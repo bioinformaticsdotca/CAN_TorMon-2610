@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Module 2 | Cancer Analysis 2026</title>
   <meta name="description" content="Workshop website for the 2026 Cancer Analysis Canadian Bioinformatics Workshop" />
-  <meta name="generator" content="bookdown 0.47 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.48 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Module 2 | Cancer Analysis 2026" />
   <meta property="og:type" content="book" />
@@ -123,7 +123,12 @@
 <li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html"><i class="fa fa-check"></i>Module 2</a>
 <ul>
 <li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#lecture-1"><i class="fa fa-check"></i>Lecture</a></li>
-<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#lab-1"><i class="fa fa-check"></i>Lab</a></li>
+<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#lab-1"><i class="fa fa-check"></i>Lab</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#part-1---igv"><i class="fa fa-check"></i>Part 1 - IGV</a></li>
+<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#part-2---cbioportal"><i class="fa fa-check"></i>Part 2 - cBioPortal</a></li>
+<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#part-3---cosmic"><i class="fa fa-check"></i>Part 3 - COSMIC</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="module-3.html"><a href="module-3.html"><i class="fa fa-check"></i>Module 3</a>
 <ul>
@@ -203,7 +208,491 @@
 </div>
 <div id="lab-1" class="section level2 hasAnchor">
 <h2>Lab<a href="module-2.html#lab-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In this lab, we’ll demo a popular tool and resources related to exploring our data and potentially finding datasets of interest.</p>
+<p>The only requirements for the tutorial are as follows:</p>
+<ol style="list-style-type: decimal">
+<li>An internet connection</li>
+<li>A modern browser</li>
+<li>An account with COSMIC : <a href="https://cancer.sanger.ac.uk/cosmic/register" class="uri">https://cancer.sanger.ac.uk/cosmic/register</a></li>
+</ol>
+<div id="learning-objectives" class="section level4 hasAnchor">
+<h4>Learning Objectives<a href="module-2.html#learning-objectives" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li>How to use IGV browser to explore data types : BAMs, VCFs, BEDs</li>
+<li>How to browse and make use of the visualization functions in cBioPortal</li>
+<li>How to browse and make use of the visualization functions in COSMIC</li>
+</ul>
+</div>
+<div id="part-1---igv" class="section level3 hasAnchor">
+<h3>Part 1 - IGV<a href="module-2.html#part-1---igv" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="learning-objectives-1" class="section level4 hasAnchor">
+<h4>Learning Objectives<a href="module-2.html#learning-objectives-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li>How to use IGV browser to explore data types : BAMs, VCFs, BEDs</li>
+<li>How to traverse the genome</li>
+<li>Loading Tracks and annotations</li>
+<li>How to find additional info for each genomic feature</li>
+</ul>
+<p><strong>To get started, Please navigate over to <a href="https://igv.org/app/">https://igv.org/app/</a></strong></p>
+<ul>
+<li>Question : Aside from avoiding installation issues, a browser version is much more convenient and accessible. Why should one consider using a local installation of IGV vs the online version?
+<ul>
+<li><span style="background-color: black; color: black;">1) Data size - Imagine streaming multiple 500 GB files</span></li>
+<li><span style="background-color: black; color: black;">2) Data protection - if you’re working with sensitive data that is under DACO restriction or patient data, you’re limited by where you store and send the data</span></li>
+</ul></li>
+</ul>
+</div>
+<div id="bam" class="section level4 hasAnchor">
+<h4>BAM<a href="module-2.html#bam" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="step-1-open-igv-web-and-choose-the-genome" class="section level5 hasAnchor">
+<h5>Step 1 – Open IGV-Web and choose the genome<a href="module-2.html#step-1-open-igv-web-and-choose-the-genome" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>Make sure our build is on <code>Hg38</code>, to do so click “Genome” and navigate the dropdown to find GRCh38/hg38</p>
+<p><img src="img/module2_lab1.png" width="30%" height="30%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;"></p>
+<p>Let’s load our data, <strong>select Tracks, then URL from the dropdown</strong>,</p>
+<p><img src="img/module2_lab2.png" width="30%" height="30%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;"></p>
+</div>
+<div id="step-2-loading-the-bam-and-index" class="section level5 hasAnchor">
+<h5>Step 2 – Loading the BAM and Index<a href="module-2.html#step-2-loading-the-bam-and-index" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>Paste the following info, ensure the <strong>BAM file goes into the Track</strong> and <strong>index file into index</strong>:</p>
+<pre class="shell"><code>https://42basepairs.com/download/s3/gatk-test-data/wgs_bam/NA12878_20k_hg38/NA12878.bam
+https://42basepairs.com/download/s3/gatk-test-data/wgs_bam/NA12878_20k_hg38/NA12878.bai</code></pre>
+<p>NA12878 is the GIAB/1000 Genomes reference individual. This BAM is a very small subset of a whole-genome run: about 61,000 mapped reads across the whole genome, compared with hundreds of millions in a real 30× genome. It is meant for teaching.</p>
+<p><img src="img/module2_lab3.png" width="100%" height="100%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;"></p>
+</div>
+<div id="step-3-post-loading-sanity-check" class="section level5 hasAnchor">
+<h5>Step 3 – Post loading sanity check<a href="module-2.html#step-3-post-loading-sanity-check" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>What do we see after loading?</p>
+<p><img src="img/module2_lab4.png" width="100%" height="100%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;"></p>
+<p>Question : We don’t see much. How come?</p>
+<ul>
+<li><span style="background-color: black; color: black;">One possibility is wrong genome build. Not the case here but a possibility. </span></li>
+<li><span style="background-color: black; color: black;"> The toy BAM being examined is also very small in comparison. So the reads representation will be sparse. </span></li>
+<li><span style="background-color: black; color: black;">In both the browser and local version of IGV, the number of reads visualized is limited, especially at whole genome view that’s an overwhelming amount of data to visualize. For the browser, imagine everyone trying to load a 1TB BAM. Local version can adjust settings according to hardware limitations. </span></li>
+</ul>
+</div>
+<div id="step-4-zoomed-in-look" class="section level5 hasAnchor">
+<h5>Step 4 – Zoomed in look<a href="module-2.html#step-4-zoomed-in-look" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>Let’s zoom in to a more manageable view. <strong>Paste the following coordinates into the search bar</strong></p>
+<pre class="shell"><code>chr1:143,220,111-143,221,807</code></pre>
+<p><img src="img/module2_lab5.png" width="100%" height="100%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;"></p>
+<p>Once the result loads, what do we see?<br />
+<img src="img/module2_lab6.png" width="100%" height="100%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;"></p>
+<ul>
+<li>Question : What are the grey lines? What do the ends (sharp vs blunt) represent?
+<ul>
+<li><span style="background-color: black; color: black;">Each grey bar is a read. The pointed end shows the direction it was sequenced: pointing right = forward (+) strand, pointing left = reverse (−).</span></li>
+</ul></li>
+<li>Question : What are the colour dashes in each block?
+<ul>
+<li><span style="background-color: black; color: black;">Mismatches</span></li>
+</ul></li>
+<li>Question : What is the graph bar above?
+<ul>
+<li><span style="background-color: black; color: black;">Coverage, the height represents the amount of reads per BP. If coloured, shows the ratio of mismatches per nucleotide</span></li>
+</ul></li>
+</ul>
+</div>
+<div id="step-5-read-features" class="section level5 hasAnchor">
+<h5>Step 5 – Read features<a href="module-2.html#step-5-read-features" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>Clicking on a read, its info can be displayed.</p>
+<p><img src="img/module2_lab7.png" width="100%" height="70%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;"></p>
+<ul>
+<li>Question : What do the blue, red and orange reads represent?
+<ul>
+<li><span style="background-color: black; color: black;"> When compared to the grey reads, the reads are identified due to their abnormal insert size. The causes could vary from a genomic feature (e.g. structural variant), RNA-seq (though not in this case), lack of size selection during library prep (there would be other signs as well). Toggleable via the gear icon on the right side of the track. Select under “Color by”, “Pair Orientation &amp; insert size (TLEN)” </span></li>
+</ul></li>
+</ul>
+</div>
+<div id="step-6-utilizing-track-annotations" class="section level5 hasAnchor">
+<h5>Step 6 – Utilizing track annotations<a href="module-2.html#step-6-utilizing-track-annotations" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>Let’s try a different region</p>
+<pre class="shell"><code>chr2:32,915,196-32,917,755</code></pre>
+<p><img src="img/module2_lab8.png" width="100%" height="100%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;"></p>
+<ul>
+<li>Question : Why are almost all reads coloured?
+<ul>
+<li><span style="background-color: black; color: black;"> Similarly to the last question, the reads are highlighted due to the unexpected read orientation. </span></li>
+</ul></li>
+</ul>
+<p>What genes are these reads at? How would we find out?
+- RefSeq is already loaded. We can try another annotation
+<img src="img/module2_lab9.png" width="30%" height="30%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;">
+<img src="img/module2_lab10.png" width="100%" height="100%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;">
+We can see that the reads intersect a “lncRNA” (long non-coding RNA).
+<img src="img/module2_lab11.png" width="100%" height="100%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;"></p>
+</div>
+</div>
+<div id="vcf" class="section level4 hasAnchor">
+<h4>VCF<a href="module-2.html#vcf" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="step-7-working-with-vcfs-germline-snvs" class="section level5 hasAnchor">
+<h5>Step 7 – Working with VCFs (Germline SNVs)<a href="module-2.html#step-7-working-with-vcfs-germline-snvs" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>Let’s load a VCF</p>
+<pre class="shell"><code>https://42basepairs.com/download/web/giab/data_somatic/HG008/NIST/HG008-T_bulk/20240508p100/analysis/GRCh38/BCM_Revio_HG008T-p100_20260313/HG008-T_vs_HG008-N-P/small_variants/HG008-N-P.dipcall.germline.vcf.gz
+https://42basepairs.com/download/web/giab/data_somatic/HG008/NIST/HG008-T_bulk/20240508p100/analysis/GRCh38/BCM_Revio_HG008T-p100_20260313/HG008-T_vs_HG008-N-P/small_variants/HG008-N-P.dipcall.germline.vcf.gz.tbi</code></pre>
+<p>These VCFs come from <code>HG008</code>, the GIAB pancreatic cancer tumour/normal cell-line pair, and not from <code>NA12878</code>. The BAM and VCFs belong to different people, so don’t expect the reads to support these variants.</p>
+<p>Then navigate to the coordinates :</p>
+<pre class="shell"><code>chr1:143,206,141-143,206,141</code></pre>
+<p>Let’s note what we see:<br />
+<img src="img/module2_lab12.png" width="100%" height="100%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;">
+Focusing on the non-greyed feature, what are the VCF features? Use the name and hover over the item for more information</p>
+<p>Additionally, a snippet of the VCF for reference:</p>
+<pre><code>##fileformat=VCFv4.2
+##FILTER=&lt;ID=PASS,Description=&quot;All filters passed&quot;&gt;
+.
+.
+.
+##FORMAT=&lt;ID=GT,Number=1,Type=String,Description=&quot;Genotype&quot;&gt;
+##FORMAT=&lt;ID=AD,Number=R,Type=Integer,Description=&quot;Allelic depths for the ref and alt alleles in the order listed&quot;&gt;
+##FILTER=&lt;ID=HET1,Description=&quot;Heterozygous in the first haplotype&quot;&gt;
+##FILTER=&lt;ID=HET2,Description=&quot;Heterozygous in the second haplotype&quot;&gt;
+##FILTER=&lt;ID=GAP1,Description=&quot;Uncalled in the first haplotype&quot;&gt;
+##FILTER=&lt;ID=GAP2,Description=&quot;Uncalled in the second haplotype&quot;&gt;
+##INFO=&lt;ID=TRF,Number=0,Type=Flag,Description=&quot;Entry hits a tandem repeat region&quot;&gt;
+##INFO=&lt;ID=TRFdiff,Number=1,Type=Float,Description=&quot;ALT TR copy difference from reference&quot;&gt;
+##INFO=&lt;ID=TRFrepeat,Number=1,Type=String,Description=&quot;Repeat motif&quot;&gt;
+##INFO=&lt;ID=TRFovl,Number=1,Type=Float,Description=&quot;Percent of ALT covered by TRF annotation&quot;&gt;
+##INFO=&lt;ID=TRFstart,Number=1,Type=Integer,Description=&quot;Start position of discovered repeat&quot;&gt;
+##INFO=&lt;ID=TRFend,Number=1,Type=Integer,Description=&quot;End position of discovered repeat&quot;&gt;
+##INFO=&lt;ID=TRFperiod,Number=1,Type=Integer,Description=&quot;Period size of the repeat&quot;&gt;
+##INFO=&lt;ID=TRFcopies,Number=1,Type=Float,Description=&quot;Number of copies aligned with the consensus pattern&quot;&gt;
+##INFO=&lt;ID=TRFscore,Number=1,Type=Integer,Description=&quot;Alignment score&quot;&gt;
+##INFO=&lt;ID=TRFentropy,Number=1,Type=Float,Description=&quot;Entropy measure&quot;&gt;
+##INFO=&lt;ID=TRFsim,Number=1,Type=Float,Description=&quot;Similarity of ALT sequence to generated motif faux sequence&quot;&gt;
+##INFO=&lt;ID=END,Number=1,Type=Integer,Description=&quot;End position of the variant&quot;&gt;
+##bcftools_pluginVersion=1.14+htslib-1.21
+##bcftools_pluginCommand=plugin fill-tags -Oz -o results/asm_varcalls/GRCh38_HG008N~v6.3-dipz2k/annotations/GRCh38_HG008N-v6.3_dipcall-z2k.trfanno.end_info.vcf.gz -- results/asm_varcalls/GRCh38_HG008N~v6.3-dipz2k/annotations/GRCh38_HG008N-v6.3_dipcall-z2k.trfanno.vcf.gz -t END; Date=Wed Jan 14 14:06:11 2026
+##bcftools_viewVersion=1.14+htslib-1.21
+##bcftools_viewCommand=view -e ALT=&quot;&lt;INV&gt;&quot; -Oz -o results/asm_varcalls/GRCh38_HG008N~v6.3-dipz2k/annotations/GRCh38_HG008N-v6.3_dipcall-z2k.trfanno.end_info.no_inv.vcf.gz results/asm_varcalls/GRCh38_HG008N~v6.3-dipz2k/annotations/GRCh38_HG008N-v6.3_dipcall-z2k.trfanno.end_info.vcf.gz; Date=Wed Jan 14 14:06:28 2026
+##HiPhase_version=&quot;1.5.0-8af3f1e&quot;
+##HiPhase_command=&quot;hiphase --bam /mnt/miniwdl_task_container/work/_miniwdl_inputs/0/m84039_250325_050416_s2.hifi_reads.aligned.bam -t 24 --output-bam m84039_250325_050416_s2.hifi_reads.aligned.hiphase.bam --vcf /mnt/miniwdl_task_container/work/_miniwdl_inputs/0/GRCh38_HG008N-v6.3_smvar_dipcall-z2k.vcf.gz --output-vcf GRCh38_HG008N-v6.3_smvar_dipcall-z2k.hiphase.vcf.gz -r /mnt/miniwdl_task_container/work/_miniwdl_inputs/0/GRCh38_GIABv3_no_alt_analysis_set_maskedGRC_decoys_MAP2K3_KMT2C_KCNJ18.fasta --stats-file m84039_250325_050416_s2.hifi_reads.aligned.hiphase.stats --summary-file m84039_250325_050416_s2.hifi_reads.aligned.hiphase.summary.tsv --blocks-file m84039_250325_050416_s2.hifi_reads.aligned.hiphase.blocks.tsv --ignore-read-groups&quot;
+##FORMAT=&lt;ID=PS,Number=1,Type=Integer,Description=&quot;Phase set identifier&quot;&gt;
+##FORMAT=&lt;ID=PF,Number=1,Type=String,Description=&quot;Phasing flag&quot;&gt;
+#CHROM  POS     ID      REF     ALT     QUAL    FILTER  INFO    FORMAT  HG008N
+chr1    89177   .       A       G       30      .       END=89177       GT:AD   1/1:0,2
+chr1    143206141    .    A    G    30    .    TRF;END=143206141    GT:AD    0/1:70,2</code></pre>
+<ul>
+<li>Question : What type of variant is it?
+<ul>
+<li><span style="background-color: black; color: black;"> SNP according to the “type”</span></li>
+</ul></li>
+<li>Question : What are the feature’s coordinates?
+<ul>
+<li><span style="background-color: black; color: black;"> Can be found under “LOC”</span></li>
+</ul></li>
+<li>Question : What is the reference vs alt?
+<ul>
+<li><span style="background-color: black; color: black;"> “REF” represents the sequence found in the reference genome. “ALT” represents the sequence that was found in the sample. In this case it was a “A” vs “G” thus the SNP </span></li>
+<li><span style="background-color: black; color: black;"> Also take note of the genotype in IGV : “A|G”. This notation is different than in the VCF and carries some different interpretations. In VCFs the genotype field can present as `0/1` meaning unphased or `0|1` phased. Being phased means we know which allele belongs on which chromosome copy. The same cannot be said for unphased. Short read sequencing does not provide that resolution, and would need long reads (for example). That context is lost in IGV, and instead IGV displays the alleles as bases, e.g. A|G, using `|` as a fixed separator regardless of phasing.</span></li>
+</ul></li>
+<li>Question : What is the depth?
+<ul>
+<li><span style="background-color: black; color: black;"> “AD” stands for allelic depth and represents the evidence/reads supporting each allele. It’s interpreted by the genotype “A | G” and “70,2” meaning 70 reads support the reference and 2 reads support the alt allele.</span></li>
+</ul></li>
+<li>Question : Compared to the features beside it, why are those features greyed out?
+<ul>
+<li><span style="background-color: black; color: black;"> Other SNPs were filtered. For the specific reason, see the “FILTER” section. Definitions for the filter are likely to be found within the header of the VCF file. </span></li>
+</ul></li>
+</ul>
+</div>
+<div id="step-8-working-with-vcfs-somatic-structural-variants" class="section level5 hasAnchor">
+<h5>Step 8 – Working with VCFs (Somatic Structural Variants)<a href="module-2.html#step-8-working-with-vcfs-somatic-structural-variants" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>Let’s load another feature</p>
+<pre class="shell"><code>https://42basepairs.com/download/web/giab/data_somatic/HG008/NIST/HG008-T_bulk/20240508p100/analysis/GRCh38/BCM_Revio_HG008T-p100_20260313/HG008-T_vs_HG008-N-P/structural_variants/HG008T-p100.severus.somatic.vcf.gz
+https://42basepairs.com/download/web/giab/data_somatic/HG008/NIST/HG008-T_bulk/20240508p100/analysis/GRCh38/BCM_Revio_HG008T-p100_20260313/HG008-T_vs_HG008-N-P/structural_variants/HG008T-p100.severus.somatic.vcf.gz.tbi</code></pre>
+<p>And let’s navigate to :</p>
+<pre class="shell"><code>chr19:38,760,896-39,923,840</code></pre>
+<p>Let’s note what we see:<br />
+<img src="img/module2_lab13.png" width="120%" height="120%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;"></p>
+<p>Notice the huge feature that’s been flagged.</p>
+<p>For reference, this is how the VCF contents look:</p>
+<pre><code>##fileformat=VCFv4.2
+##FILTER=&lt;ID=PASS,Description=&quot;All filters passed&quot;&gt;
+##source=Severus_v1.6
+.
+.
+.
+##ALT=&lt;ID=DEL,Description=&quot;Deletion&quot;&gt;
+##ALT=&lt;ID=INS,Description=&quot;Insertion&quot;&gt;
+##ALT=&lt;ID=DUP,Description=&quot;Duplication&quot;&gt;
+##ALT=&lt;ID=INV,Description=&quot;Reciprocal Inversion&quot;&gt;
+##ALT=&lt;ID=BND,Description=&quot;Breakend&quot;&gt;
+##FILTER=&lt;ID=FAIL_LOWSUPP,Description=&quot;Less number of support, but ok in other samples&quot;&gt;
+##FILTER=&lt;ID=FAIL_MAP_CONS,Description=&quot;Majority of variant reads have unreliable mappability&quot;&gt;
+##FILTER=&lt;ID=FAIL_CONN_CONS,Description=&quot;Majority of variant reads have unreliable connections&quot;&gt;
+##FILTER=&lt;ID=FAIL_LOWCOV_OTHER,Description=&quot;Low variant coverage in other samples&quot;&gt;
+##INFO=&lt;ID=PRECISE,Number=0,Type=Flag,Description=&quot;SV with precise breakpoints coordinates and length&quot;&gt;
+##INFO=&lt;ID=IMPRECISE,Number=0,Type=Flag,Description=&quot;SV with imprecise breakpoints coordinates and length&quot;&gt;
+##INFO=&lt;ID=SVTYPE,Number=1,Type=String,Description=&quot;Type of structural variant&quot;&gt;
+##INFO=&lt;ID=SVLEN,Number=1,Type=Integer,Description=&quot;Length of the SV&quot;&gt;
+##INFO=&lt;ID=END,Number=1,Type=Integer,Description=&quot;End position of the SV&quot;&gt;
+##INFO=&lt;ID=STRANDS,Number=1,Type=String,Description=&quot;Breakpoint strandedness&quot;&gt;
+##INFO=&lt;ID=DETAILED_TYPE,Number=1,Type=String,Description=&quot;Detailed type of the SV&quot;&gt;
+##INFO=&lt;ID=INSLEN,Number=1,Type=Integer,Description=&quot;Length of the unmapped sequence between breakpoint&quot;&gt;
+##INFO=&lt;ID=MAPQ,Number=1,Type=Integer,Description=&quot;Median mapping quality of supporting reads&quot;&gt;
+##INFO=&lt;ID=PHASESETID,Number=1,Type=String,Description=&quot;Matching phaseset ID for phased SVs&quot;&gt;
+##INFO=&lt;ID=HP,Number=1,Type=Integer,Description=&quot;Matching haplotype ID for phased SVs&quot;&gt;
+##INFO=&lt;ID=CLUSTERID,Number=1,Type=String,Description=&quot;Cluster ID in breakpoint_graph&quot;&gt;
+##INFO=&lt;ID=INSSEQ,Number=1,Type=String,Description=&quot;Insertion sequence between breakpoints&quot;&gt;
+##INFO=&lt;ID=MATE_ID,Number=1,Type=String,Description=&quot;MATE ID for breakends&quot;&gt;
+##INFO=&lt;ID=INSIDE_VNTR,Number=1,Type=String,Description=&quot;True if an indel is inside a VNTR&quot;&gt;
+##INFO=&lt;ID=ALIGNED_POS,Number=1,Type=String,Description=&quot;Position in the reference&quot;&gt;
+##INFO=&lt;ID=LOW_COV_IN,Number=1,Type=String,Description=&quot;Samples that has low coverage in that region&quot;&gt;
+##INFO=&lt;ID=INSIDE_WHITELIST,Number=1,Type=String,Description=&quot;SVs within the whitelist bed file&quot;&gt;
+##FORMAT=&lt;ID=GT,Number=1,Type=String,Description=&quot;Genotype&quot;&gt;
+##FORMAT=&lt;ID=DR,Number=1,Type=Integer,Description=&quot;Number of reference reads&quot;&gt;
+##FORMAT=&lt;ID=DV,Number=1,Type=Integer,Description=&quot;Number of variant reads&quot;&gt;
+##FORMAT=&lt;ID=VAF,Number=1,Type=Float,Description=&quot;Variant allele frequency&quot;&gt;
+##FORMAT=&lt;ID=hVAF,Number=3,Type=Float,Description=&quot;Haplotype specific variant Allele frequency (H0,H1,H2)&quot;&gt;
+##INFO=&lt;ID=BCSQ,Number=.,Type=String,Description=&quot;Local consequence annotation. Format: Consequence|gene|transcript|biotype|strand|amino_acid_change|dna_change&quot;&gt;
+##INFO=&lt;ID=hetalt,Number=.,Type=String,Description=&quot;Samples with heterozygous REF/ALT genotype&quot;&gt;
+##INFO=&lt;ID=homalt,Number=.,Type=String,Description=&quot;Samples with homozygous ALT/ALT or hemizygous ALT genotype&quot;&gt;
+#CHROM  POS     ID      REF     ALT     QUAL    FILTER  INFO    FORMAT  m84113_260205_082846_s3.demux.bc2055--bc2055.aligned.hiphase
+chr1    151220118       severus_DEL306  N       &lt;DEL&gt;   60      PASS    PRECISE;SVTYPE=DEL;SVLEN=172;END=151220290;STRANDS=+-;MAPQ=60;PHASESETID=151409146|151409146;HP=1;BCSQ=sv:intron|PIP5K1A||protein_coding|+||;hetalt=m84113_260205_082846_s3.demux.bc2055--bc2055.aligned.hiphase        GT:VAF:hVAF:DR:DV       0/1:0.8:0,1,0:5:20
+chr1    154714649       severus_BND18941        N       N.      60      PASS    IMPRECISE;SVTYPE=sBND;STRANDS=+;DETAILED_TYPE=loose_end;MAPQ=60;PHASESETID=154791972|154791972;HP=2;BCSQ=sv:intron|KCNN3||protein_coding|-||;hetalt=m84113_260205_082846_s3.demux.bc2055--bc2055.aligned.hiphase        GT:VAF:hVAF:DR:DV       0/1:0.16:0,0,0.26:26:5</code></pre>
+<ul>
+<li>Question : What type of variant is it?
+<ul>
+<li><span style="background-color: black; color: black;"> It is a structural variant. Much larger than the single base of SNVs. The Alt also indicates it is a deletion event.</span></li>
+</ul></li>
+<li>Question : How long is the feature?
+<ul>
+<li><span style="background-color: black; color: black;"> ~10.8 Mb according to the SV length field </span></li>
+</ul></li>
+<li>Question : What is the feature’s “ID” and what purpose does the ID field serve?
+<ul>
+<li><span style="background-color: black; color: black;"> “severus_DEL3275” and to act as a unique identifier </span></li>
+</ul></li>
+<li>Question : How would we find out how many genes are affected by the feature?
+<ul>
+<li><span style="background-color: black; color: black;"> The BCFtools Consequence or BCSQ identifies the genes affected. </span></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="bedbigbed" class="section level4 hasAnchor">
+<h4>BED/bigBed<a href="module-2.html#bedbigbed" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="step-9-working-with-bigbed-external-annotation" class="section level5 hasAnchor">
+<h5>Step 9 – Working with BigBed / External Annotation<a href="module-2.html#step-9-working-with-bigbed-external-annotation" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>Let’s explore BED files. Load the following URL into the track</p>
+<pre><code>https://hgdownload.soe.ucsc.edu/gbdb/hg38/encode4/ccre/encodeCcreRegistry.bb</code></pre>
+<ul>
+<li>Question : Notice anything different with the file suffix?
+<ul>
+<li><span style="background-color: black; color: black;">It is a bigBed file. The same as a regular bed file but binarized, compressed and indexed for accessibility. IGV is able to only fetch the region on screen and does not require a separate index file. To find out more see the following <a href="https://genome.ucsc.edu/goldenPath/help/bigBed.html">link</a></span></li>
+</ul></li>
+</ul>
+<p>How to interpret the features described by the bed file? The UCSC genome browser describes the file in great detail, specifically:
+<img src="https://genome.ucsc.edu/images/encode4cCREs.png" width="100%" height="100%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;"></p>
+<p>For more info see the following <a href="https://genome.ucsc.edu/cgi-bin/hgTrackUi?hgsid=4159675625_pMjcCAWJ0iqsyPdZ6WOQ6gMFIklH&amp;db=hg38&amp;c=chr7&amp;g=cCREregistry">link</a></p>
+<p>If we navigate to <code>TP53</code> by typing <code>TP53</code> in the search bar, we see the following:
+<img src="img/module2_lab24.png" width="200%" height="200%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;"></p>
+<p>TP53 has 26 RefSeq transcripts, but IGV only shows 2 of them. We can access the settings on refSeq annotation through the gear on the right → Set track height → 700. All 26 rows appear.</p>
+<ul>
+<li>Question : What is the red feature? What is the importance of the feature and where it is located?
+<ul>
+<li><span style="background-color: black; color: black;">It is a promoter-like element (PLS). ENCODE only assigns this class to regions near an annotated transcription start site. The main TP53 promoter is the cluster of red elements at the far right (~7,687 kb). The single red element at ~7,676.7 kb sits inside the full-length gene, in intron 1, just upstream of exon 2, which holds the start codon. Its promoter-like chromatin and a GENCODE V39 transcript starting there suggest a candidate alternative start site.</span></li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="part-2---cbioportal" class="section level3 hasAnchor">
+<h3>Part 2 - cBioPortal<a href="module-2.html#part-2---cbioportal" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="learning-objectives-2" class="section level4 hasAnchor">
+<h4>Learning Objectives<a href="module-2.html#learning-objectives-2" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li>How to browse and make use of the visualization functions in cBioPortal</li>
+<li>Learn to query genes and datasets of interest</li>
+<li>Make use of visualizations to discover relationships and biological trends</li>
+</ul>
+<p>Firstly, what is cBioPortal? <a href="https://about.cBioPortal.org/">As per their about page, Multimodal data represented in interactive visualizations that facilitates biological discovery and clinical decisions</a>. It incorporates patient-level cohort data such as mutations and clinical data.</p>
+<div id="step-1-select-the-studies-and-build-the-query" class="section level5 hasAnchor">
+<h5>Step 1 – Select the studies and build the query<a href="module-2.html#step-1-select-the-studies-and-build-the-query" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>Navigate to <a href="https://www.cBioPortal.org/">https://www.cBioPortal.org/</a> and select the following two studies:<br />
+- Breast Cancer (METABRIC, Nature 2012 &amp; Nature Commun 2016)
+- Consists of 2,509 samples of targeted sequencing on primary tumours with 549 normal matched
+- Breast Invasive Carcinoma (TCGA, PanCancer Atlas)
+- 1,084 samples as part of a large cohort that profiled 10,000 tumours across 33 cancer types</p>
+<p><img src="img/module2_lab14.png" width="100%" height="100%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;"></p>
+<p>Click “query by gene” at the footer and query the following :</p>
+<pre><code>TP53 PIK3CA BRCA1 BRCA2 PTEN STK11 CDH1 PALB2 CHEK2 ATM BARD1 RAD51C RAD51D FGFR2 TOX3 MAP3K1 ESR1 ERBB2 GATA3</code></pre>
+<p>These genes are commonly altered in breast cancer, and working with them in the tutorial will provide some insight of their significance.</p>
+<p><img src="img/module2_lab15.png" width="100%" height="100%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;">
+<img src="img/module2_lab16.png" width="100%" height="100%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;"></p>
+</div>
+<div id="step-2-oncoprint" class="section level5 hasAnchor">
+<h5>Step 2 – OncoPrint<a href="module-2.html#step-2-oncoprint" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>We are presented with an OncoPrint<br />
+<img src="img/module2_lab17.png" width="100%" height="100%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;"></p>
+<ul>
+<li>Question : What do the first four rows present and mean?
+<ul>
+<li><span style="background-color: black; color: black;">As indicated in the legend, the first four rows provide info on donors’ membership in the respective datasets and whether they were profiled for copy number changes, mutations, and structural variants.</span></li>
+</ul></li>
+<li>Question : We see multiple genes, focusing on <code>TP53</code> and <code>PIK3CA</code>, what can we infer?
+<ul>
+<li><span style="background-color: black; color: black;"> The percentage represents the number of donors with genetic alterations, where the legend specifies the type and proportion of donors</span></li>
+</ul></li>
+</ul>
+</div>
+<div id="step-3-cancer-types-summary" class="section level5 hasAnchor">
+<h5>Step 3 – Cancer Types Summary<a href="module-2.html#step-3-cancer-types-summary" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>On the above tabs, navigate to the cancer types summary view</p>
+<p><img src="img/module2_lab18.png" width="80%" height="80%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;"></p>
+<ul>
+<li>Question : What does the barchart summarize for us?
+<ul>
+<li><span style="background-color: black; color: black;"> X-axis gives info on the dataset and included profiled genomic alteration types. The Bars provide a frequency of genomic alterations.</span></li>
+</ul></li>
+</ul>
+</div>
+<div id="step-4-mutual-exclusivity" class="section level5 hasAnchor">
+<h5>Step 4 – Mutual Exclusivity<a href="module-2.html#step-4-mutual-exclusivity" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>Moving on to mutual exclusivity, select significant only and sort by q-value starting with lowest/most significant</p>
+<p><img src="img/module2_lab19.png" width="100%" height="100%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;"></p>
+<p>The first row denotes TP53 and ERBB2.</p>
+<ul>
+<li>Question : What does the finding of co-occurrence entail?
+<ul>
+<li><span style="background-color: black; color: black;">Based on the two datasets, TP53 and ERBB2 are often both found to be altered</span></li>
+<li><span style="background-color: black; color: black;"><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3465532/#:~:text=The%20HER2%2DEnriched%20subtype%20(HER2E)%2C%20which%20has%20frequent%20HER2/ERBB2%20amplification%20(80%25)%2C%20had%20a%20hybrid%20pattern%20with%20a%20high%20frequency%20of%20TP53%20(72%25)%20and">Perhaps an interesting link to look at</a></span></li>
+</ul></li>
+</ul>
+<p>Looking at the second row of TP53 and CDH1</p>
+<ul>
+<li>Question : What does the finding of mutual exclusivity entail?
+<ul>
+<li><span style="background-color: black; color: black;">Very few examples exist in the two breast cancer datasets where both TP53 and CDH1 co-occur, in fact most donors have one or the other. This could signify a dependency specific to the cancer type.</span></li>
+</ul></li>
+</ul>
+</div>
+<div id="step-5-plots" class="section level5 hasAnchor">
+<h5>Step 5 – Plots<a href="module-2.html#step-5-plots" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>Exploring the plots tab next. Let’s use the quick filter for FGA vs Dx</p>
+<p><img src="img/module2_lab20.png" width="100%" height="100%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;"></p>
+<ul>
+<li>Question : What info can we glean from the plot?
+<ul>
+<li><span style="background-color: black; color: black;">The TCGA datasets are split up into various types of breast carcinomas. Breast invasive ductal carcinoma shows the highest fraction of genome altered, signifying genomic instability.</span></li>
+</ul></li>
+<li>Let’s look at the mutations tab, specifically for gene TP53</li>
+</ul>
+<p><img src="img/module2_lab21.png" width="100%" height="100%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;"></p>
+</div>
+<div id="step-6-mutations" class="section level5 hasAnchor">
+<h5>Step 6 – Mutations<a href="module-2.html#step-6-mutations" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<ul>
+<li>Let’s look at the mutation with the highest donor count
+<ul>
+<li>Question : Where does it occur in TP53?
+<ul>
+<li><span style="background-color: black; color: black;">In the TP53 region that binds DNA. Amino acid 248</span><br />
+</li>
+</ul></li>
+<li>Question : What type of mutation is it?
+<ul>
+<li><span style="background-color: black; color: black;"> Different types, but often missense</span><br />
+</li>
+</ul></li>
+<li>Question : Are there any Post-Translational Modifications associated with the mutation?
+<ul>
+<li><span style="background-color: black; color: black;">On the left, we can add annotation tracks. Specifically we’re interested in Post-Translational Modifications (PTM). Scrolling around, no modification coincides with the mutation.</span></li>
+</ul></li>
+</ul></li>
+</ul>
+<p>Speaking of annotations, what if we wanted to find out more about the mutation? What can we look up through OncoKB?</p>
+<ul>
+<li>Hovering over the first row of the mutations table, note the record of sample ID <code>MB-0211</code> with the protein change <code>R248Q</code></li>
+<li>Hover on the dartboard icon under the column annotation
+<img src="img/module2_lab22.png" width="100%" height="100%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;"></li>
+</ul>
+</div>
+<div id="step-7-comparisonsurvival" class="section level5 hasAnchor">
+<h5>Step 7 – Comparison/Survival<a href="module-2.html#step-7-comparisonsurvival" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<ul>
+<li>Looking at survival curves.
+<ul>
+<li>Question : What can we understand about TP53 vs unaffected cohort (no alteration in any of the 19 queried genes)?
+<ul>
+<li><span style="background-color: black; color: black;">Patients with TP53 mutations initially have poorer survival odds but around 180-200 months have better outcomes compared to the unaffected cohort.</span>
+<img src="img/module2_lab23.png" width="100%" height="100%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;"></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<div id="step-8-cn-segments" class="section level5 hasAnchor">
+<h5>Step 8 – CN Segments<a href="module-2.html#step-8-cn-segments" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<ul>
+<li>Lastly, let’s look at copy number segments which brings us back to IGV. Looking at PIK3CA vs TP53
+<ul>
+<li>Question : what differences do we observe?
+<ul>
+<li><span style="background-color: black; color: black;">TP53 mutations are copy number losses while PIK3CA mutations are copy number gains.</span></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="part-3---cosmic" class="section level3 hasAnchor">
+<h3>Part 3 - COSMIC<a href="module-2.html#part-3---cosmic" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>COSMIC (Catalogue of Somatic Mutations in Cancer) is a curated knowledge base of somatic mutations drawn from the literature and large-scale studies, along with data from other assays (e.g., methylation) and analyses (e.g., drug resistance).</p>
+<p>An example use-case would be exploration with cBioPortal to find trends and patterns followed up with validation and annotating significance in COSMIC.</p>
+<div id="learning-objectives-3" class="section level4 hasAnchor">
+<h4>Learning Objectives<a href="module-2.html#learning-objectives-3" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li>How to browse and make use of the visualization functions in COSMIC</li>
+<li>Navigate datasets by refining the search using visualization functions</li>
+</ul>
+<p>Navigate to <a href="https://cancer.sanger.ac.uk/cosmic">COSMIC</a>. You’ll need an account to access the data. Follow the prompts at the following link : <a href="https://cancer.sanger.ac.uk/cosmic/register" class="uri">https://cancer.sanger.ac.uk/cosmic/register</a></p>
+<div id="step-1-search-for-a-gene" class="section level5 hasAnchor">
+<h5>Step 1 – Search for a gene<a href="module-2.html#step-1-search-for-a-gene" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>Search for <code>TP53</code> in the header search bar
+<img src="img/module2_lab25.png" width="100%" height="100%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;"></p>
+<p>Additionally, ensure you’re on the correct genome build GRCh38. The search returns the results page which groups hits by type (Genes, Mutations, Samples, Cancers, etc.). We need to choose the gene TP53 to open the gene page.</p>
+</div>
+<div id="step-2-read-the-gene-view" class="section level5 hasAnchor">
+<h5>Step 2 – Read the gene view<a href="module-2.html#step-2-read-the-gene-view" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p><img src="img/module2_lab32.png" width="100%" height="100%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;"></p>
+<p>The central gene view plot displays various types of info along the length of the gene.</p>
+<p><img src="img/module2_lab26.png" width="100%" height="100%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;"></p>
+<p>Hovering on the top substitution, we’ll find the position to be <code>273</code>. We can further zoom in to that region for more info.</p>
+</div>
+<div id="step-3-zoom-to-positions-270275" class="section level5 hasAnchor">
+<h5>Step 3 – Zoom to positions 270–275<a href="module-2.html#step-3-zoom-to-positions-270275" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>Apply the filters on the left-hand side for <code>270-275</code>.</p>
+<p><img src="img/module2_lab27.png" width="40%" height="40%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;"></p>
+<p>The result is the following barchart of substitutions.</p>
+<p><img src="img/module2_lab28.png" width="100%" height="100%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;"></p>
+<ul>
+<li>Question : Which substitution is the most common at position <code>273</code> of the TP53 gene?
+<ul>
+<li><span style="background-color: black; color: black;">p.R273H (c.818G&gt;A) 1551</span></li>
+</ul></li>
+</ul>
+</div>
+<div id="step-4-open-the-mutation-page" class="section level5 hasAnchor">
+<h5>Step 4 – Open the mutation page<a href="module-2.html#step-4-open-the-mutation-page" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>Clicking on the mutation brings us to a page dedicated to the mutation. Here, a number of interesting things can be viewed, including samples with the mutation, related references, and pathways.
+- The shape is the same (missense hotspots in the DNA-binding domain plus truncations everywhere), but COSMIC’s top hotspot is R273 across all cancers, while in cBioPortal’s two breast cohorts it was R248, with R175 and R273 close behind
+- Different sample collections give different rankings of the most common mutation!</p>
+<p>We can also observe the tissue type distribution of samples with the TP53 mutations.</p>
+<p><img src="img/module2_lab29.png" width="100%" height="100%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;"></p>
+</div>
+<div id="step-5-jump-to-a-tissue-the-cancer-browser" class="section level5 hasAnchor">
+<h5>Step 5 – Jump to a tissue: the Cancer Browser<a href="module-2.html#step-5-jump-to-a-tissue-the-cancer-browser" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>Clicking on the <code>Large Intestine</code> brings us to a page dedicated to <code>Large Intestine</code>.</p>
+<p><img src="img/module2_lab30.png" width="100%" height="100%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;"></p>
+</div>
+<div id="step-6-back-to-tp53-with-the-tissue-filter" class="section level5 hasAnchor">
+<h5>Step 6 – Back to TP53 with the tissue filter<a href="module-2.html#step-6-back-to-tp53-with-the-tissue-filter" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>We can then see the top genes mutated in Large intestinal samples. Clicking the TP53 mutation returns us to the TP53 page but with additional filters.</p>
+<p><img src="img/module2_lab31.png" width="100%" height="100%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;"></p>
+<p>Note the left-hand filter with tissue type selection applied. The result is that the most represented mutation is now different. Previously it was <code>3908</code> at position <code>273</code> but the most frequent mutation is now <code>175</code> with <code>1069</code> mutation count. We can observe how different tissue types reflect different mutations.</p>
 
+</div>
+</div>
+</div>
 </div>
 </div>
             </section>
