@@ -14,7 +14,7 @@
 
 ## Lab
 
-### Introduction to the dataset
+### 0. Introduction to the dataset
 
 #### Biological background
 
@@ -66,10 +66,11 @@ In this lab we take the raw reads all the way to a gene count table:
 4.  **Alignment** of reads to the reference with a splice-aware aligner (HISAT2), followed by sorting and indexing (samtools)
 5.  **Visualization** of the alignments (IGV)
 6.  **Gene expression** (htseq-count)
+7.  **Differential expression analysis** (edgeR)
 
 The resulting count tables are the input for differential expression analysis between `AR1_MCF7` and `MCF7` in the next module.
 
-### Setting the environment variables
+### 1. Setting the environment variables
 
 An RNA-seq analysis produces many intermediate files: raw reads, trimmed reads, alignments, and expression tables. To keep these organized, we define environment variables that point to a folder for each stage. Commands can then refer to `$RNA_ALIGN_DIR` instead of a long path. This makes the commands shorter, less error-prone, and easy to reuse on a different system by changing only `RNA_HOME`.
 
@@ -96,7 +97,7 @@ export RNA_REF_GTF=$RNA_REF_INDEX.gtf       # gene annotation (GTF)
 
 In the workshop environment all the tools needed were installed for you. Follow this page from the Griffith lab for complete instructions for RNAseq [Tool Installation](https://rnabio.org/module-00-setup/0000/10/01/Installation/) when you work on your own system.
 
-### Copy data to your workspace
+### 2. Explore data in your workspace
 
 The course data is stored in a shared, read-only location, so we copy it into our own workspace before working with it. The data is in FASTQ format. Each sequencing read occupies four lines:
 
@@ -145,7 +146,7 @@ wc -l *fastq.gz
 
 </details>
 
-### Trimming and QC
+### 3. Trimming and QC
 
 Raw reads often contain sequencing adapter sequences. Adapters appear when the cDNA fragment is shorter than the read length. Reads also tend to lose quality toward their 3′ end. Both problems can reduce alignment rates or cause misalignments.
 
@@ -177,7 +178,7 @@ Summarize all samples QC with MultiQC
 multiqc qc -o qc/multiqc_report
 ```
 
-### Prepare the reference genome for alignment
+### 4. Prepare the reference genome for alignment
 
 Searching every read against the raw genome sequence would be far too slow. Aligners therefore first build an index, a compressed data structure that allows sequences to be looked up very quickly. HISAT2 uses a hierarchical index based on the Burrows–Wheeler transform / FM-index. This only needs to be done once per reference genome.
 
@@ -201,7 +202,7 @@ hisat2_extract_splice_sites.py chr22.gtf > chr22.splicesites.txt
 samtools faidx chr22.fa
 ```
 
-### Alignment with HISAT2
+### 5. Alignment with HISAT2
 
 HISAT2 is a splice-aware aligner. It maps each read pair to its location in the genome and allows a read to be split across an intron. The options used here:
 
@@ -233,13 +234,15 @@ samtools sort -o AR1_MCF7_rep1.bam AR1_MCF7_rep1.sam
 samtools index AR1_MCF7_rep1.bam
 ```
 
+- Explore the summary.txt output file
+
 - Try FastQC on the aligned reads. FastQC accepts BAM files as input (`fastqc AR1_MCF7_rep1.bam`). Compare the report with the one from the raw reads. `samtools flagstat AR1_MCF7_rep1.bam` also gives a quick summary of mapped and properly paired reads.
 
 - Download the BAM file together with its `.bai` index, and try visualizing them in IGV. Remember that this data covers only chromosome 22 of the genome, so load the human reference (hg38) in IGV and navigate to chr22. Look for reads piling up on exons and for split reads spanning introns, which IGV draws as thin connecting lines.
 
-### Gene count estimation
+### 6. Gene count estimation
 
-To measure gene expression, we count how many reads (here, read pairs) overlap the exons of each gene. The resulting table of raw counts is the input for differential expression tools such as DESeq2 or edgeR. These tools expect raw, unnormalized counts.
+To measure gene expression, we count how many reads (here, read pairs) overlap the exons of each gene. The resulting table of raw counts is the input for differential expression tools such as edgeR or DESeq2. These tools expect raw, unnormalized counts.
 
 `htseq-count` compares each alignment with the gene annotation in the GTF file. The options used here:
 
@@ -264,4 +267,303 @@ htseq-count --format bam --order pos --mode intersection-strict \
 # inspect the result
 head AR1_MCF7_rep1_genes.tsv
 tail -n 5 AR1_MCF7_rep1_genes.tsv   # assignment summary
+```
+
+### 7. Differential Expression Analysis
+
+In this section, we start from a **protein-coding-only HTSeq count matrix**. gene-level read counts for 6 RNA-seq samples that have already been restricted to protein-coding genes. This data contains the complete genome except non-coding RNAs, pseudogenes, etc. that were removed in an earlier filtering step. We compare MCF7 breast cancer cells across two conditions with three replicates each.
+
+the standard **edgeR** workflow consists of these steps:
+
+1.  Load the count matrix and build sample metadata
+2.  Filter out low-count genes
+3.  Normalize library sizes (TMM)
+4.  Explore the data with QC plots
+5.  Estimate dispersion and fit a model
+6.  Test a contrast of interest and visualize the results: `AR1_MCF7` (Abemaciclib-resistant, dose 1) vs `MCF7` (control)
+
+At the end of the workshop, you can use the practice expression data with two more groups (`AR_MCF7` and `PR_MCF7`) to repeat the analysis yourself and test `PR_MCF7` (Palbociclib-resistant) vs `AR_MCF7` as an exercise.
+
+Transfer the expression data to your workspace, and you can move to Rstudio for the rest of this module.
+
+```{bash}
+mkdir $RNA_EXP_DIR
+cd $RNA_EXP_DIR
+
+cp ~/CourseData/Module6/expression/expression_data.txt ./
+```
+
+#### Load packages and data
+
+Load the necessary packages, on your own environment you might need to install them for the first time.
+
+``` r
+library(edgeR)
+library(ggplot2)
+library(ggrepel)
+library(DT)
+```
+
+```{r load-data}
+
+setwd("~/workspace/Module6/expression/")
+count_file <- "expression_data.txt"
+metadata_file <- "sample_metadata.txt"
+
+counts <- read.delim(count_file, row.names = 1, check.names = FALSE, stringsAsFactors = FALSE)
+metadata <- read.delim(metadata_file, stringsAsFactors = FALSE)
+
+count_mat <- as.matrix(counts)
+
+dim(count_mat)
+head(count_mat)
+
+DT::datatable(metadata, rownames = FALSE, options = list(dom = "t"))
+
+```
+
+#### Make a DGEList object
+
+edgeR stores counts, sample info, and (later) normalization factors and dispersions together in a single `DGEList` object.
+
+```{r dgelist}
+dge <- DGEList(counts = count_mat, group = metadata$group)
+dge$samples
+```
+
+#### QC: sequencing depth per sample
+
+Large differences in library size are expected and are exactly what normalization corrects for -- but it's worth checking there isn't a sample with a dramatically low read count, which could indicate a failed library.
+
+```{r qc-library-size}
+libsize_df <- data.frame(sample   = factor(colnames(dge), levels = colnames(dge)),
+                          lib_size = dge$samples$lib.size / 1e6,
+                          group    = metadata$group)
+
+ggplot(libsize_df, aes(x = sample, y = lib_size, fill = group)) +
+  geom_col() +
+  labs(title = "Sequencing depth per sample", x = NULL,
+       y = "Library size (millions)", fill = "Group") +
+  theme_minimal(base_size = 12) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+        panel.grid.major.x = element_blank(),
+        plot.margin = margin(5.5, 5.5, 11, 11))
+```
+
+#### Filter out low-count genes
+
+Genes with very few reads across all samples carry little statistical power and mostly add noise (and multiple-testing burden) to the analysis. edgeR's `filterByExpr()` keeps genes with enough counts to be reliably tested in at least one group.
+
+```{r filter-genes}
+keep <- filterByExpr(dge, group = metadata$group)
+cat(sprintf("Keeping %d of %d genes\n", sum(keep), length(keep)))
+```
+
+The density plot below compares log-CPM distributions before and after filtering -- the discarded genes are the peak of near-zero-count genes on the far left.
+
+```{r qc-density}
+logcpm_before <- edgeR::cpm(dge, log = TRUE)
+logcpm_kept   <- logcpm_before[keep, , drop = FALSE]
+
+density_df <- rbind(
+  data.frame(logcpm = as.vector(logcpm_before), sample = rep(colnames(dge), each = nrow(logcpm_before)), set = "before filtering"),
+  data.frame(logcpm = as.vector(logcpm_kept),   sample = rep(colnames(dge), each = nrow(logcpm_kept)),   set = "after filtering")
+)
+
+ggplot(density_df, aes(x = logcpm, group = interaction(sample, set), color = set)) +
+  geom_density() +
+  scale_color_manual(values = c("before filtering" = "grey70", "after filtering" = "steelblue")) +
+  labs(title = "log-CPM density before/after filtering", x = "log-CPM", y = "Density", color = NULL) +
+  theme_minimal(base_size = 12)
+```
+
+Apply the gene filter to the data
+
+```{r apply-filter}
+dge <- dge[keep, , keep.lib.sizes = FALSE]
+```
+
+#### Normalize with TMM
+
+Trimmed Mean of M-values (TMM) normalization corrects for differences in RNA composition between samples (not just sequencing depth), which keeps highly-expressed genes in one sample from skewing the comparison.
+
+```{r normalize}
+dge <- calcNormFactors(dge, method = "TMM")
+dge$samples
+```
+
+#### QC: MDS plot
+
+A multidimensional scaling (MDS) plot is edgeR's version of PCA -- samples that are more similar in expression sit closer together. We expect replicates to cluster and the two groups to separate.
+
+```{r qc-mds}
+mds <- plotMDS(dge, plot = FALSE)
+var_pct <- round(100 * mds$var.explained[mds$dim.plot])
+mds_df <- data.frame(dim1 = mds$x, dim2 = mds$y,
+                      sample = colnames(dge), group = metadata$group)
+
+ggplot(mds_df, aes(x = dim1, y = dim2, color = group)) +
+  geom_point(size = 3) +
+  ggrepel::geom_text_repel(aes(label = sample), size = 3, color = "grey30",
+                            show.legend = FALSE, max.overlaps = Inf,
+                            box.padding = 0.4, segment.color = "grey60") +
+  labs(title = "MDS plot (all samples)",
+       x = sprintf("Leading logFC dim %d (%d%%)", mds$dim.plot[1], var_pct[1]),
+       y = sprintf("Leading logFC dim %d (%d%%)", mds$dim.plot[2], var_pct[2]),
+       color = "Group") +
+  theme_minimal(base_size = 12) +
+  theme(legend.position = "right")
+```
+
+#### Design matrix and dispersion estimation
+
+We build one design matrix for the two groups and estimate dispersion using all 6 samples together, which gives a more stable estimate than fitting each sample individually.
+
+```{r design}
+design <- model.matrix(~0 + group, data = metadata)
+colnames(design) <- levels(metadata$group)
+design
+```
+
+```{r dispersion}
+dge <- estimateDisp(dge, design, robust = TRUE)
+cat(sprintf("Common dispersion: %.4f (BCV = %.3f)\n",
+            dge$common.dispersion, sqrt(dge$common.dispersion)))
+```
+
+The biological coefficient of variation (BCV) plot shows how variance (dispersion) changes with expression level -- lowly-expressed genes are typically noisier (higher BCV).
+
+```{r qc-bcv}
+plotBCV(dge, main = "Biological coefficient of variation")
+```
+
+#### Fit the model and define contrasts
+
+We use a quasi-likelihood (QL) F-test (`glmQLFit`/`glmQLFTest`), which is recommended by edgeR for bulk RNA-seq as it accounts for uncertainty in the dispersion estimate and gives more robust error control than the classic likelihood-ratio test.
+
+```{r fit-model}
+fit <- glmQLFit(dge, design, robust = TRUE)
+```
+
+A contrast is defined as `pos - neg`, so a **positive logFC means higher expression in `pos`**, and a negative logFC means higher expression in `neg`. We keep track of that mapping so the volcano plot can label the axis accordingly.
+
+```{r contrasts}
+contrasts <- makeContrasts(
+  AR1_vs_MCF7 = AR1_MCF7 - MCF7,
+  levels = design
+)
+
+contrast_groups <- list(
+  AR1_vs_MCF7 = c(pos = "AR1_MCF7", neg = "MCF7")
+)
+```
+
+#### Visualization
+
+Helper functions for visualization
+
+So the same steps can be reused for any contrast (including the one you'll run yourself on the practice dataset at the end), we define one function that runs the test, tables, and plots for a given contrast, and one helper that picks which genes to label on the volcano plot.
+
+Genes are ranked by a blend of significance (FDR) and effect size (\|log2FC\|), so the labeled genes are both strongly *and* significantly changed rather than just the single most extreme metric; up to 15 genes are labeled on each side (Up / Down).
+
+```{r helpers, message=FALSE, warning=FALSE}
+top_labels <- function(df, n = 15) {
+  if (nrow(df) == 0) return(character(0))
+  combined_rank <- rank(df$FDR, ties.method = "average") +
+    rank(-abs(df$logFC), ties.method = "average")
+  df$gene[order(combined_rank)][seq_len(min(n, nrow(df)))]
+}
+
+run_contrast <- function(contrast_name) {
+  qlf <- glmQLFTest(fit, contrast = contrasts[, contrast_name])
+
+  ## adjust.method = "BH" (Benjamini-Hochberg) controls the false discovery
+  ## rate across all genes tested; it is edgeR's default, spelled out here
+  ## since the FDR column drives both the significance calls and the
+  ## volcano plot's y-axis.
+  tt <- topTags(qlf, n = Inf, sort.by = "PValue", adjust.method = "BH")$table
+  tt$gene <- rownames(tt)
+  tt <- tt[, c("gene", setdiff(colnames(tt), "gene"))]
+
+  fdr_cutoff <- 0.05
+  fc_cutoff  <- 1
+  pos_group  <- contrast_groups[[contrast_name]][["pos"]]
+  neg_group  <- contrast_groups[[contrast_name]][["neg"]]
+
+  tt$negLog10FDR <- -log10(pmax(tt$FDR, 1e-300))
+  tt$status <- "Not sig."
+  tt$status[tt$FDR < fdr_cutoff & tt$logFC >=  fc_cutoff] <- "Up"
+  tt$status[tt$FDR < fdr_cutoff & tt$logFC <= -fc_cutoff] <- "Down"
+  tt$status <- factor(tt$status, levels = c("Down", "Not sig.", "Up"))
+
+  list(qlf = qlf, table = tt, pos = pos_group, neg = neg_group,
+       fdr_cutoff = fdr_cutoff, fc_cutoff = fc_cutoff)
+}
+
+plot_ma <- function(result, contrast_name) {
+  plotMD(result$qlf, main = sprintf("MA plot: %s", contrast_name))
+  abline(h = 0, col = "grey40")
+}
+
+plot_volcano <- function(result, contrast_name) {
+  tt <- result$table
+  up_labels   <- top_labels(tt[tt$status == "Up", ],   n = 15)
+  down_labels <- top_labels(tt[tt$status == "Down", ], n = 15)
+  tt$label <- ifelse(tt$gene %in% c(up_labels, down_labels), tt$gene, NA)
+
+  n_up   <- sum(tt$status == "Up")
+  n_down <- sum(tt$status == "Down")
+  x_range <- range(tt$logFC, na.rm = TRUE)
+  y_min   <- min(tt$negLog10FDR, na.rm = TRUE)
+
+  ggplot(tt, aes(x = logFC, y = negLog10FDR, color = status)) +
+    geom_point(alpha = 0.6, size = 1.4) +
+    geom_vline(xintercept = c(-result$fc_cutoff, result$fc_cutoff), linetype = "dashed", color = "grey50") +
+    geom_hline(yintercept = -log10(result$fdr_cutoff), linetype = "dashed", color = "grey50") +
+    ggrepel::geom_text_repel(aes(label = label), color = "black", size = 3,
+                              max.overlaps = Inf, min.segment.length = 0,
+                              box.padding = 0.4, segment.color = "grey40",
+                              na.rm = TRUE, show.legend = FALSE) +
+    scale_color_manual(values = c("Down" = "#0072B2", "Not sig." = "grey80", "Up" = "#D55E00"),
+                        drop = FALSE) +
+    annotate("text", x = x_range[1], y = y_min, label = paste("<- higher in", result$neg),
+             hjust = 0, vjust = 1.5, size = 3, color = "grey40", fontface = "italic") +
+    annotate("text", x = x_range[2], y = y_min, label = paste("higher in", result$pos, "->"),
+             hjust = 1, vjust = 1.5, size = 3, color = "grey40", fontface = "italic") +
+    labs(title = sprintf("Volcano plot: %s", contrast_name),
+         subtitle = sprintf("%d up / %d down (BH FDR < %.2f, |log2FC| >= %g); labeled: up to 15 per side (FDR + |FC|)",
+                             n_up, n_down, result$fdr_cutoff, result$fc_cutoff),
+         x = sprintf("log2 fold-change (%s vs %s)", result$pos, result$neg),
+         y = "-log10(FDR, BH-adjusted)",
+         color = NULL) +
+    coord_cartesian(clip = "off") +
+    theme_minimal(base_size = 12) +
+    theme(plot.title = element_text(face = "bold"),
+          plot.subtitle = element_text(color = "grey30", size = 9),
+          panel.grid.minor = element_blank(),
+          legend.position = "top",
+          plot.margin = margin(5.5, 5.5, 11, 5.5))
+}
+```
+
+#### AR1_MCF7 vs MCF7
+
+```{r de-ar1, fig.height=6}
+res_ar1 <- run_contrast("AR1_vs_MCF7")
+summary(decideTests(res_ar1$qlf))
+```
+
+```{r de-ar1-ma, fig.height=6, fig.width=6}
+plot_ma(res_ar1, "AR1_vs_MCF7")
+```
+
+```{r de-ar1-volcano, fig.height=7, fig.width=7.5}
+plot_volcano(res_ar1, "AR1_vs_MCF7")
+```
+
+```{r de-ar1-table}
+DT::datatable(res_ar1$table[, c("gene", "logFC", "logCPM", "PValue", "FDR")],
+              rownames = FALSE, filter = "top",
+              options = list(pageLength = 10)) |>
+  DT::formatSignif(columns = c("logFC", "logCPM", "PValue", "FDR"), digits = 3)
 ```
