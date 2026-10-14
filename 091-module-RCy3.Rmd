@@ -97,7 +97,7 @@ ssh -i <studentname>.pem -R 1234:localhost:1234 ubuntu@can.uhn-hpc.ca
 library(RCy3)
 
 is_remote = TRUE
-current_cytoscape_baseurl = "http://host.docker.internal:1234/v1"
+current_cytoscape_baseurl = "http://localhost:1234/v1"
 
 #make sure this directory is created ahead of time.  We can't create this directory from this instance of RStudio.  
 path_to_save_cytoscape = "/Users/risserlin/CBW_Workshop_results/Module9"
@@ -108,12 +108,6 @@ cytoscapePing(base.url = current_cytoscape_baseurl)
 
 
 ```{r exercise1a-rcybox, eval=FALSE}
-library(RCy3)
-
-current_cytoscape_baseurl = "http://host.docker.internal:1234/v1"
-
-# Confirm Cytoscape is running and reachable
-cytoscapePing(base.url = current_cytoscape_baseurl)
 
 # Read the network table into R
 network_df <- read.table(
