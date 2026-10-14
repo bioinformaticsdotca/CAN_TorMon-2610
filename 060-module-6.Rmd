@@ -1,0 +1,569 @@
+# Module 6
+
+## Lecture
+
+```{=html}
+<!--<iframe width="640" height="360" src="YOUTUBE EMBED LINK" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+-->
+```
+
+```{=html}
+<!--<iframe src="GOOGLE SLIDES LINK/preview" width="640" height="480" allow="autoplay"></iframe>  
+-->
+```
+
+## Lab
+
+### 0. Introduction to the dataset
+
+#### Biological background
+
+About 70% of breast cancers are hormone receptor (HR)-positive and HER2-negative. For patients with metastatic disease of this subtype, the standard of care combines endocrine therapy with a CDK4/6 inhibitor. Three such drugs are approved: palbociclib, ribociclib, and abemaciclib.
+
+CDK4 and CDK6 drive cells from the G1 phase into the S phase of the cell cycle. They do this by phosphorylating the retinoblastoma protein (Rb). Blocking them arrests tumour cells in G1. Although these drugs prolong progression-free survival, most patients eventually develop resistance. Few treatment options remain after that.
+
+The three inhibitors share the same nominal targets, but abemaciclib also inhibits several other kinases. This raises the possibility that tumours become resistant to each drug through different routes.
+
+#### The study
+
+The data for this lab comes from:
+
+> Navarro-Yepes J, Kettner NM, Rao X, *et al.* **Abemaciclib Is Effective in Palbociclib-Resistant Hormone Receptor-Positive Metastatic Breast Cancers.** *Cancer Research* 2023;83(19):3264–3283. PMID: [37384539](https://pubmed.ncbi.nlm.nih.gov/37384539/). RNA-seq data: GEO [GSE222367](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE222367).
+
+The authors generated drug-resistant versions of MCF7, a widely used ER-positive/HER2-negative breast cancer cell line. To create abemaciclib-resistant (AR) cells, they cultured several independent pools of MCF7 cells in medium with increasing concentrations of abemaciclib (0.5, 1.0, and 1.5 µM) in a stepwise manner over about 7 months. This produced one resistant line per concentration. Each line was then maintained in medium containing that concentration of the drug.
+
+The resistant and parental cells were profiled by RNA sequencing. Thousands of genes were differentially expressed between abemaciclib-resistant and parental cells. Pathway analysis showed that the resistant cells upregulated oxidative phosphorylation (OXPHOS), reactive oxygen species, and lipid metabolism pathways. Consistent with this, they relied on mitochondrial respiration for energy and were sensitive to an OXPHOS inhibitor. In contrast, palbociclib-resistant cells upregulated epithelial-to-mesenchymal transition and G2/M pathways and remained sensitive to abemaciclib. Overall, the study concluded that resistance to the two drugs follows distinct transcriptional programs.
+
+#### The samples used in this lab
+
+We will compare two groups:
+
+| Group | Sample prefix | Description |
+|------------------------|------------------------|------------------------|
+| Resistant | `AR1_MCF7` | MCF7 cells resistant to the first (lowest) abemaciclib dose |
+| Control | `MCF7` | Parental, drug-sensitive MCF7 cells |
+
+Each group includes biological replicates. You will find out how many in the first exercise, using `samples.txt`. Replicates are essential for the downstream statistical analysis. They allow us to distinguish real expression differences between conditions from normal variation between cultures.
+
+The reads are paired-end Illumina sequences. Processing a full human RNA-seq dataset takes hours and a lot of memory. To keep the exercises fast, the data has been reduced to a subset of reads.
+
+#### The reference genome
+
+We align the reads to **human chromosome 22 only**, rather than the full genome. The `refs` folder contains:
+
+- `chr22.fa`: the DNA sequence of chromosome 22 in FASTA format
+- `chr22.gtf`: the gene annotation for chromosome 22 in GTF format, describing the coordinates of genes, transcripts, and exons
+
+Chromosome 22 is one of the smallest human chromosomes, about 51 Mb long and carrying several hundred protein-coding genes. Building an index for it takes minutes instead of hours. Because of this, most reads in the dataset come from other chromosomes and will not align. A low overall alignment rate is therefore expected here and does not indicate a problem with the data. Similarly, the gene counts we produce will only cover genes on chromosome 22.
+
+#### Workflow overview
+
+In this lab we take the raw reads all the way to a gene count table:
+
+1.  **Quality control** of the raw reads (FastQC)
+2.  **Trimming** of adapters and low-quality bases (fastp), with a summary of all QC reports (MultiQC)
+3.  **Reference preparation**, building the alignment index (HISAT2, samtools)
+4.  **Alignment** of reads to the reference with a splice-aware aligner (HISAT2), followed by sorting and indexing (samtools)
+5.  **Visualization** of the alignments (IGV)
+6.  **Gene expression** (htseq-count)
+7.  **Differential expression analysis** (edgeR)
+
+The resulting count tables are the input for differential expression analysis between `AR1_MCF7` and `MCF7` in the next module.
+
+### 1. Setting the environment variables
+
+An RNA-seq analysis produces many intermediate files: raw reads, trimmed reads, alignments, and expression tables. To keep these organized, we define environment variables that point to a folder for each stage. Commands can then refer to `$RNA_ALIGN_DIR` instead of a long path. This makes the commands shorter, less error-prone, and easy to reuse on a different system by changing only `RNA_HOME`.
+
+The reference variables all build on `RNA_REF_INDEX`. The HISAT2 index prefix (`chr22`), the genome sequence (`chr22.fa`), and the annotation (`chr22.gtf`) share the same base name. To keep the exercise fast, we only use human chromosome 22 rather than the whole genome.
+
+Note that these variables have been copied to the .bashrc file and you need to do that when you work on your own system after the workshop. Another option is to run this block again when you open a new terminal or reconnect.
+
+``` bash
+# Top-level working directory for this module
+export RNA_HOME=~/workspace/Module6
+
+# One directory per analysis stage
+export RNA_DATA_DIR=$RNA_HOME/data          # raw FASTQ files
+export RNA_DATA_TRIM_DIR=$RNA_HOME/trimmed  # adapter/quality-trimmed FASTQ files
+export RNA_ALIGN_DIR=$RNA_HOME/alignment    # SAM/BAM alignment files
+export RNA_EXP_DIR=$RNA_HOME/expression     # gene count tables
+
+# Reference files (chromosome 22 only)
+export RNA_REFS_DIR=$RNA_HOME/refs
+export RNA_REF_INDEX=$RNA_REFS_DIR/chr22    # prefix for the HISAT2 index files
+export RNA_REF_FASTA=$RNA_REF_INDEX.fa      # genome sequence (FASTA)
+export RNA_REF_GTF=$RNA_REF_INDEX.gtf       # gene annotation (GTF)
+```
+
+In the workshop environment all the tools needed were installed for you. Follow this page from the Griffith lab for complete instructions for RNAseq [Tool Installation](https://rnabio.org/module-00-setup/0000/10/01/Installation/) when you work on your own system.
+
+### 2. Explore data in your workspace
+
+The course data is stored in a shared, read-only location, so we copy it into our own workspace before working with it. The data is in FASTQ format. Each sequencing read occupies four lines:
+
+1.  a header line starting with `@` (the read name)
+2.  the nucleotide sequence
+3.  a `+` separator line
+4.  a quality string with one Phred quality score per base, encoded as an ASCII character
+
+The files are gzip-compressed (`.fastq.gz`) to save space. Most bioinformatics tools read compressed files directly.
+
+Before any analysis, we run FastQC on each file. FastQC produces an HTML report with plots of per-base quality, GC content, sequence duplication, overrepresented sequences, and adapter content. These reports help us decide whether the reads need trimming, and they reveal problems with the library or the sequencing run.
+
+``` bash
+cp -r ~/CourseData/Module6/data $RNA_HOME
+
+# check the data
+cd $RNA_DATA_DIR
+ls
+
+# folder to collect all QC reports
+mkdir qc
+fastqc --outdir qc *.fastq.gz 
+```
+
+How many samples and replicates are there in the dataset?
+
+What is the sequencing depth of each sample? (Find the number of lines in each file and compare to QC report)
+
+What is r1 and r2 in the file names indicating?
+
+<details>
+
+<summary>Show Answer</summary>
+
+*Hints:* - `samples.txt` describes the experimental design: which sample belongs to which condition and replicate. Biological replicates are needed to estimate variability when testing for differential expression later. - Each read takes four lines in a FASTQ file, so dividing the line count by 4 gives the number of reads. Because the files are compressed, decompress them while counting (`zcat file.fastq.gz | wc -l`). Running `wc -l` directly on a `.gz` file counts lines in the compressed binary data, which is meaningless. - The data is paired-end. Each DNA fragment was sequenced from both ends. Read 1 and read 2 of a pair come from the same fragment and appear in the same order in the two files. Tools must always receive both files of a pair together.
+
+``` bash
+cd $RNA_DATA_DIR
+
+# experimental design
+cat samples.txt
+
+# number of lines per file and divide by 4 for number of reads
+wc -l *fastq.gz
+```
+
+</details>
+
+### 3. Trimming and QC
+
+Raw reads often contain sequencing adapter sequences. Adapters appear when the cDNA fragment is shorter than the read length. Reads also tend to lose quality toward their 3′ end. Both problems can reduce alignment rates or cause misalignments.
+
+`fastp` scans the reads and does several things in one pass: - detects and removes adapters automatically - trims low-quality bases - discards reads that become too short - writes its own HTML/JSON QC report
+
+For paired-end data, fastp processes R1 and R2 together so that the pairs stay synchronized. If one read of a pair is discarded, its mate is handled accordingly.
+
+With many samples, opening one FastQC or fastp report per file becomes tedious. MultiQC searches a directory for reports from supported tools, including FastQC and fastp, and combines them into a single interactive report. This makes it easy to compare samples side by side and spot outliers.
+
+``` bash
+mkdir -p $RNA_DATA_TRIM_DIR
+
+# example for one sample; repeat (or loop) for every sample
+fastp \
+  -i AR1_MCF7_rep1_r1.fastq.gz -I AR1_MCF7_rep1_r2.fastq.gz \
+  -o $RNA_DATA_TRIM_DIR/AR1_MCF7_rep1_r1.fastq.gz \
+  -O $RNA_DATA_TRIM_DIR/AR1_MCF7_rep1_r2.fastq.gz \
+  --detect_adapter_for_pe \
+  -h qc/AR1_MCF7_rep1_fastp.html \
+  -j qc/AR1_MCF7_rep1_fastp.json   # MultiQC reads the JSON file
+
+multiqc qc -o qc/multiqc_report
+```
+
+Summarize all samples QC with MultiQC
+
+``` bash
+# aggregate all reports found in qc/ into one summary report
+multiqc qc -o qc/multiqc_report
+```
+
+### 4. Prepare the reference genome for alignment
+
+Searching every read against the raw genome sequence would be far too slow. Aligners therefore first build an index, a compressed data structure that allows sequences to be looked up very quickly. HISAT2 uses a hierarchical index based on the Burrows–Wheeler transform / FM-index. This only needs to be done once per reference genome.
+
+- `hisat2-build` creates the index from the FASTA file. It writes several files named `chr22.1.ht2`, `chr22.2.ht2`, and so on. The second argument (`chr22`) is the prefix that we later pass to `hisat2 -x`.
+- `hisat2_extract_splice_sites.py` reads the GTF annotation and writes the coordinates of known exon–exon junctions. Because RNA-seq reads come from spliced mRNA, a single read can span an intron. Known junctions help HISAT2 align these split reads correctly. The file can be passed to `hisat2` with `--known-splicesite-infile`. It can also be passed to `hisat2-build` with `--ss`, together with `--exon` from `hisat2_extract_exons.py`, to build a splice-aware index.
+- `samtools faidx` creates a `.fai` index of the FASTA file. This allows tools such as samtools and IGV to retrieve any region of the genome quickly.
+
+``` bash
+mkdir $RNA_REFS_DIR
+cd $RNA_REFS_DIR
+
+cp ~/CourseData/Module6/refs/* $RNA_REFS_DIR
+
+# build the HISAT2 index (output files: chr22.*.ht2)
+hisat2-build chr22.fa chr22
+
+# extract known splice sites from the annotation
+hisat2_extract_splice_sites.py chr22.gtf > chr22.splicesites.txt
+
+# FASTA index for fast random access to the sequence (creates chr22.fa.fai)
+samtools faidx chr22.fa
+```
+
+### 5. Alignment with HISAT2
+
+HISAT2 is a splice-aware aligner. It maps each read pair to its location in the genome and allows a read to be split across an intron. The options used here:
+
+- `-x` sets the index prefix.
+- `-1` and `-2` give the paired read files (R1 and R2).
+- `-S` names the output SAM file.
+- `--summary-file` saves the alignment statistics: total reads, the percentage aligned uniquely, the percentage aligned to multiple locations, and the overall alignment rate.
+
+The overall alignment rate is one of the most important QC metrics. Here the reference is only chromosome 22, so most reads will legitimately not align. Expect a low rate.
+
+The output is in SAM format, a plain-text file with one line per alignment. SAM files are large and slow to process, so we convert them with `samtools sort`. This produces a BAM file, the compressed binary equivalent, and sorts the alignments by genomic coordinate. `samtools index` then creates a `.bai` index. This lets programs such as IGV and htseq-count jump directly to a genomic region without reading the whole file. Once the BAM file is created, you can delete the SAM file to save space.
+
+If you trimmed your reads in the previous step, you can align the trimmed files from `$RNA_DATA_TRIM_DIR` instead of the raw files.
+
+``` bash
+mkdir $RNA_ALIGN_DIR
+cd $RNA_ALIGN_DIR
+
+# align one paired-end sample to chr22
+hisat2 -x $RNA_REF_INDEX \
+  -1 $RNA_DATA_DIR/AR1_MCF7_rep1_r1.fastq.gz \
+  -2 $RNA_DATA_DIR/AR1_MCF7_rep1_r2.fastq.gz \
+  -S AR1_MCF7_rep1.sam \
+  --summary-file AR1_MCF7_rep1_summary.txt
+
+# convert SAM to compressed BAM, sorted by genomic position
+samtools sort -o AR1_MCF7_rep1.bam AR1_MCF7_rep1.sam
+# index the BAM file (creates AR1_MCF7_rep1.bam.bai)
+samtools index AR1_MCF7_rep1.bam
+```
+
+- Explore the summary.txt output file
+
+- Try FastQC on the aligned reads. FastQC accepts BAM files as input (`fastqc AR1_MCF7_rep1.bam`). Compare the report with the one from the raw reads. `samtools flagstat AR1_MCF7_rep1.bam` also gives a quick summary of mapped and properly paired reads.
+
+- Download the BAM file together with its `.bai` index, and try visualizing them in IGV. Remember that this data covers only chromosome 22 of the genome, so load the human reference (hg38) in IGV and navigate to chr22. Look for reads piling up on exons and for split reads spanning introns, which IGV draws as thin connecting lines.
+
+### 6. Gene count estimation
+
+To measure gene expression, we count how many reads (here, read pairs) overlap the exons of each gene. The resulting table of raw counts is the input for differential expression tools such as edgeR or DESeq2. These tools expect raw, unnormalized counts.
+
+`htseq-count` compares each alignment with the gene annotation in the GTF file. The options used here:
+
+- `--format bam --order pos`: the input is a BAM file sorted by position, as produced by `samtools sort`. For paired-end data, htseq-count needs to know the sort order to find the two mates of each pair.
+- `--mode intersection-strict`: a read is counted for a gene only if the entire read falls within that gene's exons. Reads that partly overlap introns or intergenic regions are not counted. Reads compatible with more than one gene are reported as `__ambiguous` rather than assigned.
+- `--stranded reverse`: the library was prepared with a stranded protocol (e.g. dUTP/TruSeq Stranded), in which read 1 maps to the strand opposite the gene. Setting strandedness correctly is essential. A wrong setting can make most counts disappear or assign reads to the wrong overlapping gene. Use `yes` for forward-stranded libraries and `no` for unstranded ones.
+- `--minaqual 1`: skip alignments with mapping quality below 1. This removes reads that align equally well to several locations and therefore cannot be confidently assigned.
+- `--type exon --idattr gene_id`: count over `exon` features in the GTF, and group exons by their `gene_id` so that counts are reported per gene.
+- `--additional-attr gene_name`: add the gene symbol as an extra column next to the gene ID, for readability.
+
+The output has one line per gene with its read count. It ends with summary lines (`__no_feature`, `__ambiguous`, `__too_low_aQual`, `__not_aligned`, `__alignment_not_unique`) that show how many reads were not assigned to any gene, and why. Check these lines: a very large `__no_feature` count often means the strandedness setting is wrong.
+
+``` bash
+mkdir $RNA_EXP_DIR
+cd $RNA_EXP_DIR
+
+htseq-count --format bam --order pos --mode intersection-strict \
+  --stranded reverse --minaqual 1 --type exon \
+  --idattr gene_id --additional-attr gene_name \
+  $RNA_ALIGN_DIR/AR1_MCF7_rep1.bam $RNA_REF_GTF > AR1_MCF7_rep1_genes.tsv
+
+# inspect the result
+head AR1_MCF7_rep1_genes.tsv
+tail -n 5 AR1_MCF7_rep1_genes.tsv   # assignment summary
+```
+
+### 7. Differential Expression Analysis
+
+In this section, we start from a **protein-coding-only HTSeq count matrix**. gene-level read counts for 6 RNA-seq samples that have already been restricted to protein-coding genes. This data contains the complete genome except non-coding RNAs, pseudogenes, etc. that were removed in an earlier filtering step. We compare MCF7 breast cancer cells across two conditions with three replicates each.
+
+the standard **edgeR** workflow consists of these steps:
+
+1.  Load the count matrix and build sample metadata
+2.  Filter out low-count genes
+3.  Normalize library sizes (TMM)
+4.  Explore the data with QC plots
+5.  Estimate dispersion and fit a model
+6.  Test a contrast of interest and visualize the results: `AR1_MCF7` (Abemaciclib-resistant, dose 1) vs `MCF7` (control)
+
+At the end of the workshop, you can use the practice expression data with two more groups (`AR_MCF7` and `PR_MCF7`) to repeat the analysis yourself and test `PR_MCF7` (Palbociclib-resistant) vs `AR_MCF7` as an exercise.
+
+Transfer the expression data to your workspace, and you can move to Rstudio for the rest of this module.
+
+```{bash}
+mkdir $RNA_EXP_DIR
+cd $RNA_EXP_DIR
+
+cp ~/CourseData/Module6/expression/expression_data.txt ./
+```
+
+#### Load packages and data
+
+Load the necessary packages, on your own environment you might need to install them for the first time.
+
+``` r
+library(edgeR)
+library(ggplot2)
+library(ggrepel)
+library(DT)
+```
+
+```{r load-data}
+
+setwd("~/workspace/Module6/expression/")
+count_file <- "expression_data.txt"
+metadata_file <- "sample_metadata.txt"
+
+counts <- read.delim(count_file, row.names = 1, check.names = FALSE, stringsAsFactors = FALSE)
+metadata <- read.delim(metadata_file, stringsAsFactors = FALSE)
+
+count_mat <- as.matrix(counts)
+
+dim(count_mat)
+head(count_mat)
+
+DT::datatable(metadata, rownames = FALSE, options = list(dom = "t"))
+
+```
+
+#### Make a DGEList object
+
+edgeR stores counts, sample info, and (later) normalization factors and dispersions together in a single `DGEList` object.
+
+```{r dgelist}
+dge <- DGEList(counts = count_mat, group = metadata$group)
+dge$samples
+```
+
+#### QC: sequencing depth per sample
+
+Large differences in library size are expected and are exactly what normalization corrects for -- but it's worth checking there isn't a sample with a dramatically low read count, which could indicate a failed library.
+
+```{r qc-library-size}
+libsize_df <- data.frame(sample   = factor(colnames(dge), levels = colnames(dge)),
+                          lib_size = dge$samples$lib.size / 1e6,
+                          group    = metadata$group)
+
+ggplot(libsize_df, aes(x = sample, y = lib_size, fill = group)) +
+  geom_col() +
+  labs(title = "Sequencing depth per sample", x = NULL,
+       y = "Library size (millions)", fill = "Group") +
+  theme_minimal(base_size = 12) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+        panel.grid.major.x = element_blank(),
+        plot.margin = margin(5.5, 5.5, 11, 11))
+```
+
+#### Filter out low-count genes
+
+Genes with very few reads across all samples carry little statistical power and mostly add noise (and multiple-testing burden) to the analysis. edgeR's `filterByExpr()` keeps genes with enough counts to be reliably tested in at least one group.
+
+```{r filter-genes}
+keep <- filterByExpr(dge, group = metadata$group)
+cat(sprintf("Keeping %d of %d genes\n", sum(keep), length(keep)))
+```
+
+The density plot below compares log-CPM distributions before and after filtering -- the discarded genes are the peak of near-zero-count genes on the far left.
+
+```{r qc-density}
+logcpm_before <- edgeR::cpm(dge, log = TRUE)
+logcpm_kept   <- logcpm_before[keep, , drop = FALSE]
+
+density_df <- rbind(
+  data.frame(logcpm = as.vector(logcpm_before), sample = rep(colnames(dge), each = nrow(logcpm_before)), set = "before filtering"),
+  data.frame(logcpm = as.vector(logcpm_kept),   sample = rep(colnames(dge), each = nrow(logcpm_kept)),   set = "after filtering")
+)
+
+ggplot(density_df, aes(x = logcpm, group = interaction(sample, set), color = set)) +
+  geom_density() +
+  scale_color_manual(values = c("before filtering" = "grey70", "after filtering" = "steelblue")) +
+  labs(title = "log-CPM density before/after filtering", x = "log-CPM", y = "Density", color = NULL) +
+  theme_minimal(base_size = 12)
+```
+
+Apply the gene filter to the data
+
+```{r apply-filter}
+dge <- dge[keep, , keep.lib.sizes = FALSE]
+```
+
+#### Normalize with TMM
+
+Trimmed Mean of M-values (TMM) normalization corrects for differences in RNA composition between samples (not just sequencing depth), which keeps highly-expressed genes in one sample from skewing the comparison.
+
+```{r normalize}
+dge <- calcNormFactors(dge, method = "TMM")
+dge$samples
+```
+
+#### QC: MDS plot
+
+A multidimensional scaling (MDS) plot is edgeR's version of PCA -- samples that are more similar in expression sit closer together. We expect replicates to cluster and the two groups to separate.
+
+```{r qc-mds}
+mds <- plotMDS(dge, plot = FALSE)
+var_pct <- round(100 * mds$var.explained[mds$dim.plot])
+mds_df <- data.frame(dim1 = mds$x, dim2 = mds$y,
+                      sample = colnames(dge), group = metadata$group)
+
+ggplot(mds_df, aes(x = dim1, y = dim2, color = group)) +
+  geom_point(size = 3) +
+  ggrepel::geom_text_repel(aes(label = sample), size = 3, color = "grey30",
+                            show.legend = FALSE, max.overlaps = Inf,
+                            box.padding = 0.4, segment.color = "grey60") +
+  labs(title = "MDS plot (all samples)",
+       x = sprintf("Leading logFC dim %d (%d%%)", mds$dim.plot[1], var_pct[1]),
+       y = sprintf("Leading logFC dim %d (%d%%)", mds$dim.plot[2], var_pct[2]),
+       color = "Group") +
+  theme_minimal(base_size = 12) +
+  theme(legend.position = "right")
+```
+
+#### Design matrix and dispersion estimation
+
+We build one design matrix for the two groups and estimate dispersion using all 6 samples together, which gives a more stable estimate than fitting each sample individually.
+
+```{r design}
+design <- model.matrix(~0 + group, data = metadata)
+colnames(design) <- levels(metadata$group)
+design
+```
+
+```{r dispersion}
+dge <- estimateDisp(dge, design, robust = TRUE)
+cat(sprintf("Common dispersion: %.4f (BCV = %.3f)\n",
+            dge$common.dispersion, sqrt(dge$common.dispersion)))
+```
+
+The biological coefficient of variation (BCV) plot shows how variance (dispersion) changes with expression level -- lowly-expressed genes are typically noisier (higher BCV).
+
+```{r qc-bcv}
+plotBCV(dge, main = "Biological coefficient of variation")
+```
+
+#### Fit the model and define contrasts
+
+We use a quasi-likelihood (QL) F-test (`glmQLFit`/`glmQLFTest`), which is recommended by edgeR for bulk RNA-seq as it accounts for uncertainty in the dispersion estimate and gives more robust error control than the classic likelihood-ratio test.
+
+```{r fit-model}
+fit <- glmQLFit(dge, design, robust = TRUE)
+```
+
+A contrast is defined as `pos - neg`, so a **positive logFC means higher expression in `pos`**, and a negative logFC means higher expression in `neg`. We keep track of that mapping so the volcano plot can label the axis accordingly.
+
+```{r contrasts}
+contrasts <- makeContrasts(
+  AR1_vs_MCF7 = AR1_MCF7 - MCF7,
+  levels = design
+)
+
+contrast_groups <- list(
+  AR1_vs_MCF7 = c(pos = "AR1_MCF7", neg = "MCF7")
+)
+```
+
+#### Visualization
+
+Helper functions for visualization
+
+So the same steps can be reused for any contrast (including the one you'll run yourself on the practice dataset at the end), we define one function that runs the test, tables, and plots for a given contrast, and one helper that picks which genes to label on the volcano plot.
+
+Genes are ranked by a blend of significance (FDR) and effect size (\|log2FC\|), so the labeled genes are both strongly *and* significantly changed rather than just the single most extreme metric; up to 15 genes are labeled on each side (Up / Down).
+
+```{r helpers, message=FALSE, warning=FALSE}
+top_labels <- function(df, n = 15) {
+  if (nrow(df) == 0) return(character(0))
+  combined_rank <- rank(df$FDR, ties.method = "average") +
+    rank(-abs(df$logFC), ties.method = "average")
+  df$gene[order(combined_rank)][seq_len(min(n, nrow(df)))]
+}
+
+run_contrast <- function(contrast_name) {
+  qlf <- glmQLFTest(fit, contrast = contrasts[, contrast_name])
+
+  ## adjust.method = "BH" (Benjamini-Hochberg) controls the false discovery
+  ## rate across all genes tested; it is edgeR's default, spelled out here
+  ## since the FDR column drives both the significance calls and the
+  ## volcano plot's y-axis.
+  tt <- topTags(qlf, n = Inf, sort.by = "PValue", adjust.method = "BH")$table
+  tt$gene <- rownames(tt)
+  tt <- tt[, c("gene", setdiff(colnames(tt), "gene"))]
+
+  fdr_cutoff <- 0.05
+  fc_cutoff  <- 1
+  pos_group  <- contrast_groups[[contrast_name]][["pos"]]
+  neg_group  <- contrast_groups[[contrast_name]][["neg"]]
+
+  tt$negLog10FDR <- -log10(pmax(tt$FDR, 1e-300))
+  tt$status <- "Not sig."
+  tt$status[tt$FDR < fdr_cutoff & tt$logFC >=  fc_cutoff] <- "Up"
+  tt$status[tt$FDR < fdr_cutoff & tt$logFC <= -fc_cutoff] <- "Down"
+  tt$status <- factor(tt$status, levels = c("Down", "Not sig.", "Up"))
+
+  list(qlf = qlf, table = tt, pos = pos_group, neg = neg_group,
+       fdr_cutoff = fdr_cutoff, fc_cutoff = fc_cutoff)
+}
+
+plot_ma <- function(result, contrast_name) {
+  plotMD(result$qlf, main = sprintf("MA plot: %s", contrast_name))
+  abline(h = 0, col = "grey40")
+}
+
+plot_volcano <- function(result, contrast_name) {
+  tt <- result$table
+  up_labels   <- top_labels(tt[tt$status == "Up", ],   n = 15)
+  down_labels <- top_labels(tt[tt$status == "Down", ], n = 15)
+  tt$label <- ifelse(tt$gene %in% c(up_labels, down_labels), tt$gene, NA)
+
+  n_up   <- sum(tt$status == "Up")
+  n_down <- sum(tt$status == "Down")
+  x_range <- range(tt$logFC, na.rm = TRUE)
+  y_min   <- min(tt$negLog10FDR, na.rm = TRUE)
+
+  ggplot(tt, aes(x = logFC, y = negLog10FDR, color = status)) +
+    geom_point(alpha = 0.6, size = 1.4) +
+    geom_vline(xintercept = c(-result$fc_cutoff, result$fc_cutoff), linetype = "dashed", color = "grey50") +
+    geom_hline(yintercept = -log10(result$fdr_cutoff), linetype = "dashed", color = "grey50") +
+    ggrepel::geom_text_repel(aes(label = label), color = "black", size = 3,
+                              max.overlaps = Inf, min.segment.length = 0,
+                              box.padding = 0.4, segment.color = "grey40",
+                              na.rm = TRUE, show.legend = FALSE) +
+    scale_color_manual(values = c("Down" = "#0072B2", "Not sig." = "grey80", "Up" = "#D55E00"),
+                        drop = FALSE) +
+    annotate("text", x = x_range[1], y = y_min, label = paste("<- higher in", result$neg),
+             hjust = 0, vjust = 1.5, size = 3, color = "grey40", fontface = "italic") +
+    annotate("text", x = x_range[2], y = y_min, label = paste("higher in", result$pos, "->"),
+             hjust = 1, vjust = 1.5, size = 3, color = "grey40", fontface = "italic") +
+    labs(title = sprintf("Volcano plot: %s", contrast_name),
+         subtitle = sprintf("%d up / %d down (BH FDR < %.2f, |log2FC| >= %g); labeled: up to 15 per side (FDR + |FC|)",
+                             n_up, n_down, result$fdr_cutoff, result$fc_cutoff),
+         x = sprintf("log2 fold-change (%s vs %s)", result$pos, result$neg),
+         y = "-log10(FDR, BH-adjusted)",
+         color = NULL) +
+    coord_cartesian(clip = "off") +
+    theme_minimal(base_size = 12) +
+    theme(plot.title = element_text(face = "bold"),
+          plot.subtitle = element_text(color = "grey30", size = 9),
+          panel.grid.minor = element_blank(),
+          legend.position = "top",
+          plot.margin = margin(5.5, 5.5, 11, 5.5))
+}
+```
+
+#### AR1_MCF7 vs MCF7
+
+```{r de-ar1, fig.height=6}
+res_ar1 <- run_contrast("AR1_vs_MCF7")
+summary(decideTests(res_ar1$qlf))
+```
+
+```{r de-ar1-ma, fig.height=6, fig.width=6}
+plot_ma(res_ar1, "AR1_vs_MCF7")
+```
+
+```{r de-ar1-volcano, fig.height=7, fig.width=7.5}
+plot_volcano(res_ar1, "AR1_vs_MCF7")
+```
+
+```{r de-ar1-table}
+DT::datatable(res_ar1$table[, c("gene", "logFC", "logCPM", "PValue", "FDR")],
+              rownames = FALSE, filter = "top",
+              options = list(pageLength = 10)) |>
+  DT::formatSignif(columns = c("logFC", "logCPM", "PValue", "FDR"), digits = 3)
+```

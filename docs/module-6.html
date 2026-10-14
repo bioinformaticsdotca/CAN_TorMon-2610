@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Module 6 | Cancer Analysis 2026</title>
+  <meta name="description" content="Workshop website for the 2026 Cancer Analysis Canadian Bioinformatics Workshop" />
+  <meta name="generator" content="bookdown 0.47 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Module 6 | Cancer Analysis 2026" />
+  <meta property="og:type" content="book" />
+  <meta property="og:image" content="https://bioinformaticsdotca.github.io/CAN_TorMon-2610/img/bioinformatics_logo.png" />
+  <meta property="og:description" content="Workshop website for the 2026 Cancer Analysis Canadian Bioinformatics Workshop" />
+  <meta name="github-repo" content="bioinformaticsdotca/CAN_TorMon-2610" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Module 6 | Cancer Analysis 2026" />
+  
+  <meta name="twitter:description" content="Workshop website for the 2026 Cancer Analysis Canadian Bioinformatics Workshop" />
+  <meta name="twitter:image" content="https://bioinformaticsdotca.github.io/CAN_TorMon-2610/img/bioinformatics_logo.png" />
+
+<meta name="author" content="Faculty: Trevor Pugh, Linda Xiang, Yoshiaki Tanaka, Robert Eveleigh, Mathieu Lajoie, Vida Talebian, Aqsa Alam, Veronique Voisin, Ruth Isserlin, Nicholas Geoffrion" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="prev" href="module-5.html"/>
+<link rel="next" href="module-7.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LearningResource",
+  "name": "Cancer Analysis",
+  "description": "The complete set of tutorials, slides, and practical exercises for the Cancer Analysis 2026 Canadian Bioinformatics Workshop, hosted on GitHub Pages.",
+  "url": "https://bioinformaticsdotca.github.io/CAN_TorMon-2610",
+  "learningResourceType": ["tutorial", "slides", "exercise"],
+  "inLanguage": "en",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "provider": {
+    "@type": "Organization",
+    "name": "Bioinformatics.ca",
+    "url": "https://bioinformatics.ca"
+  },
+  "keywords": "",
+  "isPartOf": {
+    "@type": "Course",
+    "@id": "https://bioinformatics.ca/CAN_TorMon-2610/"
+  }
+}
+</script>
+
+
+<style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<a href="https://bioinformaticsdotca.github.io/">
+ <img src="img/bioinformatics_logo.png" width="90%" alt="bioinformatics.ca logo" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;">
+ </a>
+<li><center><strong><a href="./"><br>Cancer Analysis<br><br></a></strong></center></li>
+<a href="./">
+ <img src="img/CBW_CAN-1.png" width="70%" alt="Cancer Analysis logo" style="display:block; margin-left:auto; margin-right:auto; ">
+ </a>
+<br>
+
+<li class="divider"></li>
+<li class="part"><span><b>I Introduction</b></span></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Workshop Info</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#pre-work"><i class="fa fa-check"></i>Pre-work</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#class-photo"><i class="fa fa-check"></i>Class Photo</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#schedule"><i class="fa fa-check"></i>Schedule</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="meet-your-faculty.html"><a href="meet-your-faculty.html"><i class="fa fa-check"></i>Meet Your Faculty</a>
+<ul>
+<li class="chapter" data-level="" data-path="meet-your-faculty.html"><a href="meet-your-faculty.html#tas"><i class="fa fa-check"></i>TA’s</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="data-and-compute-setup.html"><a href="data-and-compute-setup.html"><i class="fa fa-check"></i>Data and Compute Setup</a></li>
+<li class="part"><span><b>II Modules</b></span></li>
+<li class="chapter" data-level="" data-path="module-1.html"><a href="module-1.html"><i class="fa fa-check"></i>Module 1</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-1.html"><a href="module-1.html#lecture"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-1.html"><a href="module-1.html#lab"><i class="fa fa-check"></i>Lab</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html"><i class="fa fa-check"></i>Module 2</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#lecture-1"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#lab-1"><i class="fa fa-check"></i>Lab</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#part-1---igv"><i class="fa fa-check"></i>Part 1 - IGV</a></li>
+<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#part-2---cbioportal"><i class="fa fa-check"></i>Part 2 - cBioPortal</a></li>
+<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#part-3---cosmic"><i class="fa fa-check"></i>Part 3 - COSMIC</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-3.html"><a href="module-3.html"><i class="fa fa-check"></i>Module 3</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-3.html"><a href="module-3.html#lecture-2"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-3.html"><a href="module-3.html#lab-2"><i class="fa fa-check"></i>Lab</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-4.html"><a href="module-4.html"><i class="fa fa-check"></i>Module 4</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-4.html"><a href="module-4.html#lecture-3"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-4.html"><a href="module-4.html#lab-3"><i class="fa fa-check"></i>Lab</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-5.html"><a href="module-5.html"><i class="fa fa-check"></i>Module 5</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-5.html"><a href="module-5.html#lecture-4"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-5.html"><a href="module-5.html#lab-4"><i class="fa fa-check"></i>Lab</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-6.html"><a href="module-6.html"><i class="fa fa-check"></i>Module 6</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-6.html"><a href="module-6.html#lecture-5"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-6.html"><a href="module-6.html#lab-5"><i class="fa fa-check"></i>Lab</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-6.html"><a href="module-6.html#introduction-to-the-dataset"><i class="fa fa-check"></i>Introduction to the dataset</a></li>
+<li class="chapter" data-level="" data-path="module-6.html"><a href="module-6.html#setting-the-environment-variables"><i class="fa fa-check"></i>Setting the environment variables</a></li>
+<li class="chapter" data-level="" data-path="module-6.html"><a href="module-6.html#copy-data-to-your-workspace"><i class="fa fa-check"></i>Copy data to your workspace</a></li>
+<li class="chapter" data-level="" data-path="module-6.html"><a href="module-6.html#trimming-and-qc"><i class="fa fa-check"></i>Trimming and QC</a></li>
+<li class="chapter" data-level="" data-path="module-6.html"><a href="module-6.html#prepare-the-reference-genome-for-alignment"><i class="fa fa-check"></i>Prepare the reference genome for alignment</a></li>
+<li class="chapter" data-level="" data-path="module-6.html"><a href="module-6.html#alignment-with-hisat2"><i class="fa fa-check"></i>Alignment with HISAT2</a></li>
+<li class="chapter" data-level="" data-path="module-6.html"><a href="module-6.html#gene-count-estimation"><i class="fa fa-check"></i>Gene count estimation</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-7.html"><a href="module-7.html"><i class="fa fa-check"></i>Module 7</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-7.html"><a href="module-7.html#lecture-6"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-7.html"><a href="module-7.html#lab-6"><i class="fa fa-check"></i>Lab</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-8.html"><a href="module-8.html"><i class="fa fa-check"></i>Module 8</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-8.html"><a href="module-8.html#lecture-7"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-8.html"><a href="module-8.html#lab-7"><i class="fa fa-check"></i>Lab</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-9---variant-to-networks.html"><a href="module-9---variant-to-networks.html"><i class="fa fa-check"></i>Module 9 - Variant to Networks</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-9---variant-to-networks.html"><a href="module-9---variant-to-networks.html#network-visualization-and-analysis-with-cytoscape"><i class="fa fa-check"></i>Network Visualization and Analysis with Cytoscape</a></li>
+<li class="chapter" data-level="" data-path="module-9---variant-to-networks.html"><a href="module-9---variant-to-networks.html#lecture-8"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-9---variant-to-networks.html"><a href="module-9---variant-to-networks.html#lab-8"><i class="fa fa-check"></i>Lab</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html"><i class="fa fa-check"></i>Module 9 Lab Primer: Cytoscape Primer</a>
+<ul>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#goal-of-the-exercise"><i class="fa fa-check"></i>Goal of the exercise</a></li>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#data"><i class="fa fa-check"></i>Data</a></li>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#start-the-exercise"><i class="fa fa-check"></i>Start the exercise</a></li>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#exercise-1a---create-network-from-table"><i class="fa fa-check"></i>Exercise 1a - Create Network from table</a>
+<ul>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#setting-up-cytoscape-variables--"><i class="fa fa-check"></i>Setting up cytoscape variables -</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#exercise-1b---load-node-attributes"><i class="fa fa-check"></i>Exercise 1b - Load node attributes</a></li>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#exercise-1c---map-node-attributes-to-visual-style"><i class="fa fa-check"></i>Exercise 1c - Map node attributes to Visual Style</a></li>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#exercise-2---work-with-larger-networks"><i class="fa fa-check"></i>Exercise 2 - Work with larger networks</a></li>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#exercise-3---perform-basic-enrichment-analysis-using-enrichmenttable"><i class="fa fa-check"></i>Exercise 3 - Perform basic enrichment analysis using EnrichmentTable</a></li>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#enrichmenttabl-features"><i class="fa fa-check"></i>Exercise 3B - create Enrichment Map and Enhanced graphics nodes from EnrichmentTable</a></li>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#exercise-4---load-network-from-ndex"><i class="fa fa-check"></i>Exercise 4 - Load network from NDex</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html"><i class="fa fa-check"></i>Module 9.2 Lab: g:profiler Visualization</a>
+<ul>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#goal-of-the-exercise-1"><i class="fa fa-check"></i>Goal of the exercise</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#data-1"><i class="fa fa-check"></i>Data</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#enrichmentmap"><i class="fa fa-check"></i>EnrichmentMap</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#description-of-this-exercise"><i class="fa fa-check"></i>Description of this exercise</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#start-the-exercise-1"><i class="fa fa-check"></i>Start the exercise</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#exercise-1a---compare-up-and-down-regulated-gprofiler-results"><i class="fa fa-check"></i>Exercise 1a - compare UP and DOWN regulated g:Profiler results</a>
+<ul>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#step-1"><i class="fa fa-check"></i>Step 1</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#step-2"><i class="fa fa-check"></i>Step 2</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#step-3-explore-the-results"><i class="fa fa-check"></i>Step 3: Explore the results:</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#explore-detailed-results"><i class="fa fa-check"></i>Explore Detailed results</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#exercise-1b---create-em-from-fgsea-results-using-baderlab-genesets"><i class="fa fa-check"></i>Exercise 1b - create EM from fgsea results using Baderlab genesets</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#exercise-1c-optional---investigate-individual-pathways-in-genemania-or-string"><i class="fa fa-check"></i>Exercise 1c (optional) - investigate individual pathways in GeneMANIA or String</a>
+<ul>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#genemania"><i class="fa fa-check"></i>GeneMANIA</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#string"><i class="fa fa-check"></i>String</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-10.html"><a href="module-10.html"><i class="fa fa-check"></i>Module 10</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-10.html"><a href="module-10.html#lecture-9"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-10.html"><a href="module-10.html#lab-9"><i class="fa fa-check"></i>Lab</a></li>
+</ul></li>
+<li class="divider"></li>
+<h1 id="sponsors">Sponsors</h1>
+<center>
+<a href="https://www.cihr-irsc.gc.ca"><img src="img/sponsors/cihr.png" width=90% style="padding-bottom: 20px" alt="Canadian Institutes of Health Research logo."></a>
+
+<a href="https://genomecanada.ca/"><img src="img/sponsors/genomecanada.png" height="55" style="display:inline-block;"  style="padding-bottom: 20px" alt="Genome Canada logo.">
+<a href="https://www.ontariogenomics.ca/"><img src="img/sponsors/ontariogenomics.png" height="55" style="display:inline-block;" style="padding-bottom: 20px;" alt="Ontario Genomics logo.">
+<br><br>
+<a href="https://oicr.on.ca/"><img src="img/sponsors/oicr.png" width=35% style="display:inline-block;" style="padding-bottom: 20px" alt="Ontario Institute for Cancer Research logo.">
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Cancer Analysis 2026</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="module-6" class="section level1 hasAnchor">
+<h1>Module 6<a href="module-6.html#module-6" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="lecture-5" class="section level2 hasAnchor">
+<h2>Lecture<a href="module-6.html#lecture-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<!--<iframe width="640" height="360" src="YOUTUBE EMBED LINK" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+-->
+<!--<iframe src="GOOGLE SLIDES LINK/preview" width="640" height="480" allow="autoplay"></iframe>  
+-->
+</div>
+<div id="lab-5" class="section level2 hasAnchor">
+<h2>Lab<a href="module-6.html#lab-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="introduction-to-the-dataset" class="section level3 hasAnchor">
+<h3>Introduction to the dataset<a href="module-6.html#introduction-to-the-dataset" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="biological-background" class="section level4 hasAnchor">
+<h4>Biological background<a href="module-6.html#biological-background" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>About 70% of breast cancers are hormone receptor (HR)-positive and HER2-negative. For patients with metastatic disease of this subtype, the standard of care combines endocrine therapy with a CDK4/6 inhibitor. Three such drugs are approved: palbociclib, ribociclib, and abemaciclib.</p>
+<p>CDK4 and CDK6 drive cells from the G1 phase into the S phase of the cell cycle. They do this by phosphorylating the retinoblastoma protein (Rb). Blocking them arrests tumour cells in G1. Although these drugs prolong progression-free survival, most patients eventually develop resistance. Few treatment options remain after that.</p>
+<p>The three inhibitors share the same nominal targets, but abemaciclib also inhibits several other kinases. This raises the possibility that tumours become resistant to each drug through different routes.</p>
+</div>
+<div id="the-study" class="section level4 hasAnchor">
+<h4>The study<a href="module-6.html#the-study" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>The data for this lab comes from:</p>
+<blockquote>
+<p>Navarro-Yepes J, Kettner NM, Rao X, <em>et al.</em> <strong>Abemaciclib Is Effective in Palbociclib-Resistant Hormone Receptor-Positive Metastatic Breast Cancers.</strong> <em>Cancer Research</em> 2023;83(19):3264–3283. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/37384539/">37384539</a>. RNA-seq data: GEO <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE222367">GSE222367</a>.</p>
+</blockquote>
+<p>The authors generated drug-resistant versions of MCF7, a widely used ER-positive/HER2-negative breast cancer cell line. To create abemaciclib-resistant (AR) cells, they cultured several independent pools of MCF7 cells in medium with increasing concentrations of abemaciclib (0.5, 1.0, and 1.5 µM) in a stepwise manner over about 7 months. This produced one resistant line per concentration. Each line was then maintained in medium containing that concentration of the drug.</p>
+<p>The resistant and parental cells were profiled by RNA sequencing. Thousands of genes were differentially expressed between abemaciclib-resistant and parental cells. Pathway analysis showed that the resistant cells upregulated oxidative phosphorylation (OXPHOS), reactive oxygen species, and lipid metabolism pathways. Consistent with this, they relied on mitochondrial respiration for energy and were sensitive to an OXPHOS inhibitor. In contrast, palbociclib-resistant cells upregulated epithelial-to-mesenchymal transition and G2/M pathways and remained sensitive to abemaciclib. Overall, the study concluded that resistance to the two drugs follows distinct transcriptional programs.</p>
+</div>
+<div id="the-samples-used-in-this-lab" class="section level4 hasAnchor">
+<h4>The samples used in this lab<a href="module-6.html#the-samples-used-in-this-lab" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>We will compare two groups:</p>
+<table>
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Group</th>
+<th>Sample prefix</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Resistant</td>
+<td><code>AR1_MCF7</code></td>
+<td>MCF7 cells resistant to the first (lowest) abemaciclib dose</td>
+</tr>
+<tr class="even">
+<td>Control</td>
+<td><code>MCF7</code></td>
+<td>Parental, drug-sensitive MCF7 cells</td>
+</tr>
+</tbody>
+</table>
+<p>Each group includes biological replicates. You will find out how many in the first exercise, using <code>samples.txt</code>. Replicates are essential for the downstream statistical analysis. They allow us to distinguish real expression differences between conditions from normal variation between cultures.</p>
+<p>The reads are paired-end Illumina sequences. Processing a full human RNA-seq dataset takes hours and a lot of memory. To keep the exercises fast, the data has been reduced to a subset of reads.</p>
+</div>
+<div id="the-reference-genome" class="section level4 hasAnchor">
+<h4>The reference genome<a href="module-6.html#the-reference-genome" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>We align the reads to <strong>human chromosome 22 only</strong>, rather than the full genome. The <code>refs</code> folder contains:</p>
+<ul>
+<li><code>chr22.fa</code>: the DNA sequence of chromosome 22 in FASTA format</li>
+<li><code>chr22.gtf</code>: the gene annotation for chromosome 22 in GTF format, describing the coordinates of genes, transcripts, and exons</li>
+</ul>
+<p>Chromosome 22 is one of the smallest human chromosomes, about 51 Mb long and carrying several hundred protein-coding genes. Building an index for it takes minutes instead of hours. Because of this, most reads in the dataset come from other chromosomes and will not align. A low overall alignment rate is therefore expected here and does not indicate a problem with the data. Similarly, the gene counts we produce will only cover genes on chromosome 22.</p>
+</div>
+<div id="workflow-overview" class="section level4 hasAnchor">
+<h4>Workflow overview<a href="module-6.html#workflow-overview" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>In this lab we take the raw reads all the way to a gene count table:</p>
+<ol style="list-style-type: decimal">
+<li><strong>Quality control</strong> of the raw reads (FastQC)</li>
+<li><strong>Trimming</strong> of adapters and low-quality bases (fastp), with a summary of all QC reports (MultiQC)</li>
+<li><strong>Reference preparation</strong>, building the alignment index (HISAT2, samtools)</li>
+<li><strong>Alignment</strong> of reads to the reference with a splice-aware aligner (HISAT2), followed by sorting and indexing (samtools)</li>
+<li><strong>Visualization</strong> of the alignments (IGV)</li>
+<li><strong>Gene expression</strong> (htseq-count)</li>
+</ol>
+<p>The resulting count tables are the input for differential expression analysis between <code>AR1_MCF7</code> and <code>MCF7</code> in the next module.</p>
+</div>
+</div>
+<div id="setting-the-environment-variables" class="section level3 hasAnchor">
+<h3>Setting the environment variables<a href="module-6.html#setting-the-environment-variables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>An RNA-seq analysis produces many intermediate files: raw reads, trimmed reads, alignments, and expression tables. To keep these organized, we define environment variables that point to a folder for each stage. Commands can then refer to <code>$RNA_ALIGN_DIR</code> instead of a long path. This makes the commands shorter, less error-prone, and easy to reuse on a different system by changing only <code>RNA_HOME</code>.</p>
+<p>The reference variables all build on <code>RNA_REF_INDEX</code>. The HISAT2 index prefix (<code>chr22</code>), the genome sequence (<code>chr22.fa</code>), and the annotation (<code>chr22.gtf</code>) share the same base name. To keep the exercise fast, we only use human chromosome 22 rather than the whole genome.</p>
+<p>Note that these variables have been copied to the .bashrc file and you need to do that when you work on your own system after the workshop. Another option is to run this block again when you open a new terminal or reconnect.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="module-6.html#cb12-1" tabindex="-1"></a><span class="co"># Top-level working directory for this module</span></span>
+<span id="cb12-2"><a href="module-6.html#cb12-2" tabindex="-1"></a><span class="bu">export</span> <span class="va">RNA_HOME</span><span class="op">=</span>~/workspace/Module6</span>
+<span id="cb12-3"><a href="module-6.html#cb12-3" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="module-6.html#cb12-4" tabindex="-1"></a><span class="co"># One directory per analysis stage</span></span>
+<span id="cb12-5"><a href="module-6.html#cb12-5" tabindex="-1"></a><span class="bu">export</span> <span class="va">RNA_DATA_DIR</span><span class="op">=</span><span class="va">$RNA_HOME</span>/data          <span class="co"># raw FASTQ files</span></span>
+<span id="cb12-6"><a href="module-6.html#cb12-6" tabindex="-1"></a><span class="bu">export</span> <span class="va">RNA_DATA_TRIM_DIR</span><span class="op">=</span><span class="va">$RNA_HOME</span>/trimmed  <span class="co"># adapter/quality-trimmed FASTQ files</span></span>
+<span id="cb12-7"><a href="module-6.html#cb12-7" tabindex="-1"></a><span class="bu">export</span> <span class="va">RNA_ALIGN_DIR</span><span class="op">=</span><span class="va">$RNA_HOME</span>/alignment    <span class="co"># SAM/BAM alignment files</span></span>
+<span id="cb12-8"><a href="module-6.html#cb12-8" tabindex="-1"></a><span class="bu">export</span> <span class="va">RNA_EXP_DIR</span><span class="op">=</span><span class="va">$RNA_HOME</span>/expression     <span class="co"># gene count tables</span></span>
+<span id="cb12-9"><a href="module-6.html#cb12-9" tabindex="-1"></a></span>
+<span id="cb12-10"><a href="module-6.html#cb12-10" tabindex="-1"></a><span class="co"># Reference files (chromosome 22 only)</span></span>
+<span id="cb12-11"><a href="module-6.html#cb12-11" tabindex="-1"></a><span class="bu">export</span> <span class="va">RNA_REFS_DIR</span><span class="op">=</span><span class="va">$RNA_HOME</span>/refs</span>
+<span id="cb12-12"><a href="module-6.html#cb12-12" tabindex="-1"></a><span class="bu">export</span> <span class="va">RNA_REF_INDEX</span><span class="op">=</span><span class="va">$RNA_REFS_DIR</span>/chr22    <span class="co"># prefix for the HISAT2 index files</span></span>
+<span id="cb12-13"><a href="module-6.html#cb12-13" tabindex="-1"></a><span class="bu">export</span> <span class="va">RNA_REF_FASTA</span><span class="op">=</span><span class="va">$RNA_REF_INDEX</span>.fa      <span class="co"># genome sequence (FASTA)</span></span>
+<span id="cb12-14"><a href="module-6.html#cb12-14" tabindex="-1"></a><span class="bu">export</span> <span class="va">RNA_REF_GTF</span><span class="op">=</span><span class="va">$RNA_REF_INDEX</span>.gtf       <span class="co"># gene annotation (GTF)</span></span></code></pre></div>
+<p>In the workshop environment all the tools needed were installed for you. Follow this page from the Griffith lab for complete instructions for RNAseq <a href="https://rnabio.org/module-00-setup/0000/10/01/Installation/">Tool Installation</a> when you work on your own system.</p>
+</div>
+<div id="copy-data-to-your-workspace" class="section level3 hasAnchor">
+<h3>Copy data to your workspace<a href="module-6.html#copy-data-to-your-workspace" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The course data is stored in a shared, read-only location, so we copy it into our own workspace before working with it. The data is in FASTQ format. Each sequencing read occupies four lines:</p>
+<ol style="list-style-type: decimal">
+<li>a header line starting with <code>@</code> (the read name)</li>
+<li>the nucleotide sequence</li>
+<li>a <code>+</code> separator line</li>
+<li>a quality string with one Phred quality score per base, encoded as an ASCII character</li>
+</ol>
+<p>The files are gzip-compressed (<code>.fastq.gz</code>) to save space. Most bioinformatics tools read compressed files directly.</p>
+<p>Before any analysis, we run FastQC on each file. FastQC produces an HTML report with plots of per-base quality, GC content, sequence duplication, overrepresented sequences, and adapter content. These reports help us decide whether the reads need trimming, and they reveal problems with the library or the sequencing run.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="module-6.html#cb13-1" tabindex="-1"></a><span class="fu">cp</span> <span class="at">-r</span> ~/CourseData/Module6/data <span class="va">$RNA_HOME</span></span>
+<span id="cb13-2"><a href="module-6.html#cb13-2" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="module-6.html#cb13-3" tabindex="-1"></a><span class="co"># check the data</span></span>
+<span id="cb13-4"><a href="module-6.html#cb13-4" tabindex="-1"></a><span class="bu">cd</span> <span class="va">$RNA_DATA_DIR</span></span>
+<span id="cb13-5"><a href="module-6.html#cb13-5" tabindex="-1"></a><span class="fu">ls</span></span>
+<span id="cb13-6"><a href="module-6.html#cb13-6" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="module-6.html#cb13-7" tabindex="-1"></a><span class="co"># folder to collect all QC reports</span></span>
+<span id="cb13-8"><a href="module-6.html#cb13-8" tabindex="-1"></a><span class="fu">mkdir</span> qc</span>
+<span id="cb13-9"><a href="module-6.html#cb13-9" tabindex="-1"></a><span class="ex">fastqc</span> <span class="at">--outdir</span> qc <span class="pp">*</span>.fastq.gz </span></code></pre></div>
+<p>How many samples and replicates are there in the dataset?</p>
+<p>What is the sequencing depth of each sample? (Find the number of lines in each file and compare to QC report)</p>
+<p>What is r1 and r2 in the file names indicating?</p>
+<details>
+<summary>
+Show Answer
+</summary>
+<p><em>Hints:</em> - <code>samples.txt</code> describes the experimental design: which sample belongs to which condition and replicate. Biological replicates are needed to estimate variability when testing for differential expression later. - Each read takes four lines in a FASTQ file, so dividing the line count by 4 gives the number of reads. Because the files are compressed, decompress them while counting (<code>zcat file.fastq.gz | wc -l</code>). Running <code>wc -l</code> directly on a <code>.gz</code> file counts lines in the compressed binary data, which is meaningless. - The data is paired-end. Each DNA fragment was sequenced from both ends. Read 1 and read 2 of a pair come from the same fragment and appear in the same order in the two files. Tools must always receive both files of a pair together.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="module-6.html#cb14-1" tabindex="-1"></a><span class="bu">cd</span> <span class="va">$RNA_DATA_DIR</span></span>
+<span id="cb14-2"><a href="module-6.html#cb14-2" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="module-6.html#cb14-3" tabindex="-1"></a><span class="co"># experimental design</span></span>
+<span id="cb14-4"><a href="module-6.html#cb14-4" tabindex="-1"></a><span class="fu">cat</span> samples.txt</span>
+<span id="cb14-5"><a href="module-6.html#cb14-5" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="module-6.html#cb14-6" tabindex="-1"></a><span class="co"># number of lines per file and divide by 4 for number of reads</span></span>
+<span id="cb14-7"><a href="module-6.html#cb14-7" tabindex="-1"></a><span class="fu">wc</span> <span class="at">-l</span> <span class="pp">*</span>fastq.gz</span></code></pre></div>
+</details>
+</div>
+<div id="trimming-and-qc" class="section level3 hasAnchor">
+<h3>Trimming and QC<a href="module-6.html#trimming-and-qc" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Raw reads often contain sequencing adapter sequences. Adapters appear when the cDNA fragment is shorter than the read length. Reads also tend to lose quality toward their 3′ end. Both problems can reduce alignment rates or cause misalignments.</p>
+<p><code>fastp</code> scans the reads and does several things in one pass: - detects and removes adapters automatically - trims low-quality bases - discards reads that become too short - writes its own HTML/JSON QC report</p>
+<p>For paired-end data, fastp processes R1 and R2 together so that the pairs stay synchronized. If one read of a pair is discarded, its mate is handled accordingly.</p>
+<p>With many samples, opening one FastQC or fastp report per file becomes tedious. MultiQC searches a directory for reports from supported tools, including FastQC and fastp, and combines them into a single interactive report. This makes it easy to compare samples side by side and spot outliers.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="module-6.html#cb15-1" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="va">$RNA_DATA_TRIM_DIR</span></span>
+<span id="cb15-2"><a href="module-6.html#cb15-2" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="module-6.html#cb15-3" tabindex="-1"></a><span class="co"># example for one sample; repeat (or loop) for every sample</span></span>
+<span id="cb15-4"><a href="module-6.html#cb15-4" tabindex="-1"></a><span class="ex">fastp</span> <span class="dt">\</span></span>
+<span id="cb15-5"><a href="module-6.html#cb15-5" tabindex="-1"></a>  <span class="at">-i</span> AR1_MCF7_rep1_r1.fastq.gz <span class="at">-I</span> AR1_MCF7_rep1_r2.fastq.gz <span class="dt">\</span></span>
+<span id="cb15-6"><a href="module-6.html#cb15-6" tabindex="-1"></a>  <span class="at">-o</span> <span class="va">$RNA_DATA_TRIM_DIR</span>/AR1_MCF7_rep1_r1.fastq.gz <span class="dt">\</span></span>
+<span id="cb15-7"><a href="module-6.html#cb15-7" tabindex="-1"></a>  <span class="at">-O</span> <span class="va">$RNA_DATA_TRIM_DIR</span>/AR1_MCF7_rep1_r2.fastq.gz <span class="dt">\</span></span>
+<span id="cb15-8"><a href="module-6.html#cb15-8" tabindex="-1"></a>  <span class="at">--detect_adapter_for_pe</span> <span class="dt">\</span></span>
+<span id="cb15-9"><a href="module-6.html#cb15-9" tabindex="-1"></a>  <span class="at">-h</span> qc/AR1_MCF7_rep1_fastp.html <span class="dt">\</span></span>
+<span id="cb15-10"><a href="module-6.html#cb15-10" tabindex="-1"></a>  <span class="at">-j</span> qc/AR1_MCF7_rep1_fastp.json   <span class="co"># MultiQC reads the JSON file</span></span>
+<span id="cb15-11"><a href="module-6.html#cb15-11" tabindex="-1"></a></span>
+<span id="cb15-12"><a href="module-6.html#cb15-12" tabindex="-1"></a><span class="ex">multiqc</span> qc <span class="at">-o</span> qc/multiqc_report</span></code></pre></div>
+<p>Summarize all samples QC with MultiQC</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="module-6.html#cb16-1" tabindex="-1"></a><span class="co"># aggregate all reports found in qc/ into one summary report</span></span>
+<span id="cb16-2"><a href="module-6.html#cb16-2" tabindex="-1"></a><span class="ex">multiqc</span> qc <span class="at">-o</span> qc/multiqc_report</span></code></pre></div>
+</div>
+<div id="prepare-the-reference-genome-for-alignment" class="section level3 hasAnchor">
+<h3>Prepare the reference genome for alignment<a href="module-6.html#prepare-the-reference-genome-for-alignment" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Searching every read against the raw genome sequence would be far too slow. Aligners therefore first build an index, a compressed data structure that allows sequences to be looked up very quickly. HISAT2 uses a hierarchical index based on the Burrows–Wheeler transform / FM-index. This only needs to be done once per reference genome.</p>
+<ul>
+<li><code>hisat2-build</code> creates the index from the FASTA file. It writes several files named <code>chr22.1.ht2</code>, <code>chr22.2.ht2</code>, and so on. The second argument (<code>chr22</code>) is the prefix that we later pass to <code>hisat2 -x</code>.</li>
+<li><code>hisat2_extract_splice_sites.py</code> reads the GTF annotation and writes the coordinates of known exon–exon junctions. Because RNA-seq reads come from spliced mRNA, a single read can span an intron. Known junctions help HISAT2 align these split reads correctly. The file can be passed to <code>hisat2</code> with <code>--known-splicesite-infile</code>. It can also be passed to <code>hisat2-build</code> with <code>--ss</code>, together with <code>--exon</code> from <code>hisat2_extract_exons.py</code>, to build a splice-aware index.</li>
+<li><code>samtools faidx</code> creates a <code>.fai</code> index of the FASTA file. This allows tools such as samtools and IGV to retrieve any region of the genome quickly.</li>
+</ul>
+<div class="sourceCode" id="cb17"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb17-1"><a href="module-6.html#cb17-1" tabindex="-1"></a><span class="fu">mkdir</span> <span class="va">$RNA_REFS_DIR</span></span>
+<span id="cb17-2"><a href="module-6.html#cb17-2" tabindex="-1"></a><span class="bu">cd</span> <span class="va">$RNA_REFS_DIR</span></span>
+<span id="cb17-3"><a href="module-6.html#cb17-3" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="module-6.html#cb17-4" tabindex="-1"></a><span class="fu">cp</span> ~/CourseData/Module6/refs/<span class="pp">*</span> <span class="va">$RNA_REFS_DIR</span></span>
+<span id="cb17-5"><a href="module-6.html#cb17-5" tabindex="-1"></a></span>
+<span id="cb17-6"><a href="module-6.html#cb17-6" tabindex="-1"></a><span class="co"># build the HISAT2 index (output files: chr22.*.ht2)</span></span>
+<span id="cb17-7"><a href="module-6.html#cb17-7" tabindex="-1"></a><span class="ex">hisat2-build</span> chr22.fa chr22</span>
+<span id="cb17-8"><a href="module-6.html#cb17-8" tabindex="-1"></a></span>
+<span id="cb17-9"><a href="module-6.html#cb17-9" tabindex="-1"></a><span class="co"># extract known splice sites from the annotation</span></span>
+<span id="cb17-10"><a href="module-6.html#cb17-10" tabindex="-1"></a><span class="ex">hisat2_extract_splice_sites.py</span> chr22.gtf <span class="op">&gt;</span> chr22.splicesites.txt</span>
+<span id="cb17-11"><a href="module-6.html#cb17-11" tabindex="-1"></a></span>
+<span id="cb17-12"><a href="module-6.html#cb17-12" tabindex="-1"></a><span class="co"># FASTA index for fast random access to the sequence (creates chr22.fa.fai)</span></span>
+<span id="cb17-13"><a href="module-6.html#cb17-13" tabindex="-1"></a><span class="ex">samtools</span> faidx chr22.fa</span></code></pre></div>
+</div>
+<div id="alignment-with-hisat2" class="section level3 hasAnchor">
+<h3>Alignment with HISAT2<a href="module-6.html#alignment-with-hisat2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>HISAT2 is a splice-aware aligner. It maps each read pair to its location in the genome and allows a read to be split across an intron. The options used here:</p>
+<ul>
+<li><code>-x</code> sets the index prefix.</li>
+<li><code>-1</code> and <code>-2</code> give the paired read files (R1 and R2).</li>
+<li><code>-S</code> names the output SAM file.</li>
+<li><code>--summary-file</code> saves the alignment statistics: total reads, the percentage aligned uniquely, the percentage aligned to multiple locations, and the overall alignment rate.</li>
+</ul>
+<p>The overall alignment rate is one of the most important QC metrics. Here the reference is only chromosome 22, so most reads will legitimately not align. Expect a low rate.</p>
+<p>The output is in SAM format, a plain-text file with one line per alignment. SAM files are large and slow to process, so we convert them with <code>samtools sort</code>. This produces a BAM file, the compressed binary equivalent, and sorts the alignments by genomic coordinate. <code>samtools index</code> then creates a <code>.bai</code> index. This lets programs such as IGV and htseq-count jump directly to a genomic region without reading the whole file. Once the BAM file is created, you can delete the SAM file to save space.</p>
+<p>If you trimmed your reads in the previous step, you can align the trimmed files from <code>$RNA_DATA_TRIM_DIR</code> instead of the raw files.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href="module-6.html#cb18-1" tabindex="-1"></a><span class="fu">mkdir</span> <span class="va">$RNA_ALIGN_DIR</span></span>
+<span id="cb18-2"><a href="module-6.html#cb18-2" tabindex="-1"></a><span class="bu">cd</span> <span class="va">$RNA_ALIGN_DIR</span></span>
+<span id="cb18-3"><a href="module-6.html#cb18-3" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="module-6.html#cb18-4" tabindex="-1"></a><span class="co"># align one paired-end sample to chr22</span></span>
+<span id="cb18-5"><a href="module-6.html#cb18-5" tabindex="-1"></a><span class="ex">hisat2</span> <span class="at">-x</span> <span class="va">$RNA_REF_INDEX</span> <span class="dt">\</span></span>
+<span id="cb18-6"><a href="module-6.html#cb18-6" tabindex="-1"></a>  <span class="at">-1</span> <span class="va">$RNA_DATA_DIR</span>/AR1_MCF7_rep1_r1.fastq.gz <span class="dt">\</span></span>
+<span id="cb18-7"><a href="module-6.html#cb18-7" tabindex="-1"></a>  <span class="at">-2</span> <span class="va">$RNA_DATA_DIR</span>/AR1_MCF7_rep1_r2.fastq.gz <span class="dt">\</span></span>
+<span id="cb18-8"><a href="module-6.html#cb18-8" tabindex="-1"></a>  <span class="at">-S</span> AR1_MCF7_rep1.sam <span class="dt">\</span></span>
+<span id="cb18-9"><a href="module-6.html#cb18-9" tabindex="-1"></a>  <span class="at">--summary-file</span> AR1_MCF7_rep1_summary.txt</span>
+<span id="cb18-10"><a href="module-6.html#cb18-10" tabindex="-1"></a></span>
+<span id="cb18-11"><a href="module-6.html#cb18-11" tabindex="-1"></a><span class="co"># convert SAM to compressed BAM, sorted by genomic position</span></span>
+<span id="cb18-12"><a href="module-6.html#cb18-12" tabindex="-1"></a><span class="ex">samtools</span> sort <span class="at">-o</span> AR1_MCF7_rep1.bam AR1_MCF7_rep1.sam</span>
+<span id="cb18-13"><a href="module-6.html#cb18-13" tabindex="-1"></a><span class="co"># index the BAM file (creates AR1_MCF7_rep1.bam.bai)</span></span>
+<span id="cb18-14"><a href="module-6.html#cb18-14" tabindex="-1"></a><span class="ex">samtools</span> index AR1_MCF7_rep1.bam</span></code></pre></div>
+<ul>
+<li><p>Try FastQC on the aligned reads. FastQC accepts BAM files as input (<code>fastqc AR1_MCF7_rep1.bam</code>). Compare the report with the one from the raw reads. <code>samtools flagstat AR1_MCF7_rep1.bam</code> also gives a quick summary of mapped and properly paired reads.</p></li>
+<li><p>Download the BAM file together with its <code>.bai</code> index, and try visualizing them in IGV. Remember that this data covers only chromosome 22 of the genome, so load the human reference (hg38) in IGV and navigate to chr22. Look for reads piling up on exons and for split reads spanning introns, which IGV draws as thin connecting lines.</p></li>
+</ul>
+</div>
+<div id="gene-count-estimation" class="section level3 hasAnchor">
+<h3>Gene count estimation<a href="module-6.html#gene-count-estimation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>To measure gene expression, we count how many reads (here, read pairs) overlap the exons of each gene. The resulting table of raw counts is the input for differential expression tools such as DESeq2 or edgeR. These tools expect raw, unnormalized counts.</p>
+<p><code>htseq-count</code> compares each alignment with the gene annotation in the GTF file. The options used here:</p>
+<ul>
+<li><code>--format bam --order pos</code>: the input is a BAM file sorted by position, as produced by <code>samtools sort</code>. For paired-end data, htseq-count needs to know the sort order to find the two mates of each pair.</li>
+<li><code>--mode intersection-strict</code>: a read is counted for a gene only if the entire read falls within that gene’s exons. Reads that partly overlap introns or intergenic regions are not counted. Reads compatible with more than one gene are reported as <code>__ambiguous</code> rather than assigned.</li>
+<li><code>--stranded reverse</code>: the library was prepared with a stranded protocol (e.g. dUTP/TruSeq Stranded), in which read 1 maps to the strand opposite the gene. Setting strandedness correctly is essential. A wrong setting can make most counts disappear or assign reads to the wrong overlapping gene. Use <code>yes</code> for forward-stranded libraries and <code>no</code> for unstranded ones.</li>
+<li><code>--minaqual 1</code>: skip alignments with mapping quality below 1. This removes reads that align equally well to several locations and therefore cannot be confidently assigned.</li>
+<li><code>--type exon --idattr gene_id</code>: count over <code>exon</code> features in the GTF, and group exons by their <code>gene_id</code> so that counts are reported per gene.</li>
+<li><code>--additional-attr gene_name</code>: add the gene symbol as an extra column next to the gene ID, for readability.</li>
+</ul>
+<p>The output has one line per gene with its read count. It ends with summary lines (<code>__no_feature</code>, <code>__ambiguous</code>, <code>__too_low_aQual</code>, <code>__not_aligned</code>, <code>__alignment_not_unique</code>) that show how many reads were not assigned to any gene, and why. Check these lines: a very large <code>__no_feature</code> count often means the strandedness setting is wrong.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb19-1"><a href="module-6.html#cb19-1" tabindex="-1"></a><span class="fu">mkdir</span> <span class="va">$RNA_EXP_DIR</span></span>
+<span id="cb19-2"><a href="module-6.html#cb19-2" tabindex="-1"></a><span class="bu">cd</span> <span class="va">$RNA_EXP_DIR</span></span>
+<span id="cb19-3"><a href="module-6.html#cb19-3" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="module-6.html#cb19-4" tabindex="-1"></a><span class="ex">htseq-count</span> <span class="at">--format</span> bam <span class="at">--order</span> pos <span class="at">--mode</span> intersection-strict <span class="dt">\</span></span>
+<span id="cb19-5"><a href="module-6.html#cb19-5" tabindex="-1"></a>  <span class="at">--stranded</span> reverse <span class="at">--minaqual</span> 1 <span class="at">--type</span> exon <span class="dt">\</span></span>
+<span id="cb19-6"><a href="module-6.html#cb19-6" tabindex="-1"></a>  <span class="at">--idattr</span> gene_id <span class="at">--additional-attr</span> gene_name <span class="dt">\</span></span>
+<span id="cb19-7"><a href="module-6.html#cb19-7" tabindex="-1"></a>  <span class="va">$RNA_ALIGN_DIR</span>/AR1_MCF7_rep1.bam <span class="va">$RNA_REF_GTF</span> <span class="op">&gt;</span> AR1_MCF7_rep1_genes.tsv</span>
+<span id="cb19-8"><a href="module-6.html#cb19-8" tabindex="-1"></a></span>
+<span id="cb19-9"><a href="module-6.html#cb19-9" tabindex="-1"></a><span class="co"># inspect the result</span></span>
+<span id="cb19-10"><a href="module-6.html#cb19-10" tabindex="-1"></a><span class="fu">head</span> AR1_MCF7_rep1_genes.tsv</span>
+<span id="cb19-11"><a href="module-6.html#cb19-11" tabindex="-1"></a><span class="fu">tail</span> <span class="at">-n</span> 5 AR1_MCF7_rep1_genes.tsv   <span class="co"># assignment summary</span></span></code></pre></div>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="module-5.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="module-7.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": false,
+    "twitter": false,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/bioinformaticsdotca/CAN_TorMon-2610/blob/main/060-module-6.Rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["_main.pdf", "_main.epub"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
+});
+});
+</script>
+
+</body>
+
+</html>
