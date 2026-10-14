@@ -347,7 +347,7 @@ library(jsonlite)
 path_to_save_cytoscape = "/Users/risserlin/CBW_Workshop_results/Module9"
 
 # Set base URL — adjust if not running from Docker
-current_cytoscape_baseurl <- "http://host.docker.internal:1234/v1"
+current_cytoscape_baseurl <- "http://localhost:1234/v1"
 
 cytoscapePing(base.url = current_cytoscape_baseurl)
 cytoscapeVersionInfo(base.url = current_cytoscape_baseurl)
@@ -394,6 +394,7 @@ fgsea_csv     <- file.path(data_dir, "fgsea_resistant_vs_parental.csv")
 fgsea_gem     <- file.path(data_dir, "fgsea_report_for_list.tsv")
 gmt_gprofiler <- file.path(data_dir, "gprofiler_full_hsapiens.name.gmt")
 gmt_baderlab  <- file.path(data_dir, "Human_GOBP_AllPathways_filtered_500orLessV2.gmt")
+rnk_file <- file.path(data_dir, "resistant_vs_parental.rnk")
 
 message("Setup complete. All GEM files ready in: ", data_dir)
 ```
@@ -572,9 +573,17 @@ commandsRun(em1a_command, base.url = current_cytoscape_baseurl)
 em1a_suid <- getNetworkSuid(base.url = current_cytoscape_baseurl)
 message("Exercise 1a EM SUID: ", em1a_suid)
 
-renameNetwork("EM_UP_vs_DN_gprofiler",
+
+existing_names <- getNetworkList(base.url = current_cytoscape_baseurl)
+new_name <- "EM_UP_vs_DN_gprofiler"
+if (new_name %in% existing_names) {
+  new_name <- paste0(sample(1000:9999, 2),"_",new_name )
+}
+renameNetwork(new_name,
               network = getNetworkSuid(base.url = current_cytoscape_baseurl),
               base.url = current_cytoscape_baseurl)
+message("Network renamed to: ", new_name)
+
 
 # Apply a layout
 layoutNetwork("force-directed defaultSpringCoefficient=0.00004 defaultSpringLength=5",
@@ -656,9 +665,16 @@ em1b_command <- paste(
 
 commandsRun(em1b_command, base.url = current_cytoscape_baseurl)
 
-renameNetwork("EM_fgsea_Baderlab",
+existing_names <- getNetworkList(base.url = current_cytoscape_baseurl)
+new_name <- "EM_fgsea_Baderlab"
+if (new_name %in% existing_names) {
+  new_name <- paste0(sample(1000:9999, 2),"_",new_name )
+}
+renameNetwork(new_name,
               network = getNetworkSuid(base.url = current_cytoscape_baseurl),
               base.url = current_cytoscape_baseurl)
+message("Network renamed to: ", new_name)
+
 
 em1b_suid <- getNetworkSuid(base.url = current_cytoscape_baseurl)
 message("Exercise 1b fgsea EM SUID: ", em1b_suid)
