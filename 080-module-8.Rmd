@@ -1,11 +1,50 @@
-# Module 8
+# Module 8 - Pathway Enrichment Analysis
+
+```{r data-dir-intro, include=FALSE}
+# Location of the Module 8 files (data/, BYODdata/, image/):
+# - on the course server: ~/CourseData/Module8
+# - when the book is built from the repository: docs/Module8
+data_dir <- if (dir.exists("~/CourseData/Module8")) "~/CourseData/Module8" else "docs/Module8"
+```
+
+*<font color="#827e9c">Veronique Voisin</font>*
+
+
+This module will cover how to use differential expression output to generate pathway enrichment results.
 
 ## Lecture
 
-<!--<iframe width="640" height="360" src="YOUTUBE EMBED LINK" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<!--<iframe src="GOOGLE SLIDES LINK/preview" width="640" height="480" allow="autoplay"></iframe>
 -->
 
-<!--<iframe src="GOOGLE SLIDES LINK/preview" width="640" height="480" allow="autoplay"></iframe>  
--->
+## Presentation of the dataset
+
+* This module is a continuation of the transcriptomics module 6 and we will use the same dataset. This dataset contains bulk RNA-seq data of a model of breast cancer. The gene counts were deposited to the Gene Expression Omnibus (GEO) database under accession ***GSE222367*** and are publicly available.
+
+* RNA was extracted from MCF7, a breast cancer cell line under different conditions: parental cell line and cell line samples resistant to the drugs palbociclib or abemaciclib.
+
+* Biological replicates were available for each condition.
+
+* RNA-seq library was prepared and sequenced using an Illumina HiSeq 2500 sequencer.
+
+* Sequence reads were mapped to the human reference genome (Gencode GRCh38) using TopHat as aligner.
+
+* The BAM files with mapped reads for each sample were sorted and then used as input for HTSeq 0.11.0 in order to generate read count data at the gene level.
+
+* We retrieved the gene counts and performed differential expression analysis using a negative binomial generalized linear model, followed by pathway enrichment analysis.
+
+
+
+```{r fig-mychart, echo=FALSE, fig.cap="GEO dataset", out.width="60%"}
+knitr::include_graphics(file.path(data_dir, "image/GEOscreenshot.png"))
+```
 
 ## Lab
+
+[8.1 Lab practical Differential Expression](#de_mod8)
+
+[8.2 Lab practical Defined gene list (g:Profiler)](#gprofiler_mod8)
+
+[8.3 Lab practical Ranked gene list (fGSEA)](#fgsea_mod8)
+
+[8.4 Lab practical BYOD - Differential Expression (Palbo-resistant vs Abema-resistant)](#byod_mod8)

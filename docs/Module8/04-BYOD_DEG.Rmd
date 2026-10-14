@@ -1,0 +1,232 @@
+# BYOD - Differential Expression (Palbo-resistant vs Abema-resistant) {-}
+
+**This work is licensed under a [Creative Commons Attribution-ShareAlike 4.0 Unported License](https://creativecommons.org/licenses/by-sa/4.0/deed.en). This means that you are able to copy, share and modify the work, as long as the result is distributed under the same license.**
+
+
+We perform differential expression analysis comparing the Palbo-resistant and the Abema-resistant MCF7 cell lines using a negative binomial generalized linear model using the edgeR package.
+
+## Install and load libraries
+```{r}
+## CRAN and Bioconductor setup
+if (!requireNamespace("BiocManager", quietly = TRUE))
+  install.packages("BiocManager")
+
+## List of CRAN packages
+cran_packages <- c(
+  "tidyverse",
+  "ggrepel"
+)
+
+# List of Bioconductor packages
+bioc_packages <- c(
+  "edgeR"
+)
+
+# Install CRAN packages if not already installed
+for (pkg in cran_packages) {
+  if (!requireNamespace(pkg, quietly = TRUE)) {
+    install.packages(pkg)
+  }
+}
+
+# Install Bioconductor packages if not already installed
+for (pkg in bioc_packages) {
+  if (!requireNamespace(pkg, quietly = TRUE)) {
+    BiocManager::install(pkg)
+  }
+}
+
+# Load the libraries
+
+# CRAN packages
+library(tidyverse)
+library(ggrepel)
+# Bioconductor packages
+library(edgeR)
+
+# create the results folder (if it does not exist yet) to save the outputs
+dir.create("results", showWarnings = FALSE)
+
+```
+
+```{block, type="rmd-caution"}
+In the Ubuntu (course server) session, the `dir.create()` line above and every `write.csv()` line in this lab use `~/workspace/Module8/results` instead of `results`, so your results are saved in `~/workspace/Module8/results`.
+```
+
+## Data used for this comparison
+For this analysis, we are going to compare the Palbo-resistant cell lines (MCF7 1.2 Palbo-resistant, 3 biological replicates) versus the Abema-resistant cell lines (MCF7 0.5 Abema-resistant, 3 biological replicates). The count files are in the BYODdata folder.
+```{r byod-dataset, echo=FALSE, fig.cap="GEO dataset (GSE222367): samples used for the Palbo-resistant vs Abema-resistant comparison", out.width="60%"}
+knitr::include_graphics("BYODdata/BYOD_GEO.png")
+```
+
+
+### generate a DGE object
+```{r}
+# 1. Find the count files
+files <- list.files(path = "BYODdata", pattern = "\\.txt\\.gz$", full.names = TRUE)
+
+# 2. Sample names from the file names (strip the extension)
+samples <- sub("_S.*", "", basename(files))
+
+# 3. Read the files into a DGEList
+#    HTSeq output has no header: column 1 = gene ID, column 2 = count.
+#    R reads gzipped files directly, so no need to decompress.
+dge <- readDGE(files, columns = c(1, 2), header = FALSE, labels = samples)
+
+# 4. Remove HTSeq summary rows (__no_feature, __ambiguous, etc.)
+dge <- dge[!grepl("^__", rownames(dge)), , keep.lib.sizes = FALSE]
+
+# 5. (Optional) add group information
+#    files are listed in this order: GSM6921640-42 (Palbo-resistant),
+#    then GSM6921655-57 (Abema-resistant)
+dge$samples$group <- factor(
+  c("palbo_resistant", "palbo_resistant", "palbo_resistant",
+    "abema_resistant", "abema_resistant", "abema_resistant"),
+  levels = c("abema_resistant", "palbo_resistant")   # abema_resistant = reference
+)
+
+# check that each sample has the right group
+dge$samples[, c("files", "group")]
+```
+
+
+## Filter low-count genes and TMM-normalize
+```{r}
+keep <- filterByExpr(dge, group = dge$samples$group)
+dge  <- dge[keep, , keep.lib.sizes = FALSE]
+dge  <- calcNormFactors(dge, method = "TMM")
+cat("Genes retained after filtering:", nrow(dge), "\n")
+```
+
+```{r byod-mds-calc, fig.show='hide'}
+mds <- plotMDS(dge, col = as.numeric(dge$samples$group), main = "MDS (logCPM)")
+```
+
+
+```{r}
+group = dge$samples$group
+var_pct <- round(100 * mds$var.explained[mds$dim.plot])
+mds_df <- data.frame(dim1 = mds$x, dim2 = mds$y,
+                      sample = colnames(dge), group = group)
+
+ggplot(mds_df, aes(x = dim1, y = dim2, color = group)) +
+  geom_point(size = 3) +
+  ggrepel::geom_text_repel(aes(label = sample), size = 3, color = "grey30",
+                            show.legend = FALSE, max.overlaps = Inf,
+                            box.padding = 0.4, segment.color = "grey60") +
+  labs(title = "MDS plot (all samples)",
+       x = sprintf("Leading logFC dim %d (%d%%)", mds$dim.plot[1], var_pct[1]),
+       y = sprintf("Leading logFC dim %d (%d%%)", mds$dim.plot[2], var_pct[2]),
+       color = "Group") +
+  theme_minimal(base_size = 12) +
+  theme(legend.position = "right")
+```
+
+
+##  Design (~0 + group) and named contrast
+```{r}
+design <- model.matrix(~ 0 + group, data = dge$samples)
+colnames(design) <- levels(dge$samples$group)   # "abema_resistant", "palbo_resistant"
+
+contr <- makeContrasts(
+  palbo_resistant_vs_abema_resistant = palbo_resistant - abema_resistant,   # + logFC = up in Palbo-resistant
+  levels = design
+)
+
+head(design)
+```
+
+
+##  Dispersion estimation and quasi-likelihood GLM
+```{r}
+dge <- estimateDisp(dge, design, robust = TRUE)
+fit <- glmQLFit(dge, design, robust = TRUE)
+ 
+par(mfrow = c(1, 2)); plotBCV(dge); plotQLDisp(fit)
+
+qlf <- glmQLFTest(fit, contrast = contr[, "palbo_resistant_vs_abema_resistant"])
+ 
+res <- topTags(qlf, n = Inf, sort.by = "PValue")$table
+res$gene <- rownames(res)
+```
+## Calculating ranking score and export full results
+```{r}
+res$score = sign(res$logFC) * -log10(res$PValue)
+head(res)
+```
+
+##visualization
+```{r}
+### histogram of the ranking score
+hist(res$score, breaks=100, col="orchid", xlab = "score", main = "Histogram of score")
+
+### volcano plot
+
+```
+
+
+
+```{r byod-volcano, fig.width=7, fig.height=6}
+# Step 1: add -log10(FDR), and label each gene Up / Down / Not sig
+res <- res %>%
+  mutate(
+    negLogFDR = -log10(FDR),
+    status = case_when(
+      FDR < 0.05 & logFC > 0 ~ "Up",
+      FDR < 0.05 & logFC < 0 ~ "Down",
+      TRUE ~ "Not sig"
+    )
+  )
+
+# Step 2: pick the top 15 most significant genes on each side, to label
+top_up   <- res %>% filter(status == "Up")   %>% arrange(FDR) %>% slice_head(n = 15)
+top_down <- res %>% filter(status == "Down") %>% arrange(FDR) %>% slice_head(n = 15)
+top_genes <- bind_rows(top_up, top_down)
+
+# Step 3: plot
+ggplot(res, aes(x = logFC, y = negLogFDR, color = status)) +
+  geom_point() +
+  scale_color_manual(values = c("Up" = "#D55E00", "Down" = "#0072B2", "Not sig" = "grey")) +
+ ggrepel::geom_text_repel(data = top_genes, aes(label = gene), max.overlaps = Inf) +
+  labs(title = "Palbo-resistant vs Abema-resistant",
+       subtitle = "Up = higher in Palbo-resistant, Down = higher in Abema-resistant",
+       x = "log2 Fold Change", y = "-log10(FDR)", color = "Status")+
+  coord_cartesian(ylim = c(0, 4.5)) +
+  theme_classic()
+```
+
+
+
+## Result output
+```{r}
+print(summary(decideTests(qlf, adjust.method = "BH", p.value = 0.05)))
+write.csv(res, "results/edgeR_palbo_resistant_vs_abema_resistant_all_genes.csv", row.names = FALSE)
+
+```
+
+## YOUR TURN
+
+Now use the differential expressed genes and perform pathway enrichment analysis using g:Profiler or fgsea as described in Module 8
+
+
+## Additional exercise
+
+Use the genes from Module 5 (BRCA1, BRCA2 and TP53) and build a protein protein interaction network with the String All in Cytoscape and discover their shared interactors. Perform pathway enrichment analysis on the created network.
+
+```{r byod-hcc1395-clinical, echo=FALSE, fig.cap="Clinically relevant features of HCC1395 (Module 5): BRCA1 germline stop-gain, BRCA2 somatic stop-gain and TP53 somatic missense mutations, and the EIF3K-CYP39A1 fusion transcript.", out.width="60%"}
+knitr::include_graphics("BYODdata/hcc1395_clinical.png")
+```
+
+Query the 3 genes with the STRING protein query in Cytoscape (species Homo sapiens, full STRING network, confidence score cutoff 0.40, maximum 30 additional interactors).
+
+```{r byod-string1, echo=FALSE, fig.cap="STRING protein query in Cytoscape with BRCA1, BRCA2 and TP53.", out.width="100%"}
+knitr::include_graphics("BYODdata/string1.png")
+```
+
+The resulting network contains the 3 genes and their shared interactors. Run the STRING functional enrichment to see which pathways are enriched in the network.
+
+```{r byod-string2, echo=FALSE, fig.cap="STRING network of BRCA1, BRCA2, TP53 and their interactors (33 nodes, 225 edges), with the STRING enrichment table: DNA repair pathways are the most enriched.", out.width="100%"}
+knitr::include_graphics("BYODdata/string2.png")
+```
+
+
