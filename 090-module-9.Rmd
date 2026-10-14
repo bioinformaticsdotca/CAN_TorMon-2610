@@ -1,6 +1,29 @@
-# Module 9
+# Module 9 - Variant to Networks
 
+##  Network Visualization and Analysis with Cytoscape
+
+*<font color="#827e9c">Ruth Isserlin, Veronique Voisin</font>*
+ 
 ## Lecture
+ 
+ **Module 9.1 Cytoscape** 
+ 
+ [Cytoscape - Lecture]()
+ 
+ [Enrichment Map - Lecture]()
+ 
+ **Module 9.1 Cytoscape Lab**
+
+[Introduction to practical Cytoscape Lab (slides)]()
+
+ **Module 9.2 - g:profiler Visualization in Cytoscape **
+ 
+
+## Lab
+
+[9.1 Lab practical Cytoscape Primer](#cytoscape_mod9) 
+
+[9.2 Lab practical g:Profile Visualization in Cytoscape](#gprofiler_mod9) 
 
 <!--<iframe width="640" height="360" src="YOUTUBE EMBED LINK" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 -->
@@ -8,4 +31,6 @@
 <!--<iframe src="GOOGLE SLIDES LINK/preview" width="640" height="480" allow="autoplay"></iframe>  
 -->
 
-## Lab
+
+
+
