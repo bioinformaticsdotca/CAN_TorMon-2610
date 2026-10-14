@@ -1,14 +1,139 @@
 # Meet Your Faculty
 
-<!--#### NAME
+#### Trevor Pugh (He/Him)
 
-<img src="./img/faculty/MISSINGHEADSHOT.PNG" width="200" alt="Photo of NAME">
+<img src="./img/faculty/Trevor.PNG" width="200" alt="Photo of Trevor Pugh">
 
->JOB TITLE <br>
-INSTITUTION <br>
-LOCATION
->
-> --- CONTACT INFO, IF PROVIDED
+>Senior Scientist, Princess Margaret Cancer Centre <br>
+Director, Genomics, Ontario Institute for Cancer Research <br>
+Toronto, ON, Canada <br>
+trevor.pugh@utoronto.ca 
 
-BIO GOES HERE-->
+Dr. Trevor Pugh, PhD, FACMG is a cancer genomics researcher and board-certified molecular geneticist at the forefront of precision medicine. As holder of the Canada Research Chair in Translational Genomics, he uses genome sequencing to understand causes of cancer, guide treatment of patients, and detect early disease using blood tests. He directs the OICR Genomics Program and the Princess Margaret Genomics Centre; genomics cores that specialize in single cell, cell-free DNA and clinically-accredited whole genome sequencing. He has contributed to multiple large-scale genomics and data-sharing programs including The Cancer Genome Atlas, NCI TARGET, AACR GENIE, and the Terry Fox Marathon of Hope Cancer Centres Network. He leads the CHARM Consortium, an initiative to use cell-free DNA monitoring for all people with an inherited predisposition to cancer. Originally from Vancouver, Dr. Pugh received a PhD in Medical Genetics from the University of British Columbia and was an early student of the Canadian Bioinformatics Workshop.
 
+#### Linda Xiang (She/Her)
+
+<img src="./img/faculty/MISSINGPHOTO.PNG" width="200" alt="Photo of Linda Xiang">
+
+>Data Scientist II <br>
+Ontario Institute of Cancer Research  <br>
+Toronto, ON, Canada <br>
+lxiang@oicr.on.ca 
+
+Linda is a Senior Data Scientist with over a decade of experience designing and delivering production-grade data platforms for large-scale international genomics initiatives, including ICGC/ICGC-ARGO, PCAWG, GDC, and VirusSeq. Her work focuses on bridging complex scientific requirements with robust engineering solutions, spanning bioinformatics workflow architecture, data services, and platform integration. She has led the development of containerized, reproducible pipelines for genomic data processing and submission across cloud and on-premises environments, and has driven the adoption of standards-based frameworks to improve scalability and maintainability. In parallel, she has led the design of interoperable clinical and genomic data models to support secure data sharing and federated analysis, while contributing to global standards development through GA4GH.
+
+#### Yoshiaki Tanaka (He/Him)
+
+<img src="./img/faculty/MISSINGPHOTO.PNG" width="200" alt="Photo coming soon">
+
+>Associate Professor <br>
+Centre de Recherche de l’Hôpital Maisonneuve-Rosemont, Université de Montréal <br>
+Montreal, QC, Canada <br>
+yoshiaki.tanaka@umontreal.ca  
+
+Dr. Yoshiaki Tanaka obtained his undergraduate degree (2006) in pharmaceutical science at Tokyo University of Science, Japan. During his Ph.D. training (2006-2011), he pursued purely bioinformatics approaches using large-scale datasets, such as RNA-seq and ChIP-seq, to model the relationship between transcriptional and epigenetic regulation in eukaryotic cells under the supervision of Dr. Kenta Nakai at University of Tokyo, Japan. He also applied machine learning algorithms to high-throughput sequencing data to investigate chromatin conformation regulations. For his post-doctoral studies, Tanaka joined Dr. In-Hyun Park laboratory at Yale University USA (2011-2020) to seek out complementary training in cell and molecular biology with the goal of understanding stem cell pluripotency and tissue development. Recently, he developed in vitro 3D models of human brain and elucidated mechanistic insight of brain development and neuronal diseases. Dr. Tanaka’s research vision at Maisonneuve-Rosemont Hospital Research Center (CRHMR), University of Montreal is to explore complex problems related to brain tumor and other neuronal diseases using both in vitro and in silico modeling.
+
+#### Robert Eveleigh
+
+<img src="./img/faculty/MISSINGPHOTO.PNG" width="200" alt="Photo coming soon">
+
+> <br>
+ <br>
+ >
+
+Bio coming soon
+
+#### Mathieu Lajoie 
+
+<img src="./img/faculty/MLajoie.JPEG" width="200" alt="Photo of Mathieu Lajoie">
+
+>Research Associate - Bioinformatician <br>
+Rosalind and Morris Goodman Cancer Institute, McGill University <br>
+Montreal, QC, Canada 
+  
+Mathieu Lajoie is a Research Associate and Bioinformatician in Dr. Ian Watson’s laboratory at the Rosalind and Morris Goodman Cancer Institute, McGill University. He holds a PhD in Bioinformatics from Université de Montréal and has more than 10 years of experience in cancer research. He has worked on a wide range of computational biology topics, from algorithm development to regulatory genomics and tumour evolution. His current research focuses on melanoma, integrating genomic and spatial transcriptomic data to investigate disease progression and therapeutic response.
+
+#### Vida Talebian 
+
+<img src="./img/faculty/MISSINGPHOTO.PNG" width="200" alt="Photo coming soon">
+
+>Bioinformatician <br>
+Ontario Institute for Cancer Research <br>
+Toronto,ON,Canada 
+
+Vida is a bioinformatician at the Diagnostic Development program at OICR. She holds a master’s degree in bioinformatics from the University of Waterloo with a computer engineering background. She is involved in projects with a focus on analyzing and integrating multi-omics data to identify prognostic signatures in clinical studies.
+
+#### Aqsa Alam (She/Her)
+
+<img src="./img/faculty/Aqsa.JPEG" width="200" alt="Photo of Aqsa Alam">
+
+>Bioinformatician III <br>
+Ontario Institute for Cancer Research <br>
+Toronto,ON,Canada <br>
+aalam@oicr.on.ca
+
+Aqsa Alam is a bioinformatician in the Clinical Genome Interpretation team at the Ontario Institute of Cancer Research. Aqsa did her Honours BSc with high distinction in Biology and Physics at the University of Toronto Mississauga and her MSc in Cell and Systems Biology at the University of Toronto. Aqsa is passionate about communication and scientific outreach. Her current work focuses on genomic interpretation in cancer and supporting accredited clinical trials.
+
+#### Veronique Voisin
+
+bio coming soon
+
+#### Ruth Isserlin
+
+<img src="./img/faculty/MISSINGPHOTO.PNG" width="200" alt="Photo coming soon">
+
+>Research Data Analyst <br>
+The Donnelly Centre, University of Toronto <br>
+Toronto,ON,Canada <br>
+ruth.isseerlin@utoronto.ca
+
+Bioinformatician and data analyst in the Bader lab applying pathway and data analysis to varied data types. Developed Enrichment Map App for Cytoscape, an app to visually translate functional enrichment results from popular enrichment tools like GSEA to networks. Further developed the Enrichment Map Pipeline including development of additional Apps to help summarize and analyze resulting Enrichment Maps, including PostAnalysis, WordCloud, and AutoAnnotate App. 
+
+#### Nicholas Geoffrion
+
+<img src="./img/faculty/MISSINGPHOTO.PNG" width="200" alt="Photo coming soon">
+
+bio coming soon
+
+## TA's
+
+#### Oliver De Sa
+
+<img src="./img/faculty/Oliver.jpeg" width="200" alt="Photo of Oliver De Sa">
+
+>Bioinformatician III <br>
+Ontario Institute for Cancer Research <br>
+Toronto,ON,Canada <br>
+odesa@oicr.on.ca
+
+Oliver De Sa is a bioinformatician in the Window-of-Opportunity (WOO) network at the Ontario Institute for Cancer Research. Oliver completed a BSc in Biochemistry, followed by an MSc in Immunology both at the University of Toronto. His current work focuses on multi-omic analyses for WOO clinical trials, integrating various data types to describe the molecular mechanisms through which the tumour microenvironment responds to treatment.
+
+#### Edmund Su
+
+<img src="./img/faculty/MISSINGPHOTO.png" width="200" alt="Photo coming soon">
+
+Bio coming soon
+
+#### Jordan Babadoudou
+
+<img src="./img/faculty/MISSINGPHOTO.png" width="200" alt="Photo coming soon">
+
+bio coming soon
+
+#### Alain Pacis
+
+<img src="./img/faculty/MISSINGPHOTO.png" width="200" alt="Photo coming soon">
+
+bio coming soon
+
+#### Rong Ma
+
+<img src="./img/faculty/MISSINGPHOTO.png" width="200" alt="Photo coming soon">
+
+bio coming soon
+
+#### Zahra Tavakol
+
+<img src="./img/faculty/MISSINGPHOTO.png" width="200" alt="Photo coming soon">
+
+bio coming soon
