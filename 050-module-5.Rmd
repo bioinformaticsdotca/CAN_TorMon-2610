@@ -26,15 +26,15 @@ knitr::opts_chunk$set(message = FALSE, warning = FALSE)
 
 We use the **SEQC-II tumor purity titration** (Xiao *et al.*, *Nat Biotechnol* 2021, PMID 34504346). DNA from the breast cancer cell line **HCC1395** (tumor) was mixed with DNA from its matched B-lymphoblastoid line **HCC1395BL** (normal) at known ratios, then sequenced by WGS (\~100x).
 
-| Sample (BAM prefix) | Role   | Tumor : Normal | True purity |
-|---------------------|--------|----------------|-------------|
-| SPP_GT_0-1_1        | Normal | 0 : 1          | 0.00        |
-| SPP_GT_1-19_1       | Tumor  | 1 : 19         | 0.05        |
-| SPP_GT_1-9_1        | Tumor  | 1 : 9          | 0.10        |
-| SPP_GT_1-4_1        | Tumor  | 1 : 4          | 0.20        |
-| SPP_GT_1-1_1        | Tumor  | 1 : 1          | 0.50        |
-| SPP_GT_3-1_1        | Tumor  | 3 : 1          | 0.75        |
-| SPP_GT_1-0_1        | Tumor  | 1 : 0          | 1.00        |
+| Sample (BAM prefix) | Role   | Tumor : Normal DNA | True Tumor DNA fraction |
+|---------------------|--------|--------------------|-------------------------|
+| SPP_GT_0-1_1        | Normal | 0 : 1              | 0.00                    |
+| SPP_GT_1-19_1       | Tumor  | 1 : 19             | 0.05                    |
+| SPP_GT_1-9_1        | Tumor  | 1 : 9              | 0.10                    |
+| SPP_GT_1-4_1        | Tumor  | 1 : 4              | 0.20                    |
+| SPP_GT_1-1_1        | Tumor  | 1 : 1              | 0.50                    |
+| SPP_GT_3-1_1        | Tumor  | 3 : 1              | 0.75                    |
+| SPP_GT_1-0_1        | Tumor  | 1 : 0              | 1.00                    |
 
 Because the true purity is known, this dataset is ideal for checking how well a copy-number tool estimates purity and ploidy as the tumor fraction drops.
 
@@ -83,7 +83,7 @@ java -Xmx${JAVA_MEM} -jar $COBALT_JAR \
 ```
 
 | Parameter | Meaning |
-|------------------------|-----------------------------------------------|
+|-------------------------|-----------------------------------------------|
 | `-reference`, `-reference_bam` | Normal sample ID and BAM. The normal is used for its own depth profile, to detect germline copy-number changes and the sex of the individual. |
 | `-tumor`, `-tumor_bam` | Tumor sample ID and BAM |
 | `-gc_profile` | 1 kb GC/mappability profile. COBALT counts reads in each 1 kb window and divides by the median depth of windows with the same GC content, so GC bias is removed. |
@@ -94,7 +94,7 @@ Optional: `-pcf_gamma` (segmentation penalty; higher gives fewer, longer segment
 **Outputs** (`Mathieu_purple/cobalt/<tumor>/`):
 
 | File | Content |
-|------------------------|-----------------------------------------------|
+|-------------------------|-----------------------------------------------|
 | `<tumor>.cobalt.ratio.tsv.gz` | One row per 1 kb window: read depths, `tumorGCRatio`, `referenceGCRatio`, `referenceGCDiploidRatio`. **-1** = window not usable (low mappability, extreme GC). |
 | `<tumor>.cobalt.ratio.pcf` | Segments of the tumor ratio; the `mean` column is **log2** |
 | `<normal>.cobalt.ratio.pcf` | Segments of the normal ratio |
@@ -216,34 +216,51 @@ Other important parameters, not used in this run:
 | `<tumor>.purple.qc` | QC summary: status, contamination, gender from AMBER and COBALT, number of deleted genes |
 | `plot/` | Genome-wide plots: `copynumber.png`, `segment.png`, `purity.range.png`, ... |
 
-## First look at the results: estimated vs. true purity
+## First look at the results: estimated vs. "true" purity
 
 ```{r}
 library(tidyverse)
 
-true_purity <- tibble(
+# function to convert tumor DNA fraction to purity
+tdf_to_purity <- function(tdf, ploidy = 2) {
+  2 * tdf / (ploidy * (1 - tdf) + 2 * tdf)
+}
+
+true_fraction <- tibble(
   sample      = c("SPP_GT_1-19_1", "SPP_GT_1-9_1", "SPP_GT_1-4_1",
                   "SPP_GT_1-1_1",  "SPP_GT_3-1_1", "SPP_GT_1-0_1"),
-  true_purity = c(0.05, 0.10, 0.20, 0.50, 0.75, 1.00))
+  true_fraction = c(0.05, 0.10, 0.20, 0.50, 0.75, 1.00))
 
 purple_fit <- list.files("Mathieu_purple/purple", pattern = "purple.purity.tsv$",
                          full.names = TRUE) %>%
   set_names(~ basename(.x) %>% str_remove(".purple.purity.tsv")) %>%
   map_dfr(read_tsv, .id = "sample", show_col_types = FALSE) %>%
-  select(sample, purity, minPurity, maxPurity, ploidy, gender, runMode)
+  select(sample, purity, minPurity, maxPurity, ploidy, gender, runMode) %>% 
+  left_join(., true_fraction, by = 'sample') %>% 
+  mutate(., estimated_purity_from_fraction = tdf_to_purity(true_fraction, ploidy = ploidy) )
 
-fit <- left_join(true_purity, purple_fit, by = "sample")
-fit
 
-ggplot(fit, aes(true_purity, purity)) +
+ggplot(purple_fit, aes(estimated_purity_from_fraction, purity)) +
   geom_abline(linetype = "dashed", colour = "grey50") +
-  geom_errorbar(aes(ymin = minPurity, ymax = maxPurity), width = 0.02) +
+  # geom_errorbar(aes(ymin = minPurity, ymax = maxPurity), width = 0.02) +
   geom_point(size = 3, colour = "red3") +
   coord_equal(xlim = c(0, 1), ylim = c(0, 1)) +
-  labs(x = "True purity (mixing ratio)", y = "PURPLE purity",
+  labs(x = "Estimated purity based on tumor DNA Fraction", y = "PURPLE purity",
        title = "PURPLE purity estimates on the SEQC-II dilution series") +
   theme_bw(base_size = 13)
 ```
+
+***Summary***
+
+| Sample (BAM prefix) | Role | Tumor : Normal DNA | True Tumor DNA fraction | "True" Purity (estimated based on tDNA fraction) | Purity (estimated by PURPLE) |
+|-------------|----------|-------------|-------------|-------------|-------------|
+| SPP_GT_0-1_1 | Normal | 0 : 1 | 0.00 | 0.00 | 0.00 |
+| SPP_GT_1-19_1 | Tumor | 1 : 19 | 0.05 | 0.04 | 0.15 |
+| SPP_GT_1-9_1 | Tumor | 1 : 9 | 0.10 | 0.07 | 0.16 |
+| SPP_GT_1-4_1 | Tumor | 1 : 4 | 0.20 | 0.14 | 0.16 |
+| SPP_GT_1-1_1 | Tumor | 1 : 1 | 0.50 | 0.41 | 0.43 |
+| SPP_GT_3-1_1 | Tumor | 3 : 1 | 0.75 | 0.68 | 0.69 |
+| SPP_GT_1-0_1 | Tumor | 1 : 0 | 1.00 | 1.00 | 0.99 |
 
 Questions for discussion:
 
@@ -351,7 +368,7 @@ INIS="$GENPIPES_INIS/dnaseq/dnaseq.base.ini \
 ```
 
 | File | Role |
-|------------------------|-----------------------------------------------|
+|-------------------------|-----------------------------------------------|
 | `dnaseq.base.ini` | Default tools, module versions and genome (GRCh38) for the DNA-seq pipeline |
 | `dnaseq.cancer.ini` | Settings for the somatic protocols: caller parameters, HMF resources for PURPLE, PCGR, etc. |
 | `rorqual.ini` | Cluster-specific settings: Slurm flags, CPUs/memory per node, account (`-A $RAP_ID`) |
@@ -379,7 +396,7 @@ genpipes dnaseq \
 ```
 
 | Parameter | Meaning |
-|------------------------|------------------------------------------------|
+|------------------------|-----------------------------------------------|
 | `dnaseq` | Pipeline to run |
 | `-t somatic_ensemble` | Protocol: tumor/normal pairs, ensemble of somatic callers |
 | `-c` | List of `.ini` files (order matters, later overrides earlier) |
@@ -422,7 +439,7 @@ genpipes tools chunk_and_submit_genpipes \
 ```
 
 | Parameter | Meaning |
-|------------------------|-----------------------------------------------|
+|-------------------------|-----------------------------------------------|
 | 1st argument | The script generated in step 5 |
 | 2nd argument | Folder where the chunks and their submission status are stored |
 | `-n 20` | Jobs per chunk |
@@ -460,7 +477,7 @@ GenPipes writes a `.done` file for each finished job. If you run the same comman
 ## Key concepts (read this first)
 
 | Term | Meaning |
-|------------------------|-----------------------------------------------|
+|-------------------------|-----------------------------------------------|
 | **Copy number (CN)** | How many copies of a DNA segment a cell has. Normal human cells have 2 (one from each parent). |
 | **Purity** | Fraction of cells in the sample that are tumor cells. The rest are normal cells with CN = 2. |
 | **Ploidy** | Average copy number across the tumor genome. HCC1395 is about 2.8, i.e. near-triploid. |
@@ -482,7 +499,7 @@ $$\text{depth ratio} =
 \qquad
 \text{BAF} =
 \frac{p \cdot m + (1-p)\cdot 1}
-{p \cdot CN + (1-p)\cdot 2}$$
+{p \cdot CN + (1-p)\cdot 2}$$$$\text{depth ratio} =\frac{p \cdot CN + (1-p)\cdot 2}{p \cdot \text{ploidy} + (1-p)\cdot 2}\qquad\text{BAF} =\frac{p \cdot m + (1-p)\cdot 1}{p \cdot CN + (1-p)\cdot 2}$$
 
 PURPLE searches for the purity and ploidy that make these predictions match the observed data best, across the whole genome.
 
@@ -684,7 +701,7 @@ read_tsv(file.path(cobalt_dir, paste0(tour_sample, ".cobalt.ratio.tsv.gz")),
 ```
 
 | Column | Meaning |
-|------------------------|-----------------------------------------------|
+|-------------------------|-----------------------------------------------|
 | `chromosome`, `position` | Start of the 1 kb window (1, 1001, 2001, ...) |
 | `referenceReadDepth`, `tumorReadDepth` | Raw read depth in the window |
 | `referenceGCRatio`, `tumorGCRatio` | Depth divided by the median depth of windows with the same GC content: GC-corrected, genome average about 1. **This is the tumor depth ratio we plot.** |
@@ -855,7 +872,7 @@ library(grid)   # rasterGrob(): turn the pixels into a drawable object
 combine_pngs <- function(files, ncol = 3, labels = NULL, purity = purity_info) {
   if (is.null(labels)) {
     ids    <- str_extract(basename(files), "SPP_GT_[0-9]+-[0-9]+_[0-9]+")
-    labels <- sprintf("%s  (true purity %g%%)", ids, 100 * purity[ids])
+    labels <- sprintf("%s  (true tDNA fraction %g%%)", ids, 100 * purity[ids])
   }
   panels <- lapply(seq_along(files), function(i) {
     p <- wrap_elements(full = rasterGrob(readPNG(files[i]), interpolate = TRUE))   # image as a patchwork panel
@@ -871,7 +888,7 @@ combine_pngs <- function(files, ncol = 3, labels = NULL, purity = purity_info) {
 
 ### All four plots for one sample
 
-Change `idx` to look at another sample (1 = 5% purity ... 6 = 100% purity).
+Change `idx` to look at another sample (1 = 5% tDNA fraction ... 6 = 100% tDNA fraction).
 
 ```{r, fig.width=12, fig.height=10.5}
 idx <- 6
@@ -880,7 +897,7 @@ sid <- str_extract(basename(one_sample[1]), "SPP_GT_[0-9]+-[0-9]+_[0-9]+")
 
 # 2 x 2 figure; each PNG already has its own title, so only the sample is labelled (on top)
 combine_pngs(one_sample, ncol = 2, labels = rep("", 4)) +
-  plot_annotation(title = sprintf("%s  (true purity %g%%)", sid, 100 * purity_info[[sid]])) &
+  plot_annotation(title = sprintf("%s  (true tDNA fraction %g%%)", sid, 100 * purity_info[[sid]])) &
   theme(plot.title = element_text(face = "bold", size = 18, hjust = 0.5))
 ```
 
@@ -961,7 +978,7 @@ At 10% purity all expected states are squeezed close to BAF 0.5, and the observe
 
 ### check specific chromosome
 
-```{r}
+```{r, fig.width=16, fig.height=10, out.width="100%", dpi=150}
 plot_chromosome("SPP_GT_1-0_1", "chr1") 
 ```
 
@@ -1206,6 +1223,3 @@ save_cn_plot(p, "Mathieu_purple/plots_chromosome/SPP_GT_1-0_1_chr9")
 4.  Run `classify_gene_cn()` on `SPP_GT_1-1_1` (50%). Is CDKN2A still called a deep deletion? Why might PURPLE's call change at lower purity?
 5.  Look at the normal-ratio track of chr16. What do you see, and why does it matter for interpreting the tumor?
 6.  Plot `PTEN` with `flank = 2e6, show_cn = TRUE`. The tumor ratio shows two small focal events right next to the gene (a short gain and a short drop to 0), but the PURPLE copy-number track is flat. Why might PURPLE not call them? (Hint: count the depth windows and BAF points they contain.)
-
-
-
