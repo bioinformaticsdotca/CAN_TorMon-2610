@@ -286,7 +286,7 @@ At the end of the workshop, you can use the practice expression data with two mo
 
 Transfer the expression data to your workspace, and you can move to Rstudio for the rest of this module.
 
-```{bash}
+``` bash
 mkdir $RNA_EXP_DIR
 cd $RNA_EXP_DIR
 
@@ -304,7 +304,7 @@ library(ggrepel)
 library(DT)
 ```
 
-```{r load-data}
+``` r
 
 setwd("~/workspace/Module6/expression/")
 count_file <- "expression_data.txt"
@@ -326,7 +326,7 @@ DT::datatable(metadata, rownames = FALSE, options = list(dom = "t"))
 
 edgeR stores counts, sample info, and (later) normalization factors and dispersions together in a single `DGEList` object.
 
-```{r dgelist}
+``` r
 dge <- DGEList(counts = count_mat, group = metadata$group)
 dge$samples
 ```
@@ -335,7 +335,7 @@ dge$samples
 
 Large differences in library size are expected and are exactly what normalization corrects for -- but it's worth checking there isn't a sample with a dramatically low read count, which could indicate a failed library.
 
-```{r qc-library-size}
+``` r
 libsize_df <- data.frame(sample   = factor(colnames(dge), levels = colnames(dge)),
                           lib_size = dge$samples$lib.size / 1e6,
                           group    = metadata$group)
@@ -354,14 +354,14 @@ ggplot(libsize_df, aes(x = sample, y = lib_size, fill = group)) +
 
 Genes with very few reads across all samples carry little statistical power and mostly add noise (and multiple-testing burden) to the analysis. edgeR's `filterByExpr()` keeps genes with enough counts to be reliably tested in at least one group.
 
-```{r filter-genes}
+``` r
 keep <- filterByExpr(dge, group = metadata$group)
 cat(sprintf("Keeping %d of %d genes\n", sum(keep), length(keep)))
 ```
 
 The density plot below compares log-CPM distributions before and after filtering -- the discarded genes are the peak of near-zero-count genes on the far left.
 
-```{r qc-density}
+``` r
 logcpm_before <- edgeR::cpm(dge, log = TRUE)
 logcpm_kept   <- logcpm_before[keep, , drop = FALSE]
 
@@ -379,7 +379,7 @@ ggplot(density_df, aes(x = logcpm, group = interaction(sample, set), color = set
 
 Apply the gene filter to the data
 
-```{r apply-filter}
+``` r
 dge <- dge[keep, , keep.lib.sizes = FALSE]
 ```
 
@@ -387,7 +387,7 @@ dge <- dge[keep, , keep.lib.sizes = FALSE]
 
 Trimmed Mean of M-values (TMM) normalization corrects for differences in RNA composition between samples (not just sequencing depth), which keeps highly-expressed genes in one sample from skewing the comparison.
 
-```{r normalize}
+``` r
 dge <- calcNormFactors(dge, method = "TMM")
 dge$samples
 ```
@@ -396,7 +396,7 @@ dge$samples
 
 A multidimensional scaling (MDS) plot is edgeR's version of PCA -- samples that are more similar in expression sit closer together. We expect replicates to cluster and the two groups to separate.
 
-```{r qc-mds}
+``` r
 mds <- plotMDS(dge, plot = FALSE)
 var_pct <- round(100 * mds$var.explained[mds$dim.plot])
 mds_df <- data.frame(dim1 = mds$x, dim2 = mds$y,
@@ -419,13 +419,13 @@ ggplot(mds_df, aes(x = dim1, y = dim2, color = group)) +
 
 We build one design matrix for the two groups and estimate dispersion using all 6 samples together, which gives a more stable estimate than fitting each sample individually.
 
-```{r design}
+``` r
 design <- model.matrix(~0 + group, data = metadata)
 colnames(design) <- levels(metadata$group)
 design
 ```
 
-```{r dispersion}
+``` r
 dge <- estimateDisp(dge, design, robust = TRUE)
 cat(sprintf("Common dispersion: %.4f (BCV = %.3f)\n",
             dge$common.dispersion, sqrt(dge$common.dispersion)))
@@ -433,7 +433,7 @@ cat(sprintf("Common dispersion: %.4f (BCV = %.3f)\n",
 
 The biological coefficient of variation (BCV) plot shows how variance (dispersion) changes with expression level -- lowly-expressed genes are typically noisier (higher BCV).
 
-```{r qc-bcv}
+``` r
 plotBCV(dge, main = "Biological coefficient of variation")
 ```
 
@@ -441,13 +441,13 @@ plotBCV(dge, main = "Biological coefficient of variation")
 
 We use a quasi-likelihood (QL) F-test (`glmQLFit`/`glmQLFTest`), which is recommended by edgeR for bulk RNA-seq as it accounts for uncertainty in the dispersion estimate and gives more robust error control than the classic likelihood-ratio test.
 
-```{r fit-model}
+``` r
 fit <- glmQLFit(dge, design, robust = TRUE)
 ```
 
 A contrast is defined as `pos - neg`, so a **positive logFC means higher expression in `pos`**, and a negative logFC means higher expression in `neg`. We keep track of that mapping so the volcano plot can label the axis accordingly.
 
-```{r contrasts}
+``` r
 contrasts <- makeContrasts(
   AR1_vs_MCF7 = AR1_MCF7 - MCF7,
   levels = design
@@ -466,7 +466,7 @@ So the same steps can be reused for any contrast (including the one you'll run y
 
 Genes are ranked by a blend of significance (FDR) and effect size (\|log2FC\|), so the labeled genes are both strongly *and* significantly changed rather than just the single most extreme metric; up to 15 genes are labeled on each side (Up / Down).
 
-```{r helpers, message=FALSE, warning=FALSE}
+``` r
 top_labels <- function(df, n = 15) {
   if (nrow(df) == 0) return(character(0))
   combined_rank <- rank(df$FDR, ties.method = "average") +
@@ -548,22 +548,48 @@ plot_volcano <- function(result, contrast_name) {
 
 #### AR1_MCF7 vs MCF7
 
-```{r de-ar1, fig.height=6}
+In the following steps we will use the helper functions to run the differential analysis and visualize results. 
+
+Compare Abemaciclib resistant MCF7 cells to the parental MCF7 samples.
+
+``` r
 res_ar1 <- run_contrast("AR1_vs_MCF7")
 summary(decideTests(res_ar1$qlf))
 ```
 
-```{r de-ar1-ma, fig.height=6, fig.width=6}
+Create mean-difference plot (aka MA plot) which shows log fold-changes on the y-axis against average expression on the x-axis, and colour highlights differentially expressed genes in a fitted model.
+
+``` r
 plot_ma(res_ar1, "AR1_vs_MCF7")
 ```
 
-```{r de-ar1-volcano, fig.height=7, fig.width=7.5}
+Generate the volcano plot, colour and label the differentially expressed genes.
+
+``` r
 plot_volcano(res_ar1, "AR1_vs_MCF7")
 ```
 
-```{r de-ar1-table}
+Explore the complete table of DE results
+
+``` r
 DT::datatable(res_ar1$table[, c("gene", "logFC", "logCPM", "PValue", "FDR")],
               rownames = FALSE, filter = "top",
               options = list(pageLength = 10)) |>
   DT::formatSignif(columns = c("logFC", "logCPM", "PValue", "FDR"), digits = 3)
 ```
+
+For practice, you can copy/download the practice data from `~/CourseData/Module6/practice/expression/practice_expression_data.txt` and `~/CourseData/Module6/practice/expression/practice_sample_metadata.txt` and make the changes in this script for differential expression analysis between the two drug resistant cell groups, Abemaciclib-resistant (AR_MCF7) vs. Palbociclib-resistant (PR_MCF7)
+
+<details>
+
+<summary>Show Hints</summary>
+
+*Hints:*
+
+- add the respective file paths to the above R script
+- pay attention to the new `design` matrix generated with the sample metadata
+- make changes to the `contrasts` and `contrast_groups` using the sample names from `design`
+- helper functions remain the same
+- run the final steps with the new contrasts for PR vs AR sample groups
+
+</details>
