@@ -34,16 +34,29 @@ See `Module4/data/regions.bed` for the exact coordinates of the regions we will 
 
 ### Environment setup
 ```{.bash}
-# Pull container (This is already done by CBW IT, but if you were run this on a DRAC server this is the command)
-#module purge && \
-#module load apptainer/1.4.5 && \
-#apptainer pull docker://ghcr.io/c3g/genpipes_in_a_container:latest
+# Get the workshop data
+export COURSE_REPO=module4_repo
+mkdir -p Module4
+cd Module4
 
-# Spin up container
+git clone https://github.com/insilicool/cwb_workshop_2026.git $COURSE_REPO
+ln -s $COURSE_REPO/data/alignment alignment
+ln -s $COURSE_REPO/data/regions.bed regions.bed
+ln -s $COURSE_REPO/data/Homo_sapiens.GRCh38.af-only-gnomad.regions_only.vcf.gz* .
+ln -s $COURSE_REPO/scripts/commands.sh commands.sh
+
+# copy the workshop savedResults as pairedVariants
+tar -xzf $COURSE_REPO/data/savedResults.tar.gz
+mv savedResults pairedVariants
+
+# Pull container
+singularity pull docker://ghcr.io/c3g/genpipes_in_a_container:latest
+
+# Spin up container.  Take a few moments to set up, you should see a prompt like this: Singularity>
 export BIND_LIST=$(realpath $PWD)
-export GENPIPES_SHARED_CVMFS=/tmp/$USER/cvmfs && \
+export GENPIPES_SHARED_CVMFS=cvmfs && \
 mkdir -p $GENPIPES_SHARED_CVMFS && \
-apptainer run \
+singularity run \
     --cleanenv \
     -S /var/run/cvmfs \
     -B ${GENPIPES_SHARED_CVMFS}:/cvmfs-cache \
@@ -55,17 +68,9 @@ apptainer run \
 
 # Set up the environment
 export REF=${MUGQIC_INSTALL_HOME}/genomes/species/Homo_sapiens.GRCh38/
-export COURSE=Module4
 
-# Get the workshop data
-#git clone https://github.com/insilicool/cwb_workshop_2026.git $COURSE
-ln -s $COURSE/data/alignment alignment
-ln -s $COURSE/data/regions.bed regions.bed
-ln -s $COURSE/data/Homo_sapiens.GRCh38.af-only-gnomad.regions_only.vcf.gz* .
-
-# copy the workshop savedResults as pairedVariants
-tar -xzf $COURSE/data/savedResults.tar.gz
-mv savedResults pairedVariants
+#Run module avail to see full C3G software stack
+module avail
 ```
 
 ### Software requirements
@@ -109,8 +114,7 @@ The initial structure of your folders should look like this:
 
 
 ### Cheat file
-**You can find all the unix command lines for this practical in the file.** [commands.sh](Module4/scripts/commands.sh)
-
+**You can either run each code block below or run all commands using `bash commands.sh` ** [commands.sh](Module4/scripts/commands.sh)
 
 # Getting started
 So you've just received an email from the sequencing center indicating that your data is ready for download.
