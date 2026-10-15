@@ -40,7 +40,7 @@ We will compare two groups:
 
 | Group | Sample prefix | Description |
 |------------------------|------------------------|------------------------|
-| Resistant | `AR1_MCF7` | MCF7 cells resistant to the first (lowest) abemaciclib dose |
+| Resistant | `AR1_MCF7` | MCF7 cells resistant to the first abemaciclib dose |
 | Control | `MCF7` | Parental, drug-sensitive MCF7 cells |
 
 Each group includes biological replicates. You will find out how many in the first exercise, using `samples.txt`. Replicates are essential for the downstream statistical analysis. They allow us to distinguish real expression differences between conditions from normal variation between cultures.
@@ -54,11 +54,11 @@ We align the reads to **human chromosome 22 only**, rather than the full genome.
 - `chr22.fa`: the DNA sequence of chromosome 22 in FASTA format
 - `chr22.gtf`: the gene annotation for chromosome 22 in GTF format, describing the coordinates of genes, transcripts, and exons
 
-Chromosome 22 is one of the smallest human chromosomes, about 51 Mb long and carrying several hundred protein-coding genes. Building an index for it takes minutes instead of hours. Because of this, most reads in the dataset come from other chromosomes and will not align. A low overall alignment rate is therefore expected here and does not indicate a problem with the data. Similarly, the gene counts we produce will only cover genes on chromosome 22.
+Chromosome 22 is one of the smallest human chromosomes, about 51 Mb long and carrying several hundred protein-coding genes. Building an index for it takes minutes instead of hours. Because of this, most reads in the dataset come from other chromosomes and will not align. The gene counts we produce will only cover genes on chromosome 22, so at the of this module when we are doing differential gene expression analysis, you should use the provided full expression dataset. This reference genome was downloaded from [ftp.ensembl.org](https://ftp.ensembl.org/pub/release-116/fasta/homo_sapiens/dna/)
 
 #### Workflow overview
 
-In this lab we take the raw reads all the way to a gene count table:
+In this lab we take the raw reads all the way to a gene expression table. The scripts provided are for one sample, to practice you will write the scripts for the rest of samples in this dataset for all AR1_MCF7 and MCF7 replicates.
 
 1.  **Quality control** of the raw reads (FastQC)
 2.  **Trimming** of adapters and low-quality bases (fastp), with a summary of all QC reports (MultiQC)
