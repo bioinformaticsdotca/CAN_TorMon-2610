@@ -71,8 +71,8 @@ library(gprofiler2)
 ```{r data-dir-gprofiler}
 # Location of the Module 8 files (data/, BYODdata/, image/):
 # - on the course server: ~/CourseData/Module8
-# - when the book is built from the repository: docs/Module8
-data_dir <- if (dir.exists("~/CourseData/Module8")) "~/CourseData/Module8" else "docs/Module8"
+# - when the book is built from the repository: Module8
+data_dir <- if (dir.exists("~/CourseData/Module8")) "~/CourseData/Module8" else "Module8"
 ```
 
 <!--
