@@ -111,6 +111,7 @@ The files are gzip-compressed (`.fastq.gz`) to save space. Most bioinformatics t
 Before any analysis, we run FastQC on each file. FastQC produces an HTML report with plots of per-base quality, GC content, sequence duplication, overrepresented sequences, and adapter content. These reports help us decide whether the reads need trimming, and they reveal problems with the library or the sequencing run.
 
 ``` bash
+mkdir -p $RNA_HOME
 cp -r ~/CourseData/Module6/data $RNA_HOME
 
 # check the data
@@ -190,13 +191,16 @@ Searching every read against the raw genome sequence would be far too slow. Alig
 mkdir $RNA_REFS_DIR
 cd $RNA_REFS_DIR
 
-cp ~/CourseData/Module6/refs/* $RNA_REFS_DIR
+# the required reference files .fa and .gtf
+cp ~/CourseData/Module6/refs/chr22.fa $RNA_REFS_DIR
+cp ~/CourseData/Module6/refs/chr22.gtf $RNA_REFS_DIR
+
+# extract known splice sites and exons from the annotation .gtf
+hisat2_extract_splice_sites.py chr22.gtf > chr22.splicesites.txt
+hisat2_extract_exons.py chr22.gtf > chr22.exons.txt
 
 # build the HISAT2 index (output files: chr22.*.ht2)
-hisat2-build chr22.fa chr22
-
-# extract known splice sites from the annotation
-hisat2_extract_splice_sites.py chr22.gtf > chr22.splicesites.txt
+hisat2-build --ss $RNA_REF_INDEX.splicesites.txt --exon $RNA_REF_INDEX.exons.txt $RNA_REF_FASTA $RNA_REF_INDEX
 
 # FASTA index for fast random access to the sequence (creates chr22.fa.fai)
 samtools faidx chr22.fa
