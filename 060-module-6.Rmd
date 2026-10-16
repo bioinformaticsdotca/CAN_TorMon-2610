@@ -232,7 +232,7 @@ cd $RNA_ALIGN_DIR
 
 # align one paired-end sample to chr22
 hisat2 -x $RNA_REF_INDEX \
-  --dta --rna-strandness RF
+  --dta --rna-strandness RF \
   -1 $RNA_DATA_DIR/AR1_MCF7_rep1_r1.fastq.gz \
   -2 $RNA_DATA_DIR/AR1_MCF7_rep1_r2.fastq.gz \
   -S AR1_MCF7_rep1.sam \
