@@ -278,11 +278,12 @@ cd $RNA_EXP_DIR
 htseq-count --format bam --order pos --mode intersection-strict \
   --stranded reverse --minaqual 1 --type exon \
   --idattr gene_id --additional-attr gene_name \
-  $RNA_ALIGN_DIR/AR1_MCF7_rep1.bam $RNA_REF_GTF > AR1_MCF7_rep1_genes.tsv
+  $RNA_ALIGN_DIR/AR1_MCF7_rep1.bam $RNA_REF_GTF > AR1_MCF7_rep1_genes.chr22.tsv
 
 # inspect the result
-head AR1_MCF7_rep1_genes.tsv
-tail -n 5 AR1_MCF7_rep1_genes.tsv   # assignment summary
+head AR1_MCF7_rep1_genes.chr22.tsv
+tail -n 5 AR1_MCF7_rep1_genes.chr22.tsv   # summary
+
 ```
 
 ### 7. Differential Expression Analysis
@@ -303,15 +304,17 @@ At the end of the workshop, you can use the practice expression data with two mo
 Transfer the expression data to your workspace, and you can move to Rstudio for the rest of this module.
 
 ``` bash
-mkdir $RNA_EXP_DIR
 cd $RNA_EXP_DIR
 
+# copy the complete expression dataset and sample metadata
 cp ~/CourseData/Module6/expression/expression_data.txt ./
+cp ~/CourseData/Module6/expression/sample_metadata.txt ./
+
 ```
 
 #### Load packages and data
 
-Load the necessary packages, on your own environment you might need to install them for the first time.
+Load the necessary packages, they are installed and ready to use. On your own environment you might need to install them for the first time. 
 
 ``` r
 library(edgeR)
@@ -321,14 +324,16 @@ library(DT)
 ```
 
 ``` r
-
+# work in your workspace directory
 setwd("~/workspace/Module6/expression/")
+
 count_file <- "expression_data.txt"
 metadata_file <- "sample_metadata.txt"
 
 counts <- read.delim(count_file, row.names = 1, check.names = FALSE, stringsAsFactors = FALSE)
 metadata <- read.delim(metadata_file, stringsAsFactors = FALSE)
 
+metadata$group <- factor(metadata$group)
 count_mat <- as.matrix(counts)
 
 dim(count_mat)
@@ -438,6 +443,7 @@ We build one design matrix for the two groups and estimate dispersion using all 
 ``` r
 design <- model.matrix(~0 + group, data = metadata)
 colnames(design) <- levels(metadata$group)
+
 design
 ```
 
@@ -570,6 +576,11 @@ Compare Abemaciclib resistant MCF7 cells to the parental MCF7 samples.
 
 ``` r
 res_ar1 <- run_contrast("AR1_vs_MCF7")
+
+# write results table
+write.table(res_ar1$qlf, "AR1_vs_MCF7.txt", sep = '\t')
+
+# View summary
 summary(decideTests(res_ar1$qlf))
 ```
 
