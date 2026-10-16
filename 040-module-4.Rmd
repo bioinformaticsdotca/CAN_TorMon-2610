@@ -739,6 +739,7 @@ CPSR also requires a single sample vcf, so we will extract the normal sample fro
 
 ```{.bash}
 # CPSR vcf prep (retain calls from all three caller with tumor and normal depth >=10 and tumor and normal variant allele frequency >=0.05)
+# -f filter for variants found by at least 3 callers, -v germline (for strelka2 germline AD format), -t HCC1395_NS_T_1 (tumor sample name)
 module purge && \
 module load mugqic/mugqic_tools/2.12.7 mugqic/python/3.10.4 mugqic/bcftools/1.15 mugqic/htslib/1.14 && \
 python3 $PYTHON_TOOLS/format2pcgr.py \
@@ -795,6 +796,7 @@ However, we could wait to generate the PCGR report which will also add important
 
 ```{.bash}
 # PCGR vcf prep (retain calls from all two caller with tumor and normal depth >=10 and tumor and normal variant allele frequency >=0.05)
+# -f filter for variants found by at least 2 callers, -v somatic (for strelka2 somatic TAR/TIR indel format), -t HCC1395_NS_T_1 (tumor sample name)
 module purge && \
 module load mugqic/mugqic_tools/2.12.7 mugqic/python/3.10.4 mugqic/bcftools/1.15 mugqic/htslib/1.14 && \
 python3 $PYTHON_TOOLS/format2pcgr.py \
