@@ -14,6 +14,13 @@
 
 ## Lab
 
+Download the latest version of the R Markdown file to run on your instance:
+```{bash, eval=FALSE}
+cd /home/ubuntu/CourseData/Module5/codes && \
+wget -O 050-module-5_runVersion.Rmd \
+https://raw.githubusercontent.com/JeffBCC96/CBW_Rong/main/050-module-5_runVersion.Rmd
+```
+
 ```{r setup, include=FALSE, eval=FALSE}
 # The data are not on GitHub, so the R code of this module is NOT run when the book is knit
 # (eval=FALSE). Run the chunks by hand on the course instance: each plotting chunk saves
