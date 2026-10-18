@@ -326,8 +326,6 @@ message("RNK file written: ", rnk_file)
 ```
 
 ```{block, type="rmd-note"}
-The g:Profiler GMT file (`gprofiler_full_hsapiens.name.gmt`) is downloaded automatically by the code above using `gprofiler2::download_GO()`. 
-
 The Baderlab custom GMT (`Human_GOBP_AllPathways_filtered_500orLessV2.gmt`) is pre-filtered to gene sets with 500 or fewer genes, which means the FDR correction is applied only to those gene sets — giving more statistical power than filtering after the fact. 
 
 `evcodes = TRUE` in the `gost()` call is required to get the `intersection` column, which contains the actual gene IDs from your query that overlap with each term. Despite the name, this is not GO evidence codes — it is the intersecting gene identifiers.

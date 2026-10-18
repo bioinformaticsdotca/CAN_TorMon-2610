@@ -71,15 +71,15 @@ Two files are needed for this exercise:
 
 ### Setting up cytoscape variables -
 
-  The values of the below variables depends on where you are running your R Code and where you are running your Cytoscape.  There are a lot of different combinations but it is improtant to understand your set up.  
+  The values of the below variables depends on where you are running your R Code and where you are running your Cytoscape.  There are a lot of different combinations but it is important to understand your set up.  
   Almost always you will be running cytoscape on your computer or laptop.  Something that you can interact with directly. But often we might run our code on:
   
-  1. A Dcoker on your computer
+  1. A Docker on your computer
   1. A docker on a remote machine
   1. AWS cloud
   1. another cloud service. 
   
-  When we send commands to cytoscape we need to specify where cytoscape is.  We have defined a varialbe that we will use for every command we send to cytoscape telling it where the cytoscape host is:
+  When we send commands to cytoscape we need to specify where cytoscape is.  We have defined a variable that we will use for every command we send to cytoscape telling it where the cytoscape host is:
   1. From RStudio on your computer to cytoscape on your computer - current_cytoscape_baseurl = "http://localhost:1234/v1"
   1. From docker implementation of Rstudio on your computer to cytoscape on your computer - current_cytoscape_baseurl = "http://host.docker.internal:1234/v1"  
   1. From AWS Rstudio to cytoscape on your computer - 
@@ -97,7 +97,7 @@ ssh -i <studentname>.pem -R 1234:localhost:1234 ubuntu@can.uhn-hpc.ca
 library(RCy3)
 
 is_remote = TRUE
-current_cytoscape_baseurl = "http://localhost:1234/v1"
+current_cytoscape_baseurl = "http://host.docker.internal:1234/v1"
 
 #make sure this directory is created ahead of time.  We can't create this directory from this instance of RStudio.  
 path_to_save_cytoscape = "/Users/risserlin/CBW_Workshop_results/Module9"
@@ -161,8 +161,8 @@ message("Network SUID: ", network_suid)
 ```{block, type="rmd-note"}
   i. The key column is assumed to be the first column in your table.  
   i. The key is the column in the loaded attribute file used to match your attributes to your network. 
-  i. **key colum for Network** is the column in the Network that the key is matched to.  (In this network there isn't the ability to set this value because that is the only attribute associated with the nodes in our network but normally this drop box will be selectable)
-  i. The key and matching column need to match perfectly (unless you have specifid that case does not matter). 
+  i. **key column for Network** is the column in the Network that the key is matched to.  (In this network there isn't the ability to set this value because that is the only attribute associated with the nodes in our network but normally this drop box will be selectable)
+  i. The key and matching column need to match perfectly (unless you have specified that case does not matter). 
   
   <img src="./Module9/cytoscape_primer/images/cyto_import_attribute_table_key.png" width="75%" />
 
@@ -172,7 +172,7 @@ message("Network SUID: ", network_suid)
 
 
 ```{block, type="rmd-tip"}  
-  Similiar to the **Import Network from Table**, everything about the import is customizable.  Cytoscape does its best to guess the datatypes of each column but you are able to fine tune it.  
+  Similar to the **Import Network from Table**, everything about the import is customizable.  Cytoscape does its best to guess the datatypes of each column but you are able to fine tune it.  
   
 <img src="./Module9/cytoscape_primer/images/cyto_import_attribute_table_options.png" width="75%" />
 
@@ -246,7 +246,7 @@ message("Node attributes loaded successfully.")
 
   1. Adjust the setting on the colour mapping.  Change the colour scheme.  Change the maximum and minimum values.
   1. Adjust the setting on the size mapping.  Make the nodes bigger with higher values.
-  1.  Eventhough the network is small, play around with the layouts.
+  1.  Even though the network is small, play around with the layouts.
 
 ```
 
@@ -305,11 +305,11 @@ Cytoscape supplies a few demo networks that you can play around with.  When you 
 
   1.  Double click on the **Affinity Purification Network** to open it.
 
-  1.  If you already have a session open then you will recieve a warning that the current session will be lost.  Before proceeding make sure your current session is saved.  (Click on cancel.  Then, **File** --> **Save as**)<br>
+  1.  If you already have a session open then you will receive a warning that the current session will be lost.  Before proceeding make sure your current session is saved.  (Click on cancel.  Then, **File** --> **Save as**)<br>
   <img src="./Module9/cytoscape_primer/images/session_overwrite_warning.png" width="75%" />
 
   
-  1. Once the network has loaded you will see a network of protein interactions derived from an affinity purification experiment.  Bait proteins are reprsented as pink hexagons and their corresponing prey proteins blue boxes. 
+  1. Once the network has loaded you will see a network of protein interactions derived from an affinity purification experiment.  Bait proteins are represented as pink hexagons and their corresponding prey proteins blue boxes. 
     <img src="./Module9/cytoscape_primer/images/affinity_purification_network.png" width="75%" />
 
   1. Using this larger network play around with the different layouts
@@ -376,7 +376,7 @@ message("Selected nodes: ", paste(selected, collapse = ", "))
 
 ## Exercise 3 - Perform basic enrichment analysis using EnrichmentTable
 
-In Module 2 we performed detailed enrichment analysis with g:profiler and GSEA.  We supplied gene lists and ranked expression sets in order to perform the analysis.  What if you want to run a quick enrichment analysis with a given network or a given subset of the network?  The easiest way to do this is to use the cytoscape app EnrichmentTable.  EnrichmentTable will query g:profiler directly with the given network or subnetwork.  Not all of the parameters that are available in the web version can be tweaked from the enrichmentmap table app but it can be an easy way to quickly see enrichment results.
+In Module 8 we performed detailed enrichment analysis with g:profiler and GSEA.  We supplied gene lists and ranked expression sets in order to perform the analysis.  What if you want to run a quick enrichment analysis with a given network or a given subset of the network?  The easiest way to do this is to use the cytoscape app EnrichmentTable.  EnrichmentTable will query g:profiler directly with the given network or subnetwork.  Not all of the parameters that are available in the web version can be tweaked from the enrichmentmap table app but it can be an easy way to quickly see enrichment results.
 
 We will select the bait protein VPR and all its associated prey proteins to use for an enrichment analysis. 
 <br>
@@ -420,7 +420,7 @@ to launch Enrichment Table Tab.<br><br>
   i. **Gene ID column** - the column in the current network that you want to use to search g:Profiler with.  Ideally this should be a column specifying the Gene Name or other identifier.
   i. **Multiple testing correction** - change to fdr.
   i. **Adjusted p-value threshold (min 0 max 1)** - leave as 0.05.  If you are getting too many results you can make this value smaller.
-  i. **Include inferred GO annotations (IEA)** - by default the search will exclude inferred from electonic annotation GO terms.  If you want to include them, select this option. <br>
+  i. **Include inferred GO annotations (IEA)** - by default the search will exclude inferred from electronic annotation GO terms.  If you want to include them, select this option. <br>
     <img src="./Module9/cytoscape_primer/images/enrichment_table_params.png" width="75%" />
 
   <br>
@@ -432,7 +432,7 @@ to launch Enrichment Table Tab.<br><br>
 <br>
 
 <ol start=6 type="1">
-<li>Filter the EnrichmentTable results to show only GO&#58;BP, Reactome and Wikipathway, similiar to what we used in Module 2. </li>
+<li>Filter the EnrichmentTable results to show only GO&#58;BP, Reactome and Wikipathway, similar to what we used in Module 2. </li>
 </ol>  
   i. Click on the filter icon in the top left hand corner of the enrichment table results. <br> <img src="./Module9/cytoscape_primer/images/enrichment_table_filter.png" width="75%" />
   i. Next to **Select Categories** select *Gene Ontology Biological Process*, *Reactome*, *Wikipathways*.  To select multiple options click and hold *command* key on Mac or *Shift* on Windows. <br> <img src="./Module9/cytoscape_primer/images/enrichment_table_filter_options.png" width="75%" />
@@ -650,12 +650,17 @@ layoutNetwork("force-directed", network = mcf7_suid,
 
 # ── BONUS: Change edge width to reflect number of patients ────────────────────
 # First inspect the edge table to find the relevant column name
-edge_table <- getTableColumns(table = "edge", network = mcf7_suid,
+edge_table <- getTableColumns(table = "edge", 
+                              network = mcf7_suid,
                               base.url = current_cytoscape_baseurl)
 print(colnames(edge_table))  # identify the patients column name
 
-# Assuming the column is called "num_patients" - adjust to match actual column
-patient_col <- "PPI.Score"   # <-- update this to the actual column name
+#get current style
+current_style <- getCurrentStyle( 
+  base.url = current_cytoscape_baseurl)
+
+# Assuming the column is called "Npat" 
+patient_col <- "Npat"   # <-- update this to the actual column name
 
 patient_min <- min(edge_table[[patient_col]], na.rm = TRUE)
 patient_max <- max(edge_table[[patient_col]], na.rm = TRUE)
@@ -663,14 +668,16 @@ patient_max <- max(edge_table[[patient_col]], na.rm = TRUE)
 setEdgeLineWidthMapping(
   table.column        = patient_col,
   table.column.values = c(patient_min, patient_max),
-  widths              = c(1, 10),
+  widths              = c(1, 15),
   mapping.type        = "continuous",
   network             = mcf7_suid,
+  style.name = current_style,  
   base.url = current_cytoscape_baseurl
 )
 
 # ── BONUS: Change default node colour to blue ─────────────────────────────────
 setNodeColorDefault(new.color = "#4A90D9", 
+                    style.name = current_style,
                     base.url = current_cytoscape_baseurl)
 
 message("Visual style updates applied to MCF7 network.")
