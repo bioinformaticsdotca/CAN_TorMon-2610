@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Variant Discovery in Cancer | Cancer Analysis 2026</title>
+  <meta name="description" content="Workshop website for the 2026 Cancer Analysis Canadian Bioinformatics Workshop" />
+  <meta name="generator" content="bookdown 0.46 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Variant Discovery in Cancer | Cancer Analysis 2026" />
+  <meta property="og:type" content="book" />
+  <meta property="og:image" content="https://bioinformaticsdotca.github.io/CAN_TorMon-2610/img/bioinformatics_logo.png" />
+  <meta property="og:description" content="Workshop website for the 2026 Cancer Analysis Canadian Bioinformatics Workshop" />
+  <meta name="github-repo" content="bioinformaticsdotca/CAN_TorMon-2610" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Variant Discovery in Cancer | Cancer Analysis 2026" />
+  
+  <meta name="twitter:description" content="Workshop website for the 2026 Cancer Analysis Canadian Bioinformatics Workshop" />
+  <meta name="twitter:image" content="https://bioinformaticsdotca.github.io/CAN_TorMon-2610/img/bioinformatics_logo.png" />
+
+<meta name="author" content="Faculty: Trevor Pugh, Linda Xiang, Yoshiaki Tanaka, Robert Eveleigh, Mathieu Lajoie, Vida Talebian, Aqsa Alam, Veronique Voisin, Ruth Isserlin, Nicholas Geoffrion" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="prev" href="getting-started.html"/>
+<link rel="next" href="functional-annotations.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LearningResource",
+  "name": "Cancer Analysis",
+  "description": "The complete set of tutorials, slides, and practical exercises for the Cancer Analysis 2026 Canadian Bioinformatics Workshop, hosted on GitHub Pages.",
+  "url": "https://bioinformaticsdotca.github.io/CAN_TorMon-2610",
+  "learningResourceType": ["tutorial", "slides", "exercise"],
+  "inLanguage": "en",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "provider": {
+    "@type": "Organization",
+    "name": "Bioinformatics.ca",
+    "url": "https://bioinformatics.ca"
+  },
+  "keywords": "",
+  "isPartOf": {
+    "@type": "Course",
+    "@id": "https://bioinformatics.ca/CAN_TorMon-2610/"
+  }
+}
+</script>
+
+
+<style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<a href="https://bioinformaticsdotca.github.io/">
+ <img src="img/bioinformatics_logo.png" width="90%" alt="bioinformatics.ca logo" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;">
+ </a>
+<li><center><strong><a href="./"><br>Cancer Analysis<br><br></a></strong></center></li>
+<a href="./">
+ <img src="img/CBW_CAN-1.png" width="70%" alt="Cancer Analysis logo" style="display:block; margin-left:auto; margin-right:auto; ">
+ </a>
+<br>
+
+<li class="divider"></li>
+<li class="part"><span><b>I Introduction</b></span></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Workshop Info</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#pre-work"><i class="fa fa-check"></i>Pre-work</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#class-photo"><i class="fa fa-check"></i>Class Photo</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#schedule"><i class="fa fa-check"></i>Schedule</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="meet-your-faculty.html"><a href="meet-your-faculty.html"><i class="fa fa-check"></i>Meet Your Faculty</a>
+<ul>
+<li class="chapter" data-level="" data-path="meet-your-faculty.html"><a href="meet-your-faculty.html#tas"><i class="fa fa-check"></i>TA’s</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="data-and-compute-setup.html"><a href="data-and-compute-setup.html"><i class="fa fa-check"></i>Data and Compute Setup</a></li>
+<li class="part"><span><b>II Modules</b></span></li>
+<li class="chapter" data-level="" data-path="module-1.html"><a href="module-1.html"><i class="fa fa-check"></i>Module 1</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-1.html"><a href="module-1.html#lecture"><i class="fa fa-check"></i>Lecture</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html"><i class="fa fa-check"></i>Module 2</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#lecture-1"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#lab"><i class="fa fa-check"></i>Lab</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#part-1---igv"><i class="fa fa-check"></i>Part 1 - IGV</a></li>
+<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#part-2---cbioportal"><i class="fa fa-check"></i>Part 2 - cBioPortal</a></li>
+<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#part-3---cosmic"><i class="fa fa-check"></i>Part 3 - COSMIC</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-3.html"><a href="module-3.html"><i class="fa fa-check"></i>Module 3</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-3.html"><a href="module-3.html#lecture-2"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-3.html"><a href="module-3.html#lab-1"><i class="fa fa-check"></i>Lab</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-3.html"><a href="module-3.html#purpose"><i class="fa fa-check"></i>1. Purpose</a></li>
+<li class="chapter" data-level="" data-path="module-3.html"><a href="module-3.html#dataset"><i class="fa fa-check"></i>2. Dataset</a></li>
+<li class="chapter" data-level="" data-path="module-3.html"><a href="module-3.html#workflow"><i class="fa fa-check"></i>3. Workflow</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="introduction-to-variant-discovery-and-annotations-in-cancer-data.html"><a href="introduction-to-variant-discovery-and-annotations-in-cancer-data.html"><i class="fa fa-check"></i>Introduction to Variant Discovery and Annotations in Cancer Data</a>
+<ul>
+<li class="chapter" data-level="" data-path="introduction-to-variant-discovery-and-annotations-in-cancer-data.html"><a href="introduction-to-variant-discovery-and-annotations-in-cancer-data.html#data-source"><i class="fa fa-check"></i>Data Source</a>
+<ul>
+<li class="chapter" data-level="" data-path="introduction-to-variant-discovery-and-annotations-in-cancer-data.html"><a href="introduction-to-variant-discovery-and-annotations-in-cancer-data.html#environment-setup"><i class="fa fa-check"></i>Environment setup</a></li>
+<li class="chapter" data-level="" data-path="introduction-to-variant-discovery-and-annotations-in-cancer-data.html"><a href="introduction-to-variant-discovery-and-annotations-in-cancer-data.html#software-requirements"><i class="fa fa-check"></i>Software requirements</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="introduction-to-variant-discovery-and-annotations-in-cancer-data.html"><a href="introduction-to-variant-discovery-and-annotations-in-cancer-data.html#original-setup"><i class="fa fa-check"></i>Original Setup</a>
+<ul>
+<li class="chapter" data-level="" data-path="introduction-to-variant-discovery-and-annotations-in-cancer-data.html"><a href="introduction-to-variant-discovery-and-annotations-in-cancer-data.html#cheat-file"><i class="fa fa-check"></i>Cheat file</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="getting-started.html"><a href="getting-started.html"><i class="fa fa-check"></i>Getting started</a></li>
+<li class="chapter" data-level="" data-path="variant-discovery-in-cancer.html"><a href="variant-discovery-in-cancer.html"><i class="fa fa-check"></i>Variant Discovery in Cancer</a>
+<ul>
+<li class="chapter" data-level="" data-path="variant-discovery-in-cancer.html"><a href="variant-discovery-in-cancer.html#variant-callers-comparison-high-level-overview-more-will-be-explained-in-the-following-sections"><i class="fa fa-check"></i>Variant Callers Comparison (High-level overview more will be explained in the following sections)</a></li>
+<li class="chapter" data-level="" data-path="variant-discovery-in-cancer.html"><a href="variant-discovery-in-cancer.html#varscan-2"><i class="fa fa-check"></i>Varscan 2</a></li>
+<li class="chapter" data-level="" data-path="variant-discovery-in-cancer.html"><a href="variant-discovery-in-cancer.html#vardict"><i class="fa fa-check"></i>Vardict</a></li>
+<li class="chapter" data-level="" data-path="variant-discovery-in-cancer.html"><a href="variant-discovery-in-cancer.html#gatk-mutect2"><i class="fa fa-check"></i>GATK MuTecT2</a></li>
+<li class="chapter" data-level="" data-path="variant-discovery-in-cancer.html"><a href="variant-discovery-in-cancer.html#strelka2"><i class="fa fa-check"></i>Strelka2</a></li>
+<li class="chapter" data-level="" data-path="variant-discovery-in-cancer.html"><a href="variant-discovery-in-cancer.html#ensemble-approach"><i class="fa fa-check"></i>Ensemble approach</a></li>
+<li class="chapter" data-level="" data-path="variant-discovery-in-cancer.html"><a href="variant-discovery-in-cancer.html#cpsrpcgr-turning-a-vcf-into-a-clinically-interpretable-report"><i class="fa fa-check"></i>CPSR/PCGR — turning a VCF into a clinically interpretable report</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="functional-annotations.html"><a href="functional-annotations.html"><i class="fa fa-check"></i>Functional Annotations</a></li>
+<li class="chapter" data-level="" data-path="beyond-vep-what-else-does-pcgr-add-to-this-info-field.html"><a href="beyond-vep-what-else-does-pcgr-add-to-this-info-field.html"><i class="fa fa-check"></i>Beyond VEP: what else does PCGR add to this INFO field</a>
+<ul>
+<li class="chapter" data-level="" data-path="beyond-vep-what-else-does-pcgr-add-to-this-info-field.html"><a href="beyond-vep-what-else-does-pcgr-add-to-this-info-field.html#data-visualisation"><i class="fa fa-check"></i>Data visualisation</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="exit-the-container-environment.html"><a href="exit-the-container-environment.html"><i class="fa fa-check"></i>Exit the container environment</a>
+<ul>
+<li class="chapter" data-level="" data-path="exit-the-container-environment.html"><a href="exit-the-container-environment.html#acknowledgments"><i class="fa fa-check"></i>Acknowledgments</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-5.html"><a href="module-5.html"><i class="fa fa-check"></i>Module 5</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-5.html"><a href="module-5.html#lecture-3"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-5.html"><a href="module-5.html#lab-2"><i class="fa fa-check"></i>Lab</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="dataset-1.html"><a href="dataset-1.html"><i class="fa fa-check"></i>Dataset</a></li>
+<li class="chapter" data-level="" data-path="run-cobalt-amber-purple.html"><a href="run-cobalt-amber-purple.html"><i class="fa fa-check"></i>Run cobalt , amber , purple</a>
+<ul>
+<li class="chapter" data-level="" data-path="run-cobalt-amber-purple.html"><a href="run-cobalt-amber-purple.html#cobalt-read-depth-ratios"><i class="fa fa-check"></i>1. COBALT: read-depth ratios</a></li>
+<li class="chapter" data-level="" data-path="run-cobalt-amber-purple.html"><a href="run-cobalt-amber-purple.html#amber-b-allele-frequencies"><i class="fa fa-check"></i>2. AMBER: B-allele frequencies</a></li>
+<li class="chapter" data-level="" data-path="run-cobalt-amber-purple.html"><a href="run-cobalt-amber-purple.html#purple-purity-ploidy-and-copy-number"><i class="fa fa-check"></i>3. PURPLE: purity, ploidy and copy number</a></li>
+<li class="chapter" data-level="" data-path="run-cobalt-amber-purple.html"><a href="run-cobalt-amber-purple.html#first-look-at-the-results-estimated-vs.-true-purity"><i class="fa fa-check"></i>First look at the results: estimated vs. “true” purity</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="run-genpipe.html"><a href="run-genpipe.html"><i class="fa fa-check"></i>Run Genpipe</a>
+<ul>
+<li class="chapter" data-level="" data-path="run-genpipe.html"><a href="run-genpipe.html#load-the-environment"><i class="fa fa-check"></i>1. Load the environment</a></li>
+<li class="chapter" data-level="" data-path="run-genpipe.html"><a href="run-genpipe.html#input-files"><i class="fa fa-check"></i>2. Input files</a></li>
+<li class="chapter" data-level="" data-path="run-genpipe.html"><a href="run-genpipe.html#re-using-existing-bams-make-them-match-the-genpipes-reference"><i class="fa fa-check"></i>3. Re-using existing BAMs: make them match the GenPipes reference</a></li>
+<li class="chapter" data-level="" data-path="run-genpipe.html"><a href="run-genpipe.html#configuration-files"><i class="fa fa-check"></i>4. Configuration files</a></li>
+<li class="chapter" data-level="" data-path="run-genpipe.html"><a href="run-genpipe.html#generate-the-job-script"><i class="fa fa-check"></i>5. Generate the job script</a></li>
+<li class="chapter" data-level="" data-path="run-genpipe.html"><a href="run-genpipe.html#submit"><i class="fa fa-check"></i>6. Submit</a></li>
+<li class="chapter" data-level="" data-path="run-genpipe.html"><a href="run-genpipe.html#monitor-and-find-the-results"><i class="fa fa-check"></i>7. Monitor and find the results</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="analyze-the-purple-results.html"><a href="analyze-the-purple-results.html"><i class="fa fa-check"></i>Analyze the purple results</a>
+<ul>
+<li class="chapter" data-level="" data-path="analyze-the-purple-results.html"><a href="analyze-the-purple-results.html#key-concepts-read-this-first"><i class="fa fa-check"></i>Key concepts (read this first)</a></li>
+<li class="chapter" data-level="" data-path="analyze-the-purple-results.html"><a href="analyze-the-purple-results.html#setup"><i class="fa fa-check"></i>Setup</a></li>
+<li class="chapter" data-level="" data-path="analyze-the-purple-results.html"><a href="analyze-the-purple-results.html#a-tour-of-the-output-files-one-sample"><i class="fa fa-check"></i>A tour of the output files (one sample)</a>
+<ul>
+<li class="chapter" data-level="" data-path="analyze-the-purple-results.html"><a href="analyze-the-purple-results.html#how-the-files-fit-together"><i class="fa fa-check"></i>How the files fit together</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="analyze-the-purple-results.html"><a href="analyze-the-purple-results.html#amber-b-allele-frequency"><i class="fa fa-check"></i>AMBER: B-allele frequency</a></li>
+<li class="chapter" data-level="" data-path="analyze-the-purple-results.html"><a href="analyze-the-purple-results.html#cobalt-read-depth-ratio"><i class="fa fa-check"></i>COBALT: read-depth ratio</a></li>
+<li class="chapter" data-level="" data-path="analyze-the-purple-results.html"><a href="analyze-the-purple-results.html#purple-purity-ploidy-and-copy-number-1"><i class="fa fa-check"></i>PURPLE: purity, ploidy and copy number</a></li>
+<li class="chapter" data-level="" data-path="analyze-the-purple-results.html"><a href="analyze-the-purple-results.html#which-file-answers-which-question"><i class="fa fa-check"></i>Which file answers which question?</a>
+<ul>
+<li class="chapter" data-level="" data-path="analyze-the-purple-results.html"><a href="analyze-the-purple-results.html#load-the-files"><i class="fa fa-check"></i>Load the files</a></li>
+<li class="chapter" data-level="" data-path="analyze-the-purple-results.html"><a href="analyze-the-purple-results.html#all-four-plots-for-one-sample"><i class="fa fa-check"></i>All four plots for one sample</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="analyze-the-purple-results.html"><a href="analyze-the-purple-results.html#selection-of-purity"><i class="fa fa-check"></i>Selection of purity</a></li>
+<li class="chapter" data-level="" data-path="analyze-the-purple-results.html"><a href="analyze-the-purple-results.html#baf-vs-copy-number-does-the-fit-explain-the-data"><i class="fa fa-check"></i>BAF vs copy number: does the fit explain the data?</a>
+<ul>
+<li class="chapter" data-level="" data-path="analyze-the-purple-results.html"><a href="analyze-the-purple-results.html#low-purity"><i class="fa fa-check"></i>Low purity</a></li>
+<li class="chapter" data-level="" data-path="analyze-the-purple-results.html"><a href="analyze-the-purple-results.html#check-specific-chromosome"><i class="fa fa-check"></i>check specific chromosome</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="analyze-the-purple-results.html"><a href="analyze-the-purple-results.html#segment"><i class="fa fa-check"></i>Segment</a></li>
+<li class="chapter" data-level="" data-path="analyze-the-purple-results.html"><a href="analyze-the-purple-results.html#copy-number-distribution"><i class="fa fa-check"></i>Copy number distribution</a></li>
+<li class="chapter" data-level="" data-path="analyze-the-purple-results.html"><a href="analyze-the-purple-results.html#minorallelecopy"><i class="fa fa-check"></i>MinorAlleleCopy</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="some-examples-of-gain-loss-deletion-and-loh.html"><a href="some-examples-of-gain-loss-deletion-and-loh.html"><i class="fa fa-check"></i>Some examples of Gain, Loss, Deletion and LOH</a></li>
+<li class="chapter" data-level="" data-path="visualize-a-gene-or-a-chromosome.html"><a href="visualize-a-gene-or-a-chromosome.html"><i class="fa fa-check"></i>Visualize a gene or a chromosome</a>
+<ul>
+<li class="chapter" data-level="" data-path="visualize-a-gene-or-a-chromosome.html"><a href="visualize-a-gene-or-a-chromosome.html#one-gene-plot_gene"><i class="fa fa-check"></i>One gene: <code>plot_gene()</code></a></li>
+<li class="chapter" data-level="" data-path="visualize-a-gene-or-a-chromosome.html"><a href="visualize-a-gene-or-a-chromosome.html#one-chromosome-plot_chromosome"><i class="fa fa-check"></i>One chromosome: <code>plot_chromosome()</code></a></li>
+<li class="chapter" data-level="" data-path="visualize-a-gene-or-a-chromosome.html"><a href="visualize-a-gene-or-a-chromosome.html#effect-of-purity-on-the-signal"><i class="fa fa-check"></i>Effect of purity on the signal</a></li>
+<li class="chapter" data-level="" data-path="visualize-a-gene-or-a-chromosome.html"><a href="visualize-a-gene-or-a-chromosome.html#any-region-plot_cn_region"><i class="fa fa-check"></i>Any region: <code>plot_cn_region()</code></a></li>
+<li class="chapter" data-level="" data-path="visualize-a-gene-or-a-chromosome.html"><a href="visualize-a-gene-or-a-chromosome.html#saving-figures"><i class="fa fa-check"></i>Saving figures</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="exercises.html"><a href="exercises.html"><i class="fa fa-check"></i>Exercises</a></li>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html"><i class="fa fa-check"></i>Module 6 Transcriptomics RNA-seq</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html#lecture-4"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html#lab-3"><i class="fa fa-check"></i>Lab</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html#introduction-to-the-dataset"><i class="fa fa-check"></i>0. Introduction to the dataset</a></li>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html#setting-the-environment-variables"><i class="fa fa-check"></i>1. Setting the environment variables</a></li>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html#explore-data-in-your-workspace"><i class="fa fa-check"></i>2. Explore data in your workspace</a></li>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html#trimming-and-qc"><i class="fa fa-check"></i>3. Trimming and QC</a></li>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html#prepare-the-reference-genome-for-alignment"><i class="fa fa-check"></i>4. Prepare the reference genome for alignment</a></li>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html#alignment-with-hisat2"><i class="fa fa-check"></i>5. Alignment with HISAT2</a></li>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html#gene-count-estimation"><i class="fa fa-check"></i>6. Gene count estimation</a></li>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html#differential-expression-analysis"><i class="fa fa-check"></i>7. Differential Expression Analysis</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-7.html"><a href="module-7.html"><i class="fa fa-check"></i>Module 7</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-7.html"><a href="module-7.html#lecture-5"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-7.html"><a href="module-7.html#lab-4"><i class="fa fa-check"></i>Lab</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-8---pathway-enrichment-analysis.html"><a href="module-8---pathway-enrichment-analysis.html"><i class="fa fa-check"></i>Module 8 - Pathway Enrichment Analysis</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-8---pathway-enrichment-analysis.html"><a href="module-8---pathway-enrichment-analysis.html#lecture-6"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-8---pathway-enrichment-analysis.html"><a href="module-8---pathway-enrichment-analysis.html#presentation-of-the-dataset"><i class="fa fa-check"></i>Presentation of the dataset</a></li>
+<li class="chapter" data-level="" data-path="module-8---pathway-enrichment-analysis.html"><a href="module-8---pathway-enrichment-analysis.html#lab-5"><i class="fa fa-check"></i>Lab</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="de_mod8.html"><a href="de_mod8.html"><i class="fa fa-check"></i>Module 8.1 Lab: Differential Expression</a>
+<ul>
+<li class="chapter" data-level="" data-path="de_mod8.html"><a href="de_mod8.html#install-and-load-libraries"><i class="fa fa-check"></i>Install and load libraries</a></li>
+<li class="chapter" data-level="" data-path="de_mod8.html"><a href="de_mod8.html#data-used-for-this-comparison"><i class="fa fa-check"></i>Data used for this comparison</a>
+<ul>
+<li class="chapter" data-level="" data-path="de_mod8.html"><a href="de_mod8.html#generate-a-dge-object"><i class="fa fa-check"></i>generate a DGE object</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="de_mod8.html"><a href="de_mod8.html#filter-low-count-genes-and-tmm-normalize"><i class="fa fa-check"></i>Filter low-count genes and TMM-normalize</a></li>
+<li class="chapter" data-level="" data-path="de_mod8.html"><a href="de_mod8.html#design-0-group-and-named-contrast"><i class="fa fa-check"></i>Design (~0 + group) and named contrast</a></li>
+<li class="chapter" data-level="" data-path="de_mod8.html"><a href="de_mod8.html#dispersion-estimation-and-quasi-likelihood-glm"><i class="fa fa-check"></i>Dispersion estimation and quasi-likelihood GLM</a></li>
+<li class="chapter" data-level="" data-path="de_mod8.html"><a href="de_mod8.html#calculating-ranking-score-and-export-full-results"><i class="fa fa-check"></i>Calculating ranking score and export full results</a></li>
+<li class="chapter" data-level="" data-path="de_mod8.html"><a href="de_mod8.html#result-output"><i class="fa fa-check"></i>Result output</a></li>
+<li class="chapter" data-level="" data-path="de_mod8.html"><a href="de_mod8.html#version-of-packages-and-r"><i class="fa fa-check"></i>Version of packages and R</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html"><i class="fa fa-check"></i>Module 8.2 Lab: Defined gene list (g:Profiler)</a>
+<ul>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#introduction"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#goal-of-the-exercise-1"><i class="fa fa-check"></i>Goal of the exercise 1</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#data"><i class="fa fa-check"></i>Data</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#exercise-1-defined"><i class="fa fa-check"></i>Exercise 1 - prepare the gene lists</a>
+<ul>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#step-1---install-and-load-libraries"><i class="fa fa-check"></i>Step 1 - Install and Load libraries</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#step-2---prepare-the-define-gene-lists"><i class="fa fa-check"></i>Step 2 - Prepare the define gene lists</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#step-3---run-gprofiler"><i class="fa fa-check"></i>Step 3 - Run g:Profiler</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#clear-visualization-of-the-results"><i class="fa fa-check"></i>Clear visualization of the results</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#step-4---explore-top-table-of-results"><i class="fa fa-check"></i>Step 4 - Explore top table of results</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#step-5---filter-results-by-geneset-size"><i class="fa fa-check"></i>Step 5 - Filter results by geneset size</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#step-6---run-gprofiler-with-your-own-genesets-example-using-baderlab-genesets"><i class="fa fa-check"></i>Step 6 - Run g:profiler with your own genesets (example using BaderLab genesets)</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#exercise-2---visualization"><i class="fa fa-check"></i>Exercise 2 - visualization</a>
+<ul>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#step-2---dot-plot-with-segment"><i class="fa fa-check"></i>Step 2 - Dot plot with segment</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#step-4---hierarchical-cluster"><i class="fa fa-check"></i>Step 4 - Hierarchical Cluster</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html"><i class="fa fa-check"></i>Module 8.3 Lab: Ranked gene list (fGSEA)</a>
+<ul>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html#introduction-1"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html#goal-of-the-exercise"><i class="fa fa-check"></i>Goal of the exercise</a></li>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html#data-1"><i class="fa fa-check"></i>Data</a></li>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html#background"><i class="fa fa-check"></i>Background</a></li>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html#exercise-1-ranked"><i class="fa fa-check"></i>Exercise 1 - prepare the gene lists</a>
+<ul>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html#step-1---install-and-load-libraries-1"><i class="fa fa-check"></i>Step 1 - Install and Load libraries</a></li>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html#step-2---prepare-the-rank-file-upload-the-gmt-file-and-run-fgsea"><i class="fa fa-check"></i>Step 2 - Prepare the rank file , upload the gmt file and run fgsea</a></li>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html#step-3---examine-the-results"><i class="fa fa-check"></i>Step 3 - Examine the results</a></li>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html#step-4---explore-the-tabular-format-of-the-results"><i class="fa fa-check"></i>Step 4 - Explore the tabular format of the results</a></li>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html#step-5---visualize-the-top-results"><i class="fa fa-check"></i>Step 5 - Visualize the top results</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html"><i class="fa fa-check"></i>Module 8.4 Lab: BYOD - Differential Expression (Palbo-resistant vs Abema-resistant)</a>
+<ul>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html#install-and-load-libraries-1"><i class="fa fa-check"></i>Install and load libraries</a></li>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html#data-used-for-this-comparison-1"><i class="fa fa-check"></i>Data used for this comparison</a>
+<ul>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html#generate-a-dge-object-1"><i class="fa fa-check"></i>generate a DGE object</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html#filter-low-count-genes-and-tmm-normalize-1"><i class="fa fa-check"></i>Filter low-count genes and TMM-normalize</a></li>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html#design-0-group-and-named-contrast-1"><i class="fa fa-check"></i>Design (~0 + group) and named contrast</a></li>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html#dispersion-estimation-and-quasi-likelihood-glm-1"><i class="fa fa-check"></i>Dispersion estimation and quasi-likelihood GLM</a></li>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html#calculating-ranking-score-and-export-full-results-1"><i class="fa fa-check"></i>Calculating ranking score and export full results</a></li>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html#result-output-1"><i class="fa fa-check"></i>Result output</a></li>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html#your-turn"><i class="fa fa-check"></i>YOUR TURN</a></li>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html#additional-exercise"><i class="fa fa-check"></i>Additional exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-9---variant-to-networks.html"><a href="module-9---variant-to-networks.html"><i class="fa fa-check"></i>Module 9 - Variant to Networks</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-9---variant-to-networks.html"><a href="module-9---variant-to-networks.html#network-visualization-and-analysis-with-cytoscape"><i class="fa fa-check"></i>Network Visualization and Analysis with Cytoscape</a></li>
+<li class="chapter" data-level="" data-path="module-9---variant-to-networks.html"><a href="module-9---variant-to-networks.html#lecture-7"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-9---variant-to-networks.html"><a href="module-9---variant-to-networks.html#lab-6"><i class="fa fa-check"></i>Lab</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html"><i class="fa fa-check"></i>Module 9 Lab Primer: Cytoscape Primer</a>
+<ul>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#goal-of-the-exercise-2"><i class="fa fa-check"></i>Goal of the exercise</a></li>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#data-2"><i class="fa fa-check"></i>Data</a></li>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#start-the-exercise"><i class="fa fa-check"></i>Start the exercise</a></li>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#exercise-1a---create-network-from-table"><i class="fa fa-check"></i>Exercise 1a - Create Network from table</a>
+<ul>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#setting-up-cytoscape-variables--"><i class="fa fa-check"></i>Setting up cytoscape variables -</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#exercise-1b---load-node-attributes"><i class="fa fa-check"></i>Exercise 1b - Load node attributes</a></li>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#exercise-1c---map-node-attributes-to-visual-style"><i class="fa fa-check"></i>Exercise 1c - Map node attributes to Visual Style</a></li>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#exercise-2---work-with-larger-networks"><i class="fa fa-check"></i>Exercise 2 - Work with larger networks</a></li>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#exercise-3---perform-basic-enrichment-analysis-using-enrichmenttable"><i class="fa fa-check"></i>Exercise 3 - Perform basic enrichment analysis using EnrichmentTable</a></li>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#enrichmenttabl-features"><i class="fa fa-check"></i>Exercise 3B - create Enrichment Map and Enhanced graphics nodes from EnrichmentTable</a></li>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#exercise-4---load-network-from-ndex"><i class="fa fa-check"></i>Exercise 4 - Load network from NDex</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html"><i class="fa fa-check"></i>Module 9.2 Lab: g:profiler Visualization</a>
+<ul>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#goal-of-the-exercise-3"><i class="fa fa-check"></i>Goal of the exercise</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#data-3"><i class="fa fa-check"></i>Data</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#enrichmentmap"><i class="fa fa-check"></i>EnrichmentMap</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#description-of-this-exercise"><i class="fa fa-check"></i>Description of this exercise</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#start-the-exercise-1"><i class="fa fa-check"></i>Start the exercise</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#exercise-1a---compare-up-and-down-regulated-gprofiler-results"><i class="fa fa-check"></i>Exercise 1a - compare UP and DOWN regulated g:Profiler results</a>
+<ul>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#step-1"><i class="fa fa-check"></i>Step 1</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#step-2"><i class="fa fa-check"></i>Step 2</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#step-3-explore-the-results"><i class="fa fa-check"></i>Step 3: Explore the results:</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#explore-detailed-results"><i class="fa fa-check"></i>Explore Detailed results</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#exercise-1b---create-em-from-fgsea-results-using-baderlab-genesets"><i class="fa fa-check"></i>Exercise 1b - create EM from fgsea results using Baderlab genesets</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#exercise-1c-optional---investigate-individual-pathways-in-genemania-or-string"><i class="fa fa-check"></i>Exercise 1c (optional) - investigate individual pathways in GeneMANIA or String</a>
+<ul>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#genemania"><i class="fa fa-check"></i>GeneMANIA</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#string"><i class="fa fa-check"></i>String</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-10.html"><a href="module-10.html"><i class="fa fa-check"></i>Module 10</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-10.html"><a href="module-10.html#lecture-8"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-10.html"><a href="module-10.html#lab-7"><i class="fa fa-check"></i>Lab</a></li>
+</ul></li>
+<li class="divider"></li>
+<h1 id="sponsors">Sponsors</h1>
+<center>
+<a href="https://www.cihr-irsc.gc.ca"><img src="img/sponsors/cihr.png" width=90% style="padding-bottom: 20px" alt="Canadian Institutes of Health Research logo."></a>
+
+<a href="https://genomecanada.ca/"><img src="img/sponsors/genomecanada.png" height="55" style="display:inline-block;"  style="padding-bottom: 20px" alt="Genome Canada logo.">
+<a href="https://www.ontariogenomics.ca/"><img src="img/sponsors/ontariogenomics.png" height="55" style="display:inline-block;" style="padding-bottom: 20px;" alt="Ontario Genomics logo.">
+<br><br>
+<a href="https://oicr.on.ca/"><img src="img/sponsors/oicr.png" width=35% style="display:inline-block;" style="padding-bottom: 20px" alt="Ontario Institute for Cancer Research logo.">
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Cancer Analysis 2026</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="variant-discovery-in-cancer" class="section level1 hasAnchor">
+<h1>Variant Discovery in Cancer<a href="variant-discovery-in-cancer.html#variant-discovery-in-cancer" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div class="float">
+<img src="Module4/img/tumor_normal_vs_tumor_only_calling.png" alt="tumor-normal variant discovery" />
+<div class="figcaption">tumor-normal variant discovery</div>
+</div>
+<p>Tumor-normal (paired): the gold standard because the normal acts as a per-patient control for both germline variation and technical artifacts.</p>
+<p>Tumor-only: with no matched normal, callers substitute population databases (gnomAD, dbSNP, ExAC, etc.) and/or a panel of normals (PoN) to guess which variants are likely germline (common in the population) versus somatic.
+This is inherently weaker e.g. private/rare germline variants can get miscalled as somatic.
+PON can be useful to filter out recurrent technical artifacts, especially when using the same sequencing platform and library prep (WGS and WES - same baits) as the PoN samples, but it won’t help with private germline variants.</p>
+<p>Before we start variant discovery, let’s look at the structure of the VCF file.</p>
+<div class="float">
+<img src="Module4/img/vcf_format_example.png" alt="VCF-spec_graphic" />
+<div class="figcaption">VCF-spec_graphic</div>
+</div>
+<p>Briefly, the VCF format is is flexible and extensible, allowing for the inclusion of various types of information about each variant in a text file format (most likely stored in a compressed manner) that contains:
+- A header denoted with ## or # containing meta-data information
+- A body containing information about a position in the genome. The VCF format is flexible and extensible, allowing for the inclusion of various types of information about each variant.</p>
+<p>Notes:
+1. ##INFO=: describes the INFO field, which contains additional information about the variant, typicaly with caller-specifics, annotations etc.
+2. ##FORMAT=: describes the FORMAT field, which contains information about the genotype of each sample at that position. One set of FORMAT fields is provided for each SAMPLE in the VCF file.
+3. #CHROM, POS, ID, REF, ALT, QUAL, FILTER, INFO, FORMAT: these are the standard columns in the VCF file. The first 8 columns are fixed and contain information about the variant itself. The last two columns contain information about the genotype of each sample at that position.
+4. The first and second variant in the example contain multi-allelic variants, which are represented in the ALT field as a comma-separated list of alternate alleles. More on this in the following section on multi-allelic variants.</p>
+<p>Now that we have a basic understanding of the VCF format, let’s look at the different variant callers we will be using in this practical.</p>
+<p>Until recently, the main difference between the different callers is the way they handle the data and the statistical model they use to call variants.
+Most of SNV and indel callers use either Baysian, threshold or t-test approach for variant discovery.
+However, more variant discovery tools are making use of machine learning (ML), for discovery (e.g. DeepSomatic, Clair3), variant filtering, prioritization or annotations.</p>
+<p>In this practical we will be focusing on well known non-ML variant callers.
+Here we will try four variant callers.</p>
+<div id="variant-callers-comparison-high-level-overview-more-will-be-explained-in-the-following-sections" class="section level2 hasAnchor">
+<h2>Variant Callers Comparison (High-level overview more will be explained in the following sections)<a href="variant-discovery-in-cancer.html#variant-callers-comparison-high-level-overview-more-will-be-explained-in-the-following-sections" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<table>
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Caller</th>
+<th>Read-support model</th>
+<th>Region-calling logic</th>
+<th>Local realignment</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>VarScan2</strong></td>
+<td>mpileup counts only</td>
+<td>Heuristic thresholds + Fisher’s exact test</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td><strong>VarDict</strong></td>
+<td>Direct BAM read counts</td>
+<td>Heuristic thresholds + statistical test (<code>testsomatic.R</code>)</td>
+<td><strong>Yes</strong> — on the fly, soft-clip based</td>
+</tr>
+<tr class="odd">
+<td><strong>Mutect2</strong></td>
+<td>Local reassembly (haplotype graph)</td>
+<td>Bayesian genotype-likelihood model</td>
+<td>Yes — full local assembly</td>
+</tr>
+<tr class="even">
+<td><strong>Strelka2</strong></td>
+<td>Local reassembly</td>
+<td>Bayesian mixture model</td>
+<td>Yes — full local assembly</td>
+</tr>
+</tbody>
+</table>
+<p>many, MANY others can be found here:
+<a href="https://www.biostars.org/p/19104/" class="uri">https://www.biostars.org/p/19104/</a></p>
+<p>We will then apply and ensemble approach to combine the results of the different callers and generate a unified callset.</p>
+<p>In our case, let’s start with:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="variant-discovery-in-cancer.html#cb16-1" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> pairedVariants</span></code></pre></div>
+</div>
+<div id="varscan-2" class="section level2 hasAnchor">
+<h2>Varscan 2<a href="variant-discovery-in-cancer.html#varscan-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>VarScan2 (Koboldt et al., Genome Research, 2012) takes a fundamentally different approach from the other three callers in this practical. It uses a heuristic method and a statistical test based on the number of aligned reads supporting each allele.</p>
+<p>The caller works directly on read counts pulled from samtools mpileup output — it never touches the BAM files itself. This is why, as we set up earlier, region restriction for VarScan2 has to happen at the mpileup step rather than through a flag native to VarScan2.</p>
+<p>Requirements for running Samtools mpileup and VarScan2:
+- A Normal/tumor SAM/BAM file that has been coordinate sorted.
+- The reference sequence (“reference.fasta”) to which reads were aligned, in FASTA format.
+- The SAMtools software package.
+- The VarScan2 software package (Java-based).</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb17-1"><a href="variant-discovery-in-cancer.html#cb17-1" tabindex="-1"></a><span class="co"># SAMTools mpileup</span></span>
+<span id="cb17-2"><a href="variant-discovery-in-cancer.html#cb17-2" tabindex="-1"></a><span class="co">##Good practice to purge all modules before loading new ones</span></span>
+<span id="cb17-3"><a href="variant-discovery-in-cancer.html#cb17-3" tabindex="-1"></a><span class="ex">module</span> purge <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb17-4"><a href="variant-discovery-in-cancer.html#cb17-4" tabindex="-1"></a><span class="ex">module</span> load mugqic/samtools/1.14 <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb17-5"><a href="variant-discovery-in-cancer.html#cb17-5" tabindex="-1"></a><span class="ex">samtools</span> mpileup <span class="at">-d</span> 1000 <span class="at">-B</span> <span class="at">-q</span> 10 <span class="at">-Q</span> 10 <span class="dt">\</span></span>
+<span id="cb17-6"><a href="variant-discovery-in-cancer.html#cb17-6" tabindex="-1"></a>  <span class="at">-f</span> <span class="va">${REF}</span>/genome/Homo_sapiens.GRCh38.fa <span class="dt">\</span></span>
+<span id="cb17-7"><a href="variant-discovery-in-cancer.html#cb17-7" tabindex="-1"></a>  <span class="at">-l</span> regions.bed <span class="dt">\</span></span>
+<span id="cb17-8"><a href="variant-discovery-in-cancer.html#cb17-8" tabindex="-1"></a>  alignment/HCC1395BL_normal/HCC1395BL_normal.subset.bam <span class="dt">\</span></span>
+<span id="cb17-9"><a href="variant-discovery-in-cancer.html#cb17-9" tabindex="-1"></a>  alignment/HCC1395_tumor/HCC1395_tumor.subset.bam <span class="dt">\</span></span>
+<span id="cb17-10"><a href="variant-discovery-in-cancer.html#cb17-10" tabindex="-1"></a>  <span class="op">&gt;</span> pairedVariants/HCC1395.varscan2.mpileup</span></code></pre></div>
+<p><a href="Module4/notes/_mpileup1.md">note on samtools mpileup command</a></p>
+<p>The Varscan2 heuristic method refers to a set of user-configurable read-count thresholds applied at every candidate position:
+- Minimum read depth (–min-coverage, default 8),
+- Minimum number of reads supporting the variant allele (–min-reads2, default 2),
+- Minimum variant allele frequency (–min-var-freq, default 0.20 — though for tumor samples this is commonly relaxed to 0.05–0.10 to catch subclonal variants)
+- Minimum base quality (–min-avg-qual, default 15)</p>
+<p>The “statistical test” is where VarScan2 becomes specifically useful for a tumor-normal pair like HCC1395/HCC1395BL: for every position that passes the heuristic filters,
+VarScan2’s somatic-calling mode (varscan somatic) applies a Fisher’s exact test comparing the read counts supporting the reference vs. variant allele in the normal sample
+against the same counts in the tumor sample. Based on that comparison (and the –somatic-p-value threshold, default 0.05) each variant gets classified into one of four categories:</p>
+<ol style="list-style-type: decimal">
+<li><strong>Germline</strong>: The variant is present in the normal sample but not in the tumor sample.</li>
+<li><strong>Somatic</strong>: The variant is present in the tumor sample but not in the normal sample.</li>
+<li><strong>LOH</strong> (Loss of Heterozygosity): The variant is present in both, but at a higher allele fraction in the tumor</li>
+<li><strong>Unknown</strong>: The variant cannot be classified into any of the above categories.</li>
+</ol>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href="variant-discovery-in-cancer.html#cb18-1" tabindex="-1"></a><span class="co"># Varscan2</span></span>
+<span id="cb18-2"><a href="variant-discovery-in-cancer.html#cb18-2" tabindex="-1"></a><span class="ex">module</span> purge <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb18-3"><a href="variant-discovery-in-cancer.html#cb18-3" tabindex="-1"></a><span class="ex">module</span> load mugqic/java/openjdk-jdk-17.0.1 mugqic/VarScan/2.4.3 mugqic/htslib/1.14 mugqic/bcftools/1.15 <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb18-4"><a href="variant-discovery-in-cancer.html#cb18-4" tabindex="-1"></a><span class="ex">java</span> <span class="at">-Xmx2000M</span> <span class="at">-jar</span> <span class="va">$VARSCAN2_JAR</span> somatic <span class="dt">\</span></span>
+<span id="cb18-5"><a href="variant-discovery-in-cancer.html#cb18-5" tabindex="-1"></a>  pairedVariants/HCC1395.varscan2.mpileup <span class="dt">\</span></span>
+<span id="cb18-6"><a href="variant-discovery-in-cancer.html#cb18-6" tabindex="-1"></a>  pairedVariants/HCC1395.varscan2 <span class="dt">\</span></span>
+<span id="cb18-7"><a href="variant-discovery-in-cancer.html#cb18-7" tabindex="-1"></a>  <span class="at">--min-coverage</span> 3 <span class="dt">\</span></span>
+<span id="cb18-8"><a href="variant-discovery-in-cancer.html#cb18-8" tabindex="-1"></a>  <span class="at">--min-var-freq</span> 0.05 <span class="dt">\</span></span>
+<span id="cb18-9"><a href="variant-discovery-in-cancer.html#cb18-9" tabindex="-1"></a>  <span class="at">--p-value</span> 0.10 <span class="dt">\</span></span>
+<span id="cb18-10"><a href="variant-discovery-in-cancer.html#cb18-10" tabindex="-1"></a>  <span class="at">--somatic-p-value</span> 0.05 <span class="dt">\</span></span>
+<span id="cb18-11"><a href="variant-discovery-in-cancer.html#cb18-11" tabindex="-1"></a>  <span class="at">--strand-filter</span> 0 <span class="dt">\</span></span>
+<span id="cb18-12"><a href="variant-discovery-in-cancer.html#cb18-12" tabindex="-1"></a>  <span class="at">--output-vcf</span> 1 <span class="dt">\</span></span>
+<span id="cb18-13"><a href="variant-discovery-in-cancer.html#cb18-13" tabindex="-1"></a>  <span class="at">--mpileup</span> 1 <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb18-14"><a href="variant-discovery-in-cancer.html#cb18-14" tabindex="-1"></a><span class="ex">bgzip</span> <span class="at">-cf</span>  <span class="dt">\</span></span>
+<span id="cb18-15"><a href="variant-discovery-in-cancer.html#cb18-15" tabindex="-1"></a> pairedVariants/HCC1395.varscan2.snp.vcf <span class="dt">\</span></span>
+<span id="cb18-16"><a href="variant-discovery-in-cancer.html#cb18-16" tabindex="-1"></a>  <span class="op">&gt;</span> pairedVariants/HCC1395.varscan2.snp.vcf.gz <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb18-17"><a href="variant-discovery-in-cancer.html#cb18-17" tabindex="-1"></a><span class="ex">tabix</span> <span class="at">-pvcf</span> pairedVariants/HCC1395.varscan2.snp.vcf.gz <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb18-18"><a href="variant-discovery-in-cancer.html#cb18-18" tabindex="-1"></a><span class="ex">bgzip</span> <span class="at">-cf</span>  <span class="dt">\</span></span>
+<span id="cb18-19"><a href="variant-discovery-in-cancer.html#cb18-19" tabindex="-1"></a> pairedVariants/HCC1395.varscan2.indel.vcf <span class="dt">\</span></span>
+<span id="cb18-20"><a href="variant-discovery-in-cancer.html#cb18-20" tabindex="-1"></a>  <span class="op">&gt;</span> pairedVariants/HCC1395.varscan2.indel.vcf.gz <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb18-21"><a href="variant-discovery-in-cancer.html#cb18-21" tabindex="-1"></a><span class="ex">tabix</span> <span class="at">-pvcf</span> pairedVariants/HCC1395.varscan2.indel.vcf.gz <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb18-22"><a href="variant-discovery-in-cancer.html#cb18-22" tabindex="-1"></a><span class="ex">bcftools</span> <span class="dt">\</span></span>
+<span id="cb18-23"><a href="variant-discovery-in-cancer.html#cb18-23" tabindex="-1"></a>  concat <span class="at">-a</span> <span class="dt">\</span></span>
+<span id="cb18-24"><a href="variant-discovery-in-cancer.html#cb18-24" tabindex="-1"></a>  pairedVariants/HCC1395.varscan2.snp.vcf.gz <span class="dt">\</span></span>
+<span id="cb18-25"><a href="variant-discovery-in-cancer.html#cb18-25" tabindex="-1"></a>  pairedVariants/HCC1395.varscan2.indel.vcf.gz <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb18-26"><a href="variant-discovery-in-cancer.html#cb18-26" tabindex="-1"></a><span class="fu">sed</span> <span class="st">&#39;s/TUMOR/HCC1395_NS_T_1/g&#39;</span>   <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb18-27"><a href="variant-discovery-in-cancer.html#cb18-27" tabindex="-1"></a><span class="fu">sed</span> <span class="st">&#39;s/NORMAL/HCC1395BL_NS_N_1/g&#39;</span> <span class="dt">\</span></span>
+<span id="cb18-28"><a href="variant-discovery-in-cancer.html#cb18-28" tabindex="-1"></a><span class="op">&gt;</span> pairedVariants/HCC1395.varscan2.vcf <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb18-29"><a href="variant-discovery-in-cancer.html#cb18-29" tabindex="-1"></a><span class="ex">bgzip</span> <span class="at">-cf</span>  <span class="dt">\</span></span>
+<span id="cb18-30"><a href="variant-discovery-in-cancer.html#cb18-30" tabindex="-1"></a> pairedVariants/HCC1395.varscan2.vcf <span class="dt">\</span></span>
+<span id="cb18-31"><a href="variant-discovery-in-cancer.html#cb18-31" tabindex="-1"></a>  <span class="op">&gt;</span> pairedVariants/HCC1395.varscan2.vcf.gz <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb18-32"><a href="variant-discovery-in-cancer.html#cb18-32" tabindex="-1"></a><span class="ex">tabix</span> <span class="at">-pvcf</span> pairedVariants/HCC1395.varscan2.vcf.gz</span></code></pre></div>
+<p>Note: Using bgzip and tabix to compress and index the VCF files is a good practice, especially for large datasets, as it allows for efficient random access to specific regions of the file without needing to decompress the entire file.</p>
+<p><strong>Note on VarScan2 parameters used above</strong> <a href="Module4/solutions/_varscan1.md">here</a></p>
+<p><strong>From the VarScan2 output, how many germline, LOH, and somatic, variants were called?</strong> <a href="Module4/solutions/_varscan2.md">solution</a></p>
+<p>Open the vcf file and look at the header and the first few lines of the body.</p>
+<p>Let’s look at the mandatory fields in the VCF file.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb19-1"><a href="variant-discovery-in-cancer.html#cb19-1" tabindex="-1"></a><span class="co"># View Mandatory fields (-E means to use extended regex)</span></span>
+<span id="cb19-2"><a href="variant-discovery-in-cancer.html#cb19-2" tabindex="-1"></a><span class="fu">zgrep</span> <span class="at">-E</span> <span class="st">&quot;##fileformat|#CHROM&quot;</span> pairedVariants/HCC1395.varscan2.vcf.gz</span></code></pre></div>
+<pre><code>##fileformat=VCFv4.1
+#CHROM  POS ID  REF ALT QUAL    FILTER  INFO    FORMAT  HCC1395BL_NS_N_1    HCC1395_NS_T_1
+</code></pre>
+<p>The FORMAT metadata fields describe the per-sample genotype information. The body of the VCF the FORMAT field is a colon-separated list of subfields, and each sample column contains the corresponding values for those subfields.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb21-1"><a href="variant-discovery-in-cancer.html#cb21-1" tabindex="-1"></a><span class="co"># View FORMAT fields</span></span>
+<span id="cb21-2"><a href="variant-discovery-in-cancer.html#cb21-2" tabindex="-1"></a><span class="fu">zgrep</span> <span class="at">-E</span> <span class="st">&quot;##FORMAT&quot;</span> pairedVariants/HCC1395.varscan2.vcf.gz</span></code></pre></div>
+<pre><code>##FORMAT=&lt;ID=GT,Number=1,Type=String,Description=&quot;Genotype&quot;&gt;
+##FORMAT=&lt;ID=GQ,Number=1,Type=Integer,Description=&quot;Genotype Quality&quot;&gt;
+##FORMAT=&lt;ID=DP,Number=1,Type=Integer,Description=&quot;Read Depth&quot;&gt;
+##FORMAT=&lt;ID=RD,Number=1,Type=Integer,Description=&quot;Depth of reference-supporting bases (reads1)&quot;&gt;
+##FORMAT=&lt;ID=AD,Number=1,Type=Integer,Description=&quot;Depth of variant-supporting bases (reads2)&quot;&gt;
+##FORMAT=&lt;ID=FREQ,Number=1,Type=String,Description=&quot;Variant allele frequency&quot;&gt;
+##FORMAT=&lt;ID=DP4,Number=1,Type=String,Description=&quot;Strand read counts: ref/fwd, ref/rev, var/fwd, var/rev&quot;&gt;</code></pre>
+<p>The INFO metadata fields describe additional information about the variant itself. The body of the VCF the INFO field is a semicolon-separated list of subfields, and each variant line contains the corresponding values for those subfields.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb23-1"><a href="variant-discovery-in-cancer.html#cb23-1" tabindex="-1"></a><span class="co"># View INFO fields</span></span>
+<span id="cb23-2"><a href="variant-discovery-in-cancer.html#cb23-2" tabindex="-1"></a><span class="fu">zgrep</span> <span class="st">&quot;##INFO&quot;</span> pairedVariants/HCC1395.varscan2.vcf.gz</span></code></pre></div>
+<pre><code>##INFO=&lt;ID=DP,Number=1,Type=Integer,Description=&quot;Total depth of quality bases&quot;&gt;
+##INFO=&lt;ID=SOMATIC,Number=0,Type=Flag,Description=&quot;Indicates if record is a somatic mutation&quot;&gt;
+##INFO=&lt;ID=SS,Number=1,Type=String,Description=&quot;Somatic status of variant (0=Reference,1=Germline,2=Somatic,3=LOH, or 5=Unknown)&quot;&gt;
+##INFO=&lt;ID=SSC,Number=1,Type=String,Description=&quot;Somatic score in Phred scale (0-255) derived from somatic p-value&quot;&gt;
+##INFO=&lt;ID=GPV,Number=1,Type=Float,Description=&quot;Fisher&#39;s Exact Test P-value of tumor+normal versus no variant for Germline calls&quot;&gt;
+##INFO=&lt;ID=SPV,Number=1,Type=Float,Description=&quot;Fisher&#39;s Exact Test P-value of tumor versus normal for Somatic/LOH calls&quot;&gt;
+</code></pre>
+<p>Looking at the header how can you differentiate between the germline, LOH, and somatic variants? <a href="Module4/solutions/_varscan3.md">solution</a></p>
+<p>Using the SS field in the VCF file, let’s extract all variants using bcftools view variant with the somatic status.</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb25-1"><a href="variant-discovery-in-cancer.html#cb25-1" tabindex="-1"></a><span class="co"># Extract somatic variants</span></span>
+<span id="cb25-2"><a href="variant-discovery-in-cancer.html#cb25-2" tabindex="-1"></a><span class="ex">module</span> purge <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb25-3"><a href="variant-discovery-in-cancer.html#cb25-3" tabindex="-1"></a><span class="ex">module</span> load mugqic/bcftools/1.15 mugqic/htslib/1.14 <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb25-4"><a href="variant-discovery-in-cancer.html#cb25-4" tabindex="-1"></a><span class="ex">bcftools</span> view <span class="at">-Oz</span> <span class="at">-i</span> <span class="st">&#39;INFO/SS=&quot;2&quot;&#39;</span> <span class="at">-o</span> pairedVariants/HCC1395.varscan2.somatic.vcf.gz <span class="dt">\</span></span>
+<span id="cb25-5"><a href="variant-discovery-in-cancer.html#cb25-5" tabindex="-1"></a>pairedVariants/HCC1395.varscan2.vcf.gz <span class="kw">&amp;&amp;</span> <span class="ex">tabix</span> <span class="at">-pvcf</span> pairedVariants/HCC1395.varscan2.somatic.vcf.gz</span>
+<span id="cb25-6"><a href="variant-discovery-in-cancer.html#cb25-6" tabindex="-1"></a></span>
+<span id="cb25-7"><a href="variant-discovery-in-cancer.html#cb25-7" tabindex="-1"></a><span class="co"># Sanity check (remove the header and count the number of lines)</span></span>
+<span id="cb25-8"><a href="variant-discovery-in-cancer.html#cb25-8" tabindex="-1"></a><span class="fu">zgrep</span> <span class="at">-v</span> <span class="st">&quot;^#&quot;</span> pairedVariants/varscan2.somatic.vcf.gz <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span></code></pre></div>
+<p>This verifies that there are indeed 58 somatic variants, as varscan2 previously identified.</p>
+<p>Let’s look at the first somatic variant in the vcf file.</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb26-1"><a href="variant-discovery-in-cancer.html#cb26-1" tabindex="-1"></a><span class="co"># View the first somatic variant (-A1 means to show 1 line after the match)</span></span>
+<span id="cb26-2"><a href="variant-discovery-in-cancer.html#cb26-2" tabindex="-1"></a><span class="fu">zgrep</span> <span class="at">-A1</span> <span class="st">&quot;#CHROM&quot;</span> pairedVariants/HCC1395.varscan2.somatic.vcf.gz</span></code></pre></div>
+<pre><code>#CHROM  POS ID  REF ALT QUAL    FILTER  INFO    FORMAT  HCC1395BL_NS_N_1    HCC1395_NS_T_1
+chr13   32315128    .   G   A   .   PASS    DP=191;SOMATIC;SS=2;SSC=50;GPV=1;SPV=9.8238e-06 GT:GQ:DP:RD:AD:FREQ:DP4 0/0:.:65:62:0:0%:29,33,0,0  0/1:.:126:98:26:20.97%:51,47,16,10
+</code></pre>
+<p>Notice the normal sample (HCC1395BL_NS_N_1) has a genotype of 0/0 (homozygous reference) with 65 reads (DP) and the tumor sample (HCC1395_NS_T_1) has a genotype of 0/1 (heterozygous variant with 126 reads (DP)).</p>
+<p>How would you extract the germline and LOH variants into one vcf file? (Hint: use the OR (|) operator in bcftools view)</p>
+<details>
+<summary>
+How to extract germline and LOH variants
+</summary>
+<div class="sourceCode" id="cb28"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb28-1"><a href="variant-discovery-in-cancer.html#cb28-1" tabindex="-1"></a><span class="co"># Extract germline and LOH variants</span></span>
+<span id="cb28-2"><a href="variant-discovery-in-cancer.html#cb28-2" tabindex="-1"></a><span class="ex">module</span> purge <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb28-3"><a href="variant-discovery-in-cancer.html#cb28-3" tabindex="-1"></a><span class="ex">module</span> load mugqic/bcftools/1.15 mugqic/htslib/1.14 <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb28-4"><a href="variant-discovery-in-cancer.html#cb28-4" tabindex="-1"></a><span class="ex">bcftools</span> view <span class="at">-Oz</span> <span class="at">-i</span> <span class="st">&#39;INFO/SS=&quot;1&quot; | INFO/SS=&quot;3&quot;&#39;</span> <span class="at">-o</span> pairedVariants/HCC1395.varscan2.germline.loh.vcf.gz <span class="dt">\</span></span>
+<span id="cb28-5"><a href="variant-discovery-in-cancer.html#cb28-5" tabindex="-1"></a>pairedVariants/HCC1395.varscan2.vcf.gz <span class="kw">&amp;&amp;</span> <span class="ex">tabix</span> <span class="at">-pvcf</span> pairedVariants/HCC1395.varscan2.germline.loh.vcf.gz</span>
+<span id="cb28-6"><a href="variant-discovery-in-cancer.html#cb28-6" tabindex="-1"></a></span>
+<span id="cb28-7"><a href="variant-discovery-in-cancer.html#cb28-7" tabindex="-1"></a><span class="co">##Sanity check (remove the header and count the number of lines)</span></span>
+<span id="cb28-8"><a href="variant-discovery-in-cancer.html#cb28-8" tabindex="-1"></a><span class="fu">zgrep</span> <span class="at">-v</span> <span class="st">&quot;^#&quot;</span> pairedVariants/HCC1395.varscan2.germline.loh.vcf.gz <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span> </span></code></pre></div>
+</details>
+</div>
+<div id="vardict" class="section level2 hasAnchor">
+<h2>Vardict<a href="variant-discovery-in-cancer.html#vardict" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Vardict (Lai et al., Nucleic Acids Research, 2016) is a versatile variant caller that can handle both germline and somatic variants.
+Similar to Varscan2, the caller uses user-tuned (e.g. minimum allele frequency (-f), minimum read support, minimum quality) heuristic approach to identify candidate variants and then applies statistical tests to classify them (implemented by testsomatic.R script, conceptually in the same family as VarScan2’s Fisher’s exact test).
+VarDict performs its own intrinsic local realignment on the fly for more accurate allele frequencies for indels, and also rescues soft clipped reads to identify indels not present in the alignments or as additional support for existing indels.
+This is similar to the kind of local reassembly step that Mutect2 and Strelka2 performs.</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb29-1"><a href="variant-discovery-in-cancer.html#cb29-1" tabindex="-1"></a><span class="ex">module</span> purge <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb29-2"><a href="variant-discovery-in-cancer.html#cb29-2" tabindex="-1"></a><span class="ex">module</span> load mugqic/java/openjdk-jdk1.8.0_72 mugqic/VarDictJava/1.4.8 mugqic/samtools/1.14 mugqic/perl/5.34.0 mugqic/R_Bioconductor/4.1.0_3.13 mugqic/htslib/1.14 <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb29-3"><a href="variant-discovery-in-cancer.html#cb29-3" tabindex="-1"></a><span class="ex">java</span> <span class="at">-Xmx6000M</span> <span class="at">-classpath</span> <span class="va">$VARDICT_HOME</span>/lib/VarDict-1.4.8.jar:<span class="va">$VARDICT_HOME</span>/lib/commons-cli-1.2.jar:<span class="va">$VARDICT_HOME</span>/lib/jregex-1.2_01.jar:<span class="va">$VARDICT_HOME</span>/lib/htsjdk-2.8.0.jar com.astrazeneca.vardict.Main <span class="dt">\</span></span>
+<span id="cb29-4"><a href="variant-discovery-in-cancer.html#cb29-4" tabindex="-1"></a>  <span class="at">--G</span> <span class="va">${REF}</span>/genome/Homo_sapiens.GRCh38.fa <span class="dt">\</span></span>
+<span id="cb29-5"><a href="variant-discovery-in-cancer.html#cb29-5" tabindex="-1"></a>  <span class="at">-N</span> HCC1395 <span class="dt">\</span></span>
+<span id="cb29-6"><a href="variant-discovery-in-cancer.html#cb29-6" tabindex="-1"></a>  <span class="at">-b</span> <span class="st">&quot;alignment/HCC1395_tumor/HCC1395_tumor.subset.bam|alignment/HCC1395BL_normal/HCC1395BL_normal.subset.bam&quot;</span> <span class="dt">\</span></span>
+<span id="cb29-7"><a href="variant-discovery-in-cancer.html#cb29-7" tabindex="-1"></a>  <span class="at">-f</span> 0.03 <span class="at">-Q</span> 10 <span class="at">-c</span> 1 <span class="at">-S</span> 2 <span class="at">-E</span> 3 <span class="at">-g</span> 4 <span class="at">-th</span> 3 <span class="dt">\</span></span>
+<span id="cb29-8"><a href="variant-discovery-in-cancer.html#cb29-8" tabindex="-1"></a>  regions.bed <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb29-9"><a href="variant-discovery-in-cancer.html#cb29-9" tabindex="-1"></a><span class="va">$VARDICT_BIN</span><span class="ex">/testsomatic.R</span>  <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb29-10"><a href="variant-discovery-in-cancer.html#cb29-10" tabindex="-1"></a><span class="fu">perl</span> <span class="va">$VARDICT_BIN</span>/var2vcf_paired.pl <span class="dt">\</span></span>
+<span id="cb29-11"><a href="variant-discovery-in-cancer.html#cb29-11" tabindex="-1"></a>    <span class="at">-N</span> <span class="st">&quot;HCC1395_NS_T_1|HCC1395BL_NS_N_1&quot;</span> <span class="dt">\</span></span>
+<span id="cb29-12"><a href="variant-discovery-in-cancer.html#cb29-12" tabindex="-1"></a>    <span class="at">-f</span> 0.03 <span class="at">-P</span> 0.9 <span class="at">-m</span> 4.25 <span class="at">-M</span> <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb29-13"><a href="variant-discovery-in-cancer.html#cb29-13" tabindex="-1"></a><span class="ex">bgzip</span> <span class="at">-cf</span>  <span class="dt">\</span></span>
+<span id="cb29-14"><a href="variant-discovery-in-cancer.html#cb29-14" tabindex="-1"></a>  <span class="op">&gt;</span> pairedVariants/HCC1395.vardict.vcf.gz <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb29-15"><a href="variant-discovery-in-cancer.html#cb29-15" tabindex="-1"></a><span class="ex">tabix</span> <span class="at">-pvcf</span> pairedVariants/HCC1395.vardict.vcf.gz <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb29-16"><a href="variant-discovery-in-cancer.html#cb29-16" tabindex="-1"></a><span class="fu">zgrep</span> <span class="at">-v</span> <span class="st">&quot;^#&quot;</span> pairedVariants/HCC1395.vardict.vcf.gz <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span></code></pre></div>
+<p><strong>Note on vardict parameters available</strong> <a href="Module4/notes/_vardict.md">here</a></p>
+<p>Then we can extract somatic, germline and LOH variants using bcftools view variant with the INFO/STATUS field:
+Note the use of the regular expression operator (~) to match the string in the INFO/STATUS field i.e for somatic variants we are looking for the string “Somatic” in the INFO/STATUS field so LikelySomatic and StrongSomatic will be matched.</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb30-1"><a href="variant-discovery-in-cancer.html#cb30-1" tabindex="-1"></a><span class="co">## Extract somatic variants</span></span>
+<span id="cb30-2"><a href="variant-discovery-in-cancer.html#cb30-2" tabindex="-1"></a><span class="ex">module</span> purge <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb30-3"><a href="variant-discovery-in-cancer.html#cb30-3" tabindex="-1"></a><span class="ex">module</span> load mugqic/bcftools/1.15 mugqic/htslib/1.14 <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb30-4"><a href="variant-discovery-in-cancer.html#cb30-4" tabindex="-1"></a><span class="ex">bcftools</span> <span class="dt">\</span></span>
+<span id="cb30-5"><a href="variant-discovery-in-cancer.html#cb30-5" tabindex="-1"></a>  view <span class="at">-f</span> PASS <span class="at">-i</span> <span class="st">&#39;INFO/STATUS~&quot;.*Somatic&quot;&#39;</span> <span class="dt">\</span></span>
+<span id="cb30-6"><a href="variant-discovery-in-cancer.html#cb30-6" tabindex="-1"></a>  pairedVariants/HCC1395.vardict.vcf.gz <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb30-7"><a href="variant-discovery-in-cancer.html#cb30-7" tabindex="-1"></a><span class="ex">bgzip</span> <span class="at">-cf</span>  <span class="dt">\</span></span>
+<span id="cb30-8"><a href="variant-discovery-in-cancer.html#cb30-8" tabindex="-1"></a>  <span class="op">&gt;</span> pairedVariants/HCC1395.vardict.somatic.vcf.gz <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb30-9"><a href="variant-discovery-in-cancer.html#cb30-9" tabindex="-1"></a><span class="ex">tabix</span> <span class="at">-pvcf</span> pairedVariants/HCC1395.vardict.somatic.vcf.gz <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb30-10"><a href="variant-discovery-in-cancer.html#cb30-10" tabindex="-1"></a><span class="fu">zgrep</span> <span class="at">-v</span> <span class="st">&quot;^#&quot;</span> pairedVariants/HCC1395.vardict.somatic.vcf.gz <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span>
+<span id="cb30-11"><a href="variant-discovery-in-cancer.html#cb30-11" tabindex="-1"></a></span>
+<span id="cb30-12"><a href="variant-discovery-in-cancer.html#cb30-12" tabindex="-1"></a><span class="co">## Extract germline and LOH variants</span></span>
+<span id="cb30-13"><a href="variant-discovery-in-cancer.html#cb30-13" tabindex="-1"></a><span class="ex">module</span> purge <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb30-14"><a href="variant-discovery-in-cancer.html#cb30-14" tabindex="-1"></a><span class="ex">module</span> load mugqic/bcftools/1.15  mugqic/htslib/1.14 <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb30-15"><a href="variant-discovery-in-cancer.html#cb30-15" tabindex="-1"></a><span class="ex">bcftools</span> <span class="dt">\</span></span>
+<span id="cb30-16"><a href="variant-discovery-in-cancer.html#cb30-16" tabindex="-1"></a>  view <span class="at">-f</span> PASS <span class="at">-i</span> <span class="st">&#39;INFO/STATUS~&quot;Germline&quot; | INFO/STATUS~&quot;.*LOH&quot;&#39;</span> <span class="dt">\</span></span>
+<span id="cb30-17"><a href="variant-discovery-in-cancer.html#cb30-17" tabindex="-1"></a>  pairedVariants/HCC1395.vardict.vcf.gz <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb30-18"><a href="variant-discovery-in-cancer.html#cb30-18" tabindex="-1"></a><span class="ex">bgzip</span> <span class="at">-cf</span>  <span class="dt">\</span></span>
+<span id="cb30-19"><a href="variant-discovery-in-cancer.html#cb30-19" tabindex="-1"></a>  <span class="op">&gt;</span> pairedVariants/HCC1395.vardict.germline.loh.vcf.gz <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb30-20"><a href="variant-discovery-in-cancer.html#cb30-20" tabindex="-1"></a><span class="ex">tabix</span> <span class="at">-pvcf</span> pairedVariants/HCC1395.vardict.germline.loh.vcf.gz <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb30-21"><a href="variant-discovery-in-cancer.html#cb30-21" tabindex="-1"></a><span class="fu">zgrep</span> <span class="at">-v</span> <span class="st">&quot;^#&quot;</span> pairedVariants/HCC1395.vardict.germline.loh.vcf.gz <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span></code></pre></div>
+<p>There are 556 variants in discovered by VarDict, but only 19 somatic variants and 267 germline/LOH variants. Where did the other 270 variants go? <a href="Module4/solutions/_vardict1.md">solution</a></p>
+</div>
+<div id="gatk-mutect2" class="section level2 hasAnchor">
+<h2>GATK MuTecT2<a href="variant-discovery-in-cancer.html#gatk-mutect2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Mutect2 (Benjamin et al., part of GATK4) takes yet another approach from the two callers we’ve already covered.
+It’s the most computationally sophisticated, and unlike VarScan2/VarDict, it doesn’t rely on simple allele-count thresholds at all; the calling decision is built entirely on a probabilistic model.</p>
+<p><em>Active region detection and local assembly</em></p>
+<p>Rather than evaluating every single position independently, Mutect2 first scans the BAM for “active regions” — windows where the pileup shows enough evidence of possible variation to be worth a closer look,
+using a quick approximation of its own somatic likelihood model to flag these regions. Within each active region, Mutect2 builds a local assembly graph from the reads and reconstructs candidate haplotypes — this is the similar local-reassembly machinery that gives VarDict its edge over VarScan2 for indels,
+just implemented via full graph-based assembly rather than VarDict’s lighter soft-clip realignment.</p>
+<p><em>The Bayesian somatic genotyping model</em>
+For each candidate haplotype, Mutect2 computes a Tumor LOD (TLOD) score — essentially the log-odds that the site is a real somatic variant rather than reference, based on the tumor reads’ support.
+If you supply a matched normal (as we’re doing with HCC1395/HCC1395BL), it also computes a Normal LOD (NLOD), the log-odds that the normal sample’s reads are reference rather than showing the same variant — this is what lets Mutect2 actively subtract out anything the normal sample also carries, rather than just noting the overlap the way VarScan2’s Fisher’s exact test does.
+As a result, Mutect2 can call somatic variants even when the normal sample has a low-level presence of the same variant (e.g., due to contamination or mosaicism), as long as the tumor’s support is strong enough to outweigh it.</p>
+<p>As a results Mutect2 only calls somatic variants, and does not classify germline or LOH variants.</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb31-1"><a href="variant-discovery-in-cancer.html#cb31-1" tabindex="-1"></a><span class="co"># Variants MuTecT2</span></span>
+<span id="cb31-2"><a href="variant-discovery-in-cancer.html#cb31-2" tabindex="-1"></a><span class="ex">module</span> purge <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb31-3"><a href="variant-discovery-in-cancer.html#cb31-3" tabindex="-1"></a><span class="ex">module</span> load mugqic/java/openjdk-jdk-17.0.1 mugqic/GenomeAnalysisTK/4.6.0.0 mugqic/python/3.10.4 <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb31-4"><a href="variant-discovery-in-cancer.html#cb31-4" tabindex="-1"></a><span class="ex">gatk</span> <span class="at">--java-options</span> <span class="st">&quot;-Xmx6000M&quot;</span> <span class="dt">\</span></span>
+<span id="cb31-5"><a href="variant-discovery-in-cancer.html#cb31-5" tabindex="-1"></a>  Mutect2 <span class="dt">\</span></span>
+<span id="cb31-6"><a href="variant-discovery-in-cancer.html#cb31-6" tabindex="-1"></a>  <span class="at">--pair-hmm-implementation</span> AVX_LOGLESS_CACHING_OMP <span class="at">--native-pair-hmm-threads</span> 3 <span class="dt">\</span></span>
+<span id="cb31-7"><a href="variant-discovery-in-cancer.html#cb31-7" tabindex="-1"></a>  <span class="at">--max-reads-per-alignment-start</span> 0 <span class="at">--read-validation-stringency</span> LENIENT <span class="dt">\</span></span>
+<span id="cb31-8"><a href="variant-discovery-in-cancer.html#cb31-8" tabindex="-1"></a>  <span class="at">--af-of-alleles-not-in-resource</span> 0.0000025 <span class="dt">\</span></span>
+<span id="cb31-9"><a href="variant-discovery-in-cancer.html#cb31-9" tabindex="-1"></a>  <span class="at">--f1r2-tar-gz</span> pairedVariants/HCC1395.f1r2.tar.gz <span class="dt">\</span></span>
+<span id="cb31-10"><a href="variant-discovery-in-cancer.html#cb31-10" tabindex="-1"></a>  <span class="at">--reference</span> <span class="va">${REF}</span>/genome/Homo_sapiens.GRCh38.fa <span class="dt">\</span></span>
+<span id="cb31-11"><a href="variant-discovery-in-cancer.html#cb31-11" tabindex="-1"></a>  <span class="at">--input</span> alignment/HCC1395_tumor/HCC1395_tumor.subset.bam <span class="dt">\</span></span>
+<span id="cb31-12"><a href="variant-discovery-in-cancer.html#cb31-12" tabindex="-1"></a>  <span class="at">--tumor-sample</span> HCC1395_NS_T_1 <span class="dt">\</span></span>
+<span id="cb31-13"><a href="variant-discovery-in-cancer.html#cb31-13" tabindex="-1"></a>  <span class="at">--input</span> alignment/HCC1395BL_normal/HCC1395BL_normal.subset.bam <span class="dt">\</span></span>
+<span id="cb31-14"><a href="variant-discovery-in-cancer.html#cb31-14" tabindex="-1"></a>  <span class="at">--normal-sample</span> HCC1395BL_NS_N_1 <span class="dt">\</span></span>
+<span id="cb31-15"><a href="variant-discovery-in-cancer.html#cb31-15" tabindex="-1"></a>  <span class="at">--germline-resource</span> Homo_sapiens.GRCh38.af-only-gnomad.regions_only.vcf.gz <span class="dt">\</span></span>
+<span id="cb31-16"><a href="variant-discovery-in-cancer.html#cb31-16" tabindex="-1"></a>  <span class="at">--intervals</span> regions.bed <span class="dt">\</span></span>
+<span id="cb31-17"><a href="variant-discovery-in-cancer.html#cb31-17" tabindex="-1"></a>  <span class="at">--output</span> pairedVariants/HCC1395.mutect2.vcf.gz</span></code></pre></div>
+<p>Mutect2 itself is deliberately permissive, it emits a broad candidate callset with annotations, but doesn’t do the final PASS/FAIL determination
+That’s the job of a second tool, <em>FilterMutectCalls</em>, which applies a whole battery of additional filters and probabilistic models e.g
+- Cross-sample contamination model (fed by a separate <em>CalculateContamination</em> step)
+- Orientation-bias filtering (important for FFPE samples, less relevant for cell-line data like ours, the <em>–f1r2-tar-gz</em> argument above)
+- Hard filter blacklist against any panel of normals (PON; a set of unrelated normal samples run through Mutect2 to flag recurrent technical artifacts)</p>
+<p>To filter for somatic SNPs:</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb32-1"><a href="variant-discovery-in-cancer.html#cb32-1" tabindex="-1"></a><span class="co"># Filtering</span></span>
+<span id="cb32-2"><a href="variant-discovery-in-cancer.html#cb32-2" tabindex="-1"></a><span class="ex">module</span> purge <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb32-3"><a href="variant-discovery-in-cancer.html#cb32-3" tabindex="-1"></a><span class="ex">module</span> load mugqic/java/openjdk-jdk-17.0.1 mugqic/GenomeAnalysisTK/4.6.0.0 mugqic/bcftools/1.15 mugqic/htslib/1.14 <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb32-4"><a href="variant-discovery-in-cancer.html#cb32-4" tabindex="-1"></a><span class="ex">gatk</span> <span class="at">--java-options</span> <span class="st">&quot;-Xmx1000M&quot;</span> <span class="dt">\</span></span>
+<span id="cb32-5"><a href="variant-discovery-in-cancer.html#cb32-5" tabindex="-1"></a>  LearnReadOrientationModel  <span class="dt">\</span></span>
+<span id="cb32-6"><a href="variant-discovery-in-cancer.html#cb32-6" tabindex="-1"></a>  <span class="at">--input</span> pairedVariants/HCC1395.f1r2.tar.gz <span class="dt">\</span></span>
+<span id="cb32-7"><a href="variant-discovery-in-cancer.html#cb32-7" tabindex="-1"></a>  <span class="at">--output</span> pairedVariants/HCC1395.read-orientation-model.tar.gz <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb32-8"><a href="variant-discovery-in-cancer.html#cb32-8" tabindex="-1"></a><span class="ex">gatk</span> <span class="at">--java-options</span> <span class="st">&quot;-Xmx1000M&quot;</span> <span class="dt">\</span></span>
+<span id="cb32-9"><a href="variant-discovery-in-cancer.html#cb32-9" tabindex="-1"></a>  FilterMutectCalls  <span class="dt">\</span></span>
+<span id="cb32-10"><a href="variant-discovery-in-cancer.html#cb32-10" tabindex="-1"></a>  <span class="at">--reference</span> <span class="va">${REF}</span>/genome/Homo_sapiens.GRCh38.fa <span class="dt">\</span></span>
+<span id="cb32-11"><a href="variant-discovery-in-cancer.html#cb32-11" tabindex="-1"></a>  <span class="at">--variant</span> pairedVariants/HCC1395.mutect2.vcf.gz <span class="dt">\</span></span>
+<span id="cb32-12"><a href="variant-discovery-in-cancer.html#cb32-12" tabindex="-1"></a>  <span class="at">--ob-priors</span> pairedVariants/HCC1395.read-orientation-model.tar.gz <span class="dt">\</span></span>
+<span id="cb32-13"><a href="variant-discovery-in-cancer.html#cb32-13" tabindex="-1"></a>  <span class="at">--output</span> pairedVariants/HCC1395.mutect2.flt.vcf.gz <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb32-14"><a href="variant-discovery-in-cancer.html#cb32-14" tabindex="-1"></a><span class="ex">bcftools</span> view <span class="at">-f</span> PASS <span class="at">-Oz</span> <span class="at">-o</span> pairedVariants/HCC1395.mutect2.somatic.vcf.gz pairedVariants/HCC1395.mutect2.flt.vcf.gz <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb32-15"><a href="variant-discovery-in-cancer.html#cb32-15" tabindex="-1"></a><span class="ex">tabix</span> <span class="at">-pvcf</span> pairedVariants/HCC1395.mutect2.somatic.vcf.gz <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb32-16"><a href="variant-discovery-in-cancer.html#cb32-16" tabindex="-1"></a><span class="fu">zgrep</span> <span class="at">-v</span> <span class="st">&quot;^#&quot;</span> pairedVariants/HCC1395.mutect2.somatic.vcf.gz <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span></code></pre></div>
+<p>Notice that Mutect2 only calls 10 somatic variants</p>
+</div>
+<div id="strelka2" class="section level2 hasAnchor">
+<h2>Strelka2<a href="variant-discovery-in-cancer.html#strelka2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Strelka2 (Kim et al., Nature Methods, 2018) is Illumina’s own entry in this comparison, and its design goal was explicitly to solve
+the runtime and accuracy problems of earlier-generation Bayesian callers — including its own predecessor, the original Strelka —
+while staying in the same broad “probabilistic model” family as Mutect2 rather than the heuristic family VarScan2/VarDict lean toward.</p>
+<p><em>A shared four-stage workflow for both germline and somatic modes</em>
+Strelka2’s somatic and germline analyses (we’re using the somatic workflow for HCC1395/HCC1395BL) follow the same high-level pipeline:
+1. Parameter estimation from the sample data itself
+2. Candidate variant discovery.
+3. Realignment and variant probability inference
+4. Empirical scoring and filtration.</p>
+<p>That first stage — adaptively estimating parameters from your own data rather than using fixed defaults,
+is a meaningful departure from VarScan2 and VarDict, both of which apply the same fixed heuristic thresholds regardless of what the sequencing data actually looks like.</p>
+<p>Let’s call somatic variant with Strelka2 on our tumor-normal pair:</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb33-1"><a href="variant-discovery-in-cancer.html#cb33-1" tabindex="-1"></a><span class="co"># Strelka2 somatic (region.bed must be bgzipped and tabix indexed)</span></span>
+<span id="cb33-2"><a href="variant-discovery-in-cancer.html#cb33-2" tabindex="-1"></a><span class="ex">module</span> purge <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb33-3"><a href="variant-discovery-in-cancer.html#cb33-3" tabindex="-1"></a><span class="ex">module</span> load mugqic/htslib/1.14 mugqic/python/2.7.18 mugqic/Strelka2/2.9.10 <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb33-4"><a href="variant-discovery-in-cancer.html#cb33-4" tabindex="-1"></a><span class="fu">cat</span> regions.bed <span class="kw">|</span> <span class="ex">bgzip</span> <span class="at">-cf</span> <span class="op">&gt;</span> regions.bed.gz <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb33-5"><a href="variant-discovery-in-cancer.html#cb33-5" tabindex="-1"></a><span class="ex">tabix</span> <span class="at">-f</span> <span class="at">-pbed</span> regions.bed.gz <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb33-6"><a href="variant-discovery-in-cancer.html#cb33-6" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-rf</span> pairedVariants/strelka2_somatic <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb33-7"><a href="variant-discovery-in-cancer.html#cb33-7" tabindex="-1"></a><span class="ex">python</span> <span class="va">$STRELKA2_HOME</span>/bin/configureStrelkaSomaticWorkflow.py <span class="dt">\</span></span>
+<span id="cb33-8"><a href="variant-discovery-in-cancer.html#cb33-8" tabindex="-1"></a>  <span class="at">--normalBam</span> alignment/HCC1395BL_normal/HCC1395BL_normal.subset.bam <span class="dt">\</span></span>
+<span id="cb33-9"><a href="variant-discovery-in-cancer.html#cb33-9" tabindex="-1"></a>  <span class="at">--tumorBam</span> alignment/HCC1395_tumor/HCC1395_tumor.subset.bam <span class="dt">\</span></span>
+<span id="cb33-10"><a href="variant-discovery-in-cancer.html#cb33-10" tabindex="-1"></a>  <span class="at">--referenceFasta</span> <span class="va">${REF}</span>/genome/Homo_sapiens.GRCh38.fa <span class="dt">\</span></span>
+<span id="cb33-11"><a href="variant-discovery-in-cancer.html#cb33-11" tabindex="-1"></a>  <span class="at">--callRegions</span> regions.bed.gz <span class="dt">\</span></span>
+<span id="cb33-12"><a href="variant-discovery-in-cancer.html#cb33-12" tabindex="-1"></a>  <span class="at">--runDir</span> pairedVariants/strelka2_somatic <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb33-13"><a href="variant-discovery-in-cancer.html#cb33-13" tabindex="-1"></a><span class="ex">python</span> pairedVariants/strelka2_somatic/runWorkflow.py <span class="dt">\</span></span>
+<span id="cb33-14"><a href="variant-discovery-in-cancer.html#cb33-14" tabindex="-1"></a>  <span class="at">-m</span> local  <span class="dt">\</span></span>
+<span id="cb33-15"><a href="variant-discovery-in-cancer.html#cb33-15" tabindex="-1"></a>  <span class="at">-j</span> 3 <span class="dt">\</span></span>
+<span id="cb33-16"><a href="variant-discovery-in-cancer.html#cb33-16" tabindex="-1"></a>  <span class="at">-g</span> 6 <span class="dt">\</span></span>
+<span id="cb33-17"><a href="variant-discovery-in-cancer.html#cb33-17" tabindex="-1"></a>  <span class="at">--quiet</span></span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb34-1"><a href="variant-discovery-in-cancer.html#cb34-1" tabindex="-1"></a><span class="co"># Filter for somatic (update_genotypes_strelka.py adds FORMAT GT to samples; strelka2 uses a non-standard format)</span></span>
+<span id="cb34-2"><a href="variant-discovery-in-cancer.html#cb34-2" tabindex="-1"></a><span class="ex">module</span> purge <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb34-3"><a href="variant-discovery-in-cancer.html#cb34-3" tabindex="-1"></a><span class="ex">module</span> load mugqic/bcftools/1.15 mugqic/htslib/1.14 mugqic/mugqic_tools/2.12.7 mugqic/python/3.10.4 <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb34-4"><a href="variant-discovery-in-cancer.html#cb34-4" tabindex="-1"></a><span class="ex">bcftools</span> <span class="dt">\</span></span>
+<span id="cb34-5"><a href="variant-discovery-in-cancer.html#cb34-5" tabindex="-1"></a>  concat <span class="at">-a</span>  <span class="dt">\</span></span>
+<span id="cb34-6"><a href="variant-discovery-in-cancer.html#cb34-6" tabindex="-1"></a>  pairedVariants/strelka2_somatic/results/variants/somatic.snvs.vcf.gz <span class="dt">\</span></span>
+<span id="cb34-7"><a href="variant-discovery-in-cancer.html#cb34-7" tabindex="-1"></a>  pairedVariants/strelka2_somatic/results/variants/somatic.indels.vcf.gz <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb34-8"><a href="variant-discovery-in-cancer.html#cb34-8" tabindex="-1"></a><span class="fu">sed</span> <span class="st">&#39;s/TUMOR/HCC1395_NS_T_1/g&#39;</span>   <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb34-9"><a href="variant-discovery-in-cancer.html#cb34-9" tabindex="-1"></a><span class="fu">sed</span> <span class="st">&#39;s/NORMAL/HCC1395BL_NS_N_1/g&#39;</span>   <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb34-10"><a href="variant-discovery-in-cancer.html#cb34-10" tabindex="-1"></a><span class="ex">bgzip</span> <span class="at">-cf</span>  <span class="dt">\</span></span>
+<span id="cb34-11"><a href="variant-discovery-in-cancer.html#cb34-11" tabindex="-1"></a>  <span class="op">&gt;</span> pairedVariants/HCC1395.strelka2.vcf.gz <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb34-12"><a href="variant-discovery-in-cancer.html#cb34-12" tabindex="-1"></a><span class="ex">tabix</span> <span class="at">-pvcf</span> pairedVariants/HCC1395.strelka2.vcf.gz <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb34-13"><a href="variant-discovery-in-cancer.html#cb34-13" tabindex="-1"></a>  <span class="ex">python3</span> <span class="va">$PYTHON_TOOLS</span>/update_genotypes_strelka.py <span class="dt">\</span></span>
+<span id="cb34-14"><a href="variant-discovery-in-cancer.html#cb34-14" tabindex="-1"></a>      <span class="at">-i</span> pairedVariants/HCC1395.strelka2.vcf.gz <span class="dt">\</span></span>
+<span id="cb34-15"><a href="variant-discovery-in-cancer.html#cb34-15" tabindex="-1"></a>      <span class="at">-o</span> pairedVariants/HCC1395.strelka2.gt.vcf.gz <span class="dt">\</span></span>
+<span id="cb34-16"><a href="variant-discovery-in-cancer.html#cb34-16" tabindex="-1"></a>      <span class="at">-n</span> HCC1395BL_NS_N_1 <span class="dt">\</span></span>
+<span id="cb34-17"><a href="variant-discovery-in-cancer.html#cb34-17" tabindex="-1"></a>      <span class="at">-t</span> HCC1395_NS_T_1 <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb34-18"><a href="variant-discovery-in-cancer.html#cb34-18" tabindex="-1"></a><span class="ex">bcftools</span> <span class="dt">\</span></span>
+<span id="cb34-19"><a href="variant-discovery-in-cancer.html#cb34-19" tabindex="-1"></a>  view <span class="at">-f</span> PASS <span class="at">-Oz</span> <span class="dt">\</span></span>
+<span id="cb34-20"><a href="variant-discovery-in-cancer.html#cb34-20" tabindex="-1"></a> <span class="at">-o</span> pairedVariants/HCC1395.strelka2.somatic.vcf.gz <span class="dt">\</span></span>
+<span id="cb34-21"><a href="variant-discovery-in-cancer.html#cb34-21" tabindex="-1"></a> pairedVariants/HCC1395.strelka2.gt.vcf.gz</span></code></pre></div>
+<p>Let’s call germline variants with Strelka2:</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb35-1"><a href="variant-discovery-in-cancer.html#cb35-1" tabindex="-1"></a><span class="ex">module</span> purge <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb35-2"><a href="variant-discovery-in-cancer.html#cb35-2" tabindex="-1"></a><span class="ex">module</span> load mugqic/htslib/1.14 mugqic/python/2.7.18 mugqic/Strelka2/2.9.10 <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb35-3"><a href="variant-discovery-in-cancer.html#cb35-3" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-r</span> <span class="at">-f</span> pairedVariants/strelka2_germline <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb35-4"><a href="variant-discovery-in-cancer.html#cb35-4" tabindex="-1"></a><span class="ex">python</span> <span class="va">$STRELKA2_HOME</span>/bin/configureStrelkaGermlineWorkflow.py <span class="dt">\</span></span>
+<span id="cb35-5"><a href="variant-discovery-in-cancer.html#cb35-5" tabindex="-1"></a>  <span class="at">--bam</span> alignment/HCC1395BL_normal/HCC1395BL_normal.subset.bam <span class="dt">\</span></span>
+<span id="cb35-6"><a href="variant-discovery-in-cancer.html#cb35-6" tabindex="-1"></a>  <span class="at">--bam</span> alignment/HCC1395_tumor/HCC1395_tumor.subset.bam <span class="dt">\</span></span>
+<span id="cb35-7"><a href="variant-discovery-in-cancer.html#cb35-7" tabindex="-1"></a>  <span class="at">--referenceFasta</span> <span class="va">${REF}</span>/genome/Homo_sapiens.GRCh38.fa <span class="dt">\</span></span>
+<span id="cb35-8"><a href="variant-discovery-in-cancer.html#cb35-8" tabindex="-1"></a>  <span class="at">--callRegions</span> regions.bed.gz <span class="dt">\</span></span>
+<span id="cb35-9"><a href="variant-discovery-in-cancer.html#cb35-9" tabindex="-1"></a>  <span class="at">--exome</span> <span class="dt">\</span></span>
+<span id="cb35-10"><a href="variant-discovery-in-cancer.html#cb35-10" tabindex="-1"></a>  <span class="at">--runDir</span> pairedVariants/strelka2_germline <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb35-11"><a href="variant-discovery-in-cancer.html#cb35-11" tabindex="-1"></a><span class="ex">python</span> pairedVariants/strelka2_germline/runWorkflow.py <span class="dt">\</span></span>
+<span id="cb35-12"><a href="variant-discovery-in-cancer.html#cb35-12" tabindex="-1"></a>  <span class="at">-m</span> local  <span class="dt">\</span></span>
+<span id="cb35-13"><a href="variant-discovery-in-cancer.html#cb35-13" tabindex="-1"></a>  <span class="at">-j</span> 3 <span class="dt">\</span></span>
+<span id="cb35-14"><a href="variant-discovery-in-cancer.html#cb35-14" tabindex="-1"></a>  <span class="at">-g</span> 6 <span class="dt">\</span></span>
+<span id="cb35-15"><a href="variant-discovery-in-cancer.html#cb35-15" tabindex="-1"></a>  <span class="at">--quiet</span></span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb36-1"><a href="variant-discovery-in-cancer.html#cb36-1" tabindex="-1"></a><span class="co"># Filter germline</span></span>
+<span id="cb36-2"><a href="variant-discovery-in-cancer.html#cb36-2" tabindex="-1"></a><span class="ex">module</span> purge <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb36-3"><a href="variant-discovery-in-cancer.html#cb36-3" tabindex="-1"></a><span class="ex">module</span> load mugqic/htslib/1.14 mugqic/vt/0.57 mugqic/bcftools/1.15 <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb36-4"><a href="variant-discovery-in-cancer.html#cb36-4" tabindex="-1"></a><span class="fu">zcat</span> pairedVariants/strelka2_germline/results/variants/variants.vcf.gz  <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb36-5"><a href="variant-discovery-in-cancer.html#cb36-5" tabindex="-1"></a><span class="fu">sed</span> <span class="st">&#39;s/TUMOR/HCC1395_NS_T_1/g&#39;</span>   <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb36-6"><a href="variant-discovery-in-cancer.html#cb36-6" tabindex="-1"></a><span class="fu">sed</span> <span class="st">&#39;s/NORMAL/HCC1395BL_NS_N_1/g&#39;</span>   <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb36-7"><a href="variant-discovery-in-cancer.html#cb36-7" tabindex="-1"></a><span class="ex">bgzip</span> <span class="at">-cf</span>  <span class="dt">\</span></span>
+<span id="cb36-8"><a href="variant-discovery-in-cancer.html#cb36-8" tabindex="-1"></a>  <span class="op">&gt;</span> pairedVariants/HCC1395.strelka2.germline.vcf.gz <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb36-9"><a href="variant-discovery-in-cancer.html#cb36-9" tabindex="-1"></a><span class="ex">tabix</span> <span class="at">-pvcf</span> pairedVariants/HCC1395.strelka2.germline.vcf.gz <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb36-10"><a href="variant-discovery-in-cancer.html#cb36-10" tabindex="-1"></a><span class="ex">bcftools</span> <span class="dt">\</span></span>
+<span id="cb36-11"><a href="variant-discovery-in-cancer.html#cb36-11" tabindex="-1"></a>  view <span class="at">-f</span> PASS <span class="at">-Oz</span> <span class="dt">\</span></span>
+<span id="cb36-12"><a href="variant-discovery-in-cancer.html#cb36-12" tabindex="-1"></a> <span class="at">-o</span> pairedVariants/HCC1395.strelka2.germline.loh.vcf.gz <span class="dt">\</span></span>
+<span id="cb36-13"><a href="variant-discovery-in-cancer.html#cb36-13" tabindex="-1"></a> pairedVariants/HCC1395.strelka2.germline.vcf.gz</span></code></pre></div>
+<p>We have now generated all somatic and germline/LOH vcf for all four variant callers. Time to merge them.</p>
+</div>
+<div id="ensemble-approach" class="section level2 hasAnchor">
+<h2>Ensemble approach<a href="variant-discovery-in-cancer.html#ensemble-approach" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Why ensemble approaches?</p>
+<p>The core problem: no single caller in your panel has both high sensitivity and high specificity, and their errors typically don’t overlap
+VarScan2’s heuristic thresholds, VarDict’s realignment-plus-heuristic hybrid, and Mutect2/Strelka2’s Bayesian assembly-based models each make systematically different mistakes.
+This is the whole rationale behind consensus calling: benchmarking work comparing caller combinations found that the noise (false positives) returned by any single caller doesn’t
+fully overlap with the noise from a different caller, so accepting only the intersection of multiple callers filters out a meaningful fraction of each caller’s individual false positives
+while retaining true positives that tend to be recovered by more than one method.</p>
+<p>However, before we can merge the results, we need to make sure of two things:
+1. The sample names are consistent across all vcf files (they are which is why sed was used in many of the commands above to rename the sample columns to HCC1395_NS_T_1 and HCC1395BL_NS_N_1)
+2. Standardize variant representation across all vcf files. This is important because different callers may represent the same variant in different ways (e.g., left-aligned vs. right-aligned indels, different representations of multi-allelic sites).</p>
+<p>The first issue has already been dealt with. Standardization will be performed next using vt decompose and vt normalize. The vt decompose command splits multi-allelic variants into multiple lines, and vt normalize left-aligns indels and ensures consistent representation of variants.
+The later is important, it left-aligns and trims every indel to one canonical position and minimal REF/ALT representation, so the same real-world mutation reported by two callers collapses to an identical VCF record rather than looking like two different variants a few base pairs apart.
+This is also important when annotating variants which is why our variant reporting system CPSR/PCGR checks and runs vt decompose and normalize on the input vcf files before annotation.</p>
+<p>Let decompose and normalize the somatic and germline/LOH vcf files:</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb37-1"><a href="variant-discovery-in-cancer.html#cb37-1" tabindex="-1"></a><span class="co"># Decompose and normalize 4 somatic vcf files (AD field is Number=R in the VCF spec but use Number=., so we need to fix that first)</span></span>
+<span id="cb37-2"><a href="variant-discovery-in-cancer.html#cb37-2" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> pairedVariants/HCC1395.<span class="pp">*</span>.somatic.vcf.gz<span class="kw">;</span> <span class="cf">do</span> <span class="dt">\</span></span>
+<span id="cb37-3"><a href="variant-discovery-in-cancer.html#cb37-3" tabindex="-1"></a><span class="va">OUT</span><span class="op">=</span><span class="va">$(</span><span class="bu">echo</span> <span class="st">&quot;</span><span class="va">$i</span><span class="st">&quot;</span> <span class="kw">|</span> <span class="fu">sed</span> <span class="st">&#39;s#somatic#somatic.vt#g&#39;</span><span class="va">)</span> <span class="kw">;</span> <span class="dt">\</span></span>
+<span id="cb37-4"><a href="variant-discovery-in-cancer.html#cb37-4" tabindex="-1"></a><span class="bu">echo</span> <span class="va">$i</span> <span class="kw">;</span> <span class="dt">\</span></span>
+<span id="cb37-5"><a href="variant-discovery-in-cancer.html#cb37-5" tabindex="-1"></a><span class="ex">module</span> purge <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb37-6"><a href="variant-discovery-in-cancer.html#cb37-6" tabindex="-1"></a><span class="ex">module</span> load mugqic/htslib/1.14 mugqic/vt/0.57 <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb37-7"><a href="variant-discovery-in-cancer.html#cb37-7" tabindex="-1"></a><span class="fu">zcat</span> <span class="va">$i</span> <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb37-8"><a href="variant-discovery-in-cancer.html#cb37-8" tabindex="-1"></a><span class="fu">sed</span> <span class="st">&#39;s/ID=AD,Number=./ID=AD,Number=R/&#39;</span> <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb37-9"><a href="variant-discovery-in-cancer.html#cb37-9" tabindex="-1"></a><span class="ex">vt</span> decompose <span class="at">-s</span> <span class="at">-</span> <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb37-10"><a href="variant-discovery-in-cancer.html#cb37-10" tabindex="-1"></a><span class="ex">vt</span> normalize <span class="dt">\</span></span>
+<span id="cb37-11"><a href="variant-discovery-in-cancer.html#cb37-11" tabindex="-1"></a>    <span class="at">-r</span> <span class="va">${REF}</span>/genome/Homo_sapiens.GRCh38.fa <span class="dt">\</span></span>
+<span id="cb37-12"><a href="variant-discovery-in-cancer.html#cb37-12" tabindex="-1"></a>    <span class="at">-</span> <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb37-13"><a href="variant-discovery-in-cancer.html#cb37-13" tabindex="-1"></a><span class="ex">bgzip</span> <span class="at">-cf</span> <span class="op">&gt;</span> <span class="va">${OUT}</span> <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb37-14"><a href="variant-discovery-in-cancer.html#cb37-14" tabindex="-1"></a><span class="ex">tabix</span> <span class="at">-p</span> vcf <span class="va">${OUT}</span> <span class="kw">;</span> <span class="dt">\</span></span>
+<span id="cb37-15"><a href="variant-discovery-in-cancer.html#cb37-15" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb38-1"><a href="variant-discovery-in-cancer.html#cb38-1" tabindex="-1"></a><span class="co"># Decompose and normalize 3 germline vcf files </span></span>
+<span id="cb38-2"><a href="variant-discovery-in-cancer.html#cb38-2" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> pairedVariants/HCC1395.<span class="pp">*</span>.germline.loh.vcf.gz<span class="kw">;</span> <span class="cf">do</span> <span class="dt">\</span></span>
+<span id="cb38-3"><a href="variant-discovery-in-cancer.html#cb38-3" tabindex="-1"></a><span class="va">OUT</span><span class="op">=</span><span class="va">$(</span><span class="bu">echo</span> <span class="st">&quot;</span><span class="va">$i</span><span class="st">&quot;</span> <span class="kw">|</span> <span class="fu">sed</span> <span class="st">&#39;s#germline.loh#germline.loh.vt#g&#39;</span><span class="va">)</span> <span class="kw">;</span> <span class="dt">\</span></span>
+<span id="cb38-4"><a href="variant-discovery-in-cancer.html#cb38-4" tabindex="-1"></a><span class="bu">echo</span> <span class="va">$i</span> <span class="kw">;</span> <span class="dt">\</span></span>
+<span id="cb38-5"><a href="variant-discovery-in-cancer.html#cb38-5" tabindex="-1"></a><span class="ex">module</span> purge <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb38-6"><a href="variant-discovery-in-cancer.html#cb38-6" tabindex="-1"></a><span class="ex">module</span> load mugqic/htslib/1.14 mugqic/vt/0.57 <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb38-7"><a href="variant-discovery-in-cancer.html#cb38-7" tabindex="-1"></a><span class="fu">zcat</span> <span class="va">$i</span> <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb38-8"><a href="variant-discovery-in-cancer.html#cb38-8" tabindex="-1"></a><span class="fu">sed</span> <span class="st">&#39;s/ID=AD,Number=./ID=AD,Number=R/&#39;</span> <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb38-9"><a href="variant-discovery-in-cancer.html#cb38-9" tabindex="-1"></a><span class="ex">vt</span> decompose <span class="at">-s</span> <span class="at">-</span> <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb38-10"><a href="variant-discovery-in-cancer.html#cb38-10" tabindex="-1"></a><span class="ex">vt</span> normalize <span class="dt">\</span></span>
+<span id="cb38-11"><a href="variant-discovery-in-cancer.html#cb38-11" tabindex="-1"></a>    <span class="at">-r</span> <span class="va">${REF}</span>/genome/Homo_sapiens.GRCh38.fa <span class="dt">\</span></span>
+<span id="cb38-12"><a href="variant-discovery-in-cancer.html#cb38-12" tabindex="-1"></a>    <span class="at">-</span> <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb38-13"><a href="variant-discovery-in-cancer.html#cb38-13" tabindex="-1"></a><span class="ex">bgzip</span> <span class="at">-cf</span> <span class="op">&gt;</span> <span class="va">${OUT}</span> <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb38-14"><a href="variant-discovery-in-cancer.html#cb38-14" tabindex="-1"></a><span class="ex">tabix</span> <span class="at">-p</span> vcf <span class="va">${OUT}</span> <span class="kw">;</span> <span class="dt">\</span></span>
+<span id="cb38-15"><a href="variant-discovery-in-cancer.html#cb38-15" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div>
+<p><strong>Were any of the file decomposed and normalized?</strong> <a href="Module4/solutions/_vt1.md">Solution</a></p>
+<p>Let’s generate the ensemble call set for somatic</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb39-1"><a href="variant-discovery-in-cancer.html#cb39-1" tabindex="-1"></a><span class="co"># Unified callset (order matters, INFO and FORMAT fields are added in the order of the input files, keep variants found by 2 callers)</span></span>
+<span id="cb39-2"><a href="variant-discovery-in-cancer.html#cb39-2" tabindex="-1"></a><span class="ex">module</span> purge <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb39-3"><a href="variant-discovery-in-cancer.html#cb39-3" tabindex="-1"></a><span class="ex">module</span> load mugqic/bcbio.variation.recall/0.2.6 mugqic/bcftools/1.15 mugqic/java/openjdk-jdk1.8.0_72 <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb39-4"><a href="variant-discovery-in-cancer.html#cb39-4" tabindex="-1"></a><span class="va">$BCBIO_VARIATION_RECALL_HOME</span><span class="ex">/bcbio.variation.recall</span> ensemble <span class="dt">\</span></span>
+<span id="cb39-5"><a href="variant-discovery-in-cancer.html#cb39-5" tabindex="-1"></a>  <span class="at">--cores</span> 2 <span class="at">--numpass</span> 1 <span class="dt">\</span></span>
+<span id="cb39-6"><a href="variant-discovery-in-cancer.html#cb39-6" tabindex="-1"></a>  <span class="at">--names</span> mutect2,strelka2,vardict,varscan2 <span class="dt">\</span></span>
+<span id="cb39-7"><a href="variant-discovery-in-cancer.html#cb39-7" tabindex="-1"></a>  pairedVariants/HCC1395.ensemble.somatic.vcf.gz <span class="dt">\</span></span>
+<span id="cb39-8"><a href="variant-discovery-in-cancer.html#cb39-8" tabindex="-1"></a>  <span class="va">${REF}</span>/genome/Homo_sapiens.GRCh38.fa <span class="dt">\</span></span>
+<span id="cb39-9"><a href="variant-discovery-in-cancer.html#cb39-9" tabindex="-1"></a>  pairedVariants/HCC1395.mutect2.somatic.vt.vcf.gz <span class="dt">\</span></span>
+<span id="cb39-10"><a href="variant-discovery-in-cancer.html#cb39-10" tabindex="-1"></a>  pairedVariants/HCC1395.strelka2.somatic.vt.vcf.gz <span class="dt">\</span></span>
+<span id="cb39-11"><a href="variant-discovery-in-cancer.html#cb39-11" tabindex="-1"></a>  pairedVariants/HCC1395.vardict.somatic.vt.vcf.gz <span class="dt">\</span></span>
+<span id="cb39-12"><a href="variant-discovery-in-cancer.html#cb39-12" tabindex="-1"></a>  pairedVariants/HCC1395.varscan2.somatic.vt.vcf.gz <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb39-13"><a href="variant-discovery-in-cancer.html#cb39-13" tabindex="-1"></a><span class="fu">zgrep</span> <span class="at">-v</span> <span class="st">&quot;^#&quot;</span> pairedVariants/HCC1395.ensemble.somatic.vcf.gz <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span></code></pre></div>
+<p>The individual somatic vt vcf contain 10, 7, 19 and 58 (mutect2, strelka2, vardict, varscan2) variants respectively.
+After ensemble process, the unified callset contains a total of 9 variants. 7 variant found by all 4 callers and 2 variant found by 2 callers.</p>
+<p>Let’s generate the ensemble call set for germline/LOH</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb40-1"><a href="variant-discovery-in-cancer.html#cb40-1" tabindex="-1"></a><span class="co"># Unified callset (order matters, INFO and FORMAT fields are added in the order of the input files, keep variants found by 2 callers)</span></span>
+<span id="cb40-2"><a href="variant-discovery-in-cancer.html#cb40-2" tabindex="-1"></a><span class="ex">module</span> purge <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb40-3"><a href="variant-discovery-in-cancer.html#cb40-3" tabindex="-1"></a><span class="ex">module</span> load mugqic/bcbio.variation.recall/0.2.6 mugqic/bcftools/1.15 mugqic/java/openjdk-jdk1.8.0_72 <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb40-4"><a href="variant-discovery-in-cancer.html#cb40-4" tabindex="-1"></a><span class="va">$BCBIO_VARIATION_RECALL_HOME</span><span class="ex">/bcbio.variation.recall</span> ensemble <span class="dt">\</span></span>
+<span id="cb40-5"><a href="variant-discovery-in-cancer.html#cb40-5" tabindex="-1"></a>  <span class="at">--cores</span> 2 <span class="at">--numpass</span> 1 <span class="dt">\</span></span>
+<span id="cb40-6"><a href="variant-discovery-in-cancer.html#cb40-6" tabindex="-1"></a>  <span class="at">--names</span> strelka2,vardict,varscan2 <span class="dt">\</span></span>
+<span id="cb40-7"><a href="variant-discovery-in-cancer.html#cb40-7" tabindex="-1"></a>  pairedVariants/HCC1395.ensemble.germline.vcf.gz <span class="dt">\</span></span>
+<span id="cb40-8"><a href="variant-discovery-in-cancer.html#cb40-8" tabindex="-1"></a>  <span class="va">${REF}</span>/genome/Homo_sapiens.GRCh38.fa <span class="dt">\</span></span>
+<span id="cb40-9"><a href="variant-discovery-in-cancer.html#cb40-9" tabindex="-1"></a>  pairedVariants/HCC1395.strelka2.germline.loh.vt.vcf.gz <span class="dt">\</span></span>
+<span id="cb40-10"><a href="variant-discovery-in-cancer.html#cb40-10" tabindex="-1"></a>  pairedVariants/HCC1395.vardict.germline.loh.vt.vcf.gz <span class="dt">\</span></span>
+<span id="cb40-11"><a href="variant-discovery-in-cancer.html#cb40-11" tabindex="-1"></a>  pairedVariants/HCC1395.varscan2.germline.loh.vt.vcf.gz <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb40-12"><a href="variant-discovery-in-cancer.html#cb40-12" tabindex="-1"></a><span class="fu">zgrep</span> <span class="at">-v</span> <span class="st">&quot;^#&quot;</span> pairedVariants/HCC1395.ensemble.germline.vcf.gz <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span></code></pre></div>
+<p>There are a lot more germlines calls:
+strelka2: 478
+vardict2: 267
+varscan2: 638</p>
+<p>There are 672 in the union of the three callers.</p>
+</div>
+<div id="cpsrpcgr-turning-a-vcf-into-a-clinically-interpretable-report" class="section level2 hasAnchor">
+<h2>CPSR/PCGR — turning a VCF into a clinically interpretable report<a href="variant-discovery-in-cancer.html#cpsrpcgr-turning-a-vcf-into-a-clinically-interpretable-report" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>By this point in the practical, we have an unannotated VCF from four different callers. CPSR and PCGR are the next logical steps: it takes these VCFs and adds
+context to the variants.</p>
+<p><em>CPSR (Cancer Predisposition Sequencing Reporter)</em> — interprets germline variants (like our HCC1395 BRCA1 mutation, shared with the matched normal),
+asking “did this person inherit a cancer-predisposing variant?”</p>
+<p><em>PCGR (Personal Cancer Genome Reporter)</em> — interprets somatic variants (the tumor-only mutations, like our HCC1395 TP53 hit), asking “is this a cancer-driving event, is it actionable? Are there treatments?”</p>
+<p>Each follow these procedures to annotate and classify variants:</p>
+<ol style="list-style-type: decimal">
+<li>Functional annotations using Ensembl’s <em>Variant Effect Predictor (VEP)</em> with LOFTEE VEP plugin to flags high-confidence loss-of-function variants,
+dbNSFP to add pre-computed in silico deleteriousness predictions and cancerhotspots.org to flags positions that are recurrently mutated across thousands of real tumors</li>
+<li>Layering on cancer-specific knowledge databases: <a href="https://sigven.github.io/cpsr/articles/annotation_resources.html">CPSR</a> and <a href="https://sigven.github.io/pcgr/articles/annotation_resources.html">PCGR</a> use different knowledge databases to annotate variants with clinical relevance. <a href="Module4/notes/_knowledge_databases.md">note on knowledge databases used by CPSR</a></li>
+<li>Applying a standardized classification scheme</li>
+</ol>
+<p>To generate the full PCGR report, first CPSR needs to be run on the germline variants, then PCGR can be run on the somatic variants. The final output is a set of HTML reports that can be viewed in a web browser.</p>
+<p>First we have to prepare the germline vcf for CPSR.<br />
+We will add CPSR/PCGR specific INFO fields to the germline vcf, and then filter for variants using those fields.
+CPSR also requires a single sample vcf, so we will extract the normal sample from the germline vcf.</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb41-1"><a href="variant-discovery-in-cancer.html#cb41-1" tabindex="-1"></a><span class="co"># CPSR vcf prep (retain calls from all three caller with tumor and normal depth &gt;=10 and tumor and normal variant allele frequency &gt;=0.05)</span></span>
+<span id="cb41-2"><a href="variant-discovery-in-cancer.html#cb41-2" tabindex="-1"></a><span class="co"># -f filter for variants found by at least 3 callers, -v germline (for strelka2 germline AD format), -t HCC1395_NS_T_1 (tumor sample name)</span></span>
+<span id="cb41-3"><a href="variant-discovery-in-cancer.html#cb41-3" tabindex="-1"></a><span class="ex">module</span> purge <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb41-4"><a href="variant-discovery-in-cancer.html#cb41-4" tabindex="-1"></a><span class="ex">module</span> load mugqic/mugqic_tools/2.12.7 mugqic/python/3.10.4 mugqic/bcftools/1.15 mugqic/htslib/1.14 <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb41-5"><a href="variant-discovery-in-cancer.html#cb41-5" tabindex="-1"></a><span class="ex">python3</span> <span class="va">$PYTHON_TOOLS</span>/format2pcgr.py <span class="dt">\</span></span>
+<span id="cb41-6"><a href="variant-discovery-in-cancer.html#cb41-6" tabindex="-1"></a>  <span class="at">-i</span> pairedVariants/HCC1395.ensemble.germline.vcf.gz <span class="dt">\</span></span>
+<span id="cb41-7"><a href="variant-discovery-in-cancer.html#cb41-7" tabindex="-1"></a>  <span class="at">-o</span> pairedVariants/HCC1395.ensemble.germline.format.vcf.gz <span class="dt">\</span></span>
+<span id="cb41-8"><a href="variant-discovery-in-cancer.html#cb41-8" tabindex="-1"></a>  <span class="at">-f</span> 3 <span class="dt">\</span></span>
+<span id="cb41-9"><a href="variant-discovery-in-cancer.html#cb41-9" tabindex="-1"></a>  <span class="at">-v</span> germline <span class="dt">\</span></span>
+<span id="cb41-10"><a href="variant-discovery-in-cancer.html#cb41-10" tabindex="-1"></a>  <span class="at">-t</span> HCC1395_NS_T_1 <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb41-11"><a href="variant-discovery-in-cancer.html#cb41-11" tabindex="-1"></a><span class="ex">bcftools</span> <span class="dt">\</span></span>
+<span id="cb41-12"><a href="variant-discovery-in-cancer.html#cb41-12" tabindex="-1"></a>  view <span class="at">-Oz</span> <span class="at">-i</span><span class="st">&#39;TDP&gt;=10 &amp;&amp; TVAF&gt;=0.05 &amp;&amp; NDP&gt;=10 &amp;&amp; NVAF&gt;=0.05&#39;</span> <span class="dt">\</span></span>
+<span id="cb41-13"><a href="variant-discovery-in-cancer.html#cb41-13" tabindex="-1"></a>  pairedVariants/HCC1395.ensemble.germline.format.vcf.gz <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb41-14"><a href="variant-discovery-in-cancer.html#cb41-14" tabindex="-1"></a><span class="ex">bcftools</span> <span class="dt">\</span></span>
+<span id="cb41-15"><a href="variant-discovery-in-cancer.html#cb41-15" tabindex="-1"></a>  view <span class="at">-Oz</span> <span class="at">-s</span> ^HCC1395_NS_T_1 <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb41-16"><a href="variant-discovery-in-cancer.html#cb41-16" tabindex="-1"></a><span class="ex">bcftools</span> <span class="dt">\</span></span>
+<span id="cb41-17"><a href="variant-discovery-in-cancer.html#cb41-17" tabindex="-1"></a>  sort <span class="at">-Oz</span> <span class="dt">\</span></span>
+<span id="cb41-18"><a href="variant-discovery-in-cancer.html#cb41-18" tabindex="-1"></a> <span class="at">-o</span> pairedVariants/HCC1395.ensemble.germline.flt.vcf.gz <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb41-19"><a href="variant-discovery-in-cancer.html#cb41-19" tabindex="-1"></a><span class="ex">tabix</span> <span class="at">-pvcf</span>  <span class="dt">\</span></span>
+<span id="cb41-20"><a href="variant-discovery-in-cancer.html#cb41-20" tabindex="-1"></a>    pairedVariants/HCC1395.ensemble.germline.flt.vcf.gz</span></code></pre></div>
+<p>What did the above command add to the germline vcf? <a href="Module4/solutions/_cpsr1.md">solution</a></p>
+<p>Now we can run CPSR on the germline vcf to generate a report. As it’s running, watch the output log to see what it’s doing. It will take a few minutes to complete.</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb42-1"><a href="variant-discovery-in-cancer.html#cb42-1" tabindex="-1"></a><span class="ex">module</span> purge <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb42-2"><a href="variant-discovery-in-cancer.html#cb42-2" tabindex="-1"></a><span class="ex">module</span> load mugqic/pcgr/2.3.1 <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb42-3"><a href="variant-discovery-in-cancer.html#cb42-3" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> pairedVariants/cpsr <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb42-4"><a href="variant-discovery-in-cancer.html#cb42-4" tabindex="-1"></a><span class="ex">cpsr</span> <span class="at">--force_overwrite</span> <span class="at">--secondary_findings</span> <span class="at">--gwas_findings</span> <span class="at">--pgx_findings</span> <span class="at">--panel_id</span> 0 <span class="dt">\</span></span>
+<span id="cb42-5"><a href="variant-discovery-in-cancer.html#cb42-5" tabindex="-1"></a>    <span class="at">--input_vcf</span> pairedVariants/HCC1395.ensemble.germline.flt.vcf.gz <span class="dt">\</span></span>
+<span id="cb42-6"><a href="variant-discovery-in-cancer.html#cb42-6" tabindex="-1"></a>    <span class="at">--refdata_dir</span> <span class="va">$PCGR_DATA</span> <span class="dt">\</span></span>
+<span id="cb42-7"><a href="variant-discovery-in-cancer.html#cb42-7" tabindex="-1"></a>    <span class="at">--vep_dir</span> <span class="va">$PCGR_VEP_CACHE</span> <span class="dt">\</span></span>
+<span id="cb42-8"><a href="variant-discovery-in-cancer.html#cb42-8" tabindex="-1"></a>    <span class="at">--output_dir</span> pairedVariants/cpsr <span class="dt">\</span></span>
+<span id="cb42-9"><a href="variant-discovery-in-cancer.html#cb42-9" tabindex="-1"></a>    <span class="at">--genome_assembly</span> grch38 <span class="dt">\</span></span>
+<span id="cb42-10"><a href="variant-discovery-in-cancer.html#cb42-10" tabindex="-1"></a>    <span class="at">--sample_id</span> HCC1395</span></code></pre></div>
+<pre><code>##Noteworthy CPSR logs:
+cpsr-validate-input-arguments - INFO - All sites seem to be decomposed - skipping decomposition of multiallelic sites
+cpsr-validate-input-arguments - INFO - Limiting variant set to cancer predisposition loci (virtual panel id(s): &#39;0&#39;)
+cpsr-settings - INFO - Include incidental/secondary findings (ACMG recommended list v3.3): ON
+cpsr-settings - INFO - Include low to moderate cancer risk variants from genome-wide association studies: ON
+cpsr-settings - INFO - Include pharmacogenetic findings (PgX - variants related to potential toxicity to chemotherapy): ON
+cpsr-vcfanno - INFO - (ClinVar, CIViC, dbNSFP, dbMTS, GERP, GWAS catalog, gnomAD non-cancer subset)
+cpsr-gene-annotate - INFO - Number of PASSed variant calls: 245
+cpsr-report-generation - INFO - Variants were found in the following cancer predisposition genes: BRCA1, BRCA2, TP53</code></pre>
+<p>Feel free to explore the CPSR report in your browser or the other generated file.
+The report is located in the <code>pairedVariants/cpsr</code> directory.</p>
+<p>However, we could wait to generate the PCGR report which will also add important germline variant from CPSR report via the yaml file. This is the next step.</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb44-1"><a href="variant-discovery-in-cancer.html#cb44-1" tabindex="-1"></a><span class="co"># PCGR vcf prep (retain calls from all two caller with tumor and normal depth &gt;=10 and tumor and normal variant allele frequency &gt;=0.05)</span></span>
+<span id="cb44-2"><a href="variant-discovery-in-cancer.html#cb44-2" tabindex="-1"></a><span class="co"># -f filter for variants found by at least 2 callers, -v somatic (for strelka2 somatic TAR/TIR indel format), -t HCC1395_NS_T_1 (tumor sample name)</span></span>
+<span id="cb44-3"><a href="variant-discovery-in-cancer.html#cb44-3" tabindex="-1"></a><span class="ex">module</span> purge <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb44-4"><a href="variant-discovery-in-cancer.html#cb44-4" tabindex="-1"></a><span class="ex">module</span> load mugqic/mugqic_tools/2.12.7 mugqic/python/3.10.4 mugqic/bcftools/1.15 mugqic/htslib/1.14 <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb44-5"><a href="variant-discovery-in-cancer.html#cb44-5" tabindex="-1"></a><span class="ex">python3</span> <span class="va">$PYTHON_TOOLS</span>/format2pcgr.py <span class="dt">\</span></span>
+<span id="cb44-6"><a href="variant-discovery-in-cancer.html#cb44-6" tabindex="-1"></a>        <span class="at">-i</span> pairedVariants/HCC1395.ensemble.somatic.vcf.gz <span class="dt">\</span></span>
+<span id="cb44-7"><a href="variant-discovery-in-cancer.html#cb44-7" tabindex="-1"></a>        <span class="at">-o</span> pairedVariants/HCC1395.ensemble.somatic.format.vcf.gz <span class="dt">\</span></span>
+<span id="cb44-8"><a href="variant-discovery-in-cancer.html#cb44-8" tabindex="-1"></a>        <span class="at">-f</span> 2 <span class="dt">\</span></span>
+<span id="cb44-9"><a href="variant-discovery-in-cancer.html#cb44-9" tabindex="-1"></a>        <span class="at">-v</span> somatic <span class="dt">\</span></span>
+<span id="cb44-10"><a href="variant-discovery-in-cancer.html#cb44-10" tabindex="-1"></a>        <span class="at">-t</span> HCC1395_NS_T_1  <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb44-11"><a href="variant-discovery-in-cancer.html#cb44-11" tabindex="-1"></a><span class="ex">bcftools</span> <span class="dt">\</span></span>
+<span id="cb44-12"><a href="variant-discovery-in-cancer.html#cb44-12" tabindex="-1"></a>  view <span class="at">-Oz</span> <span class="at">-i</span><span class="st">&#39;TDP&gt;=10 &amp;&amp; TVAF&gt;=0.05 &amp;&amp; NDP&gt;=10 &amp;&amp; NVAF&lt;=0.05&#39;</span> <span class="dt">\</span></span>
+<span id="cb44-13"><a href="variant-discovery-in-cancer.html#cb44-13" tabindex="-1"></a>  <span class="at">-o</span> pairedVariants/HCC1395.ensemble.somatic.flt.vcf.gz <span class="dt">\</span></span>
+<span id="cb44-14"><a href="variant-discovery-in-cancer.html#cb44-14" tabindex="-1"></a> pairedVariants/HCC1395.ensemble.somatic.format.vcf.gz <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb44-15"><a href="variant-discovery-in-cancer.html#cb44-15" tabindex="-1"></a><span class="ex">tabix</span> <span class="at">-pvcf</span>  <span class="dt">\</span></span>
+<span id="cb44-16"><a href="variant-discovery-in-cancer.html#cb44-16" tabindex="-1"></a>  pairedVariants/HCC1395.ensemble.somatic.flt.vcf.gz </span></code></pre></div>
+<p>Note: Coverage and allele frequency filters applied to both tumor and normal samples may need to be adjusted depending on purity or based on contamination estimates.</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb45-1"><a href="variant-discovery-in-cancer.html#cb45-1" tabindex="-1"></a><span class="co">## PCGR command (-tumor_site 6 is for breast cancer)</span></span>
+<span id="cb45-2"><a href="variant-discovery-in-cancer.html#cb45-2" tabindex="-1"></a><span class="ex">module</span> purge <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb45-3"><a href="variant-discovery-in-cancer.html#cb45-3" tabindex="-1"></a><span class="ex">module</span> load mugqic/pcgr/2.3.1 <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb45-4"><a href="variant-discovery-in-cancer.html#cb45-4" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> pairedVariants/pcgr <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb45-5"><a href="variant-discovery-in-cancer.html#cb45-5" tabindex="-1"></a><span class="ex">pcgr</span> <span class="at">--force_overwrite</span> <span class="dt">\</span></span>
+<span id="cb45-6"><a href="variant-discovery-in-cancer.html#cb45-6" tabindex="-1"></a>    <span class="at">--tumor_site</span> 6 <span class="dt">\</span></span>
+<span id="cb45-7"><a href="variant-discovery-in-cancer.html#cb45-7" tabindex="-1"></a>    <span class="at">--assay</span> WGS <span class="dt">\</span></span>
+<span id="cb45-8"><a href="variant-discovery-in-cancer.html#cb45-8" tabindex="-1"></a>    <span class="at">--call_conf_tag</span> TAL <span class="at">--tumor_dp_tag</span> TDP <span class="at">--tumor_af_tag</span> TVAF <span class="at">--tumor_dp_min</span> 10 <span class="at">--tumor_af_min</span> 0.05 <span class="dt">\</span></span>
+<span id="cb45-9"><a href="variant-discovery-in-cancer.html#cb45-9" tabindex="-1"></a>    <span class="at">--control_dp_tag</span> NDP <span class="at">--control_af_tag</span> NVAF <span class="at">--control_dp_min</span> 10 <span class="at">--control_af_max</span> 0.05 <span class="dt">\</span></span>
+<span id="cb45-10"><a href="variant-discovery-in-cancer.html#cb45-10" tabindex="-1"></a>    <span class="at">--input_vcf</span> pairedVariants/HCC1395.ensemble.somatic.flt.vcf.gz  <span class="dt">\</span></span>
+<span id="cb45-11"><a href="variant-discovery-in-cancer.html#cb45-11" tabindex="-1"></a>    <span class="at">--input_cpsr</span> pairedVariants/cpsr/HCC1395.cpsr.grch38.classification.tsv.gz <span class="dt">\</span></span>
+<span id="cb45-12"><a href="variant-discovery-in-cancer.html#cb45-12" tabindex="-1"></a>    <span class="at">--input_cpsr_yaml</span> pairedVariants/cpsr/HCC1395.cpsr.grch38.conf.yaml <span class="dt">\</span></span>
+<span id="cb45-13"><a href="variant-discovery-in-cancer.html#cb45-13" tabindex="-1"></a>    <span class="at">--refdata_dir</span> <span class="va">$PCGR_DATA</span> <span class="dt">\</span></span>
+<span id="cb45-14"><a href="variant-discovery-in-cancer.html#cb45-14" tabindex="-1"></a>    <span class="at">--vep_dir</span> <span class="va">$PCGR_VEP_CACHE</span> <span class="dt">\</span></span>
+<span id="cb45-15"><a href="variant-discovery-in-cancer.html#cb45-15" tabindex="-1"></a>    <span class="at">--output_dir</span> pairedVariants/pcgr <span class="dt">\</span></span>
+<span id="cb45-16"><a href="variant-discovery-in-cancer.html#cb45-16" tabindex="-1"></a>    <span class="at">--genome_assembly</span> grch38 <span class="dt">\</span></span>
+<span id="cb45-17"><a href="variant-discovery-in-cancer.html#cb45-17" tabindex="-1"></a>    <span class="at">--sample_id</span> HCC1395</span></code></pre></div>
+<p>PCGR has other functionalities that are out of scope for this practical. For more information, please refer to the <a href="https://sigven.github.io/pcgr/articles/running.html">PCGR documentation</a>.
+i.e. tumor burden estimation, mutational signature analysis, copy number analysis, RNA expression analysis, and RNA gene fusion interpretation, etc.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="getting-started.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="functional-annotations.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": false,
+    "twitter": false,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/bioinformaticsdotca/CAN_TorMon-2610/blob/main/040-module-4.Rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["_main.pdf", "_main.epub"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

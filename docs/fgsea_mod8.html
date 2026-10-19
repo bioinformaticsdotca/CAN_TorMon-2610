@@ -1,0 +1,1332 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Module 8.3 Lab: Ranked gene list (fGSEA) | Cancer Analysis 2026</title>
+  <meta name="description" content="Workshop website for the 2026 Cancer Analysis Canadian Bioinformatics Workshop" />
+  <meta name="generator" content="bookdown 0.46 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Module 8.3 Lab: Ranked gene list (fGSEA) | Cancer Analysis 2026" />
+  <meta property="og:type" content="book" />
+  <meta property="og:image" content="https://bioinformaticsdotca.github.io/CAN_TorMon-2610/img/bioinformatics_logo.png" />
+  <meta property="og:description" content="Workshop website for the 2026 Cancer Analysis Canadian Bioinformatics Workshop" />
+  <meta name="github-repo" content="bioinformaticsdotca/CAN_TorMon-2610" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Module 8.3 Lab: Ranked gene list (fGSEA) | Cancer Analysis 2026" />
+  
+  <meta name="twitter:description" content="Workshop website for the 2026 Cancer Analysis Canadian Bioinformatics Workshop" />
+  <meta name="twitter:image" content="https://bioinformaticsdotca.github.io/CAN_TorMon-2610/img/bioinformatics_logo.png" />
+
+<meta name="author" content="Faculty: Trevor Pugh, Linda Xiang, Yoshiaki Tanaka, Robert Eveleigh, Mathieu Lajoie, Vida Talebian, Aqsa Alam, Veronique Voisin, Ruth Isserlin, Nicholas Geoffrion" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="prev" href="gprofiler_mod8.html"/>
+<link rel="next" href="byod_mod8.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LearningResource",
+  "name": "Cancer Analysis",
+  "description": "The complete set of tutorials, slides, and practical exercises for the Cancer Analysis 2026 Canadian Bioinformatics Workshop, hosted on GitHub Pages.",
+  "url": "https://bioinformaticsdotca.github.io/CAN_TorMon-2610",
+  "learningResourceType": ["tutorial", "slides", "exercise"],
+  "inLanguage": "en",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "provider": {
+    "@type": "Organization",
+    "name": "Bioinformatics.ca",
+    "url": "https://bioinformatics.ca"
+  },
+  "keywords": "",
+  "isPartOf": {
+    "@type": "Course",
+    "@id": "https://bioinformatics.ca/CAN_TorMon-2610/"
+  }
+}
+</script>
+
+
+<style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<a href="https://bioinformaticsdotca.github.io/">
+ <img src="img/bioinformatics_logo.png" width="90%" alt="bioinformatics.ca logo" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;">
+ </a>
+<li><center><strong><a href="./"><br>Cancer Analysis<br><br></a></strong></center></li>
+<a href="./">
+ <img src="img/CBW_CAN-1.png" width="70%" alt="Cancer Analysis logo" style="display:block; margin-left:auto; margin-right:auto; ">
+ </a>
+<br>
+
+<li class="divider"></li>
+<li class="part"><span><b>I Introduction</b></span></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Workshop Info</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#pre-work"><i class="fa fa-check"></i>Pre-work</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#class-photo"><i class="fa fa-check"></i>Class Photo</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#schedule"><i class="fa fa-check"></i>Schedule</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="meet-your-faculty.html"><a href="meet-your-faculty.html"><i class="fa fa-check"></i>Meet Your Faculty</a>
+<ul>
+<li class="chapter" data-level="" data-path="meet-your-faculty.html"><a href="meet-your-faculty.html#tas"><i class="fa fa-check"></i>TA’s</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="data-and-compute-setup.html"><a href="data-and-compute-setup.html"><i class="fa fa-check"></i>Data and Compute Setup</a></li>
+<li class="part"><span><b>II Modules</b></span></li>
+<li class="chapter" data-level="" data-path="module-1.html"><a href="module-1.html"><i class="fa fa-check"></i>Module 1</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-1.html"><a href="module-1.html#lecture"><i class="fa fa-check"></i>Lecture</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html"><i class="fa fa-check"></i>Module 2</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#lecture-1"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#lab"><i class="fa fa-check"></i>Lab</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#part-1---igv"><i class="fa fa-check"></i>Part 1 - IGV</a></li>
+<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#part-2---cbioportal"><i class="fa fa-check"></i>Part 2 - cBioPortal</a></li>
+<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#part-3---cosmic"><i class="fa fa-check"></i>Part 3 - COSMIC</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-3.html"><a href="module-3.html"><i class="fa fa-check"></i>Module 3</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-3.html"><a href="module-3.html#lecture-2"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-3.html"><a href="module-3.html#lab-1"><i class="fa fa-check"></i>Lab</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-3.html"><a href="module-3.html#purpose"><i class="fa fa-check"></i>1. Purpose</a></li>
+<li class="chapter" data-level="" data-path="module-3.html"><a href="module-3.html#dataset"><i class="fa fa-check"></i>2. Dataset</a></li>
+<li class="chapter" data-level="" data-path="module-3.html"><a href="module-3.html#workflow"><i class="fa fa-check"></i>3. Workflow</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="introduction-to-variant-discovery-and-annotations-in-cancer-data.html"><a href="introduction-to-variant-discovery-and-annotations-in-cancer-data.html"><i class="fa fa-check"></i>Introduction to Variant Discovery and Annotations in Cancer Data</a>
+<ul>
+<li class="chapter" data-level="" data-path="introduction-to-variant-discovery-and-annotations-in-cancer-data.html"><a href="introduction-to-variant-discovery-and-annotations-in-cancer-data.html#data-source"><i class="fa fa-check"></i>Data Source</a>
+<ul>
+<li class="chapter" data-level="" data-path="introduction-to-variant-discovery-and-annotations-in-cancer-data.html"><a href="introduction-to-variant-discovery-and-annotations-in-cancer-data.html#environment-setup"><i class="fa fa-check"></i>Environment setup</a></li>
+<li class="chapter" data-level="" data-path="introduction-to-variant-discovery-and-annotations-in-cancer-data.html"><a href="introduction-to-variant-discovery-and-annotations-in-cancer-data.html#software-requirements"><i class="fa fa-check"></i>Software requirements</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="introduction-to-variant-discovery-and-annotations-in-cancer-data.html"><a href="introduction-to-variant-discovery-and-annotations-in-cancer-data.html#original-setup"><i class="fa fa-check"></i>Original Setup</a>
+<ul>
+<li class="chapter" data-level="" data-path="introduction-to-variant-discovery-and-annotations-in-cancer-data.html"><a href="introduction-to-variant-discovery-and-annotations-in-cancer-data.html#cheat-file"><i class="fa fa-check"></i>Cheat file</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="getting-started.html"><a href="getting-started.html"><i class="fa fa-check"></i>Getting started</a></li>
+<li class="chapter" data-level="" data-path="variant-discovery-in-cancer.html"><a href="variant-discovery-in-cancer.html"><i class="fa fa-check"></i>Variant Discovery in Cancer</a>
+<ul>
+<li class="chapter" data-level="" data-path="variant-discovery-in-cancer.html"><a href="variant-discovery-in-cancer.html#variant-callers-comparison-high-level-overview-more-will-be-explained-in-the-following-sections"><i class="fa fa-check"></i>Variant Callers Comparison (High-level overview more will be explained in the following sections)</a></li>
+<li class="chapter" data-level="" data-path="variant-discovery-in-cancer.html"><a href="variant-discovery-in-cancer.html#varscan-2"><i class="fa fa-check"></i>Varscan 2</a></li>
+<li class="chapter" data-level="" data-path="variant-discovery-in-cancer.html"><a href="variant-discovery-in-cancer.html#vardict"><i class="fa fa-check"></i>Vardict</a></li>
+<li class="chapter" data-level="" data-path="variant-discovery-in-cancer.html"><a href="variant-discovery-in-cancer.html#gatk-mutect2"><i class="fa fa-check"></i>GATK MuTecT2</a></li>
+<li class="chapter" data-level="" data-path="variant-discovery-in-cancer.html"><a href="variant-discovery-in-cancer.html#strelka2"><i class="fa fa-check"></i>Strelka2</a></li>
+<li class="chapter" data-level="" data-path="variant-discovery-in-cancer.html"><a href="variant-discovery-in-cancer.html#ensemble-approach"><i class="fa fa-check"></i>Ensemble approach</a></li>
+<li class="chapter" data-level="" data-path="variant-discovery-in-cancer.html"><a href="variant-discovery-in-cancer.html#cpsrpcgr-turning-a-vcf-into-a-clinically-interpretable-report"><i class="fa fa-check"></i>CPSR/PCGR — turning a VCF into a clinically interpretable report</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="functional-annotations.html"><a href="functional-annotations.html"><i class="fa fa-check"></i>Functional Annotations</a></li>
+<li class="chapter" data-level="" data-path="beyond-vep-what-else-does-pcgr-add-to-this-info-field.html"><a href="beyond-vep-what-else-does-pcgr-add-to-this-info-field.html"><i class="fa fa-check"></i>Beyond VEP: what else does PCGR add to this INFO field</a>
+<ul>
+<li class="chapter" data-level="" data-path="beyond-vep-what-else-does-pcgr-add-to-this-info-field.html"><a href="beyond-vep-what-else-does-pcgr-add-to-this-info-field.html#data-visualisation"><i class="fa fa-check"></i>Data visualisation</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="exit-the-container-environment.html"><a href="exit-the-container-environment.html"><i class="fa fa-check"></i>Exit the container environment</a>
+<ul>
+<li class="chapter" data-level="" data-path="exit-the-container-environment.html"><a href="exit-the-container-environment.html#acknowledgments"><i class="fa fa-check"></i>Acknowledgments</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-5.html"><a href="module-5.html"><i class="fa fa-check"></i>Module 5</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-5.html"><a href="module-5.html#lecture-3"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-5.html"><a href="module-5.html#lab-2"><i class="fa fa-check"></i>Lab</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="dataset-1.html"><a href="dataset-1.html"><i class="fa fa-check"></i>Dataset</a></li>
+<li class="chapter" data-level="" data-path="run-cobalt-amber-purple.html"><a href="run-cobalt-amber-purple.html"><i class="fa fa-check"></i>Run cobalt , amber , purple</a>
+<ul>
+<li class="chapter" data-level="" data-path="run-cobalt-amber-purple.html"><a href="run-cobalt-amber-purple.html#cobalt-read-depth-ratios"><i class="fa fa-check"></i>1. COBALT: read-depth ratios</a></li>
+<li class="chapter" data-level="" data-path="run-cobalt-amber-purple.html"><a href="run-cobalt-amber-purple.html#amber-b-allele-frequencies"><i class="fa fa-check"></i>2. AMBER: B-allele frequencies</a></li>
+<li class="chapter" data-level="" data-path="run-cobalt-amber-purple.html"><a href="run-cobalt-amber-purple.html#purple-purity-ploidy-and-copy-number"><i class="fa fa-check"></i>3. PURPLE: purity, ploidy and copy number</a></li>
+<li class="chapter" data-level="" data-path="run-cobalt-amber-purple.html"><a href="run-cobalt-amber-purple.html#first-look-at-the-results-estimated-vs.-true-purity"><i class="fa fa-check"></i>First look at the results: estimated vs. “true” purity</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="run-genpipe.html"><a href="run-genpipe.html"><i class="fa fa-check"></i>Run Genpipe</a>
+<ul>
+<li class="chapter" data-level="" data-path="run-genpipe.html"><a href="run-genpipe.html#load-the-environment"><i class="fa fa-check"></i>1. Load the environment</a></li>
+<li class="chapter" data-level="" data-path="run-genpipe.html"><a href="run-genpipe.html#input-files"><i class="fa fa-check"></i>2. Input files</a></li>
+<li class="chapter" data-level="" data-path="run-genpipe.html"><a href="run-genpipe.html#re-using-existing-bams-make-them-match-the-genpipes-reference"><i class="fa fa-check"></i>3. Re-using existing BAMs: make them match the GenPipes reference</a></li>
+<li class="chapter" data-level="" data-path="run-genpipe.html"><a href="run-genpipe.html#configuration-files"><i class="fa fa-check"></i>4. Configuration files</a></li>
+<li class="chapter" data-level="" data-path="run-genpipe.html"><a href="run-genpipe.html#generate-the-job-script"><i class="fa fa-check"></i>5. Generate the job script</a></li>
+<li class="chapter" data-level="" data-path="run-genpipe.html"><a href="run-genpipe.html#submit"><i class="fa fa-check"></i>6. Submit</a></li>
+<li class="chapter" data-level="" data-path="run-genpipe.html"><a href="run-genpipe.html#monitor-and-find-the-results"><i class="fa fa-check"></i>7. Monitor and find the results</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="analyze-the-purple-results.html"><a href="analyze-the-purple-results.html"><i class="fa fa-check"></i>Analyze the purple results</a>
+<ul>
+<li class="chapter" data-level="" data-path="analyze-the-purple-results.html"><a href="analyze-the-purple-results.html#key-concepts-read-this-first"><i class="fa fa-check"></i>Key concepts (read this first)</a></li>
+<li class="chapter" data-level="" data-path="analyze-the-purple-results.html"><a href="analyze-the-purple-results.html#setup"><i class="fa fa-check"></i>Setup</a></li>
+<li class="chapter" data-level="" data-path="analyze-the-purple-results.html"><a href="analyze-the-purple-results.html#a-tour-of-the-output-files-one-sample"><i class="fa fa-check"></i>A tour of the output files (one sample)</a>
+<ul>
+<li class="chapter" data-level="" data-path="analyze-the-purple-results.html"><a href="analyze-the-purple-results.html#how-the-files-fit-together"><i class="fa fa-check"></i>How the files fit together</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="analyze-the-purple-results.html"><a href="analyze-the-purple-results.html#amber-b-allele-frequency"><i class="fa fa-check"></i>AMBER: B-allele frequency</a></li>
+<li class="chapter" data-level="" data-path="analyze-the-purple-results.html"><a href="analyze-the-purple-results.html#cobalt-read-depth-ratio"><i class="fa fa-check"></i>COBALT: read-depth ratio</a></li>
+<li class="chapter" data-level="" data-path="analyze-the-purple-results.html"><a href="analyze-the-purple-results.html#purple-purity-ploidy-and-copy-number-1"><i class="fa fa-check"></i>PURPLE: purity, ploidy and copy number</a></li>
+<li class="chapter" data-level="" data-path="analyze-the-purple-results.html"><a href="analyze-the-purple-results.html#which-file-answers-which-question"><i class="fa fa-check"></i>Which file answers which question?</a>
+<ul>
+<li class="chapter" data-level="" data-path="analyze-the-purple-results.html"><a href="analyze-the-purple-results.html#load-the-files"><i class="fa fa-check"></i>Load the files</a></li>
+<li class="chapter" data-level="" data-path="analyze-the-purple-results.html"><a href="analyze-the-purple-results.html#all-four-plots-for-one-sample"><i class="fa fa-check"></i>All four plots for one sample</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="analyze-the-purple-results.html"><a href="analyze-the-purple-results.html#selection-of-purity"><i class="fa fa-check"></i>Selection of purity</a></li>
+<li class="chapter" data-level="" data-path="analyze-the-purple-results.html"><a href="analyze-the-purple-results.html#baf-vs-copy-number-does-the-fit-explain-the-data"><i class="fa fa-check"></i>BAF vs copy number: does the fit explain the data?</a>
+<ul>
+<li class="chapter" data-level="" data-path="analyze-the-purple-results.html"><a href="analyze-the-purple-results.html#low-purity"><i class="fa fa-check"></i>Low purity</a></li>
+<li class="chapter" data-level="" data-path="analyze-the-purple-results.html"><a href="analyze-the-purple-results.html#check-specific-chromosome"><i class="fa fa-check"></i>check specific chromosome</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="analyze-the-purple-results.html"><a href="analyze-the-purple-results.html#segment"><i class="fa fa-check"></i>Segment</a></li>
+<li class="chapter" data-level="" data-path="analyze-the-purple-results.html"><a href="analyze-the-purple-results.html#copy-number-distribution"><i class="fa fa-check"></i>Copy number distribution</a></li>
+<li class="chapter" data-level="" data-path="analyze-the-purple-results.html"><a href="analyze-the-purple-results.html#minorallelecopy"><i class="fa fa-check"></i>MinorAlleleCopy</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="some-examples-of-gain-loss-deletion-and-loh.html"><a href="some-examples-of-gain-loss-deletion-and-loh.html"><i class="fa fa-check"></i>Some examples of Gain, Loss, Deletion and LOH</a></li>
+<li class="chapter" data-level="" data-path="visualize-a-gene-or-a-chromosome.html"><a href="visualize-a-gene-or-a-chromosome.html"><i class="fa fa-check"></i>Visualize a gene or a chromosome</a>
+<ul>
+<li class="chapter" data-level="" data-path="visualize-a-gene-or-a-chromosome.html"><a href="visualize-a-gene-or-a-chromosome.html#one-gene-plot_gene"><i class="fa fa-check"></i>One gene: <code>plot_gene()</code></a></li>
+<li class="chapter" data-level="" data-path="visualize-a-gene-or-a-chromosome.html"><a href="visualize-a-gene-or-a-chromosome.html#one-chromosome-plot_chromosome"><i class="fa fa-check"></i>One chromosome: <code>plot_chromosome()</code></a></li>
+<li class="chapter" data-level="" data-path="visualize-a-gene-or-a-chromosome.html"><a href="visualize-a-gene-or-a-chromosome.html#effect-of-purity-on-the-signal"><i class="fa fa-check"></i>Effect of purity on the signal</a></li>
+<li class="chapter" data-level="" data-path="visualize-a-gene-or-a-chromosome.html"><a href="visualize-a-gene-or-a-chromosome.html#any-region-plot_cn_region"><i class="fa fa-check"></i>Any region: <code>plot_cn_region()</code></a></li>
+<li class="chapter" data-level="" data-path="visualize-a-gene-or-a-chromosome.html"><a href="visualize-a-gene-or-a-chromosome.html#saving-figures"><i class="fa fa-check"></i>Saving figures</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="exercises.html"><a href="exercises.html"><i class="fa fa-check"></i>Exercises</a></li>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html"><i class="fa fa-check"></i>Module 6 Transcriptomics RNA-seq</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html#lecture-4"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html#lab-3"><i class="fa fa-check"></i>Lab</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html#introduction-to-the-dataset"><i class="fa fa-check"></i>0. Introduction to the dataset</a></li>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html#setting-the-environment-variables"><i class="fa fa-check"></i>1. Setting the environment variables</a></li>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html#explore-data-in-your-workspace"><i class="fa fa-check"></i>2. Explore data in your workspace</a></li>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html#trimming-and-qc"><i class="fa fa-check"></i>3. Trimming and QC</a></li>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html#prepare-the-reference-genome-for-alignment"><i class="fa fa-check"></i>4. Prepare the reference genome for alignment</a></li>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html#alignment-with-hisat2"><i class="fa fa-check"></i>5. Alignment with HISAT2</a></li>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html#gene-count-estimation"><i class="fa fa-check"></i>6. Gene count estimation</a></li>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html#differential-expression-analysis"><i class="fa fa-check"></i>7. Differential Expression Analysis</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-7.html"><a href="module-7.html"><i class="fa fa-check"></i>Module 7</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-7.html"><a href="module-7.html#lecture-5"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-7.html"><a href="module-7.html#lab-4"><i class="fa fa-check"></i>Lab</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-8---pathway-enrichment-analysis.html"><a href="module-8---pathway-enrichment-analysis.html"><i class="fa fa-check"></i>Module 8 - Pathway Enrichment Analysis</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-8---pathway-enrichment-analysis.html"><a href="module-8---pathway-enrichment-analysis.html#lecture-6"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-8---pathway-enrichment-analysis.html"><a href="module-8---pathway-enrichment-analysis.html#presentation-of-the-dataset"><i class="fa fa-check"></i>Presentation of the dataset</a></li>
+<li class="chapter" data-level="" data-path="module-8---pathway-enrichment-analysis.html"><a href="module-8---pathway-enrichment-analysis.html#lab-5"><i class="fa fa-check"></i>Lab</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="de_mod8.html"><a href="de_mod8.html"><i class="fa fa-check"></i>Module 8.1 Lab: Differential Expression</a>
+<ul>
+<li class="chapter" data-level="" data-path="de_mod8.html"><a href="de_mod8.html#install-and-load-libraries"><i class="fa fa-check"></i>Install and load libraries</a></li>
+<li class="chapter" data-level="" data-path="de_mod8.html"><a href="de_mod8.html#data-used-for-this-comparison"><i class="fa fa-check"></i>Data used for this comparison</a>
+<ul>
+<li class="chapter" data-level="" data-path="de_mod8.html"><a href="de_mod8.html#generate-a-dge-object"><i class="fa fa-check"></i>generate a DGE object</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="de_mod8.html"><a href="de_mod8.html#filter-low-count-genes-and-tmm-normalize"><i class="fa fa-check"></i>Filter low-count genes and TMM-normalize</a></li>
+<li class="chapter" data-level="" data-path="de_mod8.html"><a href="de_mod8.html#design-0-group-and-named-contrast"><i class="fa fa-check"></i>Design (~0 + group) and named contrast</a></li>
+<li class="chapter" data-level="" data-path="de_mod8.html"><a href="de_mod8.html#dispersion-estimation-and-quasi-likelihood-glm"><i class="fa fa-check"></i>Dispersion estimation and quasi-likelihood GLM</a></li>
+<li class="chapter" data-level="" data-path="de_mod8.html"><a href="de_mod8.html#calculating-ranking-score-and-export-full-results"><i class="fa fa-check"></i>Calculating ranking score and export full results</a></li>
+<li class="chapter" data-level="" data-path="de_mod8.html"><a href="de_mod8.html#result-output"><i class="fa fa-check"></i>Result output</a></li>
+<li class="chapter" data-level="" data-path="de_mod8.html"><a href="de_mod8.html#version-of-packages-and-r"><i class="fa fa-check"></i>Version of packages and R</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html"><i class="fa fa-check"></i>Module 8.2 Lab: Defined gene list (g:Profiler)</a>
+<ul>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#introduction"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#goal-of-the-exercise-1"><i class="fa fa-check"></i>Goal of the exercise 1</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#data"><i class="fa fa-check"></i>Data</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#exercise-1-defined"><i class="fa fa-check"></i>Exercise 1 - prepare the gene lists</a>
+<ul>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#step-1---install-and-load-libraries"><i class="fa fa-check"></i>Step 1 - Install and Load libraries</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#step-2---prepare-the-define-gene-lists"><i class="fa fa-check"></i>Step 2 - Prepare the define gene lists</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#step-3---run-gprofiler"><i class="fa fa-check"></i>Step 3 - Run g:Profiler</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#clear-visualization-of-the-results"><i class="fa fa-check"></i>Clear visualization of the results</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#step-4---explore-top-table-of-results"><i class="fa fa-check"></i>Step 4 - Explore top table of results</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#step-5---filter-results-by-geneset-size"><i class="fa fa-check"></i>Step 5 - Filter results by geneset size</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#step-6---run-gprofiler-with-your-own-genesets-example-using-baderlab-genesets"><i class="fa fa-check"></i>Step 6 - Run g:profiler with your own genesets (example using BaderLab genesets)</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#exercise-2---visualization"><i class="fa fa-check"></i>Exercise 2 - visualization</a>
+<ul>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#step-2---dot-plot-with-segment"><i class="fa fa-check"></i>Step 2 - Dot plot with segment</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#step-4---hierarchical-cluster"><i class="fa fa-check"></i>Step 4 - Hierarchical Cluster</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html"><i class="fa fa-check"></i>Module 8.3 Lab: Ranked gene list (fGSEA)</a>
+<ul>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html#introduction-1"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html#goal-of-the-exercise"><i class="fa fa-check"></i>Goal of the exercise</a></li>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html#data-1"><i class="fa fa-check"></i>Data</a></li>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html#background"><i class="fa fa-check"></i>Background</a></li>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html#exercise-1-ranked"><i class="fa fa-check"></i>Exercise 1 - prepare the gene lists</a>
+<ul>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html#step-1---install-and-load-libraries-1"><i class="fa fa-check"></i>Step 1 - Install and Load libraries</a></li>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html#step-2---prepare-the-rank-file-upload-the-gmt-file-and-run-fgsea"><i class="fa fa-check"></i>Step 2 - Prepare the rank file , upload the gmt file and run fgsea</a></li>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html#step-3---examine-the-results"><i class="fa fa-check"></i>Step 3 - Examine the results</a></li>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html#step-4---explore-the-tabular-format-of-the-results"><i class="fa fa-check"></i>Step 4 - Explore the tabular format of the results</a></li>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html#step-5---visualize-the-top-results"><i class="fa fa-check"></i>Step 5 - Visualize the top results</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html"><i class="fa fa-check"></i>Module 8.4 Lab: BYOD - Differential Expression (Palbo-resistant vs Abema-resistant)</a>
+<ul>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html#install-and-load-libraries-1"><i class="fa fa-check"></i>Install and load libraries</a></li>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html#data-used-for-this-comparison-1"><i class="fa fa-check"></i>Data used for this comparison</a>
+<ul>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html#generate-a-dge-object-1"><i class="fa fa-check"></i>generate a DGE object</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html#filter-low-count-genes-and-tmm-normalize-1"><i class="fa fa-check"></i>Filter low-count genes and TMM-normalize</a></li>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html#design-0-group-and-named-contrast-1"><i class="fa fa-check"></i>Design (~0 + group) and named contrast</a></li>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html#dispersion-estimation-and-quasi-likelihood-glm-1"><i class="fa fa-check"></i>Dispersion estimation and quasi-likelihood GLM</a></li>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html#calculating-ranking-score-and-export-full-results-1"><i class="fa fa-check"></i>Calculating ranking score and export full results</a></li>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html#result-output-1"><i class="fa fa-check"></i>Result output</a></li>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html#your-turn"><i class="fa fa-check"></i>YOUR TURN</a></li>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html#additional-exercise"><i class="fa fa-check"></i>Additional exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-9---variant-to-networks.html"><a href="module-9---variant-to-networks.html"><i class="fa fa-check"></i>Module 9 - Variant to Networks</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-9---variant-to-networks.html"><a href="module-9---variant-to-networks.html#network-visualization-and-analysis-with-cytoscape"><i class="fa fa-check"></i>Network Visualization and Analysis with Cytoscape</a></li>
+<li class="chapter" data-level="" data-path="module-9---variant-to-networks.html"><a href="module-9---variant-to-networks.html#lecture-7"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-9---variant-to-networks.html"><a href="module-9---variant-to-networks.html#lab-6"><i class="fa fa-check"></i>Lab</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html"><i class="fa fa-check"></i>Module 9 Lab Primer: Cytoscape Primer</a>
+<ul>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#goal-of-the-exercise-2"><i class="fa fa-check"></i>Goal of the exercise</a></li>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#data-2"><i class="fa fa-check"></i>Data</a></li>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#start-the-exercise"><i class="fa fa-check"></i>Start the exercise</a></li>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#exercise-1a---create-network-from-table"><i class="fa fa-check"></i>Exercise 1a - Create Network from table</a>
+<ul>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#setting-up-cytoscape-variables--"><i class="fa fa-check"></i>Setting up cytoscape variables -</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#exercise-1b---load-node-attributes"><i class="fa fa-check"></i>Exercise 1b - Load node attributes</a></li>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#exercise-1c---map-node-attributes-to-visual-style"><i class="fa fa-check"></i>Exercise 1c - Map node attributes to Visual Style</a></li>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#exercise-2---work-with-larger-networks"><i class="fa fa-check"></i>Exercise 2 - Work with larger networks</a></li>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#exercise-3---perform-basic-enrichment-analysis-using-enrichmenttable"><i class="fa fa-check"></i>Exercise 3 - Perform basic enrichment analysis using EnrichmentTable</a></li>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#enrichmenttabl-features"><i class="fa fa-check"></i>Exercise 3B - create Enrichment Map and Enhanced graphics nodes from EnrichmentTable</a></li>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#exercise-4---load-network-from-ndex"><i class="fa fa-check"></i>Exercise 4 - Load network from NDex</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html"><i class="fa fa-check"></i>Module 9.2 Lab: g:profiler Visualization</a>
+<ul>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#goal-of-the-exercise-3"><i class="fa fa-check"></i>Goal of the exercise</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#data-3"><i class="fa fa-check"></i>Data</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#enrichmentmap"><i class="fa fa-check"></i>EnrichmentMap</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#description-of-this-exercise"><i class="fa fa-check"></i>Description of this exercise</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#start-the-exercise-1"><i class="fa fa-check"></i>Start the exercise</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#exercise-1a---compare-up-and-down-regulated-gprofiler-results"><i class="fa fa-check"></i>Exercise 1a - compare UP and DOWN regulated g:Profiler results</a>
+<ul>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#step-1"><i class="fa fa-check"></i>Step 1</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#step-2"><i class="fa fa-check"></i>Step 2</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#step-3-explore-the-results"><i class="fa fa-check"></i>Step 3: Explore the results:</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#explore-detailed-results"><i class="fa fa-check"></i>Explore Detailed results</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#exercise-1b---create-em-from-fgsea-results-using-baderlab-genesets"><i class="fa fa-check"></i>Exercise 1b - create EM from fgsea results using Baderlab genesets</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#exercise-1c-optional---investigate-individual-pathways-in-genemania-or-string"><i class="fa fa-check"></i>Exercise 1c (optional) - investigate individual pathways in GeneMANIA or String</a>
+<ul>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#genemania"><i class="fa fa-check"></i>GeneMANIA</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#string"><i class="fa fa-check"></i>String</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-10.html"><a href="module-10.html"><i class="fa fa-check"></i>Module 10</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-10.html"><a href="module-10.html#lecture-8"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-10.html"><a href="module-10.html#lab-7"><i class="fa fa-check"></i>Lab</a></li>
+</ul></li>
+<li class="divider"></li>
+<h1 id="sponsors">Sponsors</h1>
+<center>
+<a href="https://www.cihr-irsc.gc.ca"><img src="img/sponsors/cihr.png" width=90% style="padding-bottom: 20px" alt="Canadian Institutes of Health Research logo."></a>
+
+<a href="https://genomecanada.ca/"><img src="img/sponsors/genomecanada.png" height="55" style="display:inline-block;"  style="padding-bottom: 20px" alt="Genome Canada logo.">
+<a href="https://www.ontariogenomics.ca/"><img src="img/sponsors/ontariogenomics.png" height="55" style="display:inline-block;" style="padding-bottom: 20px;" alt="Ontario Genomics logo.">
+<br><br>
+<a href="https://oicr.on.ca/"><img src="img/sponsors/oicr.png" width=35% style="display:inline-block;" style="padding-bottom: 20px" alt="Ontario Institute for Cancer Research logo.">
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Cancer Analysis 2026</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="fgsea_mod8" class="section level1 hasAnchor">
+<h1>Module 8.3 Lab: Ranked gene list (fGSEA)<a href="fgsea_mod8.html#fgsea_mod8" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p><strong>This work is licensed under a <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.en">Creative Commons Attribution-ShareAlike 4.0 Unported License</a>. This means that you are able to copy, share and modify the work, as long as the result is distributed under the same license.</strong></p>
+<p>Authors: Veronique Voisin, Ruth Isserlin</p>
+<p>Presenter: Veronique Voisin</p>
+<div id="introduction-1" class="section level2 hasAnchor">
+<h2>Introduction<a href="fgsea_mod8.html#introduction-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>This practical lab contains one exercise. It uses <a href="https://github.com/alserglab/fgsea">fGSEA</a> to perform a gene-set enrichment analysis.</p>
+</div>
+<div id="goal-of-the-exercise" class="section level2 hasAnchor">
+<h2>Goal of the exercise<a href="fgsea_mod8.html#goal-of-the-exercise" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Learn how to run fGSEA and explore the results.</p>
+</div>
+<div id="data-1" class="section level2 hasAnchor">
+<h2>Data<a href="fgsea_mod8.html#data-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We will perform gene-set enrichment analysis using the output of the differential expression analysis comparing the palbo-resistant and the MCF7 parental cell line. We won’t use only the signficant differentially expressed genes but we will rank all genes from top up-regulated to down-regulated. The non significant genes stays in the rank file.</p>
+</div>
+<div id="background" class="section level2 hasAnchor">
+<h2>Background<a href="fgsea_mod8.html#background" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The goal of this lab is to:</p>
+<ul>
+<li>Upload the 2 required files into GSEA,</li>
+<li>Adjust relevant parameters,</li>
+<li>Run fGSEA,</li>
+<li>Open and explore the gene-set enrichment results.</li>
+</ul>
+<p>The 2 required files are:</p>
+<ol style="list-style-type: decimal">
+<li>a rank file (.rnk)</li>
+<li>a pathway definition file (.gmt).</li>
+</ol>
+<div id="rank-file" class="section level4 hasAnchor">
+<h4>Rank File<a href="fgsea_mod8.html#rank-file" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>To generate a rank file (.rnk), a score (-log10(pvalue) * sign(logFC)) was calculated from the edgeR differential expression results. A gene that is significantly differentially expressed (i.e associated with a very small pvalue, close to 0) will be assigned a high score.<br>The sign of the logFC indicates if the gene has an expression which is higher in Palbo-resistant (logFC &gt; 0, the score will have a + sign) or higher in Parental (logFC &lt; 0, the score will have a - sign). It is used to rank the genes from top up-regulated to top down-regulated (<strong>all genes have to be included</strong>).</p>
+</div>
+</div>
+<div id="exercise-1-ranked" class="section level2 hasAnchor">
+<h2>Exercise 1 - prepare the gene lists<a href="fgsea_mod8.html#exercise-1-ranked" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>This exercise requires the file “edgeR_resistant_vs_parental_all_genes.csv” located in the data folder.</p>
+<div id="step-1---install-and-load-libraries-1" class="section level3 hasAnchor">
+<h3>Step 1 - Install and Load libraries<a href="fgsea_mod8.html#step-1---install-and-load-libraries-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="fgsea_mod8.html#cb200-1" tabindex="-1"></a><span class="co"># CRAN and Bioconductor setup</span></span>
+<span id="cb200-2"><a href="fgsea_mod8.html#cb200-2" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;BiocManager&quot;</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb200-3"><a href="fgsea_mod8.html#cb200-3" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;BiocManager&quot;</span>)</span>
+<span id="cb200-4"><a href="fgsea_mod8.html#cb200-4" tabindex="-1"></a><span class="co"># List of CRAN packages</span></span>
+<span id="cb200-5"><a href="fgsea_mod8.html#cb200-5" tabindex="-1"></a>cran_packages <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb200-6"><a href="fgsea_mod8.html#cb200-6" tabindex="-1"></a>  <span class="st">&quot;tidyverse&quot;</span>,</span>
+<span id="cb200-7"><a href="fgsea_mod8.html#cb200-7" tabindex="-1"></a>  <span class="st">&quot;knitr&quot;</span>,</span>
+<span id="cb200-8"><a href="fgsea_mod8.html#cb200-8" tabindex="-1"></a>  <span class="st">&quot;kableExtra&quot;</span>,</span>
+<span id="cb200-9"><a href="fgsea_mod8.html#cb200-9" tabindex="-1"></a>  <span class="st">&quot;glue&quot;</span>,</span>
+<span id="cb200-10"><a href="fgsea_mod8.html#cb200-10" tabindex="-1"></a>  <span class="st">&quot;ggridges&quot;</span>,</span>
+<span id="cb200-11"><a href="fgsea_mod8.html#cb200-11" tabindex="-1"></a>  <span class="st">&quot;data.table&quot;</span></span>
+<span id="cb200-12"><a href="fgsea_mod8.html#cb200-12" tabindex="-1"></a>)</span>
+<span id="cb200-13"><a href="fgsea_mod8.html#cb200-13" tabindex="-1"></a><span class="co"># List of Bioconductor packages</span></span>
+<span id="cb200-14"><a href="fgsea_mod8.html#cb200-14" tabindex="-1"></a>bioc_packages <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb200-15"><a href="fgsea_mod8.html#cb200-15" tabindex="-1"></a>  <span class="st">&quot;fgsea&quot;</span>,</span>
+<span id="cb200-16"><a href="fgsea_mod8.html#cb200-16" tabindex="-1"></a>  <span class="st">&quot;clusterProfiler&quot;</span>,</span>
+<span id="cb200-17"><a href="fgsea_mod8.html#cb200-17" tabindex="-1"></a>  <span class="st">&quot;enrichplot&quot;</span></span>
+<span id="cb200-18"><a href="fgsea_mod8.html#cb200-18" tabindex="-1"></a>) </span>
+<span id="cb200-19"><a href="fgsea_mod8.html#cb200-19" tabindex="-1"></a><span class="co"># Install CRAN packages if not already installed</span></span>
+<span id="cb200-20"><a href="fgsea_mod8.html#cb200-20" tabindex="-1"></a><span class="cf">for</span> (pkg <span class="cf">in</span> cran_packages) {</span>
+<span id="cb200-21"><a href="fgsea_mod8.html#cb200-21" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(pkg, <span class="at">quietly =</span> <span class="cn">TRUE</span>)) {</span>
+<span id="cb200-22"><a href="fgsea_mod8.html#cb200-22" tabindex="-1"></a>    <span class="fu">install.packages</span>(pkg)</span>
+<span id="cb200-23"><a href="fgsea_mod8.html#cb200-23" tabindex="-1"></a>  }</span>
+<span id="cb200-24"><a href="fgsea_mod8.html#cb200-24" tabindex="-1"></a>}</span>
+<span id="cb200-25"><a href="fgsea_mod8.html#cb200-25" tabindex="-1"></a><span class="co"># Install Bioconductor packages if not already installed</span></span>
+<span id="cb200-26"><a href="fgsea_mod8.html#cb200-26" tabindex="-1"></a><span class="cf">for</span> (pkg <span class="cf">in</span> bioc_packages) {</span>
+<span id="cb200-27"><a href="fgsea_mod8.html#cb200-27" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(pkg, <span class="at">quietly =</span> <span class="cn">TRUE</span>)) {</span>
+<span id="cb200-28"><a href="fgsea_mod8.html#cb200-28" tabindex="-1"></a>    BiocManager<span class="sc">::</span><span class="fu">install</span>(pkg)</span>
+<span id="cb200-29"><a href="fgsea_mod8.html#cb200-29" tabindex="-1"></a>  }</span>
+<span id="cb200-30"><a href="fgsea_mod8.html#cb200-30" tabindex="-1"></a>}</span>
+<span id="cb200-31"><a href="fgsea_mod8.html#cb200-31" tabindex="-1"></a><span class="co"># Load the libraries</span></span>
+<span id="cb200-32"><a href="fgsea_mod8.html#cb200-32" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb200-33"><a href="fgsea_mod8.html#cb200-33" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb200-34"><a href="fgsea_mod8.html#cb200-34" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb200-35"><a href="fgsea_mod8.html#cb200-35" tabindex="-1"></a><span class="fu">library</span>(glue)</span>
+<span id="cb200-36"><a href="fgsea_mod8.html#cb200-36" tabindex="-1"></a><span class="fu">library</span>(ggridges)</span>
+<span id="cb200-37"><a href="fgsea_mod8.html#cb200-37" tabindex="-1"></a><span class="fu">library</span>(data.table)</span>
+<span id="cb200-38"><a href="fgsea_mod8.html#cb200-38" tabindex="-1"></a></span>
+<span id="cb200-39"><a href="fgsea_mod8.html#cb200-39" tabindex="-1"></a><span class="co"># Bioconductor packages</span></span>
+<span id="cb200-40"><a href="fgsea_mod8.html#cb200-40" tabindex="-1"></a><span class="fu">library</span>(fgsea)</span>
+<span id="cb200-41"><a href="fgsea_mod8.html#cb200-41" tabindex="-1"></a><span class="fu">library</span>(clusterProfiler)</span>
+<span id="cb200-42"><a href="fgsea_mod8.html#cb200-42" tabindex="-1"></a><span class="fu">library</span>(enrichplot)</span>
+<span id="cb200-43"><a href="fgsea_mod8.html#cb200-43" tabindex="-1"></a></span>
+<span id="cb200-44"><a href="fgsea_mod8.html#cb200-44" tabindex="-1"></a><span class="co"># create the results folder (if it does not exist yet) to save the outputs</span></span>
+<span id="cb200-45"><a href="fgsea_mod8.html#cb200-45" tabindex="-1"></a><span class="co"># dir.create(&quot;results&quot;, showWarnings = FALSE)</span></span></code></pre></div>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="fgsea_mod8.html#cb201-1" tabindex="-1"></a><span class="co"># Location of the Module 8 files (data/, BYODdata/, image/):</span></span>
+<span id="cb201-2"><a href="fgsea_mod8.html#cb201-2" tabindex="-1"></a><span class="co"># - on the course server: ~/CourseData/Module8</span></span>
+<span id="cb201-3"><a href="fgsea_mod8.html#cb201-3" tabindex="-1"></a><span class="co"># - when the book is built from the repository: Module8</span></span>
+<span id="cb201-4"><a href="fgsea_mod8.html#cb201-4" tabindex="-1"></a>data_dir <span class="ot">&lt;-</span> <span class="cf">if</span> (<span class="fu">dir.exists</span>(<span class="st">&quot;~/CourseData/Module8&quot;</span>)) <span class="st">&quot;~/CourseData/Module8&quot;</span> <span class="cf">else</span> <span class="st">&quot;Module8&quot;</span></span></code></pre></div>
+<!--
+<div class="rmd-caution">
+<p>In the Ubuntu (course server) session, the <code>dir.create()</code>
+line above and every <code>write.csv()</code> line in this lab use
+<code>~/workspace/Module8/results</code> instead of
+<code>results</code>, so your results are saved in
+<code>~/workspace/Module8/results</code>.</p>
+</div>
+-->
+</div>
+<div id="step-2---prepare-the-rank-file-upload-the-gmt-file-and-run-fgsea" class="section level3 hasAnchor">
+<h3>Step 2 - Prepare the rank file , upload the gmt file and run fgsea<a href="fgsea_mod8.html#step-2---prepare-the-rank-file-upload-the-gmt-file-and-run-fgsea" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><a href="https://bioconductor.org/packages/release/bioc/html/fgsea.html">fGSEA</a> is an R package that runs a fast Gene Set Enrichment Analysis.</p>
+<p>In the below command the following options have been specified:</p>
+<ul>
+<li>pathways - list of genesets to use for the calculation</li>
+<li>stats - genes and their associated statistic, sorted ( rank file)</li>
+<li>max_size - maximum size for individual gene sets.</li>
+<li>min_size - minimum size for individual gene sets</li>
+<li>gseaParam - GSEA parameter value</li>
+</ul>
+<div class="rmd-caution">
+<p>
+gseaParam - GSEA parameter value. All ranks will be raised to this
+power when calculating the ES scores. Equivalent to the weight in the
+original GSEA algorithm.
+</p>
+</div>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="fgsea_mod8.html#cb202-1" tabindex="-1"></a>res <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="fu">file.path</span>(data_dir, <span class="st">&quot;data/edgeR_resistant_vs_parental_all_genes.csv&quot;</span>))</span>
+<span id="cb202-2"><a href="fgsea_mod8.html#cb202-2" tabindex="-1"></a></span>
+<span id="cb202-3"><a href="fgsea_mod8.html#cb202-3" tabindex="-1"></a>gmtfile <span class="ot">=</span> <span class="fu">file.path</span>(data_dir, <span class="st">&quot;data/Human_GOBP_AllPathways_noPFOCR_no_GO_iea_September_14_2026_symbol.gmt&quot;</span>)</span>
+<span id="cb202-4"><a href="fgsea_mod8.html#cb202-4" tabindex="-1"></a>pathways <span class="ot">&lt;-</span> fgsea<span class="sc">::</span><span class="fu">gmtPathways</span>(gmtfile)</span>
+<span id="cb202-5"><a href="fgsea_mod8.html#cb202-5" tabindex="-1"></a></span>
+<span id="cb202-6"><a href="fgsea_mod8.html#cb202-6" tabindex="-1"></a><span class="do">## rank file formatted for gsea</span></span>
+<span id="cb202-7"><a href="fgsea_mod8.html#cb202-7" tabindex="-1"></a>ranks <span class="ot">&lt;-</span> <span class="fu">setNames</span>(res<span class="sc">$</span>score, res<span class="sc">$</span>gene)</span>
+<span id="cb202-8"><a href="fgsea_mod8.html#cb202-8" tabindex="-1"></a>ranks <span class="ot">&lt;-</span> ranks[<span class="sc">!</span><span class="fu">is.na</span>(ranks) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(<span class="fu">names</span>(ranks))]</span>
+<span id="cb202-9"><a href="fgsea_mod8.html#cb202-9" tabindex="-1"></a>ranks <span class="ot">&lt;-</span> <span class="fu">sort</span>(ranks, <span class="at">decreasing =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb202-10"><a href="fgsea_mod8.html#cb202-10" tabindex="-1"></a></span>
+<span id="cb202-11"><a href="fgsea_mod8.html#cb202-11" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">543</span>) <span class="do">## to get reproducible results</span></span>
+<span id="cb202-12"><a href="fgsea_mod8.html#cb202-12" tabindex="-1"></a></span>
+<span id="cb202-13"><a href="fgsea_mod8.html#cb202-13" tabindex="-1"></a><span class="do">## running fgsea</span></span>
+<span id="cb202-14"><a href="fgsea_mod8.html#cb202-14" tabindex="-1"></a>fgseaRes <span class="ot">&lt;-</span> <span class="fu">fgsea</span>(</span>
+<span id="cb202-15"><a href="fgsea_mod8.html#cb202-15" tabindex="-1"></a></span>
+<span id="cb202-16"><a href="fgsea_mod8.html#cb202-16" tabindex="-1"></a><span class="at">pathways =</span> pathways,</span>
+<span id="cb202-17"><a href="fgsea_mod8.html#cb202-17" tabindex="-1"></a><span class="at">stats =</span> ranks,</span>
+<span id="cb202-18"><a href="fgsea_mod8.html#cb202-18" tabindex="-1"></a><span class="at">minSize =</span> <span class="dv">10</span>,</span>
+<span id="cb202-19"><a href="fgsea_mod8.html#cb202-19" tabindex="-1"></a><span class="at">maxSize =</span> <span class="dv">500</span>,</span>
+<span id="cb202-20"><a href="fgsea_mod8.html#cb202-20" tabindex="-1"></a><span class="at">nperm =</span> <span class="dv">2000</span></span>
+<span id="cb202-21"><a href="fgsea_mod8.html#cb202-21" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## Warning in fgsea(pathways = pathways, stats = ranks, minSize = 10, maxSize =
+## 500, : You are trying to run fgseaSimple. It is recommended to use
+## fgseaMultilevel. To run fgseaMultilevel, you need to remove the nperm argument
+## in the fgsea function call.</code></pre>
+<pre><code>## Warning in preparePathwaysAndStats(pathways, stats, minSize, maxSize, gseaParam, : There are ties in the preranked stats (0.01% of the list).
+## The order of those tied genes will be arbitrary, which may produce unexpected results.</code></pre>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="fgsea_mod8.html#cb205-1" tabindex="-1"></a>fgseaRes <span class="ot">&lt;-</span> fgseaRes[<span class="fu">order</span>(fgseaRes<span class="sc">$</span>padj), ]</span></code></pre></div>
+<p>Save the full fgsea results table to the results folder.</p>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="fgsea_mod8.html#cb206-1" tabindex="-1"></a><span class="co">#the leadingEdge column is a list of genes for each pathway,</span></span>
+<span id="cb206-2"><a href="fgsea_mod8.html#cb206-2" tabindex="-1"></a><span class="co">#convert it to text (genes separated by a comma) so that it can be written to a csv file.</span></span>
+<span id="cb206-3"><a href="fgsea_mod8.html#cb206-3" tabindex="-1"></a>fgseaRes_to_save <span class="ot">&lt;-</span> <span class="fu">copy</span>(fgseaRes)</span>
+<span id="cb206-4"><a href="fgsea_mod8.html#cb206-4" tabindex="-1"></a>fgseaRes_to_save<span class="sc">$</span>leadingEdge <span class="ot">&lt;-</span> <span class="fu">sapply</span>(fgseaRes_to_save<span class="sc">$</span>leadingEdge, paste, <span class="at">collapse =</span> <span class="st">&quot;,&quot;</span>)</span>
+<span id="cb206-5"><a href="fgsea_mod8.html#cb206-5" tabindex="-1"></a></span>
+<span id="cb206-6"><a href="fgsea_mod8.html#cb206-6" tabindex="-1"></a><span class="co"># write.csv(fgseaRes_to_save, &quot;results/fgsea_results_resistant_vs_parental.csv&quot;, row.names = FALSE)</span></span></code></pre></div>
+<div class="rmd-tip">
+<p>
+Set <strong>gseaParam</strong> to 2 if you want to add more weight on
+the most top up-regulated and top down-regulated. <br>
+<strong>2</strong> is a more stringent parameter and it will result in
+less gene-sets significant under FDR &lt;0.05.
+</p>
+</div>
+</div>
+<div id="step-3---examine-the-results" class="section level3 hasAnchor">
+<h3>Step 3 - Examine the results<a href="fgsea_mod8.html#step-3---examine-the-results" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Examining the results</p>
+<p>Get the top results and visualize as table</p>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="fgsea_mod8.html#cb207-1" tabindex="-1"></a>topPathwaysUp <span class="ot">&lt;-</span> fgseaRes[ES <span class="sc">&gt;</span> <span class="dv">0</span>][<span class="fu">head</span>(<span class="fu">order</span>(pval), <span class="at">n=</span><span class="dv">10</span>), pathway]</span>
+<span id="cb207-2"><a href="fgsea_mod8.html#cb207-2" tabindex="-1"></a>topPathwaysDown <span class="ot">&lt;-</span> fgseaRes[ES <span class="sc">&lt;</span> <span class="dv">0</span>][<span class="fu">head</span>(<span class="fu">order</span>(pval), <span class="at">n=</span><span class="dv">10</span>), pathway]</span>
+<span id="cb207-3"><a href="fgsea_mod8.html#cb207-3" tabindex="-1"></a>topPathways <span class="ot">&lt;-</span> <span class="fu">c</span>(topPathwaysUp, <span class="fu">rev</span>(topPathwaysDown))</span>
+<span id="cb207-4"><a href="fgsea_mod8.html#cb207-4" tabindex="-1"></a><span class="fu">plotGseaTable</span>(pathways[topPathways], ranks, fgseaRes, <span class="at">gseaParam=</span><span class="fl">0.5</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/top-pathways-1.png" alt="" width="672" /></p>
+<p>When examining the results there are a few things to look for:</p>
+<p>Check the number of gene-sets that have been used for the analysis.</p>
+<div class="rmd-tip">
+<p>
+A small number (a few hundred genesets if using baderlab genesets)
+could indicate an issue with identifier mapping.
+</p>
+</div>
+<p>Check the number of sets that have FDR less than 0.25 – in order to determine what thresholds to start with when creating the enrichment map. It is not uncommon to see a thousand gene sets pass the threshold of FDR less than 0.25. FDR less than 0.25 is a very lax threshold and for robust data we can set thresholds of FDR less than 0.05 or lower.</p>
+<p>Number of pathways with corrected pvalue &lt; 0.05</p>
+<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="fgsea_mod8.html#cb208-1" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">which</span>(fgseaRes<span class="sc">$</span>padj <span class="sc">&lt;</span> <span class="fl">0.05</span>))</span></code></pre></div>
+<pre><code>## [1] 325</code></pre>
+<p>Number of pathways with corrected pvalue &lt; 0.01</p>
+<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="fgsea_mod8.html#cb210-1" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">which</span>(fgseaRes<span class="sc">$</span>padj <span class="sc">&lt;</span> <span class="fl">0.01</span>))</span></code></pre></div>
+<pre><code>## [1] 0</code></pre>
+<p>Number of Palbo-resistant (up -regulated) pathways with corrected pvalue &lt; 0.05</p>
+<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="fgsea_mod8.html#cb212-1" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">which</span>(fgseaRes<span class="sc">$</span>padj <span class="sc">&lt;</span> <span class="fl">0.05</span> <span class="sc">&amp;</span> fgseaRes<span class="sc">$</span>ES <span class="sc">&gt;</span> <span class="dv">0</span>))</span></code></pre></div>
+<pre><code>## [1] 297</code></pre>
+<p>Number of Parental (down -regulated) pathways with corrected pvalue &lt; 0.05</p>
+<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="fgsea_mod8.html#cb214-1" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">which</span>(fgseaRes<span class="sc">$</span>padj <span class="sc">&lt;</span> <span class="fl">0.05</span> <span class="sc">&amp;</span> fgseaRes<span class="sc">$</span>ES <span class="sc">&lt;</span> <span class="dv">0</span>))</span></code></pre></div>
+<pre><code>## [1] 28</code></pre>
+</div>
+<div id="step-4---explore-the-tabular-format-of-the-results" class="section level3 hasAnchor">
+<h3>Step 4 - Explore the tabular format of the results<a href="fgsea_mod8.html#step-4---explore-the-tabular-format-of-the-results" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="palbo-resistant-up-regulated-genes" class="section level4 hasAnchor">
+<h4>Palbo-resistant (up-regulated genes)<a href="fgsea_mod8.html#palbo-resistant-up-regulated-genes" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="fgsea_mod8.html#cb216-1" tabindex="-1"></a>topPathwaysUp <span class="ot">&lt;-</span> fgseaRes[ES <span class="sc">&gt;</span> <span class="dv">0</span>][<span class="fu">head</span>(<span class="fu">order</span>(pval), <span class="at">n=</span><span class="dv">5</span>), pathway]</span>
+<span id="cb216-2"><a href="fgsea_mod8.html#cb216-2" tabindex="-1"></a></span>
+<span id="cb216-3"><a href="fgsea_mod8.html#cb216-3" tabindex="-1"></a>top_palbo_hits <span class="ot">&lt;-</span> fgseaRes[<span class="fu">which</span>(fgseaRes<span class="sc">$</span>pathway <span class="sc">%in%</span> topPathwaysUp),]</span>
+<span id="cb216-4"><a href="fgsea_mod8.html#cb216-4" tabindex="-1"></a></span>
+<span id="cb216-5"><a href="fgsea_mod8.html#cb216-5" tabindex="-1"></a><span class="co">#format the pathway name colum so that it is easier to see the whole table</span></span>
+<span id="cb216-6"><a href="fgsea_mod8.html#cb216-6" tabindex="-1"></a>top_palbo_hits<span class="sc">$</span>pathway <span class="ot">&lt;-</span> <span class="fu">substr</span>(top_palbo_hits<span class="sc">$</span>pathway, <span class="at">start =</span> <span class="dv">1</span>, <span class="at">stop=</span><span class="dv">35</span>)</span>
+<span id="cb216-7"><a href="fgsea_mod8.html#cb216-7" tabindex="-1"></a></span>
+<span id="cb216-8"><a href="fgsea_mod8.html#cb216-8" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">head</span>(top_palbo_hits), <span class="at">caption =</span> <span class="st">&quot;Top Palbo-resistant pathways&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb216-9"><a href="fgsea_mod8.html#cb216-9" tabindex="-1"></a><span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;condensed&quot;</span>), <span class="at">font_size =</span> <span class="dv">10</span>)</span></code></pre></div>
+<table class="table table-striped table-condensed" style="font-size: 10px; margin-left: auto; margin-right: auto;">
+<caption style="font-size: initial !important;">
+<span id="tab:top-pathways-up">Table 7: </span><span id="tab:top-pathways-up">Table 8: </span>Top Palbo-resistant pathways
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+pathway
+</th>
+<th style="text-align:right;">
+pval
+</th>
+<th style="text-align:right;">
+padj
+</th>
+<th style="text-align:right;">
+ES
+</th>
+<th style="text-align:right;">
+NES
+</th>
+<th style="text-align:right;">
+nMoreExtreme
+</th>
+<th style="text-align:right;">
+size
+</th>
+<th style="text-align:left;">
+leadingEdge
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+TRANSLATION%REACTOME DATABASE ID RE
+</td>
+<td style="text-align:right;">
+0.0009524
+</td>
+<td style="text-align:right;">
+0.0297521
+</td>
+<td style="text-align:right;">
+0.5492338
+</td>
+<td style="text-align:right;">
+2.367385
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+338
+</td>
+<td style="text-align:left;">
+EEF1A2, ….
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+POSITIVE REGULATION OF CELL MIGRATI
+</td>
+<td style="text-align:right;">
+0.0009615
+</td>
+<td style="text-align:right;">
+0.0297521
+</td>
+<td style="text-align:right;">
+0.3432083
+</td>
+<td style="text-align:right;">
+1.470604
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+324
+</td>
+<td style="text-align:left;">
+CAV1, SE….
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NEURON PROJECTION DEVELOPMENT%GOBP%
+</td>
+<td style="text-align:right;">
+0.0009671
+</td>
+<td style="text-align:right;">
+0.0297521
+</td>
+<td style="text-align:right;">
+0.3491315
+</td>
+<td style="text-align:right;">
+1.507575
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+355
+</td>
+<td style="text-align:left;">
+ADGRB1, ….
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+CIRCULATORY SYSTEM DEVELOPMENT%GOBP
+</td>
+<td style="text-align:right;">
+0.0009615
+</td>
+<td style="text-align:right;">
+0.0297521
+</td>
+<td style="text-align:right;">
+0.3364868
+</td>
+<td style="text-align:right;">
+1.456819
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+361
+</td>
+<td style="text-align:left;">
+CAV1, SE….
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ANATOMICAL STRUCTURE FORMATION INVO
+</td>
+<td style="text-align:right;">
+0.0009690
+</td>
+<td style="text-align:right;">
+0.0297521
+</td>
+<td style="text-align:right;">
+0.3734786
+</td>
+<td style="text-align:right;">
+1.610248
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+345
+</td>
+<td style="text-align:left;">
+COL6A1, ….
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="parental-down-regulated-genes" class="section level4 hasAnchor">
+<h4>Parental (down-regulated genes)<a href="fgsea_mod8.html#parental-down-regulated-genes" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="fgsea_mod8.html#cb217-1" tabindex="-1"></a>topPathwaysDown <span class="ot">&lt;-</span> fgseaRes[ES <span class="sc">&lt;</span> <span class="dv">0</span>][<span class="fu">head</span>(<span class="fu">order</span>(pval), <span class="at">n=</span><span class="dv">5</span>), pathway]</span>
+<span id="cb217-2"><a href="fgsea_mod8.html#cb217-2" tabindex="-1"></a></span>
+<span id="cb217-3"><a href="fgsea_mod8.html#cb217-3" tabindex="-1"></a>top_parental_hits <span class="ot">&lt;-</span> fgseaRes[<span class="fu">which</span>(fgseaRes<span class="sc">$</span>pathway <span class="sc">%in%</span> topPathwaysDown),]</span>
+<span id="cb217-4"><a href="fgsea_mod8.html#cb217-4" tabindex="-1"></a></span>
+<span id="cb217-5"><a href="fgsea_mod8.html#cb217-5" tabindex="-1"></a><span class="co">#format the pathway name colum so that it is easier to see the whole table</span></span>
+<span id="cb217-6"><a href="fgsea_mod8.html#cb217-6" tabindex="-1"></a>top_parental_hits<span class="sc">$</span>pathway <span class="ot">&lt;-</span> <span class="fu">substr</span>(top_parental_hits<span class="sc">$</span>pathway, <span class="at">start =</span> <span class="dv">1</span>, <span class="at">stop=</span><span class="dv">35</span>)</span>
+<span id="cb217-7"><a href="fgsea_mod8.html#cb217-7" tabindex="-1"></a></span>
+<span id="cb217-8"><a href="fgsea_mod8.html#cb217-8" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">head</span>(top_parental_hits), <span class="at">caption =</span> <span class="st">&quot;Top Parental pathways&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb217-9"><a href="fgsea_mod8.html#cb217-9" tabindex="-1"></a><span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;condensed&quot;</span>), <span class="at">font_size =</span> <span class="dv">10</span>)</span></code></pre></div>
+<table class="table table-striped table-condensed" style="font-size: 10px; margin-left: auto; margin-right: auto;">
+<caption style="font-size: initial !important;">
+<span id="tab:top-pathways-down">Table 9: </span><span id="tab:top-pathways-down">Table 10: </span>Top Parental pathways
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+pathway
+</th>
+<th style="text-align:right;">
+pval
+</th>
+<th style="text-align:right;">
+padj
+</th>
+<th style="text-align:right;">
+ES
+</th>
+<th style="text-align:right;">
+NES
+</th>
+<th style="text-align:right;">
+nMoreExtreme
+</th>
+<th style="text-align:right;">
+size
+</th>
+<th style="text-align:left;">
+leadingEdge
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+METAPATHWAY BIOTRANSFORMATION PHASE
+</td>
+<td style="text-align:right;">
+0.0009843
+</td>
+<td style="text-align:right;">
+0.0297521
+</td>
+<td style="text-align:right;">
+-0.4964078
+</td>
+<td style="text-align:right;">
+-1.728867
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+68
+</td>
+<td style="text-align:left;">
+CYP2J2, ….
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+TIGHT JUNCTION ORGANIZATION%GOBP%GO
+</td>
+<td style="text-align:right;">
+0.0009872
+</td>
+<td style="text-align:right;">
+0.0297521
+</td>
+<td style="text-align:right;">
+-0.6351792
+</td>
+<td style="text-align:right;">
+-1.936928
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+33
+</td>
+<td style="text-align:left;">
+GRHL2, M….
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+INDOLE-CONTAINING COMPOUND METABOLI
+</td>
+<td style="text-align:right;">
+0.0009881
+</td>
+<td style="text-align:right;">
+0.0297521
+</td>
+<td style="text-align:right;">
+-0.7990183
+</td>
+<td style="text-align:right;">
+-1.920113
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+13
+</td>
+<td style="text-align:left;">
+KYNU, QP….
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+DIGESTION%GOBP%<a href="GO:0007586" class="uri">GO:0007586</a>
+</td>
+<td style="text-align:right;">
+0.0009804
+</td>
+<td style="text-align:right;">
+0.0297521
+</td>
+<td style="text-align:right;">
+-0.6713524
+</td>
+<td style="text-align:right;">
+-1.987560
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+29
+</td>
+<td style="text-align:left;">
+AKR1C2, ….
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+TIGHT JUNCTION ASSEMBLY%GOBP%<a href="GO:012" class="uri">GO:012</a>
+</td>
+<td style="text-align:right;">
+0.0009833
+</td>
+<td style="text-align:right;">
+0.0297521
+</td>
+<td style="text-align:right;">
+-0.6194630
+</td>
+<td style="text-align:right;">
+-1.878603
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+32
+</td>
+<td style="text-align:left;">
+GRHL2, M….
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="step-5---visualize-the-top-results" class="section level3 hasAnchor">
+<h3>Step 5 - Visualize the top results<a href="fgsea_mod8.html#step-5---visualize-the-top-results" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Visualize the top results as different sorts of plots, as demonstrated in the first part of the lab.</p>
+<div id="gsea-style-enrichment-plots" class="section level4 hasAnchor">
+<h4>GSEA style Enrichment Plots<a href="fgsea_mod8.html#gsea-style-enrichment-plots" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>In order to create GSEA Enrichment plots we need to use the packages:</p>
+<ul>
+<li><a href="https://bioconductor.org/packages/release/bioc/html/clusterProfiler.html">clusterProfiler</a> and</li>
+<li><a href="https://bioconductor.org/packages/release/bioc/html/enrichplot.html">enrichplot</a></li>
+</ul>
+<p>clusterProfiler runs with its own set of pathways that it parses from GO or KEGG or MSigDB or other sources that are coded into the package. It does not take as input the standard GMT file. If you want to use your own pathway definitions you need to translate it into a dataframe where for every gene in a given pathway there is a row with the pathway name and the gene.</p>
+<p>In order to generate an enrichment plot with enrichplot we need the fgsea results in the datastructure returned by clusterProfiler. To run fGSEA in this way we need:</p>
+<ul>
+<li>the ranks file, as before</li>
+<li>the pathways as a data frame.</li>
+</ul>
+<p>Below we show how to run fGSEA using the clusterProfiler package and user supplied pathway definitions.</p>
+<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="fgsea_mod8.html#cb218-1" tabindex="-1"></a><span class="co">#translate our gmt file (a named list of genesets) into a dataframe</span></span>
+<span id="cb218-2"><a href="fgsea_mod8.html#cb218-2" tabindex="-1"></a><span class="co">#with one row per gene in each pathway.</span></span>
+<span id="cb218-3"><a href="fgsea_mod8.html#cb218-3" tabindex="-1"></a>TERMS <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb218-4"><a href="fgsea_mod8.html#cb218-4" tabindex="-1"></a>    <span class="at">name =</span> <span class="fu">rep</span>(<span class="fu">names</span>(pathways), <span class="fu">lengths</span>(pathways)),</span>
+<span id="cb218-5"><a href="fgsea_mod8.html#cb218-5" tabindex="-1"></a>    <span class="at">gene =</span> <span class="fu">unlist</span>(pathways, <span class="at">use.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb218-6"><a href="fgsea_mod8.html#cb218-6" tabindex="-1"></a>  )</span>
+<span id="cb218-7"><a href="fgsea_mod8.html#cb218-7" tabindex="-1"></a></span>
+<span id="cb218-8"><a href="fgsea_mod8.html#cb218-8" tabindex="-1"></a><span class="co"># specify the gene ranks, and make sure it is in descending order.</span></span>
+<span id="cb218-9"><a href="fgsea_mod8.html#cb218-9" tabindex="-1"></a>gsea_scores <span class="ot">&lt;-</span> ranks</span>
+<span id="cb218-10"><a href="fgsea_mod8.html#cb218-10" tabindex="-1"></a>gsea_scores <span class="ot">&lt;-</span> gsea_scores[<span class="sc">!</span><span class="fu">is.na</span>(gsea_scores)]</span>
+<span id="cb218-11"><a href="fgsea_mod8.html#cb218-11" tabindex="-1"></a>gsea_scores <span class="ot">&lt;-</span> <span class="fu">sort</span>(gsea_scores, <span class="at">decreasing =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb218-12"><a href="fgsea_mod8.html#cb218-12" tabindex="-1"></a></span>
+<span id="cb218-13"><a href="fgsea_mod8.html#cb218-13" tabindex="-1"></a><span class="co"># Set a seed for reproducibility</span></span>
+<span id="cb218-14"><a href="fgsea_mod8.html#cb218-14" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb218-15"><a href="fgsea_mod8.html#cb218-15" tabindex="-1"></a></span>
+<span id="cb218-16"><a href="fgsea_mod8.html#cb218-16" tabindex="-1"></a><span class="co">#Run fgsea using clusterProfiler, with the same gene-set size limits as above.</span></span>
+<span id="cb218-17"><a href="fgsea_mod8.html#cb218-17" tabindex="-1"></a>selected_gsea <span class="ot">&lt;-</span> clusterProfiler<span class="sc">::</span><span class="fu">GSEA</span>(</span>
+<span id="cb218-18"><a href="fgsea_mod8.html#cb218-18" tabindex="-1"></a>    <span class="at">geneList =</span> gsea_scores,</span>
+<span id="cb218-19"><a href="fgsea_mod8.html#cb218-19" tabindex="-1"></a>    <span class="at">TERM2GENE =</span> TERMS,</span>
+<span id="cb218-20"><a href="fgsea_mod8.html#cb218-20" tabindex="-1"></a>    <span class="at">minGSSize =</span> <span class="dv">10</span>,</span>
+<span id="cb218-21"><a href="fgsea_mod8.html#cb218-21" tabindex="-1"></a>    <span class="at">maxGSSize =</span> <span class="dv">500</span>,</span>
+<span id="cb218-22"><a href="fgsea_mod8.html#cb218-22" tabindex="-1"></a>    <span class="at">pvalueCutoff =</span> <span class="dv">1</span>,</span>
+<span id="cb218-23"><a href="fgsea_mod8.html#cb218-23" tabindex="-1"></a>    <span class="at">verbose =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb218-24"><a href="fgsea_mod8.html#cb218-24" tabindex="-1"></a>    <span class="at">pAdjustMethod =</span> <span class="st">&quot;fdr&quot;</span>,</span>
+<span id="cb218-25"><a href="fgsea_mod8.html#cb218-25" tabindex="-1"></a>    <span class="at">scoreType =</span> <span class="st">&quot;std&quot;</span>,</span>
+<span id="cb218-26"><a href="fgsea_mod8.html#cb218-26" tabindex="-1"></a>    <span class="at">eps =</span> <span class="dv">0</span></span>
+<span id="cb218-27"><a href="fgsea_mod8.html#cb218-27" tabindex="-1"></a>  )</span></code></pre></div>
+<pre><code>## Warning in preparePathwaysAndStats(pathways, stats, minSize, maxSize, gseaParam, : There are ties in the preranked stats (0.01% of the list).
+## The order of those tied genes will be arbitrary, which may produce unexpected results.</code></pre>
+<p>Print out a few of the top enrichment plots</p>
+<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="fgsea_mod8.html#cb220-1" tabindex="-1"></a>all_figures <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb220-2"><a href="fgsea_mod8.html#cb220-2" tabindex="-1"></a></span>
+<span id="cb220-3"><a href="fgsea_mod8.html#cb220-3" tabindex="-1"></a><span class="co">#generate GSEA plots for the top Parental (down-regulated) genesets that we have already seen in the table above</span></span>
+<span id="cb220-4"><a href="fgsea_mod8.html#cb220-4" tabindex="-1"></a>rows_to_use <span class="ot">&lt;-</span> <span class="fu">which</span>(selected_gsea<span class="sc">@</span>result<span class="sc">$</span>ID <span class="sc">%in%</span> topPathwaysDown)</span>
+<span id="cb220-5"><a href="fgsea_mod8.html#cb220-5" tabindex="-1"></a></span>
+<span id="cb220-6"><a href="fgsea_mod8.html#cb220-6" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="fu">seq_along</span>(rows_to_use)){</span>
+<span id="cb220-7"><a href="fgsea_mod8.html#cb220-7" tabindex="-1"></a>  row_number <span class="ot">=</span> rows_to_use[i]</span>
+<span id="cb220-8"><a href="fgsea_mod8.html#cb220-8" tabindex="-1"></a></span>
+<span id="cb220-9"><a href="fgsea_mod8.html#cb220-9" tabindex="-1"></a>  <span class="co">#format the title for the enrichment plot</span></span>
+<span id="cb220-10"><a href="fgsea_mod8.html#cb220-10" tabindex="-1"></a>  pw_des <span class="ot">&lt;-</span> selected_gsea<span class="sc">@</span>result<span class="sc">$</span>Description[row_number]</span>
+<span id="cb220-11"><a href="fgsea_mod8.html#cb220-11" tabindex="-1"></a>  pw_pval <span class="ot">&lt;-</span> selected_gsea<span class="sc">@</span>result<span class="sc">$</span>pvalue[row_number]</span>
+<span id="cb220-12"><a href="fgsea_mod8.html#cb220-12" tabindex="-1"></a>  pw_pval <span class="ot">&lt;-</span> <span class="fu">format</span>(pw_pval, <span class="at">scientific =</span> F, <span class="at">digits =</span> <span class="dv">3</span>)</span>
+<span id="cb220-13"><a href="fgsea_mod8.html#cb220-13" tabindex="-1"></a>  pw_qval <span class="ot">&lt;-</span> selected_gsea<span class="sc">@</span>result<span class="sc">$</span>p.adjust[row_number]</span>
+<span id="cb220-14"><a href="fgsea_mod8.html#cb220-14" tabindex="-1"></a>  pw_qval <span class="ot">&lt;-</span> <span class="fu">format</span>(pw_qval, <span class="at">scientific =</span> F, <span class="at">digits =</span> <span class="dv">3</span>)</span>
+<span id="cb220-15"><a href="fgsea_mod8.html#cb220-15" tabindex="-1"></a>  pw_nes <span class="ot">&lt;-</span> selected_gsea<span class="sc">@</span>result<span class="sc">$</span>NES[row_number]</span>
+<span id="cb220-16"><a href="fgsea_mod8.html#cb220-16" tabindex="-1"></a>  pw_nes <span class="ot">&lt;-</span> <span class="fu">format</span>(pw_nes, <span class="at">scientific =</span> F, <span class="at">digits =</span> <span class="dv">2</span>)</span>
+<span id="cb220-17"><a href="fgsea_mod8.html#cb220-17" tabindex="-1"></a>  pw_es <span class="ot">&lt;-</span> selected_gsea<span class="sc">@</span>result<span class="sc">$</span>enrichmentScore[row_number]</span>
+<span id="cb220-18"><a href="fgsea_mod8.html#cb220-18" tabindex="-1"></a>  pw_es <span class="ot">&lt;-</span> <span class="fu">format</span>(pw_es, <span class="at">scientific =</span> F, <span class="at">digits =</span> <span class="dv">2</span>)</span>
+<span id="cb220-19"><a href="fgsea_mod8.html#cb220-19" tabindex="-1"></a>  mytitle <span class="ot">&lt;-</span> glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">&#39;{pw_des}</span><span class="sc">\n</span><span class="st">(pval: {pw_pval}, qval: {pw_qval}, NES: {pw_nes}, ES: {pw_es})&#39;</span>)</span>
+<span id="cb220-20"><a href="fgsea_mod8.html#cb220-20" tabindex="-1"></a></span>
+<span id="cb220-21"><a href="fgsea_mod8.html#cb220-21" tabindex="-1"></a></span>
+<span id="cb220-22"><a href="fgsea_mod8.html#cb220-22" tabindex="-1"></a>  figure <span class="ot">&lt;-</span> enrichplot<span class="sc">::</span><span class="fu">gseaplot2</span>(</span>
+<span id="cb220-23"><a href="fgsea_mod8.html#cb220-23" tabindex="-1"></a>    selected_gsea,</span>
+<span id="cb220-24"><a href="fgsea_mod8.html#cb220-24" tabindex="-1"></a>    <span class="at">geneSetID =</span> selected_gsea<span class="sc">@</span>result<span class="sc">$</span>ID[row_number],</span>
+<span id="cb220-25"><a href="fgsea_mod8.html#cb220-25" tabindex="-1"></a>    <span class="at">title =</span> mytitle,</span>
+<span id="cb220-26"><a href="fgsea_mod8.html#cb220-26" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;green2&quot;</span>,</span>
+<span id="cb220-27"><a href="fgsea_mod8.html#cb220-27" tabindex="-1"></a>    <span class="at">base_size =</span> <span class="dv">12</span>,</span>
+<span id="cb220-28"><a href="fgsea_mod8.html#cb220-28" tabindex="-1"></a>    <span class="at">rel_heights =</span> <span class="fu">c</span>(<span class="fl">1.5</span>, <span class="fl">0.5</span>, <span class="dv">1</span>),</span>
+<span id="cb220-29"><a href="fgsea_mod8.html#cb220-29" tabindex="-1"></a>    <span class="at">subplots =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,</span>
+<span id="cb220-30"><a href="fgsea_mod8.html#cb220-30" tabindex="-1"></a>    <span class="at">pvalue_table =</span> F,</span>
+<span id="cb220-31"><a href="fgsea_mod8.html#cb220-31" tabindex="-1"></a>    <span class="at">ES_geom =</span> <span class="st">&quot;line&quot;</span></span>
+<span id="cb220-32"><a href="fgsea_mod8.html#cb220-32" tabindex="-1"></a>  )</span>
+<span id="cb220-33"><a href="fgsea_mod8.html#cb220-33" tabindex="-1"></a></span>
+<span id="cb220-34"><a href="fgsea_mod8.html#cb220-34" tabindex="-1"></a>  all_figures[[i]] <span class="ot">&lt;-</span> figure</span>
+<span id="cb220-35"><a href="fgsea_mod8.html#cb220-35" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>## Warning: `aes_()` was deprecated in ggplot2 3.0.0.
+## ℹ Please use tidy evaluation idioms with `aes()`
+## ℹ The deprecated feature was likely used in the
+##   enrichplot package.
+##   Please report the issue at
+##   &lt;https://github.com/GuangchuangYu/enrichplot/issues&gt;.
+## This warning is displayed once per session.
+## Call `lifecycle::last_lifecycle_warnings()` to see where
+## this warning was generated.</code></pre>
+<pre><code>## Warning: Using `size` aesthetic for lines was deprecated in
+## ggplot2 3.4.0.
+## ℹ Please use `linewidth` instead.
+## ℹ The deprecated feature was likely used in the
+##   enrichplot package.
+##   Please report the issue at
+##   &lt;https://github.com/GuangchuangYu/enrichplot/issues&gt;.
+## This warning is displayed once per session.
+## Call `lifecycle::last_lifecycle_warnings()` to see where
+## this warning was generated.</code></pre>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="fgsea_mod8.html#cb223-1" tabindex="-1"></a><span class="co">#display the first 3 enrichment plots</span></span>
+<span id="cb223-2"><a href="fgsea_mod8.html#cb223-2" tabindex="-1"></a><span class="cf">for</span> (figure <span class="cf">in</span> <span class="fu">head</span>(all_figures, <span class="dv">3</span>)) {</span>
+<span id="cb223-3"><a href="fgsea_mod8.html#cb223-3" tabindex="-1"></a>  <span class="fu">print</span>(figure)</span>
+<span id="cb223-4"><a href="fgsea_mod8.html#cb223-4" tabindex="-1"></a>}</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-115-1.png" alt="" width="672" /><img src="_main_files/figure-html/unnamed-chunk-115-2.png" alt="" width="672" /><img src="_main_files/figure-html/unnamed-chunk-115-3.png" alt="" width="672" /></p>
+</div>
+<div id="bar-plots" class="section level4 hasAnchor">
+<h4>Bar plots<a href="fgsea_mod8.html#bar-plots" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li>top pathways associated with Parental</li>
+</ul>
+<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="fgsea_mod8.html#cb224-1" tabindex="-1"></a>topPathwaysDown <span class="ot">&lt;-</span> fgseaRes[ES <span class="sc">&lt;</span> <span class="dv">0</span>][<span class="fu">head</span>(<span class="fu">order</span>(pval), <span class="at">n=</span><span class="dv">20</span>), pathway]</span>
+<span id="cb224-2"><a href="fgsea_mod8.html#cb224-2" tabindex="-1"></a></span>
+<span id="cb224-3"><a href="fgsea_mod8.html#cb224-3" tabindex="-1"></a>enrichment_results_topdown <span class="ot">&lt;-</span> fgseaRes[<span class="fu">which</span>(fgseaRes<span class="sc">$</span>pathway <span class="sc">%in%</span> topPathwaysDown),]</span>
+<span id="cb224-4"><a href="fgsea_mod8.html#cb224-4" tabindex="-1"></a></span>
+<span id="cb224-5"><a href="fgsea_mod8.html#cb224-5" tabindex="-1"></a><span class="co">#change the name to be just the first part of the name</span></span>
+<span id="cb224-6"><a href="fgsea_mod8.html#cb224-6" tabindex="-1"></a>enrichment_results_topdown<span class="sc">$</span>pathway <span class="ot">&lt;-</span> <span class="fu">unlist</span>(<span class="fu">lapply</span>(enrichment_results_topdown<span class="sc">$</span>pathway, <span class="at">FUN=</span><span class="cf">function</span>(x){<span class="fu">unlist</span>(<span class="fu">strsplit</span>(x,<span class="at">split =</span> <span class="st">&quot;%&quot;</span>))[<span class="dv">1</span>]}))</span>
+<span id="cb224-7"><a href="fgsea_mod8.html#cb224-7" tabindex="-1"></a><span class="co">#make sure that names are unique after shortening them (the same name can come from different databases)</span></span>
+<span id="cb224-8"><a href="fgsea_mod8.html#cb224-8" tabindex="-1"></a>enrichment_results_topdown<span class="sc">$</span>pathway <span class="ot">&lt;-</span> <span class="fu">make.unique</span>(enrichment_results_topdown<span class="sc">$</span>pathway)</span>
+<span id="cb224-9"><a href="fgsea_mod8.html#cb224-9" tabindex="-1"></a></span>
+<span id="cb224-10"><a href="fgsea_mod8.html#cb224-10" tabindex="-1"></a><span class="do">##Calculate a score: the absolute value of the NES.</span></span>
+<span id="cb224-11"><a href="fgsea_mod8.html#cb224-11" tabindex="-1"></a><span class="do">##(the pvalues of the top pathways are all very close to each other, so the NES is more informative here)</span></span>
+<span id="cb224-12"><a href="fgsea_mod8.html#cb224-12" tabindex="-1"></a>enrichment_results_topdown<span class="sc">$</span>score <span class="ot">=</span> <span class="fu">abs</span>(enrichment_results_topdown<span class="sc">$</span>NES)</span>
+<span id="cb224-13"><a href="fgsea_mod8.html#cb224-13" tabindex="-1"></a></span>
+<span id="cb224-14"><a href="fgsea_mod8.html#cb224-14" tabindex="-1"></a>enrichmentTidy <span class="ot">&lt;-</span> enrichment_results_topdown <span class="sc">%&gt;%</span></span>
+<span id="cb224-15"><a href="fgsea_mod8.html#cb224-15" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb224-16"><a href="fgsea_mod8.html#cb224-16" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(score)) <span class="sc">%&gt;%</span></span>
+<span id="cb224-17"><a href="fgsea_mod8.html#cb224-17" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">20</span>)</span>
+<span id="cb224-18"><a href="fgsea_mod8.html#cb224-18" tabindex="-1"></a></span>
+<span id="cb224-19"><a href="fgsea_mod8.html#cb224-19" tabindex="-1"></a>p <span class="ot">=</span> <span class="fu">ggplot</span>(enrichmentTidy, <span class="fu">aes</span>(<span class="fu">reorder</span>(pathway, score), score)) <span class="sc">+</span></span>
+<span id="cb224-20"><a href="fgsea_mod8.html#cb224-20" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">fill =</span> score), <span class="at">width=</span><span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb224-21"><a href="fgsea_mod8.html#cb224-21" tabindex="-1"></a>  <span class="fu">scale_fill_gradient</span>(<span class="at">low =</span> <span class="st">&quot;#C1F6F8&quot;</span>, <span class="at">high =</span> <span class="st">&quot;#00BFC4&quot;</span>)<span class="sc">+</span></span>
+<span id="cb224-22"><a href="fgsea_mod8.html#cb224-22" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb224-23"><a href="fgsea_mod8.html#cb224-23" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;&quot;</span>, <span class="at">y=</span><span class="st">&quot;Normalized Enrichment Score (absolute value)&quot;</span>,</span>
+<span id="cb224-24"><a href="fgsea_mod8.html#cb224-24" tabindex="-1"></a>       <span class="at">title=</span><span class="st">&quot;Pathway enrichment analysis - </span><span class="sc">\n</span><span class="st">Parental&quot;</span>) <span class="sc">+</span></span>
+<span id="cb224-25"><a href="fgsea_mod8.html#cb224-25" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb224-26"><a href="fgsea_mod8.html#cb224-26" tabindex="-1"></a></span>
+<span id="cb224-27"><a href="fgsea_mod8.html#cb224-27" tabindex="-1"></a>p</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-116-1.png" alt="" width="672" /></p>
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="fgsea_mod8.html#cb225-1" tabindex="-1"></a><span class="do">##YOUR TURN##</span></span>
+<span id="cb225-2"><a href="fgsea_mod8.html#cb225-2" tabindex="-1"></a></span>
+<span id="cb225-3"><a href="fgsea_mod8.html#cb225-3" tabindex="-1"></a><span class="do">## Generate the same bar plot for the top 20 Palbo-resistant results.</span></span>
+<span id="cb225-4"><a href="fgsea_mod8.html#cb225-4" tabindex="-1"></a><span class="do">## Change the colour of the bars to a different colour as</span></span>
+<span id="cb225-5"><a href="fgsea_mod8.html#cb225-5" tabindex="-1"></a><span class="do">## they are a different phenotype than the Parental set.</span></span></code></pre></div>
+</div>
+<div id="dot-plot" class="section level4 hasAnchor">
+<h4>Dot plot<a href="fgsea_mod8.html#dot-plot" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li>top pathways associated with Parental</li>
+</ul>
+<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="fgsea_mod8.html#cb226-1" tabindex="-1"></a>p <span class="ot">=</span> <span class="fu">ggplot</span>(enrichment_results_topdown, <span class="fu">aes</span>(</span>
+<span id="cb226-2"><a href="fgsea_mod8.html#cb226-2" tabindex="-1"></a>  <span class="at">y =</span> <span class="fu">fct_reorder</span>(pathway, score),</span>
+<span id="cb226-3"><a href="fgsea_mod8.html#cb226-3" tabindex="-1"></a>  <span class="at">x =</span> score,</span>
+<span id="cb226-4"><a href="fgsea_mod8.html#cb226-4" tabindex="-1"></a>  <span class="at">color =</span> score,</span>
+<span id="cb226-5"><a href="fgsea_mod8.html#cb226-5" tabindex="-1"></a>  <span class="at">size =</span> size</span>
+<span id="cb226-6"><a href="fgsea_mod8.html#cb226-6" tabindex="-1"></a>)) <span class="sc">+</span></span>
+<span id="cb226-7"><a href="fgsea_mod8.html#cb226-7" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb226-8"><a href="fgsea_mod8.html#cb226-8" tabindex="-1"></a>  <span class="fu">scale_color_gradientn</span>(</span>
+<span id="cb226-9"><a href="fgsea_mod8.html#cb226-9" tabindex="-1"></a>    <span class="at">colours =</span> <span class="fu">c</span>(<span class="st">&quot;lightpink&quot;</span>, <span class="st">&quot;lightblue&quot;</span>, <span class="st">&quot;blue&quot;</span>),</span>
+<span id="cb226-10"><a href="fgsea_mod8.html#cb226-10" tabindex="-1"></a>    <span class="at">guide =</span> <span class="fu">guide_colorbar</span>(<span class="at">reverse =</span> <span class="cn">FALSE</span>, <span class="at">order =</span> <span class="dv">1</span>)</span>
+<span id="cb226-11"><a href="fgsea_mod8.html#cb226-11" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb226-12"><a href="fgsea_mod8.html#cb226-12" tabindex="-1"></a>  <span class="fu">scale_size_continuous</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">8</span>), <span class="at">name =</span> <span class="st">&quot;genes in set&quot;</span>) <span class="sc">+</span></span>
+<span id="cb226-13"><a href="fgsea_mod8.html#cb226-13" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">12</span>) <span class="sc">+</span></span>
+<span id="cb226-14"><a href="fgsea_mod8.html#cb226-14" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Normalized Enrichment Score (absolute value)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb226-15"><a href="fgsea_mod8.html#cb226-15" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb226-16"><a href="fgsea_mod8.html#cb226-16" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Pathway Enrichment Analysis - </span><span class="sc">\n</span><span class="st"> Parental&quot;</span>) <span class="sc">+</span></span>
+<span id="cb226-17"><a href="fgsea_mod8.html#cb226-17" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb226-18"><a href="fgsea_mod8.html#cb226-18" tabindex="-1"></a>    <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">7</span>)</span>
+<span id="cb226-19"><a href="fgsea_mod8.html#cb226-19" tabindex="-1"></a>  )</span>
+<span id="cb226-20"><a href="fgsea_mod8.html#cb226-20" tabindex="-1"></a>p</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-118-1.png" alt="" width="672" /></p>
+<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="fgsea_mod8.html#cb227-1" tabindex="-1"></a><span class="do">##YOUR TURN##</span></span>
+<span id="cb227-2"><a href="fgsea_mod8.html#cb227-2" tabindex="-1"></a></span>
+<span id="cb227-3"><a href="fgsea_mod8.html#cb227-3" tabindex="-1"></a><span class="do">## Generate the same dot plot for the top 20 Palbo-resistant results.</span></span>
+<span id="cb227-4"><a href="fgsea_mod8.html#cb227-4" tabindex="-1"></a><span class="do">## Change the colour of the dots to a different colour range as</span></span>
+<span id="cb227-5"><a href="fgsea_mod8.html#cb227-5" tabindex="-1"></a><span class="do">## they are a different phenotype than the Parental set.</span></span></code></pre></div>
+</div>
+<div id="ridge-plots" class="section level4 hasAnchor">
+<h4>Ridge plots<a href="fgsea_mod8.html#ridge-plots" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li>top pathways associated with either class</li>
+</ul>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="fgsea_mod8.html#cb228-1" tabindex="-1"></a><span class="co"># Filter significant pathways (adjusted p-value &lt; 0.05) and take</span></span>
+<span id="cb228-2"><a href="fgsea_mod8.html#cb228-2" tabindex="-1"></a><span class="co"># the top 5 for each class (highest positive NES and most negative NES)</span></span>
+<span id="cb228-3"><a href="fgsea_mod8.html#cb228-3" tabindex="-1"></a>significant_pathways <span class="ot">&lt;-</span> fgseaRes[padj <span class="sc">&lt;</span> <span class="fl">0.05</span>]</span>
+<span id="cb228-4"><a href="fgsea_mod8.html#cb228-4" tabindex="-1"></a>topPathways <span class="ot">&lt;-</span> <span class="fu">rbind</span>(</span>
+<span id="cb228-5"><a href="fgsea_mod8.html#cb228-5" tabindex="-1"></a>  <span class="fu">head</span>(significant_pathways[NES <span class="sc">&gt;</span> <span class="dv">0</span>][<span class="fu">order</span>(<span class="sc">-</span>NES)], <span class="dv">5</span>),</span>
+<span id="cb228-6"><a href="fgsea_mod8.html#cb228-6" tabindex="-1"></a>  <span class="fu">head</span>(significant_pathways[NES <span class="sc">&lt;</span> <span class="dv">0</span>][<span class="fu">order</span>(NES)], <span class="dv">5</span>)</span>
+<span id="cb228-7"><a href="fgsea_mod8.html#cb228-7" tabindex="-1"></a>)</span>
+<span id="cb228-8"><a href="fgsea_mod8.html#cb228-8" tabindex="-1"></a></span>
+<span id="cb228-9"><a href="fgsea_mod8.html#cb228-9" tabindex="-1"></a><span class="co"># Create a data.frame for plotting with the gene ranks for each of the top pathways</span></span>
+<span id="cb228-10"><a href="fgsea_mod8.html#cb228-10" tabindex="-1"></a>ridge_data <span class="ot">&lt;-</span> <span class="fu">rbindlist</span>(<span class="fu">lapply</span>(topPathways<span class="sc">$</span>pathway, <span class="cf">function</span>(pw) {</span>
+<span id="cb228-11"><a href="fgsea_mod8.html#cb228-11" tabindex="-1"></a>  genes <span class="ot">&lt;-</span> pathways[[pw]]</span>
+<span id="cb228-12"><a href="fgsea_mod8.html#cb228-12" tabindex="-1"></a>  <span class="fu">data.frame</span>(</span>
+<span id="cb228-13"><a href="fgsea_mod8.html#cb228-13" tabindex="-1"></a>    <span class="at">gene =</span> genes,</span>
+<span id="cb228-14"><a href="fgsea_mod8.html#cb228-14" tabindex="-1"></a>    <span class="at">stat =</span> ranks[genes],</span>
+<span id="cb228-15"><a href="fgsea_mod8.html#cb228-15" tabindex="-1"></a>    <span class="at">pathway =</span> pw</span>
+<span id="cb228-16"><a href="fgsea_mod8.html#cb228-16" tabindex="-1"></a>  )</span>
+<span id="cb228-17"><a href="fgsea_mod8.html#cb228-17" tabindex="-1"></a>}))</span>
+<span id="cb228-18"><a href="fgsea_mod8.html#cb228-18" tabindex="-1"></a></span>
+<span id="cb228-19"><a href="fgsea_mod8.html#cb228-19" tabindex="-1"></a></span>
+<span id="cb228-20"><a href="fgsea_mod8.html#cb228-20" tabindex="-1"></a><span class="co"># get NES for each of the top pathways</span></span>
+<span id="cb228-21"><a href="fgsea_mod8.html#cb228-21" tabindex="-1"></a>nes_map <span class="ot">&lt;-</span> <span class="fu">setNames</span>(topPathways<span class="sc">$</span>NES, topPathways<span class="sc">$</span>pathway)</span>
+<span id="cb228-22"><a href="fgsea_mod8.html#cb228-22" tabindex="-1"></a></span>
+<span id="cb228-23"><a href="fgsea_mod8.html#cb228-23" tabindex="-1"></a><span class="co"># Add NES values to ridge_data</span></span>
+<span id="cb228-24"><a href="fgsea_mod8.html#cb228-24" tabindex="-1"></a>ridge_data<span class="sc">$</span>NES <span class="ot">&lt;-</span> nes_map[ridge_data<span class="sc">$</span>pathway]</span>
+<span id="cb228-25"><a href="fgsea_mod8.html#cb228-25" tabindex="-1"></a></span>
+<span id="cb228-26"><a href="fgsea_mod8.html#cb228-26" tabindex="-1"></a><span class="co">#change the name to be just the first part of the name (because the actual names are too long)</span></span>
+<span id="cb228-27"><a href="fgsea_mod8.html#cb228-27" tabindex="-1"></a><span class="co">#and make sure that names are unique after shortening them</span></span>
+<span id="cb228-28"><a href="fgsea_mod8.html#cb228-28" tabindex="-1"></a>short_names <span class="ot">&lt;-</span> <span class="fu">make.unique</span>(<span class="fu">unlist</span>(<span class="fu">lapply</span>(topPathways<span class="sc">$</span>pathway, <span class="at">FUN=</span><span class="cf">function</span>(x){<span class="fu">unlist</span>(<span class="fu">strsplit</span>(x,<span class="at">split =</span> <span class="st">&quot;%&quot;</span>))[<span class="dv">1</span>]})))</span>
+<span id="cb228-29"><a href="fgsea_mod8.html#cb228-29" tabindex="-1"></a><span class="fu">names</span>(short_names) <span class="ot">&lt;-</span> topPathways<span class="sc">$</span>pathway</span>
+<span id="cb228-30"><a href="fgsea_mod8.html#cb228-30" tabindex="-1"></a>ridge_data<span class="sc">$</span>pathway <span class="ot">&lt;-</span> short_names[ridge_data<span class="sc">$</span>pathway]</span>
+<span id="cb228-31"><a href="fgsea_mod8.html#cb228-31" tabindex="-1"></a></span>
+<span id="cb228-32"><a href="fgsea_mod8.html#cb228-32" tabindex="-1"></a><span class="co">#get rid of na values for genes found in the gene set but not ranked in our dataset.</span></span>
+<span id="cb228-33"><a href="fgsea_mod8.html#cb228-33" tabindex="-1"></a>ridge_data <span class="ot">&lt;-</span> ridge_data[<span class="sc">!</span><span class="fu">is.na</span>(ridge_data<span class="sc">$</span>stat),]</span>
+<span id="cb228-34"><a href="fgsea_mod8.html#cb228-34" tabindex="-1"></a></span>
+<span id="cb228-35"><a href="fgsea_mod8.html#cb228-35" tabindex="-1"></a><span class="fu">ggplot</span>(ridge_data, <span class="fu">aes</span>(<span class="at">x =</span> stat, <span class="at">y =</span> <span class="fu">reorder</span>(pathway, NES), <span class="at">fill =</span> NES)) <span class="sc">+</span></span>
+<span id="cb228-36"><a href="fgsea_mod8.html#cb228-36" tabindex="-1"></a>  <span class="fu">geom_density_ridges</span>(<span class="at">scale =</span> <span class="dv">2</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb228-37"><a href="fgsea_mod8.html#cb228-37" tabindex="-1"></a>  <span class="fu">scale_fill_gradient2</span>(</span>
+<span id="cb228-38"><a href="fgsea_mod8.html#cb228-38" tabindex="-1"></a>    <span class="at">low =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">mid =</span> <span class="st">&quot;white&quot;</span>, <span class="at">high =</span> <span class="st">&quot;red&quot;</span>, <span class="at">midpoint =</span> <span class="dv">0</span>,</span>
+<span id="cb228-39"><a href="fgsea_mod8.html#cb228-39" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">&quot;NES&quot;</span></span>
+<span id="cb228-40"><a href="fgsea_mod8.html#cb228-40" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb228-41"><a href="fgsea_mod8.html#cb228-41" tabindex="-1"></a>  <span class="fu">theme_ridges</span>() <span class="sc">+</span></span>
+<span id="cb228-42"><a href="fgsea_mod8.html#cb228-42" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;right&quot;</span>,<span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">6</span>)) <span class="sc">+</span></span>
+<span id="cb228-43"><a href="fgsea_mod8.html#cb228-43" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb228-44"><a href="fgsea_mod8.html#cb228-44" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Ridgeplot of Gene Stats</span><span class="sc">\n</span><span class="st"> for Top Enriched Pathways&quot;</span>,</span>
+<span id="cb228-45"><a href="fgsea_mod8.html#cb228-45" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Gene-level Statistic&quot;</span>,</span>
+<span id="cb228-46"><a href="fgsea_mod8.html#cb228-46" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Pathway&quot;</span></span>
+<span id="cb228-47"><a href="fgsea_mod8.html#cb228-47" tabindex="-1"></a>  )</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-120-1.png" alt="" width="672" /></p>
+<p>NOTE: In the next module, you will learn a better approach to address redundancy and visualize enriched gene sets as networks using Cytoscape and EnrichmentMap.</p>
+
+</div>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="gprofiler_mod8.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="byod_mod8.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": false,
+    "twitter": false,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/bioinformaticsdotca/CAN_TorMon-2610/blob/main/083-module-8-RankedGeneList.Rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["_main.pdf", "_main.epub"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
