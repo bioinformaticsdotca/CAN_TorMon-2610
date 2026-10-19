@@ -1,11 +1,716 @@
-# Module 7
+
+# Module 7 | From Gene Alteration to Gene Effect 
 
 ## Lecture
 
-<!--<iframe width="640" height="360" src="YOUTUBE EMBED LINK" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
--->
-
-<!--<iframe src="GOOGLE SLIDES LINK/preview" width="640" height="480" allow="autoplay"></iframe>  
--->
+<!-- PUT MY LINK HERE!!!!!!!!!!!! -->
+<iframe src="https://docs.google.com/presentation/d/18y1L6ftJpHAlFfFvX12euB0fZ650i-EY/preview" width="640" height="480" allow="autoplay"></iframe>  
 
 ## Lab
+
+### Part 1. Introduction
+
+**Author**: Aqsa Alam
+
+#### 1.1: Description of the Lab
+
+In previous modules, you learned how to identify somatic variants. But identifying a variant is only the first step. What does that variant actually mean? 
+
+A change in a DNA sequence does not automatically mean that a gene is dysfunctional or that the change contributes to cancer. To investigate its potential effect, we need to understand where the variant occurs, predict its molecular consequence, and examine what is already known about the affected gene and its variant.
+
+In this lab, you will explore somatic variants from two pancreatic ductal adenocarcinoma (PDAC) cases using **bcftools** and **awk**, and annotate those variants using **SnpEff**. You will explore the resulting annotations and HTML summary reports to investigate the types of variants present and their predicted effects on genes and transcripts. You will then examine selected variants in the context of existing databases and scientific evidence. To explore differences in annotation algorithms, you will also use **Ensembl Variant Effect Predictor (VEP)** to investigate a variant of your choice.
+
+Throughout the lab, keep one thing in mind: **a predicted consequence is not the same thing as a demonstrated functional effect, and does not automatically establish that the variant contributes to cancer.** Your goal is to use the available evidence to develop an informed hypothesis of what the variants might mean.
+
+#### 1.2: Our data
+
+The data we will be using in this lab has been downloaded from the International Cancer Genome Consortium (ICGC) ARGO Data Platform, from a study of pancreatic ductal adenocarcinoma (PDAC) called [PACA-CA (*Pancreatic Cancer Harmonized ‘Omics’ analysis for Personalized Treatment*)](https://platform.icgc-argo.org/program/PACA-CA).The study is also described [here](https://www.icgc-argo.org/page/96/panchope). The dataset consists of two tumour samples, each from a different patient, which was analyzed using a matched normal (in which DNA from a patient's tumour is analyzed alongside DNA from a normal blood sample from the same patient).  This comparison helps distinguish variants in the tumour from variants in the patient's healthy cells.
+
+:::: {.callout type="purple"}
+**DATA SOURCES**
+
+**2. Patient 1: Single-Nucleotide Variants (SNVs)**
+
+- [PACA-CA.DO49419.SA520262.wgs.20201012.gatk-mutect2.somatic.snv.open-filter.vcf.gz](https://platform.icgc-argo.org/file/FL36108)
+
+**1. Patient 2: Insertions and Deletions (InDels)**
+
+- [PACA-CA.DO35350.SA520304.wgs.20201011.gatk-mutect2.somatic.indel.open-filter.vcf.gz](https://platform.icgc-argo.org/file/FL36576)
+
+
+Both datasets have the following features:
+
+- **Assay:** Whole-genome sequencing (WGS)
+- **Instrument:** Illumina
+- **Genome build:** GRCh38
+- **Variant caller:** GATK Mutect2
+- **File processing:** bcftools view
+- **Sample type:** Primary tumour, with matched normal sequencing used for somatic variant calling
+- **Access:** Open-access, filtered VCF
+
+The two cases contain different sets of variants:
+
+| Case | Variant set | Genes of interest |
+|---|---|---|
+| Patient 1 | Single-nucleotide variants (SNVs) | KRAS, BRCA2 |
+| Patient 2 | Insertions and deletions (InDels) | SMAD4, TP53 |
+
+**Note:** These are two separate patients, not one combined tumour profile.
+::::
+
+The raw VCF data has been significantly filtered as per ICGC ARGO's [Open Access Variant Filtering workflow](https://docs.icgc-argo.org/docs/analysis-workflows/dna-open-access-filtering). Open access regions are also described in detail [here](https://github.com/icgc-argo/open-access-regions). This is to prevent accidental disclosure of germline variants which might identify a patient and compromise their privacy. This gives us the ability to explore real cancer data without the need for special permissions, at the expense of some data loss.
+
+
+:::: {.callout type="blue"}
+Before running any commands, consider:<br>
+**1.** What information can we get from a list of genomic variants?<br>
+**2.** If we know that a variant occurs in a cancer-associated gene, do we know what the variant does?<br>
+::::
+
+
+#### 1.3: Our tools 
+
+We will use three command-line tools, one web-based tool, and explore some databases.
+
+**bcftools** 
+
+bcftools is a collection of tools for working with VCF and BCF files. In this lab, we will use it to inspect variant calls, count records, and examine fields. 
+
+To see the manual for bcftools, try one of the following commands:
+
+```
+$ bcftools --help
+$ man bcftools 
+```
+
+**SnpEff**
+
+SnpEff annotates genetic variants by comparing their genomic positions and alleles with existing gene and transcript annotations. It predicts consequences such as:
+
+- **missense variant:** a coding change that alters an amino acid
+- **synonymous variant:** a coding change that does not alter an amino acid
+- **stop_gained or nonsense variant:** a change that introduces a premature stop codon
+- **frameshift_variant:** an insertion or deletion that shifts the coding reading frame
+- **intron_variant:** a variant located within an intron 
+
+SnpEff also annotates variants by impact level:
+
+- **HIGH impact:** the variant is assumed to have disruptive impact in the protein and probably causes protein truncation, loss of function, or nonsense-mediated decay<br>
+- **MODERATE impact:** a non-disruptive variant that might change protein effectiveness<br>
+- **LOW impact:** assumed to be mostly harmless or unlikely to change protein behaviour<br>
+- **MODIFIER impact:** usually non-coding variants or variants affecting non-coding genes, where predictions are difficult or there is no evidence of impact<br>
+
+The documentation is the most thorough source of explanations for SnpEff outputs. You may find this useful to consult during the lab: [SnpEff Documentation](https://pcingola.github.io/SnpEff/snpeff/inputoutput/).
+
+To see the manual for SnpEff, try the following command:
+
+```
+$ java -jar /usr/local/snpEff/snpEff.jar --help
+```
+
+:::: {.callout type="yellow"}
+**Important consideration:** SnpEff **predicts** molecular consequences. It does not **determine** that a variant changes protein function, causes cancer, or predicts response to treatment.
+::::
+
+
+**awk**
+
+awk is a command-line tool for processing and analyzing structured text. It reads input line by line, splits each line into fields (by default, separated by whitespace), and lets you select, extract, or manipulate specific fields. It is extremely useful for pattern-matching and extracting particular lines from a VCF-file, such as looking for lines that contain particular genes of interest.
+
+To see the manual for awk, try one of the following commands:
+
+```
+$ awk --help
+$ man awk
+```
+
+**Ensembl Variant Effect Predictor (VEP)**
+
+(From the homepage:) Ensembl VEP predicts the effect of your variants (SNPs, insertions, deletions, CNVs or structural variants) on gene transcripts and protein sequence, as well as regulatory regions. It reports reference data including gene and variant phenotype associations and population allele frequencies to facilitate variant prioritisation and interpretation.
+
+You can access Ensembl VEP here: [Ensembl VEP Homepage](https://useast.ensembl.org/info/docs/tools/vep/index.html)<br>
+The web browser version is here: [Ensembl VEP Web Browser Version](https://useast.ensembl.org/Tools/VEP) (note: the browser version is very slow and often times out. If you get a time out error, just refresh and try again).
+
+**Variant Databases**
+
+Lastly, we will explore several databases that collect and organize existing evidence about genetic variants. These resources can help us investigate whether a variant has been previously reported, what is known about its clinical significance, and whether it may be relevant to cancer diagnosis or treatment.
+
+- **[CIViC](https://civicdb.org/):** A community-curated database of evidence linking cancer variants to clinical significance, including potential implications for diagnosis, prognosis, and treatment.
+- **[OncoKB](https://www.oncokb.org/):** A precision oncology knowledge base that summarizes the biological and clinical significance of cancer alterations, including evidence for their relevance to specific therapies.
+- **[ClinVar](https://www.ncbi.nlm.nih.gov/clinvar/):** A public database of submitted interpretations of genetic variants and their relationships to health conditions. Entries may differ in their evidence, classification, and relevance to the cancer context being investigated.
+
+:::: {.callout type="yellow"}
+**Important consideration:** Databases are often built by public submission or curated from published literature. A database entry does not automatically establish that a variant drives cancer or is clinically actionable. Similarly, a variant missing from a database does not automatically imply that the variant is not involved in cancer or is not clinically actionable. The variant may simply not have been reported or evaluated yet. **The absence of evidence is not evidence of absence!**
+::::
+
+
+
+### Part 2: Inspect the data
+
+#### 2.1. Copy the files
+
+Navigate to your workspace directory and create a subdirectory for your work (call it whatever you want; here, I'm calling it module7):
+
+```
+$ cd workspace/
+$ mkdir module7
+$ cd module7
+```
+
+Copy the VCF files to your workspace. We will simplify the file names for the rest of the workshop.List the files:
+
+```
+$ cp ../CourseData/Module7/PACA-CA.DO49419.SA520262.wgs.20201012.gatk-mutect2.somatic.snv.open-filter.vcf.gz patient1_snvs.vcf.gz
+$ cp ../CourseData/Module7/PACA-CA.DO35350.SA520304.wgs.20201011.gatk-mutect2.somatic.indel.open-filter.vcf.gz patient2_indels.vcf.gz
+$ ls 
+```
+
+:::: {.callout type="blue"}
+**Questions:**
+
+1. Which files have been provided??
+2. Which one contains SNVs? Which ones contains indels?
+3. What file extension do you see? What might it indicate?
+::::
+
+
+
+#### 2.2. Examine the VCF header
+
+VCF stands for **Variant Call Format.** It is a standard format used in bioinformatics for representing genetic variants.
+
+First, display the header of Patient 1's VCF:
+
+```
+$ bcftools view -h patient1_snvs.vcf.gz | less 
+```
+Do the same for patient 2. Examine the header.
+
+A VCF contains two main components:
+
+1. Header lines, beginning with #, that describe the file, reference genome, samples, and fields.
+2. Variant records, which describe individual variants
+
+The header ends with a column-name line beginning with #CHROM.
+
+:::: {.callout type="blue"}
+**Questions:**
+
+1. What do the following FORMAT fields represent: `DP`, `AD`, `AF`?
+2. What do the following FILTER fields represent: `PASS`, `map_qual`, `germline`?
+3. What version of Mutect was used to process the results?
+4. What does `PASS` indicate?
+::::
+
+#### 2.3. Understand the VCF columns
+
+Each variant record describes a difference between the reference genome and an observed alternate allele.
+
+| Column | Meaning |
+|---|---|
+| `CHROM` | Chromosome or contig containing the variant |
+| `POS` | Genomic position of the variant |
+| `ID` | Variant identifier, if available |
+| `REF` | Reference allele |
+| `ALT` | Alternate allele |
+| `QUAL` | Variant-call quality score |
+| `FILTER` | Whether the record passed the applied filters |
+| `INFO` | Additional information about the variant |
+| `FORMAT` | Description of sample-level fields |
+| Sample column(s) | Genotype and other sample-level information |
+
+For example, a simplified record might look like this:
+
+```text
+chr1  1778559  .  G  A  .  PASS  DP=29  GT:AD  0|1:8,3  0|0:18,0
+```
+
+Here, the reference allele is `G`, while the alternate allele is `A`. The total sequencing depth (DP) is 29 reads. The AD field indicates the number of reads supporting each allele, in reference–alternate order. The first sample has 8 reads supporting the reference allele and 3 supporting the alternate allele, while the second sample has 18 reads supporting the reference allele and 0 supporting the alternate allele. The GT field indicates the genotype of each sample: 0|1 for the first sample and 0|0 for the second sample.
+
+:::: {.callout type="blue"}
+**Questions**
+
+1. Which column tells you where a variant occurs?
+2. Which columns tell you what sequence was observed and what sequence it differs from?
+3. Does a `PASS` record necessarily represent a cancer-driving mutation?
+4. Does the presence of an alternate allele (an allele different from the reference sequence) mean that the variant is somatic (i.e, acquired in the tumour rather than inherited)?
+::::
+
+### 2.4. Look at the first few variant records
+
+Display the first five variant records from Patient 1:
+
+```
+$ bcftools view -H patient1_snvs.vcf.gz | head -n 5
+```
+
+The `-H` option excludes the header, allowing you to see only variant records. The `head` command limits the output to the first five lines.
+
+Repeat for Patient 2:
+
+```
+$ bcftools view -H patient2_indels.vcf.gz | head -n 5
+```
+
+:::: {.callout type="blue"}
+**Questions**
+
+1. What type of information can you read directly from these records?
+2. What do you notice about the difference between the `ALT` fields in the patient with the SNV data vs. the patient with the indel data?
+3. Can you identify a gene from these columns alone?
+4. Can you determine the effect of a variant on a protein from the `REF` and `ALT` fields alone?
+5. Why might two variants with different genomic positions have very different biological consequences?
+::::
+
+### Part 3. Summarize the variant calls with bcftools
+
+Before annotating the variants, we should understand the contents of our input files.
+
+#### 3.1. Count the variant records
+
+Count the number of variant records in Patient 1's VCF:
+
+```
+$ bcftools view -H patient1_snvs.vcf.gz | wc -l
+```
+
+Repeat for Patient 2:
+
+```
+$ bcftools view -H patient2_indels.vcf.gz | wc -l
+```
+
+The `wc -l` command counts the number of lines. Here, each line represents a variant record.
+
+
+:::: {.callout type="blue"}
+**Questions**
+
+1. Which file contains more variant records?
+2. Does having more called variants mean that a tumour is more aggressive?
+3. Why should we avoid comparing these counts without knowing how the samples and variant sets were generated?
+::::
+
+#### 3.2. Generate a summary with bcftools stats
+
+Run the following command for Patient 1:
+
+```bash
+$ bcftools stats patient1_snvs.vcf.gz > patient1_stats.txt
+```
+
+Then inspect the summary:
+
+```bash
+$ less patient1_stats.txt
+```
+
+Press `q` to exit `less`.
+
+Repeat for Patient 2:
+
+```bash
+$ bcftools stats patient2_indels.vcf.gz > patient2_stats.txt
+```
+
+The output includes summary statistics about the VCF records. Depending on the input, these can include the number of records, SNPs, insertions, deletions, transitions, transversions, and other metrics.
+
+You can  also find the relevant statistics directly with:
+
+```
+$ grep '^SN' patient1_stats.txt
+$ grep '^SN' patient2_stats.txt
+```
+
+:::: {.callout type="blue"}
+**Questions**
+
+1. How many records does the summary report?
+2. How many samples does the summary report? Why are there this many number of samples?
+::::
+
+Finish examining the stats, then exit with `q`.
+
+### Part 4. Annotate variants with SnpEff
+
+#### 4.1. What are we adding to the VCF?
+
+So far, our VCF tells us where the variants are and which alternate alleles were called. However, the records may not directly tell us whether a variant lies within a coding exon, changes an amino acid, introduces a stop codon, or affects a splice site.
+
+SnpEff uses an existing genome annotation database to predict these consequences.
+
+Conceptually, the process is:
+
+<div align="center">
+
+Variant coordinates and alleles  
++  
+reference genome and gene annotations  
+=  
+predicted molecular consequences
+
+</div>
+
+SnpEff does not experimentally test each protein. Instead, it applies standardized computational rules to available sequence and annotation information to generate consistent, reproducible predictions of variant effects.
+
+#### 4.2: Exploring Available SnpEff Databases
+
+Before annotating variants, SnpEff needs a database containing reference genome and gene annotation information. The database determines which genes and transcripts SnpEff uses to predict the consequences of each variant.
+
+SnpEff provides a command to list available genome databases. Run:
+
+```
+$ java -jar /usr/local/snpEff/snpEff.jar databases | less
+```
+
+You can also search the output for human genome databases associated with GRCh38:
+
+```
+$ java -jar /usr/local/snpEff/snpEff.jar databases | grep 'GRCh38'
+```
+
+The output lists database identifiers and information about their availability. Depending on the SnpEff installation, it may include databases that are configured but not yet downloaded. While we have already installed the database we need, `GRCh38.p14`, you can install any database using the `download` command.
+
+:::: {.callout type="blue"}
+**Questions**
+
+1. Why is it important to use a database compatible with the reference genome used to call the variants?
+::::
+
+The reference genome that was used to generate the VCFs for this lab was **GRCh38**, so we will be using **GRCh38.p14** (the `.p14` bit refers to a patch release or fix).
+
+#### 4.3. Annotattion
+
+Run SnpEff on Patient 1's SNV VCF:
+
+```
+$ java -jar /usr/local/snpEff/snpEff.jar -v -stats patient1_snpeff_summary.html GRCh38.p14 patient1_snvs.vcf.gz > patient1_snvs_annotated.vcf
+```
+
+This command has several components:
+
+- `java -jar /usr/local/snpEff/snpEff.jar`: runs SnpEff.
+- `-v`: enables verbose output.
+- `-stats patient1_snpeff_summary.html`: requests an HTML summary report.
+- `GRCh38.p14`: specifies the genome annotation database.
+- `patient1_snvs.vcf.gz`: the input VCF.
+- `>`: redirects the annotated VCF output into a new file.
+- `patient1_snvs_annotated.vcf`: the output file containing the annotations.
+
+The original VCF remains unchanged.
+
+
+Repeat the process for Patient 2:
+
+```
+$ java -jar /usr/local/snpEff/snpEff.jar -v -stats patient2_snpeff_summary.html GRCh38.p14 patient2_indels.vcf.gz > patient2_indels_annotated.vcf
+```
+
+You can use the following list command to see new files at the top of the list:
+
+```
+$ ls -lt
+```
+
+:::: {.callout type="blue"}
+**Questions**
+
+1. Which new files were generated?
+2. Why is it useful to preserve the original VCF rather than overwrite it?
+3. What information do you expect to find in the annotated VCF that was absent from the original file?
+4. What assumptions does this annotation process rely on?
+::::
+ 
+#### 4.4. Inspect the annotated VCF
+
+First, inspect the header of the annotated file:
+
+```
+$ bcftools view -h patient1_snvs_annotated.vcf | less
+```
+
+Look for an INFO field called `ANN` by doing the following in `less`:
+
+```
+/ANN(hit enter)
+```
+
+Inspect the line. This tells you how to read the new annotations. The `ANN` field contains predicted annotations associated with each variant. These can include the predicted consequence, impact category, gene, transcript, and other information.
+
+Now inspect the first five annotated variant records and look at the `ANN` field.
+
+```
+$ bcftools view -H patient1_snvs_annotated.vcf | head -n 5
+```
+
+:::: {.callout type="blue"}
+**Questions**
+
+1. What has changed between the original and annotated VCFs?
+2. Which original fields have been retained?
+3. Where are the annotations stored?
+4. Does adding an annotation change the underlying variant call?
+5. Why might a single variant have more than one annotation?
+::::
+
+Repeat the above steps with Patient 2.
+
+### Part 5. Interpret the SnpEff HTML summary
+
+#### 5.1. Open the summary report
+
+Open `patient1_snpeff_summary.html` in your web browser. Repeat with `patient2_snpeff_summary.html`.
+
+These reports provide an overview of the consequences predicted across the input variant set. Explore the summary and consider what each statistic represents.
+
+The report includes information such as:
+
+- Counts of variants and annotations.
+- Predicted variant effects or consequences.
+- Impact categories.
+- Genes affected by variants.
+- Distribution of consequences across different genomic regions.
+
+:::: {.callout type="blue"}
+**Questions**
+
+1. What is the largest effect by impact: high, low, moderate, or modifier? Is this the same for Patient 2? Why is it the largest category?
+2. Can you conclude that one patient’s cancer is more aggressive from these summaries alone?
+3. Why would it be misleading to rank patients by the number of HIGH-impact annotations alone?
+4. Why might a single variant have more than one annotation?
+::::
+
+### Part 6. Examine individual variant annotations
+
+The summary tells us what is present across the dataset. Now we will examine individual records to understand what SnpEff predicts for particular variants.
+
+#### 6.1. Extract the ANN field
+
+Use `bcftools query` to extract the variant coordinates, alleles, and SnpEff annotation field, so we are not distracted by other fields in the VCF when viewing annotations:
+
+```
+$ bcftools query -f '%CHROM\t%POS\t%REF\t%ALT\t%INFO/ANN\n' patient1_snvs_annotated.vcf > patient1_annotations.tsv
+```
+
+Inspect the output:
+
+```
+$ head -n 5 patient1_annotations.tsv
+```
+
+Repeat for Patient 2.
+
+The output is a tab-separated file containing the genomic location, reference allele, alternate allele, and `ANN` annotations.
+
+A single `ANN` field may contain multiple annotations, separated by commas. Within an individual annotation, fields are separated by vertical bars (`|`). 
+
+
+:::: {.callout type="blue"}
+**Questions**
+
+1. What do the first four fields of an ANN entry represent?
+2. What is the difference between a variant's predicted consequence and its impact category?
+3. Why can a single genomic variant have multiple ANN entries?
+::::
+
+#### 6.2. Investigate a variant in a gene of interest
+
+Select a variant annotated in one of the genes of interest for your patient.
+
+- **Patient 1:** investigate a variant in KRAS or BRCA2.
+- **Patient 2:** investigate a variant in SMAD4 or TP53.
+
+These genes are known to be altered in PDAC. You can search the annotation file using **awk**:
+
+```
+$ cat patient1_snvs_annotated.vcf | awk '/KRAS/'
+```
+
+Use the annotated VCF and the extracted annotation table to find the relevant record.
+
+Record the following information for one of the transcripts:
+
+| Question | Your answer |
+|---|---|
+| Gene | |
+| Chromosome and position | |
+| Reference allele (REF) | |
+| Alternate allele (ALT) | |
+| Coding change (c.?), if available) | |
+| Protein change (p.?), if available) | |
+| Predicted consequence | |
+| SnpEff impact category | |
+| Transcript identifier, if available | |
+
+(Note: for information about coding and protein change notation, see here: [HGVS Nomenclature](https://hgvs-nomenclature.org/stable/recommendations/general/)
+
+:::: {.callout type="blue"}
+**Questions**
+
+1. What does the annotation allow you to conclude?
+2. What remains unknown?
+::::
+
+#### 6.3. Interpret the consequence
+
+Use the following guide to interpret common consequence terms.
+
+| Consequence | What it generally means |
+|---|---|
+| `missense_variant` | A coding change predicts a different amino acid |
+| `synonymous_variant` | A coding change predicts the same amino acid |
+| `stop_gained` | A change introduces a premature stop codon |
+| `frameshift_variant` | An insertion or deletion changes the reading frame of a coding sequence |
+| `splice_donor_variant` | A variant affects a splice donor region |
+| `splice_acceptor_variant` | A variant affects a splice acceptor region |
+| `intron_variant` | A variant lies within an intron |
+| `3_prime_UTR_variant` | A variant lies in the 3′ untranslated region |
+| `upstream_gene_variant` | A variant lies upstream of a gene, according to the annotation |
+
+These terms describe predicted molecular consequences relative to annotated genomic features and transcripts. They do not, by themselves, establish the full biological effect.
+
+:::: {.callout type="blue"}
+**Questions**
+
+1. Which of these consequences could directly alter the amino acid sequence?
+2. Why might a synonymous variant still be biologically relevant in some circumstances?
+3. Why could an intronic or untranslated-region variant matter even if it does not change an amino acid?
+4. Does every frameshift have the same effect on a gene?
+::::
+
+### Part 7. From gene function to cancer interpretation
+
+A molecular consequence is only one part of variant interpretation. To understand the potential significance of a variant, we also need to understand the gene and investigate the available evidence.
+
+#### 7.1. Investigate the gene
+
+Choose the gene associated with the variant you selected. You should have the coding or protein change in hand. For example, one entry is:
+
+```
+chr1    13421103        G       A       A|missense_variant|MODERATE|PRAMEF20|PRAMEF20|transcript|NM_001099852.2|protein_coding|4/4|c.1273G>A|p.Val425Ile|1372/1597|1273/1428|425/475||
+```
+
+In this example entry, we can see the following gene, coding change, and protein change:
+
+```
+Gene: PRAMEF20
+Coding change: c.1273G>A
+Protein change: p.Val425Ile
+```
+
+Search the literature for your variant (a cursory Google search is usually a good place to start. Supply the gene, coding notation, and protein change if applicable). You can use [GeneCards](https://www.genecards.org/) for information about human genes.
+
+You can also use NCBI's variation viewer to look at collated information for the variant, including in dbSNP: [NCBI variation viewer](https://www.ncbi.nlm.nih.gov/variation/view/). For this resource, type in the chromosome and coordinates in the search bar (ex. `chr13: 32379471-32379471`) and scroll down to see exact or nearby variants. 
+
+
+:::: {.callout type="blue"}
+**Questions**
+
+1. Why does knowing a gene's function help us interpret a variant?
+2. What is the pathogenicity of your variant (pathogenic, benign, etc)?
+3. If a gene is a tumour suppressor, does every variant in that gene disrupt its function?
+5. What is the difference between a plausible hypothesis and a demonstrated functional effect?
+::::
+
+### 7.2. Investigate variant evidence
+
+Look at the following resources:
+
+- **[CIViC](https://civicdb.org/):** a community-curated resource containing evidence about the clinical significance of variants in cancer.
+- **[OncoKB](https://www.oncokb.org/):** a precision oncology knowledge base that summarizes the biological and clinical significance of cancer alterations, including evidence for their relevance to specific therapies.
+- **[ClinVar](https://www.ncbi.nlm.nih.gov/clinvar/):** a public database of submitted interpretations of genetic variants and their relationships to health conditions.
+
+Look up your selected variant or gene where possible. Record whether you find a matching variant, a relevant gene-level entry, or no useful record.
+
+| Resource | What did you find? | What can you infer? |
+|---|---|---|
+| CIViC | | |
+| OncoKB | | |
+| ClinVar | | |
+
+If you cannot find the exact variant, record that result rather than substituting a different variant in the same gene without noting the distinction.
+
+:::: {.callout type="blue"}
+**Questions**
+
+1. What kind of information does each resource provide?
+2. Does finding a variant in a cancer database prove that it drives cancer?
+3. Does a ClinVar entry automatically establish that a variant is pathogenic or benign? Why or why not?
+4. If a database has no entry for your variant, does that mean the variant has no biological or clinical significance?
+5. Why might two variants in the same gene have very different levels of evidence?
+6. What additional information might be needed before concluding that a variant contributes to the development of this patient's cancer?
+::::
+
+### Part 8. Compare SnpEff and Ensembl VEP
+
+SnpEff is not the only tool used to annotate variants. Ensembl's Variant Effect Predictor (VEP) is another widely used tool for predicting the consequences of genetic variants.
+
+For this exercise, use the Ensembl VEP web interface:
+
+[Ensembl VEP Web Interface](https://useast.ensembl.org/Tools/VEP)
+
+The browser version may be slow or time out. If this happens, you may just need to try again.
+
+1. Select up to three variants from your annotated VCF file, i.e. the `_annotated.vcf` file (you can also use variants from the four known oncogenic genes provided above)
+2. Copy the chromosome, position, reference allele, and alternate allele into the VEP interface using the required input format. Below is an example. There is no need to copy the whole line; you can stop at the `FILTER` column.
+
+```
+chr13   32379471        .       G       A       .       PASS
+```
+
+3. Select a reference assembly that matches the input data. In our case, we will use GRCh38.p14.
+4. Run the annotation and inspect the results. You can click on the "run instant VEP for current line" button for faster results.
+5. Compare the predicted consequences with those reported by SnpEff.
+
+Record your comparison:
+
+| Variant | SnpEff consequence | VEP consequence | Same or different? |
+|---|---|---|---|
+| Variant 1 | | | |
+| Variant 2 | | | |
+| Variant 3 | | | |
+
+:::: {.callout type="blue"}
+**Questions**
+
+1. Did the tools predict the same consequence for every variant?
+2. If they differed, did they annotate the same transcript?
+3. Could differences in transcript selection, annotation releases, or prediction rules explain the discrepancy?
+4. If both tools agree, does this experimentally confirm the predicted effect?
+5. If they disagree, what would you investigate before deciding how to interpret the variant?
+::::
+
+Do not assume that one tool is automatically correct. A discrepancy is a reason to investigate the underlying annotations and assumptions.
+
+### Part 9. Final interpretation
+
+Return to the variant you selected.
+
+Write a short interpretation of your favourite variant. Your response should address the following:
+
+1. **The alteration:** What is the genomic variant?
+2. **The annotation:** What molecular consequence did SnpEff predict?
+3. **The gene:** What is the normal function of the affected gene, and how is it relevant to cancer?
+4. **The evidence:** What did you find in the databases or literature?
+5. **The hypothesis:** What effect might this variant have?
+6. **The uncertainty:** What can you not conclude from the available information?
+
+Your interpretation should distinguish between a predicted molecular consequence, a demonstrated functional effect, a contribution to cancer, and a potential clinical implication.
+
+You are not expected to prove that your selected variant is a cancer driver. You are expected to make a reasoned interpretation of the available evidence and explain its limitations.
+
+:::: {.callout type="blue"}
+**Final questions**
+
+1. Why is a gene's function not enough to determine the effect of an individual variant?
+2. What additional evidence would help establish whether a variant contributes to cancer?
+3. What would you need to know before deciding whether a variant could inform treatment?
+::::
+
+:::: {.callout type="purple"}
+**Key takeaway**
+
+A variant annotation is a starting point for interpretation, not the final answer.
+
+We began with a difference in DNA sequence, used genome annotations to predict its molecular consequence, investigated the affected gene and available evidence, and then formed our hypothesis.
+::::
