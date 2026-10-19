@@ -542,6 +542,7 @@ Record the following information for one of the transcripts:
 | SnpEff impact category | |
 | Transcript identifier, if available | |
 
+(Note: for information about coding and protein change notation, see here: [HGVS Nomenclature](https://hgvs-nomenclature.org/stable/recommendations/general/)
 
 :::: {.callout type="blue"}
 **Questions**
