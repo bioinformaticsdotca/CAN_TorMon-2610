@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Module 3 | Cancer Analysis 2026</title>
   <meta name="description" content="Workshop website for the 2026 Cancer Analysis Canadian Bioinformatics Workshop" />
-  <meta name="generator" content="bookdown 0.46 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.45 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Module 3 | Cancer Analysis 2026" />
   <meta property="og:type" content="book" />
@@ -512,11 +512,11 @@ Due to huge size of the original data, please use <strong>the following small da
 <p>If more multithreds are available, increase number of -t option. For example, <code>-t 8</code>.</p>
 <ol start="5" style="list-style-type: decimal">
 <li><p>Add RG (read group information) for subsequent analytic tools and convert SAM format to BAM format.
-<code>picard AddOrReplaceReadGroups \       INPUT=SRR7890824_10M.sam \       OUTPUT=SRR7890824_10M.rg.bam \       RGID=group1 \       RGLB=lib1 \       RGPL=ILLUMINA \       RGPU=unit1 \       RGSM=sample1 \       VALIDATION_STRINGENCY=LENIENT</code></p></li>
+<code>picard AddOrReplaceReadGroups \    INPUT=SRR7890824_10M.sam \    OUTPUT=SRR7890824_10M.rg.bam \    RGID=group1 \    RGLB=lib1 \    RGPL=ILLUMINA \    RGPU=unit1 \    RGSM=sample1 \    VALIDATION_STRINGENCY=LENIENT</code></p></li>
 <li><p>Sort BAM file
-<code>picard SortSam \       INPUT=SRR7890824_10M.rg.bam \       OUTPUT=SRR7890824_10M.sorted.bam \       SORT_ORDER=coordinate \       VALIDATION_STRINGENCY=SILENT</code></p></li>
+<code>picard SortSam \    INPUT=SRR7890824_10M.rg.bam \    OUTPUT=SRR7890824_10M.sorted.bam \    SORT_ORDER=coordinate \    VALIDATION_STRINGENCY=SILENT</code></p></li>
 <li><p>Mark duplicate
-<code>picard MarkDuplicates \       INPUT=SRR7890824_10M.sorted.bam \       OUTPUT=SRR7890824_10M.dedup.bam \       METRICS_FILE=metrics.txt</code></p></li>
+<code>picard MarkDuplicates \    INPUT=SRR7890824_10M.sorted.bam \    OUTPUT=SRR7890824_10M.dedup.bam \    METRICS_FILE=metrics.txt</code></p></li>
 <li><p>Make BAM index
 <code>samtools index SRR7890824_10M.dedup.bam</code></p></li>
 <li><p>Finally, you will obtain the following BAM and BAM index files.</p></li>

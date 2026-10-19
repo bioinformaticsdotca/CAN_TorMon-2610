@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Some examples of Gain, Loss, Deletion and LOH | Cancer Analysis 2026</title>
   <meta name="description" content="Workshop website for the 2026 Cancer Analysis Canadian Bioinformatics Workshop" />
-  <meta name="generator" content="bookdown 0.46 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.45 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Some examples of Gain, Loss, Deletion and LOH | Cancer Analysis 2026" />
   <meta property="og:type" content="book" />
@@ -558,7 +558,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb93-8"><a href="some-examples-of-gain-loss-deletion-and-loh.html#cb93-8" tabindex="-1"></a>  <span class="co"># bigger, opaque dots in the legend only (the plot keeps small transparent dots)</span></span>
 <span id="cb93-9"><a href="some-examples-of-gain-loss-deletion-and-loh.html#cb93-9" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">colour =</span> <span class="fu">guide_legend</span>(<span class="at">override.aes =</span> <span class="fu">list</span>(<span class="at">size =</span> <span class="dv">4</span>, <span class="at">alpha =</span> <span class="dv">1</span>))) <span class="sc">+</span></span>
 <span id="cb93-10"><a href="some-examples-of-gain-loss-deletion-and-loh.html#cb93-10" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
-<p><img src="Module5/img/gene_cn_events_SPP_GT_1-0_1.png" alt="" width="80%" style="display: block; margin: auto;" /></p>
+<p><img src="Module5/img/gene_cn_events_SPP_GT_1-0_1.png" width="80%" style="display: block; margin: auto;" /></p>
 <p>Some well-known cancer genes in this sample:</p>
 <div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="some-examples-of-gain-loss-deletion-and-loh.html#cb94-1" tabindex="-1"></a>genes_of_interest <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;CDKN2A&quot;</span>, <span class="st">&quot;FBXL17&quot;</span>, <span class="st">&quot;MYC&quot;</span>, <span class="st">&quot;CCND1&quot;</span>, <span class="st">&quot;BRCA2&quot;</span>, <span class="st">&quot;TP53&quot;</span>, <span class="st">&quot;PTEN&quot;</span>, <span class="st">&quot;BRCA1&quot;</span>, <span class="st">&quot;PIK3CA&quot;</span>, <span class="st">&quot;PTPRC&quot;</span>)</span>
 <span id="cb94-2"><a href="some-examples-of-gain-loss-deletion-and-loh.html#cb94-2" tabindex="-1"></a></span>
@@ -622,7 +622,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb95-11"><a href="some-examples-of-gain-loss-deletion-and-loh.html#cb95-11" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;chr9 (Mb), zoom 21.5-22.5&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Max CN&quot;</span>) <span class="sc">+</span> <span class="fu">theme_bw</span>()</span>
 <span id="cb95-12"><a href="some-examples-of-gain-loss-deletion-and-loh.html#cb95-12" tabindex="-1"></a></span>
 <span id="cb95-13"><a href="some-examples-of-gain-loss-deletion-and-loh.html#cb95-13" tabindex="-1"></a>p <span class="ot">&lt;-</span> p_all <span class="sc">|</span> p_zoom</span></code></pre></div>
-<p><img src="Module5/img/chr9_CDKN2A_gene_cn.png" alt="" width="90%" style="display: block; margin: auto;" /></p>
+<p><img src="Module5/img/chr9_CDKN2A_gene_cn.png" width="90%" style="display: block; margin: auto;" /></p>
 </div>
             </section>
 

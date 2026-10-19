@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Analyze the purple results | Cancer Analysis 2026</title>
   <meta name="description" content="Workshop website for the 2026 Cancer Analysis Canadian Bioinformatics Workshop" />
-  <meta name="generator" content="bookdown 0.46 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.45 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Analyze the purple results | Cancer Analysis 2026" />
   <meta property="og:type" content="book" />
@@ -862,7 +862,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb73-10"><a href="analyze-the-purple-results.html#cb73-10" tabindex="-1"></a>  <span class="at">.id =</span> <span class="st">&quot;sample&quot;</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb73-11"><a href="analyze-the-purple-results.html#cb73-11" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(gcBucket, median, <span class="at">colour =</span> sample)) <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
 <span id="cb73-12"><a href="analyze-the-purple-results.html#cb73-12" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;GC content of the 1 kb window (%)&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Median read depth&quot;</span>) <span class="sc">+</span> <span class="fu">theme_bw</span>()</span></code></pre></div>
-<p><img src="Module5/img/cobalt_gc_median.png" alt="" width="70%" style="display: block; margin: auto;" /></p>
+<p><img src="Module5/img/cobalt_gc_median.png" width="70%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="purple-purity-ploidy-and-copy-number-1" class="section level2 hasAnchor">
 <h2>PURPLE: purity, ploidy and copy number<a href="analyze-the-purple-results.html#purple-purity-ploidy-and-copy-number-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -1174,7 +1174,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb81-6"><a href="analyze-the-purple-results.html#cb81-6" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">combine_pngs</span>(one_sample, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">labels =</span> <span class="fu">rep</span>(<span class="st">&quot;&quot;</span>, <span class="dv">4</span>)) <span class="sc">+</span></span>
 <span id="cb81-7"><a href="analyze-the-purple-results.html#cb81-7" tabindex="-1"></a>  <span class="fu">plot_annotation</span>(<span class="at">title =</span> <span class="fu">sprintf</span>(<span class="st">&quot;%s  (true tDNA fraction %g%%)&quot;</span>, sid, <span class="dv">100</span> <span class="sc">*</span> purity_info[[sid]])) <span class="sc">&amp;</span></span>
 <span id="cb81-8"><a href="analyze-the-purple-results.html#cb81-8" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">&quot;bold&quot;</span>, <span class="at">size =</span> <span class="dv">18</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>))</span></code></pre></div>
-<p><img src="Module5/img/purple_plots_SPP_GT_1-0_1.png" alt="" width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="Module5/img/purple_plots_SPP_GT_1-0_1.png" width="100%" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="selection-of-purity" class="section level2 hasAnchor">
@@ -1186,7 +1186,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>several separate blue spots mean several solutions explain the data almost as well (e.g. ploidy 1.4 vs 2.8 at the same purity). This is a common source of errors, because doubling all copy numbers often fits the data equally well.</li>
 </ul>
 <div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="analyze-the-purple-results.html#cb82-1" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">combine_pngs</span>(purple.purity_ranges)</span></code></pre></div>
-<p><img src="Module5/img/purple_purity_range_all.png" alt="" width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="Module5/img/purple_purity_range_all.png" width="100%" style="display: block; margin: auto;" /></p>
 <p><strong>What to notice.</strong></p>
 <ul>
 <li><strong>100%</strong>: one sharp blue spot at purity 99%, ploidy 2.82 (plus a small one at ploidy ~1.4, the “half” solution).</li>
@@ -1213,27 +1213,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb83-3"><a href="analyze-the-purple-results.html#cb83-3" tabindex="-1"></a><span class="fu">plot_baf_cn</span>(sample_id, <span class="at">purity =</span> <span class="cn">NULL</span>, <span class="at">ploidy =</span> <span class="cn">NULL</span>, <span class="at">min_baf_count =</span> <span class="dv">10</span>, <span class="at">max_cn =</span> <span class="dv">8</span>)</span></code></pre></div>
 <p>By default <code>plot_baf_cn()</code> uses PURPLE’s fitted purity and ploidy. With these values, <code>expected_CN()</code> gives back PURPLE’s own <code>tumorCopyNumber</code>.</p>
 <div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="analyze-the-purple-results.html#cb84-1" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">plot_baf_cn</span>(<span class="st">&quot;SPP_GT_1-0_1&quot;</span>)</span></code></pre></div>
-<p><img src="Module5/img/baf_cn_SPP_GT_1-0_1.png" alt="" width="80%" style="display: block; margin: auto;" /></p>
+<p><img src="Module5/img/baf_cn_SPP_GT_1-0_1.png" width="80%" style="display: block; margin: auto;" /></p>
 <p><strong>100% purity.</strong> The clouds sit on whole-number states: a big cloud on <code>2+0</code> (copy-neutral LOH), and others on <code>1+0</code>, <code>3+0</code>, <code>4+0</code>, <code>2+1</code>, <code>4+1</code>, <code>2+2</code>. Balanced states (<code>1+1</code>, <code>2+2</code>) appear slightly right of 0.5: folding a noisy BAF to 0.5-1 always pushes it up a little.</p>
 <div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="analyze-the-purple-results.html#cb85-1" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">plot_baf_cn</span>(<span class="st">&quot;SPP_GT_1-1_1&quot;</span>)</span>
 <span id="cb85-2"><a href="analyze-the-purple-results.html#cb85-2" tabindex="-1"></a></span>
 <span id="cb85-3"><a href="analyze-the-purple-results.html#cb85-3" tabindex="-1"></a><span class="co"># Test another solution</span></span>
 <span id="cb85-4"><a href="analyze-the-purple-results.html#cb85-4" tabindex="-1"></a><span class="co"># The purity-range plot of SPP_GT_1-1_1 had a second blue spot at about 73% purity and ploidy 4.8. Give these values to plot_baf_cn()</span></span>
 <span id="cb85-5"><a href="analyze-the-purple-results.html#cb85-5" tabindex="-1"></a><span class="co"># plot_baf_cn(&quot;SPP_GT_1-1_1&quot;, purity = 0.73, ploidy =4.8 ) # 4.8  2</span></span></code></pre></div>
-<p><img src="Module5/img/baf_cn_SPP_GT_1-1_1.png" alt="" width="80%" style="display: block; margin: auto;" /></p>
+<p><img src="Module5/img/baf_cn_SPP_GT_1-1_1.png" width="80%" style="display: block; margin: auto;" /></p>
 <p><strong>50% purity.</strong> All states move towards BAF 0.5 because of the normal cells (<code>2+0</code> is now at BAF ~0.71 instead of 1), but the clouds still sit on the predicted dots. The fit is good.</p>
 <p><strong>Another solution:</strong> The clouds still sit on predicted dots, only every state has one more copy: <code>2+0</code> becomes <code>3+1</code>, <code>2+1</code> becomes <code>3+2</code>, <code>1+0</code> becomes <code>2+1</code>. Both solutions explain the same BAF and depth data, which is why PURPLE found two blue spots. PURPLE prefers the solution with fewer copy-number changes and lower ploidy (here the correct one).</p>
 <div id="low-purity" class="section level3 hasAnchor">
 <h3>Low purity<a href="analyze-the-purple-results.html#low-purity" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="analyze-the-purple-results.html#cb86-1" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">plot_baf_cn</span>(<span class="st">&quot;SPP_GT_1-9_1&quot;</span>)</span></code></pre></div>
-<p><img src="Module5/img/baf_cn_SPP_GT_1-9_1.png" alt="" width="80%" style="display: block; margin: auto;" /></p>
+<p><img src="Module5/img/baf_cn_SPP_GT_1-9_1.png" width="80%" style="display: block; margin: auto;" /></p>
 <p>At 10% purity all expected states are squeezed close to BAF 0.5, and the observed segments form one blurred cloud: many purity/ploidy combinations fit equally badly or well, so the fit cannot be trusted.</p>
 <p><strong>Try it:</strong> run <code>plot_baf_cn()</code> on <code>SPP_GT_3-1_1</code> with PURPLE’s fit, then with <code>purity = 0.5</code>. How do the dots move relative to the clouds?</p>
 </div>
 <div id="check-specific-chromosome" class="section level3 hasAnchor">
 <h3>check specific chromosome<a href="analyze-the-purple-results.html#check-specific-chromosome" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="analyze-the-purple-results.html#cb87-1" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">plot_chromosome</span>(<span class="st">&quot;SPP_GT_1-0_1&quot;</span>, <span class="st">&quot;chr1&quot;</span>)</span></code></pre></div>
-<p><img src="Module5/img/chromosome_SPP_GT_1-0_1_chr1.png" alt="" width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="Module5/img/chromosome_SPP_GT_1-0_1_chr1.png" width="100%" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="segment" class="section level2 hasAnchor">
@@ -1245,21 +1245,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>In a good fit, most large points sit on integer values (1+1, 2+0, 2+1, …). Points spread between integers suggest the purity/ploidy is wrong or the sample is subclonal.</p>
 <div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="analyze-the-purple-results.html#cb88-1" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">combine_pngs</span>(segfiles)   <span class="co"># one figure, panels titled with sample ID and true purity</span></span></code></pre></div>
-<p><img src="Module5/img/purple_segment_all.png" alt="" width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="Module5/img/purple_segment_all.png" width="100%" style="display: block; margin: auto;" /></p>
 <p><strong>What to notice.</strong> At 50-100% purity the large points cluster on whole-number states (1+1, 2+0, 2+1, 2+2, …). At 5-10% purity the points line up along straight lines instead of clusters: with so little tumor signal, PURPLE can place a segment almost anywhere along these lines, so the major/minor split is not determined.</p>
 </div>
 <div id="copy-number-distribution" class="section level2 hasAnchor">
 <h2>Copy number distribution<a href="analyze-the-purple-results.html#copy-number-distribution" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><code>copynumber.png</code> is a histogram of the fitted copy number, weighted by the number of BAF points. Colours split each bar by minor-allele copy number (MACN0 = LOH, MACN1, MACN2). For a good fit the peaks sit on whole numbers. For HCC1395 the largest peak is CN 2 with MACN0, i.e. copy-neutral LOH covers a big part of the genome.</p>
 <div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="analyze-the-purple-results.html#cb89-1" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">combine_pngs</span>(copyNumberFiles)   <span class="co"># one figure, panels titled with sample ID and true</span></span></code></pre></div>
-<p><img src="Module5/img/purple_copynumber_all.png" alt="" width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="Module5/img/purple_copynumber_all.png" width="100%" style="display: block; margin: auto;" /></p>
 <p><strong>What to notice.</strong> From 50% to 100% purity the histograms look alike: a sharp peak at CN 2 that is almost all MACN0 (copy-neutral LOH), plus peaks at 3 and 4. At 5% and 10% there is almost no MACN0 at all and the copy numbers form a broad, continuous hump between 1.5 and 3.5: the LOH and the integer copy-number states are no longer resolved.</p>
 </div>
 <div id="minorallelecopy" class="section level2 hasAnchor">
 <h2>MinorAlleleCopy<a href="analyze-the-purple-results.html#minorallelecopy" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><code>map.png</code> (minor-allele ploidy) is the same idea for the <strong>minor</strong> allele: a histogram of minor-allele copy number, coloured by total copy number. The bar at 0 is the amount of LOH in the genome.</p>
 <div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="analyze-the-purple-results.html#cb90-1" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">combine_pngs</span>(MAP)   <span class="co"># one figure, panels titled with sample ID and true purity</span></span></code></pre></div>
-<p><img src="Module5/img/purple_map_all.png" alt="" width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="Module5/img/purple_map_all.png" width="100%" style="display: block; margin: auto;" /></p>
 <p><strong>What to notice.</strong> At 50-100% purity the tallest bar is at minor CN 0: a large part of the genome is LOH. At 20% the LOH is still partly found (bars near 0-0.2). At 5% and 10% the distribution is centred on 1: PURPLE no longer sees the LOH, because the BAF shift it causes is too small (see the expected-signal table in the introduction).</p>
 </div>
 </div>

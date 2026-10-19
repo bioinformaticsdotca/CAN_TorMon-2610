@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Module 2 | Cancer Analysis 2026</title>
   <meta name="description" content="Workshop website for the 2026 Cancer Analysis Canadian Bioinformatics Workshop" />
-  <meta name="generator" content="bookdown 0.46 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.45 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Module 2 | Cancer Analysis 2026" />
   <meta property="og:type" content="book" />
@@ -504,13 +504,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>How to find additional info for each genomic feature</li>
 </ul>
 <p><strong>To get started, Please navigate over to <a href="https://igv.org/app/">https://igv.org/app/</a></strong></p>
-<ul>
-<li>Question : Aside from avoiding installation issues, a browser version is much more convenient and accessible. Why should one consider using a local installation of IGV vs the online version?
-<ul>
-<li><span style="background-color: black; color: black;">1) Data size - Imagine streaming multiple 500 GB files</span></li>
-<li><span style="background-color: black; color: black;">2) Data protection - if you’re working with sensitive data that is under DACO restriction or patient data, you’re limited by where you store and send the data</span></li>
-</ul></li>
-</ul>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Question : Aside from avoiding installation issues, a browser version
+is much more convenient and accessible. Why should one consider using a
+local installation of IGV vs the online version?</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><ol type="1">
+<li>Data size - Imagine streaming multiple 500 GB files</li>
+<li>Data protection - if you’re working with sensitive data that is
+under DACO restriction or patient data, you’re limited by where you
+store and send the data</li>
+</ol></div></details>
 </div>
 <div id="bam" class="section level4 hasAnchor">
 <h4>BAM<a href="module-2.html#bam" class="anchor-section" aria-label="Anchor link to header"></a></h4>
@@ -533,12 +534,17 @@ https://42basepairs.com/download/s3/gatk-test-data/wgs_bam/NA12878_20k_hg38/NA12
 <h5>Step 3 – Post loading sanity check<a href="module-2.html#step-3-post-loading-sanity-check" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p>What do we see after loading?</p>
 <p><img src="img/module2_lab4.png" width="100%" height="100%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;"></p>
-<p>Question : We don’t see much. How come?</p>
-<ul>
-<li><span style="background-color: black; color: black;">One possibility is wrong genome build. Not the case here but a possibility. </span></li>
-<li><span style="background-color: black; color: black;"> The toy BAM being examined is also very small in comparison. So the reads representation will be sparse. </span></li>
-<li><span style="background-color: black; color: black;">In both the browser and local version of IGV, the number of reads visualized is limited, especially at whole genome view that’s an overwhelming amount of data to visualize. For the browser, imagine everyone trying to load a 1TB BAM. Local version can adjust settings according to hardware limitations. </span></li>
-</ul>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Question : We don’t see much. How come?</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><ul>
+<li>One possibility is wrong genome build. Not the case here but a
+possibility.</li>
+<li>The toy BAM being examined is also very small in comparison. So the
+reads representation will be sparse.</li>
+<li>In both the browser and local version of IGV, the number of reads
+visualized is limited, especially at whole genome view that’s an
+overwhelming amount of data to visualize. For the browser, imagine
+everyone trying to load a 1TB BAM. Local version can adjust settings
+according to hardware limitations.</li>
+</ul></div></details>
 </div>
 <div id="step-4-zoomed-in-look" class="section level5 hasAnchor">
 <h5>Step 4 – Zoomed in look<a href="module-2.html#step-4-zoomed-in-look" class="anchor-section" aria-label="Anchor link to header"></a></h5>
@@ -547,43 +553,29 @@ https://42basepairs.com/download/s3/gatk-test-data/wgs_bam/NA12878_20k_hg38/NA12
 <p><img src="img/module2_lab5.png" width="100%" height="100%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;"></p>
 <p>Once the result loads, what do we see?<br />
 <img src="img/module2_lab6.png" width="100%" height="100%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;"></p>
-<ul>
-<li>Question : What are the grey lines? What do the ends (sharp vs blunt) represent?
-<ul>
-<li><span style="background-color: black; color: black;">Each grey bar is a read. The pointed end shows the direction it was sequenced: pointing right = forward (+) strand, pointing left = reverse (−).</span></li>
-</ul></li>
-<li>Question : What are the colour dashes in each block?
-<ul>
-<li><span style="background-color: black; color: black;">Mismatches</span></li>
-</ul></li>
-<li>Question : What is the graph bar above?
-<ul>
-<li><span style="background-color: black; color: black;">Coverage, the height represents the amount of reads per BP. If coloured, shows the ratio of mismatches per nucleotide</span></li>
-</ul></li>
-</ul>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Question : What are the grey lines? What do the ends (sharp vs blunt)
+represent?</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><pre><code>Each grey bar is a read. The pointed end shows the direction it was sequenced: pointing right = forward (+) strand, pointing left = reverse (−).</code></pre></div></details>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Question : What are the colour dashes in each block?</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><pre><code>Mismatches</code></pre></div></details>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Question : What is the graph bar above?</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><pre><code>Coverage, the height represents the amount of reads per BP. If coloured, shows the ratio of mismatches per nucleotide</code></pre></div></details>
 </div>
 <div id="step-5-read-features" class="section level5 hasAnchor">
 <h5>Step 5 – Read features<a href="module-2.html#step-5-read-features" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p>Clicking on a read, its info can be displayed.</p>
 <p><img src="img/module2_lab7.png" width="100%" height="70%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;"></p>
-<ul>
-<li>Question : What do the blue, red and orange reads represent?
-<ul>
-<li><span style="background-color: black; color: black;"> When compared to the grey reads, the reads are identified due to their abnormal insert size. The causes could vary from a genomic feature (e.g. structural variant), RNA-seq (though not in this case), lack of size selection during library prep (there would be other signs as well). Toggleable via the gear icon on the right side of the track. Select under “Color by”, “Pair Orientation &amp; insert size (TLEN)” </span></li>
-</ul></li>
-</ul>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Question : What do the blue, red and orange reads represent?</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><p>When compared to the grey reads, the reads are identified due to
+their abnormal insert size. The causes could vary from a genomic feature
+(e.g. structural variant), RNA-seq (though not in this case), lack of
+size selection during library prep (there would be other signs as well).
+Toggleable via the gear icon on the right side of the track. Select
+under “Color by”, “Pair Orientation &amp; insert size (TLEN)”</p></div></details>
 </div>
 <div id="step-6-utilizing-track-annotations" class="section level5 hasAnchor">
 <h5>Step 6 – Utilizing track annotations<a href="module-2.html#step-6-utilizing-track-annotations" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p>Let’s try a different region</p>
 <pre class="shell"><code>chr2:32,915,196-32,917,755</code></pre>
 <p><img src="img/module2_lab8.png" width="100%" height="100%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;"></p>
-<ul>
-<li>Question : Why are almost all reads coloured?
-<ul>
-<li><span style="background-color: black; color: black;"> Similarly to the last question, the reads are highlighted due to the unexpected read orientation. </span></li>
-</ul></li>
-</ul>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Question : Why are almost all reads coloured?</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><p>Similarly to the last question, the reads are highlighted due to the
+unexpected read orientation.</p></div></details>
 <p>What genes are these reads at? How would we find out?
 - RefSeq is already loaded. We can try another annotation
 <img src="img/module2_lab9.png" width="30%" height="30%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;">
@@ -640,29 +632,27 @@ Focusing on the non-greyed feature, what are the VCF features? Use the name and 
 #CHROM  POS     ID      REF     ALT     QUAL    FILTER  INFO    FORMAT  HG008N
 chr1    89177   .       A       G       30      .       END=89177       GT:AD   1/1:0,2
 chr1    143206141    .    A    G    30    .    TRF;END=143206141    GT:AD    0/1:70,2</code></pre>
-<ul>
-<li>Question : What type of variant is it?
-<ul>
-<li><span style="background-color: black; color: black;"> SNP according to the “type”</span></li>
-</ul></li>
-<li>Question : What are the feature’s coordinates?
-<ul>
-<li><span style="background-color: black; color: black;"> Can be found under “LOC”</span></li>
-</ul></li>
-<li>Question : What is the reference vs alt?
-<ul>
-<li><span style="background-color: black; color: black;"> “REF” represents the sequence found in the reference genome. “ALT” represents the sequence that was found in the sample. In this case it was a “A” vs “G” thus the SNP </span></li>
-<li><span style="background-color: black; color: black;"> Also take note of the genotype in IGV : “A|G”. This notation is different than in the VCF and carries some different interpretations. In VCFs the genotype field can present as `0/1` meaning unphased or `0|1` phased. Being phased means we know which allele belongs on which chromosome copy. The same cannot be said for unphased. Short read sequencing does not provide that resolution, and would need long reads (for example). That context is lost in IGV, and instead IGV displays the alleles as bases, e.g. A|G, using `|` as a fixed separator regardless of phasing.</span></li>
-</ul></li>
-<li>Question : What is the depth?
-<ul>
-<li><span style="background-color: black; color: black;"> “AD” stands for allelic depth and represents the evidence/reads supporting each allele. It’s interpreted by the genotype “A | G” and “70,2” meaning 70 reads support the reference and 2 reads support the alt allele.</span></li>
-</ul></li>
-<li>Question : Compared to the features beside it, why are those features greyed out?
-<ul>
-<li><span style="background-color: black; color: black;"> Other SNPs were filtered. For the specific reason, see the “FILTER” section. Definitions for the filter are likely to be found within the header of the VCF file. </span></li>
-</ul></li>
-</ul>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Question : What type of variant is it?</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><p>SNP according to the “type”</p></div></details>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Question : What are the feature’s coordinates?</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><p>Can be found under “LOC”</p></div></details>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Question : What is the reference vs alt?</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><p>“REF” represents the sequence found in the reference genome. “ALT”
+represents the sequence that was found in the sample. In this case it
+was a “A” vs “G” thus the SNP Also take note of the genotype in IGV :
+“A|G”. This notation is different than in the VCF and carries some
+different interpretations. In VCFs the genotype field can present as
+`0/1` meaning unphased or `0|1` phased. Being phased means we know which
+allele belongs on which chromosome copy. The same cannot be said for
+unphased. Short read sequencing does not provide that resolution, and
+would need long reads (for example). That context is lost in IGV, and
+instead IGV displays the alleles as bases, e.g. A|G, using `|` as a
+fixed separator regardless of phasing.</p></div></details>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Question : What is the depth?</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><p>“AD” stands for allelic depth and represents the evidence/reads
+supporting each allele. It’s interpreted by the genotype “A | G” and
+“70,2” meaning 70 reads support the reference and 2 reads support the
+alt allele.</p></div></details>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Question : Compared to the features beside it, why are those features
+greyed out?</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><p>Other SNPs were filtered. For the specific reason, see the “FILTER”
+section. Definitions for the filter are likely to be found within the
+header of the VCF file.</p></div></details>
 </div>
 <div id="step-8-working-with-vcfs-somatic-structural-variants" class="section level5 hasAnchor">
 <h5>Step 8 – Working with VCFs (Somatic Structural Variants)<a href="module-2.html#step-8-working-with-vcfs-somatic-structural-variants" class="anchor-section" aria-label="Anchor link to header"></a></h5>
@@ -719,24 +709,13 @@ https://42basepairs.com/download/web/giab/data_somatic/HG008/NIST/HG008-T_bulk/2
 #CHROM  POS     ID      REF     ALT     QUAL    FILTER  INFO    FORMAT  m84113_260205_082846_s3.demux.bc2055--bc2055.aligned.hiphase
 chr1    151220118       severus_DEL306  N       &lt;DEL&gt;   60      PASS    PRECISE;SVTYPE=DEL;SVLEN=172;END=151220290;STRANDS=+-;MAPQ=60;PHASESETID=151409146|151409146;HP=1;BCSQ=sv:intron|PIP5K1A||protein_coding|+||;hetalt=m84113_260205_082846_s3.demux.bc2055--bc2055.aligned.hiphase        GT:VAF:hVAF:DR:DV       0/1:0.8:0,1,0:5:20
 chr1    154714649       severus_BND18941        N       N.      60      PASS    IMPRECISE;SVTYPE=sBND;STRANDS=+;DETAILED_TYPE=loose_end;MAPQ=60;PHASESETID=154791972|154791972;HP=2;BCSQ=sv:intron|KCNN3||protein_coding|-||;hetalt=m84113_260205_082846_s3.demux.bc2055--bc2055.aligned.hiphase        GT:VAF:hVAF:DR:DV       0/1:0.16:0,0,0.26:26:5</code></pre>
-<ul>
-<li>Question : What type of variant is it?
-<ul>
-<li><span style="background-color: black; color: black;"> It is a structural variant. Much larger than the single base of SNVs. The Alt also indicates it is a deletion event.</span></li>
-</ul></li>
-<li>Question : How long is the feature?
-<ul>
-<li><span style="background-color: black; color: black;"> ~10.8 Mb according to the SV length field </span></li>
-</ul></li>
-<li>Question : What is the feature’s “ID” and what purpose does the ID field serve?
-<ul>
-<li><span style="background-color: black; color: black;"> “severus_DEL3275” and to act as a unique identifier </span></li>
-</ul></li>
-<li>Question : How would we find out how many genes are affected by the feature?
-<ul>
-<li><span style="background-color: black; color: black;"> The BCFtools Consequence or BCSQ identifies the genes affected. </span></li>
-</ul></li>
-</ul>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Question : What type of variant is it?</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><p>It is a structural variant. Much larger than the single base of SNVs.
+The Alt also indicates it is a deletion event.</p></div></details>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Question : How long is the feature?</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><p>~10.8 Mb according to the SV length field</p></div></details>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Question : What is the feature’s <code>ID</code> and what purpose
+does the ID field serve?</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><p>“severus_DEL3275” and to act as a unique identifier</p></div></details>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Question : How would we find out how many genes are affected by the
+feature?</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><p>The BCFtools Consequence or BCSQ identifies the genes affected.</p></div></details>
 </div>
 </div>
 <div id="bedbigbed" class="section level4 hasAnchor">
@@ -745,24 +724,25 @@ chr1    154714649       severus_BND18941        N       N.      60      PASS    
 <h5>Step 9 – Working with BigBed / External Annotation<a href="module-2.html#step-9-working-with-bigbed-external-annotation" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p>Let’s explore BED files. Load the following URL into the track</p>
 <pre><code>https://hgdownload.soe.ucsc.edu/gbdb/hg38/encode4/ccre/encodeCcreRegistry.bb</code></pre>
-<ul>
-<li>Question : Notice anything different with the file suffix?
-<ul>
-<li><span style="background-color: black; color: black;">It is a bigBed file. The same as a regular bed file but binarized, compressed and indexed for accessibility. IGV is able to only fetch the region on screen and does not require a separate index file. To find out more see the following <a href="https://genome.ucsc.edu/goldenPath/help/bigBed.html">link</a></span></li>
-</ul></li>
-</ul>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Question : Notice anything different with the file suffix?</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><p>It is a bigBed file. The same as a regular bed file but binarized,
+compressed and indexed for accessibility. IGV is able to only fetch the
+region on screen and does not require a separate index file. To find out
+more see the following <a
+href="https://genome.ucsc.edu/goldenPath/help/bigBed.html">link</a></p></div></details>
 <p>How to interpret the features described by the bed file? The UCSC genome browser describes the file in great detail, specifically:
 <img src="https://genome.ucsc.edu/images/encode4cCREs.png" width="100%" height="100%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;"></p>
 <p>For more info see the following <a href="https://genome.ucsc.edu/cgi-bin/hgTrackUi?hgsid=4159675625_pMjcCAWJ0iqsyPdZ6WOQ6gMFIklH&amp;db=hg38&amp;c=chr7&amp;g=cCREregistry">link</a></p>
 <p>If we navigate to <code>TP53</code> by typing <code>TP53</code> in the search bar, we see the following:
 <img src="img/module2_lab24.png" width="200%" height="200%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;"></p>
 <p>TP53 has 26 RefSeq transcripts, but IGV only shows 2 of them. We can access the settings on refSeq annotation through the gear on the right → Set track height → 700. All 26 rows appear.</p>
-<ul>
-<li>Question : What is the red feature? What is the importance of the feature and where it is located?
-<ul>
-<li><span style="background-color: black; color: black;">It is a promoter-like element (PLS). ENCODE only assigns this class to regions near an annotated transcription start site. The main TP53 promoter is the cluster of red elements at the far right (~7,687 kb). The single red element at ~7,676.7 kb sits inside the full-length gene, in intron 1, just upstream of exon 2, which holds the start codon. Its promoter-like chromatin and a GENCODE V39 transcript starting there suggest a candidate alternative start site.</span></li>
-</ul></li>
-</ul>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Question : What is the red feature? What is the importance of the
+feature and where it is located?</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><p>It is a promoter-like element (PLS). ENCODE only assigns this class
+to regions near an annotated transcription start site. The main TP53
+promoter is the cluster of red elements at the far right (~7,687 kb).
+The single red element at ~7,676.7 kb sits inside the full-length gene,
+in intron 1, just upstream of exon 2, which holds the start codon. Its
+promoter-like chromatin and a GENCODE V39 transcript starting there
+suggest a candidate alternative start site.</p></div></details>
 </div>
 </div>
 </div>
@@ -794,57 +774,41 @@ chr1    154714649       severus_BND18941        N       N.      60      PASS    
 <h5>Step 2 – OncoPrint<a href="module-2.html#step-2-oncoprint" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p>We are presented with an OncoPrint<br />
 <img src="img/module2_lab17.png" width="100%" height="100%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;"></p>
-<ul>
-<li>Question : What do the first four rows present and mean?
-<ul>
-<li><span style="background-color: black; color: black;">As indicated in the legend, the first four rows provide info on donors’ membership in the respective datasets and whether they were profiled for copy number changes, mutations, and structural variants.</span></li>
-</ul></li>
-<li>Question : We see multiple genes, focusing on <code>TP53</code> and <code>PIK3CA</code>, what can we infer?
-<ul>
-<li><span style="background-color: black; color: black;"> The percentage represents the number of donors with genetic alterations, where the legend specifies the type and proportion of donors</span></li>
-</ul></li>
-</ul>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Question : What do the first four rows present and mean?</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><p>As indicated in the legend, the first four rows provide info on
+donors’ membership in the respective datasets and whether they were
+profiled for copy number changes, mutations, and structural
+variants.</p></div></details>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Question : We see multiple genes, focusing on <code>TP53</code> and
+<code>PIK3CA</code>, what can we infer?</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><p>The percentage represents the number of donors with genetic
+alterations, where the legend specifies the type and proportion of
+donors</p></div></details>
 </div>
 <div id="step-3-cancer-types-summary" class="section level5 hasAnchor">
 <h5>Step 3 – Cancer Types Summary<a href="module-2.html#step-3-cancer-types-summary" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p>On the above tabs, navigate to the cancer types summary view</p>
 <p><img src="img/module2_lab18.png" width="80%" height="80%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;"></p>
-<ul>
-<li>Question : What does the barchart summarize for us?
-<ul>
-<li><span style="background-color: black; color: black;"> X-axis gives info on the dataset and included profiled genomic alteration types. The Bars provide a frequency of genomic alterations.</span></li>
-</ul></li>
-</ul>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Question : What does the barchart summarize for us?</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><p>X-axis gives info on the dataset and included profiled genomic
+alteration types. The Bars provide a frequency of genomic
+alterations.</p></div></details>
 </div>
 <div id="step-4-mutual-exclusivity" class="section level5 hasAnchor">
 <h5>Step 4 – Mutual Exclusivity<a href="module-2.html#step-4-mutual-exclusivity" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p>Moving on to mutual exclusivity, select significant only and sort by q-value starting with lowest/most significant</p>
 <p><img src="img/module2_lab19.png" width="100%" height="100%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;"></p>
 <p>The first row denotes TP53 and ERBB2.</p>
-<ul>
-<li>Question : What does the finding of co-occurrence entail?
-<ul>
-<li><span style="background-color: black; color: black;">Based on the two datasets, TP53 and ERBB2 are often both found to be altered</span></li>
-<li><span style="background-color: black; color: black;"><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3465532/#:~:text=The%20HER2%2DEnriched%20subtype%20(HER2E)%2C%20which%20has%20frequent%20HER2/ERBB2%20amplification%20(80%25)%2C%20had%20a%20hybrid%20pattern%20with%20a%20high%20frequency%20of%20TP53%20(72%25)%20and">Perhaps an interesting link to look at</a></span></li>
-</ul></li>
-</ul>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Question : What does the finding of co-occurrence entail?</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><p>Based on the two datasets, TP53 and ERBB2 are often both found to be
+altered <a
+href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3465532/#:~:text=The%20HER2%2DEnriched%20subtype%20(HER2E)%2C%20which%20has%20frequent%20HER2/ERBB2%20amplification%20(80%25)%2C%20had%20a%20hybrid%20pattern%20with%20a%20high%20frequency%20of%20TP53%20(72%25)%20and">Perhaps
+an interesting link to look at</a></p></div></details>
 <p>Looking at the second row of TP53 and CDH1</p>
-<ul>
-<li>Question : What does the finding of mutual exclusivity entail?
-<ul>
-<li><span style="background-color: black; color: black;">Very few examples exist in the two breast cancer datasets where both TP53 and CDH1 co-occur, in fact most donors have one or the other. This could signify a dependency specific to the cancer type.</span></li>
-</ul></li>
-</ul>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Question : What does the finding of mutual exclusivity entail?</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><pre><code>Very few examples exist in the two breast cancer datasets where both TP53 and CDH1 co-occur, in fact most donors have one or the other. This could signify a dependency specific to the cancer type.</code></pre></div></details>
 </div>
 <div id="step-5-plots" class="section level5 hasAnchor">
 <h5>Step 5 – Plots<a href="module-2.html#step-5-plots" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p>Exploring the plots tab next. Let’s use the quick filter for FGA vs Dx</p>
 <p><img src="img/module2_lab20.png" width="100%" height="100%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;"></p>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Question : What info can we glean from the plot?</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><pre><code>The TCGA datasets are split up into various types of breast carcinomas. Breast invasive ductal carcinoma shows the highest fraction of genome altered, signifying genomic instability.</code></pre></div></details>
 <ul>
-<li>Question : What info can we glean from the plot?
-<ul>
-<li><span style="background-color: black; color: black;">The TCGA datasets are split up into various types of breast carcinomas. Breast invasive ductal carcinoma shows the highest fraction of genome altered, signifying genomic instability.</span></li>
-</ul></li>
 <li>Let’s look at the mutations tab, specifically for gene TP53</li>
 </ul>
 <p><img src="img/module2_lab21.png" width="100%" height="100%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;"></p>
@@ -852,24 +816,14 @@ chr1    154714649       severus_BND18941        N       N.      60      PASS    
 <div id="step-6-mutations" class="section level5 hasAnchor">
 <h5>Step 6 – Mutations<a href="module-2.html#step-6-mutations" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <ul>
-<li>Let’s look at the mutation with the highest donor count
-<ul>
-<li>Question : Where does it occur in TP53?
-<ul>
-<li><span style="background-color: black; color: black;">In the TP53 region that binds DNA. Amino acid 248</span><br />
-</li>
-</ul></li>
-<li>Question : What type of mutation is it?
-<ul>
-<li><span style="background-color: black; color: black;"> Different types, but often missense</span><br />
-</li>
-</ul></li>
-<li>Question : Are there any Post-Translational Modifications associated with the mutation?
-<ul>
-<li><span style="background-color: black; color: black;">On the left, we can add annotation tracks. Specifically we’re interested in Post-Translational Modifications (PTM). Scrolling around, no modification coincides with the mutation.</span></li>
-</ul></li>
-</ul></li>
+<li>Let’s look at the mutation with the highest donor count</li>
 </ul>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Question : Where does it occur in TP53?</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><p>In the TP53 region that binds DNA. Amino acid 248</p></div></details>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Question : What type of mutation is it?</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><pre><code>Different types, but often missense</code></pre></div></details>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Question : Are there any Post-Translational Modifications associated
+with the mutation?</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><p>On the left, we can add annotation tracks. Specifically we’re
+interested in Post-Translational Modifications (PTM). Scrolling around,
+no modification coincides with the mutation.</p></div></details>
 <p>Speaking of annotations, what if we wanted to find out more about the mutation? What can we look up through OncoKB?</p>
 <ul>
 <li>Hovering over the first row of the mutations table, note the record of sample ID <code>MB-0211</code> with the protein change <code>R248Q</code></li>
@@ -880,27 +834,21 @@ chr1    154714649       severus_BND18941        N       N.      60      PASS    
 <div id="step-7-comparisonsurvival" class="section level5 hasAnchor">
 <h5>Step 7 – Comparison/Survival<a href="module-2.html#step-7-comparisonsurvival" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <ul>
-<li>Looking at survival curves.
-<ul>
-<li>Question : What can we understand about TP53 vs unaffected cohort (no alteration in any of the 19 queried genes)?
-<ul>
-<li><span style="background-color: black; color: black;">Patients with TP53 mutations initially have poorer survival odds but around 180-200 months have better outcomes compared to the unaffected cohort.</span>
-<img src="img/module2_lab23.png" width="100%" height="100%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;"></li>
-</ul></li>
-</ul></li>
+<li>Looking at survival curves.</li>
 </ul>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Question : What can we understand about TP53 vs unaffected cohort (no
+alteration in any of the 19 queried genes)?</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><p>Patients with TP53 mutations initially have poorer survival odds but
+around 180-200 months have better outcomes compared to the unaffected
+cohort.</p></div></details>
+<p><img src="img/module2_lab23.png" width="100%" height="100%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;"></p>
 </div>
 <div id="step-8-cn-segments" class="section level5 hasAnchor">
 <h5>Step 8 – CN Segments<a href="module-2.html#step-8-cn-segments" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <ul>
-<li>Lastly, let’s look at copy number segments which brings us back to IGV. Looking at PIK3CA vs TP53
-<ul>
-<li>Question : what differences do we observe?
-<ul>
-<li><span style="background-color: black; color: black;">TP53 mutations are copy number losses while PIK3CA mutations are copy number gains.</span></li>
-</ul></li>
-</ul></li>
+<li>Lastly, let’s look at copy number segments which brings us back to IGV. Looking at PIK3CA vs TP53</li>
 </ul>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Question : what differences do we observe?</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><p>TP53 mutations are copy number losses while PIK3CA mutations are copy
+number gains.</p></div></details>
 </div>
 </div>
 </div>
@@ -934,12 +882,8 @@ chr1    154714649       severus_BND18941        N       N.      60      PASS    
 <p><img src="img/module2_lab27.png" width="40%" height="40%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;"></p>
 <p>The result is the following barchart of substitutions.</p>
 <p><img src="img/module2_lab28.png" width="100%" height="100%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;"></p>
-<ul>
-<li>Question : Which substitution is the most common at position <code>273</code> of the TP53 gene?
-<ul>
-<li><span style="background-color: black; color: black;">p.R273H (c.818G&gt;A) 1551</span></li>
-</ul></li>
-</ul>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Question : Which substitution is the most common at position
+<code>273</code> of the TP53 gene?</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><p>p.R273H (c.818G&gt;A) 1551</p></div></details>
 </div>
 <div id="step-4-open-the-mutation-page" class="section level5 hasAnchor">
 <h5>Step 4 – Open the mutation page<a href="module-2.html#step-4-open-the-mutation-page" class="anchor-section" aria-label="Anchor link to header"></a></h5>
