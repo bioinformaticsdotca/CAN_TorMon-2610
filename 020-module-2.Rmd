@@ -86,13 +86,13 @@ Once the result loads, what do we see?
 <img src="img//module2_lab6.png" width="100%" height="100%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;">
 
 :::: {.callout type="blue" collapsible="true" title="Question : What are the grey lines? What do the ends (sharp vs blunt) represent?"}
-    Each grey bar is a read. The pointed end shows the direction it was sequenced: pointing right = forward (+) strand, pointing left = reverse (−).
+  Each grey bar is a read. The pointed end shows the direction it was sequenced: pointing right = forward (+) strand, pointing left = reverse (−).
 ::::
 :::: {.callout type="blue" collapsible="true" title="Question : What are the colour dashes in each block?"}
-    Mismatches
+  Mismatches
 ::::
 :::: {.callout type="blue" collapsible="true" title="Question : What is the graph bar above?"}
-    Coverage, the height represents the amount of reads per BP. If coloured, shows the ratio of mismatches per nucleotide
+  Coverage, the height represents the amount of reads per BP. If coloured, shows the ratio of mismatches per nucleotide
 ::::
 
 ##### Step 5 – Read features
@@ -103,7 +103,7 @@ Clicking on a read, its info can be displayed.
 <img src="img//module2_lab7.png" width="100%" height="70%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;">
 
 :::: {.callout type="blue" collapsible="true" title="Question : What do the blue, red and orange reads represent?"}
-   When compared to the grey reads, the reads are identified due to their abnormal insert size. The causes could vary from a genomic feature (e.g. structural variant), RNA-seq (though not in this case), lack of size selection during library prep (there would be other signs as well). Toggleable via the gear icon on the right side of the track. Select under "Color by", "Pair Orientation & insert size (TLEN)"
+  When compared to the grey reads, the reads are identified due to their abnormal insert size. The causes could vary from a genomic feature (e.g. structural variant), RNA-seq (though not in this case), lack of size selection during library prep (there would be other signs as well). Toggleable via the gear icon on the right side of the track. Select under "Color by", "Pair Orientation & insert size (TLEN)"
 ::::
     
 ##### Step 6 – Utilizing track annotations
@@ -117,7 +117,7 @@ chr2:32,915,196-32,917,755
 <img src="img//module2_lab8.png" width="100%" height="100%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;">
 
 :::: {.callout type="blue" collapsible="true" title="Question : Why are almost all reads coloured?"}
-   Similarly to the last question, the reads are highlighted due to the unexpected read orientation.
+  Similarly to the last question, the reads are highlighted due to the unexpected read orientation.
 ::::
 
 What genes are these reads at? How would we find out?
@@ -187,20 +187,20 @@ chr1    143206141    .    A    G    30    .    TRF;END=143206141    GT:AD    0/1
 ```
 
 :::: {.callout type="blue" collapsible="true" title="Question : What type of variant is it?"}
-   SNP according to the "type"
+  SNP according to the "type"
 ::::
 :::: {.callout type="blue" collapsible="true" title="Question : What are the feature's coordinates?"}
    Can be found under "LOC"
 ::::
 :::: {.callout type="blue" collapsible="true" title="Question : What is the reference vs alt?"}
-   "REF" represents the sequence found in the reference genome. "ALT" represents the sequence that was found in the sample. In this case it was a "A" vs "G" thus the SNP
-   Also take note of the genotype in IGV : "A|G". This notation is different than in the VCF and carries some different interpretations. In VCFs the genotype field can present as \`0/1\` meaning unphased or \`0|1\` phased. Being phased means we know which allele belongs on which chromosome copy. The same cannot be said for unphased. Short read sequencing does not provide that resolution, and would need long reads (for example). That context is lost in IGV, and instead IGV displays the alleles as bases, e.g. A|G, using \`|\` as a fixed separator regardless of phasing.
+  "REF" represents the sequence found in the reference genome. "ALT" represents the sequence that was found in the sample. In this case it was a "A" vs "G" thus the SNP
+  Also take note of the genotype in IGV : "A|G". This notation is different than in the VCF and carries some different interpretations. In VCFs the genotype field can present as \`0/1\` meaning unphased or \`0|1\` phased. Being phased means we know which allele belongs on which chromosome copy. The same cannot be said for unphased. Short read sequencing does not provide that resolution, and would need long reads (for example). That context is lost in IGV, and instead IGV displays the alleles as bases, e.g. A|G, using \`|\` as a fixed separator regardless of phasing.
 ::::
 :::: {.callout type="blue" collapsible="true" title="Question : What is the depth?"}
-   "AD" stands for allelic depth and represents the evidence/reads supporting each allele. It's interpreted by the genotype "A | G" and "70,2" meaning 70 reads support the reference and 2 reads support the alt allele.
+  "AD" stands for allelic depth and represents the evidence/reads supporting each allele. It's interpreted by the genotype "A | G" and "70,2" meaning 70 reads support the reference and 2 reads support the alt allele.
 ::::
 :::: {.callout type="blue" collapsible="true" title="Question : Compared to the features beside it, why are those features greyed out?"}
-   Other SNPs were filtered. For the specific reason, see the "FILTER" section. Definitions for the filter are likely to be found within the header of the VCF file.
+  Other SNPs were filtered. For the specific reason, see the "FILTER" section. Definitions for the filter are likely to be found within the header of the VCF file.
 ::::
 
 ##### Step 8 – Working with VCFs (Somatic Structural Variants)
@@ -270,16 +270,16 @@ chr1    151220118       severus_DEL306  N       <DEL>   60      PASS    PRECISE;
 chr1    154714649       severus_BND18941        N       N.      60      PASS    IMPRECISE;SVTYPE=sBND;STRANDS=+;DETAILED_TYPE=loose_end;MAPQ=60;PHASESETID=154791972|154791972;HP=2;BCSQ=sv:intron|KCNN3||protein_coding|-||;hetalt=m84113_260205_082846_s3.demux.bc2055--bc2055.aligned.hiphase        GT:VAF:hVAF:DR:DV       0/1:0.16:0,0,0.26:26:5
 ```
 :::: {.callout type="blue" collapsible="true" title="Question : What type of variant is it?"}
-   It is a structural variant. Much larger than the single base of SNVs. The Alt also indicates it is a deletion event.
+  It is a structural variant. Much larger than the single base of SNVs. The Alt also indicates it is a deletion event.
 ::::
 :::: {.callout type="blue" collapsible="true" title="Question : How long is the feature?"}
-   ~10.8 Mb according to the SV length field
+  ~10.8 Mb according to the SV length field
 ::::
 :::: {.callout type="blue" collapsible="true" title="Question : What is the feature's `ID` and what purpose does the ID field serve?"}
-   "severus_DEL3275" and to act as a unique identifier
+  "severus_DEL3275" and to act as a unique identifier
 ::::
 :::: {.callout type="blue" collapsible="true" title="Question : How would we find out how many genes are affected by the feature?"}
-   The BCFtools Consequence or BCSQ identifies the genes affected.
+  The BCFtools Consequence or BCSQ identifies the genes affected.
 ::::
 
 #### BED/bigBed
@@ -346,7 +346,7 @@ We are presented with an OncoPrint
 As indicated in the legend, the first four rows provide info on donors' membership in the respective datasets and whether they were profiled for copy number changes, mutations, and structural variants.
 ::::
 :::: {.callout type="blue" collapsible="true" title="Question : We see multiple genes, focusing on `TP53` and `PIK3CA`, what can we infer?"}
-   The percentage represents the number of donors with genetic alterations, where the legend specifies the type and proportion of donors
+The percentage represents the number of donors with genetic alterations, where the legend specifies the type and proportion of donors
 ::::
 
 ##### Step 3 – Cancer Types Summary
@@ -356,7 +356,7 @@ On the above tabs, navigate to the cancer types summary view
 <img src="img//module2_lab18.png" width="80%" height="80%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;">
 
 :::: {.callout type="blue" collapsible="true" title="Question : What does the barchart summarize for us?"}
-   X-axis gives info on the dataset and included profiled genomic alteration types. The Bars provide a frequency of genomic alterations.
+  X-axis gives info on the dataset and included profiled genomic alteration types. The Bars provide a frequency of genomic alterations.
 ::::
 
 ##### Step 4 – Mutual Exclusivity
@@ -375,7 +375,7 @@ The first row denotes TP53 and ERBB2.
 Looking at the second row of TP53 and CDH1
 
 :::: {.callout type="blue" collapsible="true" title="Question : What does the finding of mutual exclusivity entail?"}
-    Very few examples exist in the two breast cancer datasets where both TP53 and CDH1 co-occur, in fact most donors have one or the other. This could signify a dependency specific to the cancer type.
+  Very few examples exist in the two breast cancer datasets where both TP53 and CDH1 co-occur, in fact most donors have one or the other. This could signify a dependency specific to the cancer type.
 ::::
 
 ##### Step 5 – Plots
@@ -385,7 +385,7 @@ Exploring the plots tab next. Let's use the quick filter for FGA vs Dx
 <img src="img//module2_lab20.png" width="100%" height="100%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;"> 
 
 :::: {.callout type="blue" collapsible="true" title="Question : What info can we glean from the plot?"}
-    The TCGA datasets are split up into various types of breast carcinomas. Breast invasive ductal carcinoma shows the highest fraction of genome altered, signifying genomic instability.
+  The TCGA datasets are split up into various types of breast carcinomas. Breast invasive ductal carcinoma shows the highest fraction of genome altered, signifying genomic instability.
 ::::
 
 - Let's look at the mutations tab, specifically for gene TP53 
@@ -400,7 +400,7 @@ Exploring the plots tab next. Let's use the quick filter for FGA vs Dx
   In the TP53 region that binds DNA. Amino acid 248
 ::::  
 :::: {.callout type="blue" collapsible="true" title="Question : What type of mutation is it?"}
-    Different types, but often missense
+  Different types, but often missense
 ::::  
 :::: {.callout type="blue" collapsible="true" title="Question : Are there any Post-Translational Modifications associated with the mutation?"}
   On the left, we can add annotation tracks. Specifically we're interested in Post-Translational Modifications (PTM). Scrolling around, no modification coincides with the mutation.
@@ -497,3 +497,214 @@ We can then see the top genes mutated in Large intestinal samples. Clicking the 
 <img src="img//module2_lab31.png" width="100%" height="100%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;">
 
 Note the left-hand filter with tissue type selection applied. The result is that the most represented mutation is now different. Previously it was `3908` at position `273` but the most frequent mutation is now `175` with `1069` mutation count. We can observe how different tissue types reflect different mutations.
+
+### Part 4 - Advanced Exercises
+
+#### Exercise 1 – Real genome or alignment artefact? (Part 1, BAM)
+Go back to the two regions you looked at in NA12878.bam:
+
+- Region 1: `chr1:143,220,111-143,221,807`
+- Region 2: `chr2:32,915,196-32,917,755`
+
+Do the reads in these regions reflect the actual genome of the sample, or are they mostly alignment artefacts? 
+What in the IGV view supports your answer?
+
+To help you decide, add two annotation tracks. Open Tracks → Hosted Annotations…, go to Mapping and Sequencing, and tick:
+
+- __LowMap+SegDup__ (under Difficult regions from GIAB). GIAB uses this track to mark segmental duplications and regions that are hard to map with short reads.
+- __Simple Repeats__ (under Repeats). In region 1 you should see one bar over the whole window, with the repeat unit `TCGAATGGAATCATCA`.
+
+Does what you see in these tracks change or confirm your answer?
+
+:::: {.callout type="blue" collapsible="true" title="Answer"}
+Both regions are mostly alignment artefacts.
+
+In region 1, most reads are drawn transparent, which means mapping quality 0, and each read has several mismatches. The few coloured pairs (red, blue, orange) also have MAPQ 0, and their mates are far away on chr1 or on chr14. LowMap+SegDup covers the whole window. This part of chr1 exists in several nearly identical copies, so reads that really come from another copy end up here, and the small differences between the copies show up as mismatches.
+
+In region 2, the reads are short and heavily clipped, and almost every one has a different colour because the mates are spread over many chromosomes. Most of them are supplementary alignments with MAPQ 0. The reference sequence bar is solid orange, which is a run of about 400 G's, followed by a block of 1,000 Ns. Low-quality, G-rich pieces of unrelated reads stick to this run of G's.
+
+Low mapping quality, evidence that doesn't agree (mates scattered everywhere), and a repeat or duplication underneath are the typical signs of an artefact. A real variant or SV would be supported by many well-mapped, independent reads telling the same story.
+::::
+
+#### Exercise 2 – TP53 in the germline VCF (Part 1, germline VCF)
+
+HG008 is a pancreatic cancer patient. The germline variants in this file come from long-read (PacBio HiFi) sequencing of the patient’s normal tissue. The variants were called with dipcall, which builds the two chromosome copies from the long reads and compares each one with the reference. As you go through the variant and genotype fields, look out for what the long reads add that you would not usually get from short reads.
+
+Go to `TP53` (`chr17:7,668,000-7,690,000`). Click the variant at `chr17:7,676,154`, then click its genotype cell. Go through every field in both popups and write down what you think each one means.
+
+1. Is this variant germline or somatic? How can you tell?
+
+:::: {.callout type="blue" collapsible="true" title="Answer"}
+Germline. The variant is in the normal sample (HG008N), so the person was born with it. It is `rs1042522` (Use the annotation `ClinVar dbSNP` under `Variation`), the well-known `TP53` `Pro72Arg` variant. In most populations the arginine version (the ALT here) is actually the more common one: a “variant” only means different from the reference genome, not rare or harmful.
+::::
+
+2. What does `0|1` tell you that `0/1` would not?
+
+:::: {.callout type="blue" collapsible="true" title="Answer"}
+The pipe means the genotype is phased: we know which chromosome copy carries the `ALT` allele. This comes from the long reads (HiPhase). Note that IGV shows `A | G` in the popup either way, so check the PS field to see whether a variant is phased.
+::::
+3. Find another heterozygous variant in TP53 with the same PS value. Is its `ALT` allele on the same chromosome copy as the `ALT` at `7,676,154`?
+
+:::: {.callout type="blue" collapsible="true" title="Answer"}
+All heterozygous variants in `TP53` share PS `7498016`, so they belong to one phase block. Variants written the same way (`0|1`) have their ALT on the same copy; a `1|0` variant has its ALT on the other copy.
+::::
+4. Why is AD only `1,1` for this variant?
+
+:::: {.callout type="blue" collapsible="true" title="Answer"}
+This VCF was made by dipcall, which compares two genome assemblies with the reference rather than counting reads. Here AD counts assembly pieces, one per chromosome copy, so a heterozygous site shows `1,1` and a homozygous one `0,2`. For the same reason, QUAL is always `30`.
+::::
+5. Which fields in this VCF would you not expect to see in a germline VCF made from short reads?
+
+:::: {.callout type="blue" collapsible="true" title="Answer"}
+The main addition from the long reads is phasing. Most heterozygous genotypes are written with a pipe (`0|1`), and the PS (phase set) and PF (phasing flag) fields record which phase block each variant belongs to. Phase blocks here are tens of kilobases long, so a whole gene like `TP53` sits in one block. With short reads, most variants would be unphased (`0/1`) and these fields would be missing. Some other fields come from how this particular file was made rather than from the read length: dipcall compares two genome assemblies with the reference, so `AD` counts assembly pieces, `QUAL` is always `30`, and the filters (`HET1/2`, `GAP1/2`) describe problems with the assemblies. A short-read caller would instead give read counts (`AD`, `DP`) and genotype quality (`GQ`).
+::::
+
+#### Exercise 3 – KRAS and CDKN2A in the somatic SV VCF (Part 1, somatic VCF)
+
+HG008 is a pancreatic cancer. The tumour and normal samples were sequenced with long reads. The SV variants are called by the long-read structural-variant caller Severusa which compared the tumour and normal to find SVs present only in the tumour. The resulting file contains the two classic pancreatic cancer events: a gain of the oncogene `KRAS` and a loss of the tumour suppressor `CDKN2A`.
+
+|Gene|Locus|SV record
+|--|--|--|
+|KRAS|chr12:24,600,000-26,850,000|severus_DUP1372|
+|CDKN2A|chr9:21,940,000-21,985,000|severus_DEL7384|
+
+For each one, click the SV and its genotype cell, and note `SVTYPE`, `SVLEN`, `STRANDS`, the genes listed in `BCSQ`, `VAF`, `DR/DV` and `HP`.
+
+1. Why would a tumour gain an extra copy of an oncogene but lose a tumour suppressor?
+
+:::: {.callout type="blue" collapsible="true" title="Answer"}
+KRAS sits in a `1.95 Mb` tandem duplication that covers 12 genes (`VAF` `0.36`, `HP` `1`). 
+
+An extra copy of an oncogene increases its growth signal.
+
+CDKN2A is removed by a `19.9 kb` deletion (`VAF 1`, `DR 0`, `DV 11`, `HP 1`). Losing a tumour suppressor removes a brake on cell division.
+
+Oncogenes help a tumour when they become more active, and tumour suppressors help it when they are lost.
+::::
+
+2. The CDKN2A deletion has genotype `0/1`, yet its `VAF` is `1`. What could explain this?
+
+:::: {.callout type="blue" collapsible="true" title="Answer"}
+A `VAF` of `1` means none of the reads at the breakpoints show the normal sequence, so there is most likely no intact copy left: the other copy was probably lost by a separate event.
+
+CDKN2A is completely inactivated in this tumour. Somatic genotypes are only approximate, and VAF is more informative.
+
+Since HG008-T is a cell line, there are no normal cells to lower the VAF.
+::::
+
+3. What does the field `STRANDS` with the value `-+` tell you about the KRAS event?
+
+:::: {.callout type="blue" collapsible="true" title="Answer"}
+[`-+` describes a junction that faces outward](https://github.com/KolmogorovLab/Severus/blob/main/README.md#plotly-graphs), which is the signature of a tandem duplication. With short reads, the same event shows up as read pairs facing away from each other.
+::::
+
+#### Exercise 4 – cBioPortal (Part 2)
+
+1. `BRCA1` and `BRCA2` are the best-known breast cancer genes, yet in the OncoPrint they are altered in only 3–4 % of patients. Why?
+
+:::: {.callout type="blue" collapsible="true" title="Answer"}
+BRCA1 and BRCA2 are famous because inherited (germline) variants in them strongly raise cancer risk. 
+
+The TCGA and METABRIC data in cBioPortal are somatic, meaning only changes found in the tumour, so germline variants are not shown.
+
+Germline BRCA1/2 carriers account for only about 5 % of breast cancers. BRCA1 can also be switched off by promoter methylation or by losing one copy, and neither counts as "altered" by default. 
+
+How often a gene is mutated in tumours is not the same as how important it is for cancer risk.
+::::
+
+2. Summarise in one sentence what each view is useful for: OncoPrint, Cancer Types Summary, Mutual Exclusivity, Plots, Mutations, Comparison/Survival and CN Segments.
+
+:::: {.callout type="blue" collapsible="true" title="Answer"}
+|View|Useful for|
+|--|--|
+|OncoPrint|Seeing which patients have which alterations, across all queried genes at once|
+|Cancer Types Summary|Comparing alteration frequency between studies or cancer types|
+|Mutual Exclusivity|Testing whether two genes tend to be altered together or rarely together|
+|Plots|Comparing any two attributes, for example fraction of genome altered by subtype|
+|Mutations|Seeing where mutations fall on the protein (hotspots vs spread out) and their annotation|
+|Comparison/Survival|Checking whether altered and unaltered patients differ in survival or clinical features|
+|CN Segments|Looking at copy-number gains and losses along the genome, in an embedded IGV|
+
+
+
+::::
+
+#### Exercise 5 – COSMIC (Part 3)
+1. What is COSMIC, and how is it different from cBioPortal?
+
+:::: {.callout type="blue" collapsible="true" title="Answer"}
+
+COSMIC, the Catalogue Of Somatic Mutations In Cancer, is run by the Wellcome Sanger Institute. 
+
+Its team collects somatic mutations from thousands of published papers and genome screens, across all cancer types.
+
+cBioPortal is organised around studies: you pick a cohort and see each patient's alterations together with clinical data such as survival.
+
+COSMIC is organised around genes and mutations: you ask how often a particular mutation has been reported, and in which tissues.
+
+COSMIC is free for academic use after registration; cBioPortal is open.
+::::
+2. What are other COSMIC features worth a look?
+
+:::: {.callout type="blue" collapsible="true" title="Answer"}
+A few worth further exploring: 
+
+- the Cancer Gene Census (a curated list of cancer genes and their role), 
+- Mutational Signatures (patterns that point to causes such as smoking or UV light), 
+- the Cancer Mutation Census (mutations ranked by evidence that they drive cancer), 
+- COSMIC-3D (mutations on protein structures), 
+- Actionability (links to drugs and clinical trials) and the Cell Lines Project.
+::::
+
+#### Exercise 6 – Which tool for which question?
+
+Which tool would you use to answer each of these questions?
+
+1. Is this variant real in my sequencing data? What do the reads look like?
+
+:::: {.callout type="blue" collapsible="true" title="Answer"}
+IGV
+
+It shows your own reads, with mapping quality, mismatches and read pairs
+::::
+
+2. How often is a gene altered in a cohort, with which other genes, and does it affect survival?
+
+:::: {.callout type="blue" collapsible="true" title="Answer"}
+cBioPortal
+
+It combines cohort data with clinical outcomes
+::::
+
+3. Has this exact variant been seen before, in which tissues, and what papers report it?
+
+:::: {.callout type="blue" collapsible="true" title="Answer"}
+COSMIC
+
+It collects somatic mutations from published studies, by tissue
+::::
+
+4. Is this variant clinically actionable?
+
+:::: {.callout type="blue" collapsible="true" title="Answer"}
+OncoKB (or CIViC)
+
+Experts link variants to approved drugs and trials. OncoKB annotations also appear in cBioPortal
+::::
+
+5. Is this variant common in healthy people (likely benign germline)?
+
+:::: {.callout type="blue" collapsible="true" title="Answer"}
+gnomAD
+
+It gives allele frequencies from hundreds of thousands of people
+::::
+
+In practice these tools are often used together: 
+
+IGV to check that a variant is real, gnomAD to check that it is rare, 
+
+COSMIC and cBioPortal to see whether it is known in cancer, 
+
+and OncoKB to see whether it matters for treatment.
+
