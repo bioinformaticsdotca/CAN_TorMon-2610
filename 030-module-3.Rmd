@@ -9,35 +9,46 @@ We will practice genomic alignment tool, [BWA](https://github.com/lh3/BWA), and 
 
 ### 2. Dataset
 [SRX4728544](https://www.ncbi.nlm.nih.gov/sra/SRX4728544): Whole Genome Sequencing of CRL-2324 breast cancer cell line
+<br>
 Due to huge size of the original data, please use __the following small datasets__.
-- [SRR7890824_10M_1.fastq.gz](https://drive.google.com/file/d/15a8DxTOYFfkXlvw8x4RneoSkgvCBUlep/view?usp=drive_link)
-- [SRR7890824_10M_2.fastq.gz](https://drive.google.com/file/d/1ljGSzJRYPylCJRi-1V8Zl56K4W34EwcH/view?usp=drive_link)
-> Tang et al., Establishing community reference samples, data and call sets for benchmarking cancer mutation detection using whole-genome sequencing, Nat Biotechnol. 2021 Sep;39(9):1151-1160. doi: 10.1038/s41587-021-00993-6. Epub 2021 Sep 9
+<br>
+* [SRR7890824_10M_1.fastq.gz](https://drive.google.com/file/d/15a8DxTOYFfkXlvw8x4RneoSkgvCBUlep/view?usp=drive_link)
+* [SRR7890824_10M_2.fastq.gz](https://drive.google.com/file/d/1ljGSzJRYPylCJRi-1V8Zl56K4W34EwcH/view?usp=drive_link)
+<br>
+Tang et al., Establishing community reference samples, data and call sets for benchmarking cancer mutation detection using whole-genome sequencing, Nat Biotechnol. 2021 Sep;39(9):1151-1160. doi: 10.1038/s41587-021-00993-6. Epub 2021 Sep 9
 
 ### 3. Workflow
 1.Download human referecne genome
-`wget https://hgdownload.gi.ucsc.edu/goldenPath/hg38/bigZips/hg38.fa.gz`
+```{r eval=FALSE}
+wget https://hgdownload.gi.ucsc.edu/goldenPath/hg38/bigZips/hg38.fa.gz
+```
 
 2. Indexing human reference genome. **This process may takes 1 hour.**
-`bwa index hg38.fa.gz`
+```{r eval=FALSE}
+bwa index hg38.fa.gz
+```
 
 3. Check output
-`ls`
+```{r eval=FALSE}
+ls
+```
 `bwa index` will generate the following five files.
 
 - [hg38.fa.gz.amb](https://drive.google.com/file/d/1O0GreTeeRAw__G9kYjMmk1zuk1xjeEG1/view?usp=drive_link)
 - [hg38.fa.gz.ann](https://drive.google.com/file/d/1r9ynpMHSPFE_le8bGhLGPaxd0GTMsUUQ/view?usp=drive_link)
 - [hg38.fa.gz.bwt](https://drive.google.com/file/d/1xarOkR4lIjbZz1M-4wUI0Q0yvrAP2C8q/view?usp=drive_link)
 - [hg38.fa.gz.pac](https://drive.google.com/file/d/1w2tCGkK6IIgvBqFmKRPhSSxmLlHQRh2q/view?usp=drive_link)
-- [hg38.fa.gz.sa](https://drive.google.com/file/d/160ZshdtvfP2KgDUS8QTwkGDHE_ummPkA/view?usp=drive_link
+- [hg38.fa.gz.sa](https://drive.google.com/file/d/160ZshdtvfP2KgDUS8QTwkGDHE_ummPkA/view?usp=drive_link)
 
 4. Perform genomic alignment
-`bwa mem hg38.fa.gz SRR7890824_10M_1.fastq.gz SRR7890824_10M_2.fastq.gz -t 4 > SRR7890824_10M.sam`
-
+```{r eval=FALSE}
+bwa mem hg38.fa.gz SRR7890824_10M_1.fastq.gz SRR7890824_10M_2.fastq.gz -t 4 > SRR7890824_10M.sam
+```
 If more multithreds are available, increase number of -t option. For example, `-t 8`.
 
 5. Add RG (read group information) for subsequent analytic tools and convert SAM format to BAM format.
-`picard AddOrReplaceReadGroups \
+```{r eval=FALSE}
+picard AddOrReplaceReadGroups \
       INPUT=SRR7890824_10M.sam \
       OUTPUT=SRR7890824_10M.rg.bam \
       RGID=group1 \
@@ -45,24 +56,30 @@ If more multithreds are available, increase number of -t option. For example, `-
       RGPL=ILLUMINA \
       RGPU=unit1 \
       RGSM=sample1 \
-      VALIDATION_STRINGENCY=LENIENT`
+      VALIDATION_STRINGENCY=LENIENT
+```
 
 6. Sort BAM file
-`picard SortSam \
+```{r eval=FALSE}
+picard SortSam \
       INPUT=SRR7890824_10M.rg.bam \
       OUTPUT=SRR7890824_10M.sorted.bam \
       SORT_ORDER=coordinate \
-      VALIDATION_STRINGENCY=SILENT`
+      VALIDATION_STRINGENCY=SILENT
+```
 
 7. Mark duplicate
-`picard MarkDuplicates \
+```{r eval=FALSE}
+picard MarkDuplicates \
       INPUT=SRR7890824_10M.sorted.bam \
       OUTPUT=SRR7890824_10M.dedup.bam \
       METRICS_FILE=metrics.txt`
+```
 
 8. Make BAM index
-`samtools index SRR7890824_10M.dedup.bam`
-
+```{r eval=FALSE}
+samtools index SRR7890824_10M.dedup.bam
+```
 9. Finally, you will obtain the following BAM and BAM index files.
 - [SRR7890824_10M.dedup.bam](https://drive.google.com/file/d/1FMnfCKE2B-s1oOr8gIQBDTPMYPU_kvqL/view?usp=drive_link)
 - [SRR7890824_10M.dedup.bam.bai](https://drive.google.com/file/d/1bwOyuueLIVV8JkjRjFJ011ufBjXCtyYo/view?usp=drive_link)
