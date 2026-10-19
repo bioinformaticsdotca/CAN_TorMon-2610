@@ -21,7 +21,7 @@ Welcome to this introductory tutorial on variant discovery and annotation, where
 In this workshop, we will focus only on whole genome data and provide command lines that allow detecting Single Nucleotide Variants (SNV). 
 This workshop will show you how to launch individual steps of a complete DNA-Seq SNV pipeline using cancer data
 
-#### Data Source
+##### Data Source
 Throughout this lab, we'll be using HCC1395, a triple-negative breast cancer cell line derived from a primary ductal carcinoma, paired with its matched normal lymphoblastoid line, HCC1395BL, derived from the same patient. 
 This tumor-normal pair isn't just a convenient teaching example — it's the reference standard adopted by the SEQC2 (Sequencing Quality Control Phase 2) consortium precisely because its somatic mutations and germline variants have been exhaustively validated across multiple sequencing platforms and bioinformatics pipelines, giving us a high-confidence "truth set" to check our own results against as we learn. 
 Biologically, HCC1395 is a useful sample for this kind of exercise because it carries a well-characterized germline BRCA1 loss-of-function mutation alongside a somatically acquired TP53 mutation, plus additional alterations in genes like PTEN, CDKN2A, and BRCA2 — giving you a realistic mix of germline and somatic variant types, and a chance to see firsthand how variant calling, filtering, and functional annotation come together to distinguish an inherited cancer-predisposition variant from a tumor-acquired driver mutation. 
@@ -40,7 +40,7 @@ For practical reasons we subsampled the reads for variants of interests (refseq 
 See `Module4/data/regions.bed` for the exact coordinates of the regions we will be using in this practical.
 
 
-##### Environment setup
+###### Environment setup
 ```{.bash}
 # Get the workshop data
 export COURSE_REPO=module4_repo
@@ -81,7 +81,7 @@ export REF=${MUGQIC_INSTALL_HOME}/genomes/species/Homo_sapiens.GRCh38/
 module avail
 ```
 
-##### Software requirements
+###### Software requirements
 The workshop commands use software provided by the MUGQIC module system in the
 `c3genomics/genpipes:v6.2.0` environment. Load the modules needed for each
 step with the `module load` commands in this README; the commands purge and
@@ -106,7 +106,7 @@ load modules as needed rather than requiring every tool to be loaded at once.
 | [Python](https://www.python.org/) | 3.10.4, 2.7.18 |
 | [MUGQIC tools](https://github.com/MUGQIC/mugqic_tools) | 2.12.7 |
 
-#### Original Setup
+##### Original Setup
 
 The initial structure of your folders should look like this:
 ```
@@ -121,7 +121,7 @@ The initial structure of your folders should look like this:
 ```
 
 
-##### Cheat file
+###### Cheat file
 **You can either run each code block below or run all commands using `bash commands.sh` ** [commands.sh](Module4/scripts/commands.sh)
 
 ### Getting started
@@ -186,7 +186,7 @@ However, more variant discovery tools are making use of machine learning (ML), f
 In this practical we will be focusing on well known non-ML variant callers.
 Here we will try four variant callers.
 
-#### Variant Callers Comparison (High-level overview more will be explained in the following sections)
+##### Variant Callers Comparison (High-level overview more will be explained in the following sections)
 
 | Caller | Read-support model | Region-calling logic | Local realignment |
 |---|---|---|---|
@@ -208,7 +208,7 @@ mkdir -p pairedVariants
 
 ```
 
-#### Varscan 2
+##### Varscan 2
 
 VarScan2 (Koboldt et al., Genome Research, 2012) takes a fundamentally different approach from the other three callers in this practical. It uses a heuristic method and a statistical test based on the number of aligned reads supporting each allele.
 
@@ -392,7 +392,7 @@ zgrep -v "^#" pairedVariants/HCC1395.varscan2.germline.loh.vcf.gz | wc -l
 </details>
 
 
-#### Vardict
+##### Vardict
 
 Vardict (Lai et al., Nucleic Acids Research, 2016) is a versatile variant caller that can handle both germline and somatic variants. 
 Similar to Varscan2, the caller uses user-tuned (e.g. minimum allele frequency (-f), minimum read support, minimum quality) heuristic approach to identify candidate variants and then applies statistical tests to classify them (implemented by testsomatic.R script, conceptually in the same family as VarScan2's Fisher's exact test).
@@ -448,7 +448,7 @@ zgrep -v "^#" pairedVariants/HCC1395.vardict.germline.loh.vcf.gz | wc -l
 ```
 There are 556 variants in discovered by VarDict, but only 19 somatic variants and 267 germline/LOH variants. Where did the other 270 variants go? [solution](Module4/solutions/_vardict1.md)
 
-#### GATK MuTecT2
+##### GATK MuTecT2
 
 Mutect2 (Benjamin et al., part of GATK4) takes yet another approach from the two callers we've already covered. 
 It's the most computationally sophisticated, and unlike VarScan2/VarDict, it doesn't rely on simple allele-count thresholds at all; the calling decision is built entirely on a probabilistic model.
@@ -515,7 +515,7 @@ zgrep -v "^#" pairedVariants/HCC1395.mutect2.somatic.vcf.gz | wc -l
 Notice that Mutect2 only calls 10 somatic variants
 
 
-#### Strelka2
+##### Strelka2
 
 Strelka2 (Kim et al., Nature Methods, 2018) is Illumina's own entry in this comparison, and its design goal was explicitly to solve 
 the runtime and accuracy problems of earlier-generation Bayesian callers — including its own predecessor, the original Strelka — 
@@ -615,7 +615,7 @@ bcftools \
 
 We have now generated all somatic and germline/LOH vcf for all four variant callers.  Time to merge them.
 
-#### Ensemble approach
+##### Ensemble approach
 
 Why ensemble approaches?
 
@@ -722,7 +722,7 @@ varscan2: 638
 There are 672 in the union of the three callers.
 
 
-#### CPSR/PCGR — turning a VCF into a clinically interpretable report
+##### CPSR/PCGR — turning a VCF into a clinically interpretable report
 
 By this point in the practical, we have an unannotated VCF from four different callers. CPSR and PCGR are the next logical steps: it takes these VCFs and adds
 context to the variants.
@@ -847,7 +847,7 @@ PCGR has other functionalities that are out of scope for this practical.  For mo
 i.e. tumor burden estimation, mutational signature analysis, copy number analysis, RNA expression analysis, and RNA gene fusion interpretation, etc.
 
 
-# Functional Annotations
+### Functional Annotations
 *How does PCGR use VEP to determine functional consequence?*
 
 PCGR runs VEP as its first annotation step (before layering on all the cancer-database annotations we discussed — COSMIC, CIViC, TSgene, etc.), 
@@ -923,7 +923,7 @@ Suggested activities:
 - Lastly for more information about classification of variants, versioning of databases etc. navigate `documentation section` of the report. Click `database versions` to see the version of each database used in the report. Click on `Report Content` tab to see how variants are classified and other functions.
 
 
-#### Data visualisation
+##### Data visualisation
 The Integrative Genomics Viewer (IGV) is an efficient visualization tool for interactive exploration of large genome datasets. 
 
 ![IGV browser presentation](Module4/img/BRCA2_13_32339132.png)
@@ -947,7 +947,7 @@ exit
 
 ```
 
-#### Acknowledgments
+##### Acknowledgments
 
 I would like to thank all my colleagues for their past and ongoing contributions to the development and preparation of this workshop.
 

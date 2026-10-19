@@ -213,12 +213,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="module-4-somatic-alterations.html"><a href="module-4-somatic-alterations.html#introduction-to-variant-discovery-and-annotations-in-cancer-data"><i class="fa fa-check"></i>Introduction to Variant Discovery and Annotations in Cancer Data</a></li>
 <li class="chapter" data-level="" data-path="module-4-somatic-alterations.html"><a href="module-4-somatic-alterations.html#getting-started"><i class="fa fa-check"></i>Getting started</a></li>
 <li class="chapter" data-level="" data-path="module-4-somatic-alterations.html"><a href="module-4-somatic-alterations.html#variant-discovery-in-cancer"><i class="fa fa-check"></i>Variant Discovery in Cancer</a></li>
+<li class="chapter" data-level="" data-path="module-4-somatic-alterations.html"><a href="module-4-somatic-alterations.html#functional-annotations"><i class="fa fa-check"></i>Functional Annotations</a></li>
+<li class="chapter" data-level="" data-path="module-4-somatic-alterations.html"><a href="module-4-somatic-alterations.html#beyond-vep-what-else-does-pcgr-add-to-this-info-field"><i class="fa fa-check"></i>Beyond VEP: what else does PCGR add to this INFO field</a></li>
+<li class="chapter" data-level="" data-path="module-4-somatic-alterations.html"><a href="module-4-somatic-alterations.html#exit-the-container-environment"><i class="fa fa-check"></i>Exit the container environment</a></li>
 </ul></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="functional-annotations.html"><a href="functional-annotations.html"><i class="fa fa-check"></i>Functional Annotations</a>
-<ul>
-<li class="chapter" data-level="" data-path="functional-annotations.html"><a href="functional-annotations.html#beyond-vep-what-else-does-pcgr-add-to-this-info-field"><i class="fa fa-check"></i>Beyond VEP: what else does PCGR add to this INFO field</a></li>
-<li class="chapter" data-level="" data-path="functional-annotations.html"><a href="functional-annotations.html#exit-the-container-environment"><i class="fa fa-check"></i>Exit the container environment</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="module-5.html"><a href="module-5.html"><i class="fa fa-check"></i>Module 5</a>
 <ul>
@@ -1936,9 +1934,9 @@ Note: it took about 2 minutes to run this chunck of code.</p>
 <span id="cb212-2"><a href="gprofiler_mod8.html#cb212-2" tabindex="-1"></a></span>
 <span id="cb212-3"><a href="gprofiler_mod8.html#cb212-3" tabindex="-1"></a>custom_gmt_max500 <span class="ot">&lt;-</span> <span class="fu">upload_GMT_file</span>(</span>
 <span id="cb212-4"><a href="gprofiler_mod8.html#cb212-4" tabindex="-1"></a>                        <span class="at">gmtfile=</span>dest_gmt_file_500)</span></code></pre></div>
-<pre><code>## Your custom annotations ID is gp__tQYR_1Rzo_iHg.
+<pre><code>## Your custom annotations ID is gp__KPEN_emmu_UHk.
 ## You can use this ID as an &#39;organism&#39; name in all the related enrichment tests against this custom source.</code></pre>
-<pre><code>## Just use: gost(my_genes, organism = &#39;gp__tQYR_1Rzo_iHg&#39;)</code></pre>
+<pre><code>## Just use: gost(my_genes, organism = &#39;gp__KPEN_emmu_UHk&#39;)</code></pre>
 <div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="gprofiler_mod8.html#cb215-1" tabindex="-1"></a>UPgenes <span class="ot">&lt;-</span> res<span class="sc">$</span>gene[res<span class="sc">$</span>logFC<span class="sc">&gt;</span><span class="dv">0</span> <span class="sc">&amp;</span>  res<span class="sc">$</span>FDR <span class="sc">&lt;=</span> <span class="fl">0.001</span>]</span>
 <span id="cb215-2"><a href="gprofiler_mod8.html#cb215-2" tabindex="-1"></a>DOWNgenes <span class="ot">&lt;-</span> res<span class="sc">$</span>gene[res<span class="sc">$</span>logFC<span class="sc">&lt;</span><span class="dv">0</span> <span class="sc">&amp;</span>  res<span class="sc">$</span>FDR <span class="sc">&lt;=</span> <span class="fl">0.001</span>]</span>
 <span id="cb215-3"><a href="gprofiler_mod8.html#cb215-3" tabindex="-1"></a></span>

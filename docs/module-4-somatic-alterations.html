@@ -30,7 +30,7 @@
   
   <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
 <link rel="prev" href="module-3-genome-alignment.html"/>
-<link rel="next" href="functional-annotations.html"/>
+<link rel="next" href="module-5.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -213,12 +213,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="module-4-somatic-alterations.html"><a href="module-4-somatic-alterations.html#introduction-to-variant-discovery-and-annotations-in-cancer-data"><i class="fa fa-check"></i>Introduction to Variant Discovery and Annotations in Cancer Data</a></li>
 <li class="chapter" data-level="" data-path="module-4-somatic-alterations.html"><a href="module-4-somatic-alterations.html#getting-started"><i class="fa fa-check"></i>Getting started</a></li>
 <li class="chapter" data-level="" data-path="module-4-somatic-alterations.html"><a href="module-4-somatic-alterations.html#variant-discovery-in-cancer"><i class="fa fa-check"></i>Variant Discovery in Cancer</a></li>
+<li class="chapter" data-level="" data-path="module-4-somatic-alterations.html"><a href="module-4-somatic-alterations.html#functional-annotations"><i class="fa fa-check"></i>Functional Annotations</a></li>
+<li class="chapter" data-level="" data-path="module-4-somatic-alterations.html"><a href="module-4-somatic-alterations.html#beyond-vep-what-else-does-pcgr-add-to-this-info-field"><i class="fa fa-check"></i>Beyond VEP: what else does PCGR add to this INFO field</a></li>
+<li class="chapter" data-level="" data-path="module-4-somatic-alterations.html"><a href="module-4-somatic-alterations.html#exit-the-container-environment"><i class="fa fa-check"></i>Exit the container environment</a></li>
 </ul></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="functional-annotations.html"><a href="functional-annotations.html"><i class="fa fa-check"></i>Functional Annotations</a>
-<ul>
-<li class="chapter" data-level="" data-path="functional-annotations.html"><a href="functional-annotations.html#beyond-vep-what-else-does-pcgr-add-to-this-info-field"><i class="fa fa-check"></i>Beyond VEP: what else does PCGR add to this INFO field</a></li>
-<li class="chapter" data-level="" data-path="functional-annotations.html"><a href="functional-annotations.html#exit-the-container-environment"><i class="fa fa-check"></i>Exit the container environment</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="module-5.html"><a href="module-5.html"><i class="fa fa-check"></i>Module 5</a>
 <ul>
@@ -477,8 +475,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Welcome to this introductory tutorial on variant discovery and annotation, where you’ll work through the process of identifying and interpreting genomic variants using real cancer sequencing data.</p>
 <p>In this workshop, we will focus only on whole genome data and provide command lines that allow detecting Single Nucleotide Variants (SNV).
 This workshop will show you how to launch individual steps of a complete DNA-Seq SNV pipeline using cancer data</p>
-<div id="data-source" class="section level4 hasAnchor">
-<h4>Data Source<a href="module-4-somatic-alterations.html#data-source" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="data-source" class="section level5 hasAnchor">
+<h5>Data Source<a href="module-4-somatic-alterations.html#data-source" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p>Throughout this lab, we’ll be using HCC1395, a triple-negative breast cancer cell line derived from a primary ductal carcinoma, paired with its matched normal lymphoblastoid line, HCC1395BL, derived from the same patient.
 This tumor-normal pair isn’t just a convenient teaching example — it’s the reference standard adopted by the SEQC2 (Sequencing Quality Control Phase 2) consortium precisely because its somatic mutations and germline variants have been exhaustively validated across multiple sequencing platforms and bioinformatics pipelines, giving us a high-confidence “truth set” to check our own results against as we learn.
 Biologically, HCC1395 is a useful sample for this kind of exercise because it carries a well-characterized germline BRCA1 loss-of-function mutation alongside a somatically acquired TP53 mutation, plus additional alterations in genes like PTEN, CDKN2A, and BRCA2 — giving you a realistic mix of germline and somatic variant types, and a chance to see firsthand how variant calling, filtering, and functional annotation come together to distinguish an inherited cancer-predisposition variant from a tumor-acquired driver mutation.</p>
@@ -490,8 +488,8 @@ Using four variant callers (VarScan2, VarDict, MuTecT2 and Strelka2) we will gen
 <p><strong>For more details about</strong> <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8532138/">HCC1395</a></p>
 <p>For practical reasons we subsampled the reads for variants of interests (refseq gene boundaries for BRCA1, BRCA2, and TP53 with 2kb padding) in the table below because running the whole dataset would take way too much time and resources.
 See <code>Module4/data/regions.bed</code> for the exact coordinates of the regions we will be using in this practical.</p>
-<div id="environment-setup" class="section level5 hasAnchor">
-<h5>Environment setup<a href="module-4-somatic-alterations.html#environment-setup" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<div id="environment-setup" class="section level6 hasAnchor">
+<h6>Environment setup<a href="module-4-somatic-alterations.html#environment-setup" class="anchor-section" aria-label="Anchor link to header"></a></h6>
 <div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="module-4-somatic-alterations.html#cb12-1" tabindex="-1"></a><span class="co"># Get the workshop data</span></span>
 <span id="cb12-2"><a href="module-4-somatic-alterations.html#cb12-2" tabindex="-1"></a><span class="bu">export</span> <span class="va">COURSE_REPO</span><span class="op">=</span>module4_repo</span>
 <span id="cb12-3"><a href="module-4-somatic-alterations.html#cb12-3" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> Module4</span>
@@ -530,8 +528,8 @@ See <code>Module4/data/regions.bed</code> for the exact coordinates of the regio
 <span id="cb12-36"><a href="module-4-somatic-alterations.html#cb12-36" tabindex="-1"></a><span class="co">#Run module avail to see full C3G software stack</span></span>
 <span id="cb12-37"><a href="module-4-somatic-alterations.html#cb12-37" tabindex="-1"></a><span class="ex">module</span> avail</span></code></pre></div>
 </div>
-<div id="software-requirements" class="section level5 hasAnchor">
-<h5>Software requirements<a href="module-4-somatic-alterations.html#software-requirements" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<div id="software-requirements" class="section level6 hasAnchor">
+<h6>Software requirements<a href="module-4-somatic-alterations.html#software-requirements" class="anchor-section" aria-label="Anchor link to header"></a></h6>
 <p>The workshop commands use software provided by the MUGQIC module system in the
 <code>c3genomics/genpipes:v6.2.0</code> environment. Load the modules needed for each
 step with the <code>module load</code> commands in this README; the commands purge and
@@ -616,8 +614,8 @@ load modules as needed rather than requiring every tool to be loaded at once.</p
 </table>
 </div>
 </div>
-<div id="original-setup" class="section level4 hasAnchor">
-<h4>Original Setup<a href="module-4-somatic-alterations.html#original-setup" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="original-setup" class="section level5 hasAnchor">
+<h5>Original Setup<a href="module-4-somatic-alterations.html#original-setup" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p>The initial structure of your folders should look like this:</p>
 <pre><code>&lt;ROOT&gt;
 |-- alignments/              # aligments from the center (down sampled)
@@ -627,8 +625,8 @@ load modules as needed rather than requiring every tool to be loaded at once.</p
         `-- HCC1395*_?       # Lane directory by run number. Contains the fastqs
 |-- savedResults             # Folder containing precomputed results
 |-- scripts                  # cheat sheet folder</code></pre>
-<div id="cheat-file" class="section level5 hasAnchor">
-<h5>Cheat file<a href="module-4-somatic-alterations.html#cheat-file" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<div id="cheat-file" class="section level6 hasAnchor">
+<h6>Cheat file<a href="module-4-somatic-alterations.html#cheat-file" class="anchor-section" aria-label="Anchor link to header"></a></h6>
 <p><strong>You can either run each code block below or run all commands using <code>bash commands.sh</code> </strong> <a href="Module4/scripts/commands.sh">commands.sh</a></p>
 </div>
 </div>
@@ -677,8 +675,8 @@ Most of SNV and indel callers use either Baysian, threshold or t-test approach f
 However, more variant discovery tools are making use of machine learning (ML), for discovery (e.g. DeepSomatic, Clair3), variant filtering, prioritization or annotations.</p>
 <p>In this practical we will be focusing on well known non-ML variant callers.
 Here we will try four variant callers.</p>
-<div id="variant-callers-comparison-high-level-overview-more-will-be-explained-in-the-following-sections" class="section level4 hasAnchor">
-<h4>Variant Callers Comparison (High-level overview more will be explained in the following sections)<a href="module-4-somatic-alterations.html#variant-callers-comparison-high-level-overview-more-will-be-explained-in-the-following-sections" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="variant-callers-comparison-high-level-overview-more-will-be-explained-in-the-following-sections" class="section level5 hasAnchor">
+<h5>Variant Callers Comparison (High-level overview more will be explained in the following sections)<a href="module-4-somatic-alterations.html#variant-callers-comparison-high-level-overview-more-will-be-explained-in-the-following-sections" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <table>
 <colgroup>
 <col width="25%" />
@@ -727,8 +725,8 @@ Here we will try four variant callers.</p>
 <p>In our case, let’s start with:</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="module-4-somatic-alterations.html#cb16-1" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> pairedVariants</span></code></pre></div>
 </div>
-<div id="varscan-2" class="section level4 hasAnchor">
-<h4>Varscan 2<a href="module-4-somatic-alterations.html#varscan-2" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="varscan-2" class="section level5 hasAnchor">
+<h5>Varscan 2<a href="module-4-somatic-alterations.html#varscan-2" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p>VarScan2 (Koboldt et al., Genome Research, 2012) takes a fundamentally different approach from the other three callers in this practical. It uses a heuristic method and a statistical test based on the number of aligned reads supporting each allele.</p>
 <p>The caller works directly on read counts pulled from samtools mpileup output — it never touches the BAM files itself. This is why, as we set up earlier, region restriction for VarScan2 has to happen at the mpileup step rather than through a flag native to VarScan2.</p>
 <p>Requirements for running Samtools mpileup and VarScan2:
@@ -856,8 +854,8 @@ How to extract germline and LOH variants
 <span id="cb28-8"><a href="module-4-somatic-alterations.html#cb28-8" tabindex="-1"></a><span class="fu">zgrep</span> <span class="at">-v</span> <span class="st">&quot;^#&quot;</span> pairedVariants/HCC1395.varscan2.germline.loh.vcf.gz <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span> </span></code></pre></div>
 </details>
 </div>
-<div id="vardict" class="section level4 hasAnchor">
-<h4>Vardict<a href="module-4-somatic-alterations.html#vardict" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="vardict" class="section level5 hasAnchor">
+<h5>Vardict<a href="module-4-somatic-alterations.html#vardict" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p>Vardict (Lai et al., Nucleic Acids Research, 2016) is a versatile variant caller that can handle both germline and somatic variants.
 Similar to Varscan2, the caller uses user-tuned (e.g. minimum allele frequency (-f), minimum read support, minimum quality) heuristic approach to identify candidate variants and then applies statistical tests to classify them (implemented by testsomatic.R script, conceptually in the same family as VarScan2’s Fisher’s exact test).
 VarDict performs its own intrinsic local realignment on the fly for more accurate allele frequencies for indels, and also rescues soft clipped reads to identify indels not present in the alignments or as additional support for existing indels.
@@ -904,8 +902,8 @@ Note the use of the regular expression operator (~) to match the string in the I
 <span id="cb30-21"><a href="module-4-somatic-alterations.html#cb30-21" tabindex="-1"></a><span class="fu">zgrep</span> <span class="at">-v</span> <span class="st">&quot;^#&quot;</span> pairedVariants/HCC1395.vardict.germline.loh.vcf.gz <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span></code></pre></div>
 <p>There are 556 variants in discovered by VarDict, but only 19 somatic variants and 267 germline/LOH variants. Where did the other 270 variants go? <a href="Module4/solutions/_vardict1.md">solution</a></p>
 </div>
-<div id="gatk-mutect2" class="section level4 hasAnchor">
-<h4>GATK MuTecT2<a href="module-4-somatic-alterations.html#gatk-mutect2" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="gatk-mutect2" class="section level5 hasAnchor">
+<h5>GATK MuTecT2<a href="module-4-somatic-alterations.html#gatk-mutect2" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p>Mutect2 (Benjamin et al., part of GATK4) takes yet another approach from the two callers we’ve already covered.
 It’s the most computationally sophisticated, and unlike VarScan2/VarDict, it doesn’t rely on simple allele-count thresholds at all; the calling decision is built entirely on a probabilistic model.</p>
 <p><em>Active region detection and local assembly</em></p>
@@ -958,8 +956,8 @@ That’s the job of a second tool, <em>FilterMutectCalls</em>, which applies a w
 <span id="cb32-16"><a href="module-4-somatic-alterations.html#cb32-16" tabindex="-1"></a><span class="fu">zgrep</span> <span class="at">-v</span> <span class="st">&quot;^#&quot;</span> pairedVariants/HCC1395.mutect2.somatic.vcf.gz <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span></code></pre></div>
 <p>Notice that Mutect2 only calls 10 somatic variants</p>
 </div>
-<div id="strelka2" class="section level4 hasAnchor">
-<h4>Strelka2<a href="module-4-somatic-alterations.html#strelka2" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="strelka2" class="section level5 hasAnchor">
+<h5>Strelka2<a href="module-4-somatic-alterations.html#strelka2" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p>Strelka2 (Kim et al., Nature Methods, 2018) is Illumina’s own entry in this comparison, and its design goal was explicitly to solve
 the runtime and accuracy problems of earlier-generation Bayesian callers — including its own predecessor, the original Strelka —
 while staying in the same broad “probabilistic model” family as Mutect2 rather than the heuristic family VarScan2/VarDict lean toward.</p>
@@ -1041,8 +1039,8 @@ is a meaningful departure from VarScan2 and VarDict, both of which apply the sam
 <span id="cb36-13"><a href="module-4-somatic-alterations.html#cb36-13" tabindex="-1"></a> pairedVariants/HCC1395.strelka2.germline.vcf.gz</span></code></pre></div>
 <p>We have now generated all somatic and germline/LOH vcf for all four variant callers. Time to merge them.</p>
 </div>
-<div id="ensemble-approach" class="section level4 hasAnchor">
-<h4>Ensemble approach<a href="module-4-somatic-alterations.html#ensemble-approach" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="ensemble-approach" class="section level5 hasAnchor">
+<h5>Ensemble approach<a href="module-4-somatic-alterations.html#ensemble-approach" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p>Why ensemble approaches?</p>
 <p>The core problem: no single caller in your panel has both high sensitivity and high specificity, and their errors typically don’t overlap
 VarScan2’s heuristic thresholds, VarDict’s realignment-plus-heuristic hybrid, and Mutect2/Strelka2’s Bayesian assembly-based models each make systematically different mistakes.
@@ -1122,8 +1120,8 @@ vardict2: 267
 varscan2: 638</p>
 <p>There are 672 in the union of the three callers.</p>
 </div>
-<div id="cpsrpcgr-turning-a-vcf-into-a-clinically-interpretable-report" class="section level4 hasAnchor">
-<h4>CPSR/PCGR — turning a VCF into a clinically interpretable report<a href="module-4-somatic-alterations.html#cpsrpcgr-turning-a-vcf-into-a-clinically-interpretable-report" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="cpsrpcgr-turning-a-vcf-into-a-clinically-interpretable-report" class="section level5 hasAnchor">
+<h5>CPSR/PCGR — turning a VCF into a clinically interpretable report<a href="module-4-somatic-alterations.html#cpsrpcgr-turning-a-vcf-into-a-clinically-interpretable-report" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p>By this point in the practical, we have an unannotated VCF from four different callers. CPSR and PCGR are the next logical steps: it takes these VCFs and adds
 context to the variants.</p>
 <p><em>CPSR (Cancer Predisposition Sequencing Reporter)</em> — interprets germline variants (like our HCC1395 BRCA1 mutation, shared with the matched normal),
@@ -1222,6 +1220,87 @@ The report is located in the <code>pairedVariants/cpsr</code> directory.</p>
 i.e. tumor burden estimation, mutational signature analysis, copy number analysis, RNA expression analysis, and RNA gene fusion interpretation, etc.</p>
 </div>
 </div>
+<div id="functional-annotations" class="section level3 hasAnchor">
+<h3>Functional Annotations<a href="module-4-somatic-alterations.html#functional-annotations" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><em>How does PCGR use VEP to determine functional consequence?</em></p>
+<p>PCGR runs VEP as its first annotation step (before layering on all the cancer-database annotations we discussed — COSMIC, CIViC, TSgene, etc.),
+and the CSQ INFO field is where VEP’s raw functional-consequence prediction lives. You can read more about the CSQ format in <a href="https://jun2026.archive.ensembl.org/info/docs/tools/vep/vep_formats.html#vcfout">VEP’s own documentation</a>.</p>
+<p>Look at the annotated ensemble VCF with <code>less</code>:</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb46-1"><a href="module-4-somatic-alterations.html#cb46-1" tabindex="-1"></a><span class="fu">less</span> <span class="at">-S</span> pairedVariants/pcgr/HCC1395.pcgr.grch38.pass.vcf.gz</span></code></pre></div>
+<p>Can you find the <code>CSQ=</code> field in the INFO column?</p>
+<p>VEP’s consequence <code>CSQ</code> field is pipe-delimited. A trimmed version of the format looks like:</p>
+<pre><code>CSQ=Allele|Consequence|IMPACT|SYMBOL|Gene|Feature_type|Feature|BIOTYPE|EXON|INTRON|HGVSc|HGVSp|cDNA_position|CDS_position|Protein_position|Amino_acids|Codons|Existing_variation|...</code></pre>
+<p>And critically — one variant gets one CSQ entry per transcript it overlaps, separated by commas.
+So, a variant that overlaps 15 transcripts will have 15 comma-separated blocks inside a single <code>CSQ=</code> tag.</p>
+<p><em>Worked example: our BRCA2 somatic stop-gain</em></p>
+<p>Here’s the first transcript block from our <code>13:32339132 G&gt;T</code> variant (Side note: it’s a high confidence variant called by all four callers <code>CALLERS=mutect2,strelka2,varscan2,vardict</code> ):</p>
+<pre><code>T|stop_gained|HIGH|BRCA2|ENSG00000139618|Transcript|ENST00000380152|protein_coding|11/27||ENST00000380152.8:c.4777G&gt;T|ENSP00000369497.3:p.Glu1593Ter|4976/11954|4777/10257|1593/3418|E/*|Gaa/Taa|COSV66463787|...</code></pre>
+<p>What do these CSQ fields means? <a href="Module4/solutions/_vep1.md">solution</a></p>
+<p>How does PCGR report the “most relevant” transcript for each variant?</p>
+<p>Let’s look at the all the overlapping transcripts for our BRCA2 variant:</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb49-1"><a href="module-4-somatic-alterations.html#cb49-1" tabindex="-1"></a><span class="co"># bcftools (use the VEP plugin to extract the CSQ field)</span></span>
+<span id="cb49-2"><a href="module-4-somatic-alterations.html#cb49-2" tabindex="-1"></a> <span class="ex">module</span> purge <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb49-3"><a href="module-4-somatic-alterations.html#cb49-3" tabindex="-1"></a> <span class="ex">module</span> load mugqic/bcftools/1.23 <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb49-4"><a href="module-4-somatic-alterations.html#cb49-4" tabindex="-1"></a> <span class="ex">bcftools</span> +split-vep <span class="at">-r</span> <span class="st">&quot;13:32339132&quot;</span> <span class="dt">\</span></span>
+<span id="cb49-5"><a href="module-4-somatic-alterations.html#cb49-5" tabindex="-1"></a> pairedVariants/pcgr/HCC1395.pcgr.grch38.pass.vcf.gz <span class="dt">\</span></span>
+<span id="cb49-6"><a href="module-4-somatic-alterations.html#cb49-6" tabindex="-1"></a> <span class="at">-f</span> <span class="st">&#39;%CHROM\t%POS\t%REF\t%ALT\t%SYMBOL\t%Feature\t%Consequence\t%HGVSc\t%HGVSp\t%CANONICAL\t%MANE_SELECT\n&#39;</span> <span class="dt">\</span></span>
+<span id="cb49-7"><a href="module-4-somatic-alterations.html#cb49-7" tabindex="-1"></a> <span class="at">-d</span> <span class="dt">\</span></span>
+<span id="cb49-8"><a href="module-4-somatic-alterations.html#cb49-8" tabindex="-1"></a> <span class="at">-A</span> tab <span class="dt">\</span></span>
+<span id="cb49-9"><a href="module-4-somatic-alterations.html#cb49-9" tabindex="-1"></a> <span class="dv">2</span><span class="op">&gt;</span>/dev/null</span></code></pre></div>
+<p>Let’s look more closely at the these results <a href="Module4/solutions/_vep2.md">solution</a></p>
+<p>Now we know that the selection of the “most relevant” transcript is essential for downstream interpretation.</p>
+<p>But how does PCGR determine which transcript is the “most relevant” for a given variant? I gave you a hint above <a href="Module4/solutions/_vep3.md">solution</a></p>
+</div>
+<div id="beyond-vep-what-else-does-pcgr-add-to-this-info-field" class="section level3 hasAnchor">
+<h3>Beyond VEP: what else does PCGR add to this INFO field<a href="module-4-somatic-alterations.html#beyond-vep-what-else-does-pcgr-add-to-this-info-field" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We will not go into the details of all the annotations added by PCGR, but you can find a complete list of all the INFO fields in the <a href="https://sigven.github.io/pcgr/articles/annotation_resources.html">PCGR documentation</a>.</p>
+<p>But everything after the CSQ/flattened-VEP block in this record is not from VEP at all — it’s PCGR’s cancer-database layer, already attached to this exact variant:</p>
+<p>e.g.
+<code>TSG;TSG_SUPPORT=NCG&amp;CancerMine:132</code> — flags BRCA2 as a known tumor suppressor gene
+<code>BIOMARKER_MATCH=civic|...</code> — a direct match to CIViC clinical evidence entries
+<code>ONCOGENICITY=Oncogenic;ONCOGENICITY_CODE=ONCG_OVS1|ONCG_OP4</code> — PCGR’s automated application of the ClinGen/CGC/VICC oncogenicity classification framework:
+OVS1 (“Oncogenic Very Strong-1”) is the code for a null/loss-of-function variant in a gene where loss-of-function is a known mechanism of cancer
+— exactly what a BRCA2 nonsense mutation is — combined with a supporting-level code (OP4), together pushing this variant to an overall “Oncogenic” call</p>
+<p>Exercise: Find another somatic mutation with a predicted High or Moderate impact, find the CANONICAL transcript and its associated annotations. <a href="Module4/solutions/_pcgr1.md">solution</a></p>
+<p>Feel free to explore the PCGR report in your browser or the other generated file. Before moving to the last section.</p>
+<p>Suggested activities:
+- Use the content section (top right) to navigate to the <code>Variant classification</code> section. Look at the BRAC2 and TP53 variants. Click on the triangle by the gene name to expand the variant details. Look at the VEP and PCGR annotations.
+- Navigate to the <code>Germline findings</code> section. Look at the BRCA1 variant. Click on the triangle by the gene name to expand the variant details. Look at the VEP and PCGR annotations.
+- Lastly for more information about classification of variants, versioning of databases etc. navigate <code>documentation section</code> of the report. Click <code>database versions</code> to see the version of each database used in the report. Click on <code>Report Content</code> tab to see how variants are classified and other functions.</p>
+<div id="data-visualisation" class="section level5 hasAnchor">
+<h5>Data visualisation<a href="module-4-somatic-alterations.html#data-visualisation" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>The Integrative Genomics Viewer (IGV) is an efficient visualization tool for interactive exploration of large genome datasets.</p>
+<div class="float">
+<img src="Module4/img/BRCA2_13_32339132.png" alt="IGV browser presentation" />
+<div class="figcaption">IGV browser presentation</div>
+</div>
+<ol style="list-style-type: decimal">
+<li>Open IGV</li>
+<li>Chose the reference genome corresponding to those use for alignment (hg38)</li>
+<li>Load bam files (normal and tumor)</li>
+<li>Load vcf files (pairedVariants/HCC1395.ensemble.somatic.flt.vcf.gz)</li>
+</ol>
+<p>Explore/play with the data:</p>
+<ul>
+<li>Find somatic variants</li>
+<li>Look around…</li>
+</ul>
+<p><a href="Module4/solutions/_igv1.md">solution</a></p>
+</div>
+</div>
+<div id="exit-the-container-environment" class="section level3 hasAnchor">
+<h3>Exit the container environment<a href="module-4-somatic-alterations.html#exit-the-container-environment" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb50"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb50-1"><a href="module-4-somatic-alterations.html#cb50-1" tabindex="-1"></a><span class="bu">exit</span></span></code></pre></div>
+<div id="acknowledgments" class="section level5 hasAnchor">
+<h5>Acknowledgments<a href="module-4-somatic-alterations.html#acknowledgments" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>I would like to thank all my colleagues for their past and ongoing contributions to the development and preparation of this workshop.</p>
+<p><em>Past contributors</em>: Joel Fillon, Louis Letourneau, Edouard Henrion, François Lefebvre, and Maxime Caron.</p>
+<p><em>Current contributors</em>: Robert Eveleigh, Alain Pacis, Aline Rangel, Mathieu Bourgey, Hector Galvez, and Guillaume Bourque.</p>
+<p>I would also like to acknowledge the SEQC2 Consortium for making publicly available data for the HCC1395 benchmark sample, which supports the practical exercises in this workshop.</p>
+<p>The format of the tutorial has been inspired from Mar Gonzalez Porta.</p>
+
+</div>
+</div>
 </div>
 </div>
             </section>
@@ -1230,7 +1309,7 @@ i.e. tumor burden estimation, mutational signature analysis, copy number analys
         </div>
       </div>
 <a href="module-3-genome-alignment.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="functional-annotations.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="module-5.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
