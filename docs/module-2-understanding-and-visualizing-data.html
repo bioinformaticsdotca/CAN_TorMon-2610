@@ -1,0 +1,1267 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Module 2 Understanding and Visualizing Data | Cancer Analysis 2026</title>
+  <meta name="description" content="Workshop website for the 2026 Cancer Analysis Canadian Bioinformatics Workshop" />
+  <meta name="generator" content="bookdown 0.46 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Module 2 Understanding and Visualizing Data | Cancer Analysis 2026" />
+  <meta property="og:type" content="book" />
+  <meta property="og:image" content="https://bioinformaticsdotca.github.io/CAN_TorMon-2610/img/bioinformatics_logo.png" />
+  <meta property="og:description" content="Workshop website for the 2026 Cancer Analysis Canadian Bioinformatics Workshop" />
+  <meta name="github-repo" content="bioinformaticsdotca/CAN_TorMon-2610" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Module 2 Understanding and Visualizing Data | Cancer Analysis 2026" />
+  
+  <meta name="twitter:description" content="Workshop website for the 2026 Cancer Analysis Canadian Bioinformatics Workshop" />
+  <meta name="twitter:image" content="https://bioinformaticsdotca.github.io/CAN_TorMon-2610/img/bioinformatics_logo.png" />
+
+<meta name="author" content="Faculty: Trevor Pugh, Linda Xiang, Yoshiaki Tanaka, Robert Eveleigh, Mathieu Lajoie, Vida Talebian, Aqsa Alam, Veronique Voisin, Ruth Isserlin, Nicholas Geoffrion" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="prev" href="module-1-intro-to-cancer-genomics.html"/>
+<link rel="next" href="module-3-genome-alignment.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LearningResource",
+  "name": "Cancer Analysis",
+  "description": "The complete set of tutorials, slides, and practical exercises for the Cancer Analysis 2026 Canadian Bioinformatics Workshop, hosted on GitHub Pages.",
+  "url": "https://bioinformaticsdotca.github.io/CAN_TorMon-2610",
+  "learningResourceType": ["tutorial", "slides", "exercise"],
+  "inLanguage": "en",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "provider": {
+    "@type": "Organization",
+    "name": "Bioinformatics.ca",
+    "url": "https://bioinformatics.ca"
+  },
+  "keywords": "",
+  "isPartOf": {
+    "@type": "Course",
+    "@id": "https://bioinformatics.ca/CAN_TorMon-2610/"
+  }
+}
+</script>
+
+
+<style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<a href="https://bioinformaticsdotca.github.io/">
+ <img src="img/bioinformatics_logo.png" width="90%" alt="bioinformatics.ca logo" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;">
+ </a>
+<li><center><strong><a href="./"><br>Cancer Analysis<br><br></a></strong></center></li>
+<a href="./">
+ <img src="img/CBW_CAN-1.png" width="70%" alt="Cancer Analysis logo" style="display:block; margin-left:auto; margin-right:auto; ">
+ </a>
+<br>
+
+<li class="divider"></li>
+<li class="part"><span><b>I Introduction</b></span></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Workshop Info</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#pre-work"><i class="fa fa-check"></i>Pre-work</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#class-photo"><i class="fa fa-check"></i>Class Photo</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#schedule"><i class="fa fa-check"></i>Schedule</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="meet-your-faculty.html"><a href="meet-your-faculty.html"><i class="fa fa-check"></i>Meet Your Faculty</a>
+<ul>
+<li class="chapter" data-level="" data-path="meet-your-faculty.html"><a href="meet-your-faculty.html#tas"><i class="fa fa-check"></i>TA’s</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="data-and-compute-setup.html"><a href="data-and-compute-setup.html"><i class="fa fa-check"></i>Data and Compute Setup</a></li>
+<li class="part"><span><b>II Modules</b></span></li>
+<li class="chapter" data-level="" data-path="module-1-intro-to-cancer-genomics.html"><a href="module-1-intro-to-cancer-genomics.html"><i class="fa fa-check"></i>Module 1 Intro to Cancer Genomics</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-1-intro-to-cancer-genomics.html"><a href="module-1-intro-to-cancer-genomics.html#lecture"><i class="fa fa-check"></i>Lecture</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-2-understanding-and-visualizing-data.html"><a href="module-2-understanding-and-visualizing-data.html"><i class="fa fa-check"></i>Module 2 Understanding and Visualizing Data</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-2-understanding-and-visualizing-data.html"><a href="module-2-understanding-and-visualizing-data.html#lecture-1"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-2-understanding-and-visualizing-data.html"><a href="module-2-understanding-and-visualizing-data.html#lab"><i class="fa fa-check"></i>Lab</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-2-understanding-and-visualizing-data.html"><a href="module-2-understanding-and-visualizing-data.html#part-1---igv"><i class="fa fa-check"></i>Part 1 - IGV</a></li>
+<li class="chapter" data-level="" data-path="module-2-understanding-and-visualizing-data.html"><a href="module-2-understanding-and-visualizing-data.html#part-2---cbioportal"><i class="fa fa-check"></i>Part 2 - cBioPortal</a></li>
+<li class="chapter" data-level="" data-path="module-2-understanding-and-visualizing-data.html"><a href="module-2-understanding-and-visualizing-data.html#part-3---cosmic"><i class="fa fa-check"></i>Part 3 - COSMIC</a></li>
+<li class="chapter" data-level="" data-path="module-2-understanding-and-visualizing-data.html"><a href="module-2-understanding-and-visualizing-data.html#part-4---advanced-exercises"><i class="fa fa-check"></i>Part 4 - Advanced Exercises</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-3-genome-alignment.html"><a href="module-3-genome-alignment.html"><i class="fa fa-check"></i>Module 3 Genome Alignment</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-3-genome-alignment.html"><a href="module-3-genome-alignment.html#lecture-2"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-3-genome-alignment.html"><a href="module-3-genome-alignment.html#lab-1"><i class="fa fa-check"></i>Lab</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-4-somatic-alterations.html"><a href="module-4-somatic-alterations.html"><i class="fa fa-check"></i>Module 4 Somatic Alterations</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-4-somatic-alterations.html"><a href="module-4-somatic-alterations.html#lecture-3"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-4-somatic-alterations.html"><a href="module-4-somatic-alterations.html#lab-2"><i class="fa fa-check"></i>Lab</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-4-somatic-alterations.html"><a href="module-4-somatic-alterations.html#introduction-to-variant-discovery-and-annotations-in-cancer-data"><i class="fa fa-check"></i>Introduction to Variant Discovery and Annotations in Cancer Data</a></li>
+<li class="chapter" data-level="" data-path="module-4-somatic-alterations.html"><a href="module-4-somatic-alterations.html#getting-started"><i class="fa fa-check"></i>Getting started</a></li>
+<li class="chapter" data-level="" data-path="module-4-somatic-alterations.html"><a href="module-4-somatic-alterations.html#variant-discovery-in-cancer"><i class="fa fa-check"></i>Variant Discovery in Cancer</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="functional-annotations.html"><a href="functional-annotations.html"><i class="fa fa-check"></i>Functional Annotations</a>
+<ul>
+<li class="chapter" data-level="" data-path="functional-annotations.html"><a href="functional-annotations.html#beyond-vep-what-else-does-pcgr-add-to-this-info-field"><i class="fa fa-check"></i>Beyond VEP: what else does PCGR add to this INFO field</a></li>
+<li class="chapter" data-level="" data-path="functional-annotations.html"><a href="functional-annotations.html#exit-the-container-environment"><i class="fa fa-check"></i>Exit the container environment</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-5.html"><a href="module-5.html"><i class="fa fa-check"></i>Module 5</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-5.html"><a href="module-5.html#lecture-4"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-5.html"><a href="module-5.html#lab-3"><i class="fa fa-check"></i>Lab</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="dataset-1.html"><a href="dataset-1.html"><i class="fa fa-check"></i>Dataset</a></li>
+<li class="chapter" data-level="" data-path="run-cobalt-amber-purple.html"><a href="run-cobalt-amber-purple.html"><i class="fa fa-check"></i>Run cobalt , amber , purple</a>
+<ul>
+<li class="chapter" data-level="" data-path="run-cobalt-amber-purple.html"><a href="run-cobalt-amber-purple.html#cobalt-read-depth-ratios"><i class="fa fa-check"></i>1. COBALT: read-depth ratios</a></li>
+<li class="chapter" data-level="" data-path="run-cobalt-amber-purple.html"><a href="run-cobalt-amber-purple.html#amber-b-allele-frequencies"><i class="fa fa-check"></i>2. AMBER: B-allele frequencies</a></li>
+<li class="chapter" data-level="" data-path="run-cobalt-amber-purple.html"><a href="run-cobalt-amber-purple.html#purple-purity-ploidy-and-copy-number"><i class="fa fa-check"></i>3. PURPLE: purity, ploidy and copy number</a></li>
+<li class="chapter" data-level="" data-path="run-cobalt-amber-purple.html"><a href="run-cobalt-amber-purple.html#first-look-at-the-results-estimated-vs.-true-purity"><i class="fa fa-check"></i>First look at the results: estimated vs. “true” purity</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="run-genpipe.html"><a href="run-genpipe.html"><i class="fa fa-check"></i>Run Genpipe</a>
+<ul>
+<li class="chapter" data-level="" data-path="run-genpipe.html"><a href="run-genpipe.html#load-the-environment"><i class="fa fa-check"></i>1. Load the environment</a></li>
+<li class="chapter" data-level="" data-path="run-genpipe.html"><a href="run-genpipe.html#input-files"><i class="fa fa-check"></i>2. Input files</a></li>
+<li class="chapter" data-level="" data-path="run-genpipe.html"><a href="run-genpipe.html#re-using-existing-bams-make-them-match-the-genpipes-reference"><i class="fa fa-check"></i>3. Re-using existing BAMs: make them match the GenPipes reference</a></li>
+<li class="chapter" data-level="" data-path="run-genpipe.html"><a href="run-genpipe.html#configuration-files"><i class="fa fa-check"></i>4. Configuration files</a></li>
+<li class="chapter" data-level="" data-path="run-genpipe.html"><a href="run-genpipe.html#generate-the-job-script"><i class="fa fa-check"></i>5. Generate the job script</a></li>
+<li class="chapter" data-level="" data-path="run-genpipe.html"><a href="run-genpipe.html#submit"><i class="fa fa-check"></i>6. Submit</a></li>
+<li class="chapter" data-level="" data-path="run-genpipe.html"><a href="run-genpipe.html#monitor-and-find-the-results"><i class="fa fa-check"></i>7. Monitor and find the results</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="analyze-the-purple-results.html"><a href="analyze-the-purple-results.html"><i class="fa fa-check"></i>Analyze the purple results</a>
+<ul>
+<li class="chapter" data-level="" data-path="analyze-the-purple-results.html"><a href="analyze-the-purple-results.html#key-concepts-read-this-first"><i class="fa fa-check"></i>Key concepts (read this first)</a></li>
+<li class="chapter" data-level="" data-path="analyze-the-purple-results.html"><a href="analyze-the-purple-results.html#setup"><i class="fa fa-check"></i>Setup</a></li>
+<li class="chapter" data-level="" data-path="analyze-the-purple-results.html"><a href="analyze-the-purple-results.html#a-tour-of-the-output-files-one-sample"><i class="fa fa-check"></i>A tour of the output files (one sample)</a>
+<ul>
+<li class="chapter" data-level="" data-path="analyze-the-purple-results.html"><a href="analyze-the-purple-results.html#how-the-files-fit-together"><i class="fa fa-check"></i>How the files fit together</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="analyze-the-purple-results.html"><a href="analyze-the-purple-results.html#amber-b-allele-frequency"><i class="fa fa-check"></i>AMBER: B-allele frequency</a></li>
+<li class="chapter" data-level="" data-path="analyze-the-purple-results.html"><a href="analyze-the-purple-results.html#cobalt-read-depth-ratio"><i class="fa fa-check"></i>COBALT: read-depth ratio</a></li>
+<li class="chapter" data-level="" data-path="analyze-the-purple-results.html"><a href="analyze-the-purple-results.html#purple-purity-ploidy-and-copy-number-1"><i class="fa fa-check"></i>PURPLE: purity, ploidy and copy number</a></li>
+<li class="chapter" data-level="" data-path="analyze-the-purple-results.html"><a href="analyze-the-purple-results.html#which-file-answers-which-question"><i class="fa fa-check"></i>Which file answers which question?</a>
+<ul>
+<li class="chapter" data-level="" data-path="analyze-the-purple-results.html"><a href="analyze-the-purple-results.html#load-the-files"><i class="fa fa-check"></i>Load the files</a></li>
+<li class="chapter" data-level="" data-path="analyze-the-purple-results.html"><a href="analyze-the-purple-results.html#all-four-plots-for-one-sample"><i class="fa fa-check"></i>All four plots for one sample</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="analyze-the-purple-results.html"><a href="analyze-the-purple-results.html#selection-of-purity"><i class="fa fa-check"></i>Selection of purity</a></li>
+<li class="chapter" data-level="" data-path="analyze-the-purple-results.html"><a href="analyze-the-purple-results.html#baf-vs-copy-number-does-the-fit-explain-the-data"><i class="fa fa-check"></i>BAF vs copy number: does the fit explain the data?</a>
+<ul>
+<li class="chapter" data-level="" data-path="analyze-the-purple-results.html"><a href="analyze-the-purple-results.html#low-purity"><i class="fa fa-check"></i>Low purity</a></li>
+<li class="chapter" data-level="" data-path="analyze-the-purple-results.html"><a href="analyze-the-purple-results.html#check-specific-chromosome"><i class="fa fa-check"></i>check specific chromosome</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="analyze-the-purple-results.html"><a href="analyze-the-purple-results.html#segment"><i class="fa fa-check"></i>Segment</a></li>
+<li class="chapter" data-level="" data-path="analyze-the-purple-results.html"><a href="analyze-the-purple-results.html#copy-number-distribution"><i class="fa fa-check"></i>Copy number distribution</a></li>
+<li class="chapter" data-level="" data-path="analyze-the-purple-results.html"><a href="analyze-the-purple-results.html#minorallelecopy"><i class="fa fa-check"></i>MinorAlleleCopy</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="some-examples-of-gain-loss-deletion-and-loh.html"><a href="some-examples-of-gain-loss-deletion-and-loh.html"><i class="fa fa-check"></i>Some examples of Gain, Loss, Deletion and LOH</a></li>
+<li class="chapter" data-level="" data-path="visualize-a-gene-or-a-chromosome.html"><a href="visualize-a-gene-or-a-chromosome.html"><i class="fa fa-check"></i>Visualize a gene or a chromosome</a>
+<ul>
+<li class="chapter" data-level="" data-path="visualize-a-gene-or-a-chromosome.html"><a href="visualize-a-gene-or-a-chromosome.html#one-gene-plot_gene"><i class="fa fa-check"></i>One gene: <code>plot_gene()</code></a></li>
+<li class="chapter" data-level="" data-path="visualize-a-gene-or-a-chromosome.html"><a href="visualize-a-gene-or-a-chromosome.html#one-chromosome-plot_chromosome"><i class="fa fa-check"></i>One chromosome: <code>plot_chromosome()</code></a></li>
+<li class="chapter" data-level="" data-path="visualize-a-gene-or-a-chromosome.html"><a href="visualize-a-gene-or-a-chromosome.html#effect-of-purity-on-the-signal"><i class="fa fa-check"></i>Effect of purity on the signal</a></li>
+<li class="chapter" data-level="" data-path="visualize-a-gene-or-a-chromosome.html"><a href="visualize-a-gene-or-a-chromosome.html#any-region-plot_cn_region"><i class="fa fa-check"></i>Any region: <code>plot_cn_region()</code></a></li>
+<li class="chapter" data-level="" data-path="visualize-a-gene-or-a-chromosome.html"><a href="visualize-a-gene-or-a-chromosome.html#saving-figures"><i class="fa fa-check"></i>Saving figures</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="exercises.html"><a href="exercises.html"><i class="fa fa-check"></i>Exercises</a></li>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html"><i class="fa fa-check"></i>Module 6 Transcriptomics RNA-seq</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html#lecture-5"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html#lab-4"><i class="fa fa-check"></i>Lab</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html#introduction-to-the-dataset"><i class="fa fa-check"></i>0. Introduction to the dataset</a></li>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html#setting-the-environment-variables"><i class="fa fa-check"></i>1. Setting the environment variables</a></li>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html#explore-data-in-your-workspace"><i class="fa fa-check"></i>2. Explore data in your workspace</a></li>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html#trimming-and-qc"><i class="fa fa-check"></i>3. Trimming and QC</a></li>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html#prepare-the-reference-genome-for-alignment"><i class="fa fa-check"></i>4. Prepare the reference genome for alignment</a></li>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html#alignment-with-hisat2"><i class="fa fa-check"></i>5. Alignment with HISAT2</a></li>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html#gene-count-estimation"><i class="fa fa-check"></i>6. Gene count estimation</a></li>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html#differential-expression-analysis"><i class="fa fa-check"></i>7. Differential Expression Analysis</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html"><i class="fa fa-check"></i>Module 7 | From Gene Alteration to Gene Effect</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#lecture-6"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#lab-5"><i class="fa fa-check"></i>Lab</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#part-1.-introduction"><i class="fa fa-check"></i>Part 1. Introduction</a></li>
+<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#part-2-inspect-the-data"><i class="fa fa-check"></i>Part 2: Inspect the data</a></li>
+<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#look-at-the-first-few-variant-records"><i class="fa fa-check"></i>2.4. Look at the first few variant records</a></li>
+<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#part-3.-summarize-the-variant-calls-with-bcftools"><i class="fa fa-check"></i>Part 3. Summarize the variant calls with bcftools</a></li>
+<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#part-4.-annotate-variants-with-snpeff"><i class="fa fa-check"></i>Part 4. Annotate variants with SnpEff</a></li>
+<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#part-5.-interpret-the-snpeff-html-summary"><i class="fa fa-check"></i>Part 5. Interpret the SnpEff HTML summary</a></li>
+<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#part-6.-examine-individual-variant-annotations"><i class="fa fa-check"></i>Part 6. Examine individual variant annotations</a></li>
+<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#part-7.-from-gene-function-to-cancer-interpretation"><i class="fa fa-check"></i>Part 7. From gene function to cancer interpretation</a></li>
+<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#investigate-variant-evidence"><i class="fa fa-check"></i>7.2. Investigate variant evidence</a></li>
+<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#part-8.-compare-snpeff-and-ensembl-vep"><i class="fa fa-check"></i>Part 8. Compare SnpEff and Ensembl VEP</a></li>
+<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#part-9.-final-interpretation"><i class="fa fa-check"></i>Part 9. Final interpretation</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-8---pathway-enrichment-analysis.html"><a href="module-8---pathway-enrichment-analysis.html"><i class="fa fa-check"></i>Module 8 - Pathway Enrichment Analysis</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-8---pathway-enrichment-analysis.html"><a href="module-8---pathway-enrichment-analysis.html#lecture-7"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-8---pathway-enrichment-analysis.html"><a href="module-8---pathway-enrichment-analysis.html#presentation-of-the-dataset"><i class="fa fa-check"></i>Presentation of the dataset</a></li>
+<li class="chapter" data-level="" data-path="module-8---pathway-enrichment-analysis.html"><a href="module-8---pathway-enrichment-analysis.html#lab-6"><i class="fa fa-check"></i>Lab</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="de_mod8.html"><a href="de_mod8.html"><i class="fa fa-check"></i>Module 8.1 Lab: Differential Expression</a>
+<ul>
+<li class="chapter" data-level="" data-path="de_mod8.html"><a href="de_mod8.html#install-and-load-libraries"><i class="fa fa-check"></i>Install and load libraries</a></li>
+<li class="chapter" data-level="" data-path="de_mod8.html"><a href="de_mod8.html#data-used-for-this-comparison"><i class="fa fa-check"></i>Data used for this comparison</a>
+<ul>
+<li class="chapter" data-level="" data-path="de_mod8.html"><a href="de_mod8.html#generate-a-dge-object"><i class="fa fa-check"></i>generate a DGE object</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="de_mod8.html"><a href="de_mod8.html#filter-low-count-genes-and-tmm-normalize"><i class="fa fa-check"></i>Filter low-count genes and TMM-normalize</a></li>
+<li class="chapter" data-level="" data-path="de_mod8.html"><a href="de_mod8.html#design-0-group-and-named-contrast"><i class="fa fa-check"></i>Design (~0 + group) and named contrast</a></li>
+<li class="chapter" data-level="" data-path="de_mod8.html"><a href="de_mod8.html#dispersion-estimation-and-quasi-likelihood-glm"><i class="fa fa-check"></i>Dispersion estimation and quasi-likelihood GLM</a></li>
+<li class="chapter" data-level="" data-path="de_mod8.html"><a href="de_mod8.html#calculating-ranking-score-and-export-full-results"><i class="fa fa-check"></i>Calculating ranking score and export full results</a></li>
+<li class="chapter" data-level="" data-path="de_mod8.html"><a href="de_mod8.html#result-output"><i class="fa fa-check"></i>Result output</a></li>
+<li class="chapter" data-level="" data-path="de_mod8.html"><a href="de_mod8.html#version-of-packages-and-r"><i class="fa fa-check"></i>Version of packages and R</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html"><i class="fa fa-check"></i>Module 8.2 Lab: Defined gene list (g:Profiler)</a>
+<ul>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#introduction"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#goal-of-the-exercise-1"><i class="fa fa-check"></i>Goal of the exercise 1</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#data"><i class="fa fa-check"></i>Data</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#exercise-1-defined"><i class="fa fa-check"></i>Exercise 1 - prepare the gene lists</a>
+<ul>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#step-1---install-and-load-libraries"><i class="fa fa-check"></i>Step 1 - Install and Load libraries</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#step-2---prepare-the-define-gene-lists"><i class="fa fa-check"></i>Step 2 - Prepare the define gene lists</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#step-3---run-gprofiler"><i class="fa fa-check"></i>Step 3 - Run g:Profiler</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#clear-visualization-of-the-results"><i class="fa fa-check"></i>Clear visualization of the results</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#step-4---explore-top-table-of-results"><i class="fa fa-check"></i>Step 4 - Explore top table of results</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#step-5---filter-results-by-geneset-size"><i class="fa fa-check"></i>Step 5 - Filter results by geneset size</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#step-6---run-gprofiler-with-your-own-genesets-example-using-baderlab-genesets"><i class="fa fa-check"></i>Step 6 - Run g:profiler with your own genesets (example using BaderLab genesets)</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#exercise-2---visualization"><i class="fa fa-check"></i>Exercise 2 - visualization</a>
+<ul>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#step-2---dot-plot-with-segment"><i class="fa fa-check"></i>Step 2 - Dot plot with segment</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#step-4---hierarchical-cluster"><i class="fa fa-check"></i>Step 4 - Hierarchical Cluster</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html"><i class="fa fa-check"></i>Module 8.3 Lab: Ranked gene list (fGSEA)</a>
+<ul>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html#introduction-1"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html#goal-of-the-exercise"><i class="fa fa-check"></i>Goal of the exercise</a></li>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html#data-1"><i class="fa fa-check"></i>Data</a></li>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html#background"><i class="fa fa-check"></i>Background</a></li>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html#exercise-1-ranked"><i class="fa fa-check"></i>Exercise 1 - prepare the gene lists</a>
+<ul>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html#step-1---install-and-load-libraries-1"><i class="fa fa-check"></i>Step 1 - Install and Load libraries</a></li>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html#step-2---prepare-the-rank-file-upload-the-gmt-file-and-run-fgsea"><i class="fa fa-check"></i>Step 2 - Prepare the rank file , upload the gmt file and run fgsea</a></li>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html#step-3---examine-the-results"><i class="fa fa-check"></i>Step 3 - Examine the results</a></li>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html#step-4---explore-the-tabular-format-of-the-results"><i class="fa fa-check"></i>Step 4 - Explore the tabular format of the results</a></li>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html#step-5---visualize-the-top-results"><i class="fa fa-check"></i>Step 5 - Visualize the top results</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html"><i class="fa fa-check"></i>Module 8.4 Lab: BYOD - Differential Expression (Palbo-resistant vs Abema-resistant)</a>
+<ul>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html#install-and-load-libraries-1"><i class="fa fa-check"></i>Install and load libraries</a></li>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html#data-used-for-this-comparison-1"><i class="fa fa-check"></i>Data used for this comparison</a>
+<ul>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html#generate-a-dge-object-1"><i class="fa fa-check"></i>generate a DGE object</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html#filter-low-count-genes-and-tmm-normalize-1"><i class="fa fa-check"></i>Filter low-count genes and TMM-normalize</a></li>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html#design-0-group-and-named-contrast-1"><i class="fa fa-check"></i>Design (~0 + group) and named contrast</a></li>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html#dispersion-estimation-and-quasi-likelihood-glm-1"><i class="fa fa-check"></i>Dispersion estimation and quasi-likelihood GLM</a></li>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html#calculating-ranking-score-and-export-full-results-1"><i class="fa fa-check"></i>Calculating ranking score and export full results</a></li>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html#result-output-1"><i class="fa fa-check"></i>Result output</a></li>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html#your-turn"><i class="fa fa-check"></i>YOUR TURN</a></li>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html#additional-exercise"><i class="fa fa-check"></i>Additional exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-9---variant-to-networks.html"><a href="module-9---variant-to-networks.html"><i class="fa fa-check"></i>Module 9 - Variant to Networks</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-9---variant-to-networks.html"><a href="module-9---variant-to-networks.html#network-visualization-and-analysis-with-cytoscape"><i class="fa fa-check"></i>Network Visualization and Analysis with Cytoscape</a></li>
+<li class="chapter" data-level="" data-path="module-9---variant-to-networks.html"><a href="module-9---variant-to-networks.html#lecture-8"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-9---variant-to-networks.html"><a href="module-9---variant-to-networks.html#lab-7"><i class="fa fa-check"></i>Lab</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html"><i class="fa fa-check"></i>Module 9 Lab Primer: Cytoscape Primer</a>
+<ul>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#goal-of-the-exercise-2"><i class="fa fa-check"></i>Goal of the exercise</a></li>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#data-2"><i class="fa fa-check"></i>Data</a></li>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#start-the-exercise"><i class="fa fa-check"></i>Start the exercise</a></li>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#exercise-1a---create-network-from-table"><i class="fa fa-check"></i>Exercise 1a - Create Network from table</a>
+<ul>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#setting-up-cytoscape-variables--"><i class="fa fa-check"></i>Setting up cytoscape variables -</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#exercise-1b---load-node-attributes"><i class="fa fa-check"></i>Exercise 1b - Load node attributes</a></li>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#exercise-1c---map-node-attributes-to-visual-style"><i class="fa fa-check"></i>Exercise 1c - Map node attributes to Visual Style</a></li>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#exercise-2---work-with-larger-networks"><i class="fa fa-check"></i>Exercise 2 - Work with larger networks</a></li>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#exercise-3---perform-basic-enrichment-analysis-using-enrichmenttable"><i class="fa fa-check"></i>Exercise 3 - Perform basic enrichment analysis using EnrichmentTable</a></li>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#enrichmenttabl-features"><i class="fa fa-check"></i>Exercise 3B - create Enrichment Map and Enhanced graphics nodes from EnrichmentTable</a></li>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#exercise-4---load-network-from-ndex"><i class="fa fa-check"></i>Exercise 4 - Load network from NDex</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html"><i class="fa fa-check"></i>Module 9.2 Lab: g:profiler Visualization</a>
+<ul>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#goal-of-the-exercise-3"><i class="fa fa-check"></i>Goal of the exercise</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#data-3"><i class="fa fa-check"></i>Data</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#enrichmentmap"><i class="fa fa-check"></i>EnrichmentMap</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#description-of-this-exercise"><i class="fa fa-check"></i>Description of this exercise</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#start-the-exercise-1"><i class="fa fa-check"></i>Start the exercise</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#exercise-1a---compare-up-and-down-regulated-gprofiler-results"><i class="fa fa-check"></i>Exercise 1a - compare UP and DOWN regulated g:Profiler results</a>
+<ul>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#step-1"><i class="fa fa-check"></i>Step 1</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#step-2"><i class="fa fa-check"></i>Step 2</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#step-3-explore-the-results"><i class="fa fa-check"></i>Step 3: Explore the results:</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#explore-detailed-results"><i class="fa fa-check"></i>Explore Detailed results</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#exercise-1b---create-em-from-fgsea-results-using-baderlab-genesets"><i class="fa fa-check"></i>Exercise 1b - create EM from fgsea results using Baderlab genesets</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#exercise-1c-optional---investigate-individual-pathways-in-genemania-or-string"><i class="fa fa-check"></i>Exercise 1c (optional) - investigate individual pathways in GeneMANIA or String</a>
+<ul>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#genemania"><i class="fa fa-check"></i>GeneMANIA</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#string"><i class="fa fa-check"></i>String</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-10.html"><a href="module-10.html"><i class="fa fa-check"></i>Module 10</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-10.html"><a href="module-10.html#lecture-9"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-10.html"><a href="module-10.html#lab-8"><i class="fa fa-check"></i>Lab</a></li>
+</ul></li>
+<li class="divider"></li>
+<h1 id="sponsors">Sponsors</h1>
+<center>
+<a href="https://www.cihr-irsc.gc.ca"><img src="img/sponsors/cihr.png" width=90% style="padding-bottom: 20px" alt="Canadian Institutes of Health Research logo."></a>
+
+<a href="https://genomecanada.ca/"><img src="img/sponsors/genomecanada.png" height="55" style="display:inline-block;"  style="padding-bottom: 20px" alt="Genome Canada logo.">
+<a href="https://www.ontariogenomics.ca/"><img src="img/sponsors/ontariogenomics.png" height="55" style="display:inline-block;" style="padding-bottom: 20px;" alt="Ontario Genomics logo.">
+<br><br>
+<a href="https://oicr.on.ca/"><img src="img/sponsors/oicr.png" width=35% style="display:inline-block;" style="padding-bottom: 20px" alt="Ontario Institute for Cancer Research logo.">
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Cancer Analysis 2026</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="module-2-understanding-and-visualizing-data" class="section level1 hasAnchor">
+<h1>Module 2 Understanding and Visualizing Data<a href="module-2-understanding-and-visualizing-data.html#module-2-understanding-and-visualizing-data" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="lecture-1" class="section level2 hasAnchor">
+<h2>Lecture<a href="module-2-understanding-and-visualizing-data.html#lecture-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<!--<iframe width="640" height="360" src="YOUTUBE EMBED LINK" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+-->
+<iframe src="https://docs.google.com/presentation/d/1J3otDAd_AILYLFDwxbxpMMJS07cYCxtw/preview" width="640" height="480" allow="autoplay">
+</iframe>
+</div>
+<div id="lab" class="section level2 hasAnchor">
+<h2>Lab<a href="module-2-understanding-and-visualizing-data.html#lab" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In this lab, we’ll demo a popular tool and resources related to exploring our data and potentially finding datasets of interest.</p>
+<p>The only requirements for the tutorial are as follows:</p>
+<ol style="list-style-type: decimal">
+<li>An internet connection</li>
+<li>A modern browser</li>
+<li>An account with COSMIC : <a href="https://cancer.sanger.ac.uk/cosmic/register" class="uri">https://cancer.sanger.ac.uk/cosmic/register</a></li>
+</ol>
+<div id="learning-objectives" class="section level4 hasAnchor">
+<h4>Learning Objectives<a href="module-2-understanding-and-visualizing-data.html#learning-objectives" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li>How to use IGV browser to explore data types : BAMs, VCFs, BEDs</li>
+<li>How to browse and make use of the visualization functions in cBioPortal</li>
+<li>How to browse and make use of the visualization functions in COSMIC</li>
+</ul>
+</div>
+<div id="part-1---igv" class="section level3 hasAnchor">
+<h3>Part 1 - IGV<a href="module-2-understanding-and-visualizing-data.html#part-1---igv" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="learning-objectives-1" class="section level4 hasAnchor">
+<h4>Learning Objectives<a href="module-2-understanding-and-visualizing-data.html#learning-objectives-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li>How to use IGV browser to explore data types : BAMs, VCFs, BEDs</li>
+<li>How to traverse the genome</li>
+<li>Loading Tracks and annotations</li>
+<li>How to find additional info for each genomic feature</li>
+</ul>
+<p><strong>To get started, Please navigate over to <a href="https://igv.org/app/">https://igv.org/app/</a></strong></p>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Question : Aside from avoiding installation issues, a browser version
+is much more convenient and accessible. Why should one consider using a
+local installation of IGV vs the online version?</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><ol type="1">
+<li>Data size - Imagine streaming multiple 500 GB files</li>
+<li>Data protection - if you’re working with sensitive data that is
+under DACO restriction or patient data, you’re limited by where you
+store and send the data</li>
+</ol></div></details>
+</div>
+<div id="bam" class="section level4 hasAnchor">
+<h4>BAM<a href="module-2-understanding-and-visualizing-data.html#bam" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="step-1-open-igv-web-and-choose-the-genome" class="section level5 hasAnchor">
+<h5>Step 1 – Open IGV-Web and choose the genome<a href="module-2-understanding-and-visualizing-data.html#step-1-open-igv-web-and-choose-the-genome" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>Make sure our build is on <code>Hg38</code>, to do so click “Genome” and navigate the dropdown to find GRCh38/hg38</p>
+<p><img src="img/module2_lab1.png" width="30%" height="30%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;"></p>
+<p>Let’s load our data, <strong>select Tracks, then URL from the dropdown</strong>,</p>
+<p><img src="img/module2_lab2.png" width="30%" height="30%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;"></p>
+</div>
+<div id="step-2-loading-the-bam-and-index" class="section level5 hasAnchor">
+<h5>Step 2 – Loading the BAM and Index<a href="module-2-understanding-and-visualizing-data.html#step-2-loading-the-bam-and-index" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>Paste the following info, ensure the <strong>BAM file goes into the Track</strong> and <strong>index file into index</strong>:</p>
+<pre class="shell"><code>https://42basepairs.com/download/s3/gatk-test-data/wgs_bam/NA12878_20k_hg38/NA12878.bam
+https://42basepairs.com/download/s3/gatk-test-data/wgs_bam/NA12878_20k_hg38/NA12878.bai</code></pre>
+<p>NA12878 is the GIAB/1000 Genomes reference individual. This BAM is a very small subset of a whole-genome run: about 61,000 mapped reads across the whole genome, compared with hundreds of millions in a real 30× genome. It is meant for teaching.</p>
+<p><img src="img/module2_lab3.png" width="100%" height="100%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;"></p>
+</div>
+<div id="step-3-post-loading-sanity-check" class="section level5 hasAnchor">
+<h5>Step 3 – Post loading sanity check<a href="module-2-understanding-and-visualizing-data.html#step-3-post-loading-sanity-check" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>What do we see after loading?</p>
+<p><img src="img/module2_lab4.png" width="100%" height="100%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;"></p>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Question : We don’t see much. How come?</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><ul>
+<li>One possibility is wrong genome build. Not the case here but a
+possibility.</li>
+<li>The toy BAM being examined is also very small in comparison. So the
+reads representation will be sparse.</li>
+<li>In both the browser and local version of IGV, the number of reads
+visualized is limited, especially at whole genome view that’s an
+overwhelming amount of data to visualize. For the browser, imagine
+everyone trying to load a 1TB BAM. Local version can adjust settings
+according to hardware limitations.</li>
+</ul></div></details>
+</div>
+<div id="step-4-zoomed-in-look" class="section level5 hasAnchor">
+<h5>Step 4 – Zoomed in look<a href="module-2-understanding-and-visualizing-data.html#step-4-zoomed-in-look" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>Let’s zoom in to a more manageable view. <strong>Paste the following coordinates into the search bar</strong></p>
+<pre class="shell"><code>chr1:143,220,111-143,221,807</code></pre>
+<p><img src="img/module2_lab5.png" width="100%" height="100%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;"></p>
+<p>Once the result loads, what do we see?<br />
+<img src="img/module2_lab6.png" width="100%" height="100%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;"></p>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Question : What are the grey lines? What do the ends (sharp vs blunt)
+represent?</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><p>Each grey bar is a read. The pointed end shows the direction it was
+sequenced: pointing right = forward (+) strand, pointing left = reverse
+(−).</p></div></details>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Question : What are the colour dashes in each block?</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><p>Mismatches</p></div></details>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Question : What is the graph bar above?</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><p>Coverage, the height represents the amount of reads per BP. If
+coloured, shows the ratio of mismatches per nucleotide</p></div></details>
+</div>
+<div id="step-5-read-features" class="section level5 hasAnchor">
+<h5>Step 5 – Read features<a href="module-2-understanding-and-visualizing-data.html#step-5-read-features" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>Clicking on a read, its info can be displayed.</p>
+<p><img src="img/module2_lab7.png" width="100%" height="70%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;"></p>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Question : What do the blue, red and orange reads represent?</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><p>When compared to the grey reads, the reads are identified due to
+their abnormal insert size. The causes could vary from a genomic feature
+(e.g. structural variant), RNA-seq (though not in this case), lack of
+size selection during library prep (there would be other signs as well).
+Toggleable via the gear icon on the right side of the track. Select
+under “Color by”, “Pair Orientation &amp; insert size (TLEN)”</p></div></details>
+</div>
+<div id="step-6-utilizing-track-annotations" class="section level5 hasAnchor">
+<h5>Step 6 – Utilizing track annotations<a href="module-2-understanding-and-visualizing-data.html#step-6-utilizing-track-annotations" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>Let’s try a different region</p>
+<pre class="shell"><code>chr2:32,915,196-32,917,755</code></pre>
+<p><img src="img/module2_lab8.png" width="100%" height="100%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;"></p>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Question : Why are almost all reads coloured?</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><p>Similarly to the last question, the reads are highlighted due to the
+unexpected read orientation.</p></div></details>
+<p>What genes are these reads at? How would we find out?
+- RefSeq is already loaded. We can try another annotation
+<img src="img/module2_lab9.png" width="30%" height="30%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;">
+<img src="img/module2_lab10.png" width="100%" height="100%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;">
+We can see that the reads intersect a “lncRNA” (long non-coding RNA).
+<img src="img/module2_lab11.png" width="100%" height="100%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;"></p>
+</div>
+</div>
+<div id="vcf" class="section level4 hasAnchor">
+<h4>VCF<a href="module-2-understanding-and-visualizing-data.html#vcf" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="step-7-working-with-vcfs-germline-snvs" class="section level5 hasAnchor">
+<h5>Step 7 – Working with VCFs (Germline SNVs)<a href="module-2-understanding-and-visualizing-data.html#step-7-working-with-vcfs-germline-snvs" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>Let’s load a VCF</p>
+<pre class="shell"><code>https://42basepairs.com/download/web/giab/data_somatic/HG008/NIST/HG008-T_bulk/20240508p100/analysis/GRCh38/BCM_Revio_HG008T-p100_20260313/HG008-T_vs_HG008-N-P/small_variants/HG008-N-P.dipcall.germline.vcf.gz
+https://42basepairs.com/download/web/giab/data_somatic/HG008/NIST/HG008-T_bulk/20240508p100/analysis/GRCh38/BCM_Revio_HG008T-p100_20260313/HG008-T_vs_HG008-N-P/small_variants/HG008-N-P.dipcall.germline.vcf.gz.tbi</code></pre>
+<p>These VCFs come from <code>HG008</code>, the GIAB pancreatic cancer tumour/normal cell-line pair, and not from <code>NA12878</code>. The BAM and VCFs belong to different people, so don’t expect the reads to support these variants.</p>
+<p>Then navigate to the coordinates :</p>
+<pre class="shell"><code>chr1:143,206,141-143,206,141</code></pre>
+<p>Let’s note what we see:<br />
+<img src="img/module2_lab12.png" width="100%" height="100%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;">
+Focusing on the non-greyed feature, what are the VCF features? Use the name and hover over the item for more information</p>
+<p>Additionally, a snippet of the VCF for reference:</p>
+<pre><code>##fileformat=VCFv4.2
+##FILTER=&lt;ID=PASS,Description=&quot;All filters passed&quot;&gt;
+.
+.
+.
+##FORMAT=&lt;ID=GT,Number=1,Type=String,Description=&quot;Genotype&quot;&gt;
+##FORMAT=&lt;ID=AD,Number=R,Type=Integer,Description=&quot;Allelic depths for the ref and alt alleles in the order listed&quot;&gt;
+##FILTER=&lt;ID=HET1,Description=&quot;Heterozygous in the first haplotype&quot;&gt;
+##FILTER=&lt;ID=HET2,Description=&quot;Heterozygous in the second haplotype&quot;&gt;
+##FILTER=&lt;ID=GAP1,Description=&quot;Uncalled in the first haplotype&quot;&gt;
+##FILTER=&lt;ID=GAP2,Description=&quot;Uncalled in the second haplotype&quot;&gt;
+##INFO=&lt;ID=TRF,Number=0,Type=Flag,Description=&quot;Entry hits a tandem repeat region&quot;&gt;
+##INFO=&lt;ID=TRFdiff,Number=1,Type=Float,Description=&quot;ALT TR copy difference from reference&quot;&gt;
+##INFO=&lt;ID=TRFrepeat,Number=1,Type=String,Description=&quot;Repeat motif&quot;&gt;
+##INFO=&lt;ID=TRFovl,Number=1,Type=Float,Description=&quot;Percent of ALT covered by TRF annotation&quot;&gt;
+##INFO=&lt;ID=TRFstart,Number=1,Type=Integer,Description=&quot;Start position of discovered repeat&quot;&gt;
+##INFO=&lt;ID=TRFend,Number=1,Type=Integer,Description=&quot;End position of discovered repeat&quot;&gt;
+##INFO=&lt;ID=TRFperiod,Number=1,Type=Integer,Description=&quot;Period size of the repeat&quot;&gt;
+##INFO=&lt;ID=TRFcopies,Number=1,Type=Float,Description=&quot;Number of copies aligned with the consensus pattern&quot;&gt;
+##INFO=&lt;ID=TRFscore,Number=1,Type=Integer,Description=&quot;Alignment score&quot;&gt;
+##INFO=&lt;ID=TRFentropy,Number=1,Type=Float,Description=&quot;Entropy measure&quot;&gt;
+##INFO=&lt;ID=TRFsim,Number=1,Type=Float,Description=&quot;Similarity of ALT sequence to generated motif faux sequence&quot;&gt;
+##INFO=&lt;ID=END,Number=1,Type=Integer,Description=&quot;End position of the variant&quot;&gt;
+##bcftools_pluginVersion=1.14+htslib-1.21
+##bcftools_pluginCommand=plugin fill-tags -Oz -o results/asm_varcalls/GRCh38_HG008N~v6.3-dipz2k/annotations/GRCh38_HG008N-v6.3_dipcall-z2k.trfanno.end_info.vcf.gz -- results/asm_varcalls/GRCh38_HG008N~v6.3-dipz2k/annotations/GRCh38_HG008N-v6.3_dipcall-z2k.trfanno.vcf.gz -t END; Date=Wed Jan 14 14:06:11 2026
+##bcftools_viewVersion=1.14+htslib-1.21
+##bcftools_viewCommand=view -e ALT=&quot;&lt;INV&gt;&quot; -Oz -o results/asm_varcalls/GRCh38_HG008N~v6.3-dipz2k/annotations/GRCh38_HG008N-v6.3_dipcall-z2k.trfanno.end_info.no_inv.vcf.gz results/asm_varcalls/GRCh38_HG008N~v6.3-dipz2k/annotations/GRCh38_HG008N-v6.3_dipcall-z2k.trfanno.end_info.vcf.gz; Date=Wed Jan 14 14:06:28 2026
+##HiPhase_version=&quot;1.5.0-8af3f1e&quot;
+##HiPhase_command=&quot;hiphase --bam /mnt/miniwdl_task_container/work/_miniwdl_inputs/0/m84039_250325_050416_s2.hifi_reads.aligned.bam -t 24 --output-bam m84039_250325_050416_s2.hifi_reads.aligned.hiphase.bam --vcf /mnt/miniwdl_task_container/work/_miniwdl_inputs/0/GRCh38_HG008N-v6.3_smvar_dipcall-z2k.vcf.gz --output-vcf GRCh38_HG008N-v6.3_smvar_dipcall-z2k.hiphase.vcf.gz -r /mnt/miniwdl_task_container/work/_miniwdl_inputs/0/GRCh38_GIABv3_no_alt_analysis_set_maskedGRC_decoys_MAP2K3_KMT2C_KCNJ18.fasta --stats-file m84039_250325_050416_s2.hifi_reads.aligned.hiphase.stats --summary-file m84039_250325_050416_s2.hifi_reads.aligned.hiphase.summary.tsv --blocks-file m84039_250325_050416_s2.hifi_reads.aligned.hiphase.blocks.tsv --ignore-read-groups&quot;
+##FORMAT=&lt;ID=PS,Number=1,Type=Integer,Description=&quot;Phase set identifier&quot;&gt;
+##FORMAT=&lt;ID=PF,Number=1,Type=String,Description=&quot;Phasing flag&quot;&gt;
+#CHROM  POS     ID      REF     ALT     QUAL    FILTER  INFO    FORMAT  HG008N
+chr1    89177   .       A       G       30      .       END=89177       GT:AD   1/1:0,2
+chr1    143206141    .    A    G    30    .    TRF;END=143206141    GT:AD    0/1:70,2</code></pre>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Question : What type of variant is it?</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><p>SNP according to the “type”</p></div></details>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Question : What are the feature’s coordinates?</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><p>Can be found under “LOC”</p></div></details>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Question : What is the reference vs alt?</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><p>“REF” represents the sequence found in the reference genome. “ALT”
+represents the sequence that was found in the sample. In this case it
+was a “A” vs “G” thus the SNP Also take note of the genotype in IGV :
+“A|G”. This notation is different than in the VCF and carries some
+different interpretations. In VCFs the genotype field can present as
+`0/1` meaning unphased or `0|1` phased. Being phased means we know which
+allele belongs on which chromosome copy. The same cannot be said for
+unphased. Short read sequencing does not provide that resolution, and
+would need long reads (for example). That context is lost in IGV, and
+instead IGV displays the alleles as bases, e.g. A|G, using `|` as a
+fixed separator regardless of phasing.</p></div></details>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Question : What is the depth?</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><p>“AD” stands for allelic depth and represents the evidence/reads
+supporting each allele. It’s interpreted by the genotype “A | G” and
+“70,2” meaning 70 reads support the reference and 2 reads support the
+alt allele.</p></div></details>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Question : Compared to the features beside it, why are those features
+greyed out?</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><p>Other SNPs were filtered. For the specific reason, see the “FILTER”
+section. Definitions for the filter are likely to be found within the
+header of the VCF file.</p></div></details>
+</div>
+<div id="step-8-working-with-vcfs-somatic-structural-variants" class="section level5 hasAnchor">
+<h5>Step 8 – Working with VCFs (Somatic Structural Variants)<a href="module-2-understanding-and-visualizing-data.html#step-8-working-with-vcfs-somatic-structural-variants" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>Let’s load another feature</p>
+<pre class="shell"><code>https://42basepairs.com/download/web/giab/data_somatic/HG008/NIST/HG008-T_bulk/20240508p100/analysis/GRCh38/BCM_Revio_HG008T-p100_20260313/HG008-T_vs_HG008-N-P/structural_variants/HG008T-p100.severus.somatic.vcf.gz
+https://42basepairs.com/download/web/giab/data_somatic/HG008/NIST/HG008-T_bulk/20240508p100/analysis/GRCh38/BCM_Revio_HG008T-p100_20260313/HG008-T_vs_HG008-N-P/structural_variants/HG008T-p100.severus.somatic.vcf.gz.tbi</code></pre>
+<p>And let’s navigate to :</p>
+<pre class="shell"><code>chr19:38,760,896-39,923,840</code></pre>
+<p>Let’s note what we see:<br />
+<img src="img/module2_lab13.png" width="120%" height="120%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;"></p>
+<p>Notice the huge feature that’s been flagged.</p>
+<p>For reference, this is how the VCF contents look:</p>
+<pre><code>##fileformat=VCFv4.2
+##FILTER=&lt;ID=PASS,Description=&quot;All filters passed&quot;&gt;
+##source=Severus_v1.6
+.
+.
+.
+##ALT=&lt;ID=DEL,Description=&quot;Deletion&quot;&gt;
+##ALT=&lt;ID=INS,Description=&quot;Insertion&quot;&gt;
+##ALT=&lt;ID=DUP,Description=&quot;Duplication&quot;&gt;
+##ALT=&lt;ID=INV,Description=&quot;Reciprocal Inversion&quot;&gt;
+##ALT=&lt;ID=BND,Description=&quot;Breakend&quot;&gt;
+##FILTER=&lt;ID=FAIL_LOWSUPP,Description=&quot;Less number of support, but ok in other samples&quot;&gt;
+##FILTER=&lt;ID=FAIL_MAP_CONS,Description=&quot;Majority of variant reads have unreliable mappability&quot;&gt;
+##FILTER=&lt;ID=FAIL_CONN_CONS,Description=&quot;Majority of variant reads have unreliable connections&quot;&gt;
+##FILTER=&lt;ID=FAIL_LOWCOV_OTHER,Description=&quot;Low variant coverage in other samples&quot;&gt;
+##INFO=&lt;ID=PRECISE,Number=0,Type=Flag,Description=&quot;SV with precise breakpoints coordinates and length&quot;&gt;
+##INFO=&lt;ID=IMPRECISE,Number=0,Type=Flag,Description=&quot;SV with imprecise breakpoints coordinates and length&quot;&gt;
+##INFO=&lt;ID=SVTYPE,Number=1,Type=String,Description=&quot;Type of structural variant&quot;&gt;
+##INFO=&lt;ID=SVLEN,Number=1,Type=Integer,Description=&quot;Length of the SV&quot;&gt;
+##INFO=&lt;ID=END,Number=1,Type=Integer,Description=&quot;End position of the SV&quot;&gt;
+##INFO=&lt;ID=STRANDS,Number=1,Type=String,Description=&quot;Breakpoint strandedness&quot;&gt;
+##INFO=&lt;ID=DETAILED_TYPE,Number=1,Type=String,Description=&quot;Detailed type of the SV&quot;&gt;
+##INFO=&lt;ID=INSLEN,Number=1,Type=Integer,Description=&quot;Length of the unmapped sequence between breakpoint&quot;&gt;
+##INFO=&lt;ID=MAPQ,Number=1,Type=Integer,Description=&quot;Median mapping quality of supporting reads&quot;&gt;
+##INFO=&lt;ID=PHASESETID,Number=1,Type=String,Description=&quot;Matching phaseset ID for phased SVs&quot;&gt;
+##INFO=&lt;ID=HP,Number=1,Type=Integer,Description=&quot;Matching haplotype ID for phased SVs&quot;&gt;
+##INFO=&lt;ID=CLUSTERID,Number=1,Type=String,Description=&quot;Cluster ID in breakpoint_graph&quot;&gt;
+##INFO=&lt;ID=INSSEQ,Number=1,Type=String,Description=&quot;Insertion sequence between breakpoints&quot;&gt;
+##INFO=&lt;ID=MATE_ID,Number=1,Type=String,Description=&quot;MATE ID for breakends&quot;&gt;
+##INFO=&lt;ID=INSIDE_VNTR,Number=1,Type=String,Description=&quot;True if an indel is inside a VNTR&quot;&gt;
+##INFO=&lt;ID=ALIGNED_POS,Number=1,Type=String,Description=&quot;Position in the reference&quot;&gt;
+##INFO=&lt;ID=LOW_COV_IN,Number=1,Type=String,Description=&quot;Samples that has low coverage in that region&quot;&gt;
+##INFO=&lt;ID=INSIDE_WHITELIST,Number=1,Type=String,Description=&quot;SVs within the whitelist bed file&quot;&gt;
+##FORMAT=&lt;ID=GT,Number=1,Type=String,Description=&quot;Genotype&quot;&gt;
+##FORMAT=&lt;ID=DR,Number=1,Type=Integer,Description=&quot;Number of reference reads&quot;&gt;
+##FORMAT=&lt;ID=DV,Number=1,Type=Integer,Description=&quot;Number of variant reads&quot;&gt;
+##FORMAT=&lt;ID=VAF,Number=1,Type=Float,Description=&quot;Variant allele frequency&quot;&gt;
+##FORMAT=&lt;ID=hVAF,Number=3,Type=Float,Description=&quot;Haplotype specific variant Allele frequency (H0,H1,H2)&quot;&gt;
+##INFO=&lt;ID=BCSQ,Number=.,Type=String,Description=&quot;Local consequence annotation. Format: Consequence|gene|transcript|biotype|strand|amino_acid_change|dna_change&quot;&gt;
+##INFO=&lt;ID=hetalt,Number=.,Type=String,Description=&quot;Samples with heterozygous REF/ALT genotype&quot;&gt;
+##INFO=&lt;ID=homalt,Number=.,Type=String,Description=&quot;Samples with homozygous ALT/ALT or hemizygous ALT genotype&quot;&gt;
+#CHROM  POS     ID      REF     ALT     QUAL    FILTER  INFO    FORMAT  m84113_260205_082846_s3.demux.bc2055--bc2055.aligned.hiphase
+chr1    151220118       severus_DEL306  N       &lt;DEL&gt;   60      PASS    PRECISE;SVTYPE=DEL;SVLEN=172;END=151220290;STRANDS=+-;MAPQ=60;PHASESETID=151409146|151409146;HP=1;BCSQ=sv:intron|PIP5K1A||protein_coding|+||;hetalt=m84113_260205_082846_s3.demux.bc2055--bc2055.aligned.hiphase        GT:VAF:hVAF:DR:DV       0/1:0.8:0,1,0:5:20
+chr1    154714649       severus_BND18941        N       N.      60      PASS    IMPRECISE;SVTYPE=sBND;STRANDS=+;DETAILED_TYPE=loose_end;MAPQ=60;PHASESETID=154791972|154791972;HP=2;BCSQ=sv:intron|KCNN3||protein_coding|-||;hetalt=m84113_260205_082846_s3.demux.bc2055--bc2055.aligned.hiphase        GT:VAF:hVAF:DR:DV       0/1:0.16:0,0,0.26:26:5</code></pre>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Question : What type of variant is it?</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><p>It is a structural variant. Much larger than the single base of SNVs.
+The Alt also indicates it is a deletion event.</p></div></details>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Question : How long is the feature?</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><p>~10.8 Mb according to the SV length field</p></div></details>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Question : What is the feature’s <code>ID</code> and what purpose
+does the ID field serve?</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><p>“severus_DEL3275” and to act as a unique identifier</p></div></details>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Question : How would we find out how many genes are affected by the
+feature?</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><p>The BCFtools Consequence or BCSQ identifies the genes affected.</p></div></details>
+</div>
+</div>
+<div id="bedbigbed" class="section level4 hasAnchor">
+<h4>BED/bigBed<a href="module-2-understanding-and-visualizing-data.html#bedbigbed" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="step-9-working-with-bigbed-external-annotation" class="section level5 hasAnchor">
+<h5>Step 9 – Working with BigBed / External Annotation<a href="module-2-understanding-and-visualizing-data.html#step-9-working-with-bigbed-external-annotation" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>Let’s explore BED files. Load the following URL into the track</p>
+<pre><code>https://hgdownload.soe.ucsc.edu/gbdb/hg38/encode4/ccre/encodeCcreRegistry.bb</code></pre>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Question : Notice anything different with the file suffix?</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><p>It is a bigBed file. The same as a regular bed file but binarized,
+compressed and indexed for accessibility. IGV is able to only fetch the
+region on screen and does not require a separate index file. To find out
+more see the following <a
+href="https://genome.ucsc.edu/goldenPath/help/bigBed.html">link</a></p></div></details>
+<p>How to interpret the features described by the bed file? The UCSC genome browser describes the file in great detail, specifically:
+<img src="https://genome.ucsc.edu/images/encode4cCREs.png" width="100%" height="100%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;"></p>
+<p>For more info see the following <a href="https://genome.ucsc.edu/cgi-bin/hgTrackUi?hgsid=4159675625_pMjcCAWJ0iqsyPdZ6WOQ6gMFIklH&amp;db=hg38&amp;c=chr7&amp;g=cCREregistry">link</a></p>
+<p>If we navigate to <code>TP53</code> by typing <code>TP53</code> in the search bar, we see the following:
+<img src="img/module2_lab24.png" width="200%" height="200%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;"></p>
+<p>TP53 has 26 RefSeq transcripts, but IGV only shows 2 of them. We can access the settings on refSeq annotation through the gear on the right → Set track height → 700. All 26 rows appear.</p>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Question : What is the red feature? What is the importance of the
+feature and where it is located?</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><p>It is a promoter-like element (PLS). ENCODE only assigns this class
+to regions near an annotated transcription start site. The main TP53
+promoter is the cluster of red elements at the far right (~7,687 kb).
+The single red element at ~7,676.7 kb sits inside the full-length gene,
+in intron 1, just upstream of exon 2, which holds the start codon. Its
+promoter-like chromatin and a GENCODE V39 transcript starting there
+suggest a candidate alternative start site.</p></div></details>
+</div>
+</div>
+</div>
+<div id="part-2---cbioportal" class="section level3 hasAnchor">
+<h3>Part 2 - cBioPortal<a href="module-2-understanding-and-visualizing-data.html#part-2---cbioportal" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="learning-objectives-2" class="section level4 hasAnchor">
+<h4>Learning Objectives<a href="module-2-understanding-and-visualizing-data.html#learning-objectives-2" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li>How to browse and make use of the visualization functions in cBioPortal</li>
+<li>Learn to query genes and datasets of interest</li>
+<li>Make use of visualizations to discover relationships and biological trends</li>
+</ul>
+<p>Firstly, what is cBioPortal? <a href="https://about.cBioPortal.org/">As per their about page, Multimodal data represented in interactive visualizations that facilitates biological discovery and clinical decisions</a>. It incorporates patient-level cohort data such as mutations and clinical data.</p>
+<div id="step-1-select-the-studies-and-build-the-query" class="section level5 hasAnchor">
+<h5>Step 1 – Select the studies and build the query<a href="module-2-understanding-and-visualizing-data.html#step-1-select-the-studies-and-build-the-query" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>Navigate to <a href="https://www.cBioPortal.org/">https://www.cBioPortal.org/</a> and select the following two studies:<br />
+- Breast Cancer (METABRIC, Nature 2012 &amp; Nature Commun 2016)
+- Consists of 2,509 samples of targeted sequencing on primary tumours with 549 normal matched
+- Breast Invasive Carcinoma (TCGA, PanCancer Atlas)
+- 1,084 samples as part of a large cohort that profiled 10,000 tumours across 33 cancer types</p>
+<p><img src="img/module2_lab14.png" width="100%" height="100%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;"></p>
+<p>Click “query by gene” at the footer and query the following :</p>
+<pre><code>TP53 PIK3CA BRCA1 BRCA2 PTEN STK11 CDH1 PALB2 CHEK2 ATM BARD1 RAD51C RAD51D FGFR2 TOX3 MAP3K1 ESR1 ERBB2 GATA3</code></pre>
+<p>These genes are commonly altered in breast cancer, and working with them in the tutorial will provide some insight of their significance.</p>
+<p><img src="img/module2_lab15.png" width="100%" height="100%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;">
+<img src="img/module2_lab16.png" width="100%" height="100%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;"></p>
+</div>
+<div id="step-2-oncoprint" class="section level5 hasAnchor">
+<h5>Step 2 – OncoPrint<a href="module-2-understanding-and-visualizing-data.html#step-2-oncoprint" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>We are presented with an OncoPrint<br />
+<img src="img/module2_lab17.png" width="100%" height="100%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;"></p>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Question : What do the first four rows present and mean?</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><p>As indicated in the legend, the first four rows provide info on
+donors’ membership in the respective datasets and whether they were
+profiled for copy number changes, mutations, and structural
+variants.</p></div></details>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Question : We see multiple genes, focusing on <code>TP53</code> and
+<code>PIK3CA</code>, what can we infer?</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><p>The percentage represents the number of donors with genetic
+alterations, where the legend specifies the type and proportion of
+donors</p></div></details>
+</div>
+<div id="step-3-cancer-types-summary" class="section level5 hasAnchor">
+<h5>Step 3 – Cancer Types Summary<a href="module-2-understanding-and-visualizing-data.html#step-3-cancer-types-summary" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>On the above tabs, navigate to the cancer types summary view</p>
+<p><img src="img/module2_lab18.png" width="80%" height="80%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;"></p>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Question : What does the barchart summarize for us?</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><p>X-axis gives info on the dataset and included profiled genomic
+alteration types. The Bars provide a frequency of genomic
+alterations.</p></div></details>
+</div>
+<div id="step-4-mutual-exclusivity" class="section level5 hasAnchor">
+<h5>Step 4 – Mutual Exclusivity<a href="module-2-understanding-and-visualizing-data.html#step-4-mutual-exclusivity" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>Moving on to mutual exclusivity, select significant only and sort by q-value starting with lowest/most significant</p>
+<p><img src="img/module2_lab19.png" width="100%" height="100%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;"></p>
+<p>The first row denotes TP53 and ERBB2.</p>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Question : What does the finding of co-occurrence entail?</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><p>Based on the two datasets, TP53 and ERBB2 are often both found to be
+altered <a
+href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3465532/#:~:text=The%20HER2%2DEnriched%20subtype%20(HER2E)%2C%20which%20has%20frequent%20HER2/ERBB2%20amplification%20(80%25)%2C%20had%20a%20hybrid%20pattern%20with%20a%20high%20frequency%20of%20TP53%20(72%25)%20and">Perhaps
+an interesting link to look at</a></p></div></details>
+<p>Looking at the second row of TP53 and CDH1</p>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Question : What does the finding of mutual exclusivity entail?</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><p>Very few examples exist in the two breast cancer datasets where both
+TP53 and CDH1 co-occur, in fact most donors have one or the other. This
+could signify a dependency specific to the cancer type.</p></div></details>
+</div>
+<div id="step-5-plots" class="section level5 hasAnchor">
+<h5>Step 5 – Plots<a href="module-2-understanding-and-visualizing-data.html#step-5-plots" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>Exploring the plots tab next. Let’s use the quick filter for FGA vs Dx</p>
+<p><img src="img/module2_lab20.png" width="100%" height="100%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;"></p>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Question : What info can we glean from the plot?</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><p>The TCGA datasets are split up into various types of breast
+carcinomas. Breast invasive ductal carcinoma shows the highest fraction
+of genome altered, signifying genomic instability.</p></div></details>
+<ul>
+<li>Let’s look at the mutations tab, specifically for gene TP53</li>
+</ul>
+<p><img src="img/module2_lab21.png" width="100%" height="100%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;"></p>
+</div>
+<div id="step-6-mutations" class="section level5 hasAnchor">
+<h5>Step 6 – Mutations<a href="module-2-understanding-and-visualizing-data.html#step-6-mutations" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<ul>
+<li>Let’s look at the mutation with the highest donor count</li>
+</ul>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Question : Where does it occur in TP53?</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><p>In the TP53 region that binds DNA. Amino acid 248</p></div></details>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Question : What type of mutation is it?</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><p>Different types, but often missense</p></div></details>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Question : Are there any Post-Translational Modifications associated
+with the mutation?</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><p>On the left, we can add annotation tracks. Specifically we’re
+interested in Post-Translational Modifications (PTM). Scrolling around,
+no modification coincides with the mutation.</p></div></details>
+<p>Speaking of annotations, what if we wanted to find out more about the mutation? What can we look up through OncoKB?</p>
+<ul>
+<li>Hovering over the first row of the mutations table, note the record of sample ID <code>MB-0211</code> with the protein change <code>R248Q</code></li>
+<li>Hover on the dartboard icon under the column annotation
+<img src="img/module2_lab22.png" width="100%" height="100%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;"></li>
+</ul>
+</div>
+<div id="step-7-comparisonsurvival" class="section level5 hasAnchor">
+<h5>Step 7 – Comparison/Survival<a href="module-2-understanding-and-visualizing-data.html#step-7-comparisonsurvival" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<ul>
+<li>Looking at survival curves.</li>
+</ul>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Question : What can we understand about TP53 vs unaffected cohort (no
+alteration in any of the 19 queried genes)?</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><p>Patients with TP53 mutations initially have poorer survival odds but
+around 180-200 months have better outcomes compared to the unaffected
+cohort.</p></div></details>
+<p><img src="img/module2_lab23.png" width="100%" height="100%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;"></p>
+</div>
+<div id="step-8-cn-segments" class="section level5 hasAnchor">
+<h5>Step 8 – CN Segments<a href="module-2-understanding-and-visualizing-data.html#step-8-cn-segments" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<ul>
+<li>Lastly, let’s look at copy number segments which brings us back to IGV. Looking at PIK3CA vs TP53</li>
+</ul>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Question : what differences do we observe?</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><p>TP53 mutations are copy number losses while PIK3CA mutations are copy
+number gains.</p></div></details>
+</div>
+</div>
+</div>
+<div id="part-3---cosmic" class="section level3 hasAnchor">
+<h3>Part 3 - COSMIC<a href="module-2-understanding-and-visualizing-data.html#part-3---cosmic" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>COSMIC (Catalogue of Somatic Mutations in Cancer) is a curated knowledge base of somatic mutations drawn from the literature and large-scale studies, along with data from other assays (e.g., methylation) and analyses (e.g., drug resistance).</p>
+<p>An example use-case would be exploration with cBioPortal to find trends and patterns followed up with validation and annotating significance in COSMIC.</p>
+<div id="learning-objectives-3" class="section level4 hasAnchor">
+<h4>Learning Objectives<a href="module-2-understanding-and-visualizing-data.html#learning-objectives-3" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li>How to browse and make use of the visualization functions in COSMIC</li>
+<li>Navigate datasets by refining the search using visualization functions</li>
+</ul>
+<p>Navigate to <a href="https://cancer.sanger.ac.uk/cosmic">COSMIC</a>. You’ll need an account to access the data. Follow the prompts at the following link : <a href="https://cancer.sanger.ac.uk/cosmic/register" class="uri">https://cancer.sanger.ac.uk/cosmic/register</a></p>
+<div id="step-1-search-for-a-gene" class="section level5 hasAnchor">
+<h5>Step 1 – Search for a gene<a href="module-2-understanding-and-visualizing-data.html#step-1-search-for-a-gene" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>Search for <code>TP53</code> in the header search bar
+<img src="img/module2_lab25.png" width="100%" height="100%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;"></p>
+<p>Additionally, ensure you’re on the correct genome build GRCh38. The search returns the results page which groups hits by type (Genes, Mutations, Samples, Cancers, etc.). We need to choose the gene TP53 to open the gene page.</p>
+</div>
+<div id="step-2-read-the-gene-view" class="section level5 hasAnchor">
+<h5>Step 2 – Read the gene view<a href="module-2-understanding-and-visualizing-data.html#step-2-read-the-gene-view" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p><img src="img/module2_lab32.png" width="100%" height="100%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;"></p>
+<p>The central gene view plot displays various types of info along the length of the gene.</p>
+<p><img src="img/module2_lab26.png" width="100%" height="100%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;"></p>
+<p>Hovering on the top substitution, we’ll find the position to be <code>273</code>. We can further zoom in to that region for more info.</p>
+</div>
+<div id="step-3-zoom-to-positions-270275" class="section level5 hasAnchor">
+<h5>Step 3 – Zoom to positions 270–275<a href="module-2-understanding-and-visualizing-data.html#step-3-zoom-to-positions-270275" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>Apply the filters on the left-hand side for <code>270-275</code>.</p>
+<p><img src="img/module2_lab27.png" width="40%" height="40%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;"></p>
+<p>The result is the following barchart of substitutions.</p>
+<p><img src="img/module2_lab28.png" width="100%" height="100%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;"></p>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Question : Which substitution is the most common at position
+<code>273</code> of the TP53 gene?</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><p>p.R273H (c.818G&gt;A) 1551</p></div></details>
+</div>
+<div id="step-4-open-the-mutation-page" class="section level5 hasAnchor">
+<h5>Step 4 – Open the mutation page<a href="module-2-understanding-and-visualizing-data.html#step-4-open-the-mutation-page" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>Clicking on the mutation brings us to a page dedicated to the mutation. Here, a number of interesting things can be viewed, including samples with the mutation, related references, and pathways.
+- The shape is the same (missense hotspots in the DNA-binding domain plus truncations everywhere), but COSMIC’s top hotspot is R273 across all cancers, while in cBioPortal’s two breast cohorts it was R248, with R175 and R273 close behind
+- Different sample collections give different rankings of the most common mutation!</p>
+<p>We can also observe the tissue type distribution of samples with the TP53 mutations.</p>
+<p><img src="img/module2_lab29.png" width="100%" height="100%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;"></p>
+</div>
+<div id="step-5-jump-to-a-tissue-the-cancer-browser" class="section level5 hasAnchor">
+<h5>Step 5 – Jump to a tissue: the Cancer Browser<a href="module-2-understanding-and-visualizing-data.html#step-5-jump-to-a-tissue-the-cancer-browser" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>Clicking on the <code>Large Intestine</code> brings us to a page dedicated to <code>Large Intestine</code>.</p>
+<p><img src="img/module2_lab30.png" width="100%" height="100%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;"></p>
+</div>
+<div id="step-6-back-to-tp53-with-the-tissue-filter" class="section level5 hasAnchor">
+<h5>Step 6 – Back to TP53 with the tissue filter<a href="module-2-understanding-and-visualizing-data.html#step-6-back-to-tp53-with-the-tissue-filter" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>We can then see the top genes mutated in Large intestinal samples. Clicking the TP53 mutation returns us to the TP53 page but with additional filters.</p>
+<p><img src="img/module2_lab31.png" width="100%" height="100%" alt="" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;"></p>
+<p>Note the left-hand filter with tissue type selection applied. The result is that the most represented mutation is now different. Previously it was <code>3908</code> at position <code>273</code> but the most frequent mutation is now <code>175</code> with <code>1069</code> mutation count. We can observe how different tissue types reflect different mutations.</p>
+</div>
+</div>
+</div>
+<div id="part-4---advanced-exercises" class="section level3 hasAnchor">
+<h3>Part 4 - Advanced Exercises<a href="module-2-understanding-and-visualizing-data.html#part-4---advanced-exercises" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="exercise-1-real-genome-or-alignment-artefact-part-1-bam" class="section level4 hasAnchor">
+<h4>Exercise 1 – Real genome or alignment artefact? (Part 1, BAM)<a href="module-2-understanding-and-visualizing-data.html#exercise-1-real-genome-or-alignment-artefact-part-1-bam" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Go back to the two regions you looked at in NA12878.bam:</p>
+<ul>
+<li>Region 1: <code>chr1:143,220,111-143,221,807</code></li>
+<li>Region 2: <code>chr2:32,915,196-32,917,755</code></li>
+</ul>
+<p>Do the reads in these regions reflect the actual genome of the sample, or are they mostly alignment artefacts?
+What in the IGV view supports your answer?</p>
+<p>To help you decide, add two annotation tracks. Open Tracks → Hosted Annotations…, go to Mapping and Sequencing, and tick:</p>
+<ul>
+<li><strong>LowMap+SegDup</strong> (under Difficult regions from GIAB). GIAB uses this track to mark segmental duplications and regions that are hard to map with short reads.</li>
+<li><strong>Simple Repeats</strong> (under Repeats). In region 1 you should see one bar over the whole window, with the repeat unit <code>TCGAATGGAATCATCA</code>.</li>
+</ul>
+<p>Does what you see in these tracks change or confirm your answer?</p>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Answer</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><p>Both regions are mostly alignment artefacts.</p>
+<p>In region 1, most reads are drawn transparent, which means mapping
+quality 0, and each read has several mismatches. The few coloured pairs
+(red, blue, orange) also have MAPQ 0, and their mates are far away on
+chr1 or on chr14. LowMap+SegDup covers the whole window. This part of
+chr1 exists in several nearly identical copies, so reads that really
+come from another copy end up here, and the small differences between
+the copies show up as mismatches.</p>
+<p>In region 2, the reads are short and heavily clipped, and almost
+every one has a different colour because the mates are spread over many
+chromosomes. Most of them are supplementary alignments with MAPQ 0. The
+reference sequence bar is solid orange, which is a run of about 400 G’s,
+followed by a block of 1,000 Ns. Low-quality, G-rich pieces of unrelated
+reads stick to this run of G’s.</p>
+<p>Low mapping quality, evidence that doesn’t agree (mates scattered
+everywhere), and a repeat or duplication underneath are the typical
+signs of an artefact. A real variant or SV would be supported by many
+well-mapped, independent reads telling the same story.</p></div></details>
+</div>
+<div id="exercise-2-tp53-in-the-germline-vcf-part-1-germline-vcf" class="section level4 hasAnchor">
+<h4>Exercise 2 – TP53 in the germline VCF (Part 1, germline VCF)<a href="module-2-understanding-and-visualizing-data.html#exercise-2-tp53-in-the-germline-vcf-part-1-germline-vcf" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>HG008 is a pancreatic cancer patient. The germline variants in this file come from long-read (PacBio HiFi) sequencing of the patient’s normal tissue. The variants were called with dipcall, which builds the two chromosome copies from the long reads and compares each one with the reference. As you go through the variant and genotype fields, look out for what the long reads add that you would not usually get from short reads.</p>
+<p>Go to <code>TP53</code> (<code>chr17:7,668,000-7,690,000</code>). Click the variant at <code>chr17:7,676,154</code>, then click its genotype cell. Go through every field in both popups and write down what you think each one means.</p>
+<ol style="list-style-type: decimal">
+<li>Is this variant germline or somatic? How can you tell?</li>
+</ol>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Answer</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><p>Germline. The variant is in the normal sample (HG008N), so the person
+was born with it. It is <code>rs1042522</code> (Use the annotation
+<code>ClinVar dbSNP</code> under <code>Variation</code>), the well-known
+<code>TP53</code> <code>Pro72Arg</code> variant. In most populations the
+arginine version (the ALT here) is actually the more common one: a
+“variant” only means different from the reference genome, not rare or
+harmful.</p></div></details>
+<ol start="2" style="list-style-type: decimal">
+<li>What does <code>0|1</code> tell you that <code>0/1</code> would not?</li>
+</ol>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Answer</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><p>The pipe means the genotype is phased: we know which chromosome copy
+carries the <code>ALT</code> allele. This comes from the long reads
+(HiPhase). Note that IGV shows <code>A | G</code> in the popup either
+way, so check the PS field to see whether a variant is phased.</p></div></details>
+<ol start="3" style="list-style-type: decimal">
+<li>Find another heterozygous variant in TP53 with the same PS value. Is its <code>ALT</code> allele on the same chromosome copy as the <code>ALT</code> at <code>7,676,154</code>?</li>
+</ol>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Answer</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><p>All heterozygous variants in <code>TP53</code> share PS
+<code>7498016</code>, so they belong to one phase block. Variants
+written the same way (<code>0|1</code>) have their ALT on the same copy;
+a <code>1|0</code> variant has its ALT on the other copy.</p></div></details>
+<ol start="4" style="list-style-type: decimal">
+<li>Why is AD only <code>1,1</code> for this variant?</li>
+</ol>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Answer</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><p>This VCF was made by dipcall, which compares two genome assemblies
+with the reference rather than counting reads. Here AD counts assembly
+pieces, one per chromosome copy, so a heterozygous site shows
+<code>1,1</code> and a homozygous one <code>0,2</code>. For the same
+reason, QUAL is always <code>30</code>.</p></div></details>
+<ol start="5" style="list-style-type: decimal">
+<li>Which fields in this VCF would you not expect to see in a germline VCF made from short reads?</li>
+</ol>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Answer</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><p>The main addition from the long reads is phasing. Most heterozygous
+genotypes are written with a pipe (<code>0|1</code>), and the PS (phase
+set) and PF (phasing flag) fields record which phase block each variant
+belongs to. Phase blocks here are tens of kilobases long, so a whole
+gene like <code>TP53</code> sits in one block. With short reads, most
+variants would be unphased (<code>0/1</code>) and these fields would be
+missing. Some other fields come from how this particular file was made
+rather than from the read length: dipcall compares two genome assemblies
+with the reference, so <code>AD</code> counts assembly pieces,
+<code>QUAL</code> is always <code>30</code>, and the filters
+(<code>HET1/2</code>, <code>GAP1/2</code>) describe problems with the
+assemblies. A short-read caller would instead give read counts
+(<code>AD</code>, <code>DP</code>) and genotype quality
+(<code>GQ</code>).</p></div></details>
+</div>
+<div id="exercise-3-kras-and-cdkn2a-in-the-somatic-sv-vcf-part-1-somatic-vcf" class="section level4 hasAnchor">
+<h4>Exercise 3 – KRAS and CDKN2A in the somatic SV VCF (Part 1, somatic VCF)<a href="module-2-understanding-and-visualizing-data.html#exercise-3-kras-and-cdkn2a-in-the-somatic-sv-vcf-part-1-somatic-vcf" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>HG008 is a pancreatic cancer. The tumour and normal samples were sequenced with long reads. The SV variants are called by the long-read structural-variant caller Severusa which compared the tumour and normal to find SVs present only in the tumour. The resulting file contains the two classic pancreatic cancer events: a gain of the oncogene <code>KRAS</code> and a loss of the tumour suppressor <code>CDKN2A</code>.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Gene</th>
+<th>Locus</th>
+<th>SV record</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>KRAS</td>
+<td>chr12:24,600,000-26,850,000</td>
+<td>severus_DUP1372</td>
+</tr>
+<tr class="even">
+<td>CDKN2A</td>
+<td>chr9:21,940,000-21,985,000</td>
+<td>severus_DEL7384</td>
+</tr>
+</tbody>
+</table>
+<p>For each one, click the SV and its genotype cell, and note <code>SVTYPE</code>, <code>SVLEN</code>, <code>STRANDS</code>, the genes listed in <code>BCSQ</code>, <code>VAF</code>, <code>DR/DV</code> and <code>HP</code>.</p>
+<ol style="list-style-type: decimal">
+<li>Why would a tumour gain an extra copy of an oncogene but lose a tumour suppressor?</li>
+</ol>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Answer</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><p>KRAS sits in a <code>1.95 Mb</code> tandem duplication that covers 12
+genes (<code>VAF</code> <code>0.36</code>, <code>HP</code>
+<code>1</code>).</p>
+<p>An extra copy of an oncogene increases its growth signal.</p>
+<p>CDKN2A is removed by a <code>19.9 kb</code> deletion
+(<code>VAF 1</code>, <code>DR 0</code>, <code>DV 11</code>,
+<code>HP 1</code>). Losing a tumour suppressor removes a brake on cell
+division.</p>
+<p>Oncogenes help a tumour when they become more active, and tumour
+suppressors help it when they are lost.</p></div></details>
+<ol start="2" style="list-style-type: decimal">
+<li>The CDKN2A deletion has genotype <code>0/1</code>, yet its <code>VAF</code> is <code>1</code>. What could explain this?</li>
+</ol>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Answer</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><p>A <code>VAF</code> of <code>1</code> means none of the reads at the
+breakpoints show the normal sequence, so there is most likely no intact
+copy left: the other copy was probably lost by a separate event.</p>
+<p>CDKN2A is completely inactivated in this tumour. Somatic genotypes
+are only approximate, and VAF is more informative.</p>
+<p>Since HG008-T is a cell line, there are no normal cells to lower the
+VAF.</p></div></details>
+<ol start="3" style="list-style-type: decimal">
+<li>What does the field <code>STRANDS</code> with the value <code>-+</code> tell you about the KRAS event?</li>
+</ol>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Answer</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><p><a
+href="https://github.com/KolmogorovLab/Severus/blob/main/README.md#plotly-graphs"><code>-+</code>
+describes a junction that faces outward</a>, which is the signature of a
+tandem duplication. With short reads, the same event shows up as read
+pairs facing away from each other.</p></div></details>
+</div>
+<div id="exercise-4-cbioportal-part-2" class="section level4 hasAnchor">
+<h4>Exercise 4 – cBioPortal (Part 2)<a href="module-2-understanding-and-visualizing-data.html#exercise-4-cbioportal-part-2" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ol style="list-style-type: decimal">
+<li><code>BRCA1</code> and <code>BRCA2</code> are the best-known breast cancer genes, yet in the OncoPrint they are altered in only 3–4 % of patients. Why?</li>
+</ol>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Answer</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><p>BRCA1 and BRCA2 are famous because inherited (germline) variants in
+them strongly raise cancer risk.</p>
+<p>The TCGA and METABRIC data in cBioPortal are somatic, meaning only
+changes found in the tumour, so germline variants are not shown.</p>
+<p>Germline BRCA1/2 carriers account for only about 5 % of breast
+cancers. BRCA1 can also be switched off by promoter methylation or by
+losing one copy, and neither counts as “altered” by default.</p>
+<p>How often a gene is mutated in tumours is not the same as how
+important it is for cancer risk.</p></div></details>
+<ol start="2" style="list-style-type: decimal">
+<li>Summarise in one sentence what each view is useful for: OncoPrint, Cancer Types Summary, Mutual Exclusivity, Plots, Mutations, Comparison/Survival and CN Segments.</li>
+</ol>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Answer</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>View</th>
+<th>Useful for</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>OncoPrint</td>
+<td>Seeing which patients have which alterations, across all queried
+genes at once</td>
+</tr>
+<tr class="even">
+<td>Cancer Types Summary</td>
+<td>Comparing alteration frequency between studies or cancer types</td>
+</tr>
+<tr class="odd">
+<td>Mutual Exclusivity</td>
+<td>Testing whether two genes tend to be altered together or rarely
+together</td>
+</tr>
+<tr class="even">
+<td>Plots</td>
+<td>Comparing any two attributes, for example fraction of genome altered
+by subtype</td>
+</tr>
+<tr class="odd">
+<td>Mutations</td>
+<td>Seeing where mutations fall on the protein (hotspots vs spread out)
+and their annotation</td>
+</tr>
+<tr class="even">
+<td>Comparison/Survival</td>
+<td>Checking whether altered and unaltered patients differ in survival
+or clinical features</td>
+</tr>
+<tr class="odd">
+<td>CN Segments</td>
+<td>Looking at copy-number gains and losses along the genome, in an
+embedded IGV</td>
+</tr>
+</tbody>
+</table></div></details>
+</div>
+<div id="exercise-5-cosmic-part-3" class="section level4 hasAnchor">
+<h4>Exercise 5 – COSMIC (Part 3)<a href="module-2-understanding-and-visualizing-data.html#exercise-5-cosmic-part-3" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ol style="list-style-type: decimal">
+<li>What is COSMIC, and how is it different from cBioPortal?</li>
+</ol>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Answer</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><p>COSMIC, the Catalogue Of Somatic Mutations In Cancer, is run by the
+Wellcome Sanger Institute.</p>
+<p>Its team collects somatic mutations from thousands of published
+papers and genome screens, across all cancer types.</p>
+<p>cBioPortal is organised around studies: you pick a cohort and see
+each patient’s alterations together with clinical data such as
+survival.</p>
+<p>COSMIC is organised around genes and mutations: you ask how often a
+particular mutation has been reported, and in which tissues.</p>
+<p>COSMIC is free for academic use after registration; cBioPortal is
+open.</p></div></details>
+<ol start="2" style="list-style-type: decimal">
+<li>What are other COSMIC features worth a look?</li>
+</ol>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Answer</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><p>A few worth further exploring:</p>
+<ul>
+<li>the Cancer Gene Census (a curated list of cancer genes and their
+role),</li>
+<li>Mutational Signatures (patterns that point to causes such as smoking
+or UV light),</li>
+<li>the Cancer Mutation Census (mutations ranked by evidence that they
+drive cancer),</li>
+<li>COSMIC-3D (mutations on protein structures),</li>
+<li>Actionability (links to drugs and clinical trials) and the Cell
+Lines Project.</li>
+</ul></div></details>
+</div>
+<div id="exercise-6-which-tool-for-which-question" class="section level4 hasAnchor">
+<h4>Exercise 6 – Which tool for which question?<a href="module-2-understanding-and-visualizing-data.html#exercise-6-which-tool-for-which-question" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Which tool would you use to answer each of these questions?</p>
+<ol style="list-style-type: decimal">
+<li>Is this variant real in my sequencing data? What do the reads look like?</li>
+</ol>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Answer</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><p>IGV</p>
+<p>It shows your own reads, with mapping quality, mismatches and read
+pairs</p></div></details>
+<ol start="2" style="list-style-type: decimal">
+<li>How often is a gene altered in a cohort, with which other genes, and does it affect survival?</li>
+</ol>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Answer</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><p>cBioPortal</p>
+<p>It combines cohort data with clinical outcomes</p></div></details>
+<ol start="3" style="list-style-type: decimal">
+<li>Has this exact variant been seen before, in which tissues, and what papers report it?</li>
+</ol>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Answer</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><p>COSMIC</p>
+<p>It collects somatic mutations from published studies, by tissue</p></div></details>
+<ol start="4" style="list-style-type: decimal">
+<li>Is this variant clinically actionable?</li>
+</ol>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Answer</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><p>OncoKB (or CIViC)</p>
+<p>Experts link variants to approved drugs and trials. OncoKB
+annotations also appear in cBioPortal</p></div></details>
+<ol start="5" style="list-style-type: decimal">
+<li>Is this variant common in healthy people (likely benign germline)?</li>
+</ol>
+<details class="callout-dropdown callout-blue"><summary class="callout-dropdown-summary"><span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span><span class="callout-dropdown-title">Answer</span> <span class="callout-dropdown-caret"><i class="fas fa-chevron-right" aria-hidden="true"></i></span></summary><div class="callout-dropdown-content"><p>gnomAD</p>
+<p>It gives allele frequencies from hundreds of thousands of people</p></div></details>
+<p>In practice these tools are often used together:</p>
+<p>IGV to check that a variant is real, gnomAD to check that it is rare,</p>
+<p>COSMIC and cBioPortal to see whether it is known in cancer,</p>
+<p>and OncoKB to see whether it matters for treatment.</p>
+
+</div>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="module-1-intro-to-cancer-genomics.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="module-3-genome-alignment.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": false,
+    "twitter": false,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/bioinformaticsdotca/CAN_TorMon-2610/blob/main/020-module-2.Rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["_main.pdf", "_main.epub"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

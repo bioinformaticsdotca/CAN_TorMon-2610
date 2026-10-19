@@ -1,20 +1,20 @@
-# Module 3
+# Module 3 Genome Alignment
 
 ## Lecture
-<iframe src="https://docs.google.com/presentation/d/10R9UkBE4ts3qVFKnISm4WkUuIXA2zT7s/edit?usp=drive_link&ouid=105959913933382382844&rtpof=true&sd=true/preview" width="640" height="480" allow="autoplay"></iframe>
+<iframe src="https://docs.google.com/presentation/d/10R9UkBE4ts3qVFKnISm4WkUuIXA2zT7s/preview" width="640" height="480" allow="autoplay"></iframe>
 
 ## Lab
-### 1. Purpose
+#### 1. Purpose
 We will practice genomic alignment tool, [BWA](https://github.com/lh3/BWA), and post-alignment tool, [Picard](https://broadinstitute.github.io/picard/) and [SAMtools](https://www.htslib.org/), with whole genome sequencing data.
 
-### 2. Dataset
+#### 2. Dataset
 [SRX4728544](https://www.ncbi.nlm.nih.gov/sra/SRX4728544): Whole Genome Sequencing of CRL-2324 breast cancer cell line
 Due to huge size of the original data, please use __the following small datasets__.
 - [SRR7890824_10M_1.fastq.gz](https://drive.google.com/file/d/15a8DxTOYFfkXlvw8x4RneoSkgvCBUlep/view?usp=drive_link)
 - [SRR7890824_10M_2.fastq.gz](https://drive.google.com/file/d/1ljGSzJRYPylCJRi-1V8Zl56K4W34EwcH/view?usp=drive_link)
 > Tang et al., Establishing community reference samples, data and call sets for benchmarking cancer mutation detection using whole-genome sequencing, Nat Biotechnol. 2021 Sep;39(9):1151-1160. doi: 10.1038/s41587-021-00993-6. Epub 2021 Sep 9
 
-### 3. Workflow
+#### 3. Workflow
 1.Download human referecne genome
 `wget https://hgdownload.gi.ucsc.edu/goldenPath/hg38/bigZips/hg38.fa.gz`
 

@@ -1,4 +1,4 @@
-# Module 2
+# Module 2 Understanding and Visualizing Data
 
 ## Lecture
 
@@ -6,7 +6,7 @@
 -->
 
 <iframe src="https://docs.google.com/presentation/d/1J3otDAd_AILYLFDwxbxpMMJS07cYCxtw/preview" width="640" height="480" allow="autoplay"></iframe>  
--->
+
 
 ## Lab
 
