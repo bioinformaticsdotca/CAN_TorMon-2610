@@ -218,18 +218,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="module-4-somatic-alterations.html"><a href="module-4-somatic-alterations.html#exit-the-container-environment"><i class="fa fa-check"></i>Exit the container environment</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="module-5.html"><a href="module-5.html"><i class="fa fa-check"></i>Module 5</a>
+<li class="chapter" data-level="" data-path="module-5-copy-number-alterations.html"><a href="module-5-copy-number-alterations.html"><i class="fa fa-check"></i>Module 5 Copy Number Alterations</a>
 <ul>
-<li class="chapter" data-level="" data-path="module-5.html"><a href="module-5.html#lecture-4"><i class="fa fa-check"></i>Lecture</a></li>
-<li class="chapter" data-level="" data-path="module-5.html"><a href="module-5.html#lab-3"><i class="fa fa-check"></i>Lab</a>
+<li class="chapter" data-level="" data-path="module-5-copy-number-alterations.html"><a href="module-5-copy-number-alterations.html#lecture-4"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-5-copy-number-alterations.html"><a href="module-5-copy-number-alterations.html#lab-3"><i class="fa fa-check"></i>Lab</a>
 <ul>
-<li class="chapter" data-level="" data-path="module-5.html"><a href="module-5.html#dataset-1"><i class="fa fa-check"></i>Dataset</a></li>
-<li class="chapter" data-level="" data-path="module-5.html"><a href="module-5.html#run-cobalt-amber-purple"><i class="fa fa-check"></i>Run cobalt , amber , purple</a></li>
-<li class="chapter" data-level="" data-path="module-5.html"><a href="module-5.html#run-genpipe"><i class="fa fa-check"></i>Run Genpipe</a></li>
-<li class="chapter" data-level="" data-path="module-5.html"><a href="module-5.html#analyze-the-purple-results"><i class="fa fa-check"></i>Analyze the purple results</a></li>
-<li class="chapter" data-level="" data-path="module-5.html"><a href="module-5.html#some-examples-of-gain-loss-deletion-and-loh"><i class="fa fa-check"></i>Some examples of Gain, Loss, Deletion and LOH</a></li>
-<li class="chapter" data-level="" data-path="module-5.html"><a href="module-5.html#visualize-a-gene-or-a-chromosome"><i class="fa fa-check"></i>Visualize a gene or a chromosome</a></li>
-<li class="chapter" data-level="" data-path="module-5.html"><a href="module-5.html#exercises"><i class="fa fa-check"></i>Exercises</a></li>
+<li class="chapter" data-level="" data-path="module-5-copy-number-alterations.html"><a href="module-5-copy-number-alterations.html#dataset-1"><i class="fa fa-check"></i>Dataset</a></li>
+<li class="chapter" data-level="" data-path="module-5-copy-number-alterations.html"><a href="module-5-copy-number-alterations.html#run-cobalt-amber-purple"><i class="fa fa-check"></i>Run cobalt , amber , purple</a></li>
+<li class="chapter" data-level="" data-path="module-5-copy-number-alterations.html"><a href="module-5-copy-number-alterations.html#run-genpipe"><i class="fa fa-check"></i>Run Genpipe</a></li>
+<li class="chapter" data-level="" data-path="module-5-copy-number-alterations.html"><a href="module-5-copy-number-alterations.html#analyze-the-purple-results"><i class="fa fa-check"></i>Analyze the purple results</a></li>
+<li class="chapter" data-level="" data-path="module-5-copy-number-alterations.html"><a href="module-5-copy-number-alterations.html#some-examples-of-gain-loss-deletion-and-loh"><i class="fa fa-check"></i>Some examples of Gain, Loss, Deletion and LOH</a></li>
+<li class="chapter" data-level="" data-path="module-5-copy-number-alterations.html"><a href="module-5-copy-number-alterations.html#visualize-a-gene-or-a-chromosome"><i class="fa fa-check"></i>Visualize a gene or a chromosome</a></li>
+<li class="chapter" data-level="" data-path="module-5-copy-number-alterations.html"><a href="module-5-copy-number-alterations.html#exercises"><i class="fa fa-check"></i>Exercises</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html"><i class="fa fa-check"></i>Module 6 Transcriptomics RNA-seq</a>
@@ -427,44 +427,72 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="dataset" class="section level4 hasAnchor">
 <h4>2. Dataset<a href="module-3-genome-alignment.html#dataset" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p><a href="https://www.ncbi.nlm.nih.gov/sra/SRX4728544">SRX4728544</a>: Whole Genome Sequencing of CRL-2324 breast cancer cell line
+<br>
 Due to huge size of the original data, please use <strong>the following small datasets</strong>.
-- <a href="https://drive.google.com/file/d/15a8DxTOYFfkXlvw8x4RneoSkgvCBUlep/view?usp=drive_link">SRR7890824_10M_1.fastq.gz</a>
-- <a href="https://drive.google.com/file/d/1ljGSzJRYPylCJRi-1V8Zl56K4W34EwcH/view?usp=drive_link">SRR7890824_10M_2.fastq.gz</a>
-&gt; Tang et al., Establishing community reference samples, data and call sets for benchmarking cancer mutation detection using whole-genome sequencing, Nat Biotechnol. 2021 Sep;39(9):1151-1160. doi: 10.1038/s41587-021-00993-6. Epub 2021 Sep 9</p>
+<br>
+* <a href="https://drive.google.com/file/d/15a8DxTOYFfkXlvw8x4RneoSkgvCBUlep/view?usp=drive_link">SRR7890824_10M_1.fastq.gz</a>
+* <a href="https://drive.google.com/file/d/1ljGSzJRYPylCJRi-1V8Zl56K4W34EwcH/view?usp=drive_link">SRR7890824_10M_2.fastq.gz</a>
+<br>
+Tang et al., Establishing community reference samples, data and call sets for benchmarking cancer mutation detection using whole-genome sequencing, Nat Biotechnol. 2021 Sep;39(9):1151-1160. doi: 10.1038/s41587-021-00993-6. Epub 2021 Sep 9</p>
 </div>
 <div id="workflow" class="section level4 hasAnchor">
 <h4>3. Workflow<a href="module-3-genome-alignment.html#workflow" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>1.Download human referecne genome
-<code>wget https://hgdownload.gi.ucsc.edu/goldenPath/hg38/bigZips/hg38.fa.gz</code></p>
+<p>1.Download human referecne genome</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="module-3-genome-alignment.html#cb12-1" tabindex="-1"></a>wget https<span class="sc">:</span><span class="er">//</span>hgdownload.gi.ucsc.edu<span class="sc">/</span>goldenPath<span class="sc">/</span>hg38<span class="sc">/</span>bigZips<span class="sc">/</span>hg38.fa.gz</span></code></pre></div>
 <ol start="2" style="list-style-type: decimal">
-<li><p>Indexing human reference genome. <strong>This process may takes 1 hour.</strong>
-<code>bwa index hg38.fa.gz</code></p></li>
-<li><p>Check output
-<code>ls</code>
-<code>bwa index</code> will generate the following five files.</p></li>
+<li>Indexing human reference genome. <strong>This process may takes 1 hour.</strong></li>
 </ol>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="module-3-genome-alignment.html#cb13-1" tabindex="-1"></a>bwa index hg38.fa.gz</span></code></pre></div>
+<ol start="3" style="list-style-type: decimal">
+<li>Check output</li>
+</ol>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="module-3-genome-alignment.html#cb14-1" tabindex="-1"></a>ls</span></code></pre></div>
+<p><code>bwa index</code> will generate the following five files.</p>
 <ul>
 <li><a href="https://drive.google.com/file/d/1O0GreTeeRAw__G9kYjMmk1zuk1xjeEG1/view?usp=drive_link">hg38.fa.gz.amb</a></li>
 <li><a href="https://drive.google.com/file/d/1r9ynpMHSPFE_le8bGhLGPaxd0GTMsUUQ/view?usp=drive_link">hg38.fa.gz.ann</a></li>
 <li><a href="https://drive.google.com/file/d/1xarOkR4lIjbZz1M-4wUI0Q0yvrAP2C8q/view?usp=drive_link">hg38.fa.gz.bwt</a></li>
 <li><a href="https://drive.google.com/file/d/1w2tCGkK6IIgvBqFmKRPhSSxmLlHQRh2q/view?usp=drive_link">hg38.fa.gz.pac</a></li>
-<li>[hg38.fa.gz.sa](<a href="https://drive.google.com/file/d/160ZshdtvfP2KgDUS8QTwkGDHE_ummPkA/view?usp=drive_link" class="uri">https://drive.google.com/file/d/160ZshdtvfP2KgDUS8QTwkGDHE_ummPkA/view?usp=drive_link</a></li>
+<li><a href="https://drive.google.com/file/d/160ZshdtvfP2KgDUS8QTwkGDHE_ummPkA/view?usp=drive_link">hg38.fa.gz.sa</a></li>
 </ul>
 <ol start="4" style="list-style-type: decimal">
-<li>Perform genomic alignment
-<code>bwa mem hg38.fa.gz SRR7890824_10M_1.fastq.gz SRR7890824_10M_2.fastq.gz -t 4 &gt; SRR7890824_10M.sam</code></li>
+<li>Perform genomic alignment</li>
 </ol>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="module-3-genome-alignment.html#cb15-1" tabindex="-1"></a>bwa mem hg38.fa.gz SRR7890824_10M_1.fastq.gz SRR7890824_10M_2.fastq.gz <span class="sc">-</span>t <span class="dv">4</span> <span class="sc">&gt;</span> SRR7890824_10M.sam</span></code></pre></div>
 <p>If more multithreds are available, increase number of -t option. For example, <code>-t 8</code>.</p>
 <ol start="5" style="list-style-type: decimal">
-<li><p>Add RG (read group information) for subsequent analytic tools and convert SAM format to BAM format.
-<code>picard AddOrReplaceReadGroups \       INPUT=SRR7890824_10M.sam \       OUTPUT=SRR7890824_10M.rg.bam \       RGID=group1 \       RGLB=lib1 \       RGPL=ILLUMINA \       RGPU=unit1 \       RGSM=sample1 \       VALIDATION_STRINGENCY=LENIENT</code></p></li>
-<li><p>Sort BAM file
-<code>picard SortSam \       INPUT=SRR7890824_10M.rg.bam \       OUTPUT=SRR7890824_10M.sorted.bam \       SORT_ORDER=coordinate \       VALIDATION_STRINGENCY=SILENT</code></p></li>
-<li><p>Mark duplicate
-<code>picard MarkDuplicates \       INPUT=SRR7890824_10M.sorted.bam \       OUTPUT=SRR7890824_10M.dedup.bam \       METRICS_FILE=metrics.txt</code></p></li>
-<li><p>Make BAM index
-<code>samtools index SRR7890824_10M.dedup.bam</code></p></li>
-<li><p>Finally, you will obtain the following BAM and BAM index files.</p></li>
+<li>Add RG (read group information) for subsequent analytic tools and convert SAM format to BAM format.</li>
+</ol>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="module-3-genome-alignment.html#cb16-1" tabindex="-1"></a>picard AddOrReplaceReadGroups \</span>
+<span id="cb16-2"><a href="module-3-genome-alignment.html#cb16-2" tabindex="-1"></a>      INPUT<span class="ot">=</span>SRR7890824_10M.sam \</span>
+<span id="cb16-3"><a href="module-3-genome-alignment.html#cb16-3" tabindex="-1"></a>      OUTPUT<span class="ot">=</span>SRR7890824_10M.rg.bam \</span>
+<span id="cb16-4"><a href="module-3-genome-alignment.html#cb16-4" tabindex="-1"></a>      RGID<span class="ot">=</span>group1 \</span>
+<span id="cb16-5"><a href="module-3-genome-alignment.html#cb16-5" tabindex="-1"></a>      RGLB<span class="ot">=</span>lib1 \</span>
+<span id="cb16-6"><a href="module-3-genome-alignment.html#cb16-6" tabindex="-1"></a>      RGPL<span class="ot">=</span>ILLUMINA \</span>
+<span id="cb16-7"><a href="module-3-genome-alignment.html#cb16-7" tabindex="-1"></a>      RGPU<span class="ot">=</span>unit1 \</span>
+<span id="cb16-8"><a href="module-3-genome-alignment.html#cb16-8" tabindex="-1"></a>      RGSM<span class="ot">=</span>sample1 \</span>
+<span id="cb16-9"><a href="module-3-genome-alignment.html#cb16-9" tabindex="-1"></a>      VALIDATION_STRINGENCY<span class="ot">=</span>LENIENT</span></code></pre></div>
+<ol start="6" style="list-style-type: decimal">
+<li>Sort BAM file</li>
+</ol>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="module-3-genome-alignment.html#cb17-1" tabindex="-1"></a>picard SortSam \</span>
+<span id="cb17-2"><a href="module-3-genome-alignment.html#cb17-2" tabindex="-1"></a>      INPUT<span class="ot">=</span>SRR7890824_10M.rg.bam \</span>
+<span id="cb17-3"><a href="module-3-genome-alignment.html#cb17-3" tabindex="-1"></a>      OUTPUT<span class="ot">=</span>SRR7890824_10M.sorted.bam \</span>
+<span id="cb17-4"><a href="module-3-genome-alignment.html#cb17-4" tabindex="-1"></a>      SORT_ORDER<span class="ot">=</span>coordinate \</span>
+<span id="cb17-5"><a href="module-3-genome-alignment.html#cb17-5" tabindex="-1"></a>      VALIDATION_STRINGENCY<span class="ot">=</span>SILENT</span></code></pre></div>
+<ol start="7" style="list-style-type: decimal">
+<li>Mark duplicate</li>
+</ol>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="module-3-genome-alignment.html#cb18-1" tabindex="-1"></a>picard MarkDuplicates \</span>
+<span id="cb18-2"><a href="module-3-genome-alignment.html#cb18-2" tabindex="-1"></a>      INPUT<span class="ot">=</span>SRR7890824_10M.sorted.bam \</span>
+<span id="cb18-3"><a href="module-3-genome-alignment.html#cb18-3" tabindex="-1"></a>      OUTPUT<span class="ot">=</span>SRR7890824_10M.dedup.bam \</span>
+<span id="cb18-4"><a href="module-3-genome-alignment.html#cb18-4" tabindex="-1"></a>      METRICS_FILE<span class="ot">=</span>metrics.txt<span class="st">`</span></span></code></pre></div>
+<ol start="8" style="list-style-type: decimal">
+<li>Make BAM index</li>
+</ol>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="module-3-genome-alignment.html#cb19-1" tabindex="-1"></a>samtools index SRR7890824_10M.dedup.bam</span></code></pre></div>
+<ol start="9" style="list-style-type: decimal">
+<li>Finally, you will obtain the following BAM and BAM index files.</li>
 </ol>
 <ul>
 <li><a href="https://drive.google.com/file/d/1FMnfCKE2B-s1oOr8gIQBDTPMYPU_kvqL/view?usp=drive_link">SRR7890824_10M.dedup.bam</a></li>

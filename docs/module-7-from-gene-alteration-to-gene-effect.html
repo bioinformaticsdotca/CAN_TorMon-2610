@@ -218,18 +218,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="module-4-somatic-alterations.html"><a href="module-4-somatic-alterations.html#exit-the-container-environment"><i class="fa fa-check"></i>Exit the container environment</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="module-5.html"><a href="module-5.html"><i class="fa fa-check"></i>Module 5</a>
+<li class="chapter" data-level="" data-path="module-5-copy-number-alterations.html"><a href="module-5-copy-number-alterations.html"><i class="fa fa-check"></i>Module 5 Copy Number Alterations</a>
 <ul>
-<li class="chapter" data-level="" data-path="module-5.html"><a href="module-5.html#lecture-4"><i class="fa fa-check"></i>Lecture</a></li>
-<li class="chapter" data-level="" data-path="module-5.html"><a href="module-5.html#lab-3"><i class="fa fa-check"></i>Lab</a>
+<li class="chapter" data-level="" data-path="module-5-copy-number-alterations.html"><a href="module-5-copy-number-alterations.html#lecture-4"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-5-copy-number-alterations.html"><a href="module-5-copy-number-alterations.html#lab-3"><i class="fa fa-check"></i>Lab</a>
 <ul>
-<li class="chapter" data-level="" data-path="module-5.html"><a href="module-5.html#dataset-1"><i class="fa fa-check"></i>Dataset</a></li>
-<li class="chapter" data-level="" data-path="module-5.html"><a href="module-5.html#run-cobalt-amber-purple"><i class="fa fa-check"></i>Run cobalt , amber , purple</a></li>
-<li class="chapter" data-level="" data-path="module-5.html"><a href="module-5.html#run-genpipe"><i class="fa fa-check"></i>Run Genpipe</a></li>
-<li class="chapter" data-level="" data-path="module-5.html"><a href="module-5.html#analyze-the-purple-results"><i class="fa fa-check"></i>Analyze the purple results</a></li>
-<li class="chapter" data-level="" data-path="module-5.html"><a href="module-5.html#some-examples-of-gain-loss-deletion-and-loh"><i class="fa fa-check"></i>Some examples of Gain, Loss, Deletion and LOH</a></li>
-<li class="chapter" data-level="" data-path="module-5.html"><a href="module-5.html#visualize-a-gene-or-a-chromosome"><i class="fa fa-check"></i>Visualize a gene or a chromosome</a></li>
-<li class="chapter" data-level="" data-path="module-5.html"><a href="module-5.html#exercises"><i class="fa fa-check"></i>Exercises</a></li>
+<li class="chapter" data-level="" data-path="module-5-copy-number-alterations.html"><a href="module-5-copy-number-alterations.html#dataset-1"><i class="fa fa-check"></i>Dataset</a></li>
+<li class="chapter" data-level="" data-path="module-5-copy-number-alterations.html"><a href="module-5-copy-number-alterations.html#run-cobalt-amber-purple"><i class="fa fa-check"></i>Run cobalt , amber , purple</a></li>
+<li class="chapter" data-level="" data-path="module-5-copy-number-alterations.html"><a href="module-5-copy-number-alterations.html#run-genpipe"><i class="fa fa-check"></i>Run Genpipe</a></li>
+<li class="chapter" data-level="" data-path="module-5-copy-number-alterations.html"><a href="module-5-copy-number-alterations.html#analyze-the-purple-results"><i class="fa fa-check"></i>Analyze the purple results</a></li>
+<li class="chapter" data-level="" data-path="module-5-copy-number-alterations.html"><a href="module-5-copy-number-alterations.html#some-examples-of-gain-loss-deletion-and-loh"><i class="fa fa-check"></i>Some examples of Gain, Loss, Deletion and LOH</a></li>
+<li class="chapter" data-level="" data-path="module-5-copy-number-alterations.html"><a href="module-5-copy-number-alterations.html#visualize-a-gene-or-a-chromosome"><i class="fa fa-check"></i>Visualize a gene or a chromosome</a></li>
+<li class="chapter" data-level="" data-path="module-5-copy-number-alterations.html"><a href="module-5-copy-number-alterations.html#exercises"><i class="fa fa-check"></i>Exercises</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html"><i class="fa fa-check"></i>Module 6 Transcriptomics RNA-seq</a>
@@ -713,12 +713,12 @@ $ ls </code></pre>
 <div id="generate-a-summary-with-bcftools-stats" class="section level4 hasAnchor">
 <h4>3.2. Generate a summary with bcftools stats<a href="module-7-from-gene-alteration-to-gene-effect.html#generate-a-summary-with-bcftools-stats" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Run the following command for Patient 1:</p>
-<div class="sourceCode" id="cb144"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb144-1"><a href="module-7-from-gene-alteration-to-gene-effect.html#cb144-1" tabindex="-1"></a><span class="ex">$</span> bcftools stats patient1_snvs.vcf.gz <span class="op">&gt;</span> patient1_stats.txt</span></code></pre></div>
+<div class="sourceCode" id="cb152"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb152-1"><a href="module-7-from-gene-alteration-to-gene-effect.html#cb152-1" tabindex="-1"></a><span class="ex">$</span> bcftools stats patient1_snvs.vcf.gz <span class="op">&gt;</span> patient1_stats.txt</span></code></pre></div>
 <p>Then inspect the summary:</p>
-<div class="sourceCode" id="cb145"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb145-1"><a href="module-7-from-gene-alteration-to-gene-effect.html#cb145-1" tabindex="-1"></a><span class="ex">$</span> less patient1_stats.txt</span></code></pre></div>
+<div class="sourceCode" id="cb153"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb153-1"><a href="module-7-from-gene-alteration-to-gene-effect.html#cb153-1" tabindex="-1"></a><span class="ex">$</span> less patient1_stats.txt</span></code></pre></div>
 <p>Press <code>q</code> to exit <code>less</code>.</p>
 <p>Repeat for Patient 2:</p>
-<div class="sourceCode" id="cb146"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb146-1"><a href="module-7-from-gene-alteration-to-gene-effect.html#cb146-1" tabindex="-1"></a><span class="ex">$</span> bcftools stats patient2_indels.vcf.gz <span class="op">&gt;</span> patient2_stats.txt</span></code></pre></div>
+<div class="sourceCode" id="cb154"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb154-1"><a href="module-7-from-gene-alteration-to-gene-effect.html#cb154-1" tabindex="-1"></a><span class="ex">$</span> bcftools stats patient2_indels.vcf.gz <span class="op">&gt;</span> patient2_stats.txt</span></code></pre></div>
 <p>The output includes summary statistics about the VCF records. Depending on the input, these can include the number of records, SNPs, insertions, deletions, transitions, transversions, and other metrics.</p>
 <p>You can also find the relevant statistics directly with:</p>
 <pre><code>$ grep &#39;^SN&#39; patient1_stats.txt

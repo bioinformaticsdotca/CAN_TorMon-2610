@@ -462,13 +462,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>In GenPipes 6 the old <code>tumor_pair</code> pipeline is part of <strong><code>dnaseq</code></strong>, selected with <code>-t somatic_ensemble</code>. The <em>ensemble</em> protocol calls somatic SNVs/indels with several callers (MuTect2, Strelka2, VarDict, VarScan2) and keeps a consensus. It also runs Manta (SVs), Sequenza, PURPLE and CNVkit (copy number), and annotates with PCGR/CPSR.</p>
 <div id="load-the-environment" class="section level3 hasAnchor">
 <h3>1. Load the environment<a href="run-genpipe.html#load-the-environment" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb56"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb56-1"><a href="run-genpipe.html#cb56-1" tabindex="-1"></a><span class="co"># GenPipes and all its tools are distributed on CVMFS by C3G</span></span>
-<span id="cb56-2"><a href="run-genpipe.html#cb56-2" tabindex="-1"></a><span class="bu">export</span> <span class="va">MUGQIC_INSTALL_HOME</span><span class="op">=</span>/cvmfs/soft.mugqic/root   <span class="co"># root of the C3G software/genome stack</span></span>
-<span id="cb56-3"><a href="run-genpipe.html#cb56-3" tabindex="-1"></a><span class="ex">module</span> use <span class="va">$MUGQIC_INSTALL_HOME</span>/modulefiles         <span class="co"># make the mugqic/* modules visible</span></span>
-<span id="cb56-4"><a href="run-genpipe.html#cb56-4" tabindex="-1"></a><span class="ex">module</span> load mugqic/genpipes/6.2.0</span>
-<span id="cb56-5"><a href="run-genpipe.html#cb56-5" tabindex="-1"></a></span>
-<span id="cb56-6"><a href="run-genpipe.html#cb56-6" tabindex="-1"></a><span class="bu">export</span> <span class="va">RAP_ID</span><span class="op">=</span><span class="st">&#39;#put the slurm account&#39;</span> <span class="co"># Slurm account; the rorqual.ini passes it as &quot;-A $RAP_ID&quot;</span></span>
-<span id="cb56-7"><a href="run-genpipe.html#cb56-7" tabindex="-1"></a><span class="bu">export</span> <span class="va">JOB_MAIL</span><span class="op">=</span><span class="st">&quot;you@example.com&quot;</span> <span class="co"># e-mail for job </span><span class="re">END</span><span class="co">/FAIL notifications</span></span></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb64-1"><a href="run-genpipe.html#cb64-1" tabindex="-1"></a><span class="co"># GenPipes and all its tools are distributed on CVMFS by C3G</span></span>
+<span id="cb64-2"><a href="run-genpipe.html#cb64-2" tabindex="-1"></a><span class="bu">export</span> <span class="va">MUGQIC_INSTALL_HOME</span><span class="op">=</span>/cvmfs/soft.mugqic/root   <span class="co"># root of the C3G software/genome stack</span></span>
+<span id="cb64-3"><a href="run-genpipe.html#cb64-3" tabindex="-1"></a><span class="ex">module</span> use <span class="va">$MUGQIC_INSTALL_HOME</span>/modulefiles         <span class="co"># make the mugqic/* modules visible</span></span>
+<span id="cb64-4"><a href="run-genpipe.html#cb64-4" tabindex="-1"></a><span class="ex">module</span> load mugqic/genpipes/6.2.0</span>
+<span id="cb64-5"><a href="run-genpipe.html#cb64-5" tabindex="-1"></a></span>
+<span id="cb64-6"><a href="run-genpipe.html#cb64-6" tabindex="-1"></a><span class="bu">export</span> <span class="va">RAP_ID</span><span class="op">=</span><span class="st">&#39;#put the slurm account&#39;</span> <span class="co"># Slurm account; the rorqual.ini passes it as &quot;-A $RAP_ID&quot;</span></span>
+<span id="cb64-7"><a href="run-genpipe.html#cb64-7" tabindex="-1"></a><span class="bu">export</span> <span class="va">JOB_MAIL</span><span class="op">=</span><span class="st">&quot;you@example.com&quot;</span> <span class="co"># e-mail for job </span><span class="re">END</span><span class="co">/FAIL notifications</span></span></code></pre></div>
 <blockquote>
 <p><code>module load</code> only works in a <strong>login shell</strong>. In scripts use <code>#!/bin/bash -l</code>.</p>
 </blockquote>
@@ -532,35 +532,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb57"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb57-1"><a href="run-genpipe.html#cb57-1" tabindex="-1"></a><span class="fu">cat</span> codes/genpipes_somatic_ensemble/readsets.tsv <span class="kw">|</span> <span class="ex">column</span> <span class="at">-t</span> <span class="at">-s</span> <span class="st">$&#39;</span><span class="dt">\t</span><span class="st">&#39;</span></span>
-<span id="cb57-2"><a href="run-genpipe.html#cb57-2" tabindex="-1"></a><span class="co"># Sample         Readset             Library        RunType     Run  Lane  ...  QualityOffset  ...  BAM</span></span>
-<span id="cb57-3"><a href="run-genpipe.html#cb57-3" tabindex="-1"></a><span class="co"># SPP_GT_0-1_1   SPP_GT_0-1_1.L001   SPP_GT_0-1_1   PAIRED_END  1    1    ...  33             ...  .../SPP_GT_0-1_1.bwa.dedup.bam</span></span>
-<span id="cb57-4"><a href="run-genpipe.html#cb57-4" tabindex="-1"></a><span class="co"># ...</span></span></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb65-1"><a href="run-genpipe.html#cb65-1" tabindex="-1"></a><span class="fu">cat</span> codes/genpipes_somatic_ensemble/readsets.tsv <span class="kw">|</span> <span class="ex">column</span> <span class="at">-t</span> <span class="at">-s</span> <span class="st">$&#39;</span><span class="dt">\t</span><span class="st">&#39;</span></span>
+<span id="cb65-2"><a href="run-genpipe.html#cb65-2" tabindex="-1"></a><span class="co"># Sample         Readset             Library        RunType     Run  Lane  ...  QualityOffset  ...  BAM</span></span>
+<span id="cb65-3"><a href="run-genpipe.html#cb65-3" tabindex="-1"></a><span class="co"># SPP_GT_0-1_1   SPP_GT_0-1_1.L001   SPP_GT_0-1_1   PAIRED_END  1    1    ...  33             ...  .../SPP_GT_0-1_1.bwa.dedup.bam</span></span>
+<span id="cb65-4"><a href="run-genpipe.html#cb65-4" tabindex="-1"></a><span class="co"># ...</span></span></code></pre></div>
 </div>
 <div id="pairs-file-pairs.csv-comma-separated-no-header" class="section level4 hasAnchor">
 <h4>Pairs file (<code>pairs.csv</code>, comma-separated, no header)<a href="run-genpipe.html#pairs-file-pairs.csv-comma-separated-no-header" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p><code>&lt;pair name&gt;,&lt;normal sample&gt;,&lt;tumor sample&gt;</code>. Every tumor is paired with the same normal.</p>
-<div class="sourceCode" id="cb58"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb58-1"><a href="run-genpipe.html#cb58-1" tabindex="-1"></a><span class="fu">cat</span> codes/genpipes_somatic_ensemble/pairs.csv</span>
-<span id="cb58-2"><a href="run-genpipe.html#cb58-2" tabindex="-1"></a><span class="co"># pair_1-19_1,SPP_GT_0-1_1,SPP_GT_1-19_1</span></span>
-<span id="cb58-3"><a href="run-genpipe.html#cb58-3" tabindex="-1"></a><span class="co"># pair_1-9_1,SPP_GT_0-1_1,SPP_GT_1-9_1</span></span>
-<span id="cb58-4"><a href="run-genpipe.html#cb58-4" tabindex="-1"></a><span class="co"># pair_1-4_1,SPP_GT_0-1_1,SPP_GT_1-4_1</span></span>
-<span id="cb58-5"><a href="run-genpipe.html#cb58-5" tabindex="-1"></a><span class="co"># pair_1-1_1,SPP_GT_0-1_1,SPP_GT_1-1_1</span></span>
-<span id="cb58-6"><a href="run-genpipe.html#cb58-6" tabindex="-1"></a><span class="co"># pair_3-1_1,SPP_GT_0-1_1,SPP_GT_3-1_1</span></span>
-<span id="cb58-7"><a href="run-genpipe.html#cb58-7" tabindex="-1"></a><span class="co"># pair_1-0_1,SPP_GT_0-1_1,SPP_GT_1-0_1</span></span></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb66-1"><a href="run-genpipe.html#cb66-1" tabindex="-1"></a><span class="fu">cat</span> codes/genpipes_somatic_ensemble/pairs.csv</span>
+<span id="cb66-2"><a href="run-genpipe.html#cb66-2" tabindex="-1"></a><span class="co"># pair_1-19_1,SPP_GT_0-1_1,SPP_GT_1-19_1</span></span>
+<span id="cb66-3"><a href="run-genpipe.html#cb66-3" tabindex="-1"></a><span class="co"># pair_1-9_1,SPP_GT_0-1_1,SPP_GT_1-9_1</span></span>
+<span id="cb66-4"><a href="run-genpipe.html#cb66-4" tabindex="-1"></a><span class="co"># pair_1-4_1,SPP_GT_0-1_1,SPP_GT_1-4_1</span></span>
+<span id="cb66-5"><a href="run-genpipe.html#cb66-5" tabindex="-1"></a><span class="co"># pair_1-1_1,SPP_GT_0-1_1,SPP_GT_1-1_1</span></span>
+<span id="cb66-6"><a href="run-genpipe.html#cb66-6" tabindex="-1"></a><span class="co"># pair_3-1_1,SPP_GT_0-1_1,SPP_GT_3-1_1</span></span>
+<span id="cb66-7"><a href="run-genpipe.html#cb66-7" tabindex="-1"></a><span class="co"># pair_1-0_1,SPP_GT_0-1_1,SPP_GT_1-0_1</span></span></code></pre></div>
 </div>
 </div>
 <div id="re-using-existing-bams-make-them-match-the-genpipes-reference" class="section level3 hasAnchor">
 <h3>3. Re-using existing BAMs: make them match the GenPipes reference<a href="run-genpipe.html#re-using-existing-bams-make-them-match-the-genpipes-reference" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Steps 1-4 of the protocol (BAM → FASTQ, trimming, BWA-MEM2 alignment, duplicate marking) are already done for our BAMs, so we start at step 5. GenPipes then expects each sample’s BAM at <code>alignment/&lt;sample&gt;/&lt;sample&gt;.sorted.dup.bam</code>.</p>
 <p>There is one catch. Our BAMs were aligned to GRCh38.d1.vd1 (2,779 contigs), but GenPipes uses <code>Homo_sapiens.GRCh38</code> (195 contigs). The first 195 contigs are identical in name, length and order; the remaining 2,584 are HLA, decoy and viral sequences. Strelka2 and Manta stop with <em>“Reference genome mismatch: Reference fasta file is missing a chromosome found in the BAM”</em>. <strong>GATK ReorderSam</strong> rewrites each BAM against the GenPipes sequence dictionary:</p>
-<div class="sourceCode" id="cb59"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb59-1"><a href="run-genpipe.html#cb59-1" tabindex="-1"></a><span class="ex">gatk</span> <span class="at">--java-options</span> <span class="st">&quot;-Xmx20G&quot;</span> ReorderSam <span class="dt">\</span></span>
-<span id="cb59-2"><a href="run-genpipe.html#cb59-2" tabindex="-1"></a>  <span class="at">-I</span>  data/NCBI_SEQCII_SPP/SPP_GT_0-1_1.bwa.dedup.bam <span class="dt">\</span></span>
-<span id="cb59-3"><a href="run-genpipe.html#cb59-3" tabindex="-1"></a>  <span class="at">-O</span>  results/genpipes_somatic_ensemble/alignment/SPP_GT_0-1_1/SPP_GT_0-1_1.sorted.dup.bam <span class="dt">\</span></span>
-<span id="cb59-4"><a href="run-genpipe.html#cb59-4" tabindex="-1"></a>  <span class="at">-SD</span> /cvmfs/ref.mugqic/genomes/species/Homo_sapiens.GRCh38/genome/Homo_sapiens.GRCh38.dict <span class="dt">\</span></span>
-<span id="cb59-5"><a href="run-genpipe.html#cb59-5" tabindex="-1"></a>  <span class="at">--ALLOW_INCOMPLETE_DICT_CONCORDANCE</span> true <span class="dt">\</span></span>
-<span id="cb59-6"><a href="run-genpipe.html#cb59-6" tabindex="-1"></a>  <span class="at">--CREATE_INDEX</span> true <span class="dt">\</span></span>
-<span id="cb59-7"><a href="run-genpipe.html#cb59-7" tabindex="-1"></a>  <span class="at">--VALIDATION_STRINGENCY</span> SILENT <span class="dt">\</span></span>
-<span id="cb59-8"><a href="run-genpipe.html#cb59-8" tabindex="-1"></a>  <span class="at">--TMP_DIR</span> /lustre10/scratch/rongma/CBW/tmp</span></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb67-1"><a href="run-genpipe.html#cb67-1" tabindex="-1"></a><span class="ex">gatk</span> <span class="at">--java-options</span> <span class="st">&quot;-Xmx20G&quot;</span> ReorderSam <span class="dt">\</span></span>
+<span id="cb67-2"><a href="run-genpipe.html#cb67-2" tabindex="-1"></a>  <span class="at">-I</span>  data/NCBI_SEQCII_SPP/SPP_GT_0-1_1.bwa.dedup.bam <span class="dt">\</span></span>
+<span id="cb67-3"><a href="run-genpipe.html#cb67-3" tabindex="-1"></a>  <span class="at">-O</span>  results/genpipes_somatic_ensemble/alignment/SPP_GT_0-1_1/SPP_GT_0-1_1.sorted.dup.bam <span class="dt">\</span></span>
+<span id="cb67-4"><a href="run-genpipe.html#cb67-4" tabindex="-1"></a>  <span class="at">-SD</span> /cvmfs/ref.mugqic/genomes/species/Homo_sapiens.GRCh38/genome/Homo_sapiens.GRCh38.dict <span class="dt">\</span></span>
+<span id="cb67-5"><a href="run-genpipe.html#cb67-5" tabindex="-1"></a>  <span class="at">--ALLOW_INCOMPLETE_DICT_CONCORDANCE</span> true <span class="dt">\</span></span>
+<span id="cb67-6"><a href="run-genpipe.html#cb67-6" tabindex="-1"></a>  <span class="at">--CREATE_INDEX</span> true <span class="dt">\</span></span>
+<span id="cb67-7"><a href="run-genpipe.html#cb67-7" tabindex="-1"></a>  <span class="at">--VALIDATION_STRINGENCY</span> SILENT <span class="dt">\</span></span>
+<span id="cb67-8"><a href="run-genpipe.html#cb67-8" tabindex="-1"></a>  <span class="at">--TMP_DIR</span> /lustre10/scratch/rongma/CBW/tmp</span></code></pre></div>
 <table>
 <colgroup>
 <col width="34%" />
@@ -604,10 +604,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="configuration-files" class="section level3 hasAnchor">
 <h3>4. Configuration files<a href="run-genpipe.html#configuration-files" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>GenPipes reads a stack of <code>.ini</code> files; a parameter in a later file overrides the same parameter in an earlier file.</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb60-1"><a href="run-genpipe.html#cb60-1" tabindex="-1"></a><span class="va">INIS</span><span class="op">=</span><span class="st">&quot;</span><span class="va">$GENPIPES_INIS</span><span class="st">/dnaseq/dnaseq.base.ini </span><span class="dt">\</span></span>
-<span id="cb60-2"><a href="run-genpipe.html#cb60-2" tabindex="-1"></a><span class="st">      </span><span class="va">$GENPIPES_INIS</span><span class="st">/dnaseq/dnaseq.cancer.ini </span><span class="dt">\</span></span>
-<span id="cb60-3"><a href="run-genpipe.html#cb60-3" tabindex="-1"></a><span class="st">      </span><span class="va">$GENPIPES_INIS</span><span class="st">/common_ini/rorqual.ini </span><span class="dt">\</span></span>
-<span id="cb60-4"><a href="run-genpipe.html#cb60-4" tabindex="-1"></a><span class="st">      codes/genpipes_somatic_ensemble/custom.ini&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb68-1"><a href="run-genpipe.html#cb68-1" tabindex="-1"></a><span class="va">INIS</span><span class="op">=</span><span class="st">&quot;</span><span class="va">$GENPIPES_INIS</span><span class="st">/dnaseq/dnaseq.base.ini </span><span class="dt">\</span></span>
+<span id="cb68-2"><a href="run-genpipe.html#cb68-2" tabindex="-1"></a><span class="st">      </span><span class="va">$GENPIPES_INIS</span><span class="st">/dnaseq/dnaseq.cancer.ini </span><span class="dt">\</span></span>
+<span id="cb68-3"><a href="run-genpipe.html#cb68-3" tabindex="-1"></a><span class="st">      </span><span class="va">$GENPIPES_INIS</span><span class="st">/common_ini/rorqual.ini </span><span class="dt">\</span></span>
+<span id="cb68-4"><a href="run-genpipe.html#cb68-4" tabindex="-1"></a><span class="st">      codes/genpipes_somatic_ensemble/custom.ini&quot;</span></span></code></pre></div>
 <table>
 <colgroup>
 <col width="34%" />
@@ -639,20 +639,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tbody>
 </table>
 <p>Example override in <code>custom.ini</code>:</p>
-<div class="sourceCode" id="cb61"><pre class="sourceCode ini"><code class="sourceCode ini"><span id="cb61-1"><a href="run-genpipe.html#cb61-1" tabindex="-1"></a><span class="kw">[amber]</span></span>
-<span id="cb61-2"><a href="run-genpipe.html#cb61-2" tabindex="-1"></a><span class="dt">cluster_walltime</span><span class="ot">=</span><span class="st">12:00:0</span></span></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode ini"><code class="sourceCode ini"><span id="cb69-1"><a href="run-genpipe.html#cb69-1" tabindex="-1"></a><span class="kw">[amber]</span></span>
+<span id="cb69-2"><a href="run-genpipe.html#cb69-2" tabindex="-1"></a><span class="dt">cluster_walltime</span><span class="ot">=</span><span class="st">12:00:0</span></span></code></pre></div>
 </div>
 <div id="generate-the-job-script" class="section level3 hasAnchor">
 <h3>5. Generate the job script<a href="run-genpipe.html#generate-the-job-script" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb62"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb62-1"><a href="run-genpipe.html#cb62-1" tabindex="-1"></a><span class="ex">genpipes</span> dnaseq <span class="dt">\</span></span>
-<span id="cb62-2"><a href="run-genpipe.html#cb62-2" tabindex="-1"></a>  <span class="at">-t</span> somatic_ensemble <span class="dt">\</span></span>
-<span id="cb62-3"><a href="run-genpipe.html#cb62-3" tabindex="-1"></a>  <span class="at">-c</span> <span class="va">$INIS</span> <span class="dt">\</span></span>
-<span id="cb62-4"><a href="run-genpipe.html#cb62-4" tabindex="-1"></a>  <span class="at">-r</span> codes/genpipes_somatic_ensemble/readsets.tsv <span class="dt">\</span></span>
-<span id="cb62-5"><a href="run-genpipe.html#cb62-5" tabindex="-1"></a>  <span class="at">-p</span> codes/genpipes_somatic_ensemble/pairs.csv <span class="dt">\</span></span>
-<span id="cb62-6"><a href="run-genpipe.html#cb62-6" tabindex="-1"></a>  <span class="at">-o</span> results/genpipes_somatic_ensemble <span class="dt">\</span></span>
-<span id="cb62-7"><a href="run-genpipe.html#cb62-7" tabindex="-1"></a>  <span class="at">-s</span> 5-33,35-37,39 <span class="dt">\</span></span>
-<span id="cb62-8"><a href="run-genpipe.html#cb62-8" tabindex="-1"></a>  <span class="at">-j</span> slurm <span class="dt">\</span></span>
-<span id="cb62-9"><a href="run-genpipe.html#cb62-9" tabindex="-1"></a>  <span class="at">-g</span> results/genpipes_somatic_ensemble/genpipes_somatic_ensemble_cmd.sh</span></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb70-1"><a href="run-genpipe.html#cb70-1" tabindex="-1"></a><span class="ex">genpipes</span> dnaseq <span class="dt">\</span></span>
+<span id="cb70-2"><a href="run-genpipe.html#cb70-2" tabindex="-1"></a>  <span class="at">-t</span> somatic_ensemble <span class="dt">\</span></span>
+<span id="cb70-3"><a href="run-genpipe.html#cb70-3" tabindex="-1"></a>  <span class="at">-c</span> <span class="va">$INIS</span> <span class="dt">\</span></span>
+<span id="cb70-4"><a href="run-genpipe.html#cb70-4" tabindex="-1"></a>  <span class="at">-r</span> codes/genpipes_somatic_ensemble/readsets.tsv <span class="dt">\</span></span>
+<span id="cb70-5"><a href="run-genpipe.html#cb70-5" tabindex="-1"></a>  <span class="at">-p</span> codes/genpipes_somatic_ensemble/pairs.csv <span class="dt">\</span></span>
+<span id="cb70-6"><a href="run-genpipe.html#cb70-6" tabindex="-1"></a>  <span class="at">-o</span> results/genpipes_somatic_ensemble <span class="dt">\</span></span>
+<span id="cb70-7"><a href="run-genpipe.html#cb70-7" tabindex="-1"></a>  <span class="at">-s</span> 5-33,35-37,39 <span class="dt">\</span></span>
+<span id="cb70-8"><a href="run-genpipe.html#cb70-8" tabindex="-1"></a>  <span class="at">-j</span> slurm <span class="dt">\</span></span>
+<span id="cb70-9"><a href="run-genpipe.html#cb70-9" tabindex="-1"></a>  <span class="at">-g</span> results/genpipes_somatic_ensemble/genpipes_somatic_ensemble_cmd.sh</span></code></pre></div>
 <table>
 <colgroup>
 <col width="34%" />
@@ -798,10 +798,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="submit" class="section level3 hasAnchor">
 <h3>6. Submit<a href="run-genpipe.html#submit" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Running <code>bash genpipes_somatic_ensemble_cmd.sh</code> would submit all <strong>1,231 jobs</strong> at once. Rorqual allows at most <strong>1,000 queued jobs per user</strong>, so plain submission fails part-way. GenPipes includes a tool that cuts the script into chunks and keeps the queue below a limit:</p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb63-1"><a href="run-genpipe.html#cb63-1" tabindex="-1"></a><span class="ex">genpipes</span> tools chunk_and_submit_genpipes <span class="dt">\</span></span>
-<span id="cb63-2"><a href="run-genpipe.html#cb63-2" tabindex="-1"></a>  results/genpipes_somatic_ensemble/genpipes_somatic_ensemble_cmd.sh <span class="dt">\</span></span>
-<span id="cb63-3"><a href="run-genpipe.html#cb63-3" tabindex="-1"></a>  results/genpipes_somatic_ensemble/chunks <span class="dt">\</span></span>
-<span id="cb63-4"><a href="run-genpipe.html#cb63-4" tabindex="-1"></a>  <span class="at">-n</span> 20 <span class="at">-q</span> 900 <span class="at">-s</span> 300 <span class="at">-S</span> slurm</span></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb71-1"><a href="run-genpipe.html#cb71-1" tabindex="-1"></a><span class="ex">genpipes</span> tools chunk_and_submit_genpipes <span class="dt">\</span></span>
+<span id="cb71-2"><a href="run-genpipe.html#cb71-2" tabindex="-1"></a>  results/genpipes_somatic_ensemble/genpipes_somatic_ensemble_cmd.sh <span class="dt">\</span></span>
+<span id="cb71-3"><a href="run-genpipe.html#cb71-3" tabindex="-1"></a>  results/genpipes_somatic_ensemble/chunks <span class="dt">\</span></span>
+<span id="cb71-4"><a href="run-genpipe.html#cb71-4" tabindex="-1"></a>  <span class="at">-n</span> 20 <span class="at">-q</span> 900 <span class="at">-s</span> 300 <span class="at">-S</span> slurm</span></code></pre></div>
 <table>
 <colgroup>
 <col width="34%" />
@@ -844,10 +844,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="monitor-and-find-the-results" class="section level3 hasAnchor">
 <h3>7. Monitor and find the results<a href="run-genpipe.html#monitor-and-find-the-results" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb64"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb64-1"><a href="run-genpipe.html#cb64-1" tabindex="-1"></a><span class="ex">squeue</span> <span class="at">-u</span> <span class="va">$USER</span> <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span>                                    <span class="co"># jobs still queued or running</span></span>
-<span id="cb64-2"><a href="run-genpipe.html#cb64-2" tabindex="-1"></a><span class="fu">ls</span> results/genpipes_somatic_ensemble/job_output/           <span class="co"># one log per job, grouped by step</span></span>
-<span id="cb64-3"><a href="run-genpipe.html#cb64-3" tabindex="-1"></a><span class="fu">ls</span> results/genpipes_somatic_ensemble/pairedVariants/       <span class="co"># per-pair variant calls</span></span>
-<span id="cb64-4"><a href="run-genpipe.html#cb64-4" tabindex="-1"></a><span class="fu">ls</span> results/genpipes_somatic_ensemble/pairedVariants/ensemble/   <span class="co"># consensus somatic / germline VCFs</span></span></code></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb72-1"><a href="run-genpipe.html#cb72-1" tabindex="-1"></a><span class="ex">squeue</span> <span class="at">-u</span> <span class="va">$USER</span> <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span>                                    <span class="co"># jobs still queued or running</span></span>
+<span id="cb72-2"><a href="run-genpipe.html#cb72-2" tabindex="-1"></a><span class="fu">ls</span> results/genpipes_somatic_ensemble/job_output/           <span class="co"># one log per job, grouped by step</span></span>
+<span id="cb72-3"><a href="run-genpipe.html#cb72-3" tabindex="-1"></a><span class="fu">ls</span> results/genpipes_somatic_ensemble/pairedVariants/       <span class="co"># per-pair variant calls</span></span>
+<span id="cb72-4"><a href="run-genpipe.html#cb72-4" tabindex="-1"></a><span class="fu">ls</span> results/genpipes_somatic_ensemble/pairedVariants/ensemble/   <span class="co"># consensus somatic / germline VCFs</span></span></code></pre></div>
 <p>GenPipes writes a <code>.done</code> file for each finished job. If you run the same command again, it only regenerates the jobs whose outputs are missing or out of date, so a failed run can be restarted.</p>
 <hr />
 </div>

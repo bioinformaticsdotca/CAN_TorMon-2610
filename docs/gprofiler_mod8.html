@@ -218,18 +218,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="module-4-somatic-alterations.html"><a href="module-4-somatic-alterations.html#exit-the-container-environment"><i class="fa fa-check"></i>Exit the container environment</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="module-5.html"><a href="module-5.html"><i class="fa fa-check"></i>Module 5</a>
+<li class="chapter" data-level="" data-path="module-5-copy-number-alterations.html"><a href="module-5-copy-number-alterations.html"><i class="fa fa-check"></i>Module 5 Copy Number Alterations</a>
 <ul>
-<li class="chapter" data-level="" data-path="module-5.html"><a href="module-5.html#lecture-4"><i class="fa fa-check"></i>Lecture</a></li>
-<li class="chapter" data-level="" data-path="module-5.html"><a href="module-5.html#lab-3"><i class="fa fa-check"></i>Lab</a>
+<li class="chapter" data-level="" data-path="module-5-copy-number-alterations.html"><a href="module-5-copy-number-alterations.html#lecture-4"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-5-copy-number-alterations.html"><a href="module-5-copy-number-alterations.html#lab-3"><i class="fa fa-check"></i>Lab</a>
 <ul>
-<li class="chapter" data-level="" data-path="module-5.html"><a href="module-5.html#dataset-1"><i class="fa fa-check"></i>Dataset</a></li>
-<li class="chapter" data-level="" data-path="module-5.html"><a href="module-5.html#run-cobalt-amber-purple"><i class="fa fa-check"></i>Run cobalt , amber , purple</a></li>
-<li class="chapter" data-level="" data-path="module-5.html"><a href="module-5.html#run-genpipe"><i class="fa fa-check"></i>Run Genpipe</a></li>
-<li class="chapter" data-level="" data-path="module-5.html"><a href="module-5.html#analyze-the-purple-results"><i class="fa fa-check"></i>Analyze the purple results</a></li>
-<li class="chapter" data-level="" data-path="module-5.html"><a href="module-5.html#some-examples-of-gain-loss-deletion-and-loh"><i class="fa fa-check"></i>Some examples of Gain, Loss, Deletion and LOH</a></li>
-<li class="chapter" data-level="" data-path="module-5.html"><a href="module-5.html#visualize-a-gene-or-a-chromosome"><i class="fa fa-check"></i>Visualize a gene or a chromosome</a></li>
-<li class="chapter" data-level="" data-path="module-5.html"><a href="module-5.html#exercises"><i class="fa fa-check"></i>Exercises</a></li>
+<li class="chapter" data-level="" data-path="module-5-copy-number-alterations.html"><a href="module-5-copy-number-alterations.html#dataset-1"><i class="fa fa-check"></i>Dataset</a></li>
+<li class="chapter" data-level="" data-path="module-5-copy-number-alterations.html"><a href="module-5-copy-number-alterations.html#run-cobalt-amber-purple"><i class="fa fa-check"></i>Run cobalt , amber , purple</a></li>
+<li class="chapter" data-level="" data-path="module-5-copy-number-alterations.html"><a href="module-5-copy-number-alterations.html#run-genpipe"><i class="fa fa-check"></i>Run Genpipe</a></li>
+<li class="chapter" data-level="" data-path="module-5-copy-number-alterations.html"><a href="module-5-copy-number-alterations.html#analyze-the-purple-results"><i class="fa fa-check"></i>Analyze the purple results</a></li>
+<li class="chapter" data-level="" data-path="module-5-copy-number-alterations.html"><a href="module-5-copy-number-alterations.html#some-examples-of-gain-loss-deletion-and-loh"><i class="fa fa-check"></i>Some examples of Gain, Loss, Deletion and LOH</a></li>
+<li class="chapter" data-level="" data-path="module-5-copy-number-alterations.html"><a href="module-5-copy-number-alterations.html#visualize-a-gene-or-a-chromosome"><i class="fa fa-check"></i>Visualize a gene or a chromosome</a></li>
+<li class="chapter" data-level="" data-path="module-5-copy-number-alterations.html"><a href="module-5-copy-number-alterations.html#exercises"><i class="fa fa-check"></i>Exercises</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html"><i class="fa fa-check"></i>Module 6 Transcriptomics RNA-seq</a>
@@ -439,39 +439,39 @@ We wil also upload our custom geneset file.</p>
 <p>This exercise requires the file “edgeR_resistant_vs_parental_all_genes.csv” located in the data folder.</p>
 <div id="step-1---install-and-load-libraries" class="section level3 hasAnchor">
 <h3>Step 1 - Install and Load libraries<a href="gprofiler_mod8.html#step-1---install-and-load-libraries" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="gprofiler_mod8.html#cb194-1" tabindex="-1"></a><span class="co"># List of CRAN packages</span></span>
-<span id="cb194-2"><a href="gprofiler_mod8.html#cb194-2" tabindex="-1"></a>cran_packages <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb194-3"><a href="gprofiler_mod8.html#cb194-3" tabindex="-1"></a>  <span class="st">&quot;tidyverse&quot;</span>,</span>
-<span id="cb194-4"><a href="gprofiler_mod8.html#cb194-4" tabindex="-1"></a>  <span class="st">&quot;knitr&quot;</span>,</span>
-<span id="cb194-5"><a href="gprofiler_mod8.html#cb194-5" tabindex="-1"></a>  <span class="st">&quot;kableExtra&quot;</span>,</span>
-<span id="cb194-6"><a href="gprofiler_mod8.html#cb194-6" tabindex="-1"></a>  <span class="st">&quot;glue&quot;</span>,</span>
-<span id="cb194-7"><a href="gprofiler_mod8.html#cb194-7" tabindex="-1"></a>  <span class="st">&quot;patchwork&quot;</span>,</span>
-<span id="cb194-8"><a href="gprofiler_mod8.html#cb194-8" tabindex="-1"></a>  <span class="st">&quot;ggdendro&quot;</span>,</span>
-<span id="cb194-9"><a href="gprofiler_mod8.html#cb194-9" tabindex="-1"></a>  <span class="st">&quot;pheatmap&quot;</span>,</span>
-<span id="cb194-10"><a href="gprofiler_mod8.html#cb194-10" tabindex="-1"></a>  <span class="st">&quot;gprofiler2&quot;</span></span>
-<span id="cb194-11"><a href="gprofiler_mod8.html#cb194-11" tabindex="-1"></a>)</span>
-<span id="cb194-12"><a href="gprofiler_mod8.html#cb194-12" tabindex="-1"></a><span class="co"># Install CRAN packages if not already installed</span></span>
-<span id="cb194-13"><a href="gprofiler_mod8.html#cb194-13" tabindex="-1"></a><span class="cf">for</span> (pkg <span class="cf">in</span> cran_packages) {</span>
-<span id="cb194-14"><a href="gprofiler_mod8.html#cb194-14" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(pkg, <span class="at">quietly =</span> <span class="cn">TRUE</span>)) {</span>
-<span id="cb194-15"><a href="gprofiler_mod8.html#cb194-15" tabindex="-1"></a>    <span class="fu">install.packages</span>(pkg)</span>
-<span id="cb194-16"><a href="gprofiler_mod8.html#cb194-16" tabindex="-1"></a>  }</span>
-<span id="cb194-17"><a href="gprofiler_mod8.html#cb194-17" tabindex="-1"></a>}</span>
-<span id="cb194-18"><a href="gprofiler_mod8.html#cb194-18" tabindex="-1"></a><span class="co"># Load the libraries</span></span>
-<span id="cb194-19"><a href="gprofiler_mod8.html#cb194-19" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb194-20"><a href="gprofiler_mod8.html#cb194-20" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
-<span id="cb194-21"><a href="gprofiler_mod8.html#cb194-21" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
-<span id="cb194-22"><a href="gprofiler_mod8.html#cb194-22" tabindex="-1"></a><span class="fu">library</span>(glue)</span>
-<span id="cb194-23"><a href="gprofiler_mod8.html#cb194-23" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
-<span id="cb194-24"><a href="gprofiler_mod8.html#cb194-24" tabindex="-1"></a><span class="fu">library</span>(ggdendro)</span>
-<span id="cb194-25"><a href="gprofiler_mod8.html#cb194-25" tabindex="-1"></a><span class="fu">library</span>(pheatmap)</span>
-<span id="cb194-26"><a href="gprofiler_mod8.html#cb194-26" tabindex="-1"></a><span class="fu">library</span>(gprofiler2)</span>
-<span id="cb194-27"><a href="gprofiler_mod8.html#cb194-27" tabindex="-1"></a></span>
-<span id="cb194-28"><a href="gprofiler_mod8.html#cb194-28" tabindex="-1"></a><span class="co"># create the results folder (if it does not exist yet) to save the outputs</span></span>
-<span id="cb194-29"><a href="gprofiler_mod8.html#cb194-29" tabindex="-1"></a><span class="co"># dir.create(&quot;results&quot;, showWarnings = FALSE)</span></span></code></pre></div>
-<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="gprofiler_mod8.html#cb195-1" tabindex="-1"></a><span class="co"># Location of the Module 8 files (data/, BYODdata/, image/):</span></span>
-<span id="cb195-2"><a href="gprofiler_mod8.html#cb195-2" tabindex="-1"></a><span class="co"># - on the course server: ~/CourseData/Module8</span></span>
-<span id="cb195-3"><a href="gprofiler_mod8.html#cb195-3" tabindex="-1"></a><span class="co"># - when the book is built from the repository: Module8</span></span>
-<span id="cb195-4"><a href="gprofiler_mod8.html#cb195-4" tabindex="-1"></a>data_dir <span class="ot">&lt;-</span> <span class="cf">if</span> (<span class="fu">dir.exists</span>(<span class="st">&quot;~/CourseData/Module8&quot;</span>)) <span class="st">&quot;~/CourseData/Module8&quot;</span> <span class="cf">else</span> <span class="st">&quot;Module8&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="gprofiler_mod8.html#cb202-1" tabindex="-1"></a><span class="co"># List of CRAN packages</span></span>
+<span id="cb202-2"><a href="gprofiler_mod8.html#cb202-2" tabindex="-1"></a>cran_packages <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb202-3"><a href="gprofiler_mod8.html#cb202-3" tabindex="-1"></a>  <span class="st">&quot;tidyverse&quot;</span>,</span>
+<span id="cb202-4"><a href="gprofiler_mod8.html#cb202-4" tabindex="-1"></a>  <span class="st">&quot;knitr&quot;</span>,</span>
+<span id="cb202-5"><a href="gprofiler_mod8.html#cb202-5" tabindex="-1"></a>  <span class="st">&quot;kableExtra&quot;</span>,</span>
+<span id="cb202-6"><a href="gprofiler_mod8.html#cb202-6" tabindex="-1"></a>  <span class="st">&quot;glue&quot;</span>,</span>
+<span id="cb202-7"><a href="gprofiler_mod8.html#cb202-7" tabindex="-1"></a>  <span class="st">&quot;patchwork&quot;</span>,</span>
+<span id="cb202-8"><a href="gprofiler_mod8.html#cb202-8" tabindex="-1"></a>  <span class="st">&quot;ggdendro&quot;</span>,</span>
+<span id="cb202-9"><a href="gprofiler_mod8.html#cb202-9" tabindex="-1"></a>  <span class="st">&quot;pheatmap&quot;</span>,</span>
+<span id="cb202-10"><a href="gprofiler_mod8.html#cb202-10" tabindex="-1"></a>  <span class="st">&quot;gprofiler2&quot;</span></span>
+<span id="cb202-11"><a href="gprofiler_mod8.html#cb202-11" tabindex="-1"></a>)</span>
+<span id="cb202-12"><a href="gprofiler_mod8.html#cb202-12" tabindex="-1"></a><span class="co"># Install CRAN packages if not already installed</span></span>
+<span id="cb202-13"><a href="gprofiler_mod8.html#cb202-13" tabindex="-1"></a><span class="cf">for</span> (pkg <span class="cf">in</span> cran_packages) {</span>
+<span id="cb202-14"><a href="gprofiler_mod8.html#cb202-14" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(pkg, <span class="at">quietly =</span> <span class="cn">TRUE</span>)) {</span>
+<span id="cb202-15"><a href="gprofiler_mod8.html#cb202-15" tabindex="-1"></a>    <span class="fu">install.packages</span>(pkg)</span>
+<span id="cb202-16"><a href="gprofiler_mod8.html#cb202-16" tabindex="-1"></a>  }</span>
+<span id="cb202-17"><a href="gprofiler_mod8.html#cb202-17" tabindex="-1"></a>}</span>
+<span id="cb202-18"><a href="gprofiler_mod8.html#cb202-18" tabindex="-1"></a><span class="co"># Load the libraries</span></span>
+<span id="cb202-19"><a href="gprofiler_mod8.html#cb202-19" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb202-20"><a href="gprofiler_mod8.html#cb202-20" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb202-21"><a href="gprofiler_mod8.html#cb202-21" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb202-22"><a href="gprofiler_mod8.html#cb202-22" tabindex="-1"></a><span class="fu">library</span>(glue)</span>
+<span id="cb202-23"><a href="gprofiler_mod8.html#cb202-23" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb202-24"><a href="gprofiler_mod8.html#cb202-24" tabindex="-1"></a><span class="fu">library</span>(ggdendro)</span>
+<span id="cb202-25"><a href="gprofiler_mod8.html#cb202-25" tabindex="-1"></a><span class="fu">library</span>(pheatmap)</span>
+<span id="cb202-26"><a href="gprofiler_mod8.html#cb202-26" tabindex="-1"></a><span class="fu">library</span>(gprofiler2)</span>
+<span id="cb202-27"><a href="gprofiler_mod8.html#cb202-27" tabindex="-1"></a></span>
+<span id="cb202-28"><a href="gprofiler_mod8.html#cb202-28" tabindex="-1"></a><span class="co"># create the results folder (if it does not exist yet) to save the outputs</span></span>
+<span id="cb202-29"><a href="gprofiler_mod8.html#cb202-29" tabindex="-1"></a><span class="co"># dir.create(&quot;results&quot;, showWarnings = FALSE)</span></span></code></pre></div>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="gprofiler_mod8.html#cb203-1" tabindex="-1"></a><span class="co"># Location of the Module 8 files (data/, BYODdata/, image/):</span></span>
+<span id="cb203-2"><a href="gprofiler_mod8.html#cb203-2" tabindex="-1"></a><span class="co"># - on the course server: ~/CourseData/Module8</span></span>
+<span id="cb203-3"><a href="gprofiler_mod8.html#cb203-3" tabindex="-1"></a><span class="co"># - when the book is built from the repository: Module8</span></span>
+<span id="cb203-4"><a href="gprofiler_mod8.html#cb203-4" tabindex="-1"></a>data_dir <span class="ot">&lt;-</span> <span class="cf">if</span> (<span class="fu">dir.exists</span>(<span class="st">&quot;~/CourseData/Module8&quot;</span>)) <span class="st">&quot;~/CourseData/Module8&quot;</span> <span class="cf">else</span> <span class="st">&quot;Module8&quot;</span></span></code></pre></div>
 <!--
 <div class="rmd-caution">
 <p>In the Ubuntu (course server) session, the <code>dir.create()</code>
@@ -484,10 +484,10 @@ line above and every <code>write.csv()</code> line in this lab use
 </div>
 <div id="step-2---prepare-the-define-gene-lists" class="section level3 hasAnchor">
 <h3>Step 2 - Prepare the define gene lists<a href="gprofiler_mod8.html#step-2---prepare-the-define-gene-lists" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="gprofiler_mod8.html#cb196-1" tabindex="-1"></a>res <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="fu">file.path</span>(data_dir, <span class="st">&quot;data/edgeR_resistant_vs_parental_all_genes.csv&quot;</span>))</span>
-<span id="cb196-2"><a href="gprofiler_mod8.html#cb196-2" tabindex="-1"></a></span>
-<span id="cb196-3"><a href="gprofiler_mod8.html#cb196-3" tabindex="-1"></a>UPgenes <span class="ot">&lt;-</span> res<span class="sc">$</span>gene[res<span class="sc">$</span>logFC<span class="sc">&gt;</span><span class="dv">0</span> <span class="sc">&amp;</span>  res<span class="sc">$</span>FDR <span class="sc">&lt;=</span> <span class="fl">0.001</span>]</span>
-<span id="cb196-4"><a href="gprofiler_mod8.html#cb196-4" tabindex="-1"></a>DOWNgenes <span class="ot">&lt;-</span> res<span class="sc">$</span>gene[res<span class="sc">$</span>logFC<span class="sc">&lt;</span><span class="dv">0</span> <span class="sc">&amp;</span>  res<span class="sc">$</span>FDR <span class="sc">&lt;=</span> <span class="fl">0.001</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="gprofiler_mod8.html#cb204-1" tabindex="-1"></a>res <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="fu">file.path</span>(data_dir, <span class="st">&quot;data/edgeR_resistant_vs_parental_all_genes.csv&quot;</span>))</span>
+<span id="cb204-2"><a href="gprofiler_mod8.html#cb204-2" tabindex="-1"></a></span>
+<span id="cb204-3"><a href="gprofiler_mod8.html#cb204-3" tabindex="-1"></a>UPgenes <span class="ot">&lt;-</span> res<span class="sc">$</span>gene[res<span class="sc">$</span>logFC<span class="sc">&gt;</span><span class="dv">0</span> <span class="sc">&amp;</span>  res<span class="sc">$</span>FDR <span class="sc">&lt;=</span> <span class="fl">0.001</span>]</span>
+<span id="cb204-4"><a href="gprofiler_mod8.html#cb204-4" tabindex="-1"></a>DOWNgenes <span class="ot">&lt;-</span> res<span class="sc">$</span>gene[res<span class="sc">$</span>logFC<span class="sc">&lt;</span><span class="dv">0</span> <span class="sc">&amp;</span>  res<span class="sc">$</span>FDR <span class="sc">&lt;=</span> <span class="fl">0.001</span>]</span></code></pre></div>
 </div>
 <div id="step-3---run-gprofiler" class="section level3 hasAnchor">
 <h3>Step 3 - Run g:Profiler<a href="gprofiler_mod8.html#step-3---run-gprofiler" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -506,32 +506,32 @@ For detailed descriptions of all the parameters that can be specified for the go
 </ul>
 <div id="run-gprofiler-with-the-up-genes" class="section level4 hasAnchor">
 <h4>run g:Profiler with the up genes<a href="gprofiler_mod8.html#run-gprofiler-with-the-up-genes" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="gprofiler_mod8.html#cb197-1" tabindex="-1"></a>query_set <span class="ot">=</span> UPgenes </span>
-<span id="cb197-2"><a href="gprofiler_mod8.html#cb197-2" tabindex="-1"></a></span>
-<span id="cb197-3"><a href="gprofiler_mod8.html#cb197-3" tabindex="-1"></a>gprofiler_results_UPgenes <span class="ot">&lt;-</span> <span class="fu">gost</span>(<span class="at">query =</span> query_set ,</span>
-<span id="cb197-4"><a href="gprofiler_mod8.html#cb197-4" tabindex="-1"></a>                          <span class="at">significant=</span><span class="cn">TRUE</span>,</span>
-<span id="cb197-5"><a href="gprofiler_mod8.html#cb197-5" tabindex="-1"></a>                          <span class="at">ordered_query =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb197-6"><a href="gprofiler_mod8.html#cb197-6" tabindex="-1"></a>                          <span class="at">exclude_iea=</span><span class="cn">TRUE</span>,</span>
-<span id="cb197-7"><a href="gprofiler_mod8.html#cb197-7" tabindex="-1"></a>                          <span class="at">correction_method =</span> <span class="st">&quot;fdr&quot;</span>,</span>
-<span id="cb197-8"><a href="gprofiler_mod8.html#cb197-8" tabindex="-1"></a>                          <span class="at">organism =</span> <span class="st">&quot;hsapiens&quot;</span>,</span>
-<span id="cb197-9"><a href="gprofiler_mod8.html#cb197-9" tabindex="-1"></a>                          <span class="at">source =</span> <span class="fu">c</span>(<span class="st">&quot;REAC&quot;</span>,<span class="st">&quot;WP&quot;</span>,<span class="st">&quot;GO:BP&quot;</span>),</span>
-<span id="cb197-10"><a href="gprofiler_mod8.html#cb197-10" tabindex="-1"></a>                          <span class="at">evcodes =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="gprofiler_mod8.html#cb205-1" tabindex="-1"></a>query_set <span class="ot">=</span> UPgenes </span>
+<span id="cb205-2"><a href="gprofiler_mod8.html#cb205-2" tabindex="-1"></a></span>
+<span id="cb205-3"><a href="gprofiler_mod8.html#cb205-3" tabindex="-1"></a>gprofiler_results_UPgenes <span class="ot">&lt;-</span> <span class="fu">gost</span>(<span class="at">query =</span> query_set ,</span>
+<span id="cb205-4"><a href="gprofiler_mod8.html#cb205-4" tabindex="-1"></a>                          <span class="at">significant=</span><span class="cn">TRUE</span>,</span>
+<span id="cb205-5"><a href="gprofiler_mod8.html#cb205-5" tabindex="-1"></a>                          <span class="at">ordered_query =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb205-6"><a href="gprofiler_mod8.html#cb205-6" tabindex="-1"></a>                          <span class="at">exclude_iea=</span><span class="cn">TRUE</span>,</span>
+<span id="cb205-7"><a href="gprofiler_mod8.html#cb205-7" tabindex="-1"></a>                          <span class="at">correction_method =</span> <span class="st">&quot;fdr&quot;</span>,</span>
+<span id="cb205-8"><a href="gprofiler_mod8.html#cb205-8" tabindex="-1"></a>                          <span class="at">organism =</span> <span class="st">&quot;hsapiens&quot;</span>,</span>
+<span id="cb205-9"><a href="gprofiler_mod8.html#cb205-9" tabindex="-1"></a>                          <span class="at">source =</span> <span class="fu">c</span>(<span class="st">&quot;REAC&quot;</span>,<span class="st">&quot;WP&quot;</span>,<span class="st">&quot;GO:BP&quot;</span>),</span>
+<span id="cb205-10"><a href="gprofiler_mod8.html#cb205-10" tabindex="-1"></a>                          <span class="at">evcodes =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 </div>
 <div id="observe-the-results" class="section level4 hasAnchor">
 <h4>observe the results<a href="gprofiler_mod8.html#observe-the-results" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="gprofiler_mod8.html#cb198-1" tabindex="-1"></a><span class="co">#get the gprofiler results table</span></span>
-<span id="cb198-2"><a href="gprofiler_mod8.html#cb198-2" tabindex="-1"></a>enrichment_results <span class="ot">&lt;-</span> gprofiler_results_UPgenes<span class="sc">$</span>result</span>
-<span id="cb198-3"><a href="gprofiler_mod8.html#cb198-3" tabindex="-1"></a></span>
-<span id="cb198-4"><a href="gprofiler_mod8.html#cb198-4" tabindex="-1"></a><span class="co">#display the names of all columns</span></span>
-<span id="cb198-5"><a href="gprofiler_mod8.html#cb198-5" tabindex="-1"></a><span class="fu">colnames</span>(enrichment_results)</span></code></pre></div>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="gprofiler_mod8.html#cb206-1" tabindex="-1"></a><span class="co">#get the gprofiler results table</span></span>
+<span id="cb206-2"><a href="gprofiler_mod8.html#cb206-2" tabindex="-1"></a>enrichment_results <span class="ot">&lt;-</span> gprofiler_results_UPgenes<span class="sc">$</span>result</span>
+<span id="cb206-3"><a href="gprofiler_mod8.html#cb206-3" tabindex="-1"></a></span>
+<span id="cb206-4"><a href="gprofiler_mod8.html#cb206-4" tabindex="-1"></a><span class="co">#display the names of all columns</span></span>
+<span id="cb206-5"><a href="gprofiler_mod8.html#cb206-5" tabindex="-1"></a><span class="fu">colnames</span>(enrichment_results)</span></code></pre></div>
 <pre><code>##  [1] &quot;query&quot;                 &quot;significant&quot;           &quot;p_value&quot;              
 ##  [4] &quot;term_size&quot;             &quot;query_size&quot;            &quot;intersection_size&quot;    
 ##  [7] &quot;precision&quot;             &quot;recall&quot;                &quot;term_id&quot;              
 ## [10] &quot;source&quot;                &quot;term_name&quot;             &quot;effective_domain_size&quot;
 ## [13] &quot;source_order&quot;          &quot;parents&quot;               &quot;evidence_codes&quot;       
 ## [16] &quot;intersection&quot;</code></pre>
-<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="gprofiler_mod8.html#cb200-1" tabindex="-1"></a><span class="co">#display the top rows</span></span>
-<span id="cb200-2"><a href="gprofiler_mod8.html#cb200-2" tabindex="-1"></a><span class="fu">head</span>(enrichment_results)</span></code></pre></div>
+<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="gprofiler_mod8.html#cb208-1" tabindex="-1"></a><span class="co">#display the top rows</span></span>
+<span id="cb208-2"><a href="gprofiler_mod8.html#cb208-2" tabindex="-1"></a><span class="fu">head</span>(enrichment_results)</span></code></pre></div>
 <pre><code>##     query significant     p_value term_size query_size intersection_size
 ## 1 query_1        TRUE 0.005977645       635         74                13
 ## 2 query_1        TRUE 0.005977645       509         74                11
@@ -577,19 +577,19 @@ For detailed descriptions of all the parameters that can be specified for the go
 </div>
 <div id="your-turn-run-gprofiler-with-the-down-genes-use-same-parameters-as-above" class="section level4 hasAnchor">
 <h4>YOUR TURN: run g:Profiler with the down genes (use same parameters as above)<a href="gprofiler_mod8.html#your-turn-run-gprofiler-with-the-down-genes-use-same-parameters-as-above" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="gprofiler_mod8.html#cb202-1" tabindex="-1"></a><span class="do">##Tip: remove eval=FALSE chunk option to run the code</span></span>
-<span id="cb202-2"><a href="gprofiler_mod8.html#cb202-2" tabindex="-1"></a>query_set <span class="ot">=</span> XXXX</span>
-<span id="cb202-3"><a href="gprofiler_mod8.html#cb202-3" tabindex="-1"></a></span>
-<span id="cb202-4"><a href="gprofiler_mod8.html#cb202-4" tabindex="-1"></a>gprofiler_results_DOWNgenes <span class="ot">&lt;-</span> <span class="fu">gost</span>(<span class="at">query =</span> XXXX,</span>
-<span id="cb202-5"><a href="gprofiler_mod8.html#cb202-5" tabindex="-1"></a>                          <span class="at">significant =</span> XXXX,</span>
-<span id="cb202-6"><a href="gprofiler_mod8.html#cb202-6" tabindex="-1"></a>                          <span class="at">ordered_query =</span> XXXX,</span>
-<span id="cb202-7"><a href="gprofiler_mod8.html#cb202-7" tabindex="-1"></a>                          <span class="at">exclude_iea =</span> XXXX,</span>
-<span id="cb202-8"><a href="gprofiler_mod8.html#cb202-8" tabindex="-1"></a>                          <span class="at">correction_method =</span> XXXX,</span>
-<span id="cb202-9"><a href="gprofiler_mod8.html#cb202-9" tabindex="-1"></a>                          <span class="at">organism =</span> XXXX,</span>
-<span id="cb202-10"><a href="gprofiler_mod8.html#cb202-10" tabindex="-1"></a>                          <span class="at">source =</span> <span class="fu">c</span>(<span class="st">&quot;XXXX&quot;</span>,<span class="st">&quot;XXXX&quot;</span>,<span class="st">&quot;XXXX&quot;</span>),</span>
-<span id="cb202-11"><a href="gprofiler_mod8.html#cb202-11" tabindex="-1"></a>                          <span class="at">evcodes =</span> XXXX)</span>
-<span id="cb202-12"><a href="gprofiler_mod8.html#cb202-12" tabindex="-1"></a></span>
-<span id="cb202-13"><a href="gprofiler_mod8.html#cb202-13" tabindex="-1"></a><span class="do">##observe the results (same as for the UP genes)</span></span></code></pre></div>
+<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="gprofiler_mod8.html#cb210-1" tabindex="-1"></a><span class="do">##Tip: remove eval=FALSE chunk option to run the code</span></span>
+<span id="cb210-2"><a href="gprofiler_mod8.html#cb210-2" tabindex="-1"></a>query_set <span class="ot">=</span> XXXX</span>
+<span id="cb210-3"><a href="gprofiler_mod8.html#cb210-3" tabindex="-1"></a></span>
+<span id="cb210-4"><a href="gprofiler_mod8.html#cb210-4" tabindex="-1"></a>gprofiler_results_DOWNgenes <span class="ot">&lt;-</span> <span class="fu">gost</span>(<span class="at">query =</span> XXXX,</span>
+<span id="cb210-5"><a href="gprofiler_mod8.html#cb210-5" tabindex="-1"></a>                          <span class="at">significant =</span> XXXX,</span>
+<span id="cb210-6"><a href="gprofiler_mod8.html#cb210-6" tabindex="-1"></a>                          <span class="at">ordered_query =</span> XXXX,</span>
+<span id="cb210-7"><a href="gprofiler_mod8.html#cb210-7" tabindex="-1"></a>                          <span class="at">exclude_iea =</span> XXXX,</span>
+<span id="cb210-8"><a href="gprofiler_mod8.html#cb210-8" tabindex="-1"></a>                          <span class="at">correction_method =</span> XXXX,</span>
+<span id="cb210-9"><a href="gprofiler_mod8.html#cb210-9" tabindex="-1"></a>                          <span class="at">organism =</span> XXXX,</span>
+<span id="cb210-10"><a href="gprofiler_mod8.html#cb210-10" tabindex="-1"></a>                          <span class="at">source =</span> <span class="fu">c</span>(<span class="st">&quot;XXXX&quot;</span>,<span class="st">&quot;XXXX&quot;</span>,<span class="st">&quot;XXXX&quot;</span>),</span>
+<span id="cb210-11"><a href="gprofiler_mod8.html#cb210-11" tabindex="-1"></a>                          <span class="at">evcodes =</span> XXXX)</span>
+<span id="cb210-12"><a href="gprofiler_mod8.html#cb210-12" tabindex="-1"></a></span>
+<span id="cb210-13"><a href="gprofiler_mod8.html#cb210-13" tabindex="-1"></a><span class="do">##observe the results (same as for the UP genes)</span></span></code></pre></div>
 </div>
 </div>
 <div id="clear-visualization-of-the-results" class="section level3 hasAnchor">
@@ -602,16 +602,16 @@ For detailed descriptions of all the parameters that can be specified for the go
 <li>pvalue: adjusted pvalue (corrected for multiple hypothesis testing using the Benjamini-Hochberg method)</li>
 </ul>
 <p>The results are ordered by significance, from the most significant pathway (lowest p-value) to the least significant.</p>
-<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="gprofiler_mod8.html#cb203-1" tabindex="-1"></a>enrichment_results <span class="ot">&lt;-</span> gprofiler_results_UPgenes<span class="sc">$</span>result</span>
-<span id="cb203-2"><a href="gprofiler_mod8.html#cb203-2" tabindex="-1"></a>enrichment_results<span class="sc">$</span>p_value <span class="ot">&lt;-</span> <span class="fu">formatC</span>(enrichment_results<span class="sc">$</span>p_value, <span class="at">format =</span> <span class="st">&quot;e&quot;</span>, <span class="at">digits =</span> <span class="dv">2</span>)</span>
-<span id="cb203-3"><a href="gprofiler_mod8.html#cb203-3" tabindex="-1"></a></span>
-<span id="cb203-4"><a href="gprofiler_mod8.html#cb203-4" tabindex="-1"></a>enrichment_results <span class="ot">=</span> enrichment_results[ , <span class="fu">c</span>(<span class="st">&quot;source&quot;</span>, <span class="st">&quot;term_name&quot;</span>, <span class="st">&quot;term_size&quot;</span>, <span class="st">&quot;query_size&quot;</span>, <span class="st">&quot;intersection_size&quot;</span>, <span class="st">&quot;p_value&quot;</span>)]</span>
-<span id="cb203-5"><a href="gprofiler_mod8.html#cb203-5" tabindex="-1"></a></span>
-<span id="cb203-6"><a href="gprofiler_mod8.html#cb203-6" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">head</span>(enrichment_results, <span class="at">n=</span><span class="dv">20</span>), <span class="at">caption =</span> <span class="st">&quot;Enrichment Result&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb203-7"><a href="gprofiler_mod8.html#cb203-7" tabindex="-1"></a><span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;condensed&quot;</span>), <span class="at">font_size =</span> <span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="gprofiler_mod8.html#cb211-1" tabindex="-1"></a>enrichment_results <span class="ot">&lt;-</span> gprofiler_results_UPgenes<span class="sc">$</span>result</span>
+<span id="cb211-2"><a href="gprofiler_mod8.html#cb211-2" tabindex="-1"></a>enrichment_results<span class="sc">$</span>p_value <span class="ot">&lt;-</span> <span class="fu">formatC</span>(enrichment_results<span class="sc">$</span>p_value, <span class="at">format =</span> <span class="st">&quot;e&quot;</span>, <span class="at">digits =</span> <span class="dv">2</span>)</span>
+<span id="cb211-3"><a href="gprofiler_mod8.html#cb211-3" tabindex="-1"></a></span>
+<span id="cb211-4"><a href="gprofiler_mod8.html#cb211-4" tabindex="-1"></a>enrichment_results <span class="ot">=</span> enrichment_results[ , <span class="fu">c</span>(<span class="st">&quot;source&quot;</span>, <span class="st">&quot;term_name&quot;</span>, <span class="st">&quot;term_size&quot;</span>, <span class="st">&quot;query_size&quot;</span>, <span class="st">&quot;intersection_size&quot;</span>, <span class="st">&quot;p_value&quot;</span>)]</span>
+<span id="cb211-5"><a href="gprofiler_mod8.html#cb211-5" tabindex="-1"></a></span>
+<span id="cb211-6"><a href="gprofiler_mod8.html#cb211-6" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">head</span>(enrichment_results, <span class="at">n=</span><span class="dv">20</span>), <span class="at">caption =</span> <span class="st">&quot;Enrichment Result&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb211-7"><a href="gprofiler_mod8.html#cb211-7" tabindex="-1"></a><span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;condensed&quot;</span>), <span class="at">font_size =</span> <span class="dv">10</span>)</span></code></pre></div>
 <table class="table table-striped table-condensed" style="font-size: 10px; margin-left: auto; margin-right: auto;">
 <caption style="font-size: initial !important;">
-<span id="tab:unnamed-chunk-86">Table 1: </span><span id="tab:unnamed-chunk-86">Table 2: </span>Enrichment Result
+<span id="tab:unnamed-chunk-94">Table 1: </span><span id="tab:unnamed-chunk-94">Table 2: </span>Enrichment Result
 </caption>
 <thead>
 <tr>
@@ -1040,35 +1040,35 @@ blood coagulation
 </table>
 <div id="your-turn-visualize-the-results-with-the-down-genes-use-same-parameters-as-above" class="section level4 hasAnchor">
 <h4>YOUR TURN: visualize the results with the down genes (use same parameters as above)<a href="gprofiler_mod8.html#your-turn-visualize-the-results-with-the-down-genes-use-same-parameters-as-above" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="gprofiler_mod8.html#cb204-1" tabindex="-1"></a><span class="do">##Tip: remove eval=FALSE chunk option to run the code</span></span>
-<span id="cb204-2"><a href="gprofiler_mod8.html#cb204-2" tabindex="-1"></a></span>
-<span id="cb204-3"><a href="gprofiler_mod8.html#cb204-3" tabindex="-1"></a>enrichment_results <span class="ot">&lt;-</span> XXXX</span>
-<span id="cb204-4"><a href="gprofiler_mod8.html#cb204-4" tabindex="-1"></a>enrichment_results<span class="sc">$</span>p_value <span class="ot">&lt;-</span> <span class="fu">formatC</span>(XXXX)</span>
-<span id="cb204-5"><a href="gprofiler_mod8.html#cb204-5" tabindex="-1"></a></span>
-<span id="cb204-6"><a href="gprofiler_mod8.html#cb204-6" tabindex="-1"></a>enrichment_results <span class="ot">=</span> enrichment_results[ , <span class="fu">c</span>(<span class="st">&quot;XXXX&quot;</span>, <span class="st">&quot;XXXX&quot;</span>, <span class="st">&quot;XXXX&quot;</span>, <span class="st">&quot;XXXX&quot;</span>, <span class="st">&quot;XXXX&quot;</span>, <span class="st">&quot;XXXX&quot;</span>)]</span>
-<span id="cb204-7"><a href="gprofiler_mod8.html#cb204-7" tabindex="-1"></a></span>
-<span id="cb204-8"><a href="gprofiler_mod8.html#cb204-8" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">head</span>(enrichment_results, <span class="at">n=</span><span class="dv">20</span>), <span class="at">caption =</span> <span class="st">&quot;Enrichment Result&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb204-9"><a href="gprofiler_mod8.html#cb204-9" tabindex="-1"></a><span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;condensed&quot;</span>), <span class="at">font_size =</span> <span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="gprofiler_mod8.html#cb212-1" tabindex="-1"></a><span class="do">##Tip: remove eval=FALSE chunk option to run the code</span></span>
+<span id="cb212-2"><a href="gprofiler_mod8.html#cb212-2" tabindex="-1"></a></span>
+<span id="cb212-3"><a href="gprofiler_mod8.html#cb212-3" tabindex="-1"></a>enrichment_results <span class="ot">&lt;-</span> XXXX</span>
+<span id="cb212-4"><a href="gprofiler_mod8.html#cb212-4" tabindex="-1"></a>enrichment_results<span class="sc">$</span>p_value <span class="ot">&lt;-</span> <span class="fu">formatC</span>(XXXX)</span>
+<span id="cb212-5"><a href="gprofiler_mod8.html#cb212-5" tabindex="-1"></a></span>
+<span id="cb212-6"><a href="gprofiler_mod8.html#cb212-6" tabindex="-1"></a>enrichment_results <span class="ot">=</span> enrichment_results[ , <span class="fu">c</span>(<span class="st">&quot;XXXX&quot;</span>, <span class="st">&quot;XXXX&quot;</span>, <span class="st">&quot;XXXX&quot;</span>, <span class="st">&quot;XXXX&quot;</span>, <span class="st">&quot;XXXX&quot;</span>, <span class="st">&quot;XXXX&quot;</span>)]</span>
+<span id="cb212-7"><a href="gprofiler_mod8.html#cb212-7" tabindex="-1"></a></span>
+<span id="cb212-8"><a href="gprofiler_mod8.html#cb212-8" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">head</span>(enrichment_results, <span class="at">n=</span><span class="dv">20</span>), <span class="at">caption =</span> <span class="st">&quot;Enrichment Result&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb212-9"><a href="gprofiler_mod8.html#cb212-9" tabindex="-1"></a><span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;condensed&quot;</span>), <span class="at">font_size =</span> <span class="dv">10</span>)</span></code></pre></div>
 </div>
 </div>
 <div id="step-4---explore-top-table-of-results" class="section level3 hasAnchor">
 <h3>Step 4 - Explore top table of results<a href="gprofiler_mod8.html#step-4---explore-top-table-of-results" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>For this analysis, we chose to use 3 databases: <a href="GO:BP" class="uri">GO:BP</a>, Reactome and Wikipathways.
 If we look at the top table only, we are only going to see the results of <a href="GO:BP" class="uri">GO:BP</a> but it is interesting to look at the top results for each of the 3 databunique(enrichment_results$source)</p>
-<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="gprofiler_mod8.html#cb205-1" tabindex="-1"></a>enrichment_results <span class="ot">&lt;-</span> gprofiler_results_UPgenes<span class="sc">$</span>result</span>
-<span id="cb205-2"><a href="gprofiler_mod8.html#cb205-2" tabindex="-1"></a><span class="do">##Get the name of the databases</span></span>
-<span id="cb205-3"><a href="gprofiler_mod8.html#cb205-3" tabindex="-1"></a><span class="fu">unique</span>(enrichment_results<span class="sc">$</span>source) </span></code></pre></div>
+<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="gprofiler_mod8.html#cb213-1" tabindex="-1"></a>enrichment_results <span class="ot">&lt;-</span> gprofiler_results_UPgenes<span class="sc">$</span>result</span>
+<span id="cb213-2"><a href="gprofiler_mod8.html#cb213-2" tabindex="-1"></a><span class="do">##Get the name of the databases</span></span>
+<span id="cb213-3"><a href="gprofiler_mod8.html#cb213-3" tabindex="-1"></a><span class="fu">unique</span>(enrichment_results<span class="sc">$</span>source) </span></code></pre></div>
 <pre><code>## [1] &quot;GO:BP&quot; &quot;REAC&quot;  &quot;WP&quot;</code></pre>
-<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="gprofiler_mod8.html#cb207-1" tabindex="-1"></a><span class="do">##Filter the dataframe to retrieve only the Reactome results</span></span>
-<span id="cb207-2"><a href="gprofiler_mod8.html#cb207-2" tabindex="-1"></a>enrichment_results_Reac <span class="ot">&lt;-</span> enrichment_results <span class="sc">%&gt;%</span></span>
-<span id="cb207-3"><a href="gprofiler_mod8.html#cb207-3" tabindex="-1"></a>  <span class="fu">filter</span>(source <span class="sc">==</span> <span class="st">&quot;REAC&quot;</span>)</span>
-<span id="cb207-4"><a href="gprofiler_mod8.html#cb207-4" tabindex="-1"></a></span>
-<span id="cb207-5"><a href="gprofiler_mod8.html#cb207-5" tabindex="-1"></a><span class="do">##Now display the top 20 pathways</span></span>
-<span id="cb207-6"><a href="gprofiler_mod8.html#cb207-6" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">head</span>(enrichment_results_Reac, <span class="at">n=</span><span class="dv">20</span>), <span class="at">caption =</span> <span class="st">&quot;Enrichment Result&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb207-7"><a href="gprofiler_mod8.html#cb207-7" tabindex="-1"></a><span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;condensed&quot;</span>), <span class="at">font_size =</span> <span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="gprofiler_mod8.html#cb215-1" tabindex="-1"></a><span class="do">##Filter the dataframe to retrieve only the Reactome results</span></span>
+<span id="cb215-2"><a href="gprofiler_mod8.html#cb215-2" tabindex="-1"></a>enrichment_results_Reac <span class="ot">&lt;-</span> enrichment_results <span class="sc">%&gt;%</span></span>
+<span id="cb215-3"><a href="gprofiler_mod8.html#cb215-3" tabindex="-1"></a>  <span class="fu">filter</span>(source <span class="sc">==</span> <span class="st">&quot;REAC&quot;</span>)</span>
+<span id="cb215-4"><a href="gprofiler_mod8.html#cb215-4" tabindex="-1"></a></span>
+<span id="cb215-5"><a href="gprofiler_mod8.html#cb215-5" tabindex="-1"></a><span class="do">##Now display the top 20 pathways</span></span>
+<span id="cb215-6"><a href="gprofiler_mod8.html#cb215-6" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">head</span>(enrichment_results_Reac, <span class="at">n=</span><span class="dv">20</span>), <span class="at">caption =</span> <span class="st">&quot;Enrichment Result&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb215-7"><a href="gprofiler_mod8.html#cb215-7" tabindex="-1"></a><span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;condensed&quot;</span>), <span class="at">font_size =</span> <span class="dv">10</span>)</span></code></pre></div>
 <table class="table table-striped table-condensed" style="font-size: 10px; margin-left: auto; margin-right: auto;">
 <caption style="font-size: initial !important;">
-<span id="tab:unnamed-chunk-88">Table 3: </span><span id="tab:unnamed-chunk-88">Table 4: </span>Enrichment Result
+<span id="tab:unnamed-chunk-96">Table 3: </span><span id="tab:unnamed-chunk-96">Table 4: </span>Enrichment Result
 </caption>
 <thead>
 <tr>
@@ -1777,17 +1777,17 @@ CAV1,SERPINE1,F3,PDE9A,ITGA5,EHD2,F2R,PROCR,L1CAM,SERPINA1
 </table>
 <div id="your-turn-display-the-top-20-pathways-for-the-wikipathway-database-wp-and-the-down-genes" class="section level4 hasAnchor">
 <h4>YOUR TURN: DISPLAY THE TOP 20 PATHWAYS FOR THE WIKIPATHWAY DATABASE (“WP”) and the down genes<a href="gprofiler_mod8.html#your-turn-display-the-top-20-pathways-for-the-wikipathway-database-wp-and-the-down-genes" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="gprofiler_mod8.html#cb208-1" tabindex="-1"></a>enrichment_results <span class="ot">&lt;-</span> gprofiler_results_DOWNgenes<span class="sc">$</span>result</span>
-<span id="cb208-2"><a href="gprofiler_mod8.html#cb208-2" tabindex="-1"></a><span class="do">##Get the name of the databases</span></span>
-<span id="cb208-3"><a href="gprofiler_mod8.html#cb208-3" tabindex="-1"></a><span class="fu">unique</span>(enrichment_results<span class="sc">$</span>source) </span>
-<span id="cb208-4"><a href="gprofiler_mod8.html#cb208-4" tabindex="-1"></a></span>
-<span id="cb208-5"><a href="gprofiler_mod8.html#cb208-5" tabindex="-1"></a><span class="do">##Filter the dataframe to retrieve only the Reactome results</span></span>
-<span id="cb208-6"><a href="gprofiler_mod8.html#cb208-6" tabindex="-1"></a>enrichment_results_WP <span class="ot">&lt;-</span> enrichment_results <span class="sc">%&gt;%</span></span>
-<span id="cb208-7"><a href="gprofiler_mod8.html#cb208-7" tabindex="-1"></a>  <span class="fu">XXXX</span>(source <span class="sc">==</span> <span class="st">&quot;XXXX&quot;</span>)</span>
-<span id="cb208-8"><a href="gprofiler_mod8.html#cb208-8" tabindex="-1"></a></span>
-<span id="cb208-9"><a href="gprofiler_mod8.html#cb208-9" tabindex="-1"></a><span class="do">##Now display the top 20 pathways</span></span>
-<span id="cb208-10"><a href="gprofiler_mod8.html#cb208-10" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">head</span>(enrichment_results_WP, <span class="at">n=</span><span class="dv">20</span>), <span class="at">caption =</span> <span class="st">&quot;Enrichment Result&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb208-11"><a href="gprofiler_mod8.html#cb208-11" tabindex="-1"></a><span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;condensed&quot;</span>), <span class="at">font_size =</span> <span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="gprofiler_mod8.html#cb216-1" tabindex="-1"></a>enrichment_results <span class="ot">&lt;-</span> gprofiler_results_DOWNgenes<span class="sc">$</span>result</span>
+<span id="cb216-2"><a href="gprofiler_mod8.html#cb216-2" tabindex="-1"></a><span class="do">##Get the name of the databases</span></span>
+<span id="cb216-3"><a href="gprofiler_mod8.html#cb216-3" tabindex="-1"></a><span class="fu">unique</span>(enrichment_results<span class="sc">$</span>source) </span>
+<span id="cb216-4"><a href="gprofiler_mod8.html#cb216-4" tabindex="-1"></a></span>
+<span id="cb216-5"><a href="gprofiler_mod8.html#cb216-5" tabindex="-1"></a><span class="do">##Filter the dataframe to retrieve only the Reactome results</span></span>
+<span id="cb216-6"><a href="gprofiler_mod8.html#cb216-6" tabindex="-1"></a>enrichment_results_WP <span class="ot">&lt;-</span> enrichment_results <span class="sc">%&gt;%</span></span>
+<span id="cb216-7"><a href="gprofiler_mod8.html#cb216-7" tabindex="-1"></a>  <span class="fu">XXXX</span>(source <span class="sc">==</span> <span class="st">&quot;XXXX&quot;</span>)</span>
+<span id="cb216-8"><a href="gprofiler_mod8.html#cb216-8" tabindex="-1"></a></span>
+<span id="cb216-9"><a href="gprofiler_mod8.html#cb216-9" tabindex="-1"></a><span class="do">##Now display the top 20 pathways</span></span>
+<span id="cb216-10"><a href="gprofiler_mod8.html#cb216-10" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">head</span>(enrichment_results_WP, <span class="at">n=</span><span class="dv">20</span>), <span class="at">caption =</span> <span class="st">&quot;Enrichment Result&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb216-11"><a href="gprofiler_mod8.html#cb216-11" tabindex="-1"></a><span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;condensed&quot;</span>), <span class="at">font_size =</span> <span class="dv">10</span>)</span></code></pre></div>
 </div>
 </div>
 <div id="step-5---filter-results-by-geneset-size" class="section level3 hasAnchor">
@@ -1798,28 +1798,28 @@ CAV1,SERPINE1,F3,PDE9A,ITGA5,EHD2,F2R,PROCR,L1CAM,SERPINA1
 <li>minimum gene-set size of 10: will remove small pathways where the pvalue is significant athough the overlap size is very small</li>
 <li>p_thres: aim is to retrieve only pathways that are significant under this adjusted pvalue threshold of 0.01 (1% false positive)</li>
 </ul>
-<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="gprofiler_mod8.html#cb209-1" tabindex="-1"></a>enrichment_results <span class="ot">&lt;-</span> gprofiler_results_UPgenes<span class="sc">$</span>result </span>
-<span id="cb209-2"><a href="gprofiler_mod8.html#cb209-2" tabindex="-1"></a></span>
-<span id="cb209-3"><a href="gprofiler_mod8.html#cb209-3" tabindex="-1"></a>min_gs_size <span class="ot">=</span> <span class="dv">10</span></span>
-<span id="cb209-4"><a href="gprofiler_mod8.html#cb209-4" tabindex="-1"></a>max_gs_size <span class="ot">=</span> <span class="dv">1000</span></span>
-<span id="cb209-5"><a href="gprofiler_mod8.html#cb209-5" tabindex="-1"></a>p_thres <span class="ot">=</span> <span class="fl">0.01</span></span>
-<span id="cb209-6"><a href="gprofiler_mod8.html#cb209-6" tabindex="-1"></a><span class="co"># filter by params defined above</span></span>
-<span id="cb209-7"><a href="gprofiler_mod8.html#cb209-7" tabindex="-1"></a><span class="co"># by default we have set the max and min gs size to 250 and 3, respectively.</span></span>
-<span id="cb209-8"><a href="gprofiler_mod8.html#cb209-8" tabindex="-1"></a></span>
-<span id="cb209-9"><a href="gprofiler_mod8.html#cb209-9" tabindex="-1"></a></span>
-<span id="cb209-10"><a href="gprofiler_mod8.html#cb209-10" tabindex="-1"></a><span class="do">##the pvalue was stored as a character vector, we have to transform back into a numerical vector to be able to use it to filter values</span></span>
-<span id="cb209-11"><a href="gprofiler_mod8.html#cb209-11" tabindex="-1"></a>enrichment_results<span class="sc">$</span>p_value <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(enrichment_results<span class="sc">$</span>p_value) </span>
-<span id="cb209-12"><a href="gprofiler_mod8.html#cb209-12" tabindex="-1"></a></span>
-<span id="cb209-13"><a href="gprofiler_mod8.html#cb209-13" tabindex="-1"></a>enrichment_results_mxgssize_1000_min_10_adjp_0_01 <span class="ot">&lt;-</span> </span>
-<span id="cb209-14"><a href="gprofiler_mod8.html#cb209-14" tabindex="-1"></a>                        <span class="fu">subset</span>(enrichment_results,</span>
-<span id="cb209-15"><a href="gprofiler_mod8.html#cb209-15" tabindex="-1"></a>                                   term_size <span class="sc">&gt;=</span> min_gs_size <span class="sc">&amp;</span> </span>
-<span id="cb209-16"><a href="gprofiler_mod8.html#cb209-16" tabindex="-1"></a>                                   term_size <span class="sc">&lt;=</span> max_gs_size <span class="sc">&amp;</span> </span>
-<span id="cb209-17"><a href="gprofiler_mod8.html#cb209-17" tabindex="-1"></a>                                   p_value <span class="sc">&lt;=</span> p_thres )</span>
-<span id="cb209-18"><a href="gprofiler_mod8.html#cb209-18" tabindex="-1"></a></span>
-<span id="cb209-19"><a href="gprofiler_mod8.html#cb209-19" tabindex="-1"></a><span class="co">#</span></span>
-<span id="cb209-20"><a href="gprofiler_mod8.html#cb209-20" tabindex="-1"></a>myrows <span class="ot">=</span> <span class="fu">nrow</span>(enrichment_results_mxgssize_1000_min_10_adjp_0_01)</span>
-<span id="cb209-21"><a href="gprofiler_mod8.html#cb209-21" tabindex="-1"></a></span>
-<span id="cb209-22"><a href="gprofiler_mod8.html#cb209-22" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">glue</span>(<span class="st">&quot;It results in {myrows} selected pathways with maximum gene-set size of {max_gs_size} and minimum gene-set of {min_gs_size} with an adjusted p-value of {p_thres} . &quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="gprofiler_mod8.html#cb217-1" tabindex="-1"></a>enrichment_results <span class="ot">&lt;-</span> gprofiler_results_UPgenes<span class="sc">$</span>result </span>
+<span id="cb217-2"><a href="gprofiler_mod8.html#cb217-2" tabindex="-1"></a></span>
+<span id="cb217-3"><a href="gprofiler_mod8.html#cb217-3" tabindex="-1"></a>min_gs_size <span class="ot">=</span> <span class="dv">10</span></span>
+<span id="cb217-4"><a href="gprofiler_mod8.html#cb217-4" tabindex="-1"></a>max_gs_size <span class="ot">=</span> <span class="dv">1000</span></span>
+<span id="cb217-5"><a href="gprofiler_mod8.html#cb217-5" tabindex="-1"></a>p_thres <span class="ot">=</span> <span class="fl">0.01</span></span>
+<span id="cb217-6"><a href="gprofiler_mod8.html#cb217-6" tabindex="-1"></a><span class="co"># filter by params defined above</span></span>
+<span id="cb217-7"><a href="gprofiler_mod8.html#cb217-7" tabindex="-1"></a><span class="co"># by default we have set the max and min gs size to 250 and 3, respectively.</span></span>
+<span id="cb217-8"><a href="gprofiler_mod8.html#cb217-8" tabindex="-1"></a></span>
+<span id="cb217-9"><a href="gprofiler_mod8.html#cb217-9" tabindex="-1"></a></span>
+<span id="cb217-10"><a href="gprofiler_mod8.html#cb217-10" tabindex="-1"></a><span class="do">##the pvalue was stored as a character vector, we have to transform back into a numerical vector to be able to use it to filter values</span></span>
+<span id="cb217-11"><a href="gprofiler_mod8.html#cb217-11" tabindex="-1"></a>enrichment_results<span class="sc">$</span>p_value <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(enrichment_results<span class="sc">$</span>p_value) </span>
+<span id="cb217-12"><a href="gprofiler_mod8.html#cb217-12" tabindex="-1"></a></span>
+<span id="cb217-13"><a href="gprofiler_mod8.html#cb217-13" tabindex="-1"></a>enrichment_results_mxgssize_1000_min_10_adjp_0_01 <span class="ot">&lt;-</span> </span>
+<span id="cb217-14"><a href="gprofiler_mod8.html#cb217-14" tabindex="-1"></a>                        <span class="fu">subset</span>(enrichment_results,</span>
+<span id="cb217-15"><a href="gprofiler_mod8.html#cb217-15" tabindex="-1"></a>                                   term_size <span class="sc">&gt;=</span> min_gs_size <span class="sc">&amp;</span> </span>
+<span id="cb217-16"><a href="gprofiler_mod8.html#cb217-16" tabindex="-1"></a>                                   term_size <span class="sc">&lt;=</span> max_gs_size <span class="sc">&amp;</span> </span>
+<span id="cb217-17"><a href="gprofiler_mod8.html#cb217-17" tabindex="-1"></a>                                   p_value <span class="sc">&lt;=</span> p_thres )</span>
+<span id="cb217-18"><a href="gprofiler_mod8.html#cb217-18" tabindex="-1"></a></span>
+<span id="cb217-19"><a href="gprofiler_mod8.html#cb217-19" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb217-20"><a href="gprofiler_mod8.html#cb217-20" tabindex="-1"></a>myrows <span class="ot">=</span> <span class="fu">nrow</span>(enrichment_results_mxgssize_1000_min_10_adjp_0_01)</span>
+<span id="cb217-21"><a href="gprofiler_mod8.html#cb217-21" tabindex="-1"></a></span>
+<span id="cb217-22"><a href="gprofiler_mod8.html#cb217-22" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">glue</span>(<span class="st">&quot;It results in {myrows} selected pathways with maximum gene-set size of {max_gs_size} and minimum gene-set of {min_gs_size} with an adjusted p-value of {p_thres} . &quot;</span>))</span></code></pre></div>
 <pre><code>## It results in 15 selected pathways with maximum gene-set size of 1000 and minimum gene-set of 10 with an adjusted p-value of 0.01 .</code></pre>
 <div id="your-turn-using-the-enrichment-results-for-the-down-genes-use-gene-set-size-filters-and-fdr-filters-and-display-the-results" class="section level4 hasAnchor">
 <h4>YOUR TURN: using the enrichment results for the down genes, use gene-set size filters and FDR filters and display the results<a href="gprofiler_mod8.html#your-turn-using-the-enrichment-results-for-the-down-genes-use-gene-set-size-filters-and-fdr-filters-and-display-the-results" class="anchor-section" aria-label="Anchor link to header"></a></h4>
@@ -1840,24 +1840,24 @@ CAV1,SERPINE1,F3,PDE9A,ITGA5,EHD2,F2R,PROCR,L1CAM,SERPINA1
 </ul></li>
 </ul>
 <p>How many pathways do you get for each option (nrow())??</p>
-<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="gprofiler_mod8.html#cb211-1" tabindex="-1"></a>enrichment_results <span class="ot">&lt;-</span> gprofiler_results_DOWNgenes<span class="sc">$</span>result </span>
-<span id="cb211-2"><a href="gprofiler_mod8.html#cb211-2" tabindex="-1"></a></span>
-<span id="cb211-3"><a href="gprofiler_mod8.html#cb211-3" tabindex="-1"></a>min_gs_size <span class="ot">=</span> XXXX</span>
-<span id="cb211-4"><a href="gprofiler_mod8.html#cb211-4" tabindex="-1"></a>max_gs_size <span class="ot">=</span> XXXX</span>
-<span id="cb211-5"><a href="gprofiler_mod8.html#cb211-5" tabindex="-1"></a>p_thres <span class="ot">=</span> XXXX</span>
-<span id="cb211-6"><a href="gprofiler_mod8.html#cb211-6" tabindex="-1"></a><span class="co"># filter by params defined above</span></span>
-<span id="cb211-7"><a href="gprofiler_mod8.html#cb211-7" tabindex="-1"></a><span class="co"># by default we have set the max and min gs size to 250 and 3, respectively.</span></span>
-<span id="cb211-8"><a href="gprofiler_mod8.html#cb211-8" tabindex="-1"></a></span>
-<span id="cb211-9"><a href="gprofiler_mod8.html#cb211-9" tabindex="-1"></a></span>
-<span id="cb211-10"><a href="gprofiler_mod8.html#cb211-10" tabindex="-1"></a><span class="do">##the pvalue was stored as a character vector, we have to transform back into a numerical vector to be able to use it to filter values</span></span>
-<span id="cb211-11"><a href="gprofiler_mod8.html#cb211-11" tabindex="-1"></a>enrichment_results<span class="sc">$</span>p_value <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(enrichment_results<span class="sc">$</span>p_value) </span>
-<span id="cb211-12"><a href="gprofiler_mod8.html#cb211-12" tabindex="-1"></a></span>
-<span id="cb211-13"><a href="gprofiler_mod8.html#cb211-13" tabindex="-1"></a>enrichment_results <span class="ot">&lt;-</span> XXXXX</span>
-<span id="cb211-14"><a href="gprofiler_mod8.html#cb211-14" tabindex="-1"></a>                        </span>
-<span id="cb211-15"><a href="gprofiler_mod8.html#cb211-15" tabindex="-1"></a><span class="co">#</span></span>
-<span id="cb211-16"><a href="gprofiler_mod8.html#cb211-16" tabindex="-1"></a>myrows <span class="ot">=</span> <span class="fu">nrow</span>(enrichment_results)</span>
-<span id="cb211-17"><a href="gprofiler_mod8.html#cb211-17" tabindex="-1"></a></span>
-<span id="cb211-18"><a href="gprofiler_mod8.html#cb211-18" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">glue</span>(<span class="st">&quot;It results in {myrows} selected pathways with maximum gene-set size of {max_gs_size} and minimum gene-set of {min_gs_size} with an adjusted p-value of {p_thres} . &quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="gprofiler_mod8.html#cb219-1" tabindex="-1"></a>enrichment_results <span class="ot">&lt;-</span> gprofiler_results_DOWNgenes<span class="sc">$</span>result </span>
+<span id="cb219-2"><a href="gprofiler_mod8.html#cb219-2" tabindex="-1"></a></span>
+<span id="cb219-3"><a href="gprofiler_mod8.html#cb219-3" tabindex="-1"></a>min_gs_size <span class="ot">=</span> XXXX</span>
+<span id="cb219-4"><a href="gprofiler_mod8.html#cb219-4" tabindex="-1"></a>max_gs_size <span class="ot">=</span> XXXX</span>
+<span id="cb219-5"><a href="gprofiler_mod8.html#cb219-5" tabindex="-1"></a>p_thres <span class="ot">=</span> XXXX</span>
+<span id="cb219-6"><a href="gprofiler_mod8.html#cb219-6" tabindex="-1"></a><span class="co"># filter by params defined above</span></span>
+<span id="cb219-7"><a href="gprofiler_mod8.html#cb219-7" tabindex="-1"></a><span class="co"># by default we have set the max and min gs size to 250 and 3, respectively.</span></span>
+<span id="cb219-8"><a href="gprofiler_mod8.html#cb219-8" tabindex="-1"></a></span>
+<span id="cb219-9"><a href="gprofiler_mod8.html#cb219-9" tabindex="-1"></a></span>
+<span id="cb219-10"><a href="gprofiler_mod8.html#cb219-10" tabindex="-1"></a><span class="do">##the pvalue was stored as a character vector, we have to transform back into a numerical vector to be able to use it to filter values</span></span>
+<span id="cb219-11"><a href="gprofiler_mod8.html#cb219-11" tabindex="-1"></a>enrichment_results<span class="sc">$</span>p_value <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(enrichment_results<span class="sc">$</span>p_value) </span>
+<span id="cb219-12"><a href="gprofiler_mod8.html#cb219-12" tabindex="-1"></a></span>
+<span id="cb219-13"><a href="gprofiler_mod8.html#cb219-13" tabindex="-1"></a>enrichment_results <span class="ot">&lt;-</span> XXXXX</span>
+<span id="cb219-14"><a href="gprofiler_mod8.html#cb219-14" tabindex="-1"></a>                        </span>
+<span id="cb219-15"><a href="gprofiler_mod8.html#cb219-15" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb219-16"><a href="gprofiler_mod8.html#cb219-16" tabindex="-1"></a>myrows <span class="ot">=</span> <span class="fu">nrow</span>(enrichment_results)</span>
+<span id="cb219-17"><a href="gprofiler_mod8.html#cb219-17" tabindex="-1"></a></span>
+<span id="cb219-18"><a href="gprofiler_mod8.html#cb219-18" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">glue</span>(<span class="st">&quot;It results in {myrows} selected pathways with maximum gene-set size of {max_gs_size} and minimum gene-set of {min_gs_size} with an adjusted p-value of {p_thres} . &quot;</span>))</span></code></pre></div>
 </div>
 </div>
 <div id="step-6---run-gprofiler-with-your-own-genesets-example-using-baderlab-genesets" class="section level3 hasAnchor">
@@ -1885,39 +1885,39 @@ The Baderlab gene set file combines different sources of databases and you can f
 <p>In order to use your own genesets with g:Profiler you need to upload the the file to g:Profiler server first. The function will return an ID that you need to specify in the organism parameter of the g:Profiler gost function call.
 It is done by using the upload_GMT_file() function which is included in the gprofiler2 package.
 Note: it took about 2 minutes to run this chunck of code.</p>
-<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="gprofiler_mod8.html#cb212-1" tabindex="-1"></a>dest_gmt_file_500 <span class="ot">=</span><span class="fu">file.path</span>(data_dir, <span class="st">&quot;data/Human_GOBP_AllPathways_filtered_500orLessV2.gmt&quot;</span>)</span>
-<span id="cb212-2"><a href="gprofiler_mod8.html#cb212-2" tabindex="-1"></a></span>
-<span id="cb212-3"><a href="gprofiler_mod8.html#cb212-3" tabindex="-1"></a>custom_gmt_max500 <span class="ot">&lt;-</span> <span class="fu">upload_GMT_file</span>(</span>
-<span id="cb212-4"><a href="gprofiler_mod8.html#cb212-4" tabindex="-1"></a>                        <span class="at">gmtfile=</span>dest_gmt_file_500)</span></code></pre></div>
-<pre><code>## Your custom annotations ID is gp__EeOr_HgT0_IHo.
+<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="gprofiler_mod8.html#cb220-1" tabindex="-1"></a>dest_gmt_file_500 <span class="ot">=</span><span class="fu">file.path</span>(data_dir, <span class="st">&quot;data/Human_GOBP_AllPathways_filtered_500orLessV2.gmt&quot;</span>)</span>
+<span id="cb220-2"><a href="gprofiler_mod8.html#cb220-2" tabindex="-1"></a></span>
+<span id="cb220-3"><a href="gprofiler_mod8.html#cb220-3" tabindex="-1"></a>custom_gmt_max500 <span class="ot">&lt;-</span> <span class="fu">upload_GMT_file</span>(</span>
+<span id="cb220-4"><a href="gprofiler_mod8.html#cb220-4" tabindex="-1"></a>                        <span class="at">gmtfile=</span>dest_gmt_file_500)</span></code></pre></div>
+<pre><code>## Your custom annotations ID is gp__9y7C_nv9T_9PQ.
 ## You can use this ID as an &#39;organism&#39; name in all the related enrichment tests against this custom source.</code></pre>
-<pre><code>## Just use: gost(my_genes, organism = &#39;gp__EeOr_HgT0_IHo&#39;)</code></pre>
-<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="gprofiler_mod8.html#cb215-1" tabindex="-1"></a>UPgenes <span class="ot">&lt;-</span> res<span class="sc">$</span>gene[res<span class="sc">$</span>logFC<span class="sc">&gt;</span><span class="dv">0</span> <span class="sc">&amp;</span>  res<span class="sc">$</span>FDR <span class="sc">&lt;=</span> <span class="fl">0.001</span>]</span>
-<span id="cb215-2"><a href="gprofiler_mod8.html#cb215-2" tabindex="-1"></a>DOWNgenes <span class="ot">&lt;-</span> res<span class="sc">$</span>gene[res<span class="sc">$</span>logFC<span class="sc">&lt;</span><span class="dv">0</span> <span class="sc">&amp;</span>  res<span class="sc">$</span>FDR <span class="sc">&lt;=</span> <span class="fl">0.001</span>]</span>
-<span id="cb215-3"><a href="gprofiler_mod8.html#cb215-3" tabindex="-1"></a></span>
-<span id="cb215-4"><a href="gprofiler_mod8.html#cb215-4" tabindex="-1"></a></span>
-<span id="cb215-5"><a href="gprofiler_mod8.html#cb215-5" tabindex="-1"></a>gprofiler_results_custom_max500_UPgenes <span class="ot">&lt;-</span> <span class="fu">gost</span>(<span class="at">query =</span> UPgenes  ,</span>
-<span id="cb215-6"><a href="gprofiler_mod8.html#cb215-6" tabindex="-1"></a>                                     <span class="at">significant=</span><span class="cn">TRUE</span>,</span>
-<span id="cb215-7"><a href="gprofiler_mod8.html#cb215-7" tabindex="-1"></a>                                      <span class="at">ordered_query =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb215-8"><a href="gprofiler_mod8.html#cb215-8" tabindex="-1"></a>                                      <span class="at">exclude_iea=</span><span class="cn">TRUE</span>,</span>
-<span id="cb215-9"><a href="gprofiler_mod8.html#cb215-9" tabindex="-1"></a>                                     <span class="at">correction_method =</span> <span class="st">&quot;fdr&quot;</span>,</span>
-<span id="cb215-10"><a href="gprofiler_mod8.html#cb215-10" tabindex="-1"></a>                                 <span class="at">organism =</span> custom_gmt_max500,</span>
-<span id="cb215-11"><a href="gprofiler_mod8.html#cb215-11" tabindex="-1"></a>                                     <span class="at">evcodes =</span> <span class="cn">TRUE</span></span>
-<span id="cb215-12"><a href="gprofiler_mod8.html#cb215-12" tabindex="-1"></a>                                     )</span></code></pre></div>
+<pre><code>## Just use: gost(my_genes, organism = &#39;gp__9y7C_nv9T_9PQ&#39;)</code></pre>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="gprofiler_mod8.html#cb223-1" tabindex="-1"></a>UPgenes <span class="ot">&lt;-</span> res<span class="sc">$</span>gene[res<span class="sc">$</span>logFC<span class="sc">&gt;</span><span class="dv">0</span> <span class="sc">&amp;</span>  res<span class="sc">$</span>FDR <span class="sc">&lt;=</span> <span class="fl">0.001</span>]</span>
+<span id="cb223-2"><a href="gprofiler_mod8.html#cb223-2" tabindex="-1"></a>DOWNgenes <span class="ot">&lt;-</span> res<span class="sc">$</span>gene[res<span class="sc">$</span>logFC<span class="sc">&lt;</span><span class="dv">0</span> <span class="sc">&amp;</span>  res<span class="sc">$</span>FDR <span class="sc">&lt;=</span> <span class="fl">0.001</span>]</span>
+<span id="cb223-3"><a href="gprofiler_mod8.html#cb223-3" tabindex="-1"></a></span>
+<span id="cb223-4"><a href="gprofiler_mod8.html#cb223-4" tabindex="-1"></a></span>
+<span id="cb223-5"><a href="gprofiler_mod8.html#cb223-5" tabindex="-1"></a>gprofiler_results_custom_max500_UPgenes <span class="ot">&lt;-</span> <span class="fu">gost</span>(<span class="at">query =</span> UPgenes  ,</span>
+<span id="cb223-6"><a href="gprofiler_mod8.html#cb223-6" tabindex="-1"></a>                                     <span class="at">significant=</span><span class="cn">TRUE</span>,</span>
+<span id="cb223-7"><a href="gprofiler_mod8.html#cb223-7" tabindex="-1"></a>                                      <span class="at">ordered_query =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb223-8"><a href="gprofiler_mod8.html#cb223-8" tabindex="-1"></a>                                      <span class="at">exclude_iea=</span><span class="cn">TRUE</span>,</span>
+<span id="cb223-9"><a href="gprofiler_mod8.html#cb223-9" tabindex="-1"></a>                                     <span class="at">correction_method =</span> <span class="st">&quot;fdr&quot;</span>,</span>
+<span id="cb223-10"><a href="gprofiler_mod8.html#cb223-10" tabindex="-1"></a>                                 <span class="at">organism =</span> custom_gmt_max500,</span>
+<span id="cb223-11"><a href="gprofiler_mod8.html#cb223-11" tabindex="-1"></a>                                     <span class="at">evcodes =</span> <span class="cn">TRUE</span></span>
+<span id="cb223-12"><a href="gprofiler_mod8.html#cb223-12" tabindex="-1"></a>                                     )</span></code></pre></div>
 <pre><code>## Detected custom GMT source request</code></pre>
-<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="gprofiler_mod8.html#cb217-1" tabindex="-1"></a>enrichment_results_UPgenes <span class="ot">&lt;-</span> gprofiler_results_custom_max500_UPgenes<span class="sc">$</span>result</span>
-<span id="cb217-2"><a href="gprofiler_mod8.html#cb217-2" tabindex="-1"></a></span>
-<span id="cb217-3"><a href="gprofiler_mod8.html#cb217-3" tabindex="-1"></a>enrichment_results_UPgenes<span class="sc">$</span>parents <span class="ot">&lt;-</span> <span class="fu">sapply</span>(</span>
-<span id="cb217-4"><a href="gprofiler_mod8.html#cb217-4" tabindex="-1"></a>  enrichment_results_UPgenes<span class="sc">$</span>parents,</span>
-<span id="cb217-5"><a href="gprofiler_mod8.html#cb217-5" tabindex="-1"></a>  <span class="cf">function</span>(x) <span class="fu">paste</span>(x, <span class="at">collapse =</span> <span class="st">&quot;, &quot;</span>)</span>
-<span id="cb217-6"><a href="gprofiler_mod8.html#cb217-6" tabindex="-1"></a>)</span>
-<span id="cb217-7"><a href="gprofiler_mod8.html#cb217-7" tabindex="-1"></a> </span>
-<span id="cb217-8"><a href="gprofiler_mod8.html#cb217-8" tabindex="-1"></a><span class="do">##Now display the top 20 pathways</span></span>
-<span id="cb217-9"><a href="gprofiler_mod8.html#cb217-9" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">head</span>(enrichment_results_UPgenes, <span class="at">n=</span><span class="dv">20</span>), <span class="at">caption =</span> <span class="st">&quot;Enrichment Result&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb217-10"><a href="gprofiler_mod8.html#cb217-10" tabindex="-1"></a><span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;condensed&quot;</span>), <span class="at">font_size =</span> <span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="gprofiler_mod8.html#cb225-1" tabindex="-1"></a>enrichment_results_UPgenes <span class="ot">&lt;-</span> gprofiler_results_custom_max500_UPgenes<span class="sc">$</span>result</span>
+<span id="cb225-2"><a href="gprofiler_mod8.html#cb225-2" tabindex="-1"></a></span>
+<span id="cb225-3"><a href="gprofiler_mod8.html#cb225-3" tabindex="-1"></a>enrichment_results_UPgenes<span class="sc">$</span>parents <span class="ot">&lt;-</span> <span class="fu">sapply</span>(</span>
+<span id="cb225-4"><a href="gprofiler_mod8.html#cb225-4" tabindex="-1"></a>  enrichment_results_UPgenes<span class="sc">$</span>parents,</span>
+<span id="cb225-5"><a href="gprofiler_mod8.html#cb225-5" tabindex="-1"></a>  <span class="cf">function</span>(x) <span class="fu">paste</span>(x, <span class="at">collapse =</span> <span class="st">&quot;, &quot;</span>)</span>
+<span id="cb225-6"><a href="gprofiler_mod8.html#cb225-6" tabindex="-1"></a>)</span>
+<span id="cb225-7"><a href="gprofiler_mod8.html#cb225-7" tabindex="-1"></a> </span>
+<span id="cb225-8"><a href="gprofiler_mod8.html#cb225-8" tabindex="-1"></a><span class="do">##Now display the top 20 pathways</span></span>
+<span id="cb225-9"><a href="gprofiler_mod8.html#cb225-9" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">head</span>(enrichment_results_UPgenes, <span class="at">n=</span><span class="dv">20</span>), <span class="at">caption =</span> <span class="st">&quot;Enrichment Result&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb225-10"><a href="gprofiler_mod8.html#cb225-10" tabindex="-1"></a><span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;condensed&quot;</span>), <span class="at">font_size =</span> <span class="dv">10</span>)</span></code></pre></div>
 <table class="table table-striped table-condensed" style="font-size: 10px; margin-left: auto; margin-right: auto;">
 <caption style="font-size: initial !important;">
-<span id="tab:unnamed-chunk-92">Table 5: </span><span id="tab:unnamed-chunk-92">Table 6: </span>Enrichment Result
+<span id="tab:unnamed-chunk-100">Table 5: </span><span id="tab:unnamed-chunk-100">Table 6: </span>Enrichment Result
 </caption>
 <thead>
 <tr>
@@ -2954,31 +2954,31 @@ SERPINE1,F3,F2R
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="gprofiler_mod8.html#cb218-1" tabindex="-1"></a><span class="co"># write.csv( enrichment_results_UPgenes, &quot;results/enrichment_results_gprofiler_UPgenes.csv&quot;)</span></span></code></pre></div>
+<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="gprofiler_mod8.html#cb226-1" tabindex="-1"></a><span class="co"># write.csv( enrichment_results_UPgenes, &quot;results/enrichment_results_gprofiler_UPgenes.csv&quot;)</span></span></code></pre></div>
 <div id="your-turn-perform-the-same-task-with-the-down-genes" class="section level4 hasAnchor">
 <h4>YOUR TURN: perform the same task with the down genes<a href="gprofiler_mod8.html#your-turn-perform-the-same-task-with-the-down-genes" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="gprofiler_mod8.html#cb219-1" tabindex="-1"></a>gprofiler_results_custom_max500_DNgenes <span class="ot">&lt;-</span> <span class="fu">gost</span>(</span>
-<span id="cb219-2"><a href="gprofiler_mod8.html#cb219-2" tabindex="-1"></a>                                      <span class="at">query =</span> XXXX  ,</span>
-<span id="cb219-3"><a href="gprofiler_mod8.html#cb219-3" tabindex="-1"></a>                                     <span class="at">significant=</span>XXXX,</span>
-<span id="cb219-4"><a href="gprofiler_mod8.html#cb219-4" tabindex="-1"></a>                                      <span class="at">ordered_query =</span> XXXX,</span>
-<span id="cb219-5"><a href="gprofiler_mod8.html#cb219-5" tabindex="-1"></a>                                      <span class="at">exclude_iea=</span>XXXX,</span>
-<span id="cb219-6"><a href="gprofiler_mod8.html#cb219-6" tabindex="-1"></a>                                     <span class="at">correction_method =</span> <span class="st">&quot;XXX&quot;</span>,</span>
-<span id="cb219-7"><a href="gprofiler_mod8.html#cb219-7" tabindex="-1"></a>                                 <span class="at">organism =</span> XXXX,</span>
-<span id="cb219-8"><a href="gprofiler_mod8.html#cb219-8" tabindex="-1"></a>                                     <span class="at">evcodes =</span> XXXX</span>
-<span id="cb219-9"><a href="gprofiler_mod8.html#cb219-9" tabindex="-1"></a>                                     )</span>
-<span id="cb219-10"><a href="gprofiler_mod8.html#cb219-10" tabindex="-1"></a></span>
-<span id="cb219-11"><a href="gprofiler_mod8.html#cb219-11" tabindex="-1"></a>enrichment_results_DNgenes <span class="ot">&lt;-</span> gprofiler_results_custom_max500_DNgenes<span class="sc">$</span>result</span>
-<span id="cb219-12"><a href="gprofiler_mod8.html#cb219-12" tabindex="-1"></a></span>
-<span id="cb219-13"><a href="gprofiler_mod8.html#cb219-13" tabindex="-1"></a></span>
-<span id="cb219-14"><a href="gprofiler_mod8.html#cb219-14" tabindex="-1"></a>enrichment_results_DNgenes<span class="sc">$</span>parents <span class="ot">&lt;-</span> <span class="fu">sapply</span>(</span>
-<span id="cb219-15"><a href="gprofiler_mod8.html#cb219-15" tabindex="-1"></a>  enrichment_results_DNgenes<span class="sc">$</span>parents,</span>
-<span id="cb219-16"><a href="gprofiler_mod8.html#cb219-16" tabindex="-1"></a>  <span class="cf">function</span>(x) <span class="fu">paste</span>(x, <span class="at">collapse =</span> <span class="st">&quot;, &quot;</span>)</span>
-<span id="cb219-17"><a href="gprofiler_mod8.html#cb219-17" tabindex="-1"></a>)</span>
-<span id="cb219-18"><a href="gprofiler_mod8.html#cb219-18" tabindex="-1"></a></span>
-<span id="cb219-19"><a href="gprofiler_mod8.html#cb219-19" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">head</span>(enrichment_results_DNgenes, <span class="at">n=</span><span class="dv">20</span>), <span class="at">caption =</span> <span class="st">&quot;Enrichment Result&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb219-20"><a href="gprofiler_mod8.html#cb219-20" tabindex="-1"></a><span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;condensed&quot;</span>), <span class="at">font_size =</span> <span class="dv">10</span>)</span>
-<span id="cb219-21"><a href="gprofiler_mod8.html#cb219-21" tabindex="-1"></a></span>
-<span id="cb219-22"><a href="gprofiler_mod8.html#cb219-22" tabindex="-1"></a><span class="co"># write.csv( enrichment_results_DNgenes, &quot;results/enrichment_results_gprofiler_DNgenes.csv&quot;)</span></span></code></pre></div>
+<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="gprofiler_mod8.html#cb227-1" tabindex="-1"></a>gprofiler_results_custom_max500_DNgenes <span class="ot">&lt;-</span> <span class="fu">gost</span>(</span>
+<span id="cb227-2"><a href="gprofiler_mod8.html#cb227-2" tabindex="-1"></a>                                      <span class="at">query =</span> XXXX  ,</span>
+<span id="cb227-3"><a href="gprofiler_mod8.html#cb227-3" tabindex="-1"></a>                                     <span class="at">significant=</span>XXXX,</span>
+<span id="cb227-4"><a href="gprofiler_mod8.html#cb227-4" tabindex="-1"></a>                                      <span class="at">ordered_query =</span> XXXX,</span>
+<span id="cb227-5"><a href="gprofiler_mod8.html#cb227-5" tabindex="-1"></a>                                      <span class="at">exclude_iea=</span>XXXX,</span>
+<span id="cb227-6"><a href="gprofiler_mod8.html#cb227-6" tabindex="-1"></a>                                     <span class="at">correction_method =</span> <span class="st">&quot;XXX&quot;</span>,</span>
+<span id="cb227-7"><a href="gprofiler_mod8.html#cb227-7" tabindex="-1"></a>                                 <span class="at">organism =</span> XXXX,</span>
+<span id="cb227-8"><a href="gprofiler_mod8.html#cb227-8" tabindex="-1"></a>                                     <span class="at">evcodes =</span> XXXX</span>
+<span id="cb227-9"><a href="gprofiler_mod8.html#cb227-9" tabindex="-1"></a>                                     )</span>
+<span id="cb227-10"><a href="gprofiler_mod8.html#cb227-10" tabindex="-1"></a></span>
+<span id="cb227-11"><a href="gprofiler_mod8.html#cb227-11" tabindex="-1"></a>enrichment_results_DNgenes <span class="ot">&lt;-</span> gprofiler_results_custom_max500_DNgenes<span class="sc">$</span>result</span>
+<span id="cb227-12"><a href="gprofiler_mod8.html#cb227-12" tabindex="-1"></a></span>
+<span id="cb227-13"><a href="gprofiler_mod8.html#cb227-13" tabindex="-1"></a></span>
+<span id="cb227-14"><a href="gprofiler_mod8.html#cb227-14" tabindex="-1"></a>enrichment_results_DNgenes<span class="sc">$</span>parents <span class="ot">&lt;-</span> <span class="fu">sapply</span>(</span>
+<span id="cb227-15"><a href="gprofiler_mod8.html#cb227-15" tabindex="-1"></a>  enrichment_results_DNgenes<span class="sc">$</span>parents,</span>
+<span id="cb227-16"><a href="gprofiler_mod8.html#cb227-16" tabindex="-1"></a>  <span class="cf">function</span>(x) <span class="fu">paste</span>(x, <span class="at">collapse =</span> <span class="st">&quot;, &quot;</span>)</span>
+<span id="cb227-17"><a href="gprofiler_mod8.html#cb227-17" tabindex="-1"></a>)</span>
+<span id="cb227-18"><a href="gprofiler_mod8.html#cb227-18" tabindex="-1"></a></span>
+<span id="cb227-19"><a href="gprofiler_mod8.html#cb227-19" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">head</span>(enrichment_results_DNgenes, <span class="at">n=</span><span class="dv">20</span>), <span class="at">caption =</span> <span class="st">&quot;Enrichment Result&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb227-20"><a href="gprofiler_mod8.html#cb227-20" tabindex="-1"></a><span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;condensed&quot;</span>), <span class="at">font_size =</span> <span class="dv">10</span>)</span>
+<span id="cb227-21"><a href="gprofiler_mod8.html#cb227-21" tabindex="-1"></a></span>
+<span id="cb227-22"><a href="gprofiler_mod8.html#cb227-22" tabindex="-1"></a><span class="co"># write.csv( enrichment_results_DNgenes, &quot;results/enrichment_results_gprofiler_DNgenes.csv&quot;)</span></span></code></pre></div>
 </div>
 </div>
 </div>
@@ -2986,67 +2986,67 @@ SERPINE1,F3,F2R
 <h2>Exercise 2 - visualization<a href="gprofiler_mod8.html#exercise-2---visualization" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>We will use clusterProfiler style visualization.
 ### Step 1 - Bar plot</p>
-<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="gprofiler_mod8.html#cb220-1" tabindex="-1"></a><span class="do">##Calculate a score (small very significant adjusted p value will turn into a large score)</span></span>
-<span id="cb220-2"><a href="gprofiler_mod8.html#cb220-2" tabindex="-1"></a></span>
-<span id="cb220-3"><a href="gprofiler_mod8.html#cb220-3" tabindex="-1"></a>enrichment_results_UPgenes <span class="ot">&lt;-</span> gprofiler_results_custom_max500_UPgenes<span class="sc">$</span>result</span>
-<span id="cb220-4"><a href="gprofiler_mod8.html#cb220-4" tabindex="-1"></a></span>
-<span id="cb220-5"><a href="gprofiler_mod8.html#cb220-5" tabindex="-1"></a>enrichment_results_UPgenes<span class="sc">$</span>score <span class="ot">=</span> <span class="sc">-</span><span class="fu">log10</span>(<span class="fu">as.numeric</span>(enrichment_results_UPgenes<span class="sc">$</span>p_value))</span>
-<span id="cb220-6"><a href="gprofiler_mod8.html#cb220-6" tabindex="-1"></a></span>
-<span id="cb220-7"><a href="gprofiler_mod8.html#cb220-7" tabindex="-1"></a>enrichment <span class="ot">&lt;-</span> enrichment_results_UPgenes <span class="sc">%&gt;%</span></span>
-<span id="cb220-8"><a href="gprofiler_mod8.html#cb220-8" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb220-9"><a href="gprofiler_mod8.html#cb220-9" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(score)) <span class="sc">%&gt;%</span></span>
-<span id="cb220-10"><a href="gprofiler_mod8.html#cb220-10" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">20</span>)</span>
-<span id="cb220-11"><a href="gprofiler_mod8.html#cb220-11" tabindex="-1"></a></span>
-<span id="cb220-12"><a href="gprofiler_mod8.html#cb220-12" tabindex="-1"></a>p <span class="ot">=</span> <span class="fu">ggplot</span>(enrichment, <span class="fu">aes</span>(<span class="fu">reorder</span>(term_name, score), score)) <span class="sc">+</span></span>
-<span id="cb220-13"><a href="gprofiler_mod8.html#cb220-13" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">fill =</span> score), <span class="at">width=</span><span class="fl">0.8</span>) <span class="sc">+</span></span>
-<span id="cb220-14"><a href="gprofiler_mod8.html#cb220-14" tabindex="-1"></a>  <span class="fu">scale_fill_gradient</span>(<span class="at">low =</span> <span class="st">&quot;#C1F6F8&quot;</span>, <span class="at">high =</span> <span class="st">&quot;#00BFC4&quot;</span>)<span class="sc">+</span></span>
-<span id="cb220-15"><a href="gprofiler_mod8.html#cb220-15" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
-<span id="cb220-16"><a href="gprofiler_mod8.html#cb220-16" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;&quot;</span>, <span class="at">y=</span><span class="st">&quot;Normalized Enrichment Score&quot;</span>,<span class="at">title=</span><span class="st">&quot;Pathway enrichment analysis &quot;</span>) <span class="sc">+</span> </span>
-<span id="cb220-17"><a href="gprofiler_mod8.html#cb220-17" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
-<span id="cb220-18"><a href="gprofiler_mod8.html#cb220-18" tabindex="-1"></a></span>
-<span id="cb220-19"><a href="gprofiler_mod8.html#cb220-19" tabindex="-1"></a>p</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-94-1.png" alt="" width="672" /></p>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="gprofiler_mod8.html#cb228-1" tabindex="-1"></a><span class="do">##Calculate a score (small very significant adjusted p value will turn into a large score)</span></span>
+<span id="cb228-2"><a href="gprofiler_mod8.html#cb228-2" tabindex="-1"></a></span>
+<span id="cb228-3"><a href="gprofiler_mod8.html#cb228-3" tabindex="-1"></a>enrichment_results_UPgenes <span class="ot">&lt;-</span> gprofiler_results_custom_max500_UPgenes<span class="sc">$</span>result</span>
+<span id="cb228-4"><a href="gprofiler_mod8.html#cb228-4" tabindex="-1"></a></span>
+<span id="cb228-5"><a href="gprofiler_mod8.html#cb228-5" tabindex="-1"></a>enrichment_results_UPgenes<span class="sc">$</span>score <span class="ot">=</span> <span class="sc">-</span><span class="fu">log10</span>(<span class="fu">as.numeric</span>(enrichment_results_UPgenes<span class="sc">$</span>p_value))</span>
+<span id="cb228-6"><a href="gprofiler_mod8.html#cb228-6" tabindex="-1"></a></span>
+<span id="cb228-7"><a href="gprofiler_mod8.html#cb228-7" tabindex="-1"></a>enrichment <span class="ot">&lt;-</span> enrichment_results_UPgenes <span class="sc">%&gt;%</span></span>
+<span id="cb228-8"><a href="gprofiler_mod8.html#cb228-8" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb228-9"><a href="gprofiler_mod8.html#cb228-9" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(score)) <span class="sc">%&gt;%</span></span>
+<span id="cb228-10"><a href="gprofiler_mod8.html#cb228-10" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">20</span>)</span>
+<span id="cb228-11"><a href="gprofiler_mod8.html#cb228-11" tabindex="-1"></a></span>
+<span id="cb228-12"><a href="gprofiler_mod8.html#cb228-12" tabindex="-1"></a>p <span class="ot">=</span> <span class="fu">ggplot</span>(enrichment, <span class="fu">aes</span>(<span class="fu">reorder</span>(term_name, score), score)) <span class="sc">+</span></span>
+<span id="cb228-13"><a href="gprofiler_mod8.html#cb228-13" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">fill =</span> score), <span class="at">width=</span><span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb228-14"><a href="gprofiler_mod8.html#cb228-14" tabindex="-1"></a>  <span class="fu">scale_fill_gradient</span>(<span class="at">low =</span> <span class="st">&quot;#C1F6F8&quot;</span>, <span class="at">high =</span> <span class="st">&quot;#00BFC4&quot;</span>)<span class="sc">+</span></span>
+<span id="cb228-15"><a href="gprofiler_mod8.html#cb228-15" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb228-16"><a href="gprofiler_mod8.html#cb228-16" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;&quot;</span>, <span class="at">y=</span><span class="st">&quot;Normalized Enrichment Score&quot;</span>,<span class="at">title=</span><span class="st">&quot;Pathway enrichment analysis &quot;</span>) <span class="sc">+</span> </span>
+<span id="cb228-17"><a href="gprofiler_mod8.html#cb228-17" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb228-18"><a href="gprofiler_mod8.html#cb228-18" tabindex="-1"></a></span>
+<span id="cb228-19"><a href="gprofiler_mod8.html#cb228-19" tabindex="-1"></a>p</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-102-1.png" alt="" width="672" /></p>
 <div id="step-2---dot-plot-with-segment" class="section level3 hasAnchor">
 <h3>Step 2 - Dot plot with segment<a href="gprofiler_mod8.html#step-2---dot-plot-with-segment" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="gprofiler_mod8.html#cb221-1" tabindex="-1"></a>enrichmentTop20 <span class="ot">&lt;-</span> enrichment <span class="sc">%&gt;%</span></span>
-<span id="cb221-2"><a href="gprofiler_mod8.html#cb221-2" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(score)) <span class="sc">%&gt;%</span></span>
-<span id="cb221-3"><a href="gprofiler_mod8.html#cb221-3" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">20</span>)</span>
-<span id="cb221-4"><a href="gprofiler_mod8.html#cb221-4" tabindex="-1"></a></span>
-<span id="cb221-5"><a href="gprofiler_mod8.html#cb221-5" tabindex="-1"></a>p <span class="ot">=</span> <span class="fu">ggplot</span>(enrichmentTop20, <span class="fu">aes</span>(</span>
-<span id="cb221-6"><a href="gprofiler_mod8.html#cb221-6" tabindex="-1"></a>  <span class="at">y =</span> <span class="fu">fct_reorder</span>(term_name, score),</span>
-<span id="cb221-7"><a href="gprofiler_mod8.html#cb221-7" tabindex="-1"></a>  <span class="at">x =</span> score,</span>
-<span id="cb221-8"><a href="gprofiler_mod8.html#cb221-8" tabindex="-1"></a>  <span class="at">color =</span> score,</span>
-<span id="cb221-9"><a href="gprofiler_mod8.html#cb221-9" tabindex="-1"></a>  <span class="at">size =</span> score</span>
-<span id="cb221-10"><a href="gprofiler_mod8.html#cb221-10" tabindex="-1"></a>)) <span class="sc">+</span></span>
-<span id="cb221-11"><a href="gprofiler_mod8.html#cb221-11" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb221-12"><a href="gprofiler_mod8.html#cb221-12" tabindex="-1"></a>  <span class="fu">scale_color_gradientn</span>(</span>
-<span id="cb221-13"><a href="gprofiler_mod8.html#cb221-13" tabindex="-1"></a>    <span class="at">colours =</span> <span class="fu">c</span>(<span class="st">&quot;#56A443&quot;</span>, <span class="st">&quot;#8AA443&quot;</span>, <span class="st">&quot;#f7ca64&quot;</span>),</span>
-<span id="cb221-14"><a href="gprofiler_mod8.html#cb221-14" tabindex="-1"></a>    <span class="at">trans =</span> <span class="st">&quot;log10&quot;</span>,</span>
-<span id="cb221-15"><a href="gprofiler_mod8.html#cb221-15" tabindex="-1"></a>    <span class="at">guide =</span> <span class="fu">guide_colorbar</span>(<span class="at">reverse =</span> <span class="cn">FALSE</span>, <span class="at">order =</span> <span class="dv">1</span>)</span>
-<span id="cb221-16"><a href="gprofiler_mod8.html#cb221-16" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb221-17"><a href="gprofiler_mod8.html#cb221-17" tabindex="-1"></a>  <span class="fu">scale_size_continuous</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">8</span>)) <span class="sc">+</span></span>
-<span id="cb221-18"><a href="gprofiler_mod8.html#cb221-18" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">12</span>) <span class="sc">+</span></span>
-<span id="cb221-19"><a href="gprofiler_mod8.html#cb221-19" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;score -log10(adj pvalue)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb221-20"><a href="gprofiler_mod8.html#cb221-20" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="cn">NULL</span>) <span class="sc">+</span></span>
-<span id="cb221-21"><a href="gprofiler_mod8.html#cb221-21" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Pathway Enrichment Analysis&quot;</span>) <span class="sc">+</span></span>
-<span id="cb221-22"><a href="gprofiler_mod8.html#cb221-22" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb221-23"><a href="gprofiler_mod8.html#cb221-23" tabindex="-1"></a>    <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>)</span>
-<span id="cb221-24"><a href="gprofiler_mod8.html#cb221-24" tabindex="-1"></a>  )</span>
-<span id="cb221-25"><a href="gprofiler_mod8.html#cb221-25" tabindex="-1"></a>p</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-95-1.png" alt="" width="672" /></p>
+<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="gprofiler_mod8.html#cb229-1" tabindex="-1"></a>enrichmentTop20 <span class="ot">&lt;-</span> enrichment <span class="sc">%&gt;%</span></span>
+<span id="cb229-2"><a href="gprofiler_mod8.html#cb229-2" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(score)) <span class="sc">%&gt;%</span></span>
+<span id="cb229-3"><a href="gprofiler_mod8.html#cb229-3" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">20</span>)</span>
+<span id="cb229-4"><a href="gprofiler_mod8.html#cb229-4" tabindex="-1"></a></span>
+<span id="cb229-5"><a href="gprofiler_mod8.html#cb229-5" tabindex="-1"></a>p <span class="ot">=</span> <span class="fu">ggplot</span>(enrichmentTop20, <span class="fu">aes</span>(</span>
+<span id="cb229-6"><a href="gprofiler_mod8.html#cb229-6" tabindex="-1"></a>  <span class="at">y =</span> <span class="fu">fct_reorder</span>(term_name, score),</span>
+<span id="cb229-7"><a href="gprofiler_mod8.html#cb229-7" tabindex="-1"></a>  <span class="at">x =</span> score,</span>
+<span id="cb229-8"><a href="gprofiler_mod8.html#cb229-8" tabindex="-1"></a>  <span class="at">color =</span> score,</span>
+<span id="cb229-9"><a href="gprofiler_mod8.html#cb229-9" tabindex="-1"></a>  <span class="at">size =</span> score</span>
+<span id="cb229-10"><a href="gprofiler_mod8.html#cb229-10" tabindex="-1"></a>)) <span class="sc">+</span></span>
+<span id="cb229-11"><a href="gprofiler_mod8.html#cb229-11" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb229-12"><a href="gprofiler_mod8.html#cb229-12" tabindex="-1"></a>  <span class="fu">scale_color_gradientn</span>(</span>
+<span id="cb229-13"><a href="gprofiler_mod8.html#cb229-13" tabindex="-1"></a>    <span class="at">colours =</span> <span class="fu">c</span>(<span class="st">&quot;#56A443&quot;</span>, <span class="st">&quot;#8AA443&quot;</span>, <span class="st">&quot;#f7ca64&quot;</span>),</span>
+<span id="cb229-14"><a href="gprofiler_mod8.html#cb229-14" tabindex="-1"></a>    <span class="at">trans =</span> <span class="st">&quot;log10&quot;</span>,</span>
+<span id="cb229-15"><a href="gprofiler_mod8.html#cb229-15" tabindex="-1"></a>    <span class="at">guide =</span> <span class="fu">guide_colorbar</span>(<span class="at">reverse =</span> <span class="cn">FALSE</span>, <span class="at">order =</span> <span class="dv">1</span>)</span>
+<span id="cb229-16"><a href="gprofiler_mod8.html#cb229-16" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb229-17"><a href="gprofiler_mod8.html#cb229-17" tabindex="-1"></a>  <span class="fu">scale_size_continuous</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">8</span>)) <span class="sc">+</span></span>
+<span id="cb229-18"><a href="gprofiler_mod8.html#cb229-18" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">12</span>) <span class="sc">+</span></span>
+<span id="cb229-19"><a href="gprofiler_mod8.html#cb229-19" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;score -log10(adj pvalue)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb229-20"><a href="gprofiler_mod8.html#cb229-20" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb229-21"><a href="gprofiler_mod8.html#cb229-21" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Pathway Enrichment Analysis&quot;</span>) <span class="sc">+</span></span>
+<span id="cb229-22"><a href="gprofiler_mod8.html#cb229-22" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb229-23"><a href="gprofiler_mod8.html#cb229-23" tabindex="-1"></a>    <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>)</span>
+<span id="cb229-24"><a href="gprofiler_mod8.html#cb229-24" tabindex="-1"></a>  )</span>
+<span id="cb229-25"><a href="gprofiler_mod8.html#cb229-25" tabindex="-1"></a>p</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-103-1.png" alt="" width="672" /></p>
 </div>
 <div id="step-4---hierarchical-cluster" class="section level3 hasAnchor">
 <h3>Step 4 - Hierarchical Cluster<a href="gprofiler_mod8.html#step-4---hierarchical-cluster" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The problem with the earlier visualization, which represents the top 20 pathways, is that it does not account for the overlap between gene sets. As you can observe, many pathways have similar names because they share a substantial number of genes. To provide a more accurate and efficient representation of the results, and to obtain a quicker and clearer overview, it would be more appropriate to aggregate and summarize pathways with substantial gene overlap, thereby reducing redundancy.</p>
 <p>Our first approach is to use hierarchical clustering based on a distance matrix that measures the similarity between pathways according to the number of genes they have in common, allowing us to visualize their relationships.</p>
-<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="gprofiler_mod8.html#cb222-1" tabindex="-1"></a>enrichment_results_UPgenes <span class="ot">&lt;-</span> gprofiler_results_custom_max500_UPgenes<span class="sc">$</span>result</span>
-<span id="cb222-2"><a href="gprofiler_mod8.html#cb222-2" tabindex="-1"></a></span>
-<span id="cb222-3"><a href="gprofiler_mod8.html#cb222-3" tabindex="-1"></a>enrichment_results_UPgenes<span class="sc">$</span>score <span class="ot">=</span> <span class="sc">-</span><span class="fu">log10</span>(<span class="fu">as.numeric</span>(enrichment_results_UPgenes<span class="sc">$</span>p_value))</span>
-<span id="cb222-4"><a href="gprofiler_mod8.html#cb222-4" tabindex="-1"></a></span>
-<span id="cb222-5"><a href="gprofiler_mod8.html#cb222-5" tabindex="-1"></a><span class="co"># Top 20 enriched terms</span></span>
-<span id="cb222-6"><a href="gprofiler_mod8.html#cb222-6" tabindex="-1"></a>enrichmentTop20 <span class="ot">&lt;-</span> enrichment_results_UPgenes <span class="sc">%&gt;%</span></span>
-<span id="cb222-7"><a href="gprofiler_mod8.html#cb222-7" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(score)) <span class="sc">%&gt;%</span></span>
-<span id="cb222-8"><a href="gprofiler_mod8.html#cb222-8" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">20</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="gprofiler_mod8.html#cb230-1" tabindex="-1"></a>enrichment_results_UPgenes <span class="ot">&lt;-</span> gprofiler_results_custom_max500_UPgenes<span class="sc">$</span>result</span>
+<span id="cb230-2"><a href="gprofiler_mod8.html#cb230-2" tabindex="-1"></a></span>
+<span id="cb230-3"><a href="gprofiler_mod8.html#cb230-3" tabindex="-1"></a>enrichment_results_UPgenes<span class="sc">$</span>score <span class="ot">=</span> <span class="sc">-</span><span class="fu">log10</span>(<span class="fu">as.numeric</span>(enrichment_results_UPgenes<span class="sc">$</span>p_value))</span>
+<span id="cb230-4"><a href="gprofiler_mod8.html#cb230-4" tabindex="-1"></a></span>
+<span id="cb230-5"><a href="gprofiler_mod8.html#cb230-5" tabindex="-1"></a><span class="co"># Top 20 enriched terms</span></span>
+<span id="cb230-6"><a href="gprofiler_mod8.html#cb230-6" tabindex="-1"></a>enrichmentTop20 <span class="ot">&lt;-</span> enrichment_results_UPgenes <span class="sc">%&gt;%</span></span>
+<span id="cb230-7"><a href="gprofiler_mod8.html#cb230-7" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(score)) <span class="sc">%&gt;%</span></span>
+<span id="cb230-8"><a href="gprofiler_mod8.html#cb230-8" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">20</span>)</span></code></pre></div>
 <div id="calculating-the-distance-matrix-using-the-jaccard-coefficient" class="section level4 hasAnchor">
 <h4>Calculating the distance matrix using the jaccard coefficient<a href="gprofiler_mod8.html#calculating-the-distance-matrix-using-the-jaccard-coefficient" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <ul>
@@ -3062,222 +3062,222 @@ Figure 3: Jaccard and overlap coefficients for two gene sets.
 </div>
 <p>We convert these scores into distances (1 − score) and use them to group similar pathways into broader biological themes.</p>
 <p>##Illustration with Jaccard Coefficient</p>
-<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="gprofiler_mod8.html#cb223-1" tabindex="-1"></a><span class="co"># Convert genes to lists</span></span>
-<span id="cb223-2"><a href="gprofiler_mod8.html#cb223-2" tabindex="-1"></a><span class="co"># (the intersection column, returned by g:Profiler with evcodes = TRUE, contains</span></span>
-<span id="cb223-3"><a href="gprofiler_mod8.html#cb223-3" tabindex="-1"></a><span class="co"># the genes of our list found in each pathway, separated by a comma)</span></span>
-<span id="cb223-4"><a href="gprofiler_mod8.html#cb223-4" tabindex="-1"></a>gene_lists <span class="ot">&lt;-</span> <span class="fu">strsplit</span>(enrichment_results_UPgenes<span class="sc">$</span>intersection, <span class="st">&quot;,&quot;</span>)</span>
-<span id="cb223-5"><a href="gprofiler_mod8.html#cb223-5" tabindex="-1"></a></span>
-<span id="cb223-6"><a href="gprofiler_mod8.html#cb223-6" tabindex="-1"></a><span class="co"># Calculate Jaccard similarity matrix</span></span>
-<span id="cb223-7"><a href="gprofiler_mod8.html#cb223-7" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">length</span>(gene_lists)</span>
-<span id="cb223-8"><a href="gprofiler_mod8.html#cb223-8" tabindex="-1"></a>jaccard_mat <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">0</span>, n, n)</span>
-<span id="cb223-9"><a href="gprofiler_mod8.html#cb223-9" tabindex="-1"></a><span class="fu">rownames</span>(jaccard_mat) <span class="ot">&lt;-</span> enrichment_results_UPgenes<span class="sc">$</span>term_name</span>
-<span id="cb223-10"><a href="gprofiler_mod8.html#cb223-10" tabindex="-1"></a><span class="fu">colnames</span>(jaccard_mat) <span class="ot">&lt;-</span> enrichment_results_UPgenes<span class="sc">$</span>term_name</span>
-<span id="cb223-11"><a href="gprofiler_mod8.html#cb223-11" tabindex="-1"></a></span>
-<span id="cb223-12"><a href="gprofiler_mod8.html#cb223-12" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_len</span>(n)) {</span>
-<span id="cb223-13"><a href="gprofiler_mod8.html#cb223-13" tabindex="-1"></a>  <span class="cf">for</span> (j <span class="cf">in</span> <span class="fu">seq_len</span>(n)) {</span>
-<span id="cb223-14"><a href="gprofiler_mod8.html#cb223-14" tabindex="-1"></a>    intersection <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">intersect</span>(gene_lists[[i]], gene_lists[[j]]))</span>
-<span id="cb223-15"><a href="gprofiler_mod8.html#cb223-15" tabindex="-1"></a>    union        <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">union</span>(gene_lists[[i]],     gene_lists[[j]]))</span>
-<span id="cb223-16"><a href="gprofiler_mod8.html#cb223-16" tabindex="-1"></a>    jaccard_mat[i, j] <span class="ot">&lt;-</span> intersection <span class="sc">/</span> union</span>
-<span id="cb223-17"><a href="gprofiler_mod8.html#cb223-17" tabindex="-1"></a>  }</span>
-<span id="cb223-18"><a href="gprofiler_mod8.html#cb223-18" tabindex="-1"></a>}</span>
-<span id="cb223-19"><a href="gprofiler_mod8.html#cb223-19" tabindex="-1"></a></span>
-<span id="cb223-20"><a href="gprofiler_mod8.html#cb223-20" tabindex="-1"></a></span>
-<span id="cb223-21"><a href="gprofiler_mod8.html#cb223-21" tabindex="-1"></a>labs <span class="ot">&lt;-</span> enrichment_results_UPgenes<span class="sc">$</span>term_name</span>
-<span id="cb223-22"><a href="gprofiler_mod8.html#cb223-22" tabindex="-1"></a>labs <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">nchar</span>(labs) <span class="sc">&gt;</span> <span class="dv">30</span>, <span class="fu">paste0</span>(<span class="fu">substr</span>(labs, <span class="dv">1</span>, <span class="dv">27</span>), <span class="st">&quot;...&quot;</span>), labs)</span>
-<span id="cb223-23"><a href="gprofiler_mod8.html#cb223-23" tabindex="-1"></a><span class="fu">rownames</span>(jaccard_mat) <span class="ot">&lt;-</span> <span class="fu">colnames</span>(jaccard_mat) <span class="ot">&lt;-</span> <span class="fu">make.unique</span>(labs)</span>
-<span id="cb223-24"><a href="gprofiler_mod8.html#cb223-24" tabindex="-1"></a></span>
-<span id="cb223-25"><a href="gprofiler_mod8.html#cb223-25" tabindex="-1"></a>keep <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">seq_len</span>(<span class="fu">nrow</span>(jaccard_mat)), <span class="fu">min</span>(<span class="dv">20</span>, <span class="fu">nrow</span>(jaccard_mat)))</span>
-<span id="cb223-26"><a href="gprofiler_mod8.html#cb223-26" tabindex="-1"></a>jaccard_sub <span class="ot">&lt;-</span> jaccard_mat[keep, keep]</span>
-<span id="cb223-27"><a href="gprofiler_mod8.html#cb223-27" tabindex="-1"></a></span>
-<span id="cb223-28"><a href="gprofiler_mod8.html#cb223-28" tabindex="-1"></a></span>
-<span id="cb223-29"><a href="gprofiler_mod8.html#cb223-29" tabindex="-1"></a><span class="co"># Heatmap</span></span>
-<span id="cb223-30"><a href="gprofiler_mod8.html#cb223-30" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">pheatmap</span>(</span>
-<span id="cb223-31"><a href="gprofiler_mod8.html#cb223-31" tabindex="-1"></a>  jaccard_sub,</span>
-<span id="cb223-32"><a href="gprofiler_mod8.html#cb223-32" tabindex="-1"></a>  <span class="at">color           =</span> <span class="fu">colorRampPalette</span>(<span class="fu">c</span>(<span class="st">&quot;white&quot;</span>, <span class="st">&quot;#C6DBEF&quot;</span>, <span class="st">&quot;#6BAED6&quot;</span>, <span class="st">&quot;#2171B5&quot;</span>, <span class="st">&quot;#08306B&quot;</span>))(<span class="dv">100</span>),</span>
-<span id="cb223-33"><a href="gprofiler_mod8.html#cb223-33" tabindex="-1"></a>  <span class="at">breaks          =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">length.out =</span> <span class="dv">101</span>),</span>
-<span id="cb223-34"><a href="gprofiler_mod8.html#cb223-34" tabindex="-1"></a>  <span class="at">display_numbers =</span> F,</span>
-<span id="cb223-35"><a href="gprofiler_mod8.html#cb223-35" tabindex="-1"></a>  <span class="co">#number_format   = &quot;%.2f&quot;,</span></span>
-<span id="cb223-36"><a href="gprofiler_mod8.html#cb223-36" tabindex="-1"></a>  <span class="co">#number_color    = &quot;black&quot;,</span></span>
-<span id="cb223-37"><a href="gprofiler_mod8.html#cb223-37" tabindex="-1"></a>  <span class="co">#fontsize_number = 8,</span></span>
-<span id="cb223-38"><a href="gprofiler_mod8.html#cb223-38" tabindex="-1"></a>  <span class="at">clustering_distance_rows =</span> <span class="fu">as.dist</span>(<span class="dv">1</span> <span class="sc">-</span> jaccard_sub),</span>
-<span id="cb223-39"><a href="gprofiler_mod8.html#cb223-39" tabindex="-1"></a>  <span class="at">clustering_distance_cols =</span> <span class="fu">as.dist</span>(<span class="dv">1</span> <span class="sc">-</span> jaccard_sub),</span>
-<span id="cb223-40"><a href="gprofiler_mod8.html#cb223-40" tabindex="-1"></a>  <span class="at">border_color    =</span> <span class="st">&quot;grey90&quot;</span>,</span>
-<span id="cb223-41"><a href="gprofiler_mod8.html#cb223-41" tabindex="-1"></a>  <span class="at">fontsize_row    =</span> <span class="dv">7</span>,</span>
-<span id="cb223-42"><a href="gprofiler_mod8.html#cb223-42" tabindex="-1"></a>  <span class="at">fontsize_col    =</span> <span class="dv">7</span>,</span>
-<span id="cb223-43"><a href="gprofiler_mod8.html#cb223-43" tabindex="-1"></a>  <span class="at">angle_col       =</span> <span class="dv">45</span>,</span>
-<span id="cb223-44"><a href="gprofiler_mod8.html#cb223-44" tabindex="-1"></a>  <span class="at">main            =</span> <span class="st">&quot;Jaccard coefficient (20 random gene sets)&quot;</span></span>
-<span id="cb223-45"><a href="gprofiler_mod8.html#cb223-45" tabindex="-1"></a>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-97-1.png" alt="" width="672" /></p>
+<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="gprofiler_mod8.html#cb231-1" tabindex="-1"></a><span class="co"># Convert genes to lists</span></span>
+<span id="cb231-2"><a href="gprofiler_mod8.html#cb231-2" tabindex="-1"></a><span class="co"># (the intersection column, returned by g:Profiler with evcodes = TRUE, contains</span></span>
+<span id="cb231-3"><a href="gprofiler_mod8.html#cb231-3" tabindex="-1"></a><span class="co"># the genes of our list found in each pathway, separated by a comma)</span></span>
+<span id="cb231-4"><a href="gprofiler_mod8.html#cb231-4" tabindex="-1"></a>gene_lists <span class="ot">&lt;-</span> <span class="fu">strsplit</span>(enrichment_results_UPgenes<span class="sc">$</span>intersection, <span class="st">&quot;,&quot;</span>)</span>
+<span id="cb231-5"><a href="gprofiler_mod8.html#cb231-5" tabindex="-1"></a></span>
+<span id="cb231-6"><a href="gprofiler_mod8.html#cb231-6" tabindex="-1"></a><span class="co"># Calculate Jaccard similarity matrix</span></span>
+<span id="cb231-7"><a href="gprofiler_mod8.html#cb231-7" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">length</span>(gene_lists)</span>
+<span id="cb231-8"><a href="gprofiler_mod8.html#cb231-8" tabindex="-1"></a>jaccard_mat <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">0</span>, n, n)</span>
+<span id="cb231-9"><a href="gprofiler_mod8.html#cb231-9" tabindex="-1"></a><span class="fu">rownames</span>(jaccard_mat) <span class="ot">&lt;-</span> enrichment_results_UPgenes<span class="sc">$</span>term_name</span>
+<span id="cb231-10"><a href="gprofiler_mod8.html#cb231-10" tabindex="-1"></a><span class="fu">colnames</span>(jaccard_mat) <span class="ot">&lt;-</span> enrichment_results_UPgenes<span class="sc">$</span>term_name</span>
+<span id="cb231-11"><a href="gprofiler_mod8.html#cb231-11" tabindex="-1"></a></span>
+<span id="cb231-12"><a href="gprofiler_mod8.html#cb231-12" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_len</span>(n)) {</span>
+<span id="cb231-13"><a href="gprofiler_mod8.html#cb231-13" tabindex="-1"></a>  <span class="cf">for</span> (j <span class="cf">in</span> <span class="fu">seq_len</span>(n)) {</span>
+<span id="cb231-14"><a href="gprofiler_mod8.html#cb231-14" tabindex="-1"></a>    intersection <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">intersect</span>(gene_lists[[i]], gene_lists[[j]]))</span>
+<span id="cb231-15"><a href="gprofiler_mod8.html#cb231-15" tabindex="-1"></a>    union        <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">union</span>(gene_lists[[i]],     gene_lists[[j]]))</span>
+<span id="cb231-16"><a href="gprofiler_mod8.html#cb231-16" tabindex="-1"></a>    jaccard_mat[i, j] <span class="ot">&lt;-</span> intersection <span class="sc">/</span> union</span>
+<span id="cb231-17"><a href="gprofiler_mod8.html#cb231-17" tabindex="-1"></a>  }</span>
+<span id="cb231-18"><a href="gprofiler_mod8.html#cb231-18" tabindex="-1"></a>}</span>
+<span id="cb231-19"><a href="gprofiler_mod8.html#cb231-19" tabindex="-1"></a></span>
+<span id="cb231-20"><a href="gprofiler_mod8.html#cb231-20" tabindex="-1"></a></span>
+<span id="cb231-21"><a href="gprofiler_mod8.html#cb231-21" tabindex="-1"></a>labs <span class="ot">&lt;-</span> enrichment_results_UPgenes<span class="sc">$</span>term_name</span>
+<span id="cb231-22"><a href="gprofiler_mod8.html#cb231-22" tabindex="-1"></a>labs <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">nchar</span>(labs) <span class="sc">&gt;</span> <span class="dv">30</span>, <span class="fu">paste0</span>(<span class="fu">substr</span>(labs, <span class="dv">1</span>, <span class="dv">27</span>), <span class="st">&quot;...&quot;</span>), labs)</span>
+<span id="cb231-23"><a href="gprofiler_mod8.html#cb231-23" tabindex="-1"></a><span class="fu">rownames</span>(jaccard_mat) <span class="ot">&lt;-</span> <span class="fu">colnames</span>(jaccard_mat) <span class="ot">&lt;-</span> <span class="fu">make.unique</span>(labs)</span>
+<span id="cb231-24"><a href="gprofiler_mod8.html#cb231-24" tabindex="-1"></a></span>
+<span id="cb231-25"><a href="gprofiler_mod8.html#cb231-25" tabindex="-1"></a>keep <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">seq_len</span>(<span class="fu">nrow</span>(jaccard_mat)), <span class="fu">min</span>(<span class="dv">20</span>, <span class="fu">nrow</span>(jaccard_mat)))</span>
+<span id="cb231-26"><a href="gprofiler_mod8.html#cb231-26" tabindex="-1"></a>jaccard_sub <span class="ot">&lt;-</span> jaccard_mat[keep, keep]</span>
+<span id="cb231-27"><a href="gprofiler_mod8.html#cb231-27" tabindex="-1"></a></span>
+<span id="cb231-28"><a href="gprofiler_mod8.html#cb231-28" tabindex="-1"></a></span>
+<span id="cb231-29"><a href="gprofiler_mod8.html#cb231-29" tabindex="-1"></a><span class="co"># Heatmap</span></span>
+<span id="cb231-30"><a href="gprofiler_mod8.html#cb231-30" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">pheatmap</span>(</span>
+<span id="cb231-31"><a href="gprofiler_mod8.html#cb231-31" tabindex="-1"></a>  jaccard_sub,</span>
+<span id="cb231-32"><a href="gprofiler_mod8.html#cb231-32" tabindex="-1"></a>  <span class="at">color           =</span> <span class="fu">colorRampPalette</span>(<span class="fu">c</span>(<span class="st">&quot;white&quot;</span>, <span class="st">&quot;#C6DBEF&quot;</span>, <span class="st">&quot;#6BAED6&quot;</span>, <span class="st">&quot;#2171B5&quot;</span>, <span class="st">&quot;#08306B&quot;</span>))(<span class="dv">100</span>),</span>
+<span id="cb231-33"><a href="gprofiler_mod8.html#cb231-33" tabindex="-1"></a>  <span class="at">breaks          =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">length.out =</span> <span class="dv">101</span>),</span>
+<span id="cb231-34"><a href="gprofiler_mod8.html#cb231-34" tabindex="-1"></a>  <span class="at">display_numbers =</span> F,</span>
+<span id="cb231-35"><a href="gprofiler_mod8.html#cb231-35" tabindex="-1"></a>  <span class="co">#number_format   = &quot;%.2f&quot;,</span></span>
+<span id="cb231-36"><a href="gprofiler_mod8.html#cb231-36" tabindex="-1"></a>  <span class="co">#number_color    = &quot;black&quot;,</span></span>
+<span id="cb231-37"><a href="gprofiler_mod8.html#cb231-37" tabindex="-1"></a>  <span class="co">#fontsize_number = 8,</span></span>
+<span id="cb231-38"><a href="gprofiler_mod8.html#cb231-38" tabindex="-1"></a>  <span class="at">clustering_distance_rows =</span> <span class="fu">as.dist</span>(<span class="dv">1</span> <span class="sc">-</span> jaccard_sub),</span>
+<span id="cb231-39"><a href="gprofiler_mod8.html#cb231-39" tabindex="-1"></a>  <span class="at">clustering_distance_cols =</span> <span class="fu">as.dist</span>(<span class="dv">1</span> <span class="sc">-</span> jaccard_sub),</span>
+<span id="cb231-40"><a href="gprofiler_mod8.html#cb231-40" tabindex="-1"></a>  <span class="at">border_color    =</span> <span class="st">&quot;grey90&quot;</span>,</span>
+<span id="cb231-41"><a href="gprofiler_mod8.html#cb231-41" tabindex="-1"></a>  <span class="at">fontsize_row    =</span> <span class="dv">7</span>,</span>
+<span id="cb231-42"><a href="gprofiler_mod8.html#cb231-42" tabindex="-1"></a>  <span class="at">fontsize_col    =</span> <span class="dv">7</span>,</span>
+<span id="cb231-43"><a href="gprofiler_mod8.html#cb231-43" tabindex="-1"></a>  <span class="at">angle_col       =</span> <span class="dv">45</span>,</span>
+<span id="cb231-44"><a href="gprofiler_mod8.html#cb231-44" tabindex="-1"></a>  <span class="at">main            =</span> <span class="st">&quot;Jaccard coefficient (20 random gene sets)&quot;</span></span>
+<span id="cb231-45"><a href="gprofiler_mod8.html#cb231-45" tabindex="-1"></a>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-105-1.png" alt="" width="672" /></p>
 <p>##Illustration with Overlap Coefficient</p>
-<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="gprofiler_mod8.html#cb224-1" tabindex="-1"></a><span class="co"># Calculate Overlap coefficient matrix (reuses gene_lists and n from above)</span></span>
-<span id="cb224-2"><a href="gprofiler_mod8.html#cb224-2" tabindex="-1"></a>overlap_mat <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">0</span>, n, n)</span>
-<span id="cb224-3"><a href="gprofiler_mod8.html#cb224-3" tabindex="-1"></a></span>
-<span id="cb224-4"><a href="gprofiler_mod8.html#cb224-4" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_len</span>(n)) {</span>
-<span id="cb224-5"><a href="gprofiler_mod8.html#cb224-5" tabindex="-1"></a>  <span class="cf">for</span> (j <span class="cf">in</span> <span class="fu">seq_len</span>(n)) {</span>
-<span id="cb224-6"><a href="gprofiler_mod8.html#cb224-6" tabindex="-1"></a>    intersection <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">intersect</span>(gene_lists[[i]], gene_lists[[j]]))</span>
-<span id="cb224-7"><a href="gprofiler_mod8.html#cb224-7" tabindex="-1"></a>    smaller      <span class="ot">&lt;-</span> <span class="fu">min</span>(<span class="fu">length</span>(gene_lists[[i]]), <span class="fu">length</span>(gene_lists[[j]]))</span>
-<span id="cb224-8"><a href="gprofiler_mod8.html#cb224-8" tabindex="-1"></a>    overlap_mat[i, j] <span class="ot">&lt;-</span> intersection <span class="sc">/</span> smaller</span>
-<span id="cb224-9"><a href="gprofiler_mod8.html#cb224-9" tabindex="-1"></a>  }</span>
-<span id="cb224-10"><a href="gprofiler_mod8.html#cb224-10" tabindex="-1"></a>}</span>
-<span id="cb224-11"><a href="gprofiler_mod8.html#cb224-11" tabindex="-1"></a></span>
-<span id="cb224-12"><a href="gprofiler_mod8.html#cb224-12" tabindex="-1"></a><span class="fu">rownames</span>(overlap_mat) <span class="ot">&lt;-</span> <span class="fu">colnames</span>(overlap_mat) <span class="ot">&lt;-</span> <span class="fu">make.unique</span>(labs)</span>
-<span id="cb224-13"><a href="gprofiler_mod8.html#cb224-13" tabindex="-1"></a></span>
-<span id="cb224-14"><a href="gprofiler_mod8.html#cb224-14" tabindex="-1"></a><span class="co"># Use the same 20 gene sets as the Jaccard heatmap so the two can be compared</span></span>
-<span id="cb224-15"><a href="gprofiler_mod8.html#cb224-15" tabindex="-1"></a>overlap_sub <span class="ot">&lt;-</span> overlap_mat[keep, keep]</span>
-<span id="cb224-16"><a href="gprofiler_mod8.html#cb224-16" tabindex="-1"></a></span>
-<span id="cb224-17"><a href="gprofiler_mod8.html#cb224-17" tabindex="-1"></a></span>
-<span id="cb224-18"><a href="gprofiler_mod8.html#cb224-18" tabindex="-1"></a><span class="co"># Heatmap</span></span>
-<span id="cb224-19"><a href="gprofiler_mod8.html#cb224-19" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">pheatmap</span>(</span>
-<span id="cb224-20"><a href="gprofiler_mod8.html#cb224-20" tabindex="-1"></a>  overlap_sub,</span>
-<span id="cb224-21"><a href="gprofiler_mod8.html#cb224-21" tabindex="-1"></a>  <span class="at">color           =</span> <span class="fu">colorRampPalette</span>(<span class="fu">c</span>(<span class="st">&quot;white&quot;</span>, <span class="st">&quot;#C6DBEF&quot;</span>, <span class="st">&quot;#6BAED6&quot;</span>, <span class="st">&quot;#2171B5&quot;</span>, <span class="st">&quot;#08306B&quot;</span>))(<span class="dv">100</span>),</span>
-<span id="cb224-22"><a href="gprofiler_mod8.html#cb224-22" tabindex="-1"></a>  <span class="at">breaks          =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">length.out =</span> <span class="dv">101</span>),</span>
-<span id="cb224-23"><a href="gprofiler_mod8.html#cb224-23" tabindex="-1"></a>  <span class="at">display_numbers =</span> F,</span>
-<span id="cb224-24"><a href="gprofiler_mod8.html#cb224-24" tabindex="-1"></a>  <span class="at">clustering_distance_rows =</span> <span class="fu">as.dist</span>(<span class="dv">1</span> <span class="sc">-</span> overlap_sub),</span>
-<span id="cb224-25"><a href="gprofiler_mod8.html#cb224-25" tabindex="-1"></a>  <span class="at">clustering_distance_cols =</span> <span class="fu">as.dist</span>(<span class="dv">1</span> <span class="sc">-</span> overlap_sub),</span>
-<span id="cb224-26"><a href="gprofiler_mod8.html#cb224-26" tabindex="-1"></a>  <span class="at">border_color    =</span> <span class="st">&quot;grey90&quot;</span>,</span>
-<span id="cb224-27"><a href="gprofiler_mod8.html#cb224-27" tabindex="-1"></a>  <span class="at">fontsize_row    =</span> <span class="dv">7</span>,</span>
-<span id="cb224-28"><a href="gprofiler_mod8.html#cb224-28" tabindex="-1"></a>  <span class="at">fontsize_col    =</span> <span class="dv">7</span>,</span>
-<span id="cb224-29"><a href="gprofiler_mod8.html#cb224-29" tabindex="-1"></a>  <span class="at">angle_col       =</span> <span class="dv">45</span>,</span>
-<span id="cb224-30"><a href="gprofiler_mod8.html#cb224-30" tabindex="-1"></a>  <span class="at">main            =</span> <span class="st">&quot;Overlap coefficient (20 random gene sets)&quot;</span></span>
-<span id="cb224-31"><a href="gprofiler_mod8.html#cb224-31" tabindex="-1"></a>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-98-1.png" alt="" width="672" /></p>
+<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="gprofiler_mod8.html#cb232-1" tabindex="-1"></a><span class="co"># Calculate Overlap coefficient matrix (reuses gene_lists and n from above)</span></span>
+<span id="cb232-2"><a href="gprofiler_mod8.html#cb232-2" tabindex="-1"></a>overlap_mat <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">0</span>, n, n)</span>
+<span id="cb232-3"><a href="gprofiler_mod8.html#cb232-3" tabindex="-1"></a></span>
+<span id="cb232-4"><a href="gprofiler_mod8.html#cb232-4" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_len</span>(n)) {</span>
+<span id="cb232-5"><a href="gprofiler_mod8.html#cb232-5" tabindex="-1"></a>  <span class="cf">for</span> (j <span class="cf">in</span> <span class="fu">seq_len</span>(n)) {</span>
+<span id="cb232-6"><a href="gprofiler_mod8.html#cb232-6" tabindex="-1"></a>    intersection <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">intersect</span>(gene_lists[[i]], gene_lists[[j]]))</span>
+<span id="cb232-7"><a href="gprofiler_mod8.html#cb232-7" tabindex="-1"></a>    smaller      <span class="ot">&lt;-</span> <span class="fu">min</span>(<span class="fu">length</span>(gene_lists[[i]]), <span class="fu">length</span>(gene_lists[[j]]))</span>
+<span id="cb232-8"><a href="gprofiler_mod8.html#cb232-8" tabindex="-1"></a>    overlap_mat[i, j] <span class="ot">&lt;-</span> intersection <span class="sc">/</span> smaller</span>
+<span id="cb232-9"><a href="gprofiler_mod8.html#cb232-9" tabindex="-1"></a>  }</span>
+<span id="cb232-10"><a href="gprofiler_mod8.html#cb232-10" tabindex="-1"></a>}</span>
+<span id="cb232-11"><a href="gprofiler_mod8.html#cb232-11" tabindex="-1"></a></span>
+<span id="cb232-12"><a href="gprofiler_mod8.html#cb232-12" tabindex="-1"></a><span class="fu">rownames</span>(overlap_mat) <span class="ot">&lt;-</span> <span class="fu">colnames</span>(overlap_mat) <span class="ot">&lt;-</span> <span class="fu">make.unique</span>(labs)</span>
+<span id="cb232-13"><a href="gprofiler_mod8.html#cb232-13" tabindex="-1"></a></span>
+<span id="cb232-14"><a href="gprofiler_mod8.html#cb232-14" tabindex="-1"></a><span class="co"># Use the same 20 gene sets as the Jaccard heatmap so the two can be compared</span></span>
+<span id="cb232-15"><a href="gprofiler_mod8.html#cb232-15" tabindex="-1"></a>overlap_sub <span class="ot">&lt;-</span> overlap_mat[keep, keep]</span>
+<span id="cb232-16"><a href="gprofiler_mod8.html#cb232-16" tabindex="-1"></a></span>
+<span id="cb232-17"><a href="gprofiler_mod8.html#cb232-17" tabindex="-1"></a></span>
+<span id="cb232-18"><a href="gprofiler_mod8.html#cb232-18" tabindex="-1"></a><span class="co"># Heatmap</span></span>
+<span id="cb232-19"><a href="gprofiler_mod8.html#cb232-19" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">pheatmap</span>(</span>
+<span id="cb232-20"><a href="gprofiler_mod8.html#cb232-20" tabindex="-1"></a>  overlap_sub,</span>
+<span id="cb232-21"><a href="gprofiler_mod8.html#cb232-21" tabindex="-1"></a>  <span class="at">color           =</span> <span class="fu">colorRampPalette</span>(<span class="fu">c</span>(<span class="st">&quot;white&quot;</span>, <span class="st">&quot;#C6DBEF&quot;</span>, <span class="st">&quot;#6BAED6&quot;</span>, <span class="st">&quot;#2171B5&quot;</span>, <span class="st">&quot;#08306B&quot;</span>))(<span class="dv">100</span>),</span>
+<span id="cb232-22"><a href="gprofiler_mod8.html#cb232-22" tabindex="-1"></a>  <span class="at">breaks          =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">length.out =</span> <span class="dv">101</span>),</span>
+<span id="cb232-23"><a href="gprofiler_mod8.html#cb232-23" tabindex="-1"></a>  <span class="at">display_numbers =</span> F,</span>
+<span id="cb232-24"><a href="gprofiler_mod8.html#cb232-24" tabindex="-1"></a>  <span class="at">clustering_distance_rows =</span> <span class="fu">as.dist</span>(<span class="dv">1</span> <span class="sc">-</span> overlap_sub),</span>
+<span id="cb232-25"><a href="gprofiler_mod8.html#cb232-25" tabindex="-1"></a>  <span class="at">clustering_distance_cols =</span> <span class="fu">as.dist</span>(<span class="dv">1</span> <span class="sc">-</span> overlap_sub),</span>
+<span id="cb232-26"><a href="gprofiler_mod8.html#cb232-26" tabindex="-1"></a>  <span class="at">border_color    =</span> <span class="st">&quot;grey90&quot;</span>,</span>
+<span id="cb232-27"><a href="gprofiler_mod8.html#cb232-27" tabindex="-1"></a>  <span class="at">fontsize_row    =</span> <span class="dv">7</span>,</span>
+<span id="cb232-28"><a href="gprofiler_mod8.html#cb232-28" tabindex="-1"></a>  <span class="at">fontsize_col    =</span> <span class="dv">7</span>,</span>
+<span id="cb232-29"><a href="gprofiler_mod8.html#cb232-29" tabindex="-1"></a>  <span class="at">angle_col       =</span> <span class="dv">45</span>,</span>
+<span id="cb232-30"><a href="gprofiler_mod8.html#cb232-30" tabindex="-1"></a>  <span class="at">main            =</span> <span class="st">&quot;Overlap coefficient (20 random gene sets)&quot;</span></span>
+<span id="cb232-31"><a href="gprofiler_mod8.html#cb232-31" tabindex="-1"></a>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-106-1.png" alt="" width="672" /></p>
 <p>##Hierarchical Clustering</p>
 <p>plot_hclust_enrichment: helper function to cluster the top enriched pathways by gene overlap (Jaccard distance) and plot them next to the dendrogram</p>
-<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="gprofiler_mod8.html#cb225-1" tabindex="-1"></a>plot_hclust_enrichment <span class="ot">=</span> <span class="cf">function</span>(enrichment_results, <span class="at">n_top =</span> <span class="dv">20</span>, <span class="at">n_clusters =</span> <span class="dv">8</span>) {</span>
-<span id="cb225-2"><a href="gprofiler_mod8.html#cb225-2" tabindex="-1"></a></span>
-<span id="cb225-3"><a href="gprofiler_mod8.html#cb225-3" tabindex="-1"></a>  enrichment_results<span class="sc">$</span>score <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fu">log10</span>(<span class="fu">as.numeric</span>(enrichment_results<span class="sc">$</span>p_value))</span>
-<span id="cb225-4"><a href="gprofiler_mod8.html#cb225-4" tabindex="-1"></a></span>
-<span id="cb225-5"><a href="gprofiler_mod8.html#cb225-5" tabindex="-1"></a>  <span class="co"># Top n_top enriched terms</span></span>
-<span id="cb225-6"><a href="gprofiler_mod8.html#cb225-6" tabindex="-1"></a>  enrichmentTop <span class="ot">&lt;-</span> enrichment_results <span class="sc">%&gt;%</span></span>
-<span id="cb225-7"><a href="gprofiler_mod8.html#cb225-7" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(score)) <span class="sc">%&gt;%</span></span>
-<span id="cb225-8"><a href="gprofiler_mod8.html#cb225-8" tabindex="-1"></a>    <span class="fu">slice_head</span>(<span class="at">n =</span> n_top)</span>
-<span id="cb225-9"><a href="gprofiler_mod8.html#cb225-9" tabindex="-1"></a></span>
-<span id="cb225-10"><a href="gprofiler_mod8.html#cb225-10" tabindex="-1"></a>  top_terms <span class="ot">&lt;-</span> enrichmentTop <span class="sc">%&gt;%</span></span>
-<span id="cb225-11"><a href="gprofiler_mod8.html#cb225-11" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="fu">as.numeric</span>(p_value))</span>
-<span id="cb225-12"><a href="gprofiler_mod8.html#cb225-12" tabindex="-1"></a></span>
-<span id="cb225-13"><a href="gprofiler_mod8.html#cb225-13" tabindex="-1"></a>  <span class="co"># Jaccard similarity matrix</span></span>
-<span id="cb225-14"><a href="gprofiler_mod8.html#cb225-14" tabindex="-1"></a>  <span class="co"># (the intersection column contains the genes of our list found in each pathway)</span></span>
-<span id="cb225-15"><a href="gprofiler_mod8.html#cb225-15" tabindex="-1"></a>  gene_lists <span class="ot">&lt;-</span> <span class="fu">strsplit</span>(top_terms<span class="sc">$</span>intersection, <span class="st">&quot;,&quot;</span>)</span>
-<span id="cb225-16"><a href="gprofiler_mod8.html#cb225-16" tabindex="-1"></a>  n          <span class="ot">&lt;-</span> <span class="fu">length</span>(gene_lists)</span>
-<span id="cb225-17"><a href="gprofiler_mod8.html#cb225-17" tabindex="-1"></a></span>
-<span id="cb225-18"><a href="gprofiler_mod8.html#cb225-18" tabindex="-1"></a>  jaccard_mat <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">0</span>, n, n,</span>
-<span id="cb225-19"><a href="gprofiler_mod8.html#cb225-19" tabindex="-1"></a>                        <span class="at">dimnames =</span> <span class="fu">list</span>(top_terms<span class="sc">$</span>term_name, top_terms<span class="sc">$</span>term_name))</span>
-<span id="cb225-20"><a href="gprofiler_mod8.html#cb225-20" tabindex="-1"></a></span>
-<span id="cb225-21"><a href="gprofiler_mod8.html#cb225-21" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_len</span>(n)) {</span>
-<span id="cb225-22"><a href="gprofiler_mod8.html#cb225-22" tabindex="-1"></a>    <span class="cf">for</span> (j <span class="cf">in</span> <span class="fu">seq_len</span>(n)) {</span>
-<span id="cb225-23"><a href="gprofiler_mod8.html#cb225-23" tabindex="-1"></a>      inter <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">intersect</span>(gene_lists[[i]], gene_lists[[j]]))</span>
-<span id="cb225-24"><a href="gprofiler_mod8.html#cb225-24" tabindex="-1"></a>      uni   <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">union</span>(gene_lists[[i]],     gene_lists[[j]]))</span>
-<span id="cb225-25"><a href="gprofiler_mod8.html#cb225-25" tabindex="-1"></a>      jaccard_mat[i, j] <span class="ot">&lt;-</span> inter <span class="sc">/</span> uni</span>
-<span id="cb225-26"><a href="gprofiler_mod8.html#cb225-26" tabindex="-1"></a>    }</span>
-<span id="cb225-27"><a href="gprofiler_mod8.html#cb225-27" tabindex="-1"></a>  }</span>
-<span id="cb225-28"><a href="gprofiler_mod8.html#cb225-28" tabindex="-1"></a></span>
-<span id="cb225-29"><a href="gprofiler_mod8.html#cb225-29" tabindex="-1"></a>  <span class="co"># Hierarchical clustering </span></span>
-<span id="cb225-30"><a href="gprofiler_mod8.html#cb225-30" tabindex="-1"></a>  dist_mat   <span class="ot">&lt;-</span> <span class="fu">as.dist</span>(<span class="dv">1</span> <span class="sc">-</span> jaccard_mat)</span>
-<span id="cb225-31"><a href="gprofiler_mod8.html#cb225-31" tabindex="-1"></a>  hc         <span class="ot">&lt;-</span> <span class="fu">hclust</span>(dist_mat, <span class="at">method =</span> <span class="st">&quot;average&quot;</span>)</span>
-<span id="cb225-32"><a href="gprofiler_mod8.html#cb225-32" tabindex="-1"></a>  term_order <span class="ot">&lt;-</span> hc<span class="sc">$</span>labels[hc<span class="sc">$</span>order]</span>
-<span id="cb225-33"><a href="gprofiler_mod8.html#cb225-33" tabindex="-1"></a></span>
-<span id="cb225-34"><a href="gprofiler_mod8.html#cb225-34" tabindex="-1"></a>  <span class="co"># The first level is drawn at the bottom of the bar plot, matching the</span></span>
-<span id="cb225-35"><a href="gprofiler_mod8.html#cb225-35" tabindex="-1"></a>  <span class="co"># first dendrogram leaf (y = 1)</span></span>
-<span id="cb225-36"><a href="gprofiler_mod8.html#cb225-36" tabindex="-1"></a>  top_terms<span class="sc">$</span>term_name <span class="ot">&lt;-</span> <span class="fu">factor</span>(top_terms<span class="sc">$</span>term_name, <span class="at">levels =</span> term_order)</span>
-<span id="cb225-37"><a href="gprofiler_mod8.html#cb225-37" tabindex="-1"></a>  top_terms<span class="sc">$</span>neglog10p <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fu">log10</span>(<span class="fu">as.numeric</span>(top_terms<span class="sc">$</span>p_value))</span>
-<span id="cb225-38"><a href="gprofiler_mod8.html#cb225-38" tabindex="-1"></a></span>
-<span id="cb225-39"><a href="gprofiler_mod8.html#cb225-39" tabindex="-1"></a>  <span class="co">#  Cut tree into k branches (cannot have more branches than terms)</span></span>
-<span id="cb225-40"><a href="gprofiler_mod8.html#cb225-40" tabindex="-1"></a>  k        <span class="ot">&lt;-</span> <span class="fu">min</span>(n_clusters, n)</span>
-<span id="cb225-41"><a href="gprofiler_mod8.html#cb225-41" tabindex="-1"></a>  clusters <span class="ot">&lt;-</span> <span class="fu">cutree</span>(hc, <span class="at">k =</span> k)</span>
-<span id="cb225-42"><a href="gprofiler_mod8.html#cb225-42" tabindex="-1"></a></span>
-<span id="cb225-43"><a href="gprofiler_mod8.html#cb225-43" tabindex="-1"></a>  top_terms<span class="sc">$</span>cluster <span class="ot">&lt;-</span> <span class="fu">factor</span>(clusters[<span class="fu">as.character</span>(top_terms<span class="sc">$</span>term_name)])</span>
-<span id="cb225-44"><a href="gprofiler_mod8.html#cb225-44" tabindex="-1"></a></span>
-<span id="cb225-45"><a href="gprofiler_mod8.html#cb225-45" tabindex="-1"></a>  <span class="co"># Bar plot (full, coloured by cluster)</span></span>
-<span id="cb225-46"><a href="gprofiler_mod8.html#cb225-46" tabindex="-1"></a>  base_colours <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;#1D9E75&quot;</span>, <span class="st">&quot;#3A7DC9&quot;</span>, <span class="st">&quot;#E07B39&quot;</span>, <span class="st">&quot;#9B59B6&quot;</span>,</span>
-<span id="cb225-47"><a href="gprofiler_mod8.html#cb225-47" tabindex="-1"></a>                    <span class="st">&quot;#E74C3C&quot;</span>, <span class="st">&quot;#F1C40F&quot;</span>, <span class="st">&quot;#1ABC9C&quot;</span>, <span class="st">&quot;#E91E63&quot;</span>)</span>
-<span id="cb225-48"><a href="gprofiler_mod8.html#cb225-48" tabindex="-1"></a>  <span class="co"># Interpolate extra colours when more than 8 clusters are requested</span></span>
-<span id="cb225-49"><a href="gprofiler_mod8.html#cb225-49" tabindex="-1"></a>  <span class="cf">if</span> (k <span class="sc">&lt;=</span> <span class="fu">length</span>(base_colours)) {</span>
-<span id="cb225-50"><a href="gprofiler_mod8.html#cb225-50" tabindex="-1"></a>    cluster_colours <span class="ot">&lt;-</span> base_colours</span>
-<span id="cb225-51"><a href="gprofiler_mod8.html#cb225-51" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
-<span id="cb225-52"><a href="gprofiler_mod8.html#cb225-52" tabindex="-1"></a>    cluster_colours <span class="ot">&lt;-</span> <span class="fu">colorRampPalette</span>(base_colours)(k)</span>
-<span id="cb225-53"><a href="gprofiler_mod8.html#cb225-53" tabindex="-1"></a>  }</span>
-<span id="cb225-54"><a href="gprofiler_mod8.html#cb225-54" tabindex="-1"></a></span>
-<span id="cb225-55"><a href="gprofiler_mod8.html#cb225-55" tabindex="-1"></a>  p_bar <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(top_terms, <span class="fu">aes</span>(<span class="at">x =</span> neglog10p, <span class="at">y =</span> term_name, <span class="at">fill =</span> cluster)) <span class="sc">+</span></span>
-<span id="cb225-56"><a href="gprofiler_mod8.html#cb225-56" tabindex="-1"></a>    <span class="fu">geom_col</span>(<span class="at">alpha =</span> <span class="fl">0.85</span>, <span class="at">width =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
-<span id="cb225-57"><a href="gprofiler_mod8.html#cb225-57" tabindex="-1"></a>    <span class="fu">scale_y_discrete</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.5</span>)) <span class="sc">+</span></span>
-<span id="cb225-58"><a href="gprofiler_mod8.html#cb225-58" tabindex="-1"></a>    <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> cluster_colours[<span class="fu">seq_len</span>(k)],</span>
-<span id="cb225-59"><a href="gprofiler_mod8.html#cb225-59" tabindex="-1"></a>                      <span class="at">name   =</span> <span class="st">&quot;Branch&quot;</span>) <span class="sc">+</span></span>
-<span id="cb225-60"><a href="gprofiler_mod8.html#cb225-60" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="fu">expression</span>(<span class="sc">-</span>log[<span class="dv">10</span>](p<span class="sc">-</span>value)), <span class="at">y =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
-<span id="cb225-61"><a href="gprofiler_mod8.html#cb225-61" tabindex="-1"></a>    <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">10</span>) <span class="sc">+</span></span>
-<span id="cb225-62"><a href="gprofiler_mod8.html#cb225-62" tabindex="-1"></a>    <span class="fu">theme</span>(</span>
-<span id="cb225-63"><a href="gprofiler_mod8.html#cb225-63" tabindex="-1"></a>      <span class="at">panel.grid.major.y =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb225-64"><a href="gprofiler_mod8.html#cb225-64" tabindex="-1"></a>      <span class="at">axis.text.y        =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>),</span>
-<span id="cb225-65"><a href="gprofiler_mod8.html#cb225-65" tabindex="-1"></a>      <span class="at">legend.position    =</span> <span class="st">&quot;right&quot;</span></span>
-<span id="cb225-66"><a href="gprofiler_mod8.html#cb225-66" tabindex="-1"></a>    )</span>
-<span id="cb225-67"><a href="gprofiler_mod8.html#cb225-67" tabindex="-1"></a></span>
-<span id="cb225-68"><a href="gprofiler_mod8.html#cb225-68" tabindex="-1"></a>  <span class="co">#  Dendrogram </span></span>
-<span id="cb225-69"><a href="gprofiler_mod8.html#cb225-69" tabindex="-1"></a>  dend_data <span class="ot">&lt;-</span> <span class="fu">dendro_data</span>(hc, <span class="at">type =</span> <span class="st">&quot;rectangle&quot;</span>)</span>
-<span id="cb225-70"><a href="gprofiler_mod8.html#cb225-70" tabindex="-1"></a>  seg       <span class="ot">&lt;-</span> dend_data<span class="sc">$</span>segments</span>
-<span id="cb225-71"><a href="gprofiler_mod8.html#cb225-71" tabindex="-1"></a></span>
-<span id="cb225-72"><a href="gprofiler_mod8.html#cb225-72" tabindex="-1"></a>  p_dend <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(seg) <span class="sc">+</span></span>
-<span id="cb225-73"><a href="gprofiler_mod8.html#cb225-73" tabindex="-1"></a>    <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> y, <span class="at">y =</span> x, <span class="at">xend =</span> yend, <span class="at">yend =</span> xend),</span>
-<span id="cb225-74"><a href="gprofiler_mod8.html#cb225-74" tabindex="-1"></a>                 <span class="at">colour =</span> <span class="st">&quot;grey40&quot;</span>, <span class="at">linewidth =</span> <span class="fl">0.45</span>) <span class="sc">+</span></span>
-<span id="cb225-75"><a href="gprofiler_mod8.html#cb225-75" tabindex="-1"></a>    <span class="fu">scale_x_reverse</span>(<span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="fl">0.02</span>, <span class="dv">0</span>))) <span class="sc">+</span></span>
-<span id="cb225-76"><a href="gprofiler_mod8.html#cb225-76" tabindex="-1"></a>    <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, n <span class="sc">+</span> <span class="fl">0.5</span>), <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="sc">+</span></span>
-<span id="cb225-77"><a href="gprofiler_mod8.html#cb225-77" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Jaccard distance&quot;</span>) <span class="sc">+</span></span>
-<span id="cb225-78"><a href="gprofiler_mod8.html#cb225-78" tabindex="-1"></a>    <span class="fu">theme_void</span>() <span class="sc">+</span></span>
-<span id="cb225-79"><a href="gprofiler_mod8.html#cb225-79" tabindex="-1"></a>    <span class="fu">theme</span>(</span>
-<span id="cb225-80"><a href="gprofiler_mod8.html#cb225-80" tabindex="-1"></a>      <span class="at">axis.title.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>, <span class="at">colour =</span> <span class="st">&quot;grey50&quot;</span>, <span class="at">margin =</span> <span class="fu">margin</span>(<span class="at">t =</span> <span class="dv">4</span>)),</span>
-<span id="cb225-81"><a href="gprofiler_mod8.html#cb225-81" tabindex="-1"></a>      <span class="at">axis.text.x  =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">7</span>, <span class="at">colour =</span> <span class="st">&quot;grey60&quot;</span>),</span>
-<span id="cb225-82"><a href="gprofiler_mod8.html#cb225-82" tabindex="-1"></a>      <span class="at">plot.margin  =</span> <span class="fu">margin</span>(<span class="dv">0</span>, <span class="dv">4</span>, <span class="dv">0</span>, <span class="dv">0</span>)</span>
-<span id="cb225-83"><a href="gprofiler_mod8.html#cb225-83" tabindex="-1"></a>    )</span>
-<span id="cb225-84"><a href="gprofiler_mod8.html#cb225-84" tabindex="-1"></a></span>
-<span id="cb225-85"><a href="gprofiler_mod8.html#cb225-85" tabindex="-1"></a>  <span class="co">#  Combined plot </span></span>
-<span id="cb225-86"><a href="gprofiler_mod8.html#cb225-86" tabindex="-1"></a>  p_combined <span class="ot">&lt;-</span> p_dend <span class="sc">+</span> p_bar <span class="sc">+</span></span>
-<span id="cb225-87"><a href="gprofiler_mod8.html#cb225-87" tabindex="-1"></a>    <span class="fu">plot_layout</span>(<span class="at">widths =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">1</span>))</span>
-<span id="cb225-88"><a href="gprofiler_mod8.html#cb225-88" tabindex="-1"></a></span>
-<span id="cb225-89"><a href="gprofiler_mod8.html#cb225-89" tabindex="-1"></a>  <span class="co">#  Keep only the top hit per branch </span></span>
-<span id="cb225-90"><a href="gprofiler_mod8.html#cb225-90" tabindex="-1"></a>  top_per_cluster <span class="ot">&lt;-</span> top_terms <span class="sc">%&gt;%</span></span>
-<span id="cb225-91"><a href="gprofiler_mod8.html#cb225-91" tabindex="-1"></a>    <span class="fu">group_by</span>(cluster) <span class="sc">%&gt;%</span></span>
-<span id="cb225-92"><a href="gprofiler_mod8.html#cb225-92" tabindex="-1"></a>    <span class="fu">slice_min</span>(<span class="fu">as.numeric</span>(p_value), <span class="at">n =</span> <span class="dv">1</span>, <span class="at">with_ties =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb225-93"><a href="gprofiler_mod8.html#cb225-93" tabindex="-1"></a>    <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb225-94"><a href="gprofiler_mod8.html#cb225-94" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="fu">as.numeric</span>(p_value)) <span class="sc">%&gt;%</span></span>
-<span id="cb225-95"><a href="gprofiler_mod8.html#cb225-95" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">term_name =</span> <span class="fu">factor</span>(<span class="fu">as.character</span>(term_name),</span>
-<span id="cb225-96"><a href="gprofiler_mod8.html#cb225-96" tabindex="-1"></a>                              <span class="at">levels =</span> <span class="fu">rev</span>(<span class="fu">as.character</span>(term_name))))</span>
-<span id="cb225-97"><a href="gprofiler_mod8.html#cb225-97" tabindex="-1"></a></span>
-<span id="cb225-98"><a href="gprofiler_mod8.html#cb225-98" tabindex="-1"></a>  <span class="co">#  Simple barplot — one representative term per branch </span></span>
-<span id="cb225-99"><a href="gprofiler_mod8.html#cb225-99" tabindex="-1"></a>  p_simple <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(top_per_cluster,</span>
-<span id="cb225-100"><a href="gprofiler_mod8.html#cb225-100" tabindex="-1"></a>                     <span class="fu">aes</span>(<span class="at">x =</span> neglog10p, <span class="at">y =</span> term_name, <span class="at">fill =</span> cluster)) <span class="sc">+</span></span>
-<span id="cb225-101"><a href="gprofiler_mod8.html#cb225-101" tabindex="-1"></a>    <span class="fu">geom_col</span>(<span class="at">alpha =</span> <span class="fl">0.88</span>, <span class="at">width =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
-<span id="cb225-102"><a href="gprofiler_mod8.html#cb225-102" tabindex="-1"></a>    <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">sprintf</span>(<span class="st">&quot;p = %.2e&quot;</span>, <span class="fu">as.numeric</span>(p_value))),</span>
-<span id="cb225-103"><a href="gprofiler_mod8.html#cb225-103" tabindex="-1"></a>              <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.1</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">colour =</span> <span class="st">&quot;grey30&quot;</span>) <span class="sc">+</span></span>
-<span id="cb225-104"><a href="gprofiler_mod8.html#cb225-104" tabindex="-1"></a>    <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> cluster_colours[<span class="fu">seq_len</span>(k)],</span>
-<span id="cb225-105"><a href="gprofiler_mod8.html#cb225-105" tabindex="-1"></a>                      <span class="at">name   =</span> <span class="st">&quot;Branch&quot;</span>) <span class="sc">+</span></span>
-<span id="cb225-106"><a href="gprofiler_mod8.html#cb225-106" tabindex="-1"></a>    <span class="fu">scale_x_continuous</span>(<span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.25</span>))) <span class="sc">+</span></span>
-<span id="cb225-107"><a href="gprofiler_mod8.html#cb225-107" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
-<span id="cb225-108"><a href="gprofiler_mod8.html#cb225-108" tabindex="-1"></a>      <span class="at">x     =</span> <span class="fu">expression</span>(<span class="sc">-</span>log[<span class="dv">10</span>](p<span class="sc">-</span>value)),</span>
-<span id="cb225-109"><a href="gprofiler_mod8.html#cb225-109" tabindex="-1"></a>      <span class="at">y     =</span> <span class="cn">NULL</span>,</span>
-<span id="cb225-110"><a href="gprofiler_mod8.html#cb225-110" tabindex="-1"></a>      <span class="at">title =</span> <span class="st">&quot;Top term per branch&quot;</span></span>
-<span id="cb225-111"><a href="gprofiler_mod8.html#cb225-111" tabindex="-1"></a>    ) <span class="sc">+</span></span>
-<span id="cb225-112"><a href="gprofiler_mod8.html#cb225-112" tabindex="-1"></a>    <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">11</span>) <span class="sc">+</span></span>
-<span id="cb225-113"><a href="gprofiler_mod8.html#cb225-113" tabindex="-1"></a>    <span class="fu">theme</span>(</span>
-<span id="cb225-114"><a href="gprofiler_mod8.html#cb225-114" tabindex="-1"></a>      <span class="at">panel.grid.major.y =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb225-115"><a href="gprofiler_mod8.html#cb225-115" tabindex="-1"></a>      <span class="at">axis.text.y        =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">9</span>),</span>
-<span id="cb225-116"><a href="gprofiler_mod8.html#cb225-116" tabindex="-1"></a>      <span class="at">legend.position    =</span> <span class="st">&quot;bottom&quot;</span>,</span>
-<span id="cb225-117"><a href="gprofiler_mod8.html#cb225-117" tabindex="-1"></a>      <span class="at">plot.title         =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">11</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>)</span>
-<span id="cb225-118"><a href="gprofiler_mod8.html#cb225-118" tabindex="-1"></a>    )</span>
-<span id="cb225-119"><a href="gprofiler_mod8.html#cb225-119" tabindex="-1"></a></span>
-<span id="cb225-120"><a href="gprofiler_mod8.html#cb225-120" tabindex="-1"></a>  <span class="co"># n_terms and n_clusters are returned so the figure height can be set</span></span>
-<span id="cb225-121"><a href="gprofiler_mod8.html#cb225-121" tabindex="-1"></a>  <span class="co"># from them in the chunk options</span></span>
-<span id="cb225-122"><a href="gprofiler_mod8.html#cb225-122" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">list</span>(<span class="at">combined =</span> p_combined, <span class="at">top_per_branch =</span> p_simple,</span>
-<span id="cb225-123"><a href="gprofiler_mod8.html#cb225-123" tabindex="-1"></a>              <span class="at">n_terms =</span> n, <span class="at">n_clusters =</span> k))</span>
-<span id="cb225-124"><a href="gprofiler_mod8.html#cb225-124" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="gprofiler_mod8.html#cb233-1" tabindex="-1"></a>plot_hclust_enrichment <span class="ot">=</span> <span class="cf">function</span>(enrichment_results, <span class="at">n_top =</span> <span class="dv">20</span>, <span class="at">n_clusters =</span> <span class="dv">8</span>) {</span>
+<span id="cb233-2"><a href="gprofiler_mod8.html#cb233-2" tabindex="-1"></a></span>
+<span id="cb233-3"><a href="gprofiler_mod8.html#cb233-3" tabindex="-1"></a>  enrichment_results<span class="sc">$</span>score <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fu">log10</span>(<span class="fu">as.numeric</span>(enrichment_results<span class="sc">$</span>p_value))</span>
+<span id="cb233-4"><a href="gprofiler_mod8.html#cb233-4" tabindex="-1"></a></span>
+<span id="cb233-5"><a href="gprofiler_mod8.html#cb233-5" tabindex="-1"></a>  <span class="co"># Top n_top enriched terms</span></span>
+<span id="cb233-6"><a href="gprofiler_mod8.html#cb233-6" tabindex="-1"></a>  enrichmentTop <span class="ot">&lt;-</span> enrichment_results <span class="sc">%&gt;%</span></span>
+<span id="cb233-7"><a href="gprofiler_mod8.html#cb233-7" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(score)) <span class="sc">%&gt;%</span></span>
+<span id="cb233-8"><a href="gprofiler_mod8.html#cb233-8" tabindex="-1"></a>    <span class="fu">slice_head</span>(<span class="at">n =</span> n_top)</span>
+<span id="cb233-9"><a href="gprofiler_mod8.html#cb233-9" tabindex="-1"></a></span>
+<span id="cb233-10"><a href="gprofiler_mod8.html#cb233-10" tabindex="-1"></a>  top_terms <span class="ot">&lt;-</span> enrichmentTop <span class="sc">%&gt;%</span></span>
+<span id="cb233-11"><a href="gprofiler_mod8.html#cb233-11" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="fu">as.numeric</span>(p_value))</span>
+<span id="cb233-12"><a href="gprofiler_mod8.html#cb233-12" tabindex="-1"></a></span>
+<span id="cb233-13"><a href="gprofiler_mod8.html#cb233-13" tabindex="-1"></a>  <span class="co"># Jaccard similarity matrix</span></span>
+<span id="cb233-14"><a href="gprofiler_mod8.html#cb233-14" tabindex="-1"></a>  <span class="co"># (the intersection column contains the genes of our list found in each pathway)</span></span>
+<span id="cb233-15"><a href="gprofiler_mod8.html#cb233-15" tabindex="-1"></a>  gene_lists <span class="ot">&lt;-</span> <span class="fu">strsplit</span>(top_terms<span class="sc">$</span>intersection, <span class="st">&quot;,&quot;</span>)</span>
+<span id="cb233-16"><a href="gprofiler_mod8.html#cb233-16" tabindex="-1"></a>  n          <span class="ot">&lt;-</span> <span class="fu">length</span>(gene_lists)</span>
+<span id="cb233-17"><a href="gprofiler_mod8.html#cb233-17" tabindex="-1"></a></span>
+<span id="cb233-18"><a href="gprofiler_mod8.html#cb233-18" tabindex="-1"></a>  jaccard_mat <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">0</span>, n, n,</span>
+<span id="cb233-19"><a href="gprofiler_mod8.html#cb233-19" tabindex="-1"></a>                        <span class="at">dimnames =</span> <span class="fu">list</span>(top_terms<span class="sc">$</span>term_name, top_terms<span class="sc">$</span>term_name))</span>
+<span id="cb233-20"><a href="gprofiler_mod8.html#cb233-20" tabindex="-1"></a></span>
+<span id="cb233-21"><a href="gprofiler_mod8.html#cb233-21" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_len</span>(n)) {</span>
+<span id="cb233-22"><a href="gprofiler_mod8.html#cb233-22" tabindex="-1"></a>    <span class="cf">for</span> (j <span class="cf">in</span> <span class="fu">seq_len</span>(n)) {</span>
+<span id="cb233-23"><a href="gprofiler_mod8.html#cb233-23" tabindex="-1"></a>      inter <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">intersect</span>(gene_lists[[i]], gene_lists[[j]]))</span>
+<span id="cb233-24"><a href="gprofiler_mod8.html#cb233-24" tabindex="-1"></a>      uni   <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">union</span>(gene_lists[[i]],     gene_lists[[j]]))</span>
+<span id="cb233-25"><a href="gprofiler_mod8.html#cb233-25" tabindex="-1"></a>      jaccard_mat[i, j] <span class="ot">&lt;-</span> inter <span class="sc">/</span> uni</span>
+<span id="cb233-26"><a href="gprofiler_mod8.html#cb233-26" tabindex="-1"></a>    }</span>
+<span id="cb233-27"><a href="gprofiler_mod8.html#cb233-27" tabindex="-1"></a>  }</span>
+<span id="cb233-28"><a href="gprofiler_mod8.html#cb233-28" tabindex="-1"></a></span>
+<span id="cb233-29"><a href="gprofiler_mod8.html#cb233-29" tabindex="-1"></a>  <span class="co"># Hierarchical clustering </span></span>
+<span id="cb233-30"><a href="gprofiler_mod8.html#cb233-30" tabindex="-1"></a>  dist_mat   <span class="ot">&lt;-</span> <span class="fu">as.dist</span>(<span class="dv">1</span> <span class="sc">-</span> jaccard_mat)</span>
+<span id="cb233-31"><a href="gprofiler_mod8.html#cb233-31" tabindex="-1"></a>  hc         <span class="ot">&lt;-</span> <span class="fu">hclust</span>(dist_mat, <span class="at">method =</span> <span class="st">&quot;average&quot;</span>)</span>
+<span id="cb233-32"><a href="gprofiler_mod8.html#cb233-32" tabindex="-1"></a>  term_order <span class="ot">&lt;-</span> hc<span class="sc">$</span>labels[hc<span class="sc">$</span>order]</span>
+<span id="cb233-33"><a href="gprofiler_mod8.html#cb233-33" tabindex="-1"></a></span>
+<span id="cb233-34"><a href="gprofiler_mod8.html#cb233-34" tabindex="-1"></a>  <span class="co"># The first level is drawn at the bottom of the bar plot, matching the</span></span>
+<span id="cb233-35"><a href="gprofiler_mod8.html#cb233-35" tabindex="-1"></a>  <span class="co"># first dendrogram leaf (y = 1)</span></span>
+<span id="cb233-36"><a href="gprofiler_mod8.html#cb233-36" tabindex="-1"></a>  top_terms<span class="sc">$</span>term_name <span class="ot">&lt;-</span> <span class="fu">factor</span>(top_terms<span class="sc">$</span>term_name, <span class="at">levels =</span> term_order)</span>
+<span id="cb233-37"><a href="gprofiler_mod8.html#cb233-37" tabindex="-1"></a>  top_terms<span class="sc">$</span>neglog10p <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fu">log10</span>(<span class="fu">as.numeric</span>(top_terms<span class="sc">$</span>p_value))</span>
+<span id="cb233-38"><a href="gprofiler_mod8.html#cb233-38" tabindex="-1"></a></span>
+<span id="cb233-39"><a href="gprofiler_mod8.html#cb233-39" tabindex="-1"></a>  <span class="co">#  Cut tree into k branches (cannot have more branches than terms)</span></span>
+<span id="cb233-40"><a href="gprofiler_mod8.html#cb233-40" tabindex="-1"></a>  k        <span class="ot">&lt;-</span> <span class="fu">min</span>(n_clusters, n)</span>
+<span id="cb233-41"><a href="gprofiler_mod8.html#cb233-41" tabindex="-1"></a>  clusters <span class="ot">&lt;-</span> <span class="fu">cutree</span>(hc, <span class="at">k =</span> k)</span>
+<span id="cb233-42"><a href="gprofiler_mod8.html#cb233-42" tabindex="-1"></a></span>
+<span id="cb233-43"><a href="gprofiler_mod8.html#cb233-43" tabindex="-1"></a>  top_terms<span class="sc">$</span>cluster <span class="ot">&lt;-</span> <span class="fu">factor</span>(clusters[<span class="fu">as.character</span>(top_terms<span class="sc">$</span>term_name)])</span>
+<span id="cb233-44"><a href="gprofiler_mod8.html#cb233-44" tabindex="-1"></a></span>
+<span id="cb233-45"><a href="gprofiler_mod8.html#cb233-45" tabindex="-1"></a>  <span class="co"># Bar plot (full, coloured by cluster)</span></span>
+<span id="cb233-46"><a href="gprofiler_mod8.html#cb233-46" tabindex="-1"></a>  base_colours <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;#1D9E75&quot;</span>, <span class="st">&quot;#3A7DC9&quot;</span>, <span class="st">&quot;#E07B39&quot;</span>, <span class="st">&quot;#9B59B6&quot;</span>,</span>
+<span id="cb233-47"><a href="gprofiler_mod8.html#cb233-47" tabindex="-1"></a>                    <span class="st">&quot;#E74C3C&quot;</span>, <span class="st">&quot;#F1C40F&quot;</span>, <span class="st">&quot;#1ABC9C&quot;</span>, <span class="st">&quot;#E91E63&quot;</span>)</span>
+<span id="cb233-48"><a href="gprofiler_mod8.html#cb233-48" tabindex="-1"></a>  <span class="co"># Interpolate extra colours when more than 8 clusters are requested</span></span>
+<span id="cb233-49"><a href="gprofiler_mod8.html#cb233-49" tabindex="-1"></a>  <span class="cf">if</span> (k <span class="sc">&lt;=</span> <span class="fu">length</span>(base_colours)) {</span>
+<span id="cb233-50"><a href="gprofiler_mod8.html#cb233-50" tabindex="-1"></a>    cluster_colours <span class="ot">&lt;-</span> base_colours</span>
+<span id="cb233-51"><a href="gprofiler_mod8.html#cb233-51" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb233-52"><a href="gprofiler_mod8.html#cb233-52" tabindex="-1"></a>    cluster_colours <span class="ot">&lt;-</span> <span class="fu">colorRampPalette</span>(base_colours)(k)</span>
+<span id="cb233-53"><a href="gprofiler_mod8.html#cb233-53" tabindex="-1"></a>  }</span>
+<span id="cb233-54"><a href="gprofiler_mod8.html#cb233-54" tabindex="-1"></a></span>
+<span id="cb233-55"><a href="gprofiler_mod8.html#cb233-55" tabindex="-1"></a>  p_bar <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(top_terms, <span class="fu">aes</span>(<span class="at">x =</span> neglog10p, <span class="at">y =</span> term_name, <span class="at">fill =</span> cluster)) <span class="sc">+</span></span>
+<span id="cb233-56"><a href="gprofiler_mod8.html#cb233-56" tabindex="-1"></a>    <span class="fu">geom_col</span>(<span class="at">alpha =</span> <span class="fl">0.85</span>, <span class="at">width =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb233-57"><a href="gprofiler_mod8.html#cb233-57" tabindex="-1"></a>    <span class="fu">scale_y_discrete</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.5</span>)) <span class="sc">+</span></span>
+<span id="cb233-58"><a href="gprofiler_mod8.html#cb233-58" tabindex="-1"></a>    <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> cluster_colours[<span class="fu">seq_len</span>(k)],</span>
+<span id="cb233-59"><a href="gprofiler_mod8.html#cb233-59" tabindex="-1"></a>                      <span class="at">name   =</span> <span class="st">&quot;Branch&quot;</span>) <span class="sc">+</span></span>
+<span id="cb233-60"><a href="gprofiler_mod8.html#cb233-60" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="fu">expression</span>(<span class="sc">-</span>log[<span class="dv">10</span>](p<span class="sc">-</span>value)), <span class="at">y =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb233-61"><a href="gprofiler_mod8.html#cb233-61" tabindex="-1"></a>    <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">10</span>) <span class="sc">+</span></span>
+<span id="cb233-62"><a href="gprofiler_mod8.html#cb233-62" tabindex="-1"></a>    <span class="fu">theme</span>(</span>
+<span id="cb233-63"><a href="gprofiler_mod8.html#cb233-63" tabindex="-1"></a>      <span class="at">panel.grid.major.y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb233-64"><a href="gprofiler_mod8.html#cb233-64" tabindex="-1"></a>      <span class="at">axis.text.y        =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>),</span>
+<span id="cb233-65"><a href="gprofiler_mod8.html#cb233-65" tabindex="-1"></a>      <span class="at">legend.position    =</span> <span class="st">&quot;right&quot;</span></span>
+<span id="cb233-66"><a href="gprofiler_mod8.html#cb233-66" tabindex="-1"></a>    )</span>
+<span id="cb233-67"><a href="gprofiler_mod8.html#cb233-67" tabindex="-1"></a></span>
+<span id="cb233-68"><a href="gprofiler_mod8.html#cb233-68" tabindex="-1"></a>  <span class="co">#  Dendrogram </span></span>
+<span id="cb233-69"><a href="gprofiler_mod8.html#cb233-69" tabindex="-1"></a>  dend_data <span class="ot">&lt;-</span> <span class="fu">dendro_data</span>(hc, <span class="at">type =</span> <span class="st">&quot;rectangle&quot;</span>)</span>
+<span id="cb233-70"><a href="gprofiler_mod8.html#cb233-70" tabindex="-1"></a>  seg       <span class="ot">&lt;-</span> dend_data<span class="sc">$</span>segments</span>
+<span id="cb233-71"><a href="gprofiler_mod8.html#cb233-71" tabindex="-1"></a></span>
+<span id="cb233-72"><a href="gprofiler_mod8.html#cb233-72" tabindex="-1"></a>  p_dend <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(seg) <span class="sc">+</span></span>
+<span id="cb233-73"><a href="gprofiler_mod8.html#cb233-73" tabindex="-1"></a>    <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> y, <span class="at">y =</span> x, <span class="at">xend =</span> yend, <span class="at">yend =</span> xend),</span>
+<span id="cb233-74"><a href="gprofiler_mod8.html#cb233-74" tabindex="-1"></a>                 <span class="at">colour =</span> <span class="st">&quot;grey40&quot;</span>, <span class="at">linewidth =</span> <span class="fl">0.45</span>) <span class="sc">+</span></span>
+<span id="cb233-75"><a href="gprofiler_mod8.html#cb233-75" tabindex="-1"></a>    <span class="fu">scale_x_reverse</span>(<span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="fl">0.02</span>, <span class="dv">0</span>))) <span class="sc">+</span></span>
+<span id="cb233-76"><a href="gprofiler_mod8.html#cb233-76" tabindex="-1"></a>    <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, n <span class="sc">+</span> <span class="fl">0.5</span>), <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb233-77"><a href="gprofiler_mod8.html#cb233-77" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Jaccard distance&quot;</span>) <span class="sc">+</span></span>
+<span id="cb233-78"><a href="gprofiler_mod8.html#cb233-78" tabindex="-1"></a>    <span class="fu">theme_void</span>() <span class="sc">+</span></span>
+<span id="cb233-79"><a href="gprofiler_mod8.html#cb233-79" tabindex="-1"></a>    <span class="fu">theme</span>(</span>
+<span id="cb233-80"><a href="gprofiler_mod8.html#cb233-80" tabindex="-1"></a>      <span class="at">axis.title.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>, <span class="at">colour =</span> <span class="st">&quot;grey50&quot;</span>, <span class="at">margin =</span> <span class="fu">margin</span>(<span class="at">t =</span> <span class="dv">4</span>)),</span>
+<span id="cb233-81"><a href="gprofiler_mod8.html#cb233-81" tabindex="-1"></a>      <span class="at">axis.text.x  =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">7</span>, <span class="at">colour =</span> <span class="st">&quot;grey60&quot;</span>),</span>
+<span id="cb233-82"><a href="gprofiler_mod8.html#cb233-82" tabindex="-1"></a>      <span class="at">plot.margin  =</span> <span class="fu">margin</span>(<span class="dv">0</span>, <span class="dv">4</span>, <span class="dv">0</span>, <span class="dv">0</span>)</span>
+<span id="cb233-83"><a href="gprofiler_mod8.html#cb233-83" tabindex="-1"></a>    )</span>
+<span id="cb233-84"><a href="gprofiler_mod8.html#cb233-84" tabindex="-1"></a></span>
+<span id="cb233-85"><a href="gprofiler_mod8.html#cb233-85" tabindex="-1"></a>  <span class="co">#  Combined plot </span></span>
+<span id="cb233-86"><a href="gprofiler_mod8.html#cb233-86" tabindex="-1"></a>  p_combined <span class="ot">&lt;-</span> p_dend <span class="sc">+</span> p_bar <span class="sc">+</span></span>
+<span id="cb233-87"><a href="gprofiler_mod8.html#cb233-87" tabindex="-1"></a>    <span class="fu">plot_layout</span>(<span class="at">widths =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">1</span>))</span>
+<span id="cb233-88"><a href="gprofiler_mod8.html#cb233-88" tabindex="-1"></a></span>
+<span id="cb233-89"><a href="gprofiler_mod8.html#cb233-89" tabindex="-1"></a>  <span class="co">#  Keep only the top hit per branch </span></span>
+<span id="cb233-90"><a href="gprofiler_mod8.html#cb233-90" tabindex="-1"></a>  top_per_cluster <span class="ot">&lt;-</span> top_terms <span class="sc">%&gt;%</span></span>
+<span id="cb233-91"><a href="gprofiler_mod8.html#cb233-91" tabindex="-1"></a>    <span class="fu">group_by</span>(cluster) <span class="sc">%&gt;%</span></span>
+<span id="cb233-92"><a href="gprofiler_mod8.html#cb233-92" tabindex="-1"></a>    <span class="fu">slice_min</span>(<span class="fu">as.numeric</span>(p_value), <span class="at">n =</span> <span class="dv">1</span>, <span class="at">with_ties =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb233-93"><a href="gprofiler_mod8.html#cb233-93" tabindex="-1"></a>    <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb233-94"><a href="gprofiler_mod8.html#cb233-94" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="fu">as.numeric</span>(p_value)) <span class="sc">%&gt;%</span></span>
+<span id="cb233-95"><a href="gprofiler_mod8.html#cb233-95" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">term_name =</span> <span class="fu">factor</span>(<span class="fu">as.character</span>(term_name),</span>
+<span id="cb233-96"><a href="gprofiler_mod8.html#cb233-96" tabindex="-1"></a>                              <span class="at">levels =</span> <span class="fu">rev</span>(<span class="fu">as.character</span>(term_name))))</span>
+<span id="cb233-97"><a href="gprofiler_mod8.html#cb233-97" tabindex="-1"></a></span>
+<span id="cb233-98"><a href="gprofiler_mod8.html#cb233-98" tabindex="-1"></a>  <span class="co">#  Simple barplot — one representative term per branch </span></span>
+<span id="cb233-99"><a href="gprofiler_mod8.html#cb233-99" tabindex="-1"></a>  p_simple <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(top_per_cluster,</span>
+<span id="cb233-100"><a href="gprofiler_mod8.html#cb233-100" tabindex="-1"></a>                     <span class="fu">aes</span>(<span class="at">x =</span> neglog10p, <span class="at">y =</span> term_name, <span class="at">fill =</span> cluster)) <span class="sc">+</span></span>
+<span id="cb233-101"><a href="gprofiler_mod8.html#cb233-101" tabindex="-1"></a>    <span class="fu">geom_col</span>(<span class="at">alpha =</span> <span class="fl">0.88</span>, <span class="at">width =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb233-102"><a href="gprofiler_mod8.html#cb233-102" tabindex="-1"></a>    <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">sprintf</span>(<span class="st">&quot;p = %.2e&quot;</span>, <span class="fu">as.numeric</span>(p_value))),</span>
+<span id="cb233-103"><a href="gprofiler_mod8.html#cb233-103" tabindex="-1"></a>              <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.1</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">colour =</span> <span class="st">&quot;grey30&quot;</span>) <span class="sc">+</span></span>
+<span id="cb233-104"><a href="gprofiler_mod8.html#cb233-104" tabindex="-1"></a>    <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> cluster_colours[<span class="fu">seq_len</span>(k)],</span>
+<span id="cb233-105"><a href="gprofiler_mod8.html#cb233-105" tabindex="-1"></a>                      <span class="at">name   =</span> <span class="st">&quot;Branch&quot;</span>) <span class="sc">+</span></span>
+<span id="cb233-106"><a href="gprofiler_mod8.html#cb233-106" tabindex="-1"></a>    <span class="fu">scale_x_continuous</span>(<span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.25</span>))) <span class="sc">+</span></span>
+<span id="cb233-107"><a href="gprofiler_mod8.html#cb233-107" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
+<span id="cb233-108"><a href="gprofiler_mod8.html#cb233-108" tabindex="-1"></a>      <span class="at">x     =</span> <span class="fu">expression</span>(<span class="sc">-</span>log[<span class="dv">10</span>](p<span class="sc">-</span>value)),</span>
+<span id="cb233-109"><a href="gprofiler_mod8.html#cb233-109" tabindex="-1"></a>      <span class="at">y     =</span> <span class="cn">NULL</span>,</span>
+<span id="cb233-110"><a href="gprofiler_mod8.html#cb233-110" tabindex="-1"></a>      <span class="at">title =</span> <span class="st">&quot;Top term per branch&quot;</span></span>
+<span id="cb233-111"><a href="gprofiler_mod8.html#cb233-111" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb233-112"><a href="gprofiler_mod8.html#cb233-112" tabindex="-1"></a>    <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">11</span>) <span class="sc">+</span></span>
+<span id="cb233-113"><a href="gprofiler_mod8.html#cb233-113" tabindex="-1"></a>    <span class="fu">theme</span>(</span>
+<span id="cb233-114"><a href="gprofiler_mod8.html#cb233-114" tabindex="-1"></a>      <span class="at">panel.grid.major.y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb233-115"><a href="gprofiler_mod8.html#cb233-115" tabindex="-1"></a>      <span class="at">axis.text.y        =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">9</span>),</span>
+<span id="cb233-116"><a href="gprofiler_mod8.html#cb233-116" tabindex="-1"></a>      <span class="at">legend.position    =</span> <span class="st">&quot;bottom&quot;</span>,</span>
+<span id="cb233-117"><a href="gprofiler_mod8.html#cb233-117" tabindex="-1"></a>      <span class="at">plot.title         =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">11</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>)</span>
+<span id="cb233-118"><a href="gprofiler_mod8.html#cb233-118" tabindex="-1"></a>    )</span>
+<span id="cb233-119"><a href="gprofiler_mod8.html#cb233-119" tabindex="-1"></a></span>
+<span id="cb233-120"><a href="gprofiler_mod8.html#cb233-120" tabindex="-1"></a>  <span class="co"># n_terms and n_clusters are returned so the figure height can be set</span></span>
+<span id="cb233-121"><a href="gprofiler_mod8.html#cb233-121" tabindex="-1"></a>  <span class="co"># from them in the chunk options</span></span>
+<span id="cb233-122"><a href="gprofiler_mod8.html#cb233-122" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">list</span>(<span class="at">combined =</span> p_combined, <span class="at">top_per_branch =</span> p_simple,</span>
+<span id="cb233-123"><a href="gprofiler_mod8.html#cb233-123" tabindex="-1"></a>              <span class="at">n_terms =</span> n, <span class="at">n_clusters =</span> k))</span>
+<span id="cb233-124"><a href="gprofiler_mod8.html#cb233-124" tabindex="-1"></a>}</span></code></pre></div>
 </div>
 <div id="running-the-function-on-the-top-20-pathways" class="section level4 hasAnchor">
 <h4>Running the function on the top 20 pathways<a href="gprofiler_mod8.html#running-the-function-on-the-top-20-pathways" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="gprofiler_mod8.html#cb226-1" tabindex="-1"></a>enrichment_results_UPgenes <span class="ot">&lt;-</span> gprofiler_results_custom_max500_UPgenes<span class="sc">$</span>result</span>
-<span id="cb226-2"><a href="gprofiler_mod8.html#cb226-2" tabindex="-1"></a></span>
-<span id="cb226-3"><a href="gprofiler_mod8.html#cb226-3" tabindex="-1"></a>hc_plots <span class="ot">&lt;-</span> <span class="fu">plot_hclust_enrichment</span>(<span class="at">enrichment_results =</span> enrichment_results_UPgenes, <span class="at">n_top =</span> <span class="dv">20</span>, <span class="at">n_clusters =</span> <span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="gprofiler_mod8.html#cb234-1" tabindex="-1"></a>enrichment_results_UPgenes <span class="ot">&lt;-</span> gprofiler_results_custom_max500_UPgenes<span class="sc">$</span>result</span>
+<span id="cb234-2"><a href="gprofiler_mod8.html#cb234-2" tabindex="-1"></a></span>
+<span id="cb234-3"><a href="gprofiler_mod8.html#cb234-3" tabindex="-1"></a>hc_plots <span class="ot">&lt;-</span> <span class="fu">plot_hclust_enrichment</span>(<span class="at">enrichment_results =</span> enrichment_results_UPgenes, <span class="at">n_top =</span> <span class="dv">20</span>, <span class="at">n_clusters =</span> <span class="dv">10</span>)</span></code></pre></div>
 <p>The figure height grows with the number of pathways (combined plot) and the number of clusters (top term per branch), so the bars do not overlap.</p>
-<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="gprofiler_mod8.html#cb227-1" tabindex="-1"></a>hc_plots<span class="sc">$</span>combined</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-101-1.png" alt="" width="960" /></p>
-<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="gprofiler_mod8.html#cb228-1" tabindex="-1"></a>hc_plots<span class="sc">$</span>top_per_branch</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-102-1.png" alt="" width="768" /></p>
+<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="gprofiler_mod8.html#cb235-1" tabindex="-1"></a>hc_plots<span class="sc">$</span>combined</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-109-1.png" alt="" width="960" /></p>
+<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="gprofiler_mod8.html#cb236-1" tabindex="-1"></a>hc_plots<span class="sc">$</span>top_per_branch</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-110-1.png" alt="" width="768" /></p>
 </div>
 <div id="your-turn-running-the-function-with-your-defined-number-of-pathways-and-clusters" class="section level4 hasAnchor">
 <h4>YOUR TURN Running the function with your defined number of pathways and clusters<a href="gprofiler_mod8.html#your-turn-running-the-function-with-your-defined-number-of-pathways-and-clusters" class="anchor-section" aria-label="Anchor link to header"></a></h4>

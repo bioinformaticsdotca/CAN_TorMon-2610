@@ -1,8 +1,8 @@
 fig:fig-mychart
 fig:dataset
-tab:unnamed-chunk-86
-tab:unnamed-chunk-88
-tab:unnamed-chunk-92
+tab:unnamed-chunk-94
+tab:unnamed-chunk-96
+tab:unnamed-chunk-100
 fig:jaccard-overlap
 tab:top-pathways-up
 tab:top-pathways-down
