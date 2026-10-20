@@ -7,10 +7,7 @@
 -->
 ```
 
-```{=html}
-<!--<iframe src="https://docs.google.com/presentation/d/1QvGRiCufntRCvnF_h-Uihu64VYgJPqep/preview" width="640" height="480" allow="autoplay"></iframe>  
--->
-```
+<iframe src="https://docs.google.com/presentation/d/1QvGRiCufntRCvnF_h-Uihu64VYgJPqep/preview" width="640" height="480" allow="autoplay"></iframe>
 
 ## Lab
 
