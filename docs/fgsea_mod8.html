@@ -497,55 +497,59 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>This exercise requires the file “edgeR_resistant_vs_parental_all_genes.csv” located in the data folder.</p>
 <div id="step-1---install-and-load-libraries-1" class="section level3 hasAnchor">
 <h3>Step 1 - Install and Load libraries<a href="fgsea_mod8.html#step-1---install-and-load-libraries-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="fgsea_mod8.html#cb229-1" tabindex="-1"></a><span class="co"># CRAN and Bioconductor setup</span></span>
-<span id="cb229-2"><a href="fgsea_mod8.html#cb229-2" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;BiocManager&quot;</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb229-3"><a href="fgsea_mod8.html#cb229-3" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;BiocManager&quot;</span>)</span>
-<span id="cb229-4"><a href="fgsea_mod8.html#cb229-4" tabindex="-1"></a><span class="co"># List of CRAN packages</span></span>
-<span id="cb229-5"><a href="fgsea_mod8.html#cb229-5" tabindex="-1"></a>cran_packages <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb229-6"><a href="fgsea_mod8.html#cb229-6" tabindex="-1"></a>  <span class="st">&quot;tidyverse&quot;</span>,</span>
-<span id="cb229-7"><a href="fgsea_mod8.html#cb229-7" tabindex="-1"></a>  <span class="st">&quot;knitr&quot;</span>,</span>
-<span id="cb229-8"><a href="fgsea_mod8.html#cb229-8" tabindex="-1"></a>  <span class="st">&quot;kableExtra&quot;</span>,</span>
-<span id="cb229-9"><a href="fgsea_mod8.html#cb229-9" tabindex="-1"></a>  <span class="st">&quot;glue&quot;</span>,</span>
-<span id="cb229-10"><a href="fgsea_mod8.html#cb229-10" tabindex="-1"></a>  <span class="st">&quot;ggridges&quot;</span>,</span>
-<span id="cb229-11"><a href="fgsea_mod8.html#cb229-11" tabindex="-1"></a>  <span class="st">&quot;data.table&quot;</span></span>
-<span id="cb229-12"><a href="fgsea_mod8.html#cb229-12" tabindex="-1"></a>)</span>
-<span id="cb229-13"><a href="fgsea_mod8.html#cb229-13" tabindex="-1"></a><span class="co"># List of Bioconductor packages</span></span>
-<span id="cb229-14"><a href="fgsea_mod8.html#cb229-14" tabindex="-1"></a>bioc_packages <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb229-15"><a href="fgsea_mod8.html#cb229-15" tabindex="-1"></a>  <span class="st">&quot;fgsea&quot;</span>,</span>
-<span id="cb229-16"><a href="fgsea_mod8.html#cb229-16" tabindex="-1"></a>  <span class="st">&quot;clusterProfiler&quot;</span>,</span>
-<span id="cb229-17"><a href="fgsea_mod8.html#cb229-17" tabindex="-1"></a>  <span class="st">&quot;enrichplot&quot;</span></span>
-<span id="cb229-18"><a href="fgsea_mod8.html#cb229-18" tabindex="-1"></a>) </span>
-<span id="cb229-19"><a href="fgsea_mod8.html#cb229-19" tabindex="-1"></a><span class="co"># Install CRAN packages if not already installed</span></span>
-<span id="cb229-20"><a href="fgsea_mod8.html#cb229-20" tabindex="-1"></a><span class="cf">for</span> (pkg <span class="cf">in</span> cran_packages) {</span>
-<span id="cb229-21"><a href="fgsea_mod8.html#cb229-21" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(pkg, <span class="at">quietly =</span> <span class="cn">TRUE</span>)) {</span>
-<span id="cb229-22"><a href="fgsea_mod8.html#cb229-22" tabindex="-1"></a>    <span class="fu">install.packages</span>(pkg)</span>
-<span id="cb229-23"><a href="fgsea_mod8.html#cb229-23" tabindex="-1"></a>  }</span>
-<span id="cb229-24"><a href="fgsea_mod8.html#cb229-24" tabindex="-1"></a>}</span>
-<span id="cb229-25"><a href="fgsea_mod8.html#cb229-25" tabindex="-1"></a><span class="co"># Install Bioconductor packages if not already installed</span></span>
-<span id="cb229-26"><a href="fgsea_mod8.html#cb229-26" tabindex="-1"></a><span class="cf">for</span> (pkg <span class="cf">in</span> bioc_packages) {</span>
-<span id="cb229-27"><a href="fgsea_mod8.html#cb229-27" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(pkg, <span class="at">quietly =</span> <span class="cn">TRUE</span>)) {</span>
-<span id="cb229-28"><a href="fgsea_mod8.html#cb229-28" tabindex="-1"></a>    BiocManager<span class="sc">::</span><span class="fu">install</span>(pkg)</span>
-<span id="cb229-29"><a href="fgsea_mod8.html#cb229-29" tabindex="-1"></a>  }</span>
-<span id="cb229-30"><a href="fgsea_mod8.html#cb229-30" tabindex="-1"></a>}</span>
-<span id="cb229-31"><a href="fgsea_mod8.html#cb229-31" tabindex="-1"></a><span class="co"># Load the libraries</span></span>
-<span id="cb229-32"><a href="fgsea_mod8.html#cb229-32" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb229-33"><a href="fgsea_mod8.html#cb229-33" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
-<span id="cb229-34"><a href="fgsea_mod8.html#cb229-34" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
-<span id="cb229-35"><a href="fgsea_mod8.html#cb229-35" tabindex="-1"></a><span class="fu">library</span>(glue)</span>
-<span id="cb229-36"><a href="fgsea_mod8.html#cb229-36" tabindex="-1"></a><span class="fu">library</span>(ggridges)</span>
-<span id="cb229-37"><a href="fgsea_mod8.html#cb229-37" tabindex="-1"></a><span class="fu">library</span>(data.table)</span>
-<span id="cb229-38"><a href="fgsea_mod8.html#cb229-38" tabindex="-1"></a></span>
-<span id="cb229-39"><a href="fgsea_mod8.html#cb229-39" tabindex="-1"></a><span class="co"># Bioconductor packages</span></span>
-<span id="cb229-40"><a href="fgsea_mod8.html#cb229-40" tabindex="-1"></a><span class="fu">library</span>(fgsea)</span>
-<span id="cb229-41"><a href="fgsea_mod8.html#cb229-41" tabindex="-1"></a><span class="fu">library</span>(clusterProfiler)</span>
-<span id="cb229-42"><a href="fgsea_mod8.html#cb229-42" tabindex="-1"></a><span class="fu">library</span>(enrichplot)</span>
-<span id="cb229-43"><a href="fgsea_mod8.html#cb229-43" tabindex="-1"></a></span>
-<span id="cb229-44"><a href="fgsea_mod8.html#cb229-44" tabindex="-1"></a><span class="co"># create the results folder (if it does not exist yet) to save the outputs</span></span>
-<span id="cb229-45"><a href="fgsea_mod8.html#cb229-45" tabindex="-1"></a><span class="co"># dir.create(&quot;results&quot;, showWarnings = FALSE)</span></span></code></pre></div>
-<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="fgsea_mod8.html#cb230-1" tabindex="-1"></a><span class="co"># Location of the Module 8 files (data/, BYODdata/, image/):</span></span>
-<span id="cb230-2"><a href="fgsea_mod8.html#cb230-2" tabindex="-1"></a><span class="co"># - on the course server: ~/CourseData/Module8</span></span>
-<span id="cb230-3"><a href="fgsea_mod8.html#cb230-3" tabindex="-1"></a><span class="co"># - when the book is built from the repository: Module8</span></span>
-<span id="cb230-4"><a href="fgsea_mod8.html#cb230-4" tabindex="-1"></a>data_dir <span class="ot">&lt;-</span> <span class="cf">if</span> (<span class="fu">dir.exists</span>(<span class="st">&quot;~/CourseData/Module8&quot;</span>)) <span class="st">&quot;~/CourseData/Module8&quot;</span> <span class="cf">else</span> <span class="st">&quot;Module8&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="fgsea_mod8.html#cb254-1" tabindex="-1"></a><span class="co"># CRAN and Bioconductor setup</span></span>
+<span id="cb254-2"><a href="fgsea_mod8.html#cb254-2" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;BiocManager&quot;</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb254-3"><a href="fgsea_mod8.html#cb254-3" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;BiocManager&quot;</span>)</span>
+<span id="cb254-4"><a href="fgsea_mod8.html#cb254-4" tabindex="-1"></a><span class="co"># List of CRAN packages</span></span>
+<span id="cb254-5"><a href="fgsea_mod8.html#cb254-5" tabindex="-1"></a>cran_packages <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb254-6"><a href="fgsea_mod8.html#cb254-6" tabindex="-1"></a>  <span class="st">&quot;tidyverse&quot;</span>,</span>
+<span id="cb254-7"><a href="fgsea_mod8.html#cb254-7" tabindex="-1"></a>  <span class="st">&quot;knitr&quot;</span>,</span>
+<span id="cb254-8"><a href="fgsea_mod8.html#cb254-8" tabindex="-1"></a>  <span class="st">&quot;kableExtra&quot;</span>,</span>
+<span id="cb254-9"><a href="fgsea_mod8.html#cb254-9" tabindex="-1"></a>  <span class="st">&quot;glue&quot;</span>,</span>
+<span id="cb254-10"><a href="fgsea_mod8.html#cb254-10" tabindex="-1"></a>  <span class="st">&quot;ggridges&quot;</span>,</span>
+<span id="cb254-11"><a href="fgsea_mod8.html#cb254-11" tabindex="-1"></a>  <span class="st">&quot;data.table&quot;</span></span>
+<span id="cb254-12"><a href="fgsea_mod8.html#cb254-12" tabindex="-1"></a>)</span>
+<span id="cb254-13"><a href="fgsea_mod8.html#cb254-13" tabindex="-1"></a><span class="co"># List of Bioconductor packages</span></span>
+<span id="cb254-14"><a href="fgsea_mod8.html#cb254-14" tabindex="-1"></a>bioc_packages <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb254-15"><a href="fgsea_mod8.html#cb254-15" tabindex="-1"></a>  <span class="st">&quot;fgsea&quot;</span>,</span>
+<span id="cb254-16"><a href="fgsea_mod8.html#cb254-16" tabindex="-1"></a>  <span class="st">&quot;clusterProfiler&quot;</span>,</span>
+<span id="cb254-17"><a href="fgsea_mod8.html#cb254-17" tabindex="-1"></a>  <span class="st">&quot;enrichplot&quot;</span></span>
+<span id="cb254-18"><a href="fgsea_mod8.html#cb254-18" tabindex="-1"></a>) </span>
+<span id="cb254-19"><a href="fgsea_mod8.html#cb254-19" tabindex="-1"></a><span class="co"># Install CRAN packages if not already installed</span></span>
+<span id="cb254-20"><a href="fgsea_mod8.html#cb254-20" tabindex="-1"></a><span class="cf">for</span> (pkg <span class="cf">in</span> cran_packages) {</span>
+<span id="cb254-21"><a href="fgsea_mod8.html#cb254-21" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(pkg, <span class="at">quietly =</span> <span class="cn">TRUE</span>)) {</span>
+<span id="cb254-22"><a href="fgsea_mod8.html#cb254-22" tabindex="-1"></a>    <span class="fu">install.packages</span>(pkg)</span>
+<span id="cb254-23"><a href="fgsea_mod8.html#cb254-23" tabindex="-1"></a>  }</span>
+<span id="cb254-24"><a href="fgsea_mod8.html#cb254-24" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>## package &#39;ggridges&#39; successfully unpacked and MD5 sums checked
+## 
+## The downloaded binary packages are in
+##  C:\Users\benfi\AppData\Local\Temp\Rtmp8qxuJp\downloaded_packages</code></pre>
+<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="fgsea_mod8.html#cb256-1" tabindex="-1"></a><span class="co"># Install Bioconductor packages if not already installed</span></span>
+<span id="cb256-2"><a href="fgsea_mod8.html#cb256-2" tabindex="-1"></a><span class="cf">for</span> (pkg <span class="cf">in</span> bioc_packages) {</span>
+<span id="cb256-3"><a href="fgsea_mod8.html#cb256-3" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(pkg, <span class="at">quietly =</span> <span class="cn">TRUE</span>)) {</span>
+<span id="cb256-4"><a href="fgsea_mod8.html#cb256-4" tabindex="-1"></a>    BiocManager<span class="sc">::</span><span class="fu">install</span>(pkg)</span>
+<span id="cb256-5"><a href="fgsea_mod8.html#cb256-5" tabindex="-1"></a>  }</span>
+<span id="cb256-6"><a href="fgsea_mod8.html#cb256-6" tabindex="-1"></a>}</span>
+<span id="cb256-7"><a href="fgsea_mod8.html#cb256-7" tabindex="-1"></a><span class="co"># Load the libraries</span></span>
+<span id="cb256-8"><a href="fgsea_mod8.html#cb256-8" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb256-9"><a href="fgsea_mod8.html#cb256-9" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb256-10"><a href="fgsea_mod8.html#cb256-10" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb256-11"><a href="fgsea_mod8.html#cb256-11" tabindex="-1"></a><span class="fu">library</span>(glue)</span>
+<span id="cb256-12"><a href="fgsea_mod8.html#cb256-12" tabindex="-1"></a><span class="fu">library</span>(ggridges)</span>
+<span id="cb256-13"><a href="fgsea_mod8.html#cb256-13" tabindex="-1"></a><span class="fu">library</span>(data.table)</span>
+<span id="cb256-14"><a href="fgsea_mod8.html#cb256-14" tabindex="-1"></a></span>
+<span id="cb256-15"><a href="fgsea_mod8.html#cb256-15" tabindex="-1"></a><span class="co"># Bioconductor packages</span></span>
+<span id="cb256-16"><a href="fgsea_mod8.html#cb256-16" tabindex="-1"></a><span class="fu">library</span>(fgsea)</span>
+<span id="cb256-17"><a href="fgsea_mod8.html#cb256-17" tabindex="-1"></a><span class="fu">library</span>(clusterProfiler)</span>
+<span id="cb256-18"><a href="fgsea_mod8.html#cb256-18" tabindex="-1"></a><span class="fu">library</span>(enrichplot)</span>
+<span id="cb256-19"><a href="fgsea_mod8.html#cb256-19" tabindex="-1"></a></span>
+<span id="cb256-20"><a href="fgsea_mod8.html#cb256-20" tabindex="-1"></a><span class="co"># create the results folder (if it does not exist yet) to save the outputs</span></span>
+<span id="cb256-21"><a href="fgsea_mod8.html#cb256-21" tabindex="-1"></a><span class="co"># dir.create(&quot;results&quot;, showWarnings = FALSE)</span></span></code></pre></div>
+<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="fgsea_mod8.html#cb257-1" tabindex="-1"></a><span class="co"># Location of the Module 8 files (data/, BYODdata/, image/):</span></span>
+<span id="cb257-2"><a href="fgsea_mod8.html#cb257-2" tabindex="-1"></a><span class="co"># - on the course server: ~/CourseData/Module8</span></span>
+<span id="cb257-3"><a href="fgsea_mod8.html#cb257-3" tabindex="-1"></a><span class="co"># - when the book is built from the repository: Module8</span></span>
+<span id="cb257-4"><a href="fgsea_mod8.html#cb257-4" tabindex="-1"></a>data_dir <span class="ot">&lt;-</span> <span class="cf">if</span> (<span class="fu">dir.exists</span>(<span class="st">&quot;~/CourseData/Module8&quot;</span>)) <span class="st">&quot;~/CourseData/Module8&quot;</span> <span class="cf">else</span> <span class="st">&quot;Module8&quot;</span></span></code></pre></div>
 <!--
 <div class="rmd-caution">
 <p>In the Ubuntu (course server) session, the <code>dir.create()</code>
@@ -574,41 +578,41 @@ power when calculating the ES scores. Equivalent to the weight in the
 original GSEA algorithm.
 </p>
 </div>
-<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="fgsea_mod8.html#cb231-1" tabindex="-1"></a>res <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="fu">file.path</span>(data_dir, <span class="st">&quot;data/edgeR_resistant_vs_parental_all_genes.csv&quot;</span>))</span>
-<span id="cb231-2"><a href="fgsea_mod8.html#cb231-2" tabindex="-1"></a></span>
-<span id="cb231-3"><a href="fgsea_mod8.html#cb231-3" tabindex="-1"></a>gmtfile <span class="ot">=</span> <span class="fu">file.path</span>(data_dir, <span class="st">&quot;data/Human_GOBP_AllPathways_noPFOCR_no_GO_iea_September_14_2026_symbol.gmt&quot;</span>)</span>
-<span id="cb231-4"><a href="fgsea_mod8.html#cb231-4" tabindex="-1"></a>pathways <span class="ot">&lt;-</span> fgsea<span class="sc">::</span><span class="fu">gmtPathways</span>(gmtfile)</span>
-<span id="cb231-5"><a href="fgsea_mod8.html#cb231-5" tabindex="-1"></a></span>
-<span id="cb231-6"><a href="fgsea_mod8.html#cb231-6" tabindex="-1"></a><span class="do">## rank file formatted for gsea</span></span>
-<span id="cb231-7"><a href="fgsea_mod8.html#cb231-7" tabindex="-1"></a>ranks <span class="ot">&lt;-</span> <span class="fu">setNames</span>(res<span class="sc">$</span>score, res<span class="sc">$</span>gene)</span>
-<span id="cb231-8"><a href="fgsea_mod8.html#cb231-8" tabindex="-1"></a>ranks <span class="ot">&lt;-</span> ranks[<span class="sc">!</span><span class="fu">is.na</span>(ranks) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(<span class="fu">names</span>(ranks))]</span>
-<span id="cb231-9"><a href="fgsea_mod8.html#cb231-9" tabindex="-1"></a>ranks <span class="ot">&lt;-</span> <span class="fu">sort</span>(ranks, <span class="at">decreasing =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb231-10"><a href="fgsea_mod8.html#cb231-10" tabindex="-1"></a></span>
-<span id="cb231-11"><a href="fgsea_mod8.html#cb231-11" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">543</span>) <span class="do">## to get reproducible results</span></span>
-<span id="cb231-12"><a href="fgsea_mod8.html#cb231-12" tabindex="-1"></a></span>
-<span id="cb231-13"><a href="fgsea_mod8.html#cb231-13" tabindex="-1"></a><span class="do">## running fgsea</span></span>
-<span id="cb231-14"><a href="fgsea_mod8.html#cb231-14" tabindex="-1"></a>fgseaRes <span class="ot">&lt;-</span> <span class="fu">fgsea</span>(</span>
-<span id="cb231-15"><a href="fgsea_mod8.html#cb231-15" tabindex="-1"></a></span>
-<span id="cb231-16"><a href="fgsea_mod8.html#cb231-16" tabindex="-1"></a><span class="at">pathways =</span> pathways,</span>
-<span id="cb231-17"><a href="fgsea_mod8.html#cb231-17" tabindex="-1"></a><span class="at">stats =</span> ranks,</span>
-<span id="cb231-18"><a href="fgsea_mod8.html#cb231-18" tabindex="-1"></a><span class="at">minSize =</span> <span class="dv">10</span>,</span>
-<span id="cb231-19"><a href="fgsea_mod8.html#cb231-19" tabindex="-1"></a><span class="at">maxSize =</span> <span class="dv">500</span>,</span>
-<span id="cb231-20"><a href="fgsea_mod8.html#cb231-20" tabindex="-1"></a><span class="at">nperm =</span> <span class="dv">2000</span></span>
-<span id="cb231-21"><a href="fgsea_mod8.html#cb231-21" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="fgsea_mod8.html#cb258-1" tabindex="-1"></a>res <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="fu">file.path</span>(data_dir, <span class="st">&quot;data/edgeR_resistant_vs_parental_all_genes.csv&quot;</span>))</span>
+<span id="cb258-2"><a href="fgsea_mod8.html#cb258-2" tabindex="-1"></a></span>
+<span id="cb258-3"><a href="fgsea_mod8.html#cb258-3" tabindex="-1"></a>gmtfile <span class="ot">=</span> <span class="fu">file.path</span>(data_dir, <span class="st">&quot;data/Human_GOBP_AllPathways_noPFOCR_no_GO_iea_September_14_2026_symbol.gmt&quot;</span>)</span>
+<span id="cb258-4"><a href="fgsea_mod8.html#cb258-4" tabindex="-1"></a>pathways <span class="ot">&lt;-</span> fgsea<span class="sc">::</span><span class="fu">gmtPathways</span>(gmtfile)</span>
+<span id="cb258-5"><a href="fgsea_mod8.html#cb258-5" tabindex="-1"></a></span>
+<span id="cb258-6"><a href="fgsea_mod8.html#cb258-6" tabindex="-1"></a><span class="do">## rank file formatted for gsea</span></span>
+<span id="cb258-7"><a href="fgsea_mod8.html#cb258-7" tabindex="-1"></a>ranks <span class="ot">&lt;-</span> <span class="fu">setNames</span>(res<span class="sc">$</span>score, res<span class="sc">$</span>gene)</span>
+<span id="cb258-8"><a href="fgsea_mod8.html#cb258-8" tabindex="-1"></a>ranks <span class="ot">&lt;-</span> ranks[<span class="sc">!</span><span class="fu">is.na</span>(ranks) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(<span class="fu">names</span>(ranks))]</span>
+<span id="cb258-9"><a href="fgsea_mod8.html#cb258-9" tabindex="-1"></a>ranks <span class="ot">&lt;-</span> <span class="fu">sort</span>(ranks, <span class="at">decreasing =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb258-10"><a href="fgsea_mod8.html#cb258-10" tabindex="-1"></a></span>
+<span id="cb258-11"><a href="fgsea_mod8.html#cb258-11" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">543</span>) <span class="do">## to get reproducible results</span></span>
+<span id="cb258-12"><a href="fgsea_mod8.html#cb258-12" tabindex="-1"></a></span>
+<span id="cb258-13"><a href="fgsea_mod8.html#cb258-13" tabindex="-1"></a><span class="do">## running fgsea</span></span>
+<span id="cb258-14"><a href="fgsea_mod8.html#cb258-14" tabindex="-1"></a>fgseaRes <span class="ot">&lt;-</span> <span class="fu">fgsea</span>(</span>
+<span id="cb258-15"><a href="fgsea_mod8.html#cb258-15" tabindex="-1"></a></span>
+<span id="cb258-16"><a href="fgsea_mod8.html#cb258-16" tabindex="-1"></a><span class="at">pathways =</span> pathways,</span>
+<span id="cb258-17"><a href="fgsea_mod8.html#cb258-17" tabindex="-1"></a><span class="at">stats =</span> ranks,</span>
+<span id="cb258-18"><a href="fgsea_mod8.html#cb258-18" tabindex="-1"></a><span class="at">minSize =</span> <span class="dv">10</span>,</span>
+<span id="cb258-19"><a href="fgsea_mod8.html#cb258-19" tabindex="-1"></a><span class="at">maxSize =</span> <span class="dv">500</span>,</span>
+<span id="cb258-20"><a href="fgsea_mod8.html#cb258-20" tabindex="-1"></a><span class="at">nperm =</span> <span class="dv">2000</span></span>
+<span id="cb258-21"><a href="fgsea_mod8.html#cb258-21" tabindex="-1"></a>)</span></code></pre></div>
 <pre><code>## Warning in fgsea(pathways = pathways, stats = ranks, minSize = 10, maxSize =
 ## 500, : You are trying to run fgseaSimple. It is recommended to use
 ## fgseaMultilevel. To run fgseaMultilevel, you need to remove the nperm argument
 ## in the fgsea function call.</code></pre>
 <pre><code>## Warning in preparePathwaysAndStats(pathways, stats, minSize, maxSize, gseaParam, : There are ties in the preranked stats (0.01% of the list).
 ## The order of those tied genes will be arbitrary, which may produce unexpected results.</code></pre>
-<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="fgsea_mod8.html#cb234-1" tabindex="-1"></a>fgseaRes <span class="ot">&lt;-</span> fgseaRes[<span class="fu">order</span>(fgseaRes<span class="sc">$</span>padj), ]</span></code></pre></div>
+<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="fgsea_mod8.html#cb261-1" tabindex="-1"></a>fgseaRes <span class="ot">&lt;-</span> fgseaRes[<span class="fu">order</span>(fgseaRes<span class="sc">$</span>padj), ]</span></code></pre></div>
 <p>Save the full fgsea results table to the results folder.</p>
-<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="fgsea_mod8.html#cb235-1" tabindex="-1"></a><span class="co">#the leadingEdge column is a list of genes for each pathway,</span></span>
-<span id="cb235-2"><a href="fgsea_mod8.html#cb235-2" tabindex="-1"></a><span class="co">#convert it to text (genes separated by a comma) so that it can be written to a csv file.</span></span>
-<span id="cb235-3"><a href="fgsea_mod8.html#cb235-3" tabindex="-1"></a>fgseaRes_to_save <span class="ot">&lt;-</span> <span class="fu">copy</span>(fgseaRes)</span>
-<span id="cb235-4"><a href="fgsea_mod8.html#cb235-4" tabindex="-1"></a>fgseaRes_to_save<span class="sc">$</span>leadingEdge <span class="ot">&lt;-</span> <span class="fu">sapply</span>(fgseaRes_to_save<span class="sc">$</span>leadingEdge, paste, <span class="at">collapse =</span> <span class="st">&quot;,&quot;</span>)</span>
-<span id="cb235-5"><a href="fgsea_mod8.html#cb235-5" tabindex="-1"></a></span>
-<span id="cb235-6"><a href="fgsea_mod8.html#cb235-6" tabindex="-1"></a><span class="co"># write.csv(fgseaRes_to_save, &quot;results/fgsea_results_resistant_vs_parental.csv&quot;, row.names = FALSE)</span></span></code></pre></div>
+<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="fgsea_mod8.html#cb262-1" tabindex="-1"></a><span class="co">#the leadingEdge column is a list of genes for each pathway,</span></span>
+<span id="cb262-2"><a href="fgsea_mod8.html#cb262-2" tabindex="-1"></a><span class="co">#convert it to text (genes separated by a comma) so that it can be written to a csv file.</span></span>
+<span id="cb262-3"><a href="fgsea_mod8.html#cb262-3" tabindex="-1"></a>fgseaRes_to_save <span class="ot">&lt;-</span> <span class="fu">copy</span>(fgseaRes)</span>
+<span id="cb262-4"><a href="fgsea_mod8.html#cb262-4" tabindex="-1"></a>fgseaRes_to_save<span class="sc">$</span>leadingEdge <span class="ot">&lt;-</span> <span class="fu">sapply</span>(fgseaRes_to_save<span class="sc">$</span>leadingEdge, paste, <span class="at">collapse =</span> <span class="st">&quot;,&quot;</span>)</span>
+<span id="cb262-5"><a href="fgsea_mod8.html#cb262-5" tabindex="-1"></a></span>
+<span id="cb262-6"><a href="fgsea_mod8.html#cb262-6" tabindex="-1"></a><span class="co"># write.csv(fgseaRes_to_save, &quot;results/fgsea_results_resistant_vs_parental.csv&quot;, row.names = FALSE)</span></span></code></pre></div>
 <div class="rmd-tip">
 <p>
 Set <strong>gseaParam</strong> to 2 if you want to add more weight on
@@ -622,10 +626,10 @@ less gene-sets significant under FDR &lt;0.05.
 <h3>Step 3 - Examine the results<a href="fgsea_mod8.html#step-3---examine-the-results" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Examining the results</p>
 <p>Get the top results and visualize as table</p>
-<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="fgsea_mod8.html#cb236-1" tabindex="-1"></a>topPathwaysUp <span class="ot">&lt;-</span> fgseaRes[ES <span class="sc">&gt;</span> <span class="dv">0</span>][<span class="fu">head</span>(<span class="fu">order</span>(pval), <span class="at">n=</span><span class="dv">10</span>), pathway]</span>
-<span id="cb236-2"><a href="fgsea_mod8.html#cb236-2" tabindex="-1"></a>topPathwaysDown <span class="ot">&lt;-</span> fgseaRes[ES <span class="sc">&lt;</span> <span class="dv">0</span>][<span class="fu">head</span>(<span class="fu">order</span>(pval), <span class="at">n=</span><span class="dv">10</span>), pathway]</span>
-<span id="cb236-3"><a href="fgsea_mod8.html#cb236-3" tabindex="-1"></a>topPathways <span class="ot">&lt;-</span> <span class="fu">c</span>(topPathwaysUp, <span class="fu">rev</span>(topPathwaysDown))</span>
-<span id="cb236-4"><a href="fgsea_mod8.html#cb236-4" tabindex="-1"></a><span class="fu">plotGseaTable</span>(pathways[topPathways], ranks, fgseaRes, <span class="at">gseaParam=</span><span class="fl">0.5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="fgsea_mod8.html#cb263-1" tabindex="-1"></a>topPathwaysUp <span class="ot">&lt;-</span> fgseaRes[ES <span class="sc">&gt;</span> <span class="dv">0</span>][<span class="fu">head</span>(<span class="fu">order</span>(pval), <span class="at">n=</span><span class="dv">10</span>), pathway]</span>
+<span id="cb263-2"><a href="fgsea_mod8.html#cb263-2" tabindex="-1"></a>topPathwaysDown <span class="ot">&lt;-</span> fgseaRes[ES <span class="sc">&lt;</span> <span class="dv">0</span>][<span class="fu">head</span>(<span class="fu">order</span>(pval), <span class="at">n=</span><span class="dv">10</span>), pathway]</span>
+<span id="cb263-3"><a href="fgsea_mod8.html#cb263-3" tabindex="-1"></a>topPathways <span class="ot">&lt;-</span> <span class="fu">c</span>(topPathwaysUp, <span class="fu">rev</span>(topPathwaysDown))</span>
+<span id="cb263-4"><a href="fgsea_mod8.html#cb263-4" tabindex="-1"></a><span class="fu">plotGseaTable</span>(pathways[topPathways], ranks, fgseaRes, <span class="at">gseaParam=</span><span class="fl">0.5</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/top-pathways-1.png" alt="" width="672" /></p>
 <p>When examining the results there are a few things to look for:</p>
 <p>Check the number of gene-sets that have been used for the analysis.</p>
@@ -637,31 +641,31 @@ could indicate an issue with identifier mapping.
 </div>
 <p>Check the number of sets that have FDR less than 0.25 – in order to determine what thresholds to start with when creating the enrichment map. It is not uncommon to see a thousand gene sets pass the threshold of FDR less than 0.25. FDR less than 0.25 is a very lax threshold and for robust data we can set thresholds of FDR less than 0.05 or lower.</p>
 <p>Number of pathways with corrected pvalue &lt; 0.05</p>
-<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb237-1"><a href="fgsea_mod8.html#cb237-1" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">which</span>(fgseaRes<span class="sc">$</span>padj <span class="sc">&lt;</span> <span class="fl">0.05</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="fgsea_mod8.html#cb264-1" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">which</span>(fgseaRes<span class="sc">$</span>padj <span class="sc">&lt;</span> <span class="fl">0.05</span>))</span></code></pre></div>
 <pre><code>## [1] 325</code></pre>
 <p>Number of pathways with corrected pvalue &lt; 0.01</p>
-<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb239-1"><a href="fgsea_mod8.html#cb239-1" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">which</span>(fgseaRes<span class="sc">$</span>padj <span class="sc">&lt;</span> <span class="fl">0.01</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="fgsea_mod8.html#cb266-1" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">which</span>(fgseaRes<span class="sc">$</span>padj <span class="sc">&lt;</span> <span class="fl">0.01</span>))</span></code></pre></div>
 <pre><code>## [1] 0</code></pre>
 <p>Number of Palbo-resistant (up -regulated) pathways with corrected pvalue &lt; 0.05</p>
-<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="fgsea_mod8.html#cb241-1" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">which</span>(fgseaRes<span class="sc">$</span>padj <span class="sc">&lt;</span> <span class="fl">0.05</span> <span class="sc">&amp;</span> fgseaRes<span class="sc">$</span>ES <span class="sc">&gt;</span> <span class="dv">0</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="fgsea_mod8.html#cb268-1" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">which</span>(fgseaRes<span class="sc">$</span>padj <span class="sc">&lt;</span> <span class="fl">0.05</span> <span class="sc">&amp;</span> fgseaRes<span class="sc">$</span>ES <span class="sc">&gt;</span> <span class="dv">0</span>))</span></code></pre></div>
 <pre><code>## [1] 297</code></pre>
 <p>Number of Parental (down -regulated) pathways with corrected pvalue &lt; 0.05</p>
-<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="fgsea_mod8.html#cb243-1" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">which</span>(fgseaRes<span class="sc">$</span>padj <span class="sc">&lt;</span> <span class="fl">0.05</span> <span class="sc">&amp;</span> fgseaRes<span class="sc">$</span>ES <span class="sc">&lt;</span> <span class="dv">0</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="fgsea_mod8.html#cb270-1" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">which</span>(fgseaRes<span class="sc">$</span>padj <span class="sc">&lt;</span> <span class="fl">0.05</span> <span class="sc">&amp;</span> fgseaRes<span class="sc">$</span>ES <span class="sc">&lt;</span> <span class="dv">0</span>))</span></code></pre></div>
 <pre><code>## [1] 28</code></pre>
 </div>
 <div id="step-4---explore-the-tabular-format-of-the-results" class="section level3 hasAnchor">
 <h3>Step 4 - Explore the tabular format of the results<a href="fgsea_mod8.html#step-4---explore-the-tabular-format-of-the-results" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="palbo-resistant-up-regulated-genes" class="section level4 hasAnchor">
 <h4>Palbo-resistant (up-regulated genes)<a href="fgsea_mod8.html#palbo-resistant-up-regulated-genes" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="fgsea_mod8.html#cb245-1" tabindex="-1"></a>topPathwaysUp <span class="ot">&lt;-</span> fgseaRes[ES <span class="sc">&gt;</span> <span class="dv">0</span>][<span class="fu">head</span>(<span class="fu">order</span>(pval), <span class="at">n=</span><span class="dv">5</span>), pathway]</span>
-<span id="cb245-2"><a href="fgsea_mod8.html#cb245-2" tabindex="-1"></a></span>
-<span id="cb245-3"><a href="fgsea_mod8.html#cb245-3" tabindex="-1"></a>top_palbo_hits <span class="ot">&lt;-</span> fgseaRes[<span class="fu">which</span>(fgseaRes<span class="sc">$</span>pathway <span class="sc">%in%</span> topPathwaysUp),]</span>
-<span id="cb245-4"><a href="fgsea_mod8.html#cb245-4" tabindex="-1"></a></span>
-<span id="cb245-5"><a href="fgsea_mod8.html#cb245-5" tabindex="-1"></a><span class="co">#format the pathway name colum so that it is easier to see the whole table</span></span>
-<span id="cb245-6"><a href="fgsea_mod8.html#cb245-6" tabindex="-1"></a>top_palbo_hits<span class="sc">$</span>pathway <span class="ot">&lt;-</span> <span class="fu">substr</span>(top_palbo_hits<span class="sc">$</span>pathway, <span class="at">start =</span> <span class="dv">1</span>, <span class="at">stop=</span><span class="dv">35</span>)</span>
-<span id="cb245-7"><a href="fgsea_mod8.html#cb245-7" tabindex="-1"></a></span>
-<span id="cb245-8"><a href="fgsea_mod8.html#cb245-8" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">head</span>(top_palbo_hits), <span class="at">caption =</span> <span class="st">&quot;Top Palbo-resistant pathways&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb245-9"><a href="fgsea_mod8.html#cb245-9" tabindex="-1"></a><span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;condensed&quot;</span>), <span class="at">font_size =</span> <span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="fgsea_mod8.html#cb272-1" tabindex="-1"></a>topPathwaysUp <span class="ot">&lt;-</span> fgseaRes[ES <span class="sc">&gt;</span> <span class="dv">0</span>][<span class="fu">head</span>(<span class="fu">order</span>(pval), <span class="at">n=</span><span class="dv">5</span>), pathway]</span>
+<span id="cb272-2"><a href="fgsea_mod8.html#cb272-2" tabindex="-1"></a></span>
+<span id="cb272-3"><a href="fgsea_mod8.html#cb272-3" tabindex="-1"></a>top_palbo_hits <span class="ot">&lt;-</span> fgseaRes[<span class="fu">which</span>(fgseaRes<span class="sc">$</span>pathway <span class="sc">%in%</span> topPathwaysUp),]</span>
+<span id="cb272-4"><a href="fgsea_mod8.html#cb272-4" tabindex="-1"></a></span>
+<span id="cb272-5"><a href="fgsea_mod8.html#cb272-5" tabindex="-1"></a><span class="co">#format the pathway name colum so that it is easier to see the whole table</span></span>
+<span id="cb272-6"><a href="fgsea_mod8.html#cb272-6" tabindex="-1"></a>top_palbo_hits<span class="sc">$</span>pathway <span class="ot">&lt;-</span> <span class="fu">substr</span>(top_palbo_hits<span class="sc">$</span>pathway, <span class="at">start =</span> <span class="dv">1</span>, <span class="at">stop=</span><span class="dv">35</span>)</span>
+<span id="cb272-7"><a href="fgsea_mod8.html#cb272-7" tabindex="-1"></a></span>
+<span id="cb272-8"><a href="fgsea_mod8.html#cb272-8" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">head</span>(top_palbo_hits), <span class="at">caption =</span> <span class="st">&quot;Top Palbo-resistant pathways&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb272-9"><a href="fgsea_mod8.html#cb272-9" tabindex="-1"></a><span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;condensed&quot;</span>), <span class="at">font_size =</span> <span class="dv">10</span>)</span></code></pre></div>
 <table class="table table-striped table-condensed" style="font-size: 10px; margin-left: auto; margin-right: auto;">
 <caption style="font-size: initial !important;">
 <span id="tab:top-pathways-up">Table 7: </span><span id="tab:top-pathways-up">Table 8: </span>Top Palbo-resistant pathways
@@ -830,15 +834,15 @@ COL6A1, ….
 </div>
 <div id="parental-down-regulated-genes" class="section level4 hasAnchor">
 <h4>Parental (down-regulated genes)<a href="fgsea_mod8.html#parental-down-regulated-genes" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="fgsea_mod8.html#cb246-1" tabindex="-1"></a>topPathwaysDown <span class="ot">&lt;-</span> fgseaRes[ES <span class="sc">&lt;</span> <span class="dv">0</span>][<span class="fu">head</span>(<span class="fu">order</span>(pval), <span class="at">n=</span><span class="dv">5</span>), pathway]</span>
-<span id="cb246-2"><a href="fgsea_mod8.html#cb246-2" tabindex="-1"></a></span>
-<span id="cb246-3"><a href="fgsea_mod8.html#cb246-3" tabindex="-1"></a>top_parental_hits <span class="ot">&lt;-</span> fgseaRes[<span class="fu">which</span>(fgseaRes<span class="sc">$</span>pathway <span class="sc">%in%</span> topPathwaysDown),]</span>
-<span id="cb246-4"><a href="fgsea_mod8.html#cb246-4" tabindex="-1"></a></span>
-<span id="cb246-5"><a href="fgsea_mod8.html#cb246-5" tabindex="-1"></a><span class="co">#format the pathway name colum so that it is easier to see the whole table</span></span>
-<span id="cb246-6"><a href="fgsea_mod8.html#cb246-6" tabindex="-1"></a>top_parental_hits<span class="sc">$</span>pathway <span class="ot">&lt;-</span> <span class="fu">substr</span>(top_parental_hits<span class="sc">$</span>pathway, <span class="at">start =</span> <span class="dv">1</span>, <span class="at">stop=</span><span class="dv">35</span>)</span>
-<span id="cb246-7"><a href="fgsea_mod8.html#cb246-7" tabindex="-1"></a></span>
-<span id="cb246-8"><a href="fgsea_mod8.html#cb246-8" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">head</span>(top_parental_hits), <span class="at">caption =</span> <span class="st">&quot;Top Parental pathways&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb246-9"><a href="fgsea_mod8.html#cb246-9" tabindex="-1"></a><span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;condensed&quot;</span>), <span class="at">font_size =</span> <span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb273-1"><a href="fgsea_mod8.html#cb273-1" tabindex="-1"></a>topPathwaysDown <span class="ot">&lt;-</span> fgseaRes[ES <span class="sc">&lt;</span> <span class="dv">0</span>][<span class="fu">head</span>(<span class="fu">order</span>(pval), <span class="at">n=</span><span class="dv">5</span>), pathway]</span>
+<span id="cb273-2"><a href="fgsea_mod8.html#cb273-2" tabindex="-1"></a></span>
+<span id="cb273-3"><a href="fgsea_mod8.html#cb273-3" tabindex="-1"></a>top_parental_hits <span class="ot">&lt;-</span> fgseaRes[<span class="fu">which</span>(fgseaRes<span class="sc">$</span>pathway <span class="sc">%in%</span> topPathwaysDown),]</span>
+<span id="cb273-4"><a href="fgsea_mod8.html#cb273-4" tabindex="-1"></a></span>
+<span id="cb273-5"><a href="fgsea_mod8.html#cb273-5" tabindex="-1"></a><span class="co">#format the pathway name colum so that it is easier to see the whole table</span></span>
+<span id="cb273-6"><a href="fgsea_mod8.html#cb273-6" tabindex="-1"></a>top_parental_hits<span class="sc">$</span>pathway <span class="ot">&lt;-</span> <span class="fu">substr</span>(top_parental_hits<span class="sc">$</span>pathway, <span class="at">start =</span> <span class="dv">1</span>, <span class="at">stop=</span><span class="dv">35</span>)</span>
+<span id="cb273-7"><a href="fgsea_mod8.html#cb273-7" tabindex="-1"></a></span>
+<span id="cb273-8"><a href="fgsea_mod8.html#cb273-8" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">head</span>(top_parental_hits), <span class="at">caption =</span> <span class="st">&quot;Top Parental pathways&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb273-9"><a href="fgsea_mod8.html#cb273-9" tabindex="-1"></a><span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;condensed&quot;</span>), <span class="at">font_size =</span> <span class="dv">10</span>)</span></code></pre></div>
 <table class="table table-striped table-condensed" style="font-size: 10px; margin-left: auto; margin-right: auto;">
 <caption style="font-size: initial !important;">
 <span id="tab:top-pathways-down">Table 9: </span><span id="tab:top-pathways-down">Table 10: </span>Top Parental pathways
@@ -1023,71 +1027,71 @@ GRHL2, M….
 <li>the pathways as a data frame.</li>
 </ul>
 <p>Below we show how to run fGSEA using the clusterProfiler package and user supplied pathway definitions.</p>
-<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="fgsea_mod8.html#cb247-1" tabindex="-1"></a><span class="co">#translate our gmt file (a named list of genesets) into a dataframe</span></span>
-<span id="cb247-2"><a href="fgsea_mod8.html#cb247-2" tabindex="-1"></a><span class="co">#with one row per gene in each pathway.</span></span>
-<span id="cb247-3"><a href="fgsea_mod8.html#cb247-3" tabindex="-1"></a>TERMS <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb247-4"><a href="fgsea_mod8.html#cb247-4" tabindex="-1"></a>    <span class="at">name =</span> <span class="fu">rep</span>(<span class="fu">names</span>(pathways), <span class="fu">lengths</span>(pathways)),</span>
-<span id="cb247-5"><a href="fgsea_mod8.html#cb247-5" tabindex="-1"></a>    <span class="at">gene =</span> <span class="fu">unlist</span>(pathways, <span class="at">use.names =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb247-6"><a href="fgsea_mod8.html#cb247-6" tabindex="-1"></a>  )</span>
-<span id="cb247-7"><a href="fgsea_mod8.html#cb247-7" tabindex="-1"></a></span>
-<span id="cb247-8"><a href="fgsea_mod8.html#cb247-8" tabindex="-1"></a><span class="co"># specify the gene ranks, and make sure it is in descending order.</span></span>
-<span id="cb247-9"><a href="fgsea_mod8.html#cb247-9" tabindex="-1"></a>gsea_scores <span class="ot">&lt;-</span> ranks</span>
-<span id="cb247-10"><a href="fgsea_mod8.html#cb247-10" tabindex="-1"></a>gsea_scores <span class="ot">&lt;-</span> gsea_scores[<span class="sc">!</span><span class="fu">is.na</span>(gsea_scores)]</span>
-<span id="cb247-11"><a href="fgsea_mod8.html#cb247-11" tabindex="-1"></a>gsea_scores <span class="ot">&lt;-</span> <span class="fu">sort</span>(gsea_scores, <span class="at">decreasing =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb247-12"><a href="fgsea_mod8.html#cb247-12" tabindex="-1"></a></span>
-<span id="cb247-13"><a href="fgsea_mod8.html#cb247-13" tabindex="-1"></a><span class="co"># Set a seed for reproducibility</span></span>
-<span id="cb247-14"><a href="fgsea_mod8.html#cb247-14" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb247-15"><a href="fgsea_mod8.html#cb247-15" tabindex="-1"></a></span>
-<span id="cb247-16"><a href="fgsea_mod8.html#cb247-16" tabindex="-1"></a><span class="co">#Run fgsea using clusterProfiler, with the same gene-set size limits as above.</span></span>
-<span id="cb247-17"><a href="fgsea_mod8.html#cb247-17" tabindex="-1"></a>selected_gsea <span class="ot">&lt;-</span> clusterProfiler<span class="sc">::</span><span class="fu">GSEA</span>(</span>
-<span id="cb247-18"><a href="fgsea_mod8.html#cb247-18" tabindex="-1"></a>    <span class="at">geneList =</span> gsea_scores,</span>
-<span id="cb247-19"><a href="fgsea_mod8.html#cb247-19" tabindex="-1"></a>    <span class="at">TERM2GENE =</span> TERMS,</span>
-<span id="cb247-20"><a href="fgsea_mod8.html#cb247-20" tabindex="-1"></a>    <span class="at">minGSSize =</span> <span class="dv">10</span>,</span>
-<span id="cb247-21"><a href="fgsea_mod8.html#cb247-21" tabindex="-1"></a>    <span class="at">maxGSSize =</span> <span class="dv">500</span>,</span>
-<span id="cb247-22"><a href="fgsea_mod8.html#cb247-22" tabindex="-1"></a>    <span class="at">pvalueCutoff =</span> <span class="dv">1</span>,</span>
-<span id="cb247-23"><a href="fgsea_mod8.html#cb247-23" tabindex="-1"></a>    <span class="at">verbose =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb247-24"><a href="fgsea_mod8.html#cb247-24" tabindex="-1"></a>    <span class="at">pAdjustMethod =</span> <span class="st">&quot;fdr&quot;</span>,</span>
-<span id="cb247-25"><a href="fgsea_mod8.html#cb247-25" tabindex="-1"></a>    <span class="at">scoreType =</span> <span class="st">&quot;std&quot;</span>,</span>
-<span id="cb247-26"><a href="fgsea_mod8.html#cb247-26" tabindex="-1"></a>    <span class="at">eps =</span> <span class="dv">0</span></span>
-<span id="cb247-27"><a href="fgsea_mod8.html#cb247-27" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="fgsea_mod8.html#cb274-1" tabindex="-1"></a><span class="co">#translate our gmt file (a named list of genesets) into a dataframe</span></span>
+<span id="cb274-2"><a href="fgsea_mod8.html#cb274-2" tabindex="-1"></a><span class="co">#with one row per gene in each pathway.</span></span>
+<span id="cb274-3"><a href="fgsea_mod8.html#cb274-3" tabindex="-1"></a>TERMS <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb274-4"><a href="fgsea_mod8.html#cb274-4" tabindex="-1"></a>    <span class="at">name =</span> <span class="fu">rep</span>(<span class="fu">names</span>(pathways), <span class="fu">lengths</span>(pathways)),</span>
+<span id="cb274-5"><a href="fgsea_mod8.html#cb274-5" tabindex="-1"></a>    <span class="at">gene =</span> <span class="fu">unlist</span>(pathways, <span class="at">use.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb274-6"><a href="fgsea_mod8.html#cb274-6" tabindex="-1"></a>  )</span>
+<span id="cb274-7"><a href="fgsea_mod8.html#cb274-7" tabindex="-1"></a></span>
+<span id="cb274-8"><a href="fgsea_mod8.html#cb274-8" tabindex="-1"></a><span class="co"># specify the gene ranks, and make sure it is in descending order.</span></span>
+<span id="cb274-9"><a href="fgsea_mod8.html#cb274-9" tabindex="-1"></a>gsea_scores <span class="ot">&lt;-</span> ranks</span>
+<span id="cb274-10"><a href="fgsea_mod8.html#cb274-10" tabindex="-1"></a>gsea_scores <span class="ot">&lt;-</span> gsea_scores[<span class="sc">!</span><span class="fu">is.na</span>(gsea_scores)]</span>
+<span id="cb274-11"><a href="fgsea_mod8.html#cb274-11" tabindex="-1"></a>gsea_scores <span class="ot">&lt;-</span> <span class="fu">sort</span>(gsea_scores, <span class="at">decreasing =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb274-12"><a href="fgsea_mod8.html#cb274-12" tabindex="-1"></a></span>
+<span id="cb274-13"><a href="fgsea_mod8.html#cb274-13" tabindex="-1"></a><span class="co"># Set a seed for reproducibility</span></span>
+<span id="cb274-14"><a href="fgsea_mod8.html#cb274-14" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb274-15"><a href="fgsea_mod8.html#cb274-15" tabindex="-1"></a></span>
+<span id="cb274-16"><a href="fgsea_mod8.html#cb274-16" tabindex="-1"></a><span class="co">#Run fgsea using clusterProfiler, with the same gene-set size limits as above.</span></span>
+<span id="cb274-17"><a href="fgsea_mod8.html#cb274-17" tabindex="-1"></a>selected_gsea <span class="ot">&lt;-</span> clusterProfiler<span class="sc">::</span><span class="fu">GSEA</span>(</span>
+<span id="cb274-18"><a href="fgsea_mod8.html#cb274-18" tabindex="-1"></a>    <span class="at">geneList =</span> gsea_scores,</span>
+<span id="cb274-19"><a href="fgsea_mod8.html#cb274-19" tabindex="-1"></a>    <span class="at">TERM2GENE =</span> TERMS,</span>
+<span id="cb274-20"><a href="fgsea_mod8.html#cb274-20" tabindex="-1"></a>    <span class="at">minGSSize =</span> <span class="dv">10</span>,</span>
+<span id="cb274-21"><a href="fgsea_mod8.html#cb274-21" tabindex="-1"></a>    <span class="at">maxGSSize =</span> <span class="dv">500</span>,</span>
+<span id="cb274-22"><a href="fgsea_mod8.html#cb274-22" tabindex="-1"></a>    <span class="at">pvalueCutoff =</span> <span class="dv">1</span>,</span>
+<span id="cb274-23"><a href="fgsea_mod8.html#cb274-23" tabindex="-1"></a>    <span class="at">verbose =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb274-24"><a href="fgsea_mod8.html#cb274-24" tabindex="-1"></a>    <span class="at">pAdjustMethod =</span> <span class="st">&quot;fdr&quot;</span>,</span>
+<span id="cb274-25"><a href="fgsea_mod8.html#cb274-25" tabindex="-1"></a>    <span class="at">scoreType =</span> <span class="st">&quot;std&quot;</span>,</span>
+<span id="cb274-26"><a href="fgsea_mod8.html#cb274-26" tabindex="-1"></a>    <span class="at">eps =</span> <span class="dv">0</span></span>
+<span id="cb274-27"><a href="fgsea_mod8.html#cb274-27" tabindex="-1"></a>  )</span></code></pre></div>
 <pre><code>## Warning in preparePathwaysAndStats(pathways, stats, minSize, maxSize, gseaParam, : There are ties in the preranked stats (0.01% of the list).
 ## The order of those tied genes will be arbitrary, which may produce unexpected results.</code></pre>
 <p>Print out a few of the top enrichment plots</p>
-<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="fgsea_mod8.html#cb249-1" tabindex="-1"></a>all_figures <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
-<span id="cb249-2"><a href="fgsea_mod8.html#cb249-2" tabindex="-1"></a></span>
-<span id="cb249-3"><a href="fgsea_mod8.html#cb249-3" tabindex="-1"></a><span class="co">#generate GSEA plots for the top Parental (down-regulated) genesets that we have already seen in the table above</span></span>
-<span id="cb249-4"><a href="fgsea_mod8.html#cb249-4" tabindex="-1"></a>rows_to_use <span class="ot">&lt;-</span> <span class="fu">which</span>(selected_gsea<span class="sc">@</span>result<span class="sc">$</span>ID <span class="sc">%in%</span> topPathwaysDown)</span>
-<span id="cb249-5"><a href="fgsea_mod8.html#cb249-5" tabindex="-1"></a></span>
-<span id="cb249-6"><a href="fgsea_mod8.html#cb249-6" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="fu">seq_along</span>(rows_to_use)){</span>
-<span id="cb249-7"><a href="fgsea_mod8.html#cb249-7" tabindex="-1"></a>  row_number <span class="ot">=</span> rows_to_use[i]</span>
-<span id="cb249-8"><a href="fgsea_mod8.html#cb249-8" tabindex="-1"></a></span>
-<span id="cb249-9"><a href="fgsea_mod8.html#cb249-9" tabindex="-1"></a>  <span class="co">#format the title for the enrichment plot</span></span>
-<span id="cb249-10"><a href="fgsea_mod8.html#cb249-10" tabindex="-1"></a>  pw_des <span class="ot">&lt;-</span> selected_gsea<span class="sc">@</span>result<span class="sc">$</span>Description[row_number]</span>
-<span id="cb249-11"><a href="fgsea_mod8.html#cb249-11" tabindex="-1"></a>  pw_pval <span class="ot">&lt;-</span> selected_gsea<span class="sc">@</span>result<span class="sc">$</span>pvalue[row_number]</span>
-<span id="cb249-12"><a href="fgsea_mod8.html#cb249-12" tabindex="-1"></a>  pw_pval <span class="ot">&lt;-</span> <span class="fu">format</span>(pw_pval, <span class="at">scientific =</span> F, <span class="at">digits =</span> <span class="dv">3</span>)</span>
-<span id="cb249-13"><a href="fgsea_mod8.html#cb249-13" tabindex="-1"></a>  pw_qval <span class="ot">&lt;-</span> selected_gsea<span class="sc">@</span>result<span class="sc">$</span>p.adjust[row_number]</span>
-<span id="cb249-14"><a href="fgsea_mod8.html#cb249-14" tabindex="-1"></a>  pw_qval <span class="ot">&lt;-</span> <span class="fu">format</span>(pw_qval, <span class="at">scientific =</span> F, <span class="at">digits =</span> <span class="dv">3</span>)</span>
-<span id="cb249-15"><a href="fgsea_mod8.html#cb249-15" tabindex="-1"></a>  pw_nes <span class="ot">&lt;-</span> selected_gsea<span class="sc">@</span>result<span class="sc">$</span>NES[row_number]</span>
-<span id="cb249-16"><a href="fgsea_mod8.html#cb249-16" tabindex="-1"></a>  pw_nes <span class="ot">&lt;-</span> <span class="fu">format</span>(pw_nes, <span class="at">scientific =</span> F, <span class="at">digits =</span> <span class="dv">2</span>)</span>
-<span id="cb249-17"><a href="fgsea_mod8.html#cb249-17" tabindex="-1"></a>  pw_es <span class="ot">&lt;-</span> selected_gsea<span class="sc">@</span>result<span class="sc">$</span>enrichmentScore[row_number]</span>
-<span id="cb249-18"><a href="fgsea_mod8.html#cb249-18" tabindex="-1"></a>  pw_es <span class="ot">&lt;-</span> <span class="fu">format</span>(pw_es, <span class="at">scientific =</span> F, <span class="at">digits =</span> <span class="dv">2</span>)</span>
-<span id="cb249-19"><a href="fgsea_mod8.html#cb249-19" tabindex="-1"></a>  mytitle <span class="ot">&lt;-</span> glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">&#39;{pw_des}</span><span class="sc">\n</span><span class="st">(pval: {pw_pval}, qval: {pw_qval}, NES: {pw_nes}, ES: {pw_es})&#39;</span>)</span>
-<span id="cb249-20"><a href="fgsea_mod8.html#cb249-20" tabindex="-1"></a></span>
-<span id="cb249-21"><a href="fgsea_mod8.html#cb249-21" tabindex="-1"></a></span>
-<span id="cb249-22"><a href="fgsea_mod8.html#cb249-22" tabindex="-1"></a>  figure <span class="ot">&lt;-</span> enrichplot<span class="sc">::</span><span class="fu">gseaplot2</span>(</span>
-<span id="cb249-23"><a href="fgsea_mod8.html#cb249-23" tabindex="-1"></a>    selected_gsea,</span>
-<span id="cb249-24"><a href="fgsea_mod8.html#cb249-24" tabindex="-1"></a>    <span class="at">geneSetID =</span> selected_gsea<span class="sc">@</span>result<span class="sc">$</span>ID[row_number],</span>
-<span id="cb249-25"><a href="fgsea_mod8.html#cb249-25" tabindex="-1"></a>    <span class="at">title =</span> mytitle,</span>
-<span id="cb249-26"><a href="fgsea_mod8.html#cb249-26" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;green2&quot;</span>,</span>
-<span id="cb249-27"><a href="fgsea_mod8.html#cb249-27" tabindex="-1"></a>    <span class="at">base_size =</span> <span class="dv">12</span>,</span>
-<span id="cb249-28"><a href="fgsea_mod8.html#cb249-28" tabindex="-1"></a>    <span class="at">rel_heights =</span> <span class="fu">c</span>(<span class="fl">1.5</span>, <span class="fl">0.5</span>, <span class="dv">1</span>),</span>
-<span id="cb249-29"><a href="fgsea_mod8.html#cb249-29" tabindex="-1"></a>    <span class="at">subplots =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,</span>
-<span id="cb249-30"><a href="fgsea_mod8.html#cb249-30" tabindex="-1"></a>    <span class="at">pvalue_table =</span> F,</span>
-<span id="cb249-31"><a href="fgsea_mod8.html#cb249-31" tabindex="-1"></a>    <span class="at">ES_geom =</span> <span class="st">&quot;line&quot;</span></span>
-<span id="cb249-32"><a href="fgsea_mod8.html#cb249-32" tabindex="-1"></a>  )</span>
-<span id="cb249-33"><a href="fgsea_mod8.html#cb249-33" tabindex="-1"></a></span>
-<span id="cb249-34"><a href="fgsea_mod8.html#cb249-34" tabindex="-1"></a>  all_figures[[i]] <span class="ot">&lt;-</span> figure</span>
-<span id="cb249-35"><a href="fgsea_mod8.html#cb249-35" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="fgsea_mod8.html#cb276-1" tabindex="-1"></a>all_figures <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb276-2"><a href="fgsea_mod8.html#cb276-2" tabindex="-1"></a></span>
+<span id="cb276-3"><a href="fgsea_mod8.html#cb276-3" tabindex="-1"></a><span class="co">#generate GSEA plots for the top Parental (down-regulated) genesets that we have already seen in the table above</span></span>
+<span id="cb276-4"><a href="fgsea_mod8.html#cb276-4" tabindex="-1"></a>rows_to_use <span class="ot">&lt;-</span> <span class="fu">which</span>(selected_gsea<span class="sc">@</span>result<span class="sc">$</span>ID <span class="sc">%in%</span> topPathwaysDown)</span>
+<span id="cb276-5"><a href="fgsea_mod8.html#cb276-5" tabindex="-1"></a></span>
+<span id="cb276-6"><a href="fgsea_mod8.html#cb276-6" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="fu">seq_along</span>(rows_to_use)){</span>
+<span id="cb276-7"><a href="fgsea_mod8.html#cb276-7" tabindex="-1"></a>  row_number <span class="ot">=</span> rows_to_use[i]</span>
+<span id="cb276-8"><a href="fgsea_mod8.html#cb276-8" tabindex="-1"></a></span>
+<span id="cb276-9"><a href="fgsea_mod8.html#cb276-9" tabindex="-1"></a>  <span class="co">#format the title for the enrichment plot</span></span>
+<span id="cb276-10"><a href="fgsea_mod8.html#cb276-10" tabindex="-1"></a>  pw_des <span class="ot">&lt;-</span> selected_gsea<span class="sc">@</span>result<span class="sc">$</span>Description[row_number]</span>
+<span id="cb276-11"><a href="fgsea_mod8.html#cb276-11" tabindex="-1"></a>  pw_pval <span class="ot">&lt;-</span> selected_gsea<span class="sc">@</span>result<span class="sc">$</span>pvalue[row_number]</span>
+<span id="cb276-12"><a href="fgsea_mod8.html#cb276-12" tabindex="-1"></a>  pw_pval <span class="ot">&lt;-</span> <span class="fu">format</span>(pw_pval, <span class="at">scientific =</span> F, <span class="at">digits =</span> <span class="dv">3</span>)</span>
+<span id="cb276-13"><a href="fgsea_mod8.html#cb276-13" tabindex="-1"></a>  pw_qval <span class="ot">&lt;-</span> selected_gsea<span class="sc">@</span>result<span class="sc">$</span>p.adjust[row_number]</span>
+<span id="cb276-14"><a href="fgsea_mod8.html#cb276-14" tabindex="-1"></a>  pw_qval <span class="ot">&lt;-</span> <span class="fu">format</span>(pw_qval, <span class="at">scientific =</span> F, <span class="at">digits =</span> <span class="dv">3</span>)</span>
+<span id="cb276-15"><a href="fgsea_mod8.html#cb276-15" tabindex="-1"></a>  pw_nes <span class="ot">&lt;-</span> selected_gsea<span class="sc">@</span>result<span class="sc">$</span>NES[row_number]</span>
+<span id="cb276-16"><a href="fgsea_mod8.html#cb276-16" tabindex="-1"></a>  pw_nes <span class="ot">&lt;-</span> <span class="fu">format</span>(pw_nes, <span class="at">scientific =</span> F, <span class="at">digits =</span> <span class="dv">2</span>)</span>
+<span id="cb276-17"><a href="fgsea_mod8.html#cb276-17" tabindex="-1"></a>  pw_es <span class="ot">&lt;-</span> selected_gsea<span class="sc">@</span>result<span class="sc">$</span>enrichmentScore[row_number]</span>
+<span id="cb276-18"><a href="fgsea_mod8.html#cb276-18" tabindex="-1"></a>  pw_es <span class="ot">&lt;-</span> <span class="fu">format</span>(pw_es, <span class="at">scientific =</span> F, <span class="at">digits =</span> <span class="dv">2</span>)</span>
+<span id="cb276-19"><a href="fgsea_mod8.html#cb276-19" tabindex="-1"></a>  mytitle <span class="ot">&lt;-</span> glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">&#39;{pw_des}</span><span class="sc">\n</span><span class="st">(pval: {pw_pval}, qval: {pw_qval}, NES: {pw_nes}, ES: {pw_es})&#39;</span>)</span>
+<span id="cb276-20"><a href="fgsea_mod8.html#cb276-20" tabindex="-1"></a></span>
+<span id="cb276-21"><a href="fgsea_mod8.html#cb276-21" tabindex="-1"></a></span>
+<span id="cb276-22"><a href="fgsea_mod8.html#cb276-22" tabindex="-1"></a>  figure <span class="ot">&lt;-</span> enrichplot<span class="sc">::</span><span class="fu">gseaplot2</span>(</span>
+<span id="cb276-23"><a href="fgsea_mod8.html#cb276-23" tabindex="-1"></a>    selected_gsea,</span>
+<span id="cb276-24"><a href="fgsea_mod8.html#cb276-24" tabindex="-1"></a>    <span class="at">geneSetID =</span> selected_gsea<span class="sc">@</span>result<span class="sc">$</span>ID[row_number],</span>
+<span id="cb276-25"><a href="fgsea_mod8.html#cb276-25" tabindex="-1"></a>    <span class="at">title =</span> mytitle,</span>
+<span id="cb276-26"><a href="fgsea_mod8.html#cb276-26" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;green2&quot;</span>,</span>
+<span id="cb276-27"><a href="fgsea_mod8.html#cb276-27" tabindex="-1"></a>    <span class="at">base_size =</span> <span class="dv">12</span>,</span>
+<span id="cb276-28"><a href="fgsea_mod8.html#cb276-28" tabindex="-1"></a>    <span class="at">rel_heights =</span> <span class="fu">c</span>(<span class="fl">1.5</span>, <span class="fl">0.5</span>, <span class="dv">1</span>),</span>
+<span id="cb276-29"><a href="fgsea_mod8.html#cb276-29" tabindex="-1"></a>    <span class="at">subplots =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,</span>
+<span id="cb276-30"><a href="fgsea_mod8.html#cb276-30" tabindex="-1"></a>    <span class="at">pvalue_table =</span> F,</span>
+<span id="cb276-31"><a href="fgsea_mod8.html#cb276-31" tabindex="-1"></a>    <span class="at">ES_geom =</span> <span class="st">&quot;line&quot;</span></span>
+<span id="cb276-32"><a href="fgsea_mod8.html#cb276-32" tabindex="-1"></a>  )</span>
+<span id="cb276-33"><a href="fgsea_mod8.html#cb276-33" tabindex="-1"></a></span>
+<span id="cb276-34"><a href="fgsea_mod8.html#cb276-34" tabindex="-1"></a>  all_figures[[i]] <span class="ot">&lt;-</span> figure</span>
+<span id="cb276-35"><a href="fgsea_mod8.html#cb276-35" tabindex="-1"></a>}</span></code></pre></div>
 <pre><code>## Warning: `aes_()` was deprecated in ggplot2 3.0.0.
 ## ℹ Please use tidy evaluation idioms with `aes()`
 ## ℹ The deprecated feature was likely used in the
@@ -1095,8 +1099,8 @@ GRHL2, M….
 ##   Please report the issue at
 ##   &lt;https://github.com/GuangchuangYu/enrichplot/issues&gt;.
 ## This warning is displayed once per session.
-## Call `lifecycle::last_lifecycle_warnings()` to see where
-## this warning was generated.</code></pre>
+## Call `lifecycle::last_lifecycle_warnings()` to see
+## where this warning was generated.</code></pre>
 <pre><code>## Warning: Using `size` aesthetic for lines was deprecated in
 ## ggplot2 3.4.0.
 ## ℹ Please use `linewidth` instead.
@@ -1105,138 +1109,138 @@ GRHL2, M….
 ##   Please report the issue at
 ##   &lt;https://github.com/GuangchuangYu/enrichplot/issues&gt;.
 ## This warning is displayed once per session.
-## Call `lifecycle::last_lifecycle_warnings()` to see where
-## this warning was generated.</code></pre>
-<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="fgsea_mod8.html#cb252-1" tabindex="-1"></a><span class="co">#display the first 3 enrichment plots</span></span>
-<span id="cb252-2"><a href="fgsea_mod8.html#cb252-2" tabindex="-1"></a><span class="cf">for</span> (figure <span class="cf">in</span> <span class="fu">head</span>(all_figures, <span class="dv">3</span>)) {</span>
-<span id="cb252-3"><a href="fgsea_mod8.html#cb252-3" tabindex="-1"></a>  <span class="fu">print</span>(figure)</span>
-<span id="cb252-4"><a href="fgsea_mod8.html#cb252-4" tabindex="-1"></a>}</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-115-1.png" alt="" width="672" /><img src="_main_files/figure-html/unnamed-chunk-115-2.png" alt="" width="672" /><img src="_main_files/figure-html/unnamed-chunk-115-3.png" alt="" width="672" /></p>
+## Call `lifecycle::last_lifecycle_warnings()` to see
+## where this warning was generated.</code></pre>
+<div class="sourceCode" id="cb279"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb279-1"><a href="fgsea_mod8.html#cb279-1" tabindex="-1"></a><span class="co">#display the first 3 enrichment plots</span></span>
+<span id="cb279-2"><a href="fgsea_mod8.html#cb279-2" tabindex="-1"></a><span class="cf">for</span> (figure <span class="cf">in</span> <span class="fu">head</span>(all_figures, <span class="dv">3</span>)) {</span>
+<span id="cb279-3"><a href="fgsea_mod8.html#cb279-3" tabindex="-1"></a>  <span class="fu">print</span>(figure)</span>
+<span id="cb279-4"><a href="fgsea_mod8.html#cb279-4" tabindex="-1"></a>}</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-123-1.png" alt="" width="672" /><img src="_main_files/figure-html/unnamed-chunk-123-2.png" alt="" width="672" /><img src="_main_files/figure-html/unnamed-chunk-123-3.png" alt="" width="672" /></p>
 </div>
 <div id="bar-plots" class="section level4 hasAnchor">
 <h4>Bar plots<a href="fgsea_mod8.html#bar-plots" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <ul>
 <li>top pathways associated with Parental</li>
 </ul>
-<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="fgsea_mod8.html#cb253-1" tabindex="-1"></a>topPathwaysDown <span class="ot">&lt;-</span> fgseaRes[ES <span class="sc">&lt;</span> <span class="dv">0</span>][<span class="fu">head</span>(<span class="fu">order</span>(pval), <span class="at">n=</span><span class="dv">20</span>), pathway]</span>
-<span id="cb253-2"><a href="fgsea_mod8.html#cb253-2" tabindex="-1"></a></span>
-<span id="cb253-3"><a href="fgsea_mod8.html#cb253-3" tabindex="-1"></a>enrichment_results_topdown <span class="ot">&lt;-</span> fgseaRes[<span class="fu">which</span>(fgseaRes<span class="sc">$</span>pathway <span class="sc">%in%</span> topPathwaysDown),]</span>
-<span id="cb253-4"><a href="fgsea_mod8.html#cb253-4" tabindex="-1"></a></span>
-<span id="cb253-5"><a href="fgsea_mod8.html#cb253-5" tabindex="-1"></a><span class="co">#change the name to be just the first part of the name</span></span>
-<span id="cb253-6"><a href="fgsea_mod8.html#cb253-6" tabindex="-1"></a>enrichment_results_topdown<span class="sc">$</span>pathway <span class="ot">&lt;-</span> <span class="fu">unlist</span>(<span class="fu">lapply</span>(enrichment_results_topdown<span class="sc">$</span>pathway, <span class="at">FUN=</span><span class="cf">function</span>(x){<span class="fu">unlist</span>(<span class="fu">strsplit</span>(x,<span class="at">split =</span> <span class="st">&quot;%&quot;</span>))[<span class="dv">1</span>]}))</span>
-<span id="cb253-7"><a href="fgsea_mod8.html#cb253-7" tabindex="-1"></a><span class="co">#make sure that names are unique after shortening them (the same name can come from different databases)</span></span>
-<span id="cb253-8"><a href="fgsea_mod8.html#cb253-8" tabindex="-1"></a>enrichment_results_topdown<span class="sc">$</span>pathway <span class="ot">&lt;-</span> <span class="fu">make.unique</span>(enrichment_results_topdown<span class="sc">$</span>pathway)</span>
-<span id="cb253-9"><a href="fgsea_mod8.html#cb253-9" tabindex="-1"></a></span>
-<span id="cb253-10"><a href="fgsea_mod8.html#cb253-10" tabindex="-1"></a><span class="do">##Calculate a score: the absolute value of the NES.</span></span>
-<span id="cb253-11"><a href="fgsea_mod8.html#cb253-11" tabindex="-1"></a><span class="do">##(the pvalues of the top pathways are all very close to each other, so the NES is more informative here)</span></span>
-<span id="cb253-12"><a href="fgsea_mod8.html#cb253-12" tabindex="-1"></a>enrichment_results_topdown<span class="sc">$</span>score <span class="ot">=</span> <span class="fu">abs</span>(enrichment_results_topdown<span class="sc">$</span>NES)</span>
-<span id="cb253-13"><a href="fgsea_mod8.html#cb253-13" tabindex="-1"></a></span>
-<span id="cb253-14"><a href="fgsea_mod8.html#cb253-14" tabindex="-1"></a>enrichmentTidy <span class="ot">&lt;-</span> enrichment_results_topdown <span class="sc">%&gt;%</span></span>
-<span id="cb253-15"><a href="fgsea_mod8.html#cb253-15" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb253-16"><a href="fgsea_mod8.html#cb253-16" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(score)) <span class="sc">%&gt;%</span></span>
-<span id="cb253-17"><a href="fgsea_mod8.html#cb253-17" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">20</span>)</span>
-<span id="cb253-18"><a href="fgsea_mod8.html#cb253-18" tabindex="-1"></a></span>
-<span id="cb253-19"><a href="fgsea_mod8.html#cb253-19" tabindex="-1"></a>p <span class="ot">=</span> <span class="fu">ggplot</span>(enrichmentTidy, <span class="fu">aes</span>(<span class="fu">reorder</span>(pathway, score), score)) <span class="sc">+</span></span>
-<span id="cb253-20"><a href="fgsea_mod8.html#cb253-20" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">fill =</span> score), <span class="at">width=</span><span class="fl">0.8</span>) <span class="sc">+</span></span>
-<span id="cb253-21"><a href="fgsea_mod8.html#cb253-21" tabindex="-1"></a>  <span class="fu">scale_fill_gradient</span>(<span class="at">low =</span> <span class="st">&quot;#C1F6F8&quot;</span>, <span class="at">high =</span> <span class="st">&quot;#00BFC4&quot;</span>)<span class="sc">+</span></span>
-<span id="cb253-22"><a href="fgsea_mod8.html#cb253-22" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
-<span id="cb253-23"><a href="fgsea_mod8.html#cb253-23" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;&quot;</span>, <span class="at">y=</span><span class="st">&quot;Normalized Enrichment Score (absolute value)&quot;</span>,</span>
-<span id="cb253-24"><a href="fgsea_mod8.html#cb253-24" tabindex="-1"></a>       <span class="at">title=</span><span class="st">&quot;Pathway enrichment analysis - </span><span class="sc">\n</span><span class="st">Parental&quot;</span>) <span class="sc">+</span></span>
-<span id="cb253-25"><a href="fgsea_mod8.html#cb253-25" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
-<span id="cb253-26"><a href="fgsea_mod8.html#cb253-26" tabindex="-1"></a></span>
-<span id="cb253-27"><a href="fgsea_mod8.html#cb253-27" tabindex="-1"></a>p</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-116-1.png" alt="" width="672" /></p>
-<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="fgsea_mod8.html#cb254-1" tabindex="-1"></a><span class="do">##YOUR TURN##</span></span>
-<span id="cb254-2"><a href="fgsea_mod8.html#cb254-2" tabindex="-1"></a></span>
-<span id="cb254-3"><a href="fgsea_mod8.html#cb254-3" tabindex="-1"></a><span class="do">## Generate the same bar plot for the top 20 Palbo-resistant results.</span></span>
-<span id="cb254-4"><a href="fgsea_mod8.html#cb254-4" tabindex="-1"></a><span class="do">## Change the colour of the bars to a different colour as</span></span>
-<span id="cb254-5"><a href="fgsea_mod8.html#cb254-5" tabindex="-1"></a><span class="do">## they are a different phenotype than the Parental set.</span></span></code></pre></div>
+<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="fgsea_mod8.html#cb280-1" tabindex="-1"></a>topPathwaysDown <span class="ot">&lt;-</span> fgseaRes[ES <span class="sc">&lt;</span> <span class="dv">0</span>][<span class="fu">head</span>(<span class="fu">order</span>(pval), <span class="at">n=</span><span class="dv">20</span>), pathway]</span>
+<span id="cb280-2"><a href="fgsea_mod8.html#cb280-2" tabindex="-1"></a></span>
+<span id="cb280-3"><a href="fgsea_mod8.html#cb280-3" tabindex="-1"></a>enrichment_results_topdown <span class="ot">&lt;-</span> fgseaRes[<span class="fu">which</span>(fgseaRes<span class="sc">$</span>pathway <span class="sc">%in%</span> topPathwaysDown),]</span>
+<span id="cb280-4"><a href="fgsea_mod8.html#cb280-4" tabindex="-1"></a></span>
+<span id="cb280-5"><a href="fgsea_mod8.html#cb280-5" tabindex="-1"></a><span class="co">#change the name to be just the first part of the name</span></span>
+<span id="cb280-6"><a href="fgsea_mod8.html#cb280-6" tabindex="-1"></a>enrichment_results_topdown<span class="sc">$</span>pathway <span class="ot">&lt;-</span> <span class="fu">unlist</span>(<span class="fu">lapply</span>(enrichment_results_topdown<span class="sc">$</span>pathway, <span class="at">FUN=</span><span class="cf">function</span>(x){<span class="fu">unlist</span>(<span class="fu">strsplit</span>(x,<span class="at">split =</span> <span class="st">&quot;%&quot;</span>))[<span class="dv">1</span>]}))</span>
+<span id="cb280-7"><a href="fgsea_mod8.html#cb280-7" tabindex="-1"></a><span class="co">#make sure that names are unique after shortening them (the same name can come from different databases)</span></span>
+<span id="cb280-8"><a href="fgsea_mod8.html#cb280-8" tabindex="-1"></a>enrichment_results_topdown<span class="sc">$</span>pathway <span class="ot">&lt;-</span> <span class="fu">make.unique</span>(enrichment_results_topdown<span class="sc">$</span>pathway)</span>
+<span id="cb280-9"><a href="fgsea_mod8.html#cb280-9" tabindex="-1"></a></span>
+<span id="cb280-10"><a href="fgsea_mod8.html#cb280-10" tabindex="-1"></a><span class="do">##Calculate a score: the absolute value of the NES.</span></span>
+<span id="cb280-11"><a href="fgsea_mod8.html#cb280-11" tabindex="-1"></a><span class="do">##(the pvalues of the top pathways are all very close to each other, so the NES is more informative here)</span></span>
+<span id="cb280-12"><a href="fgsea_mod8.html#cb280-12" tabindex="-1"></a>enrichment_results_topdown<span class="sc">$</span>score <span class="ot">=</span> <span class="fu">abs</span>(enrichment_results_topdown<span class="sc">$</span>NES)</span>
+<span id="cb280-13"><a href="fgsea_mod8.html#cb280-13" tabindex="-1"></a></span>
+<span id="cb280-14"><a href="fgsea_mod8.html#cb280-14" tabindex="-1"></a>enrichmentTidy <span class="ot">&lt;-</span> enrichment_results_topdown <span class="sc">%&gt;%</span></span>
+<span id="cb280-15"><a href="fgsea_mod8.html#cb280-15" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb280-16"><a href="fgsea_mod8.html#cb280-16" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(score)) <span class="sc">%&gt;%</span></span>
+<span id="cb280-17"><a href="fgsea_mod8.html#cb280-17" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">20</span>)</span>
+<span id="cb280-18"><a href="fgsea_mod8.html#cb280-18" tabindex="-1"></a></span>
+<span id="cb280-19"><a href="fgsea_mod8.html#cb280-19" tabindex="-1"></a>p <span class="ot">=</span> <span class="fu">ggplot</span>(enrichmentTidy, <span class="fu">aes</span>(<span class="fu">reorder</span>(pathway, score), score)) <span class="sc">+</span></span>
+<span id="cb280-20"><a href="fgsea_mod8.html#cb280-20" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">fill =</span> score), <span class="at">width=</span><span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb280-21"><a href="fgsea_mod8.html#cb280-21" tabindex="-1"></a>  <span class="fu">scale_fill_gradient</span>(<span class="at">low =</span> <span class="st">&quot;#C1F6F8&quot;</span>, <span class="at">high =</span> <span class="st">&quot;#00BFC4&quot;</span>)<span class="sc">+</span></span>
+<span id="cb280-22"><a href="fgsea_mod8.html#cb280-22" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb280-23"><a href="fgsea_mod8.html#cb280-23" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;&quot;</span>, <span class="at">y=</span><span class="st">&quot;Normalized Enrichment Score (absolute value)&quot;</span>,</span>
+<span id="cb280-24"><a href="fgsea_mod8.html#cb280-24" tabindex="-1"></a>       <span class="at">title=</span><span class="st">&quot;Pathway enrichment analysis - </span><span class="sc">\n</span><span class="st">Parental&quot;</span>) <span class="sc">+</span></span>
+<span id="cb280-25"><a href="fgsea_mod8.html#cb280-25" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb280-26"><a href="fgsea_mod8.html#cb280-26" tabindex="-1"></a></span>
+<span id="cb280-27"><a href="fgsea_mod8.html#cb280-27" tabindex="-1"></a>p</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-124-1.png" alt="" width="672" /></p>
+<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb281-1"><a href="fgsea_mod8.html#cb281-1" tabindex="-1"></a><span class="do">##YOUR TURN##</span></span>
+<span id="cb281-2"><a href="fgsea_mod8.html#cb281-2" tabindex="-1"></a></span>
+<span id="cb281-3"><a href="fgsea_mod8.html#cb281-3" tabindex="-1"></a><span class="do">## Generate the same bar plot for the top 20 Palbo-resistant results.</span></span>
+<span id="cb281-4"><a href="fgsea_mod8.html#cb281-4" tabindex="-1"></a><span class="do">## Change the colour of the bars to a different colour as</span></span>
+<span id="cb281-5"><a href="fgsea_mod8.html#cb281-5" tabindex="-1"></a><span class="do">## they are a different phenotype than the Parental set.</span></span></code></pre></div>
 </div>
 <div id="dot-plot" class="section level4 hasAnchor">
 <h4>Dot plot<a href="fgsea_mod8.html#dot-plot" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <ul>
 <li>top pathways associated with Parental</li>
 </ul>
-<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="fgsea_mod8.html#cb255-1" tabindex="-1"></a>p <span class="ot">=</span> <span class="fu">ggplot</span>(enrichment_results_topdown, <span class="fu">aes</span>(</span>
-<span id="cb255-2"><a href="fgsea_mod8.html#cb255-2" tabindex="-1"></a>  <span class="at">y =</span> <span class="fu">fct_reorder</span>(pathway, score),</span>
-<span id="cb255-3"><a href="fgsea_mod8.html#cb255-3" tabindex="-1"></a>  <span class="at">x =</span> score,</span>
-<span id="cb255-4"><a href="fgsea_mod8.html#cb255-4" tabindex="-1"></a>  <span class="at">color =</span> score,</span>
-<span id="cb255-5"><a href="fgsea_mod8.html#cb255-5" tabindex="-1"></a>  <span class="at">size =</span> size</span>
-<span id="cb255-6"><a href="fgsea_mod8.html#cb255-6" tabindex="-1"></a>)) <span class="sc">+</span></span>
-<span id="cb255-7"><a href="fgsea_mod8.html#cb255-7" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb255-8"><a href="fgsea_mod8.html#cb255-8" tabindex="-1"></a>  <span class="fu">scale_color_gradientn</span>(</span>
-<span id="cb255-9"><a href="fgsea_mod8.html#cb255-9" tabindex="-1"></a>    <span class="at">colours =</span> <span class="fu">c</span>(<span class="st">&quot;lightpink&quot;</span>, <span class="st">&quot;lightblue&quot;</span>, <span class="st">&quot;blue&quot;</span>),</span>
-<span id="cb255-10"><a href="fgsea_mod8.html#cb255-10" tabindex="-1"></a>    <span class="at">guide =</span> <span class="fu">guide_colorbar</span>(<span class="at">reverse =</span> <span class="cn">FALSE</span>, <span class="at">order =</span> <span class="dv">1</span>)</span>
-<span id="cb255-11"><a href="fgsea_mod8.html#cb255-11" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb255-12"><a href="fgsea_mod8.html#cb255-12" tabindex="-1"></a>  <span class="fu">scale_size_continuous</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">8</span>), <span class="at">name =</span> <span class="st">&quot;genes in set&quot;</span>) <span class="sc">+</span></span>
-<span id="cb255-13"><a href="fgsea_mod8.html#cb255-13" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">12</span>) <span class="sc">+</span></span>
-<span id="cb255-14"><a href="fgsea_mod8.html#cb255-14" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Normalized Enrichment Score (absolute value)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb255-15"><a href="fgsea_mod8.html#cb255-15" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="cn">NULL</span>) <span class="sc">+</span></span>
-<span id="cb255-16"><a href="fgsea_mod8.html#cb255-16" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Pathway Enrichment Analysis - </span><span class="sc">\n</span><span class="st"> Parental&quot;</span>) <span class="sc">+</span></span>
-<span id="cb255-17"><a href="fgsea_mod8.html#cb255-17" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb255-18"><a href="fgsea_mod8.html#cb255-18" tabindex="-1"></a>    <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">7</span>)</span>
-<span id="cb255-19"><a href="fgsea_mod8.html#cb255-19" tabindex="-1"></a>  )</span>
-<span id="cb255-20"><a href="fgsea_mod8.html#cb255-20" tabindex="-1"></a>p</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-118-1.png" alt="" width="672" /></p>
-<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="fgsea_mod8.html#cb256-1" tabindex="-1"></a><span class="do">##YOUR TURN##</span></span>
-<span id="cb256-2"><a href="fgsea_mod8.html#cb256-2" tabindex="-1"></a></span>
-<span id="cb256-3"><a href="fgsea_mod8.html#cb256-3" tabindex="-1"></a><span class="do">## Generate the same dot plot for the top 20 Palbo-resistant results.</span></span>
-<span id="cb256-4"><a href="fgsea_mod8.html#cb256-4" tabindex="-1"></a><span class="do">## Change the colour of the dots to a different colour range as</span></span>
-<span id="cb256-5"><a href="fgsea_mod8.html#cb256-5" tabindex="-1"></a><span class="do">## they are a different phenotype than the Parental set.</span></span></code></pre></div>
+<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="fgsea_mod8.html#cb282-1" tabindex="-1"></a>p <span class="ot">=</span> <span class="fu">ggplot</span>(enrichment_results_topdown, <span class="fu">aes</span>(</span>
+<span id="cb282-2"><a href="fgsea_mod8.html#cb282-2" tabindex="-1"></a>  <span class="at">y =</span> <span class="fu">fct_reorder</span>(pathway, score),</span>
+<span id="cb282-3"><a href="fgsea_mod8.html#cb282-3" tabindex="-1"></a>  <span class="at">x =</span> score,</span>
+<span id="cb282-4"><a href="fgsea_mod8.html#cb282-4" tabindex="-1"></a>  <span class="at">color =</span> score,</span>
+<span id="cb282-5"><a href="fgsea_mod8.html#cb282-5" tabindex="-1"></a>  <span class="at">size =</span> size</span>
+<span id="cb282-6"><a href="fgsea_mod8.html#cb282-6" tabindex="-1"></a>)) <span class="sc">+</span></span>
+<span id="cb282-7"><a href="fgsea_mod8.html#cb282-7" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb282-8"><a href="fgsea_mod8.html#cb282-8" tabindex="-1"></a>  <span class="fu">scale_color_gradientn</span>(</span>
+<span id="cb282-9"><a href="fgsea_mod8.html#cb282-9" tabindex="-1"></a>    <span class="at">colours =</span> <span class="fu">c</span>(<span class="st">&quot;lightpink&quot;</span>, <span class="st">&quot;lightblue&quot;</span>, <span class="st">&quot;blue&quot;</span>),</span>
+<span id="cb282-10"><a href="fgsea_mod8.html#cb282-10" tabindex="-1"></a>    <span class="at">guide =</span> <span class="fu">guide_colorbar</span>(<span class="at">reverse =</span> <span class="cn">FALSE</span>, <span class="at">order =</span> <span class="dv">1</span>)</span>
+<span id="cb282-11"><a href="fgsea_mod8.html#cb282-11" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb282-12"><a href="fgsea_mod8.html#cb282-12" tabindex="-1"></a>  <span class="fu">scale_size_continuous</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">8</span>), <span class="at">name =</span> <span class="st">&quot;genes in set&quot;</span>) <span class="sc">+</span></span>
+<span id="cb282-13"><a href="fgsea_mod8.html#cb282-13" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">12</span>) <span class="sc">+</span></span>
+<span id="cb282-14"><a href="fgsea_mod8.html#cb282-14" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Normalized Enrichment Score (absolute value)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb282-15"><a href="fgsea_mod8.html#cb282-15" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb282-16"><a href="fgsea_mod8.html#cb282-16" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Pathway Enrichment Analysis - </span><span class="sc">\n</span><span class="st"> Parental&quot;</span>) <span class="sc">+</span></span>
+<span id="cb282-17"><a href="fgsea_mod8.html#cb282-17" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb282-18"><a href="fgsea_mod8.html#cb282-18" tabindex="-1"></a>    <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">7</span>)</span>
+<span id="cb282-19"><a href="fgsea_mod8.html#cb282-19" tabindex="-1"></a>  )</span>
+<span id="cb282-20"><a href="fgsea_mod8.html#cb282-20" tabindex="-1"></a>p</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-126-1.png" alt="" width="672" /></p>
+<div class="sourceCode" id="cb283"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb283-1"><a href="fgsea_mod8.html#cb283-1" tabindex="-1"></a><span class="do">##YOUR TURN##</span></span>
+<span id="cb283-2"><a href="fgsea_mod8.html#cb283-2" tabindex="-1"></a></span>
+<span id="cb283-3"><a href="fgsea_mod8.html#cb283-3" tabindex="-1"></a><span class="do">## Generate the same dot plot for the top 20 Palbo-resistant results.</span></span>
+<span id="cb283-4"><a href="fgsea_mod8.html#cb283-4" tabindex="-1"></a><span class="do">## Change the colour of the dots to a different colour range as</span></span>
+<span id="cb283-5"><a href="fgsea_mod8.html#cb283-5" tabindex="-1"></a><span class="do">## they are a different phenotype than the Parental set.</span></span></code></pre></div>
 </div>
 <div id="ridge-plots" class="section level4 hasAnchor">
 <h4>Ridge plots<a href="fgsea_mod8.html#ridge-plots" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <ul>
 <li>top pathways associated with either class</li>
 </ul>
-<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="fgsea_mod8.html#cb257-1" tabindex="-1"></a><span class="co"># Filter significant pathways (adjusted p-value &lt; 0.05) and take</span></span>
-<span id="cb257-2"><a href="fgsea_mod8.html#cb257-2" tabindex="-1"></a><span class="co"># the top 5 for each class (highest positive NES and most negative NES)</span></span>
-<span id="cb257-3"><a href="fgsea_mod8.html#cb257-3" tabindex="-1"></a>significant_pathways <span class="ot">&lt;-</span> fgseaRes[padj <span class="sc">&lt;</span> <span class="fl">0.05</span>]</span>
-<span id="cb257-4"><a href="fgsea_mod8.html#cb257-4" tabindex="-1"></a>topPathways <span class="ot">&lt;-</span> <span class="fu">rbind</span>(</span>
-<span id="cb257-5"><a href="fgsea_mod8.html#cb257-5" tabindex="-1"></a>  <span class="fu">head</span>(significant_pathways[NES <span class="sc">&gt;</span> <span class="dv">0</span>][<span class="fu">order</span>(<span class="sc">-</span>NES)], <span class="dv">5</span>),</span>
-<span id="cb257-6"><a href="fgsea_mod8.html#cb257-6" tabindex="-1"></a>  <span class="fu">head</span>(significant_pathways[NES <span class="sc">&lt;</span> <span class="dv">0</span>][<span class="fu">order</span>(NES)], <span class="dv">5</span>)</span>
-<span id="cb257-7"><a href="fgsea_mod8.html#cb257-7" tabindex="-1"></a>)</span>
-<span id="cb257-8"><a href="fgsea_mod8.html#cb257-8" tabindex="-1"></a></span>
-<span id="cb257-9"><a href="fgsea_mod8.html#cb257-9" tabindex="-1"></a><span class="co"># Create a data.frame for plotting with the gene ranks for each of the top pathways</span></span>
-<span id="cb257-10"><a href="fgsea_mod8.html#cb257-10" tabindex="-1"></a>ridge_data <span class="ot">&lt;-</span> <span class="fu">rbindlist</span>(<span class="fu">lapply</span>(topPathways<span class="sc">$</span>pathway, <span class="cf">function</span>(pw) {</span>
-<span id="cb257-11"><a href="fgsea_mod8.html#cb257-11" tabindex="-1"></a>  genes <span class="ot">&lt;-</span> pathways[[pw]]</span>
-<span id="cb257-12"><a href="fgsea_mod8.html#cb257-12" tabindex="-1"></a>  <span class="fu">data.frame</span>(</span>
-<span id="cb257-13"><a href="fgsea_mod8.html#cb257-13" tabindex="-1"></a>    <span class="at">gene =</span> genes,</span>
-<span id="cb257-14"><a href="fgsea_mod8.html#cb257-14" tabindex="-1"></a>    <span class="at">stat =</span> ranks[genes],</span>
-<span id="cb257-15"><a href="fgsea_mod8.html#cb257-15" tabindex="-1"></a>    <span class="at">pathway =</span> pw</span>
-<span id="cb257-16"><a href="fgsea_mod8.html#cb257-16" tabindex="-1"></a>  )</span>
-<span id="cb257-17"><a href="fgsea_mod8.html#cb257-17" tabindex="-1"></a>}))</span>
-<span id="cb257-18"><a href="fgsea_mod8.html#cb257-18" tabindex="-1"></a></span>
-<span id="cb257-19"><a href="fgsea_mod8.html#cb257-19" tabindex="-1"></a></span>
-<span id="cb257-20"><a href="fgsea_mod8.html#cb257-20" tabindex="-1"></a><span class="co"># get NES for each of the top pathways</span></span>
-<span id="cb257-21"><a href="fgsea_mod8.html#cb257-21" tabindex="-1"></a>nes_map <span class="ot">&lt;-</span> <span class="fu">setNames</span>(topPathways<span class="sc">$</span>NES, topPathways<span class="sc">$</span>pathway)</span>
-<span id="cb257-22"><a href="fgsea_mod8.html#cb257-22" tabindex="-1"></a></span>
-<span id="cb257-23"><a href="fgsea_mod8.html#cb257-23" tabindex="-1"></a><span class="co"># Add NES values to ridge_data</span></span>
-<span id="cb257-24"><a href="fgsea_mod8.html#cb257-24" tabindex="-1"></a>ridge_data<span class="sc">$</span>NES <span class="ot">&lt;-</span> nes_map[ridge_data<span class="sc">$</span>pathway]</span>
-<span id="cb257-25"><a href="fgsea_mod8.html#cb257-25" tabindex="-1"></a></span>
-<span id="cb257-26"><a href="fgsea_mod8.html#cb257-26" tabindex="-1"></a><span class="co">#change the name to be just the first part of the name (because the actual names are too long)</span></span>
-<span id="cb257-27"><a href="fgsea_mod8.html#cb257-27" tabindex="-1"></a><span class="co">#and make sure that names are unique after shortening them</span></span>
-<span id="cb257-28"><a href="fgsea_mod8.html#cb257-28" tabindex="-1"></a>short_names <span class="ot">&lt;-</span> <span class="fu">make.unique</span>(<span class="fu">unlist</span>(<span class="fu">lapply</span>(topPathways<span class="sc">$</span>pathway, <span class="at">FUN=</span><span class="cf">function</span>(x){<span class="fu">unlist</span>(<span class="fu">strsplit</span>(x,<span class="at">split =</span> <span class="st">&quot;%&quot;</span>))[<span class="dv">1</span>]})))</span>
-<span id="cb257-29"><a href="fgsea_mod8.html#cb257-29" tabindex="-1"></a><span class="fu">names</span>(short_names) <span class="ot">&lt;-</span> topPathways<span class="sc">$</span>pathway</span>
-<span id="cb257-30"><a href="fgsea_mod8.html#cb257-30" tabindex="-1"></a>ridge_data<span class="sc">$</span>pathway <span class="ot">&lt;-</span> short_names[ridge_data<span class="sc">$</span>pathway]</span>
-<span id="cb257-31"><a href="fgsea_mod8.html#cb257-31" tabindex="-1"></a></span>
-<span id="cb257-32"><a href="fgsea_mod8.html#cb257-32" tabindex="-1"></a><span class="co">#get rid of na values for genes found in the gene set but not ranked in our dataset.</span></span>
-<span id="cb257-33"><a href="fgsea_mod8.html#cb257-33" tabindex="-1"></a>ridge_data <span class="ot">&lt;-</span> ridge_data[<span class="sc">!</span><span class="fu">is.na</span>(ridge_data<span class="sc">$</span>stat),]</span>
-<span id="cb257-34"><a href="fgsea_mod8.html#cb257-34" tabindex="-1"></a></span>
-<span id="cb257-35"><a href="fgsea_mod8.html#cb257-35" tabindex="-1"></a><span class="fu">ggplot</span>(ridge_data, <span class="fu">aes</span>(<span class="at">x =</span> stat, <span class="at">y =</span> <span class="fu">reorder</span>(pathway, NES), <span class="at">fill =</span> NES)) <span class="sc">+</span></span>
-<span id="cb257-36"><a href="fgsea_mod8.html#cb257-36" tabindex="-1"></a>  <span class="fu">geom_density_ridges</span>(<span class="at">scale =</span> <span class="dv">2</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
-<span id="cb257-37"><a href="fgsea_mod8.html#cb257-37" tabindex="-1"></a>  <span class="fu">scale_fill_gradient2</span>(</span>
-<span id="cb257-38"><a href="fgsea_mod8.html#cb257-38" tabindex="-1"></a>    <span class="at">low =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">mid =</span> <span class="st">&quot;white&quot;</span>, <span class="at">high =</span> <span class="st">&quot;red&quot;</span>, <span class="at">midpoint =</span> <span class="dv">0</span>,</span>
-<span id="cb257-39"><a href="fgsea_mod8.html#cb257-39" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">&quot;NES&quot;</span></span>
-<span id="cb257-40"><a href="fgsea_mod8.html#cb257-40" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb257-41"><a href="fgsea_mod8.html#cb257-41" tabindex="-1"></a>  <span class="fu">theme_ridges</span>() <span class="sc">+</span></span>
-<span id="cb257-42"><a href="fgsea_mod8.html#cb257-42" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;right&quot;</span>,<span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">6</span>)) <span class="sc">+</span></span>
-<span id="cb257-43"><a href="fgsea_mod8.html#cb257-43" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb257-44"><a href="fgsea_mod8.html#cb257-44" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Ridgeplot of Gene Stats</span><span class="sc">\n</span><span class="st"> for Top Enriched Pathways&quot;</span>,</span>
-<span id="cb257-45"><a href="fgsea_mod8.html#cb257-45" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Gene-level Statistic&quot;</span>,</span>
-<span id="cb257-46"><a href="fgsea_mod8.html#cb257-46" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Pathway&quot;</span></span>
-<span id="cb257-47"><a href="fgsea_mod8.html#cb257-47" tabindex="-1"></a>  )</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-120-1.png" alt="" width="672" /></p>
+<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb284-1"><a href="fgsea_mod8.html#cb284-1" tabindex="-1"></a><span class="co"># Filter significant pathways (adjusted p-value &lt; 0.05) and take</span></span>
+<span id="cb284-2"><a href="fgsea_mod8.html#cb284-2" tabindex="-1"></a><span class="co"># the top 5 for each class (highest positive NES and most negative NES)</span></span>
+<span id="cb284-3"><a href="fgsea_mod8.html#cb284-3" tabindex="-1"></a>significant_pathways <span class="ot">&lt;-</span> fgseaRes[padj <span class="sc">&lt;</span> <span class="fl">0.05</span>]</span>
+<span id="cb284-4"><a href="fgsea_mod8.html#cb284-4" tabindex="-1"></a>topPathways <span class="ot">&lt;-</span> <span class="fu">rbind</span>(</span>
+<span id="cb284-5"><a href="fgsea_mod8.html#cb284-5" tabindex="-1"></a>  <span class="fu">head</span>(significant_pathways[NES <span class="sc">&gt;</span> <span class="dv">0</span>][<span class="fu">order</span>(<span class="sc">-</span>NES)], <span class="dv">5</span>),</span>
+<span id="cb284-6"><a href="fgsea_mod8.html#cb284-6" tabindex="-1"></a>  <span class="fu">head</span>(significant_pathways[NES <span class="sc">&lt;</span> <span class="dv">0</span>][<span class="fu">order</span>(NES)], <span class="dv">5</span>)</span>
+<span id="cb284-7"><a href="fgsea_mod8.html#cb284-7" tabindex="-1"></a>)</span>
+<span id="cb284-8"><a href="fgsea_mod8.html#cb284-8" tabindex="-1"></a></span>
+<span id="cb284-9"><a href="fgsea_mod8.html#cb284-9" tabindex="-1"></a><span class="co"># Create a data.frame for plotting with the gene ranks for each of the top pathways</span></span>
+<span id="cb284-10"><a href="fgsea_mod8.html#cb284-10" tabindex="-1"></a>ridge_data <span class="ot">&lt;-</span> <span class="fu">rbindlist</span>(<span class="fu">lapply</span>(topPathways<span class="sc">$</span>pathway, <span class="cf">function</span>(pw) {</span>
+<span id="cb284-11"><a href="fgsea_mod8.html#cb284-11" tabindex="-1"></a>  genes <span class="ot">&lt;-</span> pathways[[pw]]</span>
+<span id="cb284-12"><a href="fgsea_mod8.html#cb284-12" tabindex="-1"></a>  <span class="fu">data.frame</span>(</span>
+<span id="cb284-13"><a href="fgsea_mod8.html#cb284-13" tabindex="-1"></a>    <span class="at">gene =</span> genes,</span>
+<span id="cb284-14"><a href="fgsea_mod8.html#cb284-14" tabindex="-1"></a>    <span class="at">stat =</span> ranks[genes],</span>
+<span id="cb284-15"><a href="fgsea_mod8.html#cb284-15" tabindex="-1"></a>    <span class="at">pathway =</span> pw</span>
+<span id="cb284-16"><a href="fgsea_mod8.html#cb284-16" tabindex="-1"></a>  )</span>
+<span id="cb284-17"><a href="fgsea_mod8.html#cb284-17" tabindex="-1"></a>}))</span>
+<span id="cb284-18"><a href="fgsea_mod8.html#cb284-18" tabindex="-1"></a></span>
+<span id="cb284-19"><a href="fgsea_mod8.html#cb284-19" tabindex="-1"></a></span>
+<span id="cb284-20"><a href="fgsea_mod8.html#cb284-20" tabindex="-1"></a><span class="co"># get NES for each of the top pathways</span></span>
+<span id="cb284-21"><a href="fgsea_mod8.html#cb284-21" tabindex="-1"></a>nes_map <span class="ot">&lt;-</span> <span class="fu">setNames</span>(topPathways<span class="sc">$</span>NES, topPathways<span class="sc">$</span>pathway)</span>
+<span id="cb284-22"><a href="fgsea_mod8.html#cb284-22" tabindex="-1"></a></span>
+<span id="cb284-23"><a href="fgsea_mod8.html#cb284-23" tabindex="-1"></a><span class="co"># Add NES values to ridge_data</span></span>
+<span id="cb284-24"><a href="fgsea_mod8.html#cb284-24" tabindex="-1"></a>ridge_data<span class="sc">$</span>NES <span class="ot">&lt;-</span> nes_map[ridge_data<span class="sc">$</span>pathway]</span>
+<span id="cb284-25"><a href="fgsea_mod8.html#cb284-25" tabindex="-1"></a></span>
+<span id="cb284-26"><a href="fgsea_mod8.html#cb284-26" tabindex="-1"></a><span class="co">#change the name to be just the first part of the name (because the actual names are too long)</span></span>
+<span id="cb284-27"><a href="fgsea_mod8.html#cb284-27" tabindex="-1"></a><span class="co">#and make sure that names are unique after shortening them</span></span>
+<span id="cb284-28"><a href="fgsea_mod8.html#cb284-28" tabindex="-1"></a>short_names <span class="ot">&lt;-</span> <span class="fu">make.unique</span>(<span class="fu">unlist</span>(<span class="fu">lapply</span>(topPathways<span class="sc">$</span>pathway, <span class="at">FUN=</span><span class="cf">function</span>(x){<span class="fu">unlist</span>(<span class="fu">strsplit</span>(x,<span class="at">split =</span> <span class="st">&quot;%&quot;</span>))[<span class="dv">1</span>]})))</span>
+<span id="cb284-29"><a href="fgsea_mod8.html#cb284-29" tabindex="-1"></a><span class="fu">names</span>(short_names) <span class="ot">&lt;-</span> topPathways<span class="sc">$</span>pathway</span>
+<span id="cb284-30"><a href="fgsea_mod8.html#cb284-30" tabindex="-1"></a>ridge_data<span class="sc">$</span>pathway <span class="ot">&lt;-</span> short_names[ridge_data<span class="sc">$</span>pathway]</span>
+<span id="cb284-31"><a href="fgsea_mod8.html#cb284-31" tabindex="-1"></a></span>
+<span id="cb284-32"><a href="fgsea_mod8.html#cb284-32" tabindex="-1"></a><span class="co">#get rid of na values for genes found in the gene set but not ranked in our dataset.</span></span>
+<span id="cb284-33"><a href="fgsea_mod8.html#cb284-33" tabindex="-1"></a>ridge_data <span class="ot">&lt;-</span> ridge_data[<span class="sc">!</span><span class="fu">is.na</span>(ridge_data<span class="sc">$</span>stat),]</span>
+<span id="cb284-34"><a href="fgsea_mod8.html#cb284-34" tabindex="-1"></a></span>
+<span id="cb284-35"><a href="fgsea_mod8.html#cb284-35" tabindex="-1"></a><span class="fu">ggplot</span>(ridge_data, <span class="fu">aes</span>(<span class="at">x =</span> stat, <span class="at">y =</span> <span class="fu">reorder</span>(pathway, NES), <span class="at">fill =</span> NES)) <span class="sc">+</span></span>
+<span id="cb284-36"><a href="fgsea_mod8.html#cb284-36" tabindex="-1"></a>  <span class="fu">geom_density_ridges</span>(<span class="at">scale =</span> <span class="dv">2</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb284-37"><a href="fgsea_mod8.html#cb284-37" tabindex="-1"></a>  <span class="fu">scale_fill_gradient2</span>(</span>
+<span id="cb284-38"><a href="fgsea_mod8.html#cb284-38" tabindex="-1"></a>    <span class="at">low =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">mid =</span> <span class="st">&quot;white&quot;</span>, <span class="at">high =</span> <span class="st">&quot;red&quot;</span>, <span class="at">midpoint =</span> <span class="dv">0</span>,</span>
+<span id="cb284-39"><a href="fgsea_mod8.html#cb284-39" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">&quot;NES&quot;</span></span>
+<span id="cb284-40"><a href="fgsea_mod8.html#cb284-40" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb284-41"><a href="fgsea_mod8.html#cb284-41" tabindex="-1"></a>  <span class="fu">theme_ridges</span>() <span class="sc">+</span></span>
+<span id="cb284-42"><a href="fgsea_mod8.html#cb284-42" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;right&quot;</span>,<span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">6</span>)) <span class="sc">+</span></span>
+<span id="cb284-43"><a href="fgsea_mod8.html#cb284-43" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb284-44"><a href="fgsea_mod8.html#cb284-44" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Ridgeplot of Gene Stats</span><span class="sc">\n</span><span class="st"> for Top Enriched Pathways&quot;</span>,</span>
+<span id="cb284-45"><a href="fgsea_mod8.html#cb284-45" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Gene-level Statistic&quot;</span>,</span>
+<span id="cb284-46"><a href="fgsea_mod8.html#cb284-46" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Pathway&quot;</span></span>
+<span id="cb284-47"><a href="fgsea_mod8.html#cb284-47" tabindex="-1"></a>  )</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-128-1.png" alt="" width="672" /></p>
 <p>NOTE: In the next module, you will learn a better approach to address redundancy and visualize enriched gene sets as networks using Cytoscape and EnrichmentMap.</p>
 
 </div>

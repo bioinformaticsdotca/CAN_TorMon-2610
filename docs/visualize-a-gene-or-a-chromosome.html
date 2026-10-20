@@ -513,7 +513,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Red dashed lines mark PURPLE’s lowest-copy-number region within the gene.</p>
 <div id="one-gene-plot_gene" class="section level2 hasAnchor">
 <h2>One gene: <code>plot_gene()</code><a href="visualize-a-gene-or-a-chromosome.html#one-gene-plot_gene" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="visualize-a-gene-or-a-chromosome.html#cb96-1" tabindex="-1"></a><span class="fu">plot_gene</span>(sample_id, gene_name, <span class="at">flank =</span> <span class="fl">250e3</span>, <span class="at">show_cn =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="visualize-a-gene-or-a-chromosome.html#cb104-1" tabindex="-1"></a><span class="fu">plot_gene</span>(sample_id, gene_name, <span class="at">flank =</span> <span class="fl">250e3</span>, <span class="at">show_cn =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <ul>
 <li><code>sample_id</code>: e.g. <code>"SPP_GT_1-0_1"</code></li>
 <li><code>gene_name</code>: gene symbol as in <code>purple.cnv.gene.tsv</code></li>
@@ -521,18 +521,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>show_cn</code>: add the PURPLE copy-number track (default <code>FALSE</code>, same layout as <code>Mathieu_purple/plots_gene_region/SPP_GT_1-0_1_chr5_FBXL17.pdf</code>)</li>
 </ul>
 <p><strong>Deep deletion: FBXL17.</strong> The tumor ratio drops to 0 between the red lines (no tumor reads at all) while the normal stays at 1, and there are no BAF points inside: both copies are gone.</p>
-<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="visualize-a-gene-or-a-chromosome.html#cb97-1" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">plot_gene</span>(<span class="st">&quot;SPP_GT_1-0_1&quot;</span>, <span class="st">&quot;FBXL17&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="visualize-a-gene-or-a-chromosome.html#cb105-1" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">plot_gene</span>(<span class="st">&quot;SPP_GT_1-0_1&quot;</span>, <span class="st">&quot;FBXL17&quot;</span>)</span></code></pre></div>
 <p><img src="Module5/img/gene_SPP_GT_1-0_1_FBXL17.png" alt="" width="80%" style="display: block; margin: auto;" /></p>
 <p><strong>Deep deletion: CDKN2A</strong>, now with the copy-number track (<code>show_cn = TRUE</code>):</p>
-<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="visualize-a-gene-or-a-chromosome.html#cb98-1" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">plot_gene</span>(<span class="st">&quot;SPP_GT_1-0_1&quot;</span>, <span class="st">&quot;CDKN2A&quot;</span>, <span class="at">show_cn =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="visualize-a-gene-or-a-chromosome.html#cb106-1" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">plot_gene</span>(<span class="st">&quot;SPP_GT_1-0_1&quot;</span>, <span class="st">&quot;CDKN2A&quot;</span>, <span class="at">show_cn =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p><img src="Module5/img/gene_SPP_GT_1-0_1_CDKN2A.png" alt="" width="80%" style="display: block; margin: auto;" /></p>
 <p><strong>Copy-neutral LOH: GATA3.</strong> The tumor ratio is flat and the copy number is 2, exactly like a normal region, but the tumor BAF is at 0 and 1: one allele was lost and the other duplicated. Depth alone would miss this event; only the BAF reveals it.</p>
-<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="visualize-a-gene-or-a-chromosome.html#cb99-1" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">plot_gene</span>(<span class="st">&quot;SPP_GT_1-0_1&quot;</span>, <span class="st">&quot;GATA3&quot;</span>, <span class="at">flank =</span> <span class="fl">2e6</span>, <span class="at">show_cn =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="visualize-a-gene-or-a-chromosome.html#cb107-1" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">plot_gene</span>(<span class="st">&quot;SPP_GT_1-0_1&quot;</span>, <span class="st">&quot;GATA3&quot;</span>, <span class="at">flank =</span> <span class="fl">2e6</span>, <span class="at">show_cn =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p><img src="Module5/img/gene_SPP_GT_1-0_1_GATA3.png" alt="" width="80%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="one-chromosome-plot_chromosome" class="section level2 hasAnchor">
 <h2>One chromosome: <code>plot_chromosome()</code><a href="visualize-a-gene-or-a-chromosome.html#one-chromosome-plot_chromosome" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="visualize-a-gene-or-a-chromosome.html#cb100-1" tabindex="-1"></a><span class="fu">plot_chromosome</span>(sample_id, chr, <span class="at">genes =</span> <span class="cn">NULL</span>, <span class="at">show_cn =</span> <span class="cn">TRUE</span>, <span class="at">show_arms =</span> <span class="cn">TRUE</span>, <span class="at">baf_lines =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="visualize-a-gene-or-a-chromosome.html#cb108-1" tabindex="-1"></a><span class="fu">plot_chromosome</span>(sample_id, chr, <span class="at">genes =</span> <span class="cn">NULL</span>, <span class="at">show_cn =</span> <span class="cn">TRUE</span>, <span class="at">show_arms =</span> <span class="cn">TRUE</span>, <span class="at">baf_lines =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <ul>
 <li><code>chr</code>: chromosome name with the <code>chr</code> prefix, e.g. <code>"chr9"</code></li>
 <li><code>genes</code>: optional gene names to mark on the gene track</li>
@@ -545,16 +545,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li>On long regions the 1 kb depth windows are summarised as medians of larger bins, and at most 50,000 BAF points are drawn (the caption says so).</li>
 </ul>
-<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="visualize-a-gene-or-a-chromosome.html#cb101-1" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">plot_chromosome</span>(<span class="st">&quot;SPP_GT_1-0_1&quot;</span>, <span class="st">&quot;chr9&quot;</span>, <span class="at">genes =</span> <span class="st">&quot;CDKN2A&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="visualize-a-gene-or-a-chromosome.html#cb109-1" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">plot_chromosome</span>(<span class="st">&quot;SPP_GT_1-0_1&quot;</span>, <span class="st">&quot;chr9&quot;</span>, <span class="at">genes =</span> <span class="st">&quot;CDKN2A&quot;</span>)</span></code></pre></div>
 <p><img src="Module5/img/chromosome_SPP_GT_1-0_1_chr9.png" alt="" width="80%" style="display: block; margin: auto;" /></p>
 <p><strong>Reading chr9 from left to right:</strong> the start of 9p is gained with both alleles (4 copies, 2+2, BAF at 0.5); then comes a long copy-neutral LOH region (2+0, BAF at 0 and 1) that contains the CDKN2A deep deletion; most of 9q has 3 copies (2+1, two BAF bands around 0.33 and 0.67), followed by a second LOH region near the end of the chromosome.</p>
 </div>
 <div id="effect-of-purity-on-the-signal" class="section level2 hasAnchor">
 <h2>Effect of purity on the signal<a href="visualize-a-gene-or-a-chromosome.html#effect-of-purity-on-the-signal" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The same deletion (FBXL17) in samples with decreasing purity. Watch the depth ratio inside the deletion and the tumor BAF bands move towards the normal values.</p>
-<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="visualize-a-gene-or-a-chromosome.html#cb102-1" tabindex="-1"></a><span class="cf">for</span> (s <span class="cf">in</span> <span class="fu">c</span>(<span class="st">&quot;SPP_GT_1-0_1&quot;</span>, <span class="st">&quot;SPP_GT_1-1_1&quot;</span>, <span class="st">&quot;SPP_GT_1-9_1&quot;</span>)) {</span>
-<span id="cb102-2"><a href="visualize-a-gene-or-a-chromosome.html#cb102-2" tabindex="-1"></a>  p <span class="ot">&lt;-</span> <span class="fu">plot_gene</span>(s, <span class="st">&quot;FBXL17&quot;</span>)</span>
-<span id="cb102-3"><a href="visualize-a-gene-or-a-chromosome.html#cb102-3" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="visualize-a-gene-or-a-chromosome.html#cb110-1" tabindex="-1"></a><span class="cf">for</span> (s <span class="cf">in</span> <span class="fu">c</span>(<span class="st">&quot;SPP_GT_1-0_1&quot;</span>, <span class="st">&quot;SPP_GT_1-1_1&quot;</span>, <span class="st">&quot;SPP_GT_1-9_1&quot;</span>)) {</span>
+<span id="cb110-2"><a href="visualize-a-gene-or-a-chromosome.html#cb110-2" tabindex="-1"></a>  p <span class="ot">&lt;-</span> <span class="fu">plot_gene</span>(s, <span class="st">&quot;FBXL17&quot;</span>)</span>
+<span id="cb110-3"><a href="visualize-a-gene-or-a-chromosome.html#cb110-3" tabindex="-1"></a>}</span></code></pre></div>
 <p><img src="Module5/img/gene_SPP_GT_1-0_1_FBXL17.png" alt="" width="80%" style="display: block; margin: auto;" /><img src="Module5/img/gene_SPP_GT_1-1_1_FBXL17.png" alt="" width="80%" style="display: block; margin: auto;" /><img src="Module5/img/gene_SPP_GT_1-9_1_FBXL17.png" alt="" width="80%" style="display: block; margin: auto;" /></p>
 <p>With the formulas from the introduction (ploidy 2.8; the region around FBXL17 is cnLOH, 2+0):</p>
 <table>
@@ -603,18 +603,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="any-region-plot_cn_region" class="section level2 hasAnchor">
 <h2>Any region: <code>plot_cn_region()</code><a href="visualize-a-gene-or-a-chromosome.html#any-region-plot_cn_region" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>For a region that is not a single gene, give the coordinates directly:</p>
-<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="visualize-a-gene-or-a-chromosome.html#cb103-1" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">plot_cn_region</span>(<span class="st">&quot;SPP_GT_1-0_1&quot;</span>, <span class="at">chr =</span> <span class="st">&quot;chr5&quot;</span>, <span class="at">start =</span> <span class="fl">100e6</span>, <span class="at">end =</span> <span class="fl">115e6</span>,</span>
-<span id="cb103-2"><a href="visualize-a-gene-or-a-chromosome.html#cb103-2" tabindex="-1"></a>                    <span class="at">genes =</span> <span class="fu">c</span>(<span class="st">&quot;FBXL17&quot;</span>, <span class="st">&quot;APC&quot;</span>), <span class="at">title =</span> <span class="st">&quot;chr5:100-115 Mb&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="visualize-a-gene-or-a-chromosome.html#cb111-1" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">plot_cn_region</span>(<span class="st">&quot;SPP_GT_1-0_1&quot;</span>, <span class="at">chr =</span> <span class="st">&quot;chr5&quot;</span>, <span class="at">start =</span> <span class="fl">100e6</span>, <span class="at">end =</span> <span class="fl">115e6</span>,</span>
+<span id="cb111-2"><a href="visualize-a-gene-or-a-chromosome.html#cb111-2" tabindex="-1"></a>                    <span class="at">genes =</span> <span class="fu">c</span>(<span class="st">&quot;FBXL17&quot;</span>, <span class="st">&quot;APC&quot;</span>), <span class="at">title =</span> <span class="st">&quot;chr5:100-115 Mb&quot;</span>)</span></code></pre></div>
 <p><img src="Module5/img/region_SPP_GT_1-0_1_chr5_100-115Mb.png" alt="" width="80%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="saving-figures" class="section level2 hasAnchor">
 <h2>Saving figures<a href="visualize-a-gene-or-a-chromosome.html#saving-figures" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><code>save_cn_plot()</code> writes a PDF and a PNG; the height is chosen from the number of tracks.</p>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="visualize-a-gene-or-a-chromosome.html#cb104-1" tabindex="-1"></a><span class="co"># p &lt;- plot_gene(&quot;SPP_GT_1-0_1&quot;, &quot;FBXL17&quot;)</span></span>
-<span id="cb104-2"><a href="visualize-a-gene-or-a-chromosome.html#cb104-2" tabindex="-1"></a><span class="co"># save_cn_plot(p, &quot;Mathieu_purple/plots_gene_region/SPP_GT_1-0_1_chr5_FBXL17&quot;)</span></span>
-<span id="cb104-3"><a href="visualize-a-gene-or-a-chromosome.html#cb104-3" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb104-4"><a href="visualize-a-gene-or-a-chromosome.html#cb104-4" tabindex="-1"></a><span class="co"># p &lt;- plot_chromosome(&quot;SPP_GT_1-0_1&quot;, &quot;chr9&quot;, genes = &quot;CDKN2A&quot;)</span></span>
-<span id="cb104-5"><a href="visualize-a-gene-or-a-chromosome.html#cb104-5" tabindex="-1"></a><span class="co"># save_cn_plot(p, &quot;Mathieu_purple/plots_chromosome/SPP_GT_1-0_1_chr9&quot;)</span></span></code></pre></div>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="visualize-a-gene-or-a-chromosome.html#cb112-1" tabindex="-1"></a><span class="co"># p &lt;- plot_gene(&quot;SPP_GT_1-0_1&quot;, &quot;FBXL17&quot;)</span></span>
+<span id="cb112-2"><a href="visualize-a-gene-or-a-chromosome.html#cb112-2" tabindex="-1"></a><span class="co"># save_cn_plot(p, &quot;Mathieu_purple/plots_gene_region/SPP_GT_1-0_1_chr5_FBXL17&quot;)</span></span>
+<span id="cb112-3"><a href="visualize-a-gene-or-a-chromosome.html#cb112-3" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb112-4"><a href="visualize-a-gene-or-a-chromosome.html#cb112-4" tabindex="-1"></a><span class="co"># p &lt;- plot_chromosome(&quot;SPP_GT_1-0_1&quot;, &quot;chr9&quot;, genes = &quot;CDKN2A&quot;)</span></span>
+<span id="cb112-5"><a href="visualize-a-gene-or-a-chromosome.html#cb112-5" tabindex="-1"></a><span class="co"># save_cn_plot(p, &quot;Mathieu_purple/plots_chromosome/SPP_GT_1-0_1_chr9&quot;)</span></span></code></pre></div>
 </div>
 </div>
             </section>

@@ -547,63 +547,63 @@ identifiers.
 <strong>RCy3 Setup — run once before all exercises</strong>
 </p>
 </div>
-<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb291-1"><a href="gprofiler_mod9.html#cb291-1" tabindex="-1"></a><span class="fu">library</span>(RCy3)</span>
-<span id="cb291-2"><a href="gprofiler_mod9.html#cb291-2" tabindex="-1"></a><span class="fu">library</span>(httr)</span>
-<span id="cb291-3"><a href="gprofiler_mod9.html#cb291-3" tabindex="-1"></a><span class="fu">library</span>(jsonlite)</span>
-<span id="cb291-4"><a href="gprofiler_mod9.html#cb291-4" tabindex="-1"></a></span>
-<span id="cb291-5"><a href="gprofiler_mod9.html#cb291-5" tabindex="-1"></a>path_to_save_cytoscape <span class="ot">=</span> <span class="st">&quot;/Users/risserlin/CBW_Workshop_results/Module9&quot;</span></span>
-<span id="cb291-6"><a href="gprofiler_mod9.html#cb291-6" tabindex="-1"></a></span>
-<span id="cb291-7"><a href="gprofiler_mod9.html#cb291-7" tabindex="-1"></a><span class="co"># Set base URL — adjust if not running from Docker</span></span>
-<span id="cb291-8"><a href="gprofiler_mod9.html#cb291-8" tabindex="-1"></a>current_cytoscape_baseurl <span class="ot">&lt;-</span> <span class="st">&quot;http://localhost:1234/v1&quot;</span></span>
-<span id="cb291-9"><a href="gprofiler_mod9.html#cb291-9" tabindex="-1"></a></span>
-<span id="cb291-10"><a href="gprofiler_mod9.html#cb291-10" tabindex="-1"></a><span class="fu">cytoscapePing</span>(<span class="at">base.url =</span> current_cytoscape_baseurl)</span>
-<span id="cb291-11"><a href="gprofiler_mod9.html#cb291-11" tabindex="-1"></a><span class="fu">cytoscapeVersionInfo</span>(<span class="at">base.url =</span> current_cytoscape_baseurl)</span>
-<span id="cb291-12"><a href="gprofiler_mod9.html#cb291-12" tabindex="-1"></a></span>
-<span id="cb291-13"><a href="gprofiler_mod9.html#cb291-13" tabindex="-1"></a><span class="co"># Helper: upload a local file to Cytoscape so EM can read it.</span></span>
-<span id="cb291-14"><a href="gprofiler_mod9.html#cb291-14" tabindex="-1"></a><span class="co"># EnrichmentMap&#39;s upload endpoint sits outside /v1.</span></span>
-<span id="cb291-15"><a href="gprofiler_mod9.html#cb291-15" tabindex="-1"></a>upload_em_file <span class="ot">&lt;-</span> <span class="cf">function</span>(localPath) {</span>
-<span id="cb291-16"><a href="gprofiler_mod9.html#cb291-16" tabindex="-1"></a>  bname      <span class="ot">&lt;-</span> <span class="fu">basename</span>(localPath)</span>
-<span id="cb291-17"><a href="gprofiler_mod9.html#cb291-17" tabindex="-1"></a>  base_no_v1 <span class="ot">&lt;-</span> <span class="fu">sub</span>(<span class="st">&quot;/v1$&quot;</span>, <span class="st">&quot;&quot;</span>, current_cytoscape_baseurl)</span>
-<span id="cb291-18"><a href="gprofiler_mod9.html#cb291-18" tabindex="-1"></a>  r <span class="ot">&lt;-</span> httr<span class="sc">::</span><span class="fu">POST</span>(</span>
-<span id="cb291-19"><a href="gprofiler_mod9.html#cb291-19" tabindex="-1"></a>    <span class="at">url    =</span> <span class="fu">paste0</span>(base_no_v1,</span>
-<span id="cb291-20"><a href="gprofiler_mod9.html#cb291-20" tabindex="-1"></a>                    <span class="st">&quot;/enrichmentmap/textfileupload?fileName=&quot;</span>, bname),</span>
-<span id="cb291-21"><a href="gprofiler_mod9.html#cb291-21" tabindex="-1"></a>    <span class="at">config =</span> <span class="fu">list</span>(),</span>
-<span id="cb291-22"><a href="gprofiler_mod9.html#cb291-22" tabindex="-1"></a>    <span class="at">body   =</span> <span class="fu">list</span>(<span class="at">file =</span> httr<span class="sc">::</span><span class="fu">upload_file</span>(localPath)),</span>
-<span id="cb291-23"><a href="gprofiler_mod9.html#cb291-23" tabindex="-1"></a>    <span class="at">encode =</span> <span class="st">&quot;multipart&quot;</span>,</span>
-<span id="cb291-24"><a href="gprofiler_mod9.html#cb291-24" tabindex="-1"></a>    <span class="at">handle =</span> <span class="cn">NULL</span></span>
-<span id="cb291-25"><a href="gprofiler_mod9.html#cb291-25" tabindex="-1"></a>  )</span>
-<span id="cb291-26"><a href="gprofiler_mod9.html#cb291-26" tabindex="-1"></a>  jsonlite<span class="sc">::</span><span class="fu">fromJSON</span>(<span class="fu">rawToChar</span>(r<span class="sc">$</span>content))<span class="sc">$</span>path</span>
-<span id="cb291-27"><a href="gprofiler_mod9.html#cb291-27" tabindex="-1"></a>}</span>
-<span id="cb291-28"><a href="gprofiler_mod9.html#cb291-28" tabindex="-1"></a></span>
-<span id="cb291-29"><a href="gprofiler_mod9.html#cb291-29" tabindex="-1"></a><span class="co"># Helper: convert fgsea CSV result to GEM format and write to disk.</span></span>
-<span id="cb291-30"><a href="gprofiler_mod9.html#cb291-30" tabindex="-1"></a><span class="co"># g:Profiler GEM files are already written by the prepare-enrichment-files chunk.</span></span>
-<span id="cb291-31"><a href="gprofiler_mod9.html#cb291-31" tabindex="-1"></a>fgsea_csv_to_gem <span class="ot">&lt;-</span> <span class="cf">function</span>(csv_path, gem_path) {</span>
-<span id="cb291-32"><a href="gprofiler_mod9.html#cb291-32" tabindex="-1"></a>  fs <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(csv_path, <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb291-33"><a href="gprofiler_mod9.html#cb291-33" tabindex="-1"></a>  gem <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb291-34"><a href="gprofiler_mod9.html#cb291-34" tabindex="-1"></a>    <span class="at">Name        =</span> fs<span class="sc">$</span>pathway,</span>
-<span id="cb291-35"><a href="gprofiler_mod9.html#cb291-35" tabindex="-1"></a>    <span class="at">Description =</span> fs<span class="sc">$</span>pathway,</span>
-<span id="cb291-36"><a href="gprofiler_mod9.html#cb291-36" tabindex="-1"></a>    <span class="at">pvalue      =</span> fs<span class="sc">$</span>pval,</span>
-<span id="cb291-37"><a href="gprofiler_mod9.html#cb291-37" tabindex="-1"></a>    <span class="at">qvalue      =</span> fs<span class="sc">$</span>padj,</span>
-<span id="cb291-38"><a href="gprofiler_mod9.html#cb291-38" tabindex="-1"></a>    <span class="at">phenotype   =</span> <span class="fu">ifelse</span>(fs<span class="sc">$</span>NES <span class="sc">&gt;=</span> <span class="dv">0</span>, <span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>),</span>
-<span id="cb291-39"><a href="gprofiler_mod9.html#cb291-39" tabindex="-1"></a>    <span class="at">genes       =</span> fs<span class="sc">$</span>leadingEdge,</span>
-<span id="cb291-40"><a href="gprofiler_mod9.html#cb291-40" tabindex="-1"></a>    <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span></span>
-<span id="cb291-41"><a href="gprofiler_mod9.html#cb291-41" tabindex="-1"></a>  )</span>
-<span id="cb291-42"><a href="gprofiler_mod9.html#cb291-42" tabindex="-1"></a>  <span class="fu">write.table</span>(gem, <span class="at">file =</span> gem_path, <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>,</span>
-<span id="cb291-43"><a href="gprofiler_mod9.html#cb291-43" tabindex="-1"></a>              <span class="at">quote =</span> <span class="cn">FALSE</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>, <span class="at">col.names =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb291-44"><a href="gprofiler_mod9.html#cb291-44" tabindex="-1"></a>  <span class="fu">invisible</span>(gem_path)</span>
-<span id="cb291-45"><a href="gprofiler_mod9.html#cb291-45" tabindex="-1"></a>}</span>
-<span id="cb291-46"><a href="gprofiler_mod9.html#cb291-46" tabindex="-1"></a></span>
-<span id="cb291-47"><a href="gprofiler_mod9.html#cb291-47" tabindex="-1"></a><span class="co"># ── File paths (g:Profiler GEMs written by prepare-enrichment-files chunk) ───</span></span>
-<span id="cb291-48"><a href="gprofiler_mod9.html#cb291-48" tabindex="-1"></a>data_dir      <span class="ot">&lt;-</span> <span class="st">&quot;./Module9/gprofiler/data&quot;</span></span>
-<span id="cb291-49"><a href="gprofiler_mod9.html#cb291-49" tabindex="-1"></a>up_gem        <span class="ot">&lt;-</span> <span class="fu">file.path</span>(data_dir, <span class="st">&quot;enrichment_results_gprofiler_UPgenes.gem.txt&quot;</span>)</span>
-<span id="cb291-50"><a href="gprofiler_mod9.html#cb291-50" tabindex="-1"></a>dn_gem        <span class="ot">&lt;-</span> <span class="fu">file.path</span>(data_dir, <span class="st">&quot;enrichment_results_gprofiler_DNgenes.gem.txt&quot;</span>)</span>
-<span id="cb291-51"><a href="gprofiler_mod9.html#cb291-51" tabindex="-1"></a>fgsea_csv     <span class="ot">&lt;-</span> <span class="fu">file.path</span>(data_dir, <span class="st">&quot;fgsea_resistant_vs_parental.csv&quot;</span>)</span>
-<span id="cb291-52"><a href="gprofiler_mod9.html#cb291-52" tabindex="-1"></a>fgsea_gem     <span class="ot">&lt;-</span> <span class="fu">file.path</span>(data_dir, <span class="st">&quot;fgsea_report_for_list.tsv&quot;</span>)</span>
-<span id="cb291-53"><a href="gprofiler_mod9.html#cb291-53" tabindex="-1"></a>gmt_gprofiler <span class="ot">&lt;-</span> <span class="fu">file.path</span>(data_dir, <span class="st">&quot;gprofiler_full_hsapiens.name.gmt&quot;</span>)</span>
-<span id="cb291-54"><a href="gprofiler_mod9.html#cb291-54" tabindex="-1"></a>gmt_baderlab  <span class="ot">&lt;-</span> <span class="fu">file.path</span>(data_dir, <span class="st">&quot;Human_GOBP_AllPathways_filtered_500orLessV2.gmt&quot;</span>)</span>
-<span id="cb291-55"><a href="gprofiler_mod9.html#cb291-55" tabindex="-1"></a>rnk_file <span class="ot">&lt;-</span> <span class="fu">file.path</span>(data_dir, <span class="st">&quot;resistant_vs_parental.rnk&quot;</span>)</span>
-<span id="cb291-56"><a href="gprofiler_mod9.html#cb291-56" tabindex="-1"></a></span>
-<span id="cb291-57"><a href="gprofiler_mod9.html#cb291-57" tabindex="-1"></a><span class="fu">message</span>(<span class="st">&quot;Setup complete. All GEM files ready in: &quot;</span>, data_dir)</span></code></pre></div>
+<div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb318-1"><a href="gprofiler_mod9.html#cb318-1" tabindex="-1"></a><span class="fu">library</span>(RCy3)</span>
+<span id="cb318-2"><a href="gprofiler_mod9.html#cb318-2" tabindex="-1"></a><span class="fu">library</span>(httr)</span>
+<span id="cb318-3"><a href="gprofiler_mod9.html#cb318-3" tabindex="-1"></a><span class="fu">library</span>(jsonlite)</span>
+<span id="cb318-4"><a href="gprofiler_mod9.html#cb318-4" tabindex="-1"></a></span>
+<span id="cb318-5"><a href="gprofiler_mod9.html#cb318-5" tabindex="-1"></a>path_to_save_cytoscape <span class="ot">=</span> <span class="st">&quot;/Users/risserlin/CBW_Workshop_results/Module9&quot;</span></span>
+<span id="cb318-6"><a href="gprofiler_mod9.html#cb318-6" tabindex="-1"></a></span>
+<span id="cb318-7"><a href="gprofiler_mod9.html#cb318-7" tabindex="-1"></a><span class="co"># Set base URL — adjust if not running from Docker</span></span>
+<span id="cb318-8"><a href="gprofiler_mod9.html#cb318-8" tabindex="-1"></a>current_cytoscape_baseurl <span class="ot">&lt;-</span> <span class="st">&quot;http://localhost:1234/v1&quot;</span></span>
+<span id="cb318-9"><a href="gprofiler_mod9.html#cb318-9" tabindex="-1"></a></span>
+<span id="cb318-10"><a href="gprofiler_mod9.html#cb318-10" tabindex="-1"></a><span class="fu">cytoscapePing</span>(<span class="at">base.url =</span> current_cytoscape_baseurl)</span>
+<span id="cb318-11"><a href="gprofiler_mod9.html#cb318-11" tabindex="-1"></a><span class="fu">cytoscapeVersionInfo</span>(<span class="at">base.url =</span> current_cytoscape_baseurl)</span>
+<span id="cb318-12"><a href="gprofiler_mod9.html#cb318-12" tabindex="-1"></a></span>
+<span id="cb318-13"><a href="gprofiler_mod9.html#cb318-13" tabindex="-1"></a><span class="co"># Helper: upload a local file to Cytoscape so EM can read it.</span></span>
+<span id="cb318-14"><a href="gprofiler_mod9.html#cb318-14" tabindex="-1"></a><span class="co"># EnrichmentMap&#39;s upload endpoint sits outside /v1.</span></span>
+<span id="cb318-15"><a href="gprofiler_mod9.html#cb318-15" tabindex="-1"></a>upload_em_file <span class="ot">&lt;-</span> <span class="cf">function</span>(localPath) {</span>
+<span id="cb318-16"><a href="gprofiler_mod9.html#cb318-16" tabindex="-1"></a>  bname      <span class="ot">&lt;-</span> <span class="fu">basename</span>(localPath)</span>
+<span id="cb318-17"><a href="gprofiler_mod9.html#cb318-17" tabindex="-1"></a>  base_no_v1 <span class="ot">&lt;-</span> <span class="fu">sub</span>(<span class="st">&quot;/v1$&quot;</span>, <span class="st">&quot;&quot;</span>, current_cytoscape_baseurl)</span>
+<span id="cb318-18"><a href="gprofiler_mod9.html#cb318-18" tabindex="-1"></a>  r <span class="ot">&lt;-</span> httr<span class="sc">::</span><span class="fu">POST</span>(</span>
+<span id="cb318-19"><a href="gprofiler_mod9.html#cb318-19" tabindex="-1"></a>    <span class="at">url    =</span> <span class="fu">paste0</span>(base_no_v1,</span>
+<span id="cb318-20"><a href="gprofiler_mod9.html#cb318-20" tabindex="-1"></a>                    <span class="st">&quot;/enrichmentmap/textfileupload?fileName=&quot;</span>, bname),</span>
+<span id="cb318-21"><a href="gprofiler_mod9.html#cb318-21" tabindex="-1"></a>    <span class="at">config =</span> <span class="fu">list</span>(),</span>
+<span id="cb318-22"><a href="gprofiler_mod9.html#cb318-22" tabindex="-1"></a>    <span class="at">body   =</span> <span class="fu">list</span>(<span class="at">file =</span> httr<span class="sc">::</span><span class="fu">upload_file</span>(localPath)),</span>
+<span id="cb318-23"><a href="gprofiler_mod9.html#cb318-23" tabindex="-1"></a>    <span class="at">encode =</span> <span class="st">&quot;multipart&quot;</span>,</span>
+<span id="cb318-24"><a href="gprofiler_mod9.html#cb318-24" tabindex="-1"></a>    <span class="at">handle =</span> <span class="cn">NULL</span></span>
+<span id="cb318-25"><a href="gprofiler_mod9.html#cb318-25" tabindex="-1"></a>  )</span>
+<span id="cb318-26"><a href="gprofiler_mod9.html#cb318-26" tabindex="-1"></a>  jsonlite<span class="sc">::</span><span class="fu">fromJSON</span>(<span class="fu">rawToChar</span>(r<span class="sc">$</span>content))<span class="sc">$</span>path</span>
+<span id="cb318-27"><a href="gprofiler_mod9.html#cb318-27" tabindex="-1"></a>}</span>
+<span id="cb318-28"><a href="gprofiler_mod9.html#cb318-28" tabindex="-1"></a></span>
+<span id="cb318-29"><a href="gprofiler_mod9.html#cb318-29" tabindex="-1"></a><span class="co"># Helper: convert fgsea CSV result to GEM format and write to disk.</span></span>
+<span id="cb318-30"><a href="gprofiler_mod9.html#cb318-30" tabindex="-1"></a><span class="co"># g:Profiler GEM files are already written by the prepare-enrichment-files chunk.</span></span>
+<span id="cb318-31"><a href="gprofiler_mod9.html#cb318-31" tabindex="-1"></a>fgsea_csv_to_gem <span class="ot">&lt;-</span> <span class="cf">function</span>(csv_path, gem_path) {</span>
+<span id="cb318-32"><a href="gprofiler_mod9.html#cb318-32" tabindex="-1"></a>  fs <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(csv_path, <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb318-33"><a href="gprofiler_mod9.html#cb318-33" tabindex="-1"></a>  gem <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb318-34"><a href="gprofiler_mod9.html#cb318-34" tabindex="-1"></a>    <span class="at">Name        =</span> fs<span class="sc">$</span>pathway,</span>
+<span id="cb318-35"><a href="gprofiler_mod9.html#cb318-35" tabindex="-1"></a>    <span class="at">Description =</span> fs<span class="sc">$</span>pathway,</span>
+<span id="cb318-36"><a href="gprofiler_mod9.html#cb318-36" tabindex="-1"></a>    <span class="at">pvalue      =</span> fs<span class="sc">$</span>pval,</span>
+<span id="cb318-37"><a href="gprofiler_mod9.html#cb318-37" tabindex="-1"></a>    <span class="at">qvalue      =</span> fs<span class="sc">$</span>padj,</span>
+<span id="cb318-38"><a href="gprofiler_mod9.html#cb318-38" tabindex="-1"></a>    <span class="at">phenotype   =</span> <span class="fu">ifelse</span>(fs<span class="sc">$</span>NES <span class="sc">&gt;=</span> <span class="dv">0</span>, <span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>),</span>
+<span id="cb318-39"><a href="gprofiler_mod9.html#cb318-39" tabindex="-1"></a>    <span class="at">genes       =</span> fs<span class="sc">$</span>leadingEdge,</span>
+<span id="cb318-40"><a href="gprofiler_mod9.html#cb318-40" tabindex="-1"></a>    <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span></span>
+<span id="cb318-41"><a href="gprofiler_mod9.html#cb318-41" tabindex="-1"></a>  )</span>
+<span id="cb318-42"><a href="gprofiler_mod9.html#cb318-42" tabindex="-1"></a>  <span class="fu">write.table</span>(gem, <span class="at">file =</span> gem_path, <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>,</span>
+<span id="cb318-43"><a href="gprofiler_mod9.html#cb318-43" tabindex="-1"></a>              <span class="at">quote =</span> <span class="cn">FALSE</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>, <span class="at">col.names =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb318-44"><a href="gprofiler_mod9.html#cb318-44" tabindex="-1"></a>  <span class="fu">invisible</span>(gem_path)</span>
+<span id="cb318-45"><a href="gprofiler_mod9.html#cb318-45" tabindex="-1"></a>}</span>
+<span id="cb318-46"><a href="gprofiler_mod9.html#cb318-46" tabindex="-1"></a></span>
+<span id="cb318-47"><a href="gprofiler_mod9.html#cb318-47" tabindex="-1"></a><span class="co"># ── File paths (g:Profiler GEMs written by prepare-enrichment-files chunk) ───</span></span>
+<span id="cb318-48"><a href="gprofiler_mod9.html#cb318-48" tabindex="-1"></a>data_dir      <span class="ot">&lt;-</span> <span class="st">&quot;./Module9/gprofiler/data&quot;</span></span>
+<span id="cb318-49"><a href="gprofiler_mod9.html#cb318-49" tabindex="-1"></a>up_gem        <span class="ot">&lt;-</span> <span class="fu">file.path</span>(data_dir, <span class="st">&quot;enrichment_results_gprofiler_UPgenes.gem.txt&quot;</span>)</span>
+<span id="cb318-50"><a href="gprofiler_mod9.html#cb318-50" tabindex="-1"></a>dn_gem        <span class="ot">&lt;-</span> <span class="fu">file.path</span>(data_dir, <span class="st">&quot;enrichment_results_gprofiler_DNgenes.gem.txt&quot;</span>)</span>
+<span id="cb318-51"><a href="gprofiler_mod9.html#cb318-51" tabindex="-1"></a>fgsea_csv     <span class="ot">&lt;-</span> <span class="fu">file.path</span>(data_dir, <span class="st">&quot;fgsea_resistant_vs_parental.csv&quot;</span>)</span>
+<span id="cb318-52"><a href="gprofiler_mod9.html#cb318-52" tabindex="-1"></a>fgsea_gem     <span class="ot">&lt;-</span> <span class="fu">file.path</span>(data_dir, <span class="st">&quot;fgsea_report_for_list.tsv&quot;</span>)</span>
+<span id="cb318-53"><a href="gprofiler_mod9.html#cb318-53" tabindex="-1"></a>gmt_gprofiler <span class="ot">&lt;-</span> <span class="fu">file.path</span>(data_dir, <span class="st">&quot;gprofiler_full_hsapiens.name.gmt&quot;</span>)</span>
+<span id="cb318-54"><a href="gprofiler_mod9.html#cb318-54" tabindex="-1"></a>gmt_baderlab  <span class="ot">&lt;-</span> <span class="fu">file.path</span>(data_dir, <span class="st">&quot;Human_GOBP_AllPathways_filtered_500orLessV2.gmt&quot;</span>)</span>
+<span id="cb318-55"><a href="gprofiler_mod9.html#cb318-55" tabindex="-1"></a>rnk_file <span class="ot">&lt;-</span> <span class="fu">file.path</span>(data_dir, <span class="st">&quot;resistant_vs_parental.rnk&quot;</span>)</span>
+<span id="cb318-56"><a href="gprofiler_mod9.html#cb318-56" tabindex="-1"></a></span>
+<span id="cb318-57"><a href="gprofiler_mod9.html#cb318-57" tabindex="-1"></a><span class="fu">message</span>(<span class="st">&quot;Setup complete. All GEM files ready in: &quot;</span>, data_dir)</span></code></pre></div>
 </div>
 <div id="exercise-1a---compare-up-and-down-regulated-gprofiler-results" class="section level2 hasAnchor">
 <h2>Exercise 1a - compare UP and DOWN regulated g:Profiler results<a href="gprofiler_mod9.html#exercise-1a---compare-up-and-down-regulated-gprofiler-results" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -760,61 +760,61 @@ you can type it in the search bar, quotes are important.
 g:Profiler results</strong>
 </p>
 </div>
-<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb292-1"><a href="gprofiler_mod9.html#cb292-1" tabindex="-1"></a><span class="co"># Upload GEM files to Cytoscape</span></span>
-<span id="cb292-2"><a href="gprofiler_mod9.html#cb292-2" tabindex="-1"></a>up_gem_cyto    <span class="ot">&lt;-</span> <span class="fu">upload_em_file</span>(up_gem)</span>
-<span id="cb292-3"><a href="gprofiler_mod9.html#cb292-3" tabindex="-1"></a>dn_gem_cyto    <span class="ot">&lt;-</span> <span class="fu">upload_em_file</span>(dn_gem)</span>
-<span id="cb292-4"><a href="gprofiler_mod9.html#cb292-4" tabindex="-1"></a>gmt_cyto       <span class="ot">&lt;-</span> <span class="fu">upload_em_file</span>(gmt_baderlab)</span>
-<span id="cb292-5"><a href="gprofiler_mod9.html#cb292-5" tabindex="-1"></a></span>
-<span id="cb292-6"><a href="gprofiler_mod9.html#cb292-6" tabindex="-1"></a><span class="co"># Build the EnrichmentMap with both datasets</span></span>
-<span id="cb292-7"><a href="gprofiler_mod9.html#cb292-7" tabindex="-1"></a>em1a_command <span class="ot">&lt;-</span> <span class="fu">paste</span>(</span>
-<span id="cb292-8"><a href="gprofiler_mod9.html#cb292-8" tabindex="-1"></a>  <span class="st">&quot;enrichmentmap build&quot;</span>,</span>
-<span id="cb292-9"><a href="gprofiler_mod9.html#cb292-9" tabindex="-1"></a>  <span class="st">&quot;analysisType=generic&quot;</span>,</span>
-<span id="cb292-10"><a href="gprofiler_mod9.html#cb292-10" tabindex="-1"></a>  <span class="fu">paste0</span>(<span class="st">&quot;enrichmentsDataset1=&quot;</span>, up_gem_cyto),</span>
-<span id="cb292-11"><a href="gprofiler_mod9.html#cb292-11" tabindex="-1"></a>  <span class="fu">paste0</span>(<span class="st">&quot;gmtFile=&quot;</span>,            gmt_cyto),</span>
-<span id="cb292-12"><a href="gprofiler_mod9.html#cb292-12" tabindex="-1"></a>  <span class="fu">paste0</span>(<span class="st">&quot;enrichmentsDataset2=&quot;</span>, dn_gem_cyto),</span>
-<span id="cb292-13"><a href="gprofiler_mod9.html#cb292-13" tabindex="-1"></a>  <span class="st">&quot;qvalue=0.01&quot;</span>,</span>
-<span id="cb292-14"><a href="gprofiler_mod9.html#cb292-14" tabindex="-1"></a>  <span class="st">&quot;pvalue=1.0&quot;</span>,</span>
-<span id="cb292-15"><a href="gprofiler_mod9.html#cb292-15" tabindex="-1"></a>  <span class="st">&quot;coefficients=JACCARD&quot;</span>,</span>
-<span id="cb292-16"><a href="gprofiler_mod9.html#cb292-16" tabindex="-1"></a>  <span class="st">&quot;similaritycutoff=0.35&quot;</span>,</span>
-<span id="cb292-17"><a href="gprofiler_mod9.html#cb292-17" tabindex="-1"></a>  <span class="at">sep =</span> <span class="st">&quot; &quot;</span></span>
-<span id="cb292-18"><a href="gprofiler_mod9.html#cb292-18" tabindex="-1"></a>)</span>
-<span id="cb292-19"><a href="gprofiler_mod9.html#cb292-19" tabindex="-1"></a></span>
-<span id="cb292-20"><a href="gprofiler_mod9.html#cb292-20" tabindex="-1"></a><span class="fu">commandsRun</span>(em1a_command, <span class="at">base.url =</span> current_cytoscape_baseurl)</span>
-<span id="cb292-21"><a href="gprofiler_mod9.html#cb292-21" tabindex="-1"></a></span>
-<span id="cb292-22"><a href="gprofiler_mod9.html#cb292-22" tabindex="-1"></a><span class="co"># Get the newly created network</span></span>
-<span id="cb292-23"><a href="gprofiler_mod9.html#cb292-23" tabindex="-1"></a>em1a_suid <span class="ot">&lt;-</span> <span class="fu">getNetworkSuid</span>(<span class="at">base.url =</span> current_cytoscape_baseurl)</span>
-<span id="cb292-24"><a href="gprofiler_mod9.html#cb292-24" tabindex="-1"></a><span class="fu">message</span>(<span class="st">&quot;Exercise 1a EM SUID: &quot;</span>, em1a_suid)</span>
-<span id="cb292-25"><a href="gprofiler_mod9.html#cb292-25" tabindex="-1"></a></span>
-<span id="cb292-26"><a href="gprofiler_mod9.html#cb292-26" tabindex="-1"></a></span>
-<span id="cb292-27"><a href="gprofiler_mod9.html#cb292-27" tabindex="-1"></a>existing_names <span class="ot">&lt;-</span> <span class="fu">getNetworkList</span>(<span class="at">base.url =</span> current_cytoscape_baseurl)</span>
-<span id="cb292-28"><a href="gprofiler_mod9.html#cb292-28" tabindex="-1"></a>new_name <span class="ot">&lt;-</span> <span class="st">&quot;EM_UP_vs_DN_gprofiler&quot;</span></span>
-<span id="cb292-29"><a href="gprofiler_mod9.html#cb292-29" tabindex="-1"></a><span class="cf">if</span> (new_name <span class="sc">%in%</span> existing_names) {</span>
-<span id="cb292-30"><a href="gprofiler_mod9.html#cb292-30" tabindex="-1"></a>  new_name <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="fu">sample</span>(<span class="dv">1000</span><span class="sc">:</span><span class="dv">9999</span>, <span class="dv">2</span>),<span class="st">&quot;_&quot;</span>,new_name )</span>
-<span id="cb292-31"><a href="gprofiler_mod9.html#cb292-31" tabindex="-1"></a>}</span>
-<span id="cb292-32"><a href="gprofiler_mod9.html#cb292-32" tabindex="-1"></a><span class="fu">renameNetwork</span>(new_name,</span>
-<span id="cb292-33"><a href="gprofiler_mod9.html#cb292-33" tabindex="-1"></a>              <span class="at">network =</span> <span class="fu">getNetworkSuid</span>(<span class="at">base.url =</span> current_cytoscape_baseurl),</span>
-<span id="cb292-34"><a href="gprofiler_mod9.html#cb292-34" tabindex="-1"></a>              <span class="at">base.url =</span> current_cytoscape_baseurl)</span>
-<span id="cb292-35"><a href="gprofiler_mod9.html#cb292-35" tabindex="-1"></a><span class="fu">message</span>(<span class="st">&quot;Network renamed to: &quot;</span>, new_name)</span>
-<span id="cb292-36"><a href="gprofiler_mod9.html#cb292-36" tabindex="-1"></a></span>
-<span id="cb292-37"><a href="gprofiler_mod9.html#cb292-37" tabindex="-1"></a></span>
-<span id="cb292-38"><a href="gprofiler_mod9.html#cb292-38" tabindex="-1"></a><span class="co"># Apply a layout</span></span>
-<span id="cb292-39"><a href="gprofiler_mod9.html#cb292-39" tabindex="-1"></a><span class="fu">layoutNetwork</span>(<span class="st">&quot;force-directed defaultSpringCoefficient=0.00004 defaultSpringLength=5&quot;</span>,</span>
-<span id="cb292-40"><a href="gprofiler_mod9.html#cb292-40" tabindex="-1"></a>              <span class="at">network =</span> em1a_suid, <span class="at">base.url =</span> current_cytoscape_baseurl)</span>
-<span id="cb292-41"><a href="gprofiler_mod9.html#cb292-41" tabindex="-1"></a></span>
-<span id="cb292-42"><a href="gprofiler_mod9.html#cb292-42" tabindex="-1"></a><span class="co"># Search for a specific node (e.g. &quot;MET activates&quot;) and select it</span></span>
-<span id="cb292-43"><a href="gprofiler_mod9.html#cb292-43" tabindex="-1"></a><span class="fu">selectNodes</span>(<span class="at">nodes =</span> <span class="st">&quot;MET ACTIVATES PTK2 SIGNALING%REACTOME DATABASE ID RELEASE 97%8874081&quot;</span>, <span class="at">by.col =</span> <span class="st">&quot;name&quot;</span>,</span>
-<span id="cb292-44"><a href="gprofiler_mod9.html#cb292-44" tabindex="-1"></a>            <span class="at">network =</span> em1a_suid, <span class="at">base.url =</span> current_cytoscape_baseurl)</span>
-<span id="cb292-45"><a href="gprofiler_mod9.html#cb292-45" tabindex="-1"></a></span>
-<span id="cb292-46"><a href="gprofiler_mod9.html#cb292-46" tabindex="-1"></a><span class="co"># View the node table for the selected node</span></span>
-<span id="cb292-47"><a href="gprofiler_mod9.html#cb292-47" tabindex="-1"></a>selected_node_table <span class="ot">&lt;-</span> <span class="fu">getTableColumns</span>(</span>
-<span id="cb292-48"><a href="gprofiler_mod9.html#cb292-48" tabindex="-1"></a>  <span class="at">table   =</span> <span class="st">&quot;node&quot;</span>,</span>
-<span id="cb292-49"><a href="gprofiler_mod9.html#cb292-49" tabindex="-1"></a>  <span class="at">network =</span> em1a_suid,</span>
-<span id="cb292-50"><a href="gprofiler_mod9.html#cb292-50" tabindex="-1"></a>  <span class="at">base.url =</span> current_cytoscape_baseurl</span>
-<span id="cb292-51"><a href="gprofiler_mod9.html#cb292-51" tabindex="-1"></a>)</span>
-<span id="cb292-52"><a href="gprofiler_mod9.html#cb292-52" tabindex="-1"></a><span class="co"># Filter to the selected node</span></span>
-<span id="cb292-53"><a href="gprofiler_mod9.html#cb292-53" tabindex="-1"></a>selected_nodes <span class="ot">&lt;-</span> <span class="fu">getSelectedNodes</span>(<span class="at">network =</span> em1a_suid,</span>
-<span id="cb292-54"><a href="gprofiler_mod9.html#cb292-54" tabindex="-1"></a>                                   <span class="at">base.url =</span> current_cytoscape_baseurl)</span>
-<span id="cb292-55"><a href="gprofiler_mod9.html#cb292-55" tabindex="-1"></a><span class="fu">print</span>(selected_node_table[selected_node_table<span class="sc">$</span>name <span class="sc">%in%</span> selected_nodes, ])</span></code></pre></div>
+<div class="sourceCode" id="cb319"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb319-1"><a href="gprofiler_mod9.html#cb319-1" tabindex="-1"></a><span class="co"># Upload GEM files to Cytoscape</span></span>
+<span id="cb319-2"><a href="gprofiler_mod9.html#cb319-2" tabindex="-1"></a>up_gem_cyto    <span class="ot">&lt;-</span> <span class="fu">upload_em_file</span>(up_gem)</span>
+<span id="cb319-3"><a href="gprofiler_mod9.html#cb319-3" tabindex="-1"></a>dn_gem_cyto    <span class="ot">&lt;-</span> <span class="fu">upload_em_file</span>(dn_gem)</span>
+<span id="cb319-4"><a href="gprofiler_mod9.html#cb319-4" tabindex="-1"></a>gmt_cyto       <span class="ot">&lt;-</span> <span class="fu">upload_em_file</span>(gmt_baderlab)</span>
+<span id="cb319-5"><a href="gprofiler_mod9.html#cb319-5" tabindex="-1"></a></span>
+<span id="cb319-6"><a href="gprofiler_mod9.html#cb319-6" tabindex="-1"></a><span class="co"># Build the EnrichmentMap with both datasets</span></span>
+<span id="cb319-7"><a href="gprofiler_mod9.html#cb319-7" tabindex="-1"></a>em1a_command <span class="ot">&lt;-</span> <span class="fu">paste</span>(</span>
+<span id="cb319-8"><a href="gprofiler_mod9.html#cb319-8" tabindex="-1"></a>  <span class="st">&quot;enrichmentmap build&quot;</span>,</span>
+<span id="cb319-9"><a href="gprofiler_mod9.html#cb319-9" tabindex="-1"></a>  <span class="st">&quot;analysisType=generic&quot;</span>,</span>
+<span id="cb319-10"><a href="gprofiler_mod9.html#cb319-10" tabindex="-1"></a>  <span class="fu">paste0</span>(<span class="st">&quot;enrichmentsDataset1=&quot;</span>, up_gem_cyto),</span>
+<span id="cb319-11"><a href="gprofiler_mod9.html#cb319-11" tabindex="-1"></a>  <span class="fu">paste0</span>(<span class="st">&quot;gmtFile=&quot;</span>,            gmt_cyto),</span>
+<span id="cb319-12"><a href="gprofiler_mod9.html#cb319-12" tabindex="-1"></a>  <span class="fu">paste0</span>(<span class="st">&quot;enrichmentsDataset2=&quot;</span>, dn_gem_cyto),</span>
+<span id="cb319-13"><a href="gprofiler_mod9.html#cb319-13" tabindex="-1"></a>  <span class="st">&quot;qvalue=0.01&quot;</span>,</span>
+<span id="cb319-14"><a href="gprofiler_mod9.html#cb319-14" tabindex="-1"></a>  <span class="st">&quot;pvalue=1.0&quot;</span>,</span>
+<span id="cb319-15"><a href="gprofiler_mod9.html#cb319-15" tabindex="-1"></a>  <span class="st">&quot;coefficients=JACCARD&quot;</span>,</span>
+<span id="cb319-16"><a href="gprofiler_mod9.html#cb319-16" tabindex="-1"></a>  <span class="st">&quot;similaritycutoff=0.35&quot;</span>,</span>
+<span id="cb319-17"><a href="gprofiler_mod9.html#cb319-17" tabindex="-1"></a>  <span class="at">sep =</span> <span class="st">&quot; &quot;</span></span>
+<span id="cb319-18"><a href="gprofiler_mod9.html#cb319-18" tabindex="-1"></a>)</span>
+<span id="cb319-19"><a href="gprofiler_mod9.html#cb319-19" tabindex="-1"></a></span>
+<span id="cb319-20"><a href="gprofiler_mod9.html#cb319-20" tabindex="-1"></a><span class="fu">commandsRun</span>(em1a_command, <span class="at">base.url =</span> current_cytoscape_baseurl)</span>
+<span id="cb319-21"><a href="gprofiler_mod9.html#cb319-21" tabindex="-1"></a></span>
+<span id="cb319-22"><a href="gprofiler_mod9.html#cb319-22" tabindex="-1"></a><span class="co"># Get the newly created network</span></span>
+<span id="cb319-23"><a href="gprofiler_mod9.html#cb319-23" tabindex="-1"></a>em1a_suid <span class="ot">&lt;-</span> <span class="fu">getNetworkSuid</span>(<span class="at">base.url =</span> current_cytoscape_baseurl)</span>
+<span id="cb319-24"><a href="gprofiler_mod9.html#cb319-24" tabindex="-1"></a><span class="fu">message</span>(<span class="st">&quot;Exercise 1a EM SUID: &quot;</span>, em1a_suid)</span>
+<span id="cb319-25"><a href="gprofiler_mod9.html#cb319-25" tabindex="-1"></a></span>
+<span id="cb319-26"><a href="gprofiler_mod9.html#cb319-26" tabindex="-1"></a></span>
+<span id="cb319-27"><a href="gprofiler_mod9.html#cb319-27" tabindex="-1"></a>existing_names <span class="ot">&lt;-</span> <span class="fu">getNetworkList</span>(<span class="at">base.url =</span> current_cytoscape_baseurl)</span>
+<span id="cb319-28"><a href="gprofiler_mod9.html#cb319-28" tabindex="-1"></a>new_name <span class="ot">&lt;-</span> <span class="st">&quot;EM_UP_vs_DN_gprofiler&quot;</span></span>
+<span id="cb319-29"><a href="gprofiler_mod9.html#cb319-29" tabindex="-1"></a><span class="cf">if</span> (new_name <span class="sc">%in%</span> existing_names) {</span>
+<span id="cb319-30"><a href="gprofiler_mod9.html#cb319-30" tabindex="-1"></a>  new_name <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="fu">sample</span>(<span class="dv">1000</span><span class="sc">:</span><span class="dv">9999</span>, <span class="dv">2</span>),<span class="st">&quot;_&quot;</span>,new_name )</span>
+<span id="cb319-31"><a href="gprofiler_mod9.html#cb319-31" tabindex="-1"></a>}</span>
+<span id="cb319-32"><a href="gprofiler_mod9.html#cb319-32" tabindex="-1"></a><span class="fu">renameNetwork</span>(new_name,</span>
+<span id="cb319-33"><a href="gprofiler_mod9.html#cb319-33" tabindex="-1"></a>              <span class="at">network =</span> <span class="fu">getNetworkSuid</span>(<span class="at">base.url =</span> current_cytoscape_baseurl),</span>
+<span id="cb319-34"><a href="gprofiler_mod9.html#cb319-34" tabindex="-1"></a>              <span class="at">base.url =</span> current_cytoscape_baseurl)</span>
+<span id="cb319-35"><a href="gprofiler_mod9.html#cb319-35" tabindex="-1"></a><span class="fu">message</span>(<span class="st">&quot;Network renamed to: &quot;</span>, new_name)</span>
+<span id="cb319-36"><a href="gprofiler_mod9.html#cb319-36" tabindex="-1"></a></span>
+<span id="cb319-37"><a href="gprofiler_mod9.html#cb319-37" tabindex="-1"></a></span>
+<span id="cb319-38"><a href="gprofiler_mod9.html#cb319-38" tabindex="-1"></a><span class="co"># Apply a layout</span></span>
+<span id="cb319-39"><a href="gprofiler_mod9.html#cb319-39" tabindex="-1"></a><span class="fu">layoutNetwork</span>(<span class="st">&quot;force-directed defaultSpringCoefficient=0.00004 defaultSpringLength=5&quot;</span>,</span>
+<span id="cb319-40"><a href="gprofiler_mod9.html#cb319-40" tabindex="-1"></a>              <span class="at">network =</span> em1a_suid, <span class="at">base.url =</span> current_cytoscape_baseurl)</span>
+<span id="cb319-41"><a href="gprofiler_mod9.html#cb319-41" tabindex="-1"></a></span>
+<span id="cb319-42"><a href="gprofiler_mod9.html#cb319-42" tabindex="-1"></a><span class="co"># Search for a specific node (e.g. &quot;MET activates&quot;) and select it</span></span>
+<span id="cb319-43"><a href="gprofiler_mod9.html#cb319-43" tabindex="-1"></a><span class="fu">selectNodes</span>(<span class="at">nodes =</span> <span class="st">&quot;MET ACTIVATES PTK2 SIGNALING%REACTOME DATABASE ID RELEASE 97%8874081&quot;</span>, <span class="at">by.col =</span> <span class="st">&quot;name&quot;</span>,</span>
+<span id="cb319-44"><a href="gprofiler_mod9.html#cb319-44" tabindex="-1"></a>            <span class="at">network =</span> em1a_suid, <span class="at">base.url =</span> current_cytoscape_baseurl)</span>
+<span id="cb319-45"><a href="gprofiler_mod9.html#cb319-45" tabindex="-1"></a></span>
+<span id="cb319-46"><a href="gprofiler_mod9.html#cb319-46" tabindex="-1"></a><span class="co"># View the node table for the selected node</span></span>
+<span id="cb319-47"><a href="gprofiler_mod9.html#cb319-47" tabindex="-1"></a>selected_node_table <span class="ot">&lt;-</span> <span class="fu">getTableColumns</span>(</span>
+<span id="cb319-48"><a href="gprofiler_mod9.html#cb319-48" tabindex="-1"></a>  <span class="at">table   =</span> <span class="st">&quot;node&quot;</span>,</span>
+<span id="cb319-49"><a href="gprofiler_mod9.html#cb319-49" tabindex="-1"></a>  <span class="at">network =</span> em1a_suid,</span>
+<span id="cb319-50"><a href="gprofiler_mod9.html#cb319-50" tabindex="-1"></a>  <span class="at">base.url =</span> current_cytoscape_baseurl</span>
+<span id="cb319-51"><a href="gprofiler_mod9.html#cb319-51" tabindex="-1"></a>)</span>
+<span id="cb319-52"><a href="gprofiler_mod9.html#cb319-52" tabindex="-1"></a><span class="co"># Filter to the selected node</span></span>
+<span id="cb319-53"><a href="gprofiler_mod9.html#cb319-53" tabindex="-1"></a>selected_nodes <span class="ot">&lt;-</span> <span class="fu">getSelectedNodes</span>(<span class="at">network =</span> em1a_suid,</span>
+<span id="cb319-54"><a href="gprofiler_mod9.html#cb319-54" tabindex="-1"></a>                                   <span class="at">base.url =</span> current_cytoscape_baseurl)</span>
+<span id="cb319-55"><a href="gprofiler_mod9.html#cb319-55" tabindex="-1"></a><span class="fu">print</span>(selected_node_table[selected_node_table<span class="sc">$</span>name <span class="sc">%in%</span> selected_nodes, ])</span></code></pre></div>
 </div>
 </div>
 <div id="exercise-1b---create-em-from-fgsea-results-using-baderlab-genesets" class="section level2 hasAnchor">
@@ -851,48 +851,48 @@ SAVE YOUR CYTOSCAPE SESSION (.cys) FILE !
 results with Baderlab GMT</strong>
 </p>
 </div>
-<div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb293-1"><a href="gprofiler_mod9.html#cb293-1" tabindex="-1"></a><span class="co"># Upload the fgsea GEM and Baderlab GMT to Cytoscape</span></span>
-<span id="cb293-2"><a href="gprofiler_mod9.html#cb293-2" tabindex="-1"></a>fgsea_gem_cyto  <span class="ot">&lt;-</span> <span class="fu">upload_em_file</span>(fgsea_gem)</span>
-<span id="cb293-3"><a href="gprofiler_mod9.html#cb293-3" tabindex="-1"></a>rnk_cyto <span class="ot">&lt;-</span> <span class="fu">upload_em_file</span>(rnk_file)</span>
-<span id="cb293-4"><a href="gprofiler_mod9.html#cb293-4" tabindex="-1"></a>gmt_bader_cyto  <span class="ot">&lt;-</span> <span class="fu">upload_em_file</span>(gmt_baderlab)</span>
-<span id="cb293-5"><a href="gprofiler_mod9.html#cb293-5" tabindex="-1"></a></span>
-<span id="cb293-6"><a href="gprofiler_mod9.html#cb293-6" tabindex="-1"></a><span class="co"># Build the EnrichmentMap from fgsea results</span></span>
-<span id="cb293-7"><a href="gprofiler_mod9.html#cb293-7" tabindex="-1"></a>em1b_command <span class="ot">&lt;-</span> <span class="fu">paste</span>(</span>
-<span id="cb293-8"><a href="gprofiler_mod9.html#cb293-8" tabindex="-1"></a>  <span class="st">&quot;enrichmentmap build&quot;</span>,</span>
-<span id="cb293-9"><a href="gprofiler_mod9.html#cb293-9" tabindex="-1"></a>  <span class="st">&quot;analysisType=GSEA&quot;</span>,</span>
-<span id="cb293-10"><a href="gprofiler_mod9.html#cb293-10" tabindex="-1"></a>  <span class="fu">paste0</span>(<span class="st">&quot;enrichmentsDataset1=&quot;</span>, fgsea_gem_cyto),</span>
-<span id="cb293-11"><a href="gprofiler_mod9.html#cb293-11" tabindex="-1"></a>  <span class="fu">paste0</span>(<span class="st">&quot;gmtFile=&quot;</span>,            gmt_bader_cyto),</span>
-<span id="cb293-12"><a href="gprofiler_mod9.html#cb293-12" tabindex="-1"></a>  <span class="fu">paste0</span>(<span class="st">&quot;ranksDataset1=&quot;</span>, rnk_cyto),</span>
-<span id="cb293-13"><a href="gprofiler_mod9.html#cb293-13" tabindex="-1"></a>  <span class="st">&quot;qvalue=0.05&quot;</span>,</span>
-<span id="cb293-14"><a href="gprofiler_mod9.html#cb293-14" tabindex="-1"></a>  <span class="st">&quot;pvalue=1.0&quot;</span>,</span>
-<span id="cb293-15"><a href="gprofiler_mod9.html#cb293-15" tabindex="-1"></a>  <span class="st">&quot;coefficients=COMBINED&quot;</span>,</span>
-<span id="cb293-16"><a href="gprofiler_mod9.html#cb293-16" tabindex="-1"></a>  <span class="st">&quot;similaritycutoff=0.5&quot;</span>,   <span class="co"># second-level connectivity</span></span>
-<span id="cb293-17"><a href="gprofiler_mod9.html#cb293-17" tabindex="-1"></a>  <span class="at">sep =</span> <span class="st">&quot; &quot;</span></span>
-<span id="cb293-18"><a href="gprofiler_mod9.html#cb293-18" tabindex="-1"></a>)</span>
-<span id="cb293-19"><a href="gprofiler_mod9.html#cb293-19" tabindex="-1"></a></span>
-<span id="cb293-20"><a href="gprofiler_mod9.html#cb293-20" tabindex="-1"></a><span class="fu">commandsRun</span>(em1b_command, <span class="at">base.url =</span> current_cytoscape_baseurl)</span>
-<span id="cb293-21"><a href="gprofiler_mod9.html#cb293-21" tabindex="-1"></a></span>
-<span id="cb293-22"><a href="gprofiler_mod9.html#cb293-22" tabindex="-1"></a>existing_names <span class="ot">&lt;-</span> <span class="fu">getNetworkList</span>(<span class="at">base.url =</span> current_cytoscape_baseurl)</span>
-<span id="cb293-23"><a href="gprofiler_mod9.html#cb293-23" tabindex="-1"></a>new_name <span class="ot">&lt;-</span> <span class="st">&quot;EM_fgsea_Baderlab&quot;</span></span>
-<span id="cb293-24"><a href="gprofiler_mod9.html#cb293-24" tabindex="-1"></a><span class="cf">if</span> (new_name <span class="sc">%in%</span> existing_names) {</span>
-<span id="cb293-25"><a href="gprofiler_mod9.html#cb293-25" tabindex="-1"></a>  new_name <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="fu">sample</span>(<span class="dv">1000</span><span class="sc">:</span><span class="dv">9999</span>, <span class="dv">2</span>),<span class="st">&quot;_&quot;</span>,new_name )</span>
-<span id="cb293-26"><a href="gprofiler_mod9.html#cb293-26" tabindex="-1"></a>}</span>
-<span id="cb293-27"><a href="gprofiler_mod9.html#cb293-27" tabindex="-1"></a><span class="fu">renameNetwork</span>(new_name,</span>
-<span id="cb293-28"><a href="gprofiler_mod9.html#cb293-28" tabindex="-1"></a>              <span class="at">network =</span> <span class="fu">getNetworkSuid</span>(<span class="at">base.url =</span> current_cytoscape_baseurl),</span>
-<span id="cb293-29"><a href="gprofiler_mod9.html#cb293-29" tabindex="-1"></a>              <span class="at">base.url =</span> current_cytoscape_baseurl)</span>
-<span id="cb293-30"><a href="gprofiler_mod9.html#cb293-30" tabindex="-1"></a><span class="fu">message</span>(<span class="st">&quot;Network renamed to: &quot;</span>, new_name)</span>
-<span id="cb293-31"><a href="gprofiler_mod9.html#cb293-31" tabindex="-1"></a></span>
-<span id="cb293-32"><a href="gprofiler_mod9.html#cb293-32" tabindex="-1"></a></span>
-<span id="cb293-33"><a href="gprofiler_mod9.html#cb293-33" tabindex="-1"></a>em1b_suid <span class="ot">&lt;-</span> <span class="fu">getNetworkSuid</span>(<span class="at">base.url =</span> current_cytoscape_baseurl)</span>
-<span id="cb293-34"><a href="gprofiler_mod9.html#cb293-34" tabindex="-1"></a><span class="fu">message</span>(<span class="st">&quot;Exercise 1b fgsea EM SUID: &quot;</span>, em1b_suid)</span>
-<span id="cb293-35"><a href="gprofiler_mod9.html#cb293-35" tabindex="-1"></a></span>
-<span id="cb293-36"><a href="gprofiler_mod9.html#cb293-36" tabindex="-1"></a><span class="fu">layoutNetwork</span>(<span class="st">&quot;force-directed defaultSpringCoefficient=0.00004 defaultSpringLength=5&quot;</span>,</span>
-<span id="cb293-37"><a href="gprofiler_mod9.html#cb293-37" tabindex="-1"></a>              <span class="at">network =</span> em1b_suid, <span class="at">base.url =</span> current_cytoscape_baseurl)</span>
-<span id="cb293-38"><a href="gprofiler_mod9.html#cb293-38" tabindex="-1"></a></span>
-<span id="cb293-39"><a href="gprofiler_mod9.html#cb293-39" tabindex="-1"></a><span class="co"># Save the Cytoscape session</span></span>
-<span id="cb293-40"><a href="gprofiler_mod9.html#cb293-40" tabindex="-1"></a><span class="fu">saveSession</span>(<span class="at">filename =</span> <span class="fu">file.path</span>(path_to_save_cytoscape,<span class="st">&quot;module9_gprofiler_session.cys&quot;</span>),</span>
-<span id="cb293-41"><a href="gprofiler_mod9.html#cb293-41" tabindex="-1"></a>            <span class="at">base.url =</span> current_cytoscape_baseurl)</span>
-<span id="cb293-42"><a href="gprofiler_mod9.html#cb293-42" tabindex="-1"></a><span class="fu">message</span>(<span class="st">&quot;Session saved.&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb320"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb320-1"><a href="gprofiler_mod9.html#cb320-1" tabindex="-1"></a><span class="co"># Upload the fgsea GEM and Baderlab GMT to Cytoscape</span></span>
+<span id="cb320-2"><a href="gprofiler_mod9.html#cb320-2" tabindex="-1"></a>fgsea_gem_cyto  <span class="ot">&lt;-</span> <span class="fu">upload_em_file</span>(fgsea_gem)</span>
+<span id="cb320-3"><a href="gprofiler_mod9.html#cb320-3" tabindex="-1"></a>rnk_cyto <span class="ot">&lt;-</span> <span class="fu">upload_em_file</span>(rnk_file)</span>
+<span id="cb320-4"><a href="gprofiler_mod9.html#cb320-4" tabindex="-1"></a>gmt_bader_cyto  <span class="ot">&lt;-</span> <span class="fu">upload_em_file</span>(gmt_baderlab)</span>
+<span id="cb320-5"><a href="gprofiler_mod9.html#cb320-5" tabindex="-1"></a></span>
+<span id="cb320-6"><a href="gprofiler_mod9.html#cb320-6" tabindex="-1"></a><span class="co"># Build the EnrichmentMap from fgsea results</span></span>
+<span id="cb320-7"><a href="gprofiler_mod9.html#cb320-7" tabindex="-1"></a>em1b_command <span class="ot">&lt;-</span> <span class="fu">paste</span>(</span>
+<span id="cb320-8"><a href="gprofiler_mod9.html#cb320-8" tabindex="-1"></a>  <span class="st">&quot;enrichmentmap build&quot;</span>,</span>
+<span id="cb320-9"><a href="gprofiler_mod9.html#cb320-9" tabindex="-1"></a>  <span class="st">&quot;analysisType=GSEA&quot;</span>,</span>
+<span id="cb320-10"><a href="gprofiler_mod9.html#cb320-10" tabindex="-1"></a>  <span class="fu">paste0</span>(<span class="st">&quot;enrichmentsDataset1=&quot;</span>, fgsea_gem_cyto),</span>
+<span id="cb320-11"><a href="gprofiler_mod9.html#cb320-11" tabindex="-1"></a>  <span class="fu">paste0</span>(<span class="st">&quot;gmtFile=&quot;</span>,            gmt_bader_cyto),</span>
+<span id="cb320-12"><a href="gprofiler_mod9.html#cb320-12" tabindex="-1"></a>  <span class="fu">paste0</span>(<span class="st">&quot;ranksDataset1=&quot;</span>, rnk_cyto),</span>
+<span id="cb320-13"><a href="gprofiler_mod9.html#cb320-13" tabindex="-1"></a>  <span class="st">&quot;qvalue=0.05&quot;</span>,</span>
+<span id="cb320-14"><a href="gprofiler_mod9.html#cb320-14" tabindex="-1"></a>  <span class="st">&quot;pvalue=1.0&quot;</span>,</span>
+<span id="cb320-15"><a href="gprofiler_mod9.html#cb320-15" tabindex="-1"></a>  <span class="st">&quot;coefficients=COMBINED&quot;</span>,</span>
+<span id="cb320-16"><a href="gprofiler_mod9.html#cb320-16" tabindex="-1"></a>  <span class="st">&quot;similaritycutoff=0.5&quot;</span>,   <span class="co"># second-level connectivity</span></span>
+<span id="cb320-17"><a href="gprofiler_mod9.html#cb320-17" tabindex="-1"></a>  <span class="at">sep =</span> <span class="st">&quot; &quot;</span></span>
+<span id="cb320-18"><a href="gprofiler_mod9.html#cb320-18" tabindex="-1"></a>)</span>
+<span id="cb320-19"><a href="gprofiler_mod9.html#cb320-19" tabindex="-1"></a></span>
+<span id="cb320-20"><a href="gprofiler_mod9.html#cb320-20" tabindex="-1"></a><span class="fu">commandsRun</span>(em1b_command, <span class="at">base.url =</span> current_cytoscape_baseurl)</span>
+<span id="cb320-21"><a href="gprofiler_mod9.html#cb320-21" tabindex="-1"></a></span>
+<span id="cb320-22"><a href="gprofiler_mod9.html#cb320-22" tabindex="-1"></a>existing_names <span class="ot">&lt;-</span> <span class="fu">getNetworkList</span>(<span class="at">base.url =</span> current_cytoscape_baseurl)</span>
+<span id="cb320-23"><a href="gprofiler_mod9.html#cb320-23" tabindex="-1"></a>new_name <span class="ot">&lt;-</span> <span class="st">&quot;EM_fgsea_Baderlab&quot;</span></span>
+<span id="cb320-24"><a href="gprofiler_mod9.html#cb320-24" tabindex="-1"></a><span class="cf">if</span> (new_name <span class="sc">%in%</span> existing_names) {</span>
+<span id="cb320-25"><a href="gprofiler_mod9.html#cb320-25" tabindex="-1"></a>  new_name <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="fu">sample</span>(<span class="dv">1000</span><span class="sc">:</span><span class="dv">9999</span>, <span class="dv">2</span>),<span class="st">&quot;_&quot;</span>,new_name )</span>
+<span id="cb320-26"><a href="gprofiler_mod9.html#cb320-26" tabindex="-1"></a>}</span>
+<span id="cb320-27"><a href="gprofiler_mod9.html#cb320-27" tabindex="-1"></a><span class="fu">renameNetwork</span>(new_name,</span>
+<span id="cb320-28"><a href="gprofiler_mod9.html#cb320-28" tabindex="-1"></a>              <span class="at">network =</span> <span class="fu">getNetworkSuid</span>(<span class="at">base.url =</span> current_cytoscape_baseurl),</span>
+<span id="cb320-29"><a href="gprofiler_mod9.html#cb320-29" tabindex="-1"></a>              <span class="at">base.url =</span> current_cytoscape_baseurl)</span>
+<span id="cb320-30"><a href="gprofiler_mod9.html#cb320-30" tabindex="-1"></a><span class="fu">message</span>(<span class="st">&quot;Network renamed to: &quot;</span>, new_name)</span>
+<span id="cb320-31"><a href="gprofiler_mod9.html#cb320-31" tabindex="-1"></a></span>
+<span id="cb320-32"><a href="gprofiler_mod9.html#cb320-32" tabindex="-1"></a></span>
+<span id="cb320-33"><a href="gprofiler_mod9.html#cb320-33" tabindex="-1"></a>em1b_suid <span class="ot">&lt;-</span> <span class="fu">getNetworkSuid</span>(<span class="at">base.url =</span> current_cytoscape_baseurl)</span>
+<span id="cb320-34"><a href="gprofiler_mod9.html#cb320-34" tabindex="-1"></a><span class="fu">message</span>(<span class="st">&quot;Exercise 1b fgsea EM SUID: &quot;</span>, em1b_suid)</span>
+<span id="cb320-35"><a href="gprofiler_mod9.html#cb320-35" tabindex="-1"></a></span>
+<span id="cb320-36"><a href="gprofiler_mod9.html#cb320-36" tabindex="-1"></a><span class="fu">layoutNetwork</span>(<span class="st">&quot;force-directed defaultSpringCoefficient=0.00004 defaultSpringLength=5&quot;</span>,</span>
+<span id="cb320-37"><a href="gprofiler_mod9.html#cb320-37" tabindex="-1"></a>              <span class="at">network =</span> em1b_suid, <span class="at">base.url =</span> current_cytoscape_baseurl)</span>
+<span id="cb320-38"><a href="gprofiler_mod9.html#cb320-38" tabindex="-1"></a></span>
+<span id="cb320-39"><a href="gprofiler_mod9.html#cb320-39" tabindex="-1"></a><span class="co"># Save the Cytoscape session</span></span>
+<span id="cb320-40"><a href="gprofiler_mod9.html#cb320-40" tabindex="-1"></a><span class="fu">saveSession</span>(<span class="at">filename =</span> <span class="fu">file.path</span>(path_to_save_cytoscape,<span class="st">&quot;module9_gprofiler_session.cys&quot;</span>),</span>
+<span id="cb320-41"><a href="gprofiler_mod9.html#cb320-41" tabindex="-1"></a>            <span class="at">base.url =</span> current_cytoscape_baseurl)</span>
+<span id="cb320-42"><a href="gprofiler_mod9.html#cb320-42" tabindex="-1"></a><span class="fu">message</span>(<span class="st">&quot;Session saved.&quot;</span>)</span></code></pre></div>
 </div>
 <div id="exercise-1c-optional---investigate-individual-pathways-in-genemania-or-string" class="section level2 hasAnchor">
 <h2>Exercise 1c (optional) - investigate individual pathways in GeneMANIA or String<a href="gprofiler_mod9.html#exercise-1c-optional---investigate-individual-pathways-in-genemania-or-string" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -942,36 +942,36 @@ RCy3 because it is a functionality that is only present in the
 interface. The network you get from code will be larger.
 </p>
 </div>
-<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb294-1"><a href="gprofiler_mod9.html#cb294-1" tabindex="-1"></a><span class="co"># Navigate to the fgsea EM network</span></span>
-<span id="cb294-2"><a href="gprofiler_mod9.html#cb294-2" tabindex="-1"></a><span class="fu">setCurrentNetwork</span>(<span class="at">network =</span> em1b_suid, <span class="at">base.url =</span> current_cytoscape_baseurl)</span>
-<span id="cb294-3"><a href="gprofiler_mod9.html#cb294-3" tabindex="-1"></a></span>
-<span id="cb294-4"><a href="gprofiler_mod9.html#cb294-4" tabindex="-1"></a><span class="co"># Select the &quot;MET activates&quot; node</span></span>
-<span id="cb294-5"><a href="gprofiler_mod9.html#cb294-5" tabindex="-1"></a><span class="fu">selectNodes</span>(<span class="at">nodes =</span> <span class="st">&quot;MET ACTIVATES PTK2 SIGNALING%REACTOME DATABASE ID RELEASE 97%8874081&quot;</span>, <span class="at">by.col =</span> <span class="st">&quot;name&quot;</span>,</span>
-<span id="cb294-6"><a href="gprofiler_mod9.html#cb294-6" tabindex="-1"></a>            <span class="at">network =</span> em1b_suid, <span class="at">base.url =</span> current_cytoscape_baseurl)</span>
-<span id="cb294-7"><a href="gprofiler_mod9.html#cb294-7" tabindex="-1"></a></span>
-<span id="cb294-8"><a href="gprofiler_mod9.html#cb294-8" tabindex="-1"></a><span class="co"># Fit the view to the selected node</span></span>
-<span id="cb294-9"><a href="gprofiler_mod9.html#cb294-9" tabindex="-1"></a><span class="fu">fitContent</span>(<span class="at">selected.only =</span> <span class="cn">TRUE</span>, <span class="at">base.url =</span> current_cytoscape_baseurl)</span>
-<span id="cb294-10"><a href="gprofiler_mod9.html#cb294-10" tabindex="-1"></a></span>
-<span id="cb294-11"><a href="gprofiler_mod9.html#cb294-11" tabindex="-1"></a><span class="co"># Get the genes in this pathway from the node table</span></span>
-<span id="cb294-12"><a href="gprofiler_mod9.html#cb294-12" tabindex="-1"></a>node_tbl <span class="ot">&lt;-</span> <span class="fu">getTableColumns</span>(<span class="at">table =</span> <span class="st">&quot;node&quot;</span>, <span class="at">network =</span> em1b_suid,</span>
-<span id="cb294-13"><a href="gprofiler_mod9.html#cb294-13" tabindex="-1"></a>                             <span class="at">base.url =</span> current_cytoscape_baseurl)</span>
-<span id="cb294-14"><a href="gprofiler_mod9.html#cb294-14" tabindex="-1"></a>met_row  <span class="ot">&lt;-</span> node_tbl[<span class="fu">grepl</span>(<span class="st">&quot;MET activates&quot;</span>, node_tbl<span class="sc">$</span>name,</span>
-<span id="cb294-15"><a href="gprofiler_mod9.html#cb294-15" tabindex="-1"></a>                              <span class="at">ignore.case =</span> <span class="cn">TRUE</span>), ]</span>
-<span id="cb294-16"><a href="gprofiler_mod9.html#cb294-16" tabindex="-1"></a></span>
-<span id="cb294-17"><a href="gprofiler_mod9.html#cb294-17" tabindex="-1"></a><span class="co"># The EnrichmentMap::Genes column holds the genes in the leading edge /</span></span>
-<span id="cb294-18"><a href="gprofiler_mod9.html#cb294-18" tabindex="-1"></a><span class="co"># gene-set intersection — extract them to use as the GeneMANIA query</span></span>
-<span id="cb294-19"><a href="gprofiler_mod9.html#cb294-19" tabindex="-1"></a>met_genes <span class="ot">&lt;-</span> <span class="fu">unlist</span>(met_row[[<span class="st">&quot;EnrichmentMap::Genes&quot;</span>]][<span class="dv">1</span>])</span>
-<span id="cb294-20"><a href="gprofiler_mod9.html#cb294-20" tabindex="-1"></a>met_genes  <span class="ot">&lt;-</span> met_genes[met_genes <span class="sc">!=</span> <span class="st">&quot;&quot;</span>]</span>
-<span id="cb294-21"><a href="gprofiler_mod9.html#cb294-21" tabindex="-1"></a><span class="fu">message</span>(<span class="st">&quot;Genes in &#39;met activates&#39;: &quot;</span>, <span class="fu">paste</span>(met_genes, <span class="at">collapse =</span> <span class="st">&quot;, &quot;</span>))</span>
-<span id="cb294-22"><a href="gprofiler_mod9.html#cb294-22" tabindex="-1"></a></span>
-<span id="cb294-23"><a href="gprofiler_mod9.html#cb294-23" tabindex="-1"></a><span class="co"># Query GeneMANIA via its Cytoscape app command</span></span>
-<span id="cb294-24"><a href="gprofiler_mod9.html#cb294-24" tabindex="-1"></a><span class="co"># (requires GeneMANIA Cytoscape app to be installed)</span></span>
-<span id="cb294-25"><a href="gprofiler_mod9.html#cb294-25" tabindex="-1"></a>genemania_command <span class="ot">&lt;-</span> <span class="fu">paste0</span>(</span>
-<span id="cb294-26"><a href="gprofiler_mod9.html#cb294-26" tabindex="-1"></a>  <span class="st">&quot;genemania search genes=</span><span class="sc">\&quot;</span><span class="st">&quot;</span>,</span>
-<span id="cb294-27"><a href="gprofiler_mod9.html#cb294-27" tabindex="-1"></a>  <span class="fu">paste</span>(met_genes, <span class="at">collapse =</span> <span class="st">&quot;|&quot;</span>),</span>
-<span id="cb294-28"><a href="gprofiler_mod9.html#cb294-28" tabindex="-1"></a>  <span class="st">&quot;</span><span class="sc">\&quot;</span><span class="st"> organism=Homo sapiens&quot;</span></span>
-<span id="cb294-29"><a href="gprofiler_mod9.html#cb294-29" tabindex="-1"></a>)</span>
-<span id="cb294-30"><a href="gprofiler_mod9.html#cb294-30" tabindex="-1"></a><span class="fu">commandsRun</span>(genemania_command, <span class="at">base.url =</span> current_cytoscape_baseurl)</span></code></pre></div>
+<div class="sourceCode" id="cb321"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb321-1"><a href="gprofiler_mod9.html#cb321-1" tabindex="-1"></a><span class="co"># Navigate to the fgsea EM network</span></span>
+<span id="cb321-2"><a href="gprofiler_mod9.html#cb321-2" tabindex="-1"></a><span class="fu">setCurrentNetwork</span>(<span class="at">network =</span> em1b_suid, <span class="at">base.url =</span> current_cytoscape_baseurl)</span>
+<span id="cb321-3"><a href="gprofiler_mod9.html#cb321-3" tabindex="-1"></a></span>
+<span id="cb321-4"><a href="gprofiler_mod9.html#cb321-4" tabindex="-1"></a><span class="co"># Select the &quot;MET activates&quot; node</span></span>
+<span id="cb321-5"><a href="gprofiler_mod9.html#cb321-5" tabindex="-1"></a><span class="fu">selectNodes</span>(<span class="at">nodes =</span> <span class="st">&quot;MET ACTIVATES PTK2 SIGNALING%REACTOME DATABASE ID RELEASE 97%8874081&quot;</span>, <span class="at">by.col =</span> <span class="st">&quot;name&quot;</span>,</span>
+<span id="cb321-6"><a href="gprofiler_mod9.html#cb321-6" tabindex="-1"></a>            <span class="at">network =</span> em1b_suid, <span class="at">base.url =</span> current_cytoscape_baseurl)</span>
+<span id="cb321-7"><a href="gprofiler_mod9.html#cb321-7" tabindex="-1"></a></span>
+<span id="cb321-8"><a href="gprofiler_mod9.html#cb321-8" tabindex="-1"></a><span class="co"># Fit the view to the selected node</span></span>
+<span id="cb321-9"><a href="gprofiler_mod9.html#cb321-9" tabindex="-1"></a><span class="fu">fitContent</span>(<span class="at">selected.only =</span> <span class="cn">TRUE</span>, <span class="at">base.url =</span> current_cytoscape_baseurl)</span>
+<span id="cb321-10"><a href="gprofiler_mod9.html#cb321-10" tabindex="-1"></a></span>
+<span id="cb321-11"><a href="gprofiler_mod9.html#cb321-11" tabindex="-1"></a><span class="co"># Get the genes in this pathway from the node table</span></span>
+<span id="cb321-12"><a href="gprofiler_mod9.html#cb321-12" tabindex="-1"></a>node_tbl <span class="ot">&lt;-</span> <span class="fu">getTableColumns</span>(<span class="at">table =</span> <span class="st">&quot;node&quot;</span>, <span class="at">network =</span> em1b_suid,</span>
+<span id="cb321-13"><a href="gprofiler_mod9.html#cb321-13" tabindex="-1"></a>                             <span class="at">base.url =</span> current_cytoscape_baseurl)</span>
+<span id="cb321-14"><a href="gprofiler_mod9.html#cb321-14" tabindex="-1"></a>met_row  <span class="ot">&lt;-</span> node_tbl[<span class="fu">grepl</span>(<span class="st">&quot;MET activates&quot;</span>, node_tbl<span class="sc">$</span>name,</span>
+<span id="cb321-15"><a href="gprofiler_mod9.html#cb321-15" tabindex="-1"></a>                              <span class="at">ignore.case =</span> <span class="cn">TRUE</span>), ]</span>
+<span id="cb321-16"><a href="gprofiler_mod9.html#cb321-16" tabindex="-1"></a></span>
+<span id="cb321-17"><a href="gprofiler_mod9.html#cb321-17" tabindex="-1"></a><span class="co"># The EnrichmentMap::Genes column holds the genes in the leading edge /</span></span>
+<span id="cb321-18"><a href="gprofiler_mod9.html#cb321-18" tabindex="-1"></a><span class="co"># gene-set intersection — extract them to use as the GeneMANIA query</span></span>
+<span id="cb321-19"><a href="gprofiler_mod9.html#cb321-19" tabindex="-1"></a>met_genes <span class="ot">&lt;-</span> <span class="fu">unlist</span>(met_row[[<span class="st">&quot;EnrichmentMap::Genes&quot;</span>]][<span class="dv">1</span>])</span>
+<span id="cb321-20"><a href="gprofiler_mod9.html#cb321-20" tabindex="-1"></a>met_genes  <span class="ot">&lt;-</span> met_genes[met_genes <span class="sc">!=</span> <span class="st">&quot;&quot;</span>]</span>
+<span id="cb321-21"><a href="gprofiler_mod9.html#cb321-21" tabindex="-1"></a><span class="fu">message</span>(<span class="st">&quot;Genes in &#39;met activates&#39;: &quot;</span>, <span class="fu">paste</span>(met_genes, <span class="at">collapse =</span> <span class="st">&quot;, &quot;</span>))</span>
+<span id="cb321-22"><a href="gprofiler_mod9.html#cb321-22" tabindex="-1"></a></span>
+<span id="cb321-23"><a href="gprofiler_mod9.html#cb321-23" tabindex="-1"></a><span class="co"># Query GeneMANIA via its Cytoscape app command</span></span>
+<span id="cb321-24"><a href="gprofiler_mod9.html#cb321-24" tabindex="-1"></a><span class="co"># (requires GeneMANIA Cytoscape app to be installed)</span></span>
+<span id="cb321-25"><a href="gprofiler_mod9.html#cb321-25" tabindex="-1"></a>genemania_command <span class="ot">&lt;-</span> <span class="fu">paste0</span>(</span>
+<span id="cb321-26"><a href="gprofiler_mod9.html#cb321-26" tabindex="-1"></a>  <span class="st">&quot;genemania search genes=</span><span class="sc">\&quot;</span><span class="st">&quot;</span>,</span>
+<span id="cb321-27"><a href="gprofiler_mod9.html#cb321-27" tabindex="-1"></a>  <span class="fu">paste</span>(met_genes, <span class="at">collapse =</span> <span class="st">&quot;|&quot;</span>),</span>
+<span id="cb321-28"><a href="gprofiler_mod9.html#cb321-28" tabindex="-1"></a>  <span class="st">&quot;</span><span class="sc">\&quot;</span><span class="st"> organism=Homo sapiens&quot;</span></span>
+<span id="cb321-29"><a href="gprofiler_mod9.html#cb321-29" tabindex="-1"></a>)</span>
+<span id="cb321-30"><a href="gprofiler_mod9.html#cb321-30" tabindex="-1"></a><span class="fu">commandsRun</span>(genemania_command, <span class="at">base.url =</span> current_cytoscape_baseurl)</span></code></pre></div>
 </div>
 <div id="string" class="section level3 hasAnchor">
 <h3>String<a href="gprofiler_mod9.html#string" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -1011,16 +1011,16 @@ RCy3 because it is a functionality that is only present in the
 interface. The network you get from code will be larger.
 </p>
 </div>
-<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb295-1"><a href="gprofiler_mod9.html#cb295-1" tabindex="-1"></a><span class="co"># Using the met_genes vector extracted above, query String via its app command</span></span>
-<span id="cb295-2"><a href="gprofiler_mod9.html#cb295-2" tabindex="-1"></a><span class="co"># (requires STRINGapp Cytoscape app to be installed)</span></span>
-<span id="cb295-3"><a href="gprofiler_mod9.html#cb295-3" tabindex="-1"></a>string_command <span class="ot">&lt;-</span> <span class="fu">paste0</span>(</span>
-<span id="cb295-4"><a href="gprofiler_mod9.html#cb295-4" tabindex="-1"></a>  <span class="st">&quot;string protein query&quot;</span>,</span>
-<span id="cb295-5"><a href="gprofiler_mod9.html#cb295-5" tabindex="-1"></a>  <span class="st">&quot; query=</span><span class="sc">\&quot;</span><span class="st">&quot;</span>, <span class="fu">paste</span>(met_genes, <span class="at">collapse =</span> <span class="st">&quot;,&quot;</span>), <span class="st">&quot;</span><span class="sc">\&quot;</span><span class="st">&quot;</span>,</span>
-<span id="cb295-6"><a href="gprofiler_mod9.html#cb295-6" tabindex="-1"></a>  <span class="st">&quot; species=</span><span class="sc">\&quot;</span><span class="st">Homo sapiens</span><span class="sc">\&quot;</span><span class="st">&quot;</span>,</span>
-<span id="cb295-7"><a href="gprofiler_mod9.html#cb295-7" tabindex="-1"></a>  <span class="st">&quot; limit=0&quot;</span>,        <span class="co"># only return queried proteins, no additional interactors</span></span>
-<span id="cb295-8"><a href="gprofiler_mod9.html#cb295-8" tabindex="-1"></a>  <span class="st">&quot; cutoff=0.4&quot;</span></span>
-<span id="cb295-9"><a href="gprofiler_mod9.html#cb295-9" tabindex="-1"></a>)</span>
-<span id="cb295-10"><a href="gprofiler_mod9.html#cb295-10" tabindex="-1"></a><span class="fu">commandsRun</span>(string_command, <span class="at">base.url =</span> current_cytoscape_baseurl)</span></code></pre></div>
+<div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb322-1"><a href="gprofiler_mod9.html#cb322-1" tabindex="-1"></a><span class="co"># Using the met_genes vector extracted above, query String via its app command</span></span>
+<span id="cb322-2"><a href="gprofiler_mod9.html#cb322-2" tabindex="-1"></a><span class="co"># (requires STRINGapp Cytoscape app to be installed)</span></span>
+<span id="cb322-3"><a href="gprofiler_mod9.html#cb322-3" tabindex="-1"></a>string_command <span class="ot">&lt;-</span> <span class="fu">paste0</span>(</span>
+<span id="cb322-4"><a href="gprofiler_mod9.html#cb322-4" tabindex="-1"></a>  <span class="st">&quot;string protein query&quot;</span>,</span>
+<span id="cb322-5"><a href="gprofiler_mod9.html#cb322-5" tabindex="-1"></a>  <span class="st">&quot; query=</span><span class="sc">\&quot;</span><span class="st">&quot;</span>, <span class="fu">paste</span>(met_genes, <span class="at">collapse =</span> <span class="st">&quot;,&quot;</span>), <span class="st">&quot;</span><span class="sc">\&quot;</span><span class="st">&quot;</span>,</span>
+<span id="cb322-6"><a href="gprofiler_mod9.html#cb322-6" tabindex="-1"></a>  <span class="st">&quot; species=</span><span class="sc">\&quot;</span><span class="st">Homo sapiens</span><span class="sc">\&quot;</span><span class="st">&quot;</span>,</span>
+<span id="cb322-7"><a href="gprofiler_mod9.html#cb322-7" tabindex="-1"></a>  <span class="st">&quot; limit=0&quot;</span>,        <span class="co"># only return queried proteins, no additional interactors</span></span>
+<span id="cb322-8"><a href="gprofiler_mod9.html#cb322-8" tabindex="-1"></a>  <span class="st">&quot; cutoff=0.4&quot;</span></span>
+<span id="cb322-9"><a href="gprofiler_mod9.html#cb322-9" tabindex="-1"></a>)</span>
+<span id="cb322-10"><a href="gprofiler_mod9.html#cb322-10" tabindex="-1"></a><span class="fu">commandsRun</span>(string_command, <span class="at">base.url =</span> current_cytoscape_baseurl)</span></code></pre></div>
 <div class="rmd-question">
 <p>
 Explore the features and data of each Cytoscape app.<br>What sort of
