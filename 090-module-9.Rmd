@@ -5,12 +5,22 @@
 *<font color="#827e9c">Ruth Isserlin, Veronique Voisin</font>*
  
 ## Lecture
+
+
+
+
+
  
  **Module 9.1 Cytoscape** 
  
- [Cytoscape - Lecture](https://docs.google.com/presentation/d/1jSXse8uGd_tgm5TGgJ9XtJT2D6UeMxAy/edit?usp=sharing&ouid=111291532077779107490&rtpof=true&sd=true)
+#### Cytoscape Lecture
  
- [Enrichment Map - Lecture](https://docs.google.com/presentation/d/1_twlSWSwSDgfKjYHJVY1yjqrth_HZ_l0/edit?usp=sharing&ouid=111291532077779107490&rtpof=true&sd=true)
+<iframe src="https://docs.google.com/presentation/d/1jSXse8uGd_tgm5TGgJ9XtJT2D6UeMxAy/preview" width="640" height="480" allow="autoplay"></iframe>
+
+#### Enrichment Map Lecture
+ 
+ <iframe src="https://docs.google.com/presentation/d/1_twlSWSwSDgfKjYHJVY1yjqrth_HZ_l0/preview" width="640" height="480" allow="autoplay"></iframe>
+
  
  **Module 9.1 Cytoscape Lab**
 

@@ -14,8 +14,8 @@ This module will cover how to use differential expression output to generate pat
 
 ## Lecture
 
-<!--<iframe src="GOOGLE SLIDES LINK/preview" width="640" height="480" allow="autoplay"></iframe>
--->
+<iframe src="https://docs.google.com/presentation/d/1PL7aiYzVt-vHTR_-9LY2oQ2RKluDvf-Z/preview" width="640" height="480" allow="autoplay"></iframe>
+
 
 ## Presentation of the dataset
 
