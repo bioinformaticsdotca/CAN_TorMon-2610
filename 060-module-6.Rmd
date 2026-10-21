@@ -92,7 +92,9 @@ export RNA_REF_FASTA=$RNA_REF_INDEX.fa      # genome sequence (FASTA)
 export RNA_REF_GTF=$RNA_REF_INDEX.gtf       # gene annotation (GTF)
 ```
 
-In the workshop environment all the tools needed were installed for you. Follow this page from the Griffith lab for complete instructions for RNAseq [Tool Installation](https://rnabio.org/module-00-setup/0000/10/01/Installation/) when you work on your own system.
+To view the environment variables you can try `env` and for checking this module variables `env | grep RNA`
+
+All the tools needed are installed for you in the workshop instance environment. Follow this page from the Griffith's lab for complete instructions for RNAseq [Tool Installation](https://rnabio.org/module-00-setup/0000/10/01/Installation/) 
 
 ### 2. Explore data in your workspace
 
@@ -130,7 +132,11 @@ What is r1 and r2 in the file names indicating?
 
 <summary>Show Answer</summary>
 
-*Hints:* - `samples.txt` describes the experimental design: which sample belongs to which condition and replicate. Biological replicates are needed to estimate variability when testing for differential expression later. - Each read takes four lines in a FASTQ file, so dividing the line count by 4 gives the number of reads. Because the files are compressed, decompress them while counting (`zcat file.fastq.gz | wc -l`). Running `wc -l` directly on a `.gz` file counts lines in the compressed binary data, which is meaningless. - The data is paired-end. Each DNA fragment was sequenced from both ends. Read 1 and read 2 of a pair come from the same fragment and appear in the same order in the two files. Tools must always receive both files of a pair together.
+*Hints*
+
+- `samples.txt` describes the experimental design: which sample belongs to which condition and replicate. Biological replicates are needed to estimate variability when testing for differential expression later.
+- Each read takes four lines in a FASTQ file, so dividing the line count by 4 gives the number of reads. Because the files are compressed, decompress them while counting (`zcat file.fastq.gz | wc -l`). Running `wc -l` directly on a `.gz` file counts lines in the compressed binary data, which is meaningless.
+- The data is paired-end. Each DNA fragment was sequenced from both ends. Read 1 and read 2 of a pair come from the same fragment and appear in the same order in the two files. Tools must always receive both files of a pair together.
 
 ``` bash
 cd $RNA_DATA_DIR
@@ -139,7 +145,10 @@ cd $RNA_DATA_DIR
 cat samples.txt
 
 # number of lines per file and divide by 4 for number of reads
-wc -l *fastq.gz
+zcat MCF7_rep1_r1.fastq.gz | wc -l
+zcat MCF7_rep2_r1.fastq.gz | wc -l
+zcat MCF7_rep3_r1.fastq.gz | wc -l
+
 ```
 
 </details>
@@ -152,7 +161,7 @@ Raw reads often contain sequencing adapter sequences. Adapters appear when the c
 
 For paired-end data, fastp processes R1 and R2 together so that the pairs stay synchronized. If one read of a pair is discarded, its mate is handled accordingly.
 
-With many samples, opening one FastQC or fastp report per file becomes tedious. MultiQC searches a directory for reports from supported tools, including FastQC and fastp, and combines them into a single interactive report. This makes it easy to compare samples side by side and spot outliers.
+With many samples, opening one FastQC or fastp report per file becomes tedious. MultiQC searches a directory for reports from supported tools, including FastQC and fastp, and combines them into a single interactive report. This makes it easy to compare samples side by side and spot outliers. After running this step for all samples try MultiQC that summarizes all QC output files.
 
 ``` bash
 mkdir -p $RNA_DATA_TRIM_DIR
@@ -164,12 +173,17 @@ fastp \
   -O $RNA_DATA_TRIM_DIR/AR1_MCF7_rep1_r2.fastq.gz \
   --detect_adapter_for_pe \
   -h qc/AR1_MCF7_rep1_fastp.html \
-  -j qc/AR1_MCF7_rep1_fastp.json   # MultiQC reads the JSON file
+  -j qc/AR1_MCF7_rep1_fastp.json
 
-multiqc qc -o qc/multiqc_report
 ```
 
-Summarize all samples QC with MultiQC
+:::: {.callout type="purple" style="subtle" title="Practice" icon="false"}
+
+Write the fastp trimming scripts for the other replicates
+
+::::
+
+Summarize all samples QC with MultiQC and view the output in your browser. 
 
 ``` bash
 # aggregate all reports found in qc/ into one summary report
@@ -201,6 +215,7 @@ hisat2-build -p 2 --ss $RNA_REF_INDEX.splicesites.txt --exon $RNA_REF_INDEX.exon
 
 # FASTA index for fast random access to the sequence (creates chr22.fa.fai)
 samtools faidx chr22.fa
+
 ```
 
 ### 5. Alignment with HISAT2
@@ -247,9 +262,29 @@ samtools index AR1_MCF7_rep1.bam
 
 ```
 
+:::: {.callout type="purple" style="subtle" title="Practice" icon="false"}
+
+Write the scripts for the rest of samples
+
+::::
+
 - Explore the summary.txt output file
 
 - Try FastQC on the aligned reads. FastQC accepts BAM files as input (`fastqc AR1_MCF7_rep1.bam`). Compare the report with the one from the raw reads. `samtools flagstat AR1_MCF7_rep1.bam` also gives a quick summary of mapped and properly paired reads.
+
+Merge `.bam` files for each group of samples to make it easier for visualization. In this step, the unique `rg-id` that we set for alignment becomes important to distinguish samples.
+
+``` bash
+# merge AR1_MCF7 bam files
+java -Xmx2g -jar /usr/local/picard.jar MergeSamFiles -OUTPUT AR1_MCF7.bam -INPUT AR1_MCF7_rep1.bam -INPUT AR1_MCF7_rep2.bam -INPUT AR1_MCF7_rep3.bam
+
+# merge MCF7 bam files
+java -Xmx2g -jar /usr/local/picard.jar MergeSamFiles -OUTPUT MCF7.bam -INPUT MCF7_rep1.bam -INPUT MCF7_rep2.bam -INPUT MCF7_rep3.bam
+
+# how many bam files do you have?
+ls -l *bam | wc -l
+
+```
 
 - Download the BAM file together with its `.bai` index, and try visualizing them in IGV. Remember that this data covers only chromosome 22 of the genome, so load the human reference (hg38) in IGV and navigate to chr22. Look for reads piling up on exons and for split reads spanning introns, which IGV draws as thin connecting lines.
 
@@ -282,6 +317,7 @@ head AR1_MCF7_rep1_genes.chr22.tsv
 tail -n 5 AR1_MCF7_rep1_genes.chr22.tsv   # summary
 
 ```
+
 
 ### 7. Differential Expression Analysis
 
