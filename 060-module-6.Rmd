@@ -517,7 +517,7 @@ contrast_groups <- list(
 
 Helper functions for visualization
 
-So the same steps can be reused for any contrast (including the one you'll run yourself on the practice dataset at the end), we define one function that runs the test, tables, and plots for a given contrast, and one helper that picks which genes to label on the volcano plot.
+The same steps can be reused for any contrast (you can run a different one yourself on the practice dataset at the end), we define one function that runs the test, tables, and plots for a given contrast, and one helper that picks which genes to label on the volcano plot.
 
 Genes are ranked by a blend of significance (FDR) and effect size (\|log2FC\|), so the labeled genes are both strongly *and* significantly changed rather than just the single most extreme metric; up to 15 genes are labeled on each side (Up / Down).
 
