@@ -254,15 +254,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#part-1.-introduction"><i class="fa fa-check"></i>Part 1. Introduction</a></li>
 <li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#part-2-inspect-the-data"><i class="fa fa-check"></i>Part 2: Inspect the data</a></li>
-<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#look-at-the-first-few-variant-records"><i class="fa fa-check"></i>2.4. Look at the first few variant records</a></li>
 <li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#part-3.-summarize-the-variant-calls-with-bcftools"><i class="fa fa-check"></i>Part 3. Summarize the variant calls with bcftools</a></li>
 <li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#part-4.-annotate-variants-with-snpeff"><i class="fa fa-check"></i>Part 4. Annotate variants with SnpEff</a></li>
 <li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#part-5.-interpret-the-snpeff-html-summary"><i class="fa fa-check"></i>Part 5. Interpret the SnpEff HTML summary</a></li>
 <li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#part-6.-examine-individual-variant-annotations"><i class="fa fa-check"></i>Part 6. Examine individual variant annotations</a></li>
 <li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#part-7.-from-gene-function-to-cancer-interpretation"><i class="fa fa-check"></i>Part 7. From gene function to cancer interpretation</a></li>
-<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#investigate-variant-evidence"><i class="fa fa-check"></i>7.2. Investigate variant evidence</a></li>
 <li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#part-8.-compare-snpeff-and-ensembl-vep"><i class="fa fa-check"></i>Part 8. Compare SnpEff and Ensembl VEP</a></li>
 <li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#part-9.-final-interpretation"><i class="fa fa-check"></i>Part 9. Final interpretation</a></li>
+<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#part-10.-manually-confirming-variants-in-igv"><i class="fa fa-check"></i>Part 10. Manually confirming variants in IGV</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="module-8---pathway-enrichment-analysis.html"><a href="module-8---pathway-enrichment-analysis.html"><i class="fa fa-check"></i>Module 8 - Pathway Enrichment Analysis</a>
@@ -666,9 +665,8 @@ $ ls </code></pre>
 </div>
 </div>
 </div>
-</div>
-<div id="look-at-the-first-few-variant-records" class="section level3 hasAnchor">
-<h3>2.4. Look at the first few variant records<a href="module-7-from-gene-alteration-to-gene-effect.html#look-at-the-first-few-variant-records" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="look-at-the-first-few-variant-records" class="section level4 hasAnchor">
+<h4>2.4. Look at the first few variant records<a href="module-7-from-gene-alteration-to-gene-effect.html#look-at-the-first-few-variant-records" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Display the first five variant records from Patient 1:</p>
 <pre><code>$ bcftools view -H patient1_snvs.vcf.gz | head -n 5</code></pre>
 <p>The <code>-H</code> option excludes the header, allowing you to see only variant records. The <code>head</code> command limits the output to the first five lines.</p>
@@ -685,6 +683,7 @@ $ ls </code></pre>
 <li>Can you determine the effect of a variant on a protein from the <code>REF</code> and <code>ALT</code> fields alone?</li>
 <li>Why might two variants with different genomic positions have very different biological consequences?</li>
 </ol>
+</div>
 </div>
 </div>
 </div>
@@ -1043,9 +1042,8 @@ Protein change: p.Val425Ile</code></pre>
 </div>
 </div>
 </div>
-</div>
-<div id="investigate-variant-evidence" class="section level3 hasAnchor">
-<h3>7.2. Investigate variant evidence<a href="module-7-from-gene-alteration-to-gene-effect.html#investigate-variant-evidence" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="investigate-variant-evidence" class="section level4 hasAnchor">
+<h4>7.2. Investigate variant evidence<a href="module-7-from-gene-alteration-to-gene-effect.html#investigate-variant-evidence" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Look at the following resources:</p>
 <ul>
 <li><strong><a href="https://civicdb.org/">CIViC</a>:</strong> a community-curated resource containing evidence about the clinical significance of variants in cancer.</li>
@@ -1092,6 +1090,7 @@ Protein change: p.Val425Ile</code></pre>
 <li>Why might two variants in the same gene have very different levels of evidence?</li>
 <li>What additional information might be needed before concluding that a variant contributes to the development of this patient’s cancer?</li>
 </ol>
+</div>
 </div>
 </div>
 </div>
@@ -1174,7 +1173,7 @@ Protein change: p.Val425Ile</code></pre>
 <div class="callout-blue">
 <span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span>
 <div class="callout-content">
-<p><strong>Final questions</strong></p>
+<p><strong>Questions</strong></p>
 <ol style="list-style-type: decimal">
 <li>Why is a gene’s function not enough to determine the effect of an individual variant?</li>
 <li>What additional evidence would help establish whether a variant contributes to cancer?</li>
@@ -1182,15 +1181,215 @@ Protein change: p.Val425Ile</code></pre>
 </ol>
 </div>
 </div>
+</div>
+<div id="part-10.-manually-confirming-variants-in-igv" class="section level3 hasAnchor">
+<h3>Part 10. Manually confirming variants in IGV<a href="module-7-from-gene-alteration-to-gene-effect.html#part-10.-manually-confirming-variants-in-igv" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Variant callers are powerful tools, but their output is not infallible. Incorrect variant calls or representations can lead to misleading annotations and potentially affect clinical interpretation.</p>
+<p>Before reporting variants clinically, calls should be <strong>reviewed manually in IGV</strong>, particularly in germline testing but also in somatic analysis.</p>
+<p>Since BAM files are not provided for this exercise, we will use IGV screenshots to investigate three real case studies. For each, identify the error, manually determine the correct variant representation (via good ol’ pen and paper), and establish the corrected consequence.</p>
+<div class="callout-yellow">
+<span class="callout-icon"><i class="fas fa-bell" aria-hidden="true"></i></span>
+<div class="callout-content">
+<p><strong>Note:</strong> To report variants clinically, we are required to run them through our clincially validated pipeline, i.e. the version of VEP (or other tool) we have installed in our production pipeline. To do so, we take our manually “calculated” variant, edit the VCF file, and rerun the annotation tool to properly correct the annotation.</p>
+</div>
+</div>
+<div id="to-stop-or-not-to-stop" class="section level4 hasAnchor">
+<h4>10.1: To Stop or Not To Stop<a href="module-7-from-gene-alteration-to-gene-effect.html#to-stop-or-not-to-stop" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>You are a bioinformatician in a clinical lab. You open your clinical report and see the following oncogenic variant reported by your variant caller, Mutect2, which is also associated with a <a href="https://www.oncokb.org/gene/BRCA2/somatic/p.E1940*/HGSOC">level 1 (the most actionable level!) FDA therapy, Olaparib</a>:</p>
+<p><img src="Module7/brca2.png" /></p>
+<p>Before rushing to give the <strong>good news</strong> to the clinican (that the patient has an actionable <em>BRCA2</em> mutation), you manually confirm the variant in IGV, because you are a smart bioinformatician and good at your job.</p>
+<p>You check the MAF file (human-readable version of a VCF; think of it like a VCF re-organized) and see the following:</p>
+<pre><code>BRCA2, GRCh38, chr13 32340173 32340173, Nonsense_Mutation, SNP G G T, p.E1940*, stop_gained, Gag/Tag</code></pre>
+<p>All seems well.</p>
+<p>You open IGV and see the following:</p>
+<p><img src="Module7/IGV_screenshot_2.png" /></p>
+<div class="callout-blue">
+<span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span>
+<div class="callout-content">
+<p><strong>Questions</strong></p>
+<ol style="list-style-type: decimal">
+<li>What do you make of this finding?</li>
+<li>Can you locate the nonsense mutation given in the report?</li>
+<li>Do these extra SNVs impact our finding? If so, how?</li>
+</ol>
+</div>
+</div>
+<p>To find out if the extra SNVs impact our nonsense mutation, we need to convert the DNA sequence to amino acids. We can do so using the codon conversion table:</p>
+<p><img src="Module7/codon_table.png" /></p>
+<p>Normally, you need to know which reading frame you are in. However, we are already told that the <code>GAG</code> became a <code>TAG</code>, so use that as your frame of reference for the codons.</p>
+<p>Take out a pen and paper, roll up your sleeves, and begin problem solving the impact of the two extra SNVs on your nonsense mutation.</p>
+<div class="callout-blue">
+<span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span>
+<div class="callout-content">
+<p><strong>Questions</strong></p>
+<ol style="list-style-type: decimal">
+<li>First, ignore all of the SNVs. Convert the reference sequence to amino acids.</li>
+<li>Next, change one letter of the DNA sequence (G&gt;T) as described by your variant. What happened to the sequence of amino acids?</li>
+<li>Finally, add in the two extra SNVs. What happened to the sequence of amino acids?</li>
+<li>What is the TRUE variant? (NOTE: Remember p. notation! Look <a href="https://hgvs-nomenclature.org/stable/recommendations/protein/delins/">here</a> for the notation for a delins. Try your best before looking at the answer!)</li>
+</ol>
+<details>
+<summary>
+Reveal answer
+</summary>
+<p><code>p.E1940_K1941delinsYE</code></p>
+</details>
+<ol start="5" style="list-style-type: decimal">
+<li>Look up your new variant in OncoKB by changing the protein change field in <a href="https://www.oncokb.org/gene/BRCA2/somatic/p.E1940*/HGSOC">this link</a>. Is this variant actionable?</li>
+</ol>
+</div>
+</div>
+<p>Finally, what will you tell the clinician?</p>
+<details>
+<summary>
+Reveal answer
+</summary>
+<p>There is <strong>no actionable mutation</strong> in <em>BRCA2</em>. You <strong>cannot recommend Olaparib.</strong></p>
+</details>
+</div>
+<div id="germline-confusion" class="section level4 hasAnchor">
+<h4>10.2: Germline Confusion<a href="module-7-from-gene-alteration-to-gene-effect.html#germline-confusion" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>You are a bioinformatician in a clinical lab. You open your clinical report and see the following oncogenic variants reported by your variant caller, Mutect2:</p>
+<p><img src="Module7/germline_confusion_01.png" /></p>
+<p>Cool, two mutations in <em>HLA-B</em>! You see:</p>
+<ul>
+<li>One mutation at amino acid number 202 (K/Lys became A/Ala) which introduced a STOP codon 5 amino acids down.</li>
+<li>One mutation at amino acid number 201 (D/Asp became K/Lys) which introduced a STOP codon 14 amino acids down.</li>
+</ul>
+<p>But you are a good scientist, so you open IGV to manually verify your two frameshift variants, and you see the following:</p>
+<p><img src="Module7/IGV_screenshot_1.png" />
+Huh? Those clearly look like SNVs! Worse; one looks germline! What’s going on? It looks like Mutect2 has gotten confused with all of the germline variants, and was unable to call our real SNV.</p>
+<p>Let’s start by generating these annotations ourselves using SnpEff (note: these ones will have slightly different protein change annotations, as I edited the VCF to make fake data and couldn’t replicate the real finding 1-to-1):</p>
+<pre><code>$ $ cp ../CourseData/Module7/germline_confusion.vcf.gz .
+$ java -jar /usr/local/snpEff/snpEff.jar -v GRCh38.p14 germline_confusion.vcf.gz &gt; germline_confusion_annotated.vcf</code></pre>
+<p>Look at the annotations:</p>
+<pre><code>$ bcftools view -H germline_confusion_annotated.vcf</code></pre>
+<div class="callout-blue">
+<span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span>
+<div class="callout-content">
+<p><strong>Questions</strong></p>
+<ol style="list-style-type: decimal">
+<li>What is the protein change of variant 1 (look at the first annotation)? Variant 2?</li>
+<li>How could they be the same if they are two different variants?</li>
+<li>Look at the IGV screenshot. Which one is the <strong>REAL</strong> somatic variant?</li>
+</ol>
+</div>
+</div>
+<p>But we work for a clinical lab, so we need to reannotate this variant by editing the VCF, and then re-running SnpEff to get the corrected notation.</p>
+<p>First, we need to figure out what our edits should be. Here is some context to the IGV screenshot:</p>
+<p><img src="Module7/IGV_screenshot_3.png" /></p>
+<div class="callout-blue">
+<span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span>
+<div class="callout-content">
+<p><strong>Questions</strong></p>
+<ol style="list-style-type: decimal">
+<li>The codon associated with Asp/D is <code>GTC</code>. Does this match our codon table? Why or why not?</li>
+<li>What are the codons for Asp/D?</li>
+<li>Can you figure out why our codon was annotated to be Asp/D? (Try really hard before looking at the answer! This is a good way to exercise second-year university cell biology concepts).</li>
+</ol>
+<details>
+<summary>
+Reveal answer
+</summary>
+<p>The transcription occurs on the <strong>reverse complement!</strong> So, <code>GTC</code> becomes <code>GAC</code>, which is Asp/D.</p>
+</details>
+<ol start="4" style="list-style-type: decimal">
+<li>What is the <strong>REAL</strong> variant?</li>
+</ol>
+<details>
+<summary>
+Reveal answer
+</summary>
+<p><code>GAC</code> becomes <code>AAC</code>, i.e. D becomes N. The real variant is p.D201N.</p>
+</details>
+</div>
+</div>
+<p>So we’ve figured out the real variant, but the clinician won’t believe us (and the regulating body, CAP, will get angry with us) unless we use our clinically-validated pipeline.</p>
+<p>Let’s edit our VCF:</p>
+<pre><code>$ cp germline_confusion.vcf.gz germline_confusion_modified.vcf.gz</code></pre>
+<p>There is no real variant at position <code>31356181</code>, so delete this entry.</p>
+<p>The variant at position <code>31356185</code> is not an insertion of TT; it is a C&gt;T.</p>
+<p>Change that entry in the VCF to say:</p>
+<pre><code>BEFORE: 
+chr6    31356185        .       T       TTT     .       PASS
+
+AFTER:
+chr6    31356185        .       C       T     .       PASS
+</code></pre>
+<div class="callout-yellow">
+<span class="callout-icon"><i class="fas fa-bell" aria-hidden="true"></i></span>
+<div class="callout-content">
+<p><strong>Note:</strong> <code>nano</code> cannot edit gzipped files. If you want to use <code>nano</code>, unzip the file with <code>gunzip my_file.vcf.gz</code>, edit with <code>nano</code>, and rezip with <code>gzip my_file.vcf</code>. If you don’t want to unzip and rezip, use <code>vim</code>.</p>
+<p>To use <code>vim</code> to edit, press or type:</p>
+<ul>
+<li><code>dd</code> (to delete lines)</li>
+<li><code>i</code> (to insert i.e. start typing)</li>
+<li><code>Esc</code> (to escape editing)</li>
+<li><code>:wq</code> to finish editing</li>
+</ul>
+</div>
+</div>
+<p>and rerun SnpEff:</p>
+<pre><code>$ java -jar /usr/local/snpEff/snpEff.jar -v GRCh38.p14 germline_confusion_modified.vcf.gz &gt; germline_confusion_modified_annotated.vcf</code></pre>
+<p>View your annotation with:</p>
+<pre><code>$ bcftools view -H germline_confusion_modified_annotated.vcf</code></pre>
+<div class="callout-blue">
+<span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span>
+<div class="callout-content">
+<p><strong>Questions</strong></p>
+<ol style="list-style-type: decimal">
+<li>What is the protein change? Was your answer the same?</li>
+<li>What have you learned about the importance of reviewing variants? What are the risks if you skip review?</li>
+<li>How might you automate this process, if at all, in a very high-throughput research lab where you do not have time to manually review variants?</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="to-merge-or-not-to-merge-that-is-the-question." class="section level4 hasAnchor">
+<h4>10.3: To Merge or Not To Merge? That is the question.<a href="module-7-from-gene-alteration-to-gene-effect.html#to-merge-or-not-to-merge-that-is-the-question." class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Having been trained to investigate variants, you have become a hypervigilent bioinformatician. You open your next clinical report and see the following:</p>
+<p><img src="Module7/merge_or_not_01.png" /></p>
+<p>Suspicious! They may be the same variant, or very close. You run to IGV:</p>
+<p><img src="Module7/merge_or_not_02.png" /></p>
+<div class="callout-blue">
+<span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span>
+<div class="callout-content">
+<p><strong>Questions</strong></p>
+<ol style="list-style-type: decimal">
+<li>What do you make of this finding?</li>
+<li>Is it a delins?</li>
+<li>Should you merge it?</li>
+</ol>
+</div>
+</div>
+<p>You fight with the amino acid sequence, but are struggling to tell whether it might have impact or not.</p>
+<p>Luckily, HGVS has guidelines for merging variants. You read the guidelines:</p>
+<p><a href="https://hgvs-nomenclature.org/stable/recommendations/DNA/delins/#:~:text=two%20variants%20separated%20by%20one%20or%20more%20nucleotides%20should%20be%20described%20individually%20and%20not%20as%20a%20%22delins%22">HGVS guidelines for merging variants</a></p>
+<div class="callout-blue">
+<span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span>
+<div class="callout-content">
+<p><strong>Questions</strong></p>
+<ol style="list-style-type: decimal">
+<li>Should you merge them?</li>
+</ol>
+<details>
+<summary>
+Reveal answer
+</summary>
+<p><strong>No.</strong> Two variants separated by one or more nucleotides and not affecting the same amino acid should be described individually and not as a “delins”</p>
+</details>
+</div>
+</div>
+<p>After these three experiences, you’ve emerged stronger as a bioinformatician: cautious, but not hypervigilent!</p>
 <div class="callout-purple">
 <span class="callout-icon"><i class="fas fa-star" aria-hidden="true"></i></span>
 <div class="callout-content">
 <p><strong>Key takeaway</strong></p>
-<p>A variant annotation is a starting point for interpretation, not the final answer.</p>
-<p>We began with a difference in DNA sequence, used genome annotations to predict its molecular consequence, investigated the affected gene and available evidence, and then formed our hypothesis.</p>
+<p>A variant annotation is a starting point for interpretation, not the final answer. Always do your research, consult the literature, and manually verify your variants, if you are able to!</p>
 </div>
 </div>
 
+</div>
 </div>
 </div>
 </div>

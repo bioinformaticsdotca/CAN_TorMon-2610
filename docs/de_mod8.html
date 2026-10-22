@@ -254,15 +254,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#part-1.-introduction"><i class="fa fa-check"></i>Part 1. Introduction</a></li>
 <li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#part-2-inspect-the-data"><i class="fa fa-check"></i>Part 2: Inspect the data</a></li>
-<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#look-at-the-first-few-variant-records"><i class="fa fa-check"></i>2.4. Look at the first few variant records</a></li>
 <li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#part-3.-summarize-the-variant-calls-with-bcftools"><i class="fa fa-check"></i>Part 3. Summarize the variant calls with bcftools</a></li>
 <li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#part-4.-annotate-variants-with-snpeff"><i class="fa fa-check"></i>Part 4. Annotate variants with SnpEff</a></li>
 <li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#part-5.-interpret-the-snpeff-html-summary"><i class="fa fa-check"></i>Part 5. Interpret the SnpEff HTML summary</a></li>
 <li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#part-6.-examine-individual-variant-annotations"><i class="fa fa-check"></i>Part 6. Examine individual variant annotations</a></li>
 <li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#part-7.-from-gene-function-to-cancer-interpretation"><i class="fa fa-check"></i>Part 7. From gene function to cancer interpretation</a></li>
-<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#investigate-variant-evidence"><i class="fa fa-check"></i>7.2. Investigate variant evidence</a></li>
 <li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#part-8.-compare-snpeff-and-ensembl-vep"><i class="fa fa-check"></i>Part 8. Compare SnpEff and Ensembl VEP</a></li>
 <li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#part-9.-final-interpretation"><i class="fa fa-check"></i>Part 9. Final interpretation</a></li>
+<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#part-10.-manually-confirming-variants-in-igv"><i class="fa fa-check"></i>Part 10. Manually confirming variants in IGV</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="module-8---pathway-enrichment-analysis.html"><a href="module-8---pathway-enrichment-analysis.html"><i class="fa fa-check"></i>Module 8 - Pathway Enrichment Analysis</a>
@@ -417,39 +416,39 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>We perform differential expression analysis using a negative binomial generalized linear model using the edgeR package.</p>
 <div id="install-and-load-libraries" class="section level2 hasAnchor">
 <h2>Install and load libraries<a href="de_mod8.html#install-and-load-libraries" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="de_mod8.html#cb171-1" tabindex="-1"></a><span class="do">## CRAN and Bioconductor setup</span></span>
-<span id="cb171-2"><a href="de_mod8.html#cb171-2" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;BiocManager&quot;</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb171-3"><a href="de_mod8.html#cb171-3" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;BiocManager&quot;</span>)</span>
-<span id="cb171-4"><a href="de_mod8.html#cb171-4" tabindex="-1"></a></span>
-<span id="cb171-5"><a href="de_mod8.html#cb171-5" tabindex="-1"></a><span class="do">## List of CRAN packages</span></span>
-<span id="cb171-6"><a href="de_mod8.html#cb171-6" tabindex="-1"></a>cran_packages <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb171-7"><a href="de_mod8.html#cb171-7" tabindex="-1"></a>  <span class="st">&quot;tidyverse&quot;</span>,</span>
-<span id="cb171-8"><a href="de_mod8.html#cb171-8" tabindex="-1"></a>  <span class="st">&quot;ggrepel&quot;</span></span>
-<span id="cb171-9"><a href="de_mod8.html#cb171-9" tabindex="-1"></a>)</span>
-<span id="cb171-10"><a href="de_mod8.html#cb171-10" tabindex="-1"></a></span>
-<span id="cb171-11"><a href="de_mod8.html#cb171-11" tabindex="-1"></a><span class="co"># List of Bioconductor packages</span></span>
-<span id="cb171-12"><a href="de_mod8.html#cb171-12" tabindex="-1"></a>bioc_packages <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb171-13"><a href="de_mod8.html#cb171-13" tabindex="-1"></a>  <span class="st">&quot;edgeR&quot;</span></span>
-<span id="cb171-14"><a href="de_mod8.html#cb171-14" tabindex="-1"></a>)</span>
-<span id="cb171-15"><a href="de_mod8.html#cb171-15" tabindex="-1"></a></span>
-<span id="cb171-16"><a href="de_mod8.html#cb171-16" tabindex="-1"></a><span class="co"># Install CRAN packages if not already installed</span></span>
-<span id="cb171-17"><a href="de_mod8.html#cb171-17" tabindex="-1"></a><span class="cf">for</span> (pkg <span class="cf">in</span> cran_packages) {</span>
-<span id="cb171-18"><a href="de_mod8.html#cb171-18" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(pkg, <span class="at">quietly =</span> <span class="cn">TRUE</span>)) {</span>
-<span id="cb171-19"><a href="de_mod8.html#cb171-19" tabindex="-1"></a>    <span class="fu">install.packages</span>(pkg)</span>
-<span id="cb171-20"><a href="de_mod8.html#cb171-20" tabindex="-1"></a>  }</span>
-<span id="cb171-21"><a href="de_mod8.html#cb171-21" tabindex="-1"></a>}</span>
-<span id="cb171-22"><a href="de_mod8.html#cb171-22" tabindex="-1"></a></span>
-<span id="cb171-23"><a href="de_mod8.html#cb171-23" tabindex="-1"></a><span class="co"># Install Bioconductor packages if not already installed</span></span>
-<span id="cb171-24"><a href="de_mod8.html#cb171-24" tabindex="-1"></a><span class="cf">for</span> (pkg <span class="cf">in</span> bioc_packages) {</span>
-<span id="cb171-25"><a href="de_mod8.html#cb171-25" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(pkg, <span class="at">quietly =</span> <span class="cn">TRUE</span>)) {</span>
-<span id="cb171-26"><a href="de_mod8.html#cb171-26" tabindex="-1"></a>    BiocManager<span class="sc">::</span><span class="fu">install</span>(pkg)</span>
-<span id="cb171-27"><a href="de_mod8.html#cb171-27" tabindex="-1"></a>  }</span>
-<span id="cb171-28"><a href="de_mod8.html#cb171-28" tabindex="-1"></a>}</span>
-<span id="cb171-29"><a href="de_mod8.html#cb171-29" tabindex="-1"></a></span>
-<span id="cb171-30"><a href="de_mod8.html#cb171-30" tabindex="-1"></a><span class="co"># Load the libraries</span></span>
-<span id="cb171-31"><a href="de_mod8.html#cb171-31" tabindex="-1"></a></span>
-<span id="cb171-32"><a href="de_mod8.html#cb171-32" tabindex="-1"></a><span class="co"># CRAN packages</span></span>
-<span id="cb171-33"><a href="de_mod8.html#cb171-33" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="de_mod8.html#cb178-1" tabindex="-1"></a><span class="do">## CRAN and Bioconductor setup</span></span>
+<span id="cb178-2"><a href="de_mod8.html#cb178-2" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;BiocManager&quot;</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb178-3"><a href="de_mod8.html#cb178-3" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;BiocManager&quot;</span>)</span>
+<span id="cb178-4"><a href="de_mod8.html#cb178-4" tabindex="-1"></a></span>
+<span id="cb178-5"><a href="de_mod8.html#cb178-5" tabindex="-1"></a><span class="do">## List of CRAN packages</span></span>
+<span id="cb178-6"><a href="de_mod8.html#cb178-6" tabindex="-1"></a>cran_packages <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb178-7"><a href="de_mod8.html#cb178-7" tabindex="-1"></a>  <span class="st">&quot;tidyverse&quot;</span>,</span>
+<span id="cb178-8"><a href="de_mod8.html#cb178-8" tabindex="-1"></a>  <span class="st">&quot;ggrepel&quot;</span></span>
+<span id="cb178-9"><a href="de_mod8.html#cb178-9" tabindex="-1"></a>)</span>
+<span id="cb178-10"><a href="de_mod8.html#cb178-10" tabindex="-1"></a></span>
+<span id="cb178-11"><a href="de_mod8.html#cb178-11" tabindex="-1"></a><span class="co"># List of Bioconductor packages</span></span>
+<span id="cb178-12"><a href="de_mod8.html#cb178-12" tabindex="-1"></a>bioc_packages <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb178-13"><a href="de_mod8.html#cb178-13" tabindex="-1"></a>  <span class="st">&quot;edgeR&quot;</span></span>
+<span id="cb178-14"><a href="de_mod8.html#cb178-14" tabindex="-1"></a>)</span>
+<span id="cb178-15"><a href="de_mod8.html#cb178-15" tabindex="-1"></a></span>
+<span id="cb178-16"><a href="de_mod8.html#cb178-16" tabindex="-1"></a><span class="co"># Install CRAN packages if not already installed</span></span>
+<span id="cb178-17"><a href="de_mod8.html#cb178-17" tabindex="-1"></a><span class="cf">for</span> (pkg <span class="cf">in</span> cran_packages) {</span>
+<span id="cb178-18"><a href="de_mod8.html#cb178-18" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(pkg, <span class="at">quietly =</span> <span class="cn">TRUE</span>)) {</span>
+<span id="cb178-19"><a href="de_mod8.html#cb178-19" tabindex="-1"></a>    <span class="fu">install.packages</span>(pkg)</span>
+<span id="cb178-20"><a href="de_mod8.html#cb178-20" tabindex="-1"></a>  }</span>
+<span id="cb178-21"><a href="de_mod8.html#cb178-21" tabindex="-1"></a>}</span>
+<span id="cb178-22"><a href="de_mod8.html#cb178-22" tabindex="-1"></a></span>
+<span id="cb178-23"><a href="de_mod8.html#cb178-23" tabindex="-1"></a><span class="co"># Install Bioconductor packages if not already installed</span></span>
+<span id="cb178-24"><a href="de_mod8.html#cb178-24" tabindex="-1"></a><span class="cf">for</span> (pkg <span class="cf">in</span> bioc_packages) {</span>
+<span id="cb178-25"><a href="de_mod8.html#cb178-25" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(pkg, <span class="at">quietly =</span> <span class="cn">TRUE</span>)) {</span>
+<span id="cb178-26"><a href="de_mod8.html#cb178-26" tabindex="-1"></a>    BiocManager<span class="sc">::</span><span class="fu">install</span>(pkg)</span>
+<span id="cb178-27"><a href="de_mod8.html#cb178-27" tabindex="-1"></a>  }</span>
+<span id="cb178-28"><a href="de_mod8.html#cb178-28" tabindex="-1"></a>}</span>
+<span id="cb178-29"><a href="de_mod8.html#cb178-29" tabindex="-1"></a></span>
+<span id="cb178-30"><a href="de_mod8.html#cb178-30" tabindex="-1"></a><span class="co"># Load the libraries</span></span>
+<span id="cb178-31"><a href="de_mod8.html#cb178-31" tabindex="-1"></a></span>
+<span id="cb178-32"><a href="de_mod8.html#cb178-32" tabindex="-1"></a><span class="co"># CRAN packages</span></span>
+<span id="cb178-33"><a href="de_mod8.html#cb178-33" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
 <pre><code>## Warning: package &#39;ggplot2&#39; was built under R version 4.4.3</code></pre>
 <pre><code>## Warning: package &#39;purrr&#39; was built under R version 4.4.3</code></pre>
 <pre><code>## Warning: package &#39;dplyr&#39; was built under R version 4.4.3</code></pre>
@@ -463,17 +462,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## ✖ purrr::flatten() masks jsonlite::flatten()
 ## ✖ dplyr::lag()     masks stats::lag()
 ## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
-<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="de_mod8.html#cb176-1" tabindex="-1"></a><span class="fu">library</span>(ggrepel)</span></code></pre></div>
+<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="de_mod8.html#cb183-1" tabindex="-1"></a><span class="fu">library</span>(ggrepel)</span></code></pre></div>
 <pre><code>## Warning: package &#39;ggrepel&#39; was built under R version 4.4.3</code></pre>
-<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="de_mod8.html#cb178-1" tabindex="-1"></a><span class="co"># Bioconductor packages</span></span>
-<span id="cb178-2"><a href="de_mod8.html#cb178-2" tabindex="-1"></a><span class="fu">library</span>(edgeR)</span></code></pre></div>
+<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="de_mod8.html#cb185-1" tabindex="-1"></a><span class="co"># Bioconductor packages</span></span>
+<span id="cb185-2"><a href="de_mod8.html#cb185-2" tabindex="-1"></a><span class="fu">library</span>(edgeR)</span></code></pre></div>
 <pre><code>## Loading required package: limma</code></pre>
-<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="de_mod8.html#cb180-1" tabindex="-1"></a><span class="co"># create the results folder (if it does not exist yet) to save the outputs</span></span>
-<span id="cb180-2"><a href="de_mod8.html#cb180-2" tabindex="-1"></a><span class="co"># dir.create(&quot;results&quot;, showWarnings = FALSE)</span></span></code></pre></div>
-<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="de_mod8.html#cb181-1" tabindex="-1"></a><span class="co"># Location of the Module 8 files (data/, BYODdata/, image/):</span></span>
-<span id="cb181-2"><a href="de_mod8.html#cb181-2" tabindex="-1"></a><span class="co"># - on the course server: ~/CourseData/Module8</span></span>
-<span id="cb181-3"><a href="de_mod8.html#cb181-3" tabindex="-1"></a><span class="co"># - when the book is built from the repository: Module8</span></span>
-<span id="cb181-4"><a href="de_mod8.html#cb181-4" tabindex="-1"></a>data_dir <span class="ot">&lt;-</span> <span class="cf">if</span> (<span class="fu">dir.exists</span>(<span class="st">&quot;~/CourseData/Module8&quot;</span>)) <span class="st">&quot;~/CourseData/Module8&quot;</span> <span class="cf">else</span> <span class="st">&quot;Module8&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="de_mod8.html#cb187-1" tabindex="-1"></a><span class="co"># create the results folder (if it does not exist yet) to save the outputs</span></span>
+<span id="cb187-2"><a href="de_mod8.html#cb187-2" tabindex="-1"></a><span class="co"># dir.create(&quot;results&quot;, showWarnings = FALSE)</span></span></code></pre></div>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="de_mod8.html#cb188-1" tabindex="-1"></a><span class="co"># Location of the Module 8 files (data/, BYODdata/, image/):</span></span>
+<span id="cb188-2"><a href="de_mod8.html#cb188-2" tabindex="-1"></a><span class="co"># - on the course server: ~/CourseData/Module8</span></span>
+<span id="cb188-3"><a href="de_mod8.html#cb188-3" tabindex="-1"></a><span class="co"># - when the book is built from the repository: Module8</span></span>
+<span id="cb188-4"><a href="de_mod8.html#cb188-4" tabindex="-1"></a>data_dir <span class="ot">&lt;-</span> <span class="cf">if</span> (<span class="fu">dir.exists</span>(<span class="st">&quot;~/CourseData/Module8&quot;</span>)) <span class="st">&quot;~/CourseData/Module8&quot;</span> <span class="cf">else</span> <span class="st">&quot;Module8&quot;</span></span></code></pre></div>
 <!--
 <div class="rmd-caution">
 <p>In the Ubuntu (course server) session, the <code>dir.create()</code>
@@ -495,65 +494,65 @@ Figure 2: GEO dataset
 </div>
 <div id="generate-a-dge-object" class="section level3 hasAnchor">
 <h3>generate a DGE object<a href="de_mod8.html#generate-a-dge-object" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="de_mod8.html#cb182-1" tabindex="-1"></a><span class="co"># 1. Find the count files</span></span>
-<span id="cb182-2"><a href="de_mod8.html#cb182-2" tabindex="-1"></a>files <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="at">path =</span> <span class="fu">file.path</span>(data_dir, <span class="st">&quot;data&quot;</span>), <span class="at">pattern =</span> <span class="st">&quot;</span><span class="sc">\\</span><span class="st">.txt</span><span class="sc">\\</span><span class="st">.gz$&quot;</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb182-3"><a href="de_mod8.html#cb182-3" tabindex="-1"></a></span>
-<span id="cb182-4"><a href="de_mod8.html#cb182-4" tabindex="-1"></a><span class="co"># 2. Sample names from the file names (strip the extension)</span></span>
-<span id="cb182-5"><a href="de_mod8.html#cb182-5" tabindex="-1"></a>samples <span class="ot">&lt;-</span> <span class="fu">sub</span>(<span class="st">&quot;_S.*&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="fu">basename</span>(files))</span>
-<span id="cb182-6"><a href="de_mod8.html#cb182-6" tabindex="-1"></a></span>
-<span id="cb182-7"><a href="de_mod8.html#cb182-7" tabindex="-1"></a><span class="co"># 3. Read the files into a DGEList</span></span>
-<span id="cb182-8"><a href="de_mod8.html#cb182-8" tabindex="-1"></a><span class="co">#    HTSeq output has no header: column 1 = gene ID, column 2 = count.</span></span>
-<span id="cb182-9"><a href="de_mod8.html#cb182-9" tabindex="-1"></a><span class="co">#    R reads gzipped files directly, so no need to decompress.</span></span>
-<span id="cb182-10"><a href="de_mod8.html#cb182-10" tabindex="-1"></a>dge <span class="ot">&lt;-</span> <span class="fu">readDGE</span>(files, <span class="at">columns =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="at">header =</span> <span class="cn">FALSE</span>, <span class="at">labels =</span> samples)</span></code></pre></div>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="de_mod8.html#cb189-1" tabindex="-1"></a><span class="co"># 1. Find the count files</span></span>
+<span id="cb189-2"><a href="de_mod8.html#cb189-2" tabindex="-1"></a>files <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="at">path =</span> <span class="fu">file.path</span>(data_dir, <span class="st">&quot;data&quot;</span>), <span class="at">pattern =</span> <span class="st">&quot;</span><span class="sc">\\</span><span class="st">.txt</span><span class="sc">\\</span><span class="st">.gz$&quot;</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb189-3"><a href="de_mod8.html#cb189-3" tabindex="-1"></a></span>
+<span id="cb189-4"><a href="de_mod8.html#cb189-4" tabindex="-1"></a><span class="co"># 2. Sample names from the file names (strip the extension)</span></span>
+<span id="cb189-5"><a href="de_mod8.html#cb189-5" tabindex="-1"></a>samples <span class="ot">&lt;-</span> <span class="fu">sub</span>(<span class="st">&quot;_S.*&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="fu">basename</span>(files))</span>
+<span id="cb189-6"><a href="de_mod8.html#cb189-6" tabindex="-1"></a></span>
+<span id="cb189-7"><a href="de_mod8.html#cb189-7" tabindex="-1"></a><span class="co"># 3. Read the files into a DGEList</span></span>
+<span id="cb189-8"><a href="de_mod8.html#cb189-8" tabindex="-1"></a><span class="co">#    HTSeq output has no header: column 1 = gene ID, column 2 = count.</span></span>
+<span id="cb189-9"><a href="de_mod8.html#cb189-9" tabindex="-1"></a><span class="co">#    R reads gzipped files directly, so no need to decompress.</span></span>
+<span id="cb189-10"><a href="de_mod8.html#cb189-10" tabindex="-1"></a>dge <span class="ot">&lt;-</span> <span class="fu">readDGE</span>(files, <span class="at">columns =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="at">header =</span> <span class="cn">FALSE</span>, <span class="at">labels =</span> samples)</span></code></pre></div>
 <pre><code>## Meta tags detected: __no_feature, __ambiguous, __too_low_aQual, __not_aligned, __alignment_not_unique</code></pre>
-<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="de_mod8.html#cb184-1" tabindex="-1"></a><span class="co"># 4. Remove HTSeq summary rows (__no_feature, __ambiguous, etc.)</span></span>
-<span id="cb184-2"><a href="de_mod8.html#cb184-2" tabindex="-1"></a>dge <span class="ot">&lt;-</span> dge[<span class="sc">!</span><span class="fu">grepl</span>(<span class="st">&quot;^__&quot;</span>, <span class="fu">rownames</span>(dge)), , keep.lib.sizes <span class="ot">=</span> <span class="cn">FALSE</span>]</span>
-<span id="cb184-3"><a href="de_mod8.html#cb184-3" tabindex="-1"></a></span>
-<span id="cb184-4"><a href="de_mod8.html#cb184-4" tabindex="-1"></a><span class="co"># 5. (Optional) add group information</span></span>
-<span id="cb184-5"><a href="de_mod8.html#cb184-5" tabindex="-1"></a>dge<span class="sc">$</span>samples<span class="sc">$</span>group <span class="ot">&lt;-</span> <span class="fu">factor</span>(</span>
-<span id="cb184-6"><a href="de_mod8.html#cb184-6" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">&quot;parental&quot;</span>, <span class="st">&quot;parental&quot;</span>, <span class="st">&quot;parental&quot;</span>,</span>
-<span id="cb184-7"><a href="de_mod8.html#cb184-7" tabindex="-1"></a>    <span class="st">&quot;palbo_resistant&quot;</span>, <span class="st">&quot;palbo_resistant&quot;</span>, <span class="st">&quot;palbo_resistant&quot;</span>),</span>
-<span id="cb184-8"><a href="de_mod8.html#cb184-8" tabindex="-1"></a>  <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;parental&quot;</span>, <span class="st">&quot;palbo_resistant&quot;</span>)   <span class="co"># parental = reference</span></span>
-<span id="cb184-9"><a href="de_mod8.html#cb184-9" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="de_mod8.html#cb191-1" tabindex="-1"></a><span class="co"># 4. Remove HTSeq summary rows (__no_feature, __ambiguous, etc.)</span></span>
+<span id="cb191-2"><a href="de_mod8.html#cb191-2" tabindex="-1"></a>dge <span class="ot">&lt;-</span> dge[<span class="sc">!</span><span class="fu">grepl</span>(<span class="st">&quot;^__&quot;</span>, <span class="fu">rownames</span>(dge)), , keep.lib.sizes <span class="ot">=</span> <span class="cn">FALSE</span>]</span>
+<span id="cb191-3"><a href="de_mod8.html#cb191-3" tabindex="-1"></a></span>
+<span id="cb191-4"><a href="de_mod8.html#cb191-4" tabindex="-1"></a><span class="co"># 5. (Optional) add group information</span></span>
+<span id="cb191-5"><a href="de_mod8.html#cb191-5" tabindex="-1"></a>dge<span class="sc">$</span>samples<span class="sc">$</span>group <span class="ot">&lt;-</span> <span class="fu">factor</span>(</span>
+<span id="cb191-6"><a href="de_mod8.html#cb191-6" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">&quot;parental&quot;</span>, <span class="st">&quot;parental&quot;</span>, <span class="st">&quot;parental&quot;</span>,</span>
+<span id="cb191-7"><a href="de_mod8.html#cb191-7" tabindex="-1"></a>    <span class="st">&quot;palbo_resistant&quot;</span>, <span class="st">&quot;palbo_resistant&quot;</span>, <span class="st">&quot;palbo_resistant&quot;</span>),</span>
+<span id="cb191-8"><a href="de_mod8.html#cb191-8" tabindex="-1"></a>  <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;parental&quot;</span>, <span class="st">&quot;palbo_resistant&quot;</span>)   <span class="co"># parental = reference</span></span>
+<span id="cb191-9"><a href="de_mod8.html#cb191-9" tabindex="-1"></a>)</span></code></pre></div>
 </div>
 </div>
 <div id="filter-low-count-genes-and-tmm-normalize" class="section level2 hasAnchor">
 <h2>Filter low-count genes and TMM-normalize<a href="de_mod8.html#filter-low-count-genes-and-tmm-normalize" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="de_mod8.html#cb185-1" tabindex="-1"></a>keep <span class="ot">&lt;-</span> <span class="fu">filterByExpr</span>(dge, <span class="at">group =</span> dge<span class="sc">$</span>samples<span class="sc">$</span>group)</span>
-<span id="cb185-2"><a href="de_mod8.html#cb185-2" tabindex="-1"></a>dge  <span class="ot">&lt;-</span> dge[keep, , keep.lib.sizes <span class="ot">=</span> <span class="cn">FALSE</span>]</span>
-<span id="cb185-3"><a href="de_mod8.html#cb185-3" tabindex="-1"></a>dge  <span class="ot">&lt;-</span> <span class="fu">calcNormFactors</span>(dge, <span class="at">method =</span> <span class="st">&quot;TMM&quot;</span>)</span>
-<span id="cb185-4"><a href="de_mod8.html#cb185-4" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Genes retained after filtering:&quot;</span>, <span class="fu">nrow</span>(dge), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="de_mod8.html#cb192-1" tabindex="-1"></a>keep <span class="ot">&lt;-</span> <span class="fu">filterByExpr</span>(dge, <span class="at">group =</span> dge<span class="sc">$</span>samples<span class="sc">$</span>group)</span>
+<span id="cb192-2"><a href="de_mod8.html#cb192-2" tabindex="-1"></a>dge  <span class="ot">&lt;-</span> dge[keep, , keep.lib.sizes <span class="ot">=</span> <span class="cn">FALSE</span>]</span>
+<span id="cb192-3"><a href="de_mod8.html#cb192-3" tabindex="-1"></a>dge  <span class="ot">&lt;-</span> <span class="fu">calcNormFactors</span>(dge, <span class="at">method =</span> <span class="st">&quot;TMM&quot;</span>)</span>
+<span id="cb192-4"><a href="de_mod8.html#cb192-4" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Genes retained after filtering:&quot;</span>, <span class="fu">nrow</span>(dge), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 <pre><code>## Genes retained after filtering: 15246</code></pre>
-<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="de_mod8.html#cb187-1" tabindex="-1"></a>mds <span class="ot">&lt;-</span> <span class="fu">plotMDS</span>(dge, <span class="at">col =</span> <span class="fu">as.numeric</span>(dge<span class="sc">$</span>samples<span class="sc">$</span>group), <span class="at">main =</span> <span class="st">&quot;MDS (logCPM)&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="de_mod8.html#cb188-1" tabindex="-1"></a>group <span class="ot">=</span> dge<span class="sc">$</span>samples<span class="sc">$</span>group</span>
-<span id="cb188-2"><a href="de_mod8.html#cb188-2" tabindex="-1"></a>var_pct <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="dv">100</span> <span class="sc">*</span> mds<span class="sc">$</span>var.explained[mds<span class="sc">$</span>dim.plot])</span>
-<span id="cb188-3"><a href="de_mod8.html#cb188-3" tabindex="-1"></a>mds_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">dim1 =</span> mds<span class="sc">$</span>x, <span class="at">dim2 =</span> mds<span class="sc">$</span>y,</span>
-<span id="cb188-4"><a href="de_mod8.html#cb188-4" tabindex="-1"></a>                      <span class="at">sample =</span> <span class="fu">colnames</span>(dge), <span class="at">group =</span> group)</span>
-<span id="cb188-5"><a href="de_mod8.html#cb188-5" tabindex="-1"></a></span>
-<span id="cb188-6"><a href="de_mod8.html#cb188-6" tabindex="-1"></a><span class="fu">ggplot</span>(mds_df, <span class="fu">aes</span>(<span class="at">x =</span> dim1, <span class="at">y =</span> dim2, <span class="at">color =</span> group)) <span class="sc">+</span></span>
-<span id="cb188-7"><a href="de_mod8.html#cb188-7" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb188-8"><a href="de_mod8.html#cb188-8" tabindex="-1"></a>  ggrepel<span class="sc">::</span><span class="fu">geom_text_repel</span>(<span class="fu">aes</span>(<span class="at">label =</span> sample), <span class="at">size =</span> <span class="dv">3</span>, <span class="at">color =</span> <span class="st">&quot;grey30&quot;</span>,</span>
-<span id="cb188-9"><a href="de_mod8.html#cb188-9" tabindex="-1"></a>                            <span class="at">show.legend =</span> <span class="cn">FALSE</span>, <span class="at">max.overlaps =</span> <span class="cn">Inf</span>,</span>
-<span id="cb188-10"><a href="de_mod8.html#cb188-10" tabindex="-1"></a>                            <span class="at">box.padding =</span> <span class="fl">0.4</span>, <span class="at">segment.color =</span> <span class="st">&quot;grey60&quot;</span>) <span class="sc">+</span></span>
-<span id="cb188-11"><a href="de_mod8.html#cb188-11" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;MDS plot (all samples)&quot;</span>,</span>
-<span id="cb188-12"><a href="de_mod8.html#cb188-12" tabindex="-1"></a>       <span class="at">x =</span> <span class="fu">sprintf</span>(<span class="st">&quot;Leading logFC dim %d (%d%%)&quot;</span>, mds<span class="sc">$</span>dim.plot[<span class="dv">1</span>], var_pct[<span class="dv">1</span>]),</span>
-<span id="cb188-13"><a href="de_mod8.html#cb188-13" tabindex="-1"></a>       <span class="at">y =</span> <span class="fu">sprintf</span>(<span class="st">&quot;Leading logFC dim %d (%d%%)&quot;</span>, mds<span class="sc">$</span>dim.plot[<span class="dv">2</span>], var_pct[<span class="dv">2</span>]),</span>
-<span id="cb188-14"><a href="de_mod8.html#cb188-14" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">&quot;Group&quot;</span>) <span class="sc">+</span></span>
-<span id="cb188-15"><a href="de_mod8.html#cb188-15" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">12</span>) <span class="sc">+</span></span>
-<span id="cb188-16"><a href="de_mod8.html#cb188-16" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;right&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="de_mod8.html#cb194-1" tabindex="-1"></a>mds <span class="ot">&lt;-</span> <span class="fu">plotMDS</span>(dge, <span class="at">col =</span> <span class="fu">as.numeric</span>(dge<span class="sc">$</span>samples<span class="sc">$</span>group), <span class="at">main =</span> <span class="st">&quot;MDS (logCPM)&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="de_mod8.html#cb195-1" tabindex="-1"></a>group <span class="ot">=</span> dge<span class="sc">$</span>samples<span class="sc">$</span>group</span>
+<span id="cb195-2"><a href="de_mod8.html#cb195-2" tabindex="-1"></a>var_pct <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="dv">100</span> <span class="sc">*</span> mds<span class="sc">$</span>var.explained[mds<span class="sc">$</span>dim.plot])</span>
+<span id="cb195-3"><a href="de_mod8.html#cb195-3" tabindex="-1"></a>mds_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">dim1 =</span> mds<span class="sc">$</span>x, <span class="at">dim2 =</span> mds<span class="sc">$</span>y,</span>
+<span id="cb195-4"><a href="de_mod8.html#cb195-4" tabindex="-1"></a>                      <span class="at">sample =</span> <span class="fu">colnames</span>(dge), <span class="at">group =</span> group)</span>
+<span id="cb195-5"><a href="de_mod8.html#cb195-5" tabindex="-1"></a></span>
+<span id="cb195-6"><a href="de_mod8.html#cb195-6" tabindex="-1"></a><span class="fu">ggplot</span>(mds_df, <span class="fu">aes</span>(<span class="at">x =</span> dim1, <span class="at">y =</span> dim2, <span class="at">color =</span> group)) <span class="sc">+</span></span>
+<span id="cb195-7"><a href="de_mod8.html#cb195-7" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb195-8"><a href="de_mod8.html#cb195-8" tabindex="-1"></a>  ggrepel<span class="sc">::</span><span class="fu">geom_text_repel</span>(<span class="fu">aes</span>(<span class="at">label =</span> sample), <span class="at">size =</span> <span class="dv">3</span>, <span class="at">color =</span> <span class="st">&quot;grey30&quot;</span>,</span>
+<span id="cb195-9"><a href="de_mod8.html#cb195-9" tabindex="-1"></a>                            <span class="at">show.legend =</span> <span class="cn">FALSE</span>, <span class="at">max.overlaps =</span> <span class="cn">Inf</span>,</span>
+<span id="cb195-10"><a href="de_mod8.html#cb195-10" tabindex="-1"></a>                            <span class="at">box.padding =</span> <span class="fl">0.4</span>, <span class="at">segment.color =</span> <span class="st">&quot;grey60&quot;</span>) <span class="sc">+</span></span>
+<span id="cb195-11"><a href="de_mod8.html#cb195-11" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;MDS plot (all samples)&quot;</span>,</span>
+<span id="cb195-12"><a href="de_mod8.html#cb195-12" tabindex="-1"></a>       <span class="at">x =</span> <span class="fu">sprintf</span>(<span class="st">&quot;Leading logFC dim %d (%d%%)&quot;</span>, mds<span class="sc">$</span>dim.plot[<span class="dv">1</span>], var_pct[<span class="dv">1</span>]),</span>
+<span id="cb195-13"><a href="de_mod8.html#cb195-13" tabindex="-1"></a>       <span class="at">y =</span> <span class="fu">sprintf</span>(<span class="st">&quot;Leading logFC dim %d (%d%%)&quot;</span>, mds<span class="sc">$</span>dim.plot[<span class="dv">2</span>], var_pct[<span class="dv">2</span>]),</span>
+<span id="cb195-14"><a href="de_mod8.html#cb195-14" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">&quot;Group&quot;</span>) <span class="sc">+</span></span>
+<span id="cb195-15"><a href="de_mod8.html#cb195-15" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">12</span>) <span class="sc">+</span></span>
+<span id="cb195-16"><a href="de_mod8.html#cb195-16" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;right&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-82-1.png" alt="" width="672" /></p>
 </div>
 <div id="design-0-group-and-named-contrast" class="section level2 hasAnchor">
 <h2>Design (~0 + group) and named contrast<a href="de_mod8.html#design-0-group-and-named-contrast" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="de_mod8.html#cb189-1" tabindex="-1"></a>design <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(<span class="sc">~</span> <span class="dv">0</span> <span class="sc">+</span> group, <span class="at">data =</span> dge<span class="sc">$</span>samples)</span>
-<span id="cb189-2"><a href="de_mod8.html#cb189-2" tabindex="-1"></a><span class="fu">colnames</span>(design) <span class="ot">&lt;-</span> <span class="fu">levels</span>(dge<span class="sc">$</span>samples<span class="sc">$</span>group)   <span class="co"># &quot;parental&quot;, &quot;palbo_resistant&quot;</span></span>
-<span id="cb189-3"><a href="de_mod8.html#cb189-3" tabindex="-1"></a> </span>
-<span id="cb189-4"><a href="de_mod8.html#cb189-4" tabindex="-1"></a>contr <span class="ot">&lt;-</span> <span class="fu">makeContrasts</span>(</span>
-<span id="cb189-5"><a href="de_mod8.html#cb189-5" tabindex="-1"></a>  <span class="at">resistant_vs_parental =</span> palbo_resistant <span class="sc">-</span> parental,   <span class="co"># + logFC = up in resistant</span></span>
-<span id="cb189-6"><a href="de_mod8.html#cb189-6" tabindex="-1"></a>  <span class="at">levels =</span> design</span>
-<span id="cb189-7"><a href="de_mod8.html#cb189-7" tabindex="-1"></a>)</span>
-<span id="cb189-8"><a href="de_mod8.html#cb189-8" tabindex="-1"></a></span>
-<span id="cb189-9"><a href="de_mod8.html#cb189-9" tabindex="-1"></a><span class="fu">head</span>(design)</span></code></pre></div>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="de_mod8.html#cb196-1" tabindex="-1"></a>design <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(<span class="sc">~</span> <span class="dv">0</span> <span class="sc">+</span> group, <span class="at">data =</span> dge<span class="sc">$</span>samples)</span>
+<span id="cb196-2"><a href="de_mod8.html#cb196-2" tabindex="-1"></a><span class="fu">colnames</span>(design) <span class="ot">&lt;-</span> <span class="fu">levels</span>(dge<span class="sc">$</span>samples<span class="sc">$</span>group)   <span class="co"># &quot;parental&quot;, &quot;palbo_resistant&quot;</span></span>
+<span id="cb196-3"><a href="de_mod8.html#cb196-3" tabindex="-1"></a> </span>
+<span id="cb196-4"><a href="de_mod8.html#cb196-4" tabindex="-1"></a>contr <span class="ot">&lt;-</span> <span class="fu">makeContrasts</span>(</span>
+<span id="cb196-5"><a href="de_mod8.html#cb196-5" tabindex="-1"></a>  <span class="at">resistant_vs_parental =</span> palbo_resistant <span class="sc">-</span> parental,   <span class="co"># + logFC = up in resistant</span></span>
+<span id="cb196-6"><a href="de_mod8.html#cb196-6" tabindex="-1"></a>  <span class="at">levels =</span> design</span>
+<span id="cb196-7"><a href="de_mod8.html#cb196-7" tabindex="-1"></a>)</span>
+<span id="cb196-8"><a href="de_mod8.html#cb196-8" tabindex="-1"></a></span>
+<span id="cb196-9"><a href="de_mod8.html#cb196-9" tabindex="-1"></a><span class="fu">head</span>(design)</span></code></pre></div>
 <pre><code>##            parental palbo_resistant
 ## GSM6921637        1               0
 ## GSM6921638        1               0
@@ -564,20 +563,20 @@ Figure 2: GEO dataset
 </div>
 <div id="dispersion-estimation-and-quasi-likelihood-glm" class="section level2 hasAnchor">
 <h2>Dispersion estimation and quasi-likelihood GLM<a href="de_mod8.html#dispersion-estimation-and-quasi-likelihood-glm" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="de_mod8.html#cb191-1" tabindex="-1"></a>dge <span class="ot">&lt;-</span> <span class="fu">estimateDisp</span>(dge, design, <span class="at">robust =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb191-2"><a href="de_mod8.html#cb191-2" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">glmQLFit</span>(dge, design, <span class="at">robust =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb191-3"><a href="de_mod8.html#cb191-3" tabindex="-1"></a> </span>
-<span id="cb191-4"><a href="de_mod8.html#cb191-4" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>)); <span class="fu">plotBCV</span>(dge); <span class="fu">plotQLDisp</span>(fit)</span></code></pre></div>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="de_mod8.html#cb198-1" tabindex="-1"></a>dge <span class="ot">&lt;-</span> <span class="fu">estimateDisp</span>(dge, design, <span class="at">robust =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb198-2"><a href="de_mod8.html#cb198-2" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">glmQLFit</span>(dge, design, <span class="at">robust =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb198-3"><a href="de_mod8.html#cb198-3" tabindex="-1"></a> </span>
+<span id="cb198-4"><a href="de_mod8.html#cb198-4" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>)); <span class="fu">plotBCV</span>(dge); <span class="fu">plotQLDisp</span>(fit)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-84-1.png" alt="" width="672" /></p>
-<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="de_mod8.html#cb192-1" tabindex="-1"></a>qlf <span class="ot">&lt;-</span> <span class="fu">glmQLFTest</span>(fit, <span class="at">contrast =</span> contr[, <span class="st">&quot;resistant_vs_parental&quot;</span>])</span>
-<span id="cb192-2"><a href="de_mod8.html#cb192-2" tabindex="-1"></a> </span>
-<span id="cb192-3"><a href="de_mod8.html#cb192-3" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">topTags</span>(qlf, <span class="at">n =</span> <span class="cn">Inf</span>, <span class="at">sort.by =</span> <span class="st">&quot;PValue&quot;</span>)<span class="sc">$</span>table</span>
-<span id="cb192-4"><a href="de_mod8.html#cb192-4" tabindex="-1"></a>res<span class="sc">$</span>gene <span class="ot">&lt;-</span> <span class="fu">rownames</span>(res)</span></code></pre></div>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="de_mod8.html#cb199-1" tabindex="-1"></a>qlf <span class="ot">&lt;-</span> <span class="fu">glmQLFTest</span>(fit, <span class="at">contrast =</span> contr[, <span class="st">&quot;resistant_vs_parental&quot;</span>])</span>
+<span id="cb199-2"><a href="de_mod8.html#cb199-2" tabindex="-1"></a> </span>
+<span id="cb199-3"><a href="de_mod8.html#cb199-3" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">topTags</span>(qlf, <span class="at">n =</span> <span class="cn">Inf</span>, <span class="at">sort.by =</span> <span class="st">&quot;PValue&quot;</span>)<span class="sc">$</span>table</span>
+<span id="cb199-4"><a href="de_mod8.html#cb199-4" tabindex="-1"></a>res<span class="sc">$</span>gene <span class="ot">&lt;-</span> <span class="fu">rownames</span>(res)</span></code></pre></div>
 </div>
 <div id="calculating-ranking-score-and-export-full-results" class="section level2 hasAnchor">
 <h2>Calculating ranking score and export full results<a href="de_mod8.html#calculating-ranking-score-and-export-full-results" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="de_mod8.html#cb193-1" tabindex="-1"></a>res<span class="sc">$</span>score <span class="ot">=</span> <span class="fu">sign</span>(res<span class="sc">$</span>logFC) <span class="sc">*</span> <span class="sc">-</span><span class="fu">log10</span>(res<span class="sc">$</span>PValue)</span>
-<span id="cb193-2"><a href="de_mod8.html#cb193-2" tabindex="-1"></a><span class="fu">head</span>(res)</span></code></pre></div>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="de_mod8.html#cb200-1" tabindex="-1"></a>res<span class="sc">$</span>score <span class="ot">=</span> <span class="fu">sign</span>(res<span class="sc">$</span>logFC) <span class="sc">*</span> <span class="sc">-</span><span class="fu">log10</span>(res<span class="sc">$</span>PValue)</span>
+<span id="cb200-2"><a href="de_mod8.html#cb200-2" tabindex="-1"></a><span class="fu">head</span>(res)</span></code></pre></div>
 <pre><code>##            logFC   logCPM        F       PValue          FDR  gene     score
 ## AZGP1 -11.100279 7.258554 210.4011 1.070323e-09 9.022256e-06 AZGP1 -8.970485
 ## EPN3  -11.063337 6.286707 178.7611 1.183557e-09 9.022256e-06  EPN3 -8.926811
@@ -586,48 +585,48 @@ Figure 2: GEO dataset
 ## P3H2    9.908346 4.560450 136.7839 7.326965e-09 1.971289e-05  P3H2  8.135076
 ## SNTB1   8.362925 3.678316 140.7203 9.261871e-09 1.971289e-05 SNTB1  8.033301</code></pre>
 <p>##visualization</p>
-<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="de_mod8.html#cb195-1" tabindex="-1"></a><span class="do">### histogram of the ranking score</span></span>
-<span id="cb195-2"><a href="de_mod8.html#cb195-2" tabindex="-1"></a><span class="fu">hist</span>(res<span class="sc">$</span>score, <span class="at">breaks=</span><span class="dv">100</span>, <span class="at">col=</span><span class="st">&quot;orchid&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;score&quot;</span>, <span class="at">main =</span> <span class="st">&quot;Histogram of score&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="de_mod8.html#cb202-1" tabindex="-1"></a><span class="do">### histogram of the ranking score</span></span>
+<span id="cb202-2"><a href="de_mod8.html#cb202-2" tabindex="-1"></a><span class="fu">hist</span>(res<span class="sc">$</span>score, <span class="at">breaks=</span><span class="dv">100</span>, <span class="at">col=</span><span class="st">&quot;orchid&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;score&quot;</span>, <span class="at">main =</span> <span class="st">&quot;Histogram of score&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-86-1.png" alt="" width="672" /></p>
-<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="de_mod8.html#cb196-1" tabindex="-1"></a><span class="do">### volcano plot</span></span></code></pre></div>
-<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="de_mod8.html#cb197-1" tabindex="-1"></a><span class="co"># Step 1: add -log10(FDR), and label each gene Up / Down / Not sig</span></span>
-<span id="cb197-2"><a href="de_mod8.html#cb197-2" tabindex="-1"></a>res <span class="ot">&lt;-</span> res <span class="sc">%&gt;%</span></span>
-<span id="cb197-3"><a href="de_mod8.html#cb197-3" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb197-4"><a href="de_mod8.html#cb197-4" tabindex="-1"></a>    <span class="at">negLogFDR =</span> <span class="sc">-</span><span class="fu">log10</span>(FDR),</span>
-<span id="cb197-5"><a href="de_mod8.html#cb197-5" tabindex="-1"></a>    <span class="at">status =</span> <span class="fu">case_when</span>(</span>
-<span id="cb197-6"><a href="de_mod8.html#cb197-6" tabindex="-1"></a>      FDR <span class="sc">&lt;</span> <span class="fl">0.05</span> <span class="sc">&amp;</span> logFC <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">&quot;Up&quot;</span>,</span>
-<span id="cb197-7"><a href="de_mod8.html#cb197-7" tabindex="-1"></a>      FDR <span class="sc">&lt;</span> <span class="fl">0.05</span> <span class="sc">&amp;</span> logFC <span class="sc">&lt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">&quot;Down&quot;</span>,</span>
-<span id="cb197-8"><a href="de_mod8.html#cb197-8" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">&quot;Not sig&quot;</span></span>
-<span id="cb197-9"><a href="de_mod8.html#cb197-9" tabindex="-1"></a>    )</span>
-<span id="cb197-10"><a href="de_mod8.html#cb197-10" tabindex="-1"></a>  )</span>
-<span id="cb197-11"><a href="de_mod8.html#cb197-11" tabindex="-1"></a></span>
-<span id="cb197-12"><a href="de_mod8.html#cb197-12" tabindex="-1"></a><span class="co"># Step 2: pick the top 15 most significant genes on each side, to label</span></span>
-<span id="cb197-13"><a href="de_mod8.html#cb197-13" tabindex="-1"></a>top_up   <span class="ot">&lt;-</span> res <span class="sc">%&gt;%</span> <span class="fu">filter</span>(status <span class="sc">==</span> <span class="st">&quot;Up&quot;</span>)   <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(FDR) <span class="sc">%&gt;%</span> <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">15</span>)</span>
-<span id="cb197-14"><a href="de_mod8.html#cb197-14" tabindex="-1"></a>top_down <span class="ot">&lt;-</span> res <span class="sc">%&gt;%</span> <span class="fu">filter</span>(status <span class="sc">==</span> <span class="st">&quot;Down&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(FDR) <span class="sc">%&gt;%</span> <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">15</span>)</span>
-<span id="cb197-15"><a href="de_mod8.html#cb197-15" tabindex="-1"></a>top_genes <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(top_up, top_down)</span>
-<span id="cb197-16"><a href="de_mod8.html#cb197-16" tabindex="-1"></a></span>
-<span id="cb197-17"><a href="de_mod8.html#cb197-17" tabindex="-1"></a><span class="co"># Step 3: plot</span></span>
-<span id="cb197-18"><a href="de_mod8.html#cb197-18" tabindex="-1"></a><span class="fu">ggplot</span>(res, <span class="fu">aes</span>(<span class="at">x =</span> logFC, <span class="at">y =</span> negLogFDR, <span class="at">color =</span> status)) <span class="sc">+</span></span>
-<span id="cb197-19"><a href="de_mod8.html#cb197-19" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb197-20"><a href="de_mod8.html#cb197-20" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;Up&quot;</span> <span class="ot">=</span> <span class="st">&quot;#D55E00&quot;</span>, <span class="st">&quot;Down&quot;</span> <span class="ot">=</span> <span class="st">&quot;#0072B2&quot;</span>, <span class="st">&quot;Not sig&quot;</span> <span class="ot">=</span> <span class="st">&quot;grey&quot;</span>)) <span class="sc">+</span></span>
-<span id="cb197-21"><a href="de_mod8.html#cb197-21" tabindex="-1"></a> ggrepel<span class="sc">::</span><span class="fu">geom_text_repel</span>(<span class="at">data =</span> top_genes, <span class="fu">aes</span>(<span class="at">label =</span> gene), <span class="at">max.overlaps =</span> <span class="cn">Inf</span>) <span class="sc">+</span></span>
-<span id="cb197-22"><a href="de_mod8.html#cb197-22" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;log2 Fold Change&quot;</span>, <span class="at">y =</span> <span class="st">&quot;-log10(FDR)&quot;</span>, <span class="at">color =</span> <span class="st">&quot;Status&quot;</span>)<span class="sc">+</span></span>
-<span id="cb197-23"><a href="de_mod8.html#cb197-23" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">4.5</span>)) <span class="sc">+</span></span>
-<span id="cb197-24"><a href="de_mod8.html#cb197-24" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="de_mod8.html#cb203-1" tabindex="-1"></a><span class="do">### volcano plot</span></span></code></pre></div>
+<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="de_mod8.html#cb204-1" tabindex="-1"></a><span class="co"># Step 1: add -log10(FDR), and label each gene Up / Down / Not sig</span></span>
+<span id="cb204-2"><a href="de_mod8.html#cb204-2" tabindex="-1"></a>res <span class="ot">&lt;-</span> res <span class="sc">%&gt;%</span></span>
+<span id="cb204-3"><a href="de_mod8.html#cb204-3" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb204-4"><a href="de_mod8.html#cb204-4" tabindex="-1"></a>    <span class="at">negLogFDR =</span> <span class="sc">-</span><span class="fu">log10</span>(FDR),</span>
+<span id="cb204-5"><a href="de_mod8.html#cb204-5" tabindex="-1"></a>    <span class="at">status =</span> <span class="fu">case_when</span>(</span>
+<span id="cb204-6"><a href="de_mod8.html#cb204-6" tabindex="-1"></a>      FDR <span class="sc">&lt;</span> <span class="fl">0.05</span> <span class="sc">&amp;</span> logFC <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">&quot;Up&quot;</span>,</span>
+<span id="cb204-7"><a href="de_mod8.html#cb204-7" tabindex="-1"></a>      FDR <span class="sc">&lt;</span> <span class="fl">0.05</span> <span class="sc">&amp;</span> logFC <span class="sc">&lt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">&quot;Down&quot;</span>,</span>
+<span id="cb204-8"><a href="de_mod8.html#cb204-8" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">&quot;Not sig&quot;</span></span>
+<span id="cb204-9"><a href="de_mod8.html#cb204-9" tabindex="-1"></a>    )</span>
+<span id="cb204-10"><a href="de_mod8.html#cb204-10" tabindex="-1"></a>  )</span>
+<span id="cb204-11"><a href="de_mod8.html#cb204-11" tabindex="-1"></a></span>
+<span id="cb204-12"><a href="de_mod8.html#cb204-12" tabindex="-1"></a><span class="co"># Step 2: pick the top 15 most significant genes on each side, to label</span></span>
+<span id="cb204-13"><a href="de_mod8.html#cb204-13" tabindex="-1"></a>top_up   <span class="ot">&lt;-</span> res <span class="sc">%&gt;%</span> <span class="fu">filter</span>(status <span class="sc">==</span> <span class="st">&quot;Up&quot;</span>)   <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(FDR) <span class="sc">%&gt;%</span> <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">15</span>)</span>
+<span id="cb204-14"><a href="de_mod8.html#cb204-14" tabindex="-1"></a>top_down <span class="ot">&lt;-</span> res <span class="sc">%&gt;%</span> <span class="fu">filter</span>(status <span class="sc">==</span> <span class="st">&quot;Down&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(FDR) <span class="sc">%&gt;%</span> <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">15</span>)</span>
+<span id="cb204-15"><a href="de_mod8.html#cb204-15" tabindex="-1"></a>top_genes <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(top_up, top_down)</span>
+<span id="cb204-16"><a href="de_mod8.html#cb204-16" tabindex="-1"></a></span>
+<span id="cb204-17"><a href="de_mod8.html#cb204-17" tabindex="-1"></a><span class="co"># Step 3: plot</span></span>
+<span id="cb204-18"><a href="de_mod8.html#cb204-18" tabindex="-1"></a><span class="fu">ggplot</span>(res, <span class="fu">aes</span>(<span class="at">x =</span> logFC, <span class="at">y =</span> negLogFDR, <span class="at">color =</span> status)) <span class="sc">+</span></span>
+<span id="cb204-19"><a href="de_mod8.html#cb204-19" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb204-20"><a href="de_mod8.html#cb204-20" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;Up&quot;</span> <span class="ot">=</span> <span class="st">&quot;#D55E00&quot;</span>, <span class="st">&quot;Down&quot;</span> <span class="ot">=</span> <span class="st">&quot;#0072B2&quot;</span>, <span class="st">&quot;Not sig&quot;</span> <span class="ot">=</span> <span class="st">&quot;grey&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb204-21"><a href="de_mod8.html#cb204-21" tabindex="-1"></a> ggrepel<span class="sc">::</span><span class="fu">geom_text_repel</span>(<span class="at">data =</span> top_genes, <span class="fu">aes</span>(<span class="at">label =</span> gene), <span class="at">max.overlaps =</span> <span class="cn">Inf</span>) <span class="sc">+</span></span>
+<span id="cb204-22"><a href="de_mod8.html#cb204-22" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;log2 Fold Change&quot;</span>, <span class="at">y =</span> <span class="st">&quot;-log10(FDR)&quot;</span>, <span class="at">color =</span> <span class="st">&quot;Status&quot;</span>)<span class="sc">+</span></span>
+<span id="cb204-23"><a href="de_mod8.html#cb204-23" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">4.5</span>)) <span class="sc">+</span></span>
+<span id="cb204-24"><a href="de_mod8.html#cb204-24" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
 <p><img src="_main_files/figure-html/volcano-1.png" alt="" width="672" /></p>
 </div>
 <div id="result-output" class="section level2 hasAnchor">
 <h2>Result output<a href="de_mod8.html#result-output" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="de_mod8.html#cb198-1" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">summary</span>(<span class="fu">decideTests</span>(qlf, <span class="at">adjust.method =</span> <span class="st">&quot;BH&quot;</span>, <span class="at">p.value =</span> <span class="fl">0.05</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="de_mod8.html#cb205-1" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">summary</span>(<span class="fu">decideTests</span>(qlf, <span class="at">adjust.method =</span> <span class="st">&quot;BH&quot;</span>, <span class="at">p.value =</span> <span class="fl">0.05</span>)))</span></code></pre></div>
 <pre><code>##        -1*parental 1*palbo_resistant
 ## Down                            1655
 ## NotSig                         11983
 ## Up                              1608</code></pre>
-<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="de_mod8.html#cb200-1" tabindex="-1"></a><span class="co"># write.csv(res, &quot;results/edgeR_resistant_vs_parental_all_genes.csv&quot;, row.names = FALSE)</span></span></code></pre></div>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="de_mod8.html#cb207-1" tabindex="-1"></a><span class="co"># write.csv(res, &quot;results/edgeR_resistant_vs_parental_all_genes.csv&quot;, row.names = FALSE)</span></span></code></pre></div>
 </div>
 <div id="version-of-packages-and-r" class="section level2 hasAnchor">
 <h2>Version of packages and R<a href="de_mod8.html#version-of-packages-and-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="de_mod8.html#cb201-1" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="de_mod8.html#cb208-1" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code></pre></div>
 <pre><code>## R version 4.4.2 (2024-10-31)
 ## Platform: x86_64-apple-darwin20
 ## Running under: macOS Sequoia 15.8.1
