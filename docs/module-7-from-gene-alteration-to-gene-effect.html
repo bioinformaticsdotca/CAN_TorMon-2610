@@ -1,0 +1,1273 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Module 7 | From Gene Alteration to Gene Effect | Cancer Analysis 2026</title>
+  <meta name="description" content="Workshop website for the 2026 Cancer Analysis Canadian Bioinformatics Workshop" />
+  <meta name="generator" content="bookdown 0.46 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Module 7 | From Gene Alteration to Gene Effect | Cancer Analysis 2026" />
+  <meta property="og:type" content="book" />
+  <meta property="og:image" content="https://bioinformaticsdotca.github.io/CAN_TorMon-2610/img/bioinformatics_logo.png" />
+  <meta property="og:description" content="Workshop website for the 2026 Cancer Analysis Canadian Bioinformatics Workshop" />
+  <meta name="github-repo" content="bioinformaticsdotca/CAN_TorMon-2610" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Module 7 | From Gene Alteration to Gene Effect | Cancer Analysis 2026" />
+  
+  <meta name="twitter:description" content="Workshop website for the 2026 Cancer Analysis Canadian Bioinformatics Workshop" />
+  <meta name="twitter:image" content="https://bioinformaticsdotca.github.io/CAN_TorMon-2610/img/bioinformatics_logo.png" />
+
+<meta name="author" content="Faculty: Trevor Pugh, Linda Xiang, Yoshiaki Tanaka, Robert Eveleigh, Mathieu Lajoie, Vida Talebian, Aqsa Alam, Veronique Voisin, Ruth Isserlin, Nicholas Geoffrion" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="prev" href="module-6-transcriptomics-rna-seq.html"/>
+<link rel="next" href="module-8---pathway-enrichment-analysis.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LearningResource",
+  "name": "Cancer Analysis",
+  "description": "The complete set of tutorials, slides, and practical exercises for the Cancer Analysis 2026 Canadian Bioinformatics Workshop, hosted on GitHub Pages.",
+  "url": "https://bioinformaticsdotca.github.io/CAN_TorMon-2610",
+  "learningResourceType": ["tutorial", "slides", "exercise"],
+  "inLanguage": "en",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "provider": {
+    "@type": "Organization",
+    "name": "Bioinformatics.ca",
+    "url": "https://bioinformatics.ca"
+  },
+  "keywords": "",
+  "isPartOf": {
+    "@type": "Course",
+    "@id": "https://bioinformatics.ca/CAN_TorMon-2610/"
+  }
+}
+</script>
+
+
+<style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<a href="https://bioinformaticsdotca.github.io/">
+ <img src="img/bioinformatics_logo.png" width="90%" alt="bioinformatics.ca logo" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;">
+ </a>
+<li><center><strong><a href="./"><br>Cancer Analysis<br><br></a></strong></center></li>
+<a href="./">
+ <img src="img/CBW_CAN-1.png" width="70%" alt="Cancer Analysis logo" style="display:block; margin-left:auto; margin-right:auto; ">
+ </a>
+<br>
+
+<li class="divider"></li>
+<li class="part"><span><b>I Introduction</b></span></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Workshop Info</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#pre-work"><i class="fa fa-check"></i>Pre-work</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#class-photo"><i class="fa fa-check"></i>Class Photo</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#schedule"><i class="fa fa-check"></i>Schedule</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="meet-your-faculty.html"><a href="meet-your-faculty.html"><i class="fa fa-check"></i>Meet Your Faculty</a>
+<ul>
+<li class="chapter" data-level="" data-path="meet-your-faculty.html"><a href="meet-your-faculty.html#tas"><i class="fa fa-check"></i>TA’s</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="data-and-compute-setup.html"><a href="data-and-compute-setup.html"><i class="fa fa-check"></i>Data and Compute Setup</a></li>
+<li class="part"><span><b>II Modules</b></span></li>
+<li class="chapter" data-level="" data-path="module-1-intro-to-cancer-genomics.html"><a href="module-1-intro-to-cancer-genomics.html"><i class="fa fa-check"></i>Module 1 Intro to Cancer Genomics</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-1-intro-to-cancer-genomics.html"><a href="module-1-intro-to-cancer-genomics.html#lecture"><i class="fa fa-check"></i>Lecture</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-2-understanding-and-visualizing-data.html"><a href="module-2-understanding-and-visualizing-data.html"><i class="fa fa-check"></i>Module 2 Understanding and Visualizing Data</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-2-understanding-and-visualizing-data.html"><a href="module-2-understanding-and-visualizing-data.html#lecture-1"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-2-understanding-and-visualizing-data.html"><a href="module-2-understanding-and-visualizing-data.html#lab"><i class="fa fa-check"></i>Lab</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-2-understanding-and-visualizing-data.html"><a href="module-2-understanding-and-visualizing-data.html#part-1---igv"><i class="fa fa-check"></i>Part 1 - IGV</a></li>
+<li class="chapter" data-level="" data-path="module-2-understanding-and-visualizing-data.html"><a href="module-2-understanding-and-visualizing-data.html#part-2---cbioportal"><i class="fa fa-check"></i>Part 2 - cBioPortal</a></li>
+<li class="chapter" data-level="" data-path="module-2-understanding-and-visualizing-data.html"><a href="module-2-understanding-and-visualizing-data.html#part-3---cosmic"><i class="fa fa-check"></i>Part 3 - COSMIC</a></li>
+<li class="chapter" data-level="" data-path="module-2-understanding-and-visualizing-data.html"><a href="module-2-understanding-and-visualizing-data.html#part-4---advanced-exercises"><i class="fa fa-check"></i>Part 4 - Advanced Exercises</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-3-genome-alignment.html"><a href="module-3-genome-alignment.html"><i class="fa fa-check"></i>Module 3 Genome Alignment</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-3-genome-alignment.html"><a href="module-3-genome-alignment.html#lecture-2"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-3-genome-alignment.html"><a href="module-3-genome-alignment.html#lab-1"><i class="fa fa-check"></i>Lab</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-4-somatic-alterations.html"><a href="module-4-somatic-alterations.html"><i class="fa fa-check"></i>Module 4 Somatic Alterations</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-4-somatic-alterations.html"><a href="module-4-somatic-alterations.html#lecture-3"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-4-somatic-alterations.html"><a href="module-4-somatic-alterations.html#lab-2"><i class="fa fa-check"></i>Lab</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-4-somatic-alterations.html"><a href="module-4-somatic-alterations.html#introduction-to-variant-discovery-and-annotations-in-cancer-data"><i class="fa fa-check"></i>Introduction to Variant Discovery and Annotations in Cancer Data</a></li>
+<li class="chapter" data-level="" data-path="module-4-somatic-alterations.html"><a href="module-4-somatic-alterations.html#getting-started"><i class="fa fa-check"></i>Getting started</a></li>
+<li class="chapter" data-level="" data-path="module-4-somatic-alterations.html"><a href="module-4-somatic-alterations.html#variant-discovery-in-cancer"><i class="fa fa-check"></i>Variant Discovery in Cancer</a></li>
+<li class="chapter" data-level="" data-path="module-4-somatic-alterations.html"><a href="module-4-somatic-alterations.html#functional-annotations"><i class="fa fa-check"></i>Functional Annotations</a></li>
+<li class="chapter" data-level="" data-path="module-4-somatic-alterations.html"><a href="module-4-somatic-alterations.html#beyond-vep-what-else-does-pcgr-add-to-this-info-field"><i class="fa fa-check"></i>Beyond VEP: what else does PCGR add to this INFO field</a></li>
+<li class="chapter" data-level="" data-path="module-4-somatic-alterations.html"><a href="module-4-somatic-alterations.html#exit-the-container-environment"><i class="fa fa-check"></i>Exit the container environment</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-5-copy-number-alterations.html"><a href="module-5-copy-number-alterations.html"><i class="fa fa-check"></i>Module 5 Copy Number Alterations</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-5-copy-number-alterations.html"><a href="module-5-copy-number-alterations.html#lecture-4"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-5-copy-number-alterations.html"><a href="module-5-copy-number-alterations.html#lab-3"><i class="fa fa-check"></i>Lab</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-5-copy-number-alterations.html"><a href="module-5-copy-number-alterations.html#dataset-1"><i class="fa fa-check"></i>Dataset</a></li>
+<li class="chapter" data-level="" data-path="module-5-copy-number-alterations.html"><a href="module-5-copy-number-alterations.html#run-cobalt-amber-purple"><i class="fa fa-check"></i>Run cobalt , amber , purple</a></li>
+<li class="chapter" data-level="" data-path="module-5-copy-number-alterations.html"><a href="module-5-copy-number-alterations.html#run-genpipe"><i class="fa fa-check"></i>Run Genpipe</a></li>
+<li class="chapter" data-level="" data-path="module-5-copy-number-alterations.html"><a href="module-5-copy-number-alterations.html#analyze-the-purple-results"><i class="fa fa-check"></i>Analyze the purple results</a></li>
+<li class="chapter" data-level="" data-path="module-5-copy-number-alterations.html"><a href="module-5-copy-number-alterations.html#some-examples-of-gain-loss-deletion-and-loh"><i class="fa fa-check"></i>Some examples of Gain, Loss, Deletion and LOH</a></li>
+<li class="chapter" data-level="" data-path="module-5-copy-number-alterations.html"><a href="module-5-copy-number-alterations.html#visualize-a-gene-or-a-chromosome"><i class="fa fa-check"></i>Visualize a gene or a chromosome</a></li>
+<li class="chapter" data-level="" data-path="module-5-copy-number-alterations.html"><a href="module-5-copy-number-alterations.html#exercises"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html"><i class="fa fa-check"></i>Module 6 Transcriptomics RNA-seq</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html#lecture-5"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html#lab-4"><i class="fa fa-check"></i>Lab</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html#introduction-to-the-dataset"><i class="fa fa-check"></i>0. Introduction to the dataset</a></li>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html#setting-the-environment-variables"><i class="fa fa-check"></i>1. Setting the environment variables</a></li>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html#explore-data-in-your-workspace"><i class="fa fa-check"></i>2. Explore data in your workspace</a></li>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html#trimming-and-qc"><i class="fa fa-check"></i>3. Trimming and QC</a></li>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html#prepare-the-reference-genome-for-alignment"><i class="fa fa-check"></i>4. Prepare the reference genome for alignment</a></li>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html#alignment-with-hisat2"><i class="fa fa-check"></i>5. Alignment with HISAT2</a></li>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html#gene-count-estimation"><i class="fa fa-check"></i>6. Gene count estimation</a></li>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html#differential-expression-analysis"><i class="fa fa-check"></i>7. Differential Expression Analysis</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html"><i class="fa fa-check"></i>Module 7 | From Gene Alteration to Gene Effect</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#lecture-6"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#lab-5"><i class="fa fa-check"></i>Lab</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#part-1.-introduction"><i class="fa fa-check"></i>Part 1. Introduction</a></li>
+<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#part-2-inspect-the-data"><i class="fa fa-check"></i>Part 2: Inspect the data</a></li>
+<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#look-at-the-first-few-variant-records"><i class="fa fa-check"></i>2.4. Look at the first few variant records</a></li>
+<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#part-3.-summarize-the-variant-calls-with-bcftools"><i class="fa fa-check"></i>Part 3. Summarize the variant calls with bcftools</a></li>
+<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#part-4.-annotate-variants-with-snpeff"><i class="fa fa-check"></i>Part 4. Annotate variants with SnpEff</a></li>
+<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#part-5.-interpret-the-snpeff-html-summary"><i class="fa fa-check"></i>Part 5. Interpret the SnpEff HTML summary</a></li>
+<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#part-6.-examine-individual-variant-annotations"><i class="fa fa-check"></i>Part 6. Examine individual variant annotations</a></li>
+<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#part-7.-from-gene-function-to-cancer-interpretation"><i class="fa fa-check"></i>Part 7. From gene function to cancer interpretation</a></li>
+<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#investigate-variant-evidence"><i class="fa fa-check"></i>7.2. Investigate variant evidence</a></li>
+<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#part-8.-compare-snpeff-and-ensembl-vep"><i class="fa fa-check"></i>Part 8. Compare SnpEff and Ensembl VEP</a></li>
+<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#part-9.-final-interpretation"><i class="fa fa-check"></i>Part 9. Final interpretation</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-8---pathway-enrichment-analysis.html"><a href="module-8---pathway-enrichment-analysis.html"><i class="fa fa-check"></i>Module 8 - Pathway Enrichment Analysis</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-8---pathway-enrichment-analysis.html"><a href="module-8---pathway-enrichment-analysis.html#lecture-7"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-8---pathway-enrichment-analysis.html"><a href="module-8---pathway-enrichment-analysis.html#presentation-of-the-dataset"><i class="fa fa-check"></i>Presentation of the dataset</a></li>
+<li class="chapter" data-level="" data-path="module-8---pathway-enrichment-analysis.html"><a href="module-8---pathway-enrichment-analysis.html#lab-6"><i class="fa fa-check"></i>Lab</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="de_mod8.html"><a href="de_mod8.html"><i class="fa fa-check"></i>Module 8.1 Lab: Differential Expression</a>
+<ul>
+<li class="chapter" data-level="" data-path="de_mod8.html"><a href="de_mod8.html#install-and-load-libraries"><i class="fa fa-check"></i>Install and load libraries</a></li>
+<li class="chapter" data-level="" data-path="de_mod8.html"><a href="de_mod8.html#data-used-for-this-comparison"><i class="fa fa-check"></i>Data used for this comparison</a>
+<ul>
+<li class="chapter" data-level="" data-path="de_mod8.html"><a href="de_mod8.html#generate-a-dge-object"><i class="fa fa-check"></i>generate a DGE object</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="de_mod8.html"><a href="de_mod8.html#filter-low-count-genes-and-tmm-normalize"><i class="fa fa-check"></i>Filter low-count genes and TMM-normalize</a></li>
+<li class="chapter" data-level="" data-path="de_mod8.html"><a href="de_mod8.html#design-0-group-and-named-contrast"><i class="fa fa-check"></i>Design (~0 + group) and named contrast</a></li>
+<li class="chapter" data-level="" data-path="de_mod8.html"><a href="de_mod8.html#dispersion-estimation-and-quasi-likelihood-glm"><i class="fa fa-check"></i>Dispersion estimation and quasi-likelihood GLM</a></li>
+<li class="chapter" data-level="" data-path="de_mod8.html"><a href="de_mod8.html#calculating-ranking-score-and-export-full-results"><i class="fa fa-check"></i>Calculating ranking score and export full results</a></li>
+<li class="chapter" data-level="" data-path="de_mod8.html"><a href="de_mod8.html#result-output"><i class="fa fa-check"></i>Result output</a></li>
+<li class="chapter" data-level="" data-path="de_mod8.html"><a href="de_mod8.html#version-of-packages-and-r"><i class="fa fa-check"></i>Version of packages and R</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html"><i class="fa fa-check"></i>Module 8.2 Lab: Defined gene list (g:Profiler)</a>
+<ul>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#introduction"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#goal-of-the-exercise-1"><i class="fa fa-check"></i>Goal of the exercise 1</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#data"><i class="fa fa-check"></i>Data</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#exercise-1-defined"><i class="fa fa-check"></i>Exercise 1 - prepare the gene lists</a>
+<ul>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#step-1---install-and-load-libraries"><i class="fa fa-check"></i>Step 1 - Install and Load libraries</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#step-2---prepare-the-define-gene-lists"><i class="fa fa-check"></i>Step 2 - Prepare the define gene lists</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#step-3---run-gprofiler"><i class="fa fa-check"></i>Step 3 - Run g:Profiler</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#clear-visualization-of-the-results"><i class="fa fa-check"></i>Clear visualization of the results</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#step-4---explore-top-table-of-results"><i class="fa fa-check"></i>Step 4 - Explore top table of results</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#step-5---filter-results-by-geneset-size"><i class="fa fa-check"></i>Step 5 - Filter results by geneset size</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#step-6---run-gprofiler-with-your-own-genesets-example-using-baderlab-genesets"><i class="fa fa-check"></i>Step 6 - Run g:profiler with your own genesets (example using BaderLab genesets)</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#exercise-2---visualization"><i class="fa fa-check"></i>Exercise 2 - visualization</a>
+<ul>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#step-2---dot-plot-with-segment"><i class="fa fa-check"></i>Step 2 - Dot plot with segment</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#step-4---hierarchical-cluster"><i class="fa fa-check"></i>Step 4 - Hierarchical Cluster</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html"><i class="fa fa-check"></i>Module 8.3 Lab: Ranked gene list (fGSEA)</a>
+<ul>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html#introduction-1"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html#goal-of-the-exercise"><i class="fa fa-check"></i>Goal of the exercise</a></li>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html#data-1"><i class="fa fa-check"></i>Data</a></li>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html#background"><i class="fa fa-check"></i>Background</a></li>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html#exercise-1-ranked"><i class="fa fa-check"></i>Exercise 1 - prepare the gene lists</a>
+<ul>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html#step-1---install-and-load-libraries-1"><i class="fa fa-check"></i>Step 1 - Install and Load libraries</a></li>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html#step-2---prepare-the-rank-file-upload-the-gmt-file-and-run-fgsea"><i class="fa fa-check"></i>Step 2 - Prepare the rank file , upload the gmt file and run fgsea</a></li>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html#step-3---examine-the-results"><i class="fa fa-check"></i>Step 3 - Examine the results</a></li>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html#step-4---explore-the-tabular-format-of-the-results"><i class="fa fa-check"></i>Step 4 - Explore the tabular format of the results</a></li>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html#step-5---visualize-the-top-results"><i class="fa fa-check"></i>Step 5 - Visualize the top results</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html"><i class="fa fa-check"></i>Module 8.4 Lab: BYOD - Differential Expression (Palbo-resistant vs Abema-resistant)</a>
+<ul>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html#install-and-load-libraries-1"><i class="fa fa-check"></i>Install and load libraries</a></li>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html#data-used-for-this-comparison-1"><i class="fa fa-check"></i>Data used for this comparison</a>
+<ul>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html#generate-a-dge-object-1"><i class="fa fa-check"></i>generate a DGE object</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html#filter-low-count-genes-and-tmm-normalize-1"><i class="fa fa-check"></i>Filter low-count genes and TMM-normalize</a></li>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html#design-0-group-and-named-contrast-1"><i class="fa fa-check"></i>Design (~0 + group) and named contrast</a></li>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html#dispersion-estimation-and-quasi-likelihood-glm-1"><i class="fa fa-check"></i>Dispersion estimation and quasi-likelihood GLM</a></li>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html#calculating-ranking-score-and-export-full-results-1"><i class="fa fa-check"></i>Calculating ranking score and export full results</a></li>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html#result-output-1"><i class="fa fa-check"></i>Result output</a></li>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html#your-turn"><i class="fa fa-check"></i>YOUR TURN</a></li>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html#additional-exercise"><i class="fa fa-check"></i>Additional exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-9---variant-to-networks.html"><a href="module-9---variant-to-networks.html"><i class="fa fa-check"></i>Module 9 - Variant to Networks</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-9---variant-to-networks.html"><a href="module-9---variant-to-networks.html#network-visualization-and-analysis-with-cytoscape"><i class="fa fa-check"></i>Network Visualization and Analysis with Cytoscape</a></li>
+<li class="chapter" data-level="" data-path="module-9---variant-to-networks.html"><a href="module-9---variant-to-networks.html#lecture-8"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-9---variant-to-networks.html"><a href="module-9---variant-to-networks.html#lab-7"><i class="fa fa-check"></i>Lab</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html"><i class="fa fa-check"></i>Module 9 Lab Primer: Cytoscape Primer</a>
+<ul>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#goal-of-the-exercise-2"><i class="fa fa-check"></i>Goal of the exercise</a></li>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#data-2"><i class="fa fa-check"></i>Data</a></li>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#start-the-exercise"><i class="fa fa-check"></i>Start the exercise</a></li>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#exercise-1a---create-network-from-table"><i class="fa fa-check"></i>Exercise 1a - Create Network from table</a>
+<ul>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#setting-up-cytoscape-variables--"><i class="fa fa-check"></i>Setting up cytoscape variables -</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#exercise-1b---load-node-attributes"><i class="fa fa-check"></i>Exercise 1b - Load node attributes</a></li>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#exercise-1c---map-node-attributes-to-visual-style"><i class="fa fa-check"></i>Exercise 1c - Map node attributes to Visual Style</a></li>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#exercise-2---work-with-larger-networks"><i class="fa fa-check"></i>Exercise 2 - Work with larger networks</a></li>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#exercise-3---perform-basic-enrichment-analysis-using-enrichmenttable"><i class="fa fa-check"></i>Exercise 3 - Perform basic enrichment analysis using EnrichmentTable</a></li>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#enrichmenttabl-features"><i class="fa fa-check"></i>Exercise 3B - create Enrichment Map and Enhanced graphics nodes from EnrichmentTable</a></li>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#exercise-4---load-network-from-ndex"><i class="fa fa-check"></i>Exercise 4 - Load network from NDex</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html"><i class="fa fa-check"></i>Module 9.2 Lab: g:profiler Visualization</a>
+<ul>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#goal-of-the-exercise-3"><i class="fa fa-check"></i>Goal of the exercise</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#data-3"><i class="fa fa-check"></i>Data</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#enrichmentmap"><i class="fa fa-check"></i>EnrichmentMap</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#description-of-this-exercise"><i class="fa fa-check"></i>Description of this exercise</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#start-the-exercise-1"><i class="fa fa-check"></i>Start the exercise</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#exercise-1a---compare-up-and-down-regulated-gprofiler-results"><i class="fa fa-check"></i>Exercise 1a - compare UP and DOWN regulated g:Profiler results</a>
+<ul>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#step-1"><i class="fa fa-check"></i>Step 1</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#step-2"><i class="fa fa-check"></i>Step 2</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#step-3-explore-the-results"><i class="fa fa-check"></i>Step 3: Explore the results:</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#explore-detailed-results"><i class="fa fa-check"></i>Explore Detailed results</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#exercise-1b---create-em-from-fgsea-results-using-baderlab-genesets"><i class="fa fa-check"></i>Exercise 1b - create EM from fgsea results using Baderlab genesets</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#exercise-1c-optional---investigate-individual-pathways-in-genemania-or-string"><i class="fa fa-check"></i>Exercise 1c (optional) - investigate individual pathways in GeneMANIA or String</a>
+<ul>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#genemania"><i class="fa fa-check"></i>GeneMANIA</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#string"><i class="fa fa-check"></i>String</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-10.html"><a href="module-10.html"><i class="fa fa-check"></i>Module 10</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-10.html"><a href="module-10.html#lecture-9"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-10.html"><a href="module-10.html#lab-8"><i class="fa fa-check"></i>Lab</a></li>
+</ul></li>
+<li class="divider"></li>
+<h1 id="sponsors">Sponsors</h1>
+<center>
+<a href="https://www.cihr-irsc.gc.ca"><img src="img/sponsors/cihr.png" width=90% style="padding-bottom: 20px" alt="Canadian Institutes of Health Research logo."></a>
+
+<a href="https://genomecanada.ca/"><img src="img/sponsors/genomecanada.png" height="55" style="display:inline-block;"  style="padding-bottom: 20px" alt="Genome Canada logo.">
+<a href="https://www.ontariogenomics.ca/"><img src="img/sponsors/ontariogenomics.png" height="55" style="display:inline-block;" style="padding-bottom: 20px;" alt="Ontario Genomics logo.">
+<br><br>
+<a href="https://oicr.on.ca/"><img src="img/sponsors/oicr.png" width=35% style="display:inline-block;" style="padding-bottom: 20px" alt="Ontario Institute for Cancer Research logo.">
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Cancer Analysis 2026</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="module-7-from-gene-alteration-to-gene-effect" class="section level1 hasAnchor">
+<h1>Module 7 | From Gene Alteration to Gene Effect<a href="module-7-from-gene-alteration-to-gene-effect.html#module-7-from-gene-alteration-to-gene-effect" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="lecture-6" class="section level2 hasAnchor">
+<h2>Lecture<a href="module-7-from-gene-alteration-to-gene-effect.html#lecture-6" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<!-- PUT MY LINK HERE!!!!!!!!!!!! -->
+<iframe src="https://docs.google.com/presentation/d/18y1L6ftJpHAlFfFvX12euB0fZ650i-EY/preview" width="640" height="480" allow="autoplay">
+</iframe>
+</div>
+<div id="lab-5" class="section level2 hasAnchor">
+<h2>Lab<a href="module-7-from-gene-alteration-to-gene-effect.html#lab-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="part-1.-introduction" class="section level3 hasAnchor">
+<h3>Part 1. Introduction<a href="module-7-from-gene-alteration-to-gene-effect.html#part-1.-introduction" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>Author</strong>: Aqsa Alam</p>
+<div id="description-of-the-lab" class="section level4 hasAnchor">
+<h4>1.1: Description of the Lab<a href="module-7-from-gene-alteration-to-gene-effect.html#description-of-the-lab" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>In previous modules, you learned how to identify somatic variants. But identifying a variant is only the first step. What does that variant actually mean?</p>
+<p>A change in a DNA sequence does not automatically mean that a gene is dysfunctional or that the change contributes to cancer. To investigate its potential effect, we need to understand where the variant occurs, predict its molecular consequence, and examine what is already known about the affected gene and its variant.</p>
+<p>In this lab, you will explore somatic variants from two pancreatic ductal adenocarcinoma (PDAC) cases using <strong>bcftools</strong> and <strong>awk</strong>, and annotate those variants using <strong>SnpEff</strong>. You will explore the resulting annotations and HTML summary reports to investigate the types of variants present and their predicted effects on genes and transcripts. You will then examine selected variants in the context of existing databases and scientific evidence. To explore differences in annotation algorithms, you will also use <strong>Ensembl Variant Effect Predictor (VEP)</strong> to investigate a variant of your choice.</p>
+<p>Throughout the lab, keep one thing in mind: <strong>a predicted consequence is not the same thing as a demonstrated functional effect, and does not automatically establish that the variant contributes to cancer.</strong> Your goal is to use the available evidence to develop an informed hypothesis of what the variants might mean.</p>
+</div>
+<div id="our-data" class="section level4 hasAnchor">
+<h4>1.2: Our data<a href="module-7-from-gene-alteration-to-gene-effect.html#our-data" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>The data we will be using in this lab has been downloaded from the International Cancer Genome Consortium (ICGC) ARGO Data Platform, from a study of pancreatic ductal adenocarcinoma (PDAC) called <a href="https://platform.icgc-argo.org/program/PACA-CA">PACA-CA (<em>Pancreatic Cancer Harmonized ‘Omics’ analysis for Personalized Treatment</em>)</a>.The study is also described <a href="https://www.icgc-argo.org/page/96/panchope">here</a>. The dataset consists of two tumour samples, each from a different patient, which was analyzed using a matched normal (in which DNA from a patient’s tumour is analyzed alongside DNA from a normal blood sample from the same patient). This comparison helps distinguish variants in the tumour from variants in the patient’s healthy cells.</p>
+<div class="callout-purple">
+<span class="callout-icon"><i class="fas fa-star" aria-hidden="true"></i></span>
+<div class="callout-content">
+<p><strong>DATA SOURCES</strong></p>
+<p><strong>2. Patient 1: Single-Nucleotide Variants (SNVs)</strong></p>
+<ul>
+<li><a href="https://platform.icgc-argo.org/file/FL36108">PACA-CA.DO49419.SA520262.wgs.20201012.gatk-mutect2.somatic.snv.open-filter.vcf.gz</a></li>
+</ul>
+<p><strong>1. Patient 2: Insertions and Deletions (InDels)</strong></p>
+<ul>
+<li><a href="https://platform.icgc-argo.org/file/FL36576">PACA-CA.DO35350.SA520304.wgs.20201011.gatk-mutect2.somatic.indel.open-filter.vcf.gz</a></li>
+</ul>
+<p>Both datasets have the following features:</p>
+<ul>
+<li><strong>Assay:</strong> Whole-genome sequencing (WGS)</li>
+<li><strong>Instrument:</strong> Illumina</li>
+<li><strong>Genome build:</strong> GRCh38</li>
+<li><strong>Variant caller:</strong> GATK Mutect2</li>
+<li><strong>File processing:</strong> bcftools view</li>
+<li><strong>Sample type:</strong> Primary tumour, with matched normal sequencing used for somatic variant calling</li>
+<li><strong>Access:</strong> Open-access, filtered VCF</li>
+</ul>
+<p>The two cases contain different sets of variants:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Case</th>
+<th>Variant set</th>
+<th>Genes of interest</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Patient 1</td>
+<td>Single-nucleotide variants (SNVs)</td>
+<td>KRAS, BRCA2</td>
+</tr>
+<tr class="even">
+<td>Patient 2</td>
+<td>Insertions and deletions (InDels)</td>
+<td>SMAD4, TP53</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Note:</strong> These are two separate patients, not one combined tumour profile.</p>
+</div>
+</div>
+<p>The raw VCF data has been significantly filtered as per ICGC ARGO’s <a href="https://docs.icgc-argo.org/docs/analysis-workflows/dna-open-access-filtering">Open Access Variant Filtering workflow</a>. Open access regions are also described in detail <a href="https://github.com/icgc-argo/open-access-regions">here</a>. This is to prevent accidental disclosure of germline variants which might identify a patient and compromise their privacy. This gives us the ability to explore real cancer data without the need for special permissions, at the expense of some data loss.</p>
+<div class="callout-blue">
+<span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span>
+<div class="callout-content">
+<p>Before running any commands, consider:<br>
+<strong>1.</strong> What information can we get from a list of genomic variants?<br>
+<strong>2.</strong> If we know that a variant occurs in a cancer-associated gene, do we know what the variant does?<br></p>
+</div>
+</div>
+</div>
+<div id="our-tools" class="section level4 hasAnchor">
+<h4>1.3: Our tools<a href="module-7-from-gene-alteration-to-gene-effect.html#our-tools" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>We will use three command-line tools, one web-based tool, and explore some databases.</p>
+<p><strong>bcftools</strong></p>
+<p>bcftools is a collection of tools for working with VCF and BCF files. In this lab, we will use it to inspect variant calls, count records, and examine fields.</p>
+<p>To see the manual for bcftools, try one of the following commands:</p>
+<pre><code>$ bcftools --help
+$ man bcftools </code></pre>
+<p><strong>SnpEff</strong></p>
+<p>SnpEff annotates genetic variants by comparing their genomic positions and alleles with existing gene and transcript annotations. It predicts consequences such as:</p>
+<ul>
+<li><strong>missense variant:</strong> a coding change that alters an amino acid</li>
+<li><strong>synonymous variant:</strong> a coding change that does not alter an amino acid</li>
+<li><strong>stop_gained or nonsense variant:</strong> a change that introduces a premature stop codon</li>
+<li><strong>frameshift_variant:</strong> an insertion or deletion that shifts the coding reading frame</li>
+<li><strong>intron_variant:</strong> a variant located within an intron</li>
+</ul>
+<p>SnpEff also annotates variants by impact level:</p>
+<ul>
+<li><strong>HIGH impact:</strong> the variant is assumed to have disruptive impact in the protein and probably causes protein truncation, loss of function, or nonsense-mediated decay<br></li>
+<li><strong>MODERATE impact:</strong> a non-disruptive variant that might change protein effectiveness<br></li>
+<li><strong>LOW impact:</strong> assumed to be mostly harmless or unlikely to change protein behaviour<br></li>
+<li><strong>MODIFIER impact:</strong> usually non-coding variants or variants affecting non-coding genes, where predictions are difficult or there is no evidence of impact<br></li>
+</ul>
+<p>The documentation is the most thorough source of explanations for SnpEff outputs. You may find this useful to consult during the lab: <a href="https://pcingola.github.io/SnpEff/snpeff/inputoutput/">SnpEff Documentation</a>.</p>
+<p>To see the manual for SnpEff, try the following command:</p>
+<pre><code>$ java -jar /usr/local/snpEff/snpEff.jar --help</code></pre>
+<div class="callout-yellow">
+<span class="callout-icon"><i class="fas fa-bell" aria-hidden="true"></i></span>
+<div class="callout-content">
+<p><strong>Important consideration:</strong> SnpEff <strong>predicts</strong> molecular consequences. It does not <strong>determine</strong> that a variant changes protein function, causes cancer, or predicts response to treatment.</p>
+</div>
+</div>
+<p><strong>awk</strong></p>
+<p>awk is a command-line tool for processing and analyzing structured text. It reads input line by line, splits each line into fields (by default, separated by whitespace), and lets you select, extract, or manipulate specific fields. It is extremely useful for pattern-matching and extracting particular lines from a VCF-file, such as looking for lines that contain particular genes of interest.</p>
+<p>To see the manual for awk, try one of the following commands:</p>
+<pre><code>$ awk --help
+$ man awk</code></pre>
+<p><strong>Ensembl Variant Effect Predictor (VEP)</strong></p>
+<p>(From the homepage:) Ensembl VEP predicts the effect of your variants (SNPs, insertions, deletions, CNVs or structural variants) on gene transcripts and protein sequence, as well as regulatory regions. It reports reference data including gene and variant phenotype associations and population allele frequencies to facilitate variant prioritisation and interpretation.</p>
+<p>You can access Ensembl VEP here: <a href="https://useast.ensembl.org/info/docs/tools/vep/index.html">Ensembl VEP Homepage</a><br>
+The web browser version is here: <a href="https://useast.ensembl.org/Tools/VEP">Ensembl VEP Web Browser Version</a> (note: the browser version is very slow and often times out. If you get a time out error, just refresh and try again).</p>
+<p><strong>Variant Databases</strong></p>
+<p>Lastly, we will explore several databases that collect and organize existing evidence about genetic variants. These resources can help us investigate whether a variant has been previously reported, what is known about its clinical significance, and whether it may be relevant to cancer diagnosis or treatment.</p>
+<ul>
+<li><strong><a href="https://civicdb.org/">CIViC</a>:</strong> A community-curated database of evidence linking cancer variants to clinical significance, including potential implications for diagnosis, prognosis, and treatment.</li>
+<li><strong><a href="https://www.oncokb.org/">OncoKB</a>:</strong> A precision oncology knowledge base that summarizes the biological and clinical significance of cancer alterations, including evidence for their relevance to specific therapies.</li>
+<li><strong><a href="https://www.ncbi.nlm.nih.gov/clinvar/">ClinVar</a>:</strong> A public database of submitted interpretations of genetic variants and their relationships to health conditions. Entries may differ in their evidence, classification, and relevance to the cancer context being investigated.</li>
+</ul>
+<div class="callout-yellow">
+<span class="callout-icon"><i class="fas fa-bell" aria-hidden="true"></i></span>
+<div class="callout-content">
+<p><strong>Important consideration:</strong> Databases are often built by public submission or curated from published literature. A database entry does not automatically establish that a variant drives cancer or is clinically actionable. Similarly, a variant missing from a database does not automatically imply that the variant is not involved in cancer or is not clinically actionable. The variant may simply not have been reported or evaluated yet. <strong>The absence of evidence is not evidence of absence!</strong></p>
+</div>
+</div>
+</div>
+</div>
+<div id="part-2-inspect-the-data" class="section level3 hasAnchor">
+<h3>Part 2: Inspect the data<a href="module-7-from-gene-alteration-to-gene-effect.html#part-2-inspect-the-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="copy-the-files" class="section level4 hasAnchor">
+<h4>2.1. Copy the files<a href="module-7-from-gene-alteration-to-gene-effect.html#copy-the-files" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Navigate to your workspace directory and create a subdirectory for your work (call it whatever you want; here, I’m calling it module7):</p>
+<pre><code>$ cd workspace/
+$ mkdir module7
+$ cd module7</code></pre>
+<p>Copy the VCF files to your workspace. We will simplify the file names for the rest of the workshop.List the files:</p>
+<pre><code>$ cp ../CourseData/Module7/PACA-CA.DO49419.SA520262.wgs.20201012.gatk-mutect2.somatic.snv.open-filter.vcf.gz patient1_snvs.vcf.gz
+$ cp ../CourseData/Module7/PACA-CA.DO35350.SA520304.wgs.20201011.gatk-mutect2.somatic.indel.open-filter.vcf.gz patient2_indels.vcf.gz
+$ ls </code></pre>
+<div class="callout-blue">
+<span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span>
+<div class="callout-content">
+<p><strong>Questions:</strong></p>
+<ol style="list-style-type: decimal">
+<li>Which files have been provided??</li>
+<li>Which one contains SNVs? Which ones contains indels?</li>
+<li>What file extension do you see? What might it indicate?</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="examine-the-vcf-header" class="section level4 hasAnchor">
+<h4>2.2. Examine the VCF header<a href="module-7-from-gene-alteration-to-gene-effect.html#examine-the-vcf-header" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>VCF stands for <strong>Variant Call Format.</strong> It is a standard format used in bioinformatics for representing genetic variants.</p>
+<p>First, display the header of Patient 1’s VCF:</p>
+<pre><code>$ bcftools view -h patient1_snvs.vcf.gz | less </code></pre>
+<p>Do the same for patient 2. Examine the header.</p>
+<p>A VCF contains two main components:</p>
+<ol style="list-style-type: decimal">
+<li>Header lines, beginning with #, that describe the file, reference genome, samples, and fields.</li>
+<li>Variant records, which describe individual variants</li>
+</ol>
+<p>The header ends with a column-name line beginning with #CHROM.</p>
+<div class="callout-blue">
+<span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span>
+<div class="callout-content">
+<p><strong>Questions:</strong></p>
+<ol style="list-style-type: decimal">
+<li>What do the following FORMAT fields represent: <code>DP</code>, <code>AD</code>, <code>AF</code>?</li>
+<li>What do the following FILTER fields represent: <code>PASS</code>, <code>map_qual</code>, <code>germline</code>?</li>
+<li>What version of Mutect was used to process the results?</li>
+<li>What does <code>PASS</code> indicate?</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="understand-the-vcf-columns" class="section level4 hasAnchor">
+<h4>2.3. Understand the VCF columns<a href="module-7-from-gene-alteration-to-gene-effect.html#understand-the-vcf-columns" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Each variant record describes a difference between the reference genome and an observed alternate allele.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Column</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>CHROM</code></td>
+<td>Chromosome or contig containing the variant</td>
+</tr>
+<tr class="even">
+<td><code>POS</code></td>
+<td>Genomic position of the variant</td>
+</tr>
+<tr class="odd">
+<td><code>ID</code></td>
+<td>Variant identifier, if available</td>
+</tr>
+<tr class="even">
+<td><code>REF</code></td>
+<td>Reference allele</td>
+</tr>
+<tr class="odd">
+<td><code>ALT</code></td>
+<td>Alternate allele</td>
+</tr>
+<tr class="even">
+<td><code>QUAL</code></td>
+<td>Variant-call quality score</td>
+</tr>
+<tr class="odd">
+<td><code>FILTER</code></td>
+<td>Whether the record passed the applied filters</td>
+</tr>
+<tr class="even">
+<td><code>INFO</code></td>
+<td>Additional information about the variant</td>
+</tr>
+<tr class="odd">
+<td><code>FORMAT</code></td>
+<td>Description of sample-level fields</td>
+</tr>
+<tr class="even">
+<td>Sample column(s)</td>
+<td>Genotype and other sample-level information</td>
+</tr>
+</tbody>
+</table>
+<p>For example, a simplified record might look like this:</p>
+<pre class="text"><code>chr1  1778559  .  G  A  .  PASS  DP=29  GT:AD  0|1:8,3  0|0:18,0</code></pre>
+<p>Here, the reference allele is <code>G</code>, while the alternate allele is <code>A</code>. The total sequencing depth (DP) is 29 reads. The AD field indicates the number of reads supporting each allele, in reference–alternate order. The first sample has 8 reads supporting the reference allele and 3 supporting the alternate allele, while the second sample has 18 reads supporting the reference allele and 0 supporting the alternate allele. The GT field indicates the genotype of each sample: 0|1 for the first sample and 0|0 for the second sample.</p>
+<div class="callout-blue">
+<span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span>
+<div class="callout-content">
+<p><strong>Questions</strong></p>
+<ol style="list-style-type: decimal">
+<li>Which column tells you where a variant occurs?</li>
+<li>Which columns tell you what sequence was observed and what sequence it differs from?</li>
+<li>Does a <code>PASS</code> record necessarily represent a cancer-driving mutation?</li>
+<li>Does the presence of an alternate allele (an allele different from the reference sequence) mean that the variant is somatic (i.e, acquired in the tumour rather than inherited)?</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div id="look-at-the-first-few-variant-records" class="section level3 hasAnchor">
+<h3>2.4. Look at the first few variant records<a href="module-7-from-gene-alteration-to-gene-effect.html#look-at-the-first-few-variant-records" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Display the first five variant records from Patient 1:</p>
+<pre><code>$ bcftools view -H patient1_snvs.vcf.gz | head -n 5</code></pre>
+<p>The <code>-H</code> option excludes the header, allowing you to see only variant records. The <code>head</code> command limits the output to the first five lines.</p>
+<p>Repeat for Patient 2:</p>
+<pre><code>$ bcftools view -H patient2_indels.vcf.gz | head -n 5</code></pre>
+<div class="callout-blue">
+<span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span>
+<div class="callout-content">
+<p><strong>Questions</strong></p>
+<ol style="list-style-type: decimal">
+<li>What type of information can you read directly from these records?</li>
+<li>What do you notice about the difference between the <code>ALT</code> fields in the patient with the SNV data vs. the patient with the indel data?</li>
+<li>Can you identify a gene from these columns alone?</li>
+<li>Can you determine the effect of a variant on a protein from the <code>REF</code> and <code>ALT</code> fields alone?</li>
+<li>Why might two variants with different genomic positions have very different biological consequences?</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="part-3.-summarize-the-variant-calls-with-bcftools" class="section level3 hasAnchor">
+<h3>Part 3. Summarize the variant calls with bcftools<a href="module-7-from-gene-alteration-to-gene-effect.html#part-3.-summarize-the-variant-calls-with-bcftools" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Before annotating the variants, we should understand the contents of our input files.</p>
+<div id="count-the-variant-records" class="section level4 hasAnchor">
+<h4>3.1. Count the variant records<a href="module-7-from-gene-alteration-to-gene-effect.html#count-the-variant-records" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Count the number of variant records in Patient 1’s VCF:</p>
+<pre><code>$ bcftools view -H patient1_snvs.vcf.gz | wc -l</code></pre>
+<p>Repeat for Patient 2:</p>
+<pre><code>$ bcftools view -H patient2_indels.vcf.gz | wc -l</code></pre>
+<p>The <code>wc -l</code> command counts the number of lines. Here, each line represents a variant record.</p>
+<div class="callout-blue">
+<span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span>
+<div class="callout-content">
+<p><strong>Questions</strong></p>
+<ol style="list-style-type: decimal">
+<li>Which file contains more variant records?</li>
+<li>Does having more called variants mean that a tumour is more aggressive?</li>
+<li>Why should we avoid comparing these counts without knowing how the samples and variant sets were generated?</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="generate-a-summary-with-bcftools-stats" class="section level4 hasAnchor">
+<h4>3.2. Generate a summary with bcftools stats<a href="module-7-from-gene-alteration-to-gene-effect.html#generate-a-summary-with-bcftools-stats" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Run the following command for Patient 1:</p>
+<div class="sourceCode" id="cb153"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb153-1"><a href="module-7-from-gene-alteration-to-gene-effect.html#cb153-1" tabindex="-1"></a><span class="ex">$</span> bcftools stats patient1_snvs.vcf.gz <span class="op">&gt;</span> patient1_stats.txt</span></code></pre></div>
+<p>Then inspect the summary:</p>
+<div class="sourceCode" id="cb154"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb154-1"><a href="module-7-from-gene-alteration-to-gene-effect.html#cb154-1" tabindex="-1"></a><span class="ex">$</span> less patient1_stats.txt</span></code></pre></div>
+<p>Press <code>q</code> to exit <code>less</code>.</p>
+<p>Repeat for Patient 2:</p>
+<div class="sourceCode" id="cb155"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb155-1"><a href="module-7-from-gene-alteration-to-gene-effect.html#cb155-1" tabindex="-1"></a><span class="ex">$</span> bcftools stats patient2_indels.vcf.gz <span class="op">&gt;</span> patient2_stats.txt</span></code></pre></div>
+<p>The output includes summary statistics about the VCF records. Depending on the input, these can include the number of records, SNPs, insertions, deletions, transitions, transversions, and other metrics.</p>
+<p>You can also find the relevant statistics directly with:</p>
+<pre><code>$ grep &#39;^SN&#39; patient1_stats.txt
+$ grep &#39;^SN&#39; patient2_stats.txt</code></pre>
+<div class="callout-blue">
+<span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span>
+<div class="callout-content">
+<p><strong>Questions</strong></p>
+<ol style="list-style-type: decimal">
+<li>How many records does the summary report?</li>
+<li>How many samples does the summary report? Why are there this many number of samples?</li>
+</ol>
+</div>
+</div>
+<p>Finish examining the stats, then exit with <code>q</code>.</p>
+</div>
+</div>
+<div id="part-4.-annotate-variants-with-snpeff" class="section level3 hasAnchor">
+<h3>Part 4. Annotate variants with SnpEff<a href="module-7-from-gene-alteration-to-gene-effect.html#part-4.-annotate-variants-with-snpeff" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="what-are-we-adding-to-the-vcf" class="section level4 hasAnchor">
+<h4>4.1. What are we adding to the VCF?<a href="module-7-from-gene-alteration-to-gene-effect.html#what-are-we-adding-to-the-vcf" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>So far, our VCF tells us where the variants are and which alternate alleles were called. However, the records may not directly tell us whether a variant lies within a coding exon, changes an amino acid, introduces a stop codon, or affects a splice site.</p>
+<p>SnpEff uses an existing genome annotation database to predict these consequences.</p>
+<p>Conceptually, the process is:</p>
+<div align="center">
+<p>Variant coordinates and alleles<br />
++<br />
+reference genome and gene annotations<br />
+=<br />
+predicted molecular consequences</p>
+</div>
+<p>SnpEff does not experimentally test each protein. Instead, it applies standardized computational rules to available sequence and annotation information to generate consistent, reproducible predictions of variant effects.</p>
+</div>
+<div id="exploring-available-snpeff-databases" class="section level4 hasAnchor">
+<h4>4.2: Exploring Available SnpEff Databases<a href="module-7-from-gene-alteration-to-gene-effect.html#exploring-available-snpeff-databases" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Before annotating variants, SnpEff needs a database containing reference genome and gene annotation information. The database determines which genes and transcripts SnpEff uses to predict the consequences of each variant.</p>
+<p>SnpEff provides a command to list available genome databases. Run:</p>
+<pre><code>$ java -jar /usr/local/snpEff/snpEff.jar databases | less</code></pre>
+<p>You can also search the output for human genome databases associated with GRCh38:</p>
+<pre><code>$ java -jar /usr/local/snpEff/snpEff.jar databases | grep &#39;GRCh38&#39;</code></pre>
+<p>The output lists database identifiers and information about their availability. Depending on the SnpEff installation, it may include databases that are configured but not yet downloaded. While we have already installed the database we need, <code>GRCh38.p14</code>, you can install any database using the <code>download</code> command.</p>
+<div class="callout-blue">
+<span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span>
+<div class="callout-content">
+<p><strong>Questions</strong></p>
+<ol style="list-style-type: decimal">
+<li>Why is it important to use a database compatible with the reference genome used to call the variants?</li>
+</ol>
+</div>
+</div>
+<p>The reference genome that was used to generate the VCFs for this lab was <strong>GRCh38</strong>, so we will be using <strong>GRCh38.p14</strong> (the <code>.p14</code> bit refers to a patch release or fix).</p>
+</div>
+<div id="annotattion" class="section level4 hasAnchor">
+<h4>4.3. Annotattion<a href="module-7-from-gene-alteration-to-gene-effect.html#annotattion" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Run SnpEff on Patient 1’s SNV VCF:</p>
+<pre><code>$ java -jar /usr/local/snpEff/snpEff.jar -v -stats patient1_snpeff_summary.html GRCh38.p14 patient1_snvs.vcf.gz &gt; patient1_snvs_annotated.vcf</code></pre>
+<p>This command has several components:</p>
+<ul>
+<li><code>java -jar /usr/local/snpEff/snpEff.jar</code>: runs SnpEff.</li>
+<li><code>-v</code>: enables verbose output.</li>
+<li><code>-stats patient1_snpeff_summary.html</code>: requests an HTML summary report.</li>
+<li><code>GRCh38.p14</code>: specifies the genome annotation database.</li>
+<li><code>patient1_snvs.vcf.gz</code>: the input VCF.</li>
+<li><code>&gt;</code>: redirects the annotated VCF output into a new file.</li>
+<li><code>patient1_snvs_annotated.vcf</code>: the output file containing the annotations.</li>
+</ul>
+<p>The original VCF remains unchanged.</p>
+<p>Repeat the process for Patient 2:</p>
+<pre><code>$ java -jar /usr/local/snpEff/snpEff.jar -v -stats patient2_snpeff_summary.html GRCh38.p14 patient2_indels.vcf.gz &gt; patient2_indels_annotated.vcf</code></pre>
+<p>You can use the following list command to see new files at the top of the list:</p>
+<pre><code>$ ls -lt</code></pre>
+<div class="callout-blue">
+<span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span>
+<div class="callout-content">
+<p><strong>Questions</strong></p>
+<ol style="list-style-type: decimal">
+<li>Which new files were generated?</li>
+<li>Why is it useful to preserve the original VCF rather than overwrite it?</li>
+<li>What information do you expect to find in the annotated VCF that was absent from the original file?</li>
+<li>What assumptions does this annotation process rely on?</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="inspect-the-annotated-vcf" class="section level4 hasAnchor">
+<h4>4.4. Inspect the annotated VCF<a href="module-7-from-gene-alteration-to-gene-effect.html#inspect-the-annotated-vcf" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>First, inspect the header of the annotated file:</p>
+<pre><code>$ bcftools view -h patient1_snvs_annotated.vcf | less</code></pre>
+<p>Look for an INFO field called <code>ANN</code> by doing the following in <code>less</code>:</p>
+<pre><code>/ANN(hit enter)</code></pre>
+<p>Inspect the line. This tells you how to read the new annotations. The <code>ANN</code> field contains predicted annotations associated with each variant. These can include the predicted consequence, impact category, gene, transcript, and other information.</p>
+<p>Now inspect the first five annotated variant records and look at the <code>ANN</code> field.</p>
+<pre><code>$ bcftools view -H patient1_snvs_annotated.vcf | head -n 5</code></pre>
+<div class="callout-blue">
+<span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span>
+<div class="callout-content">
+<p><strong>Questions</strong></p>
+<ol style="list-style-type: decimal">
+<li>What has changed between the original and annotated VCFs?</li>
+<li>Which original fields have been retained?</li>
+<li>Where are the annotations stored?</li>
+<li>Does adding an annotation change the underlying variant call?</li>
+<li>Why might a single variant have more than one annotation?</li>
+</ol>
+</div>
+</div>
+<p>Repeat the above steps with Patient 2.</p>
+</div>
+</div>
+<div id="part-5.-interpret-the-snpeff-html-summary" class="section level3 hasAnchor">
+<h3>Part 5. Interpret the SnpEff HTML summary<a href="module-7-from-gene-alteration-to-gene-effect.html#part-5.-interpret-the-snpeff-html-summary" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="open-the-summary-report" class="section level4 hasAnchor">
+<h4>5.1. Open the summary report<a href="module-7-from-gene-alteration-to-gene-effect.html#open-the-summary-report" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Open <code>patient1_snpeff_summary.html</code> in your web browser. Repeat with <code>patient2_snpeff_summary.html</code>.</p>
+<p>These reports provide an overview of the consequences predicted across the input variant set. Explore the summary and consider what each statistic represents.</p>
+<p>The report includes information such as:</p>
+<ul>
+<li>Counts of variants and annotations.</li>
+<li>Predicted variant effects or consequences.</li>
+<li>Impact categories.</li>
+<li>Genes affected by variants.</li>
+<li>Distribution of consequences across different genomic regions.</li>
+</ul>
+<div class="callout-blue">
+<span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span>
+<div class="callout-content">
+<p><strong>Questions</strong></p>
+<ol style="list-style-type: decimal">
+<li>What is the largest effect by impact: high, low, moderate, or modifier? Is this the same for Patient 2? Why is it the largest category?</li>
+<li>Can you conclude that one patient’s cancer is more aggressive from these summaries alone?</li>
+<li>Why would it be misleading to rank patients by the number of HIGH-impact annotations alone?</li>
+<li>Why might a single variant have more than one annotation?</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div id="part-6.-examine-individual-variant-annotations" class="section level3 hasAnchor">
+<h3>Part 6. Examine individual variant annotations<a href="module-7-from-gene-alteration-to-gene-effect.html#part-6.-examine-individual-variant-annotations" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The summary tells us what is present across the dataset. Now we will examine individual records to understand what SnpEff predicts for particular variants.</p>
+<div id="extract-the-ann-field" class="section level4 hasAnchor">
+<h4>6.1. Extract the ANN field<a href="module-7-from-gene-alteration-to-gene-effect.html#extract-the-ann-field" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Use <code>bcftools query</code> to extract the variant coordinates, alleles, and SnpEff annotation field, so we are not distracted by other fields in the VCF when viewing annotations:</p>
+<pre><code>$ bcftools query -f &#39;%CHROM\t%POS\t%REF\t%ALT\t%INFO/ANN\n&#39; patient1_snvs_annotated.vcf &gt; patient1_annotations.tsv</code></pre>
+<p>Inspect the output:</p>
+<pre><code>$ head -n 5 patient1_annotations.tsv</code></pre>
+<p>Repeat for Patient 2.</p>
+<p>The output is a tab-separated file containing the genomic location, reference allele, alternate allele, and <code>ANN</code> annotations.</p>
+<p>A single <code>ANN</code> field may contain multiple annotations, separated by commas. Within an individual annotation, fields are separated by vertical bars (<code>|</code>).</p>
+<div class="callout-blue">
+<span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span>
+<div class="callout-content">
+<p><strong>Questions</strong></p>
+<ol style="list-style-type: decimal">
+<li>What do the first four fields of an ANN entry represent?</li>
+<li>What is the difference between a variant’s predicted consequence and its impact category?</li>
+<li>Why can a single genomic variant have multiple ANN entries?</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="investigate-a-variant-in-a-gene-of-interest" class="section level4 hasAnchor">
+<h4>6.2. Investigate a variant in a gene of interest<a href="module-7-from-gene-alteration-to-gene-effect.html#investigate-a-variant-in-a-gene-of-interest" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Select a variant annotated in one of the genes of interest for your patient.</p>
+<ul>
+<li><strong>Patient 1:</strong> investigate a variant in KRAS or BRCA2.</li>
+<li><strong>Patient 2:</strong> investigate a variant in SMAD4 or TP53.</li>
+</ul>
+<p>These genes are known to be altered in PDAC. You can search the annotation file using <strong>awk</strong>:</p>
+<pre><code>$ cat patient1_snvs_annotated.vcf | awk &#39;/KRAS/&#39;</code></pre>
+<p>Use the annotated VCF and the extracted annotation table to find the relevant record.</p>
+<p>Record the following information for one of the transcripts:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Question</th>
+<th>Your answer</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Gene</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Chromosome and position</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Reference allele (REF)</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Alternate allele (ALT)</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Coding change (c.?), if available)</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Protein change (p.?), if available)</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Predicted consequence</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>SnpEff impact category</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Transcript identifier, if available</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>(Note: for information about coding and protein change notation, see here: <a href="https://hgvs-nomenclature.org/stable/recommendations/general/">HGVS Nomenclature</a></p>
+<div class="callout-blue">
+<span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span>
+<div class="callout-content">
+<p><strong>Questions</strong></p>
+<ol style="list-style-type: decimal">
+<li>What does the annotation allow you to conclude?</li>
+<li>What remains unknown?</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="interpret-the-consequence" class="section level4 hasAnchor">
+<h4>6.3. Interpret the consequence<a href="module-7-from-gene-alteration-to-gene-effect.html#interpret-the-consequence" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Use the following guide to interpret common consequence terms.</p>
+<table>
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Consequence</th>
+<th>What it generally means</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>missense_variant</code></td>
+<td>A coding change predicts a different amino acid</td>
+</tr>
+<tr class="even">
+<td><code>synonymous_variant</code></td>
+<td>A coding change predicts the same amino acid</td>
+</tr>
+<tr class="odd">
+<td><code>stop_gained</code></td>
+<td>A change introduces a premature stop codon</td>
+</tr>
+<tr class="even">
+<td><code>frameshift_variant</code></td>
+<td>An insertion or deletion changes the reading frame of a coding sequence</td>
+</tr>
+<tr class="odd">
+<td><code>splice_donor_variant</code></td>
+<td>A variant affects a splice donor region</td>
+</tr>
+<tr class="even">
+<td><code>splice_acceptor_variant</code></td>
+<td>A variant affects a splice acceptor region</td>
+</tr>
+<tr class="odd">
+<td><code>intron_variant</code></td>
+<td>A variant lies within an intron</td>
+</tr>
+<tr class="even">
+<td><code>3_prime_UTR_variant</code></td>
+<td>A variant lies in the 3′ untranslated region</td>
+</tr>
+<tr class="odd">
+<td><code>upstream_gene_variant</code></td>
+<td>A variant lies upstream of a gene, according to the annotation</td>
+</tr>
+</tbody>
+</table>
+<p>These terms describe predicted molecular consequences relative to annotated genomic features and transcripts. They do not, by themselves, establish the full biological effect.</p>
+<div class="callout-blue">
+<span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span>
+<div class="callout-content">
+<p><strong>Questions</strong></p>
+<ol style="list-style-type: decimal">
+<li>Which of these consequences could directly alter the amino acid sequence?</li>
+<li>Why might a synonymous variant still be biologically relevant in some circumstances?</li>
+<li>Why could an intronic or untranslated-region variant matter even if it does not change an amino acid?</li>
+<li>Does every frameshift have the same effect on a gene?</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div id="part-7.-from-gene-function-to-cancer-interpretation" class="section level3 hasAnchor">
+<h3>Part 7. From gene function to cancer interpretation<a href="module-7-from-gene-alteration-to-gene-effect.html#part-7.-from-gene-function-to-cancer-interpretation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>A molecular consequence is only one part of variant interpretation. To understand the potential significance of a variant, we also need to understand the gene and investigate the available evidence.</p>
+<div id="investigate-the-gene" class="section level4 hasAnchor">
+<h4>7.1. Investigate the gene<a href="module-7-from-gene-alteration-to-gene-effect.html#investigate-the-gene" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Choose the gene associated with the variant you selected. You should have the coding or protein change in hand. For example, one entry is:</p>
+<pre><code>chr1    13421103        G       A       A|missense_variant|MODERATE|PRAMEF20|PRAMEF20|transcript|NM_001099852.2|protein_coding|4/4|c.1273G&gt;A|p.Val425Ile|1372/1597|1273/1428|425/475||</code></pre>
+<p>In this example entry, we can see the following gene, coding change, and protein change:</p>
+<pre><code>Gene: PRAMEF20
+Coding change: c.1273G&gt;A
+Protein change: p.Val425Ile</code></pre>
+<p>Search the literature for your variant (a cursory Google search is usually a good place to start. Supply the gene, coding notation, and protein change if applicable). You can use <a href="https://www.genecards.org/">GeneCards</a> for information about human genes.</p>
+<p>You can also use NCBI’s variation viewer to look at collated information for the variant, including in dbSNP: <a href="https://www.ncbi.nlm.nih.gov/variation/view/">NCBI variation viewer</a>. For this resource, type in the chromosome and coordinates in the search bar (ex. <code>chr13: 32379471-32379471</code>) and scroll down to see exact or nearby variants.</p>
+<div class="callout-blue">
+<span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span>
+<div class="callout-content">
+<p><strong>Questions</strong></p>
+<ol style="list-style-type: decimal">
+<li>Why does knowing a gene’s function help us interpret a variant?</li>
+<li>What is the pathogenicity of your variant (pathogenic, benign, etc)?</li>
+<li>If a gene is a tumour suppressor, does every variant in that gene disrupt its function?</li>
+<li>What is the difference between a plausible hypothesis and a demonstrated functional effect?</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div id="investigate-variant-evidence" class="section level3 hasAnchor">
+<h3>7.2. Investigate variant evidence<a href="module-7-from-gene-alteration-to-gene-effect.html#investigate-variant-evidence" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Look at the following resources:</p>
+<ul>
+<li><strong><a href="https://civicdb.org/">CIViC</a>:</strong> a community-curated resource containing evidence about the clinical significance of variants in cancer.</li>
+<li><strong><a href="https://www.oncokb.org/">OncoKB</a>:</strong> a precision oncology knowledge base that summarizes the biological and clinical significance of cancer alterations, including evidence for their relevance to specific therapies.</li>
+<li><strong><a href="https://www.ncbi.nlm.nih.gov/clinvar/">ClinVar</a>:</strong> a public database of submitted interpretations of genetic variants and their relationships to health conditions.</li>
+</ul>
+<p>Look up your selected variant or gene where possible. Record whether you find a matching variant, a relevant gene-level entry, or no useful record.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Resource</th>
+<th>What did you find?</th>
+<th>What can you infer?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>CIViC</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>OncoKB</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>ClinVar</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>If you cannot find the exact variant, record that result rather than substituting a different variant in the same gene without noting the distinction.</p>
+<div class="callout-blue">
+<span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span>
+<div class="callout-content">
+<p><strong>Questions</strong></p>
+<ol style="list-style-type: decimal">
+<li>What kind of information does each resource provide?</li>
+<li>Does finding a variant in a cancer database prove that it drives cancer?</li>
+<li>Does a ClinVar entry automatically establish that a variant is pathogenic or benign? Why or why not?</li>
+<li>If a database has no entry for your variant, does that mean the variant has no biological or clinical significance?</li>
+<li>Why might two variants in the same gene have very different levels of evidence?</li>
+<li>What additional information might be needed before concluding that a variant contributes to the development of this patient’s cancer?</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="part-8.-compare-snpeff-and-ensembl-vep" class="section level3 hasAnchor">
+<h3>Part 8. Compare SnpEff and Ensembl VEP<a href="module-7-from-gene-alteration-to-gene-effect.html#part-8.-compare-snpeff-and-ensembl-vep" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>SnpEff is not the only tool used to annotate variants. Ensembl’s Variant Effect Predictor (VEP) is another widely used tool for predicting the consequences of genetic variants.</p>
+<p>For this exercise, use the Ensembl VEP web interface:</p>
+<p><a href="https://useast.ensembl.org/Tools/VEP">Ensembl VEP Web Interface</a></p>
+<p>The browser version may be slow or time out. If this happens, you may just need to try again.</p>
+<ol style="list-style-type: decimal">
+<li>Select up to three variants from your annotated VCF file, i.e. the <code>_annotated.vcf</code> file (you can also use variants from the four known oncogenic genes provided above)</li>
+<li>Copy the chromosome, position, reference allele, and alternate allele into the VEP interface using the required input format. Below is an example. There is no need to copy the whole line; you can stop at the <code>FILTER</code> column.</li>
+</ol>
+<pre><code>chr13   32379471        .       G       A       .       PASS</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>Select a reference assembly that matches the input data. In our case, we will use GRCh38.p14.</li>
+<li>Run the annotation and inspect the results. You can click on the “run instant VEP for current line” button for faster results.</li>
+<li>Compare the predicted consequences with those reported by SnpEff.</li>
+</ol>
+<p>Record your comparison:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Variant</th>
+<th>SnpEff consequence</th>
+<th>VEP consequence</th>
+<th>Same or different?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Variant 1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Variant 2</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Variant 3</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="callout-blue">
+<span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span>
+<div class="callout-content">
+<p><strong>Questions</strong></p>
+<ol style="list-style-type: decimal">
+<li>Did the tools predict the same consequence for every variant?</li>
+<li>If they differed, did they annotate the same transcript?</li>
+<li>Could differences in transcript selection, annotation releases, or prediction rules explain the discrepancy?</li>
+<li>If both tools agree, does this experimentally confirm the predicted effect?</li>
+<li>If they disagree, what would you investigate before deciding how to interpret the variant?</li>
+</ol>
+</div>
+</div>
+<p>Do not assume that one tool is automatically correct. A discrepancy is a reason to investigate the underlying annotations and assumptions.</p>
+</div>
+<div id="part-9.-final-interpretation" class="section level3 hasAnchor">
+<h3>Part 9. Final interpretation<a href="module-7-from-gene-alteration-to-gene-effect.html#part-9.-final-interpretation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Return to the variant you selected.</p>
+<p>Write a short interpretation of your favourite variant. Your response should address the following:</p>
+<ol style="list-style-type: decimal">
+<li><strong>The alteration:</strong> What is the genomic variant?</li>
+<li><strong>The annotation:</strong> What molecular consequence did SnpEff predict?</li>
+<li><strong>The gene:</strong> What is the normal function of the affected gene, and how is it relevant to cancer?</li>
+<li><strong>The evidence:</strong> What did you find in the databases or literature?</li>
+<li><strong>The hypothesis:</strong> What effect might this variant have?</li>
+<li><strong>The uncertainty:</strong> What can you not conclude from the available information?</li>
+</ol>
+<p>Your interpretation should distinguish between a predicted molecular consequence, a demonstrated functional effect, a contribution to cancer, and a potential clinical implication.</p>
+<p>You are not expected to prove that your selected variant is a cancer driver. You are expected to make a reasoned interpretation of the available evidence and explain its limitations.</p>
+<div class="callout-blue">
+<span class="callout-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></span>
+<div class="callout-content">
+<p><strong>Final questions</strong></p>
+<ol style="list-style-type: decimal">
+<li>Why is a gene’s function not enough to determine the effect of an individual variant?</li>
+<li>What additional evidence would help establish whether a variant contributes to cancer?</li>
+<li>What would you need to know before deciding whether a variant could inform treatment?</li>
+</ol>
+</div>
+</div>
+<div class="callout-purple">
+<span class="callout-icon"><i class="fas fa-star" aria-hidden="true"></i></span>
+<div class="callout-content">
+<p><strong>Key takeaway</strong></p>
+<p>A variant annotation is a starting point for interpretation, not the final answer.</p>
+<p>We began with a difference in DNA sequence, used genome annotations to predict its molecular consequence, investigated the affected gene and available evidence, and then formed our hypothesis.</p>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="module-6-transcriptomics-rna-seq.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="module-8---pathway-enrichment-analysis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": false,
+    "twitter": false,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/bioinformaticsdotca/CAN_TorMon-2610/blob/main/070-module-7.Rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["_main.pdf", "_main.epub"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

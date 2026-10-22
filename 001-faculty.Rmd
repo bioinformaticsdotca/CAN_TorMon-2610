@@ -13,7 +13,7 @@ Dr. Trevor Pugh, PhD, FACMG is a cancer genomics researcher and board-certified 
 
 #### Linda Xiang (She/Her)
 
-<img src="./img/faculty/MISSINGPHOTO.PNG" width="200" alt="Photo of Linda Xiang">
+<img src="./img/faculty/LindaXiang.jpg" width="200" alt="Photo of Linda Xiang">
 
 >Data Scientist II <br>
 Ontario Institute of Cancer Research  <br>
@@ -24,7 +24,7 @@ Linda is a Senior Data Scientist with over a decade of experience designing and 
 
 #### Yoshiaki Tanaka (He/Him)
 
-<img src="./img/faculty/MISSINGPHOTO.PNG" width="200" alt="Photo coming soon">
+<img src="./img/faculty/Tanaka.jpg" width="200" alt="Yoshiaki Tanaka">
 
 >Associate Professor <br>
 Centre de Recherche de l’Hôpital Maisonneuve-Rosemont, Université de Montréal <br>
@@ -35,13 +35,14 @@ Dr. Yoshiaki Tanaka obtained his undergraduate degree (2006) in pharmaceutical s
 
 #### Robert Eveleigh
 
-<img src="./img/faculty/MISSINGPHOTO.PNG" width="200" alt="Photo coming soon">
+<img src="./img/faculty/robert_eveleigh_module4.jpg" width="200" alt="Photo of Robert Eveleigh">
 
-> <br>
- <br>
- >
+> Senior Bioinformatics Specialist <br>
+ Canacian Centre for Computational Genomics (C3G), McGill University <br>
+ Montral, QC, Canada >
 
-Bio coming soon
+Robert Eveleigh, MSc, is a Senior Bioinformatics Specialist at the Canadian Centre for Computational Genomics (C3G) at McGill University. For about 15 years he has developed variant detection pipelines in GenPipes, with a focus on DNA alterations, and he has benchmarked each new sequencing instrument brought into the centre. He develops SOPs for benchmarking to determine the optimal steps for germline and somatic alteration detection. He led development of the GenPipes tumor-pair pipeline, which has processed over 5000 patients, including hundreds from PROFYLE (Precision Oncology for Young People). He is first author of a 2026 Genome Biology paper benchmarking sequencing technologies for variant detection.
+
 
 #### Mathieu Lajoie 
 
@@ -55,7 +56,7 @@ Mathieu Lajoie is a Research Associate and Bioinformatician in Dr. Ian Watson’
 
 #### Vida Talebian 
 
-<img src="./img/faculty/MISSINGPHOTO.PNG" width="200" alt="Photo coming soon">
+<img src="./img/faculty/vida_headshot.png" width="200" alt="Vida Talebian">
 
 >Bioinformatician <br>
 Ontario Institute for Cancer Research <br>
@@ -76,7 +77,15 @@ Aqsa Alam is a bioinformatician in the Clinical Genome Interpretation team at th
 
 #### Veronique Voisin
 
-bio coming soon
+<img src="./img/faculty/veronique_CBW.png" width="200" alt="Photo of Veronique Voisin">
+
+> Computational Biologist <br>
+Princess Margaret Center <br>
+Toronto,ON,Canada <br>
+veronique.voisin@gmail.com
+
+Véronique Voisin, PhD, is a computational biologist affiliated with the Princess Margaret Cancer Centre (UHN), where she works with Dr. Aaron Schimmer, SickKids, where she works with Dr. Grace Egan, and the University of Toronto, where she continues to collaborate with Dr. Gary Bader. She uses bioinformatics tools to analyze omics and clinical data and untangle biological questions relevant to leukemia and cancer treatment. Her work includes pathway and network analysis of gene expression data using tools such as GSEA and Cytoscape. She has also contributed to bioinformatics training through the Canadian Bioinformatics Workshop (CBW) over several years.
+
 
 #### Ruth Isserlin
 
@@ -91,15 +100,22 @@ Bioinformatician and data analyst in the Bader lab applying pathway and data ana
 
 #### Nicholas Geoffrion
 
-<img src="./img/faculty/MISSINGPHOTO.PNG" width="200" alt="Photo coming soon">
+<img src="./img/faculty/nicholas.png" width="200" alt="Photo of Nicholas Geoffrion">
 
-bio coming soon
+>Senior Bioinformatician, Infrastructre Manager <br>
+Meta Platform for Integrated Genomics, Azrieli Reasearch Center, CHU Sainte-Justine
+ <br>
+Montréal, QC, Canada <br>
+nicholas.geoffrion.hsj@ssss.gouv.qc.ca
+
+Nicholas Geoffrion is a bioinformatician and Genomics Platform Infrastructure Manager at the Azrieli Research Centre in Montréal, specializing in long-read sequencing, computational genomics, and translational cancer research. His work focuses on integrating emerging sequencing technologies, particularly Oxford Nanopore, with scalable bioinformatics pipelines and high-performance computing infrastructure to support genomic research and clinical applications, with a particular emphasis on pediatric oncology. His interests span software engineering, infrastructure automation, open-source technologies, and the development of computational tools that make genomic analysis faster, more accessible, and clinically actionable.
+
 
 ## TA's
 
 #### Oliver De Sa
 
-<img src="./img/faculty/Oliver.jpeg" width="200" alt="Photo of Oliver De Sa">
+<img src="./img/faculty/Oliver.jpg" width="200" alt="Photo of Oliver De Sa">
 
 >Bioinformatician III <br>
 Ontario Institute for Cancer Research <br>
@@ -116,24 +132,44 @@ Bio coming soon
 
 #### Jordan Babadoudou
 
-<img src="./img/faculty/MISSINGPHOTO.png" width="200" alt="Photo coming soon">
+<img src="./img/faculty/jordan.jpg" width="200" alt="Photo of Jordan Babadoudou">
 
-bio coming soon
+
+>M.Sc. Student in Bioinformatics <br>
+Montreal University  <br>
+Montréal, Quebec, Canada <br>
+jordan.babadoudou@umontreal.ca
+
 
 #### Alain Pacis
 
-<img src="./img/faculty/MISSINGPHOTO.png" width="200" alt="Photo coming soon">
+<img src="./img/faculty/Alain.png" width="200" alt="Photo of Alain Pacis">
 
-bio coming soon
+>Bioinformatics Specialist <br>
+Canadian Centre for Computational Genomics (C3G), McGill University<br>
+Montréal, Quebec, Canada <br>
+
+
+Alain received his undergraduate degree in Cell and Molecular Biology at Concordia University. In 2018, he obtained his PhD in Bioinformatics from University of Montreal. His research focused on the genetic and the epigenetic regulation of innate immune responses to infection. As a bioinformatician at C3G since August 2018, Alain’s work primarily involves bulk/single-cell/spatial RNA-seq, epigenomics and cancer genomics.
 
 #### Rong Ma
 
-<img src="./img/faculty/MISSINGPHOTO.png" width="200" alt="Photo coming soon">
+<img src="./img/faculty/RongMa_headshot.PNG" width="200" alt="Photo of Rong Ma">
 
-bio coming soon
+>PhD Candidate in Human Genetics <br>
+McGill University & Kyoto University <br>
+Montréal, Quebec, Canada <br>
+rong.ma2@mail.mcgill.ca
+
+Rong Ma began his PhD in Human Genetics at McGill University in Fall 2019, joining the laboratories of Drs. Ian Watson and Guillaume Bourque. He holds a Bachelor's degree in Biochemistry and a Master's degree in Biomedical Informatics from Columbia University. His current research focuses on leveraging bioinformatics and computational approaches to advance our understanding of melanoma biology from a multi-omics perspective. In particular, he aims to investigate the molecular mechanisms underlying resistance to immune checkpoint inhibitor (ICI) therapy in melanoma patients by integrating cutting-edge genomic and transcriptomic profiling technologies.
 
 #### Zahra Tavakol
 
+>PhD Student in Computational Biology<br>
+Concordia University <br>
+Montréal, Quebec, Canada <br>
+zahra.tavakolhamedani@concordia.ca
+
 <img src="./img/faculty/MISSINGPHOTO.png" width="200" alt="Photo coming soon">
 
-bio coming soon
+She began her PhD in Quantitative Life Sciences at McGill University in Winter 2025 and joined the Kuzmin Lab at Concordia University and the Najafabadi Lab at McGill University in Winter 2026. She holds both Bachelor's and Master's degrees in Molecular Biotechnology. Her current research focuses on using bioinformatics and computational tools to analyze single-cell transcriptomic data, infer copy number aberrations, and perform pathway enrichment analysis. Her PhD research aims to develop computational approaches to predict transcriptional states at the single-cell level.

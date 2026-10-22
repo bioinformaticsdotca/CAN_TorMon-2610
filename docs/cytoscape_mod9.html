@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Module 9 Lab Primer: Cytoscape Primer | Cancer Analysis 2026</title>
   <meta name="description" content="Workshop website for the 2026 Cancer Analysis Canadian Bioinformatics Workshop" />
-  <meta name="generator" content="bookdown 0.47 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.46 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Module 9 Lab Primer: Cytoscape Primer | Cancer Analysis 2026" />
   <meta property="og:type" content="book" />
@@ -51,6 +51,8 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <script type="application/ld+json">
 {
@@ -183,70 +185,167 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="" data-path="data-and-compute-setup.html"><a href="data-and-compute-setup.html"><i class="fa fa-check"></i>Data and Compute Setup</a></li>
 <li class="part"><span><b>II Modules</b></span></li>
-<li class="chapter" data-level="" data-path="module-1.html"><a href="module-1.html"><i class="fa fa-check"></i>Module 1</a>
+<li class="chapter" data-level="" data-path="module-1-intro-to-cancer-genomics.html"><a href="module-1-intro-to-cancer-genomics.html"><i class="fa fa-check"></i>Module 1 Intro to Cancer Genomics</a>
 <ul>
-<li class="chapter" data-level="" data-path="module-1.html"><a href="module-1.html#lecture"><i class="fa fa-check"></i>Lecture</a></li>
-<li class="chapter" data-level="" data-path="module-1.html"><a href="module-1.html#lab"><i class="fa fa-check"></i>Lab</a></li>
+<li class="chapter" data-level="" data-path="module-1-intro-to-cancer-genomics.html"><a href="module-1-intro-to-cancer-genomics.html#lecture"><i class="fa fa-check"></i>Lecture</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html"><i class="fa fa-check"></i>Module 2</a>
+<li class="chapter" data-level="" data-path="module-2-understanding-and-visualizing-data.html"><a href="module-2-understanding-and-visualizing-data.html"><i class="fa fa-check"></i>Module 2 Understanding and Visualizing Data</a>
 <ul>
-<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#lecture-1"><i class="fa fa-check"></i>Lecture</a></li>
-<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#lab-1"><i class="fa fa-check"></i>Lab</a>
+<li class="chapter" data-level="" data-path="module-2-understanding-and-visualizing-data.html"><a href="module-2-understanding-and-visualizing-data.html#lecture-1"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-2-understanding-and-visualizing-data.html"><a href="module-2-understanding-and-visualizing-data.html#lab"><i class="fa fa-check"></i>Lab</a>
 <ul>
-<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#part-1---igv"><i class="fa fa-check"></i>Part 1 - IGV</a></li>
-<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#part-2---cbioportal"><i class="fa fa-check"></i>Part 2 - cBioPortal</a></li>
-<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#part-3---cosmic"><i class="fa fa-check"></i>Part 3 - COSMIC</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="module-3.html"><a href="module-3.html"><i class="fa fa-check"></i>Module 3</a>
-<ul>
-<li class="chapter" data-level="" data-path="module-3.html"><a href="module-3.html#lecture-2"><i class="fa fa-check"></i>Lecture</a></li>
-<li class="chapter" data-level="" data-path="module-3.html"><a href="module-3.html#lab-2"><i class="fa fa-check"></i>Lab</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="module-4.html"><a href="module-4.html"><i class="fa fa-check"></i>Module 4</a>
-<ul>
-<li class="chapter" data-level="" data-path="module-4.html"><a href="module-4.html#lecture-3"><i class="fa fa-check"></i>Lecture</a></li>
-<li class="chapter" data-level="" data-path="module-4.html"><a href="module-4.html#lab-3"><i class="fa fa-check"></i>Lab</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="module-5.html"><a href="module-5.html"><i class="fa fa-check"></i>Module 5</a>
-<ul>
-<li class="chapter" data-level="" data-path="module-5.html"><a href="module-5.html#lecture-4"><i class="fa fa-check"></i>Lecture</a></li>
-<li class="chapter" data-level="" data-path="module-5.html"><a href="module-5.html#lab-4"><i class="fa fa-check"></i>Lab</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="module-6.html"><a href="module-6.html"><i class="fa fa-check"></i>Module 6</a>
-<ul>
-<li class="chapter" data-level="" data-path="module-6.html"><a href="module-6.html#lecture-5"><i class="fa fa-check"></i>Lecture</a></li>
-<li class="chapter" data-level="" data-path="module-6.html"><a href="module-6.html#lab-5"><i class="fa fa-check"></i>Lab</a>
-<ul>
-<li class="chapter" data-level="" data-path="module-6.html"><a href="module-6.html#introduction-to-the-dataset"><i class="fa fa-check"></i>Introduction to the dataset</a></li>
-<li class="chapter" data-level="" data-path="module-6.html"><a href="module-6.html#setting-the-environment-variables"><i class="fa fa-check"></i>Setting the environment variables</a></li>
-<li class="chapter" data-level="" data-path="module-6.html"><a href="module-6.html#copy-data-to-your-workspace"><i class="fa fa-check"></i>Copy data to your workspace</a></li>
-<li class="chapter" data-level="" data-path="module-6.html"><a href="module-6.html#trimming-and-qc"><i class="fa fa-check"></i>Trimming and QC</a></li>
-<li class="chapter" data-level="" data-path="module-6.html"><a href="module-6.html#prepare-the-reference-genome-for-alignment"><i class="fa fa-check"></i>Prepare the reference genome for alignment</a></li>
-<li class="chapter" data-level="" data-path="module-6.html"><a href="module-6.html#alignment-with-hisat2"><i class="fa fa-check"></i>Alignment with HISAT2</a></li>
-<li class="chapter" data-level="" data-path="module-6.html"><a href="module-6.html#gene-count-estimation"><i class="fa fa-check"></i>Gene count estimation</a></li>
+<li class="chapter" data-level="" data-path="module-2-understanding-and-visualizing-data.html"><a href="module-2-understanding-and-visualizing-data.html#part-1---igv"><i class="fa fa-check"></i>Part 1 - IGV</a></li>
+<li class="chapter" data-level="" data-path="module-2-understanding-and-visualizing-data.html"><a href="module-2-understanding-and-visualizing-data.html#part-2---cbioportal"><i class="fa fa-check"></i>Part 2 - cBioPortal</a></li>
+<li class="chapter" data-level="" data-path="module-2-understanding-and-visualizing-data.html"><a href="module-2-understanding-and-visualizing-data.html#part-3---cosmic"><i class="fa fa-check"></i>Part 3 - COSMIC</a></li>
+<li class="chapter" data-level="" data-path="module-2-understanding-and-visualizing-data.html"><a href="module-2-understanding-and-visualizing-data.html#part-4---advanced-exercises"><i class="fa fa-check"></i>Part 4 - Advanced Exercises</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="module-7.html"><a href="module-7.html"><i class="fa fa-check"></i>Module 7</a>
+<li class="chapter" data-level="" data-path="module-3-genome-alignment.html"><a href="module-3-genome-alignment.html"><i class="fa fa-check"></i>Module 3 Genome Alignment</a>
 <ul>
-<li class="chapter" data-level="" data-path="module-7.html"><a href="module-7.html#lecture-6"><i class="fa fa-check"></i>Lecture</a></li>
-<li class="chapter" data-level="" data-path="module-7.html"><a href="module-7.html#lab-6"><i class="fa fa-check"></i>Lab</a></li>
+<li class="chapter" data-level="" data-path="module-3-genome-alignment.html"><a href="module-3-genome-alignment.html#lecture-2"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-3-genome-alignment.html"><a href="module-3-genome-alignment.html#lab-1"><i class="fa fa-check"></i>Lab</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="module-8.html"><a href="module-8.html"><i class="fa fa-check"></i>Module 8</a>
+<li class="chapter" data-level="" data-path="module-4-somatic-alterations.html"><a href="module-4-somatic-alterations.html"><i class="fa fa-check"></i>Module 4 Somatic Alterations</a>
 <ul>
-<li class="chapter" data-level="" data-path="module-8.html"><a href="module-8.html#lecture-7"><i class="fa fa-check"></i>Lecture</a></li>
-<li class="chapter" data-level="" data-path="module-8.html"><a href="module-8.html#lab-7"><i class="fa fa-check"></i>Lab</a></li>
+<li class="chapter" data-level="" data-path="module-4-somatic-alterations.html"><a href="module-4-somatic-alterations.html#lecture-3"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-4-somatic-alterations.html"><a href="module-4-somatic-alterations.html#lab-2"><i class="fa fa-check"></i>Lab</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-4-somatic-alterations.html"><a href="module-4-somatic-alterations.html#introduction-to-variant-discovery-and-annotations-in-cancer-data"><i class="fa fa-check"></i>Introduction to Variant Discovery and Annotations in Cancer Data</a></li>
+<li class="chapter" data-level="" data-path="module-4-somatic-alterations.html"><a href="module-4-somatic-alterations.html#getting-started"><i class="fa fa-check"></i>Getting started</a></li>
+<li class="chapter" data-level="" data-path="module-4-somatic-alterations.html"><a href="module-4-somatic-alterations.html#variant-discovery-in-cancer"><i class="fa fa-check"></i>Variant Discovery in Cancer</a></li>
+<li class="chapter" data-level="" data-path="module-4-somatic-alterations.html"><a href="module-4-somatic-alterations.html#functional-annotations"><i class="fa fa-check"></i>Functional Annotations</a></li>
+<li class="chapter" data-level="" data-path="module-4-somatic-alterations.html"><a href="module-4-somatic-alterations.html#beyond-vep-what-else-does-pcgr-add-to-this-info-field"><i class="fa fa-check"></i>Beyond VEP: what else does PCGR add to this INFO field</a></li>
+<li class="chapter" data-level="" data-path="module-4-somatic-alterations.html"><a href="module-4-somatic-alterations.html#exit-the-container-environment"><i class="fa fa-check"></i>Exit the container environment</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-5-copy-number-alterations.html"><a href="module-5-copy-number-alterations.html"><i class="fa fa-check"></i>Module 5 Copy Number Alterations</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-5-copy-number-alterations.html"><a href="module-5-copy-number-alterations.html#lecture-4"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-5-copy-number-alterations.html"><a href="module-5-copy-number-alterations.html#lab-3"><i class="fa fa-check"></i>Lab</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-5-copy-number-alterations.html"><a href="module-5-copy-number-alterations.html#dataset-1"><i class="fa fa-check"></i>Dataset</a></li>
+<li class="chapter" data-level="" data-path="module-5-copy-number-alterations.html"><a href="module-5-copy-number-alterations.html#run-cobalt-amber-purple"><i class="fa fa-check"></i>Run cobalt , amber , purple</a></li>
+<li class="chapter" data-level="" data-path="module-5-copy-number-alterations.html"><a href="module-5-copy-number-alterations.html#run-genpipe"><i class="fa fa-check"></i>Run Genpipe</a></li>
+<li class="chapter" data-level="" data-path="module-5-copy-number-alterations.html"><a href="module-5-copy-number-alterations.html#analyze-the-purple-results"><i class="fa fa-check"></i>Analyze the purple results</a></li>
+<li class="chapter" data-level="" data-path="module-5-copy-number-alterations.html"><a href="module-5-copy-number-alterations.html#some-examples-of-gain-loss-deletion-and-loh"><i class="fa fa-check"></i>Some examples of Gain, Loss, Deletion and LOH</a></li>
+<li class="chapter" data-level="" data-path="module-5-copy-number-alterations.html"><a href="module-5-copy-number-alterations.html#visualize-a-gene-or-a-chromosome"><i class="fa fa-check"></i>Visualize a gene or a chromosome</a></li>
+<li class="chapter" data-level="" data-path="module-5-copy-number-alterations.html"><a href="module-5-copy-number-alterations.html#exercises"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html"><i class="fa fa-check"></i>Module 6 Transcriptomics RNA-seq</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html#lecture-5"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html#lab-4"><i class="fa fa-check"></i>Lab</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html#introduction-to-the-dataset"><i class="fa fa-check"></i>0. Introduction to the dataset</a></li>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html#setting-the-environment-variables"><i class="fa fa-check"></i>1. Setting the environment variables</a></li>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html#explore-data-in-your-workspace"><i class="fa fa-check"></i>2. Explore data in your workspace</a></li>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html#trimming-and-qc"><i class="fa fa-check"></i>3. Trimming and QC</a></li>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html#prepare-the-reference-genome-for-alignment"><i class="fa fa-check"></i>4. Prepare the reference genome for alignment</a></li>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html#alignment-with-hisat2"><i class="fa fa-check"></i>5. Alignment with HISAT2</a></li>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html#gene-count-estimation"><i class="fa fa-check"></i>6. Gene count estimation</a></li>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html#differential-expression-analysis"><i class="fa fa-check"></i>7. Differential Expression Analysis</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html"><i class="fa fa-check"></i>Module 7 | From Gene Alteration to Gene Effect</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#lecture-6"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#lab-5"><i class="fa fa-check"></i>Lab</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#part-1.-introduction"><i class="fa fa-check"></i>Part 1. Introduction</a></li>
+<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#part-2-inspect-the-data"><i class="fa fa-check"></i>Part 2: Inspect the data</a></li>
+<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#look-at-the-first-few-variant-records"><i class="fa fa-check"></i>2.4. Look at the first few variant records</a></li>
+<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#part-3.-summarize-the-variant-calls-with-bcftools"><i class="fa fa-check"></i>Part 3. Summarize the variant calls with bcftools</a></li>
+<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#part-4.-annotate-variants-with-snpeff"><i class="fa fa-check"></i>Part 4. Annotate variants with SnpEff</a></li>
+<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#part-5.-interpret-the-snpeff-html-summary"><i class="fa fa-check"></i>Part 5. Interpret the SnpEff HTML summary</a></li>
+<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#part-6.-examine-individual-variant-annotations"><i class="fa fa-check"></i>Part 6. Examine individual variant annotations</a></li>
+<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#part-7.-from-gene-function-to-cancer-interpretation"><i class="fa fa-check"></i>Part 7. From gene function to cancer interpretation</a></li>
+<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#investigate-variant-evidence"><i class="fa fa-check"></i>7.2. Investigate variant evidence</a></li>
+<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#part-8.-compare-snpeff-and-ensembl-vep"><i class="fa fa-check"></i>Part 8. Compare SnpEff and Ensembl VEP</a></li>
+<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#part-9.-final-interpretation"><i class="fa fa-check"></i>Part 9. Final interpretation</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-8---pathway-enrichment-analysis.html"><a href="module-8---pathway-enrichment-analysis.html"><i class="fa fa-check"></i>Module 8 - Pathway Enrichment Analysis</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-8---pathway-enrichment-analysis.html"><a href="module-8---pathway-enrichment-analysis.html#lecture-7"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-8---pathway-enrichment-analysis.html"><a href="module-8---pathway-enrichment-analysis.html#presentation-of-the-dataset"><i class="fa fa-check"></i>Presentation of the dataset</a></li>
+<li class="chapter" data-level="" data-path="module-8---pathway-enrichment-analysis.html"><a href="module-8---pathway-enrichment-analysis.html#lab-6"><i class="fa fa-check"></i>Lab</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="de_mod8.html"><a href="de_mod8.html"><i class="fa fa-check"></i>Module 8.1 Lab: Differential Expression</a>
+<ul>
+<li class="chapter" data-level="" data-path="de_mod8.html"><a href="de_mod8.html#install-and-load-libraries"><i class="fa fa-check"></i>Install and load libraries</a></li>
+<li class="chapter" data-level="" data-path="de_mod8.html"><a href="de_mod8.html#data-used-for-this-comparison"><i class="fa fa-check"></i>Data used for this comparison</a>
+<ul>
+<li class="chapter" data-level="" data-path="de_mod8.html"><a href="de_mod8.html#generate-a-dge-object"><i class="fa fa-check"></i>generate a DGE object</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="de_mod8.html"><a href="de_mod8.html#filter-low-count-genes-and-tmm-normalize"><i class="fa fa-check"></i>Filter low-count genes and TMM-normalize</a></li>
+<li class="chapter" data-level="" data-path="de_mod8.html"><a href="de_mod8.html#design-0-group-and-named-contrast"><i class="fa fa-check"></i>Design (~0 + group) and named contrast</a></li>
+<li class="chapter" data-level="" data-path="de_mod8.html"><a href="de_mod8.html#dispersion-estimation-and-quasi-likelihood-glm"><i class="fa fa-check"></i>Dispersion estimation and quasi-likelihood GLM</a></li>
+<li class="chapter" data-level="" data-path="de_mod8.html"><a href="de_mod8.html#calculating-ranking-score-and-export-full-results"><i class="fa fa-check"></i>Calculating ranking score and export full results</a></li>
+<li class="chapter" data-level="" data-path="de_mod8.html"><a href="de_mod8.html#result-output"><i class="fa fa-check"></i>Result output</a></li>
+<li class="chapter" data-level="" data-path="de_mod8.html"><a href="de_mod8.html#version-of-packages-and-r"><i class="fa fa-check"></i>Version of packages and R</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html"><i class="fa fa-check"></i>Module 8.2 Lab: Defined gene list (g:Profiler)</a>
+<ul>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#introduction"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#goal-of-the-exercise-1"><i class="fa fa-check"></i>Goal of the exercise 1</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#data"><i class="fa fa-check"></i>Data</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#exercise-1-defined"><i class="fa fa-check"></i>Exercise 1 - prepare the gene lists</a>
+<ul>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#step-1---install-and-load-libraries"><i class="fa fa-check"></i>Step 1 - Install and Load libraries</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#step-2---prepare-the-define-gene-lists"><i class="fa fa-check"></i>Step 2 - Prepare the define gene lists</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#step-3---run-gprofiler"><i class="fa fa-check"></i>Step 3 - Run g:Profiler</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#clear-visualization-of-the-results"><i class="fa fa-check"></i>Clear visualization of the results</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#step-4---explore-top-table-of-results"><i class="fa fa-check"></i>Step 4 - Explore top table of results</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#step-5---filter-results-by-geneset-size"><i class="fa fa-check"></i>Step 5 - Filter results by geneset size</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#step-6---run-gprofiler-with-your-own-genesets-example-using-baderlab-genesets"><i class="fa fa-check"></i>Step 6 - Run g:profiler with your own genesets (example using BaderLab genesets)</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#exercise-2---visualization"><i class="fa fa-check"></i>Exercise 2 - visualization</a>
+<ul>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#step-2---dot-plot-with-segment"><i class="fa fa-check"></i>Step 2 - Dot plot with segment</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#step-4---hierarchical-cluster"><i class="fa fa-check"></i>Step 4 - Hierarchical Cluster</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html"><i class="fa fa-check"></i>Module 8.3 Lab: Ranked gene list (fGSEA)</a>
+<ul>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html#introduction-1"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html#goal-of-the-exercise"><i class="fa fa-check"></i>Goal of the exercise</a></li>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html#data-1"><i class="fa fa-check"></i>Data</a></li>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html#background"><i class="fa fa-check"></i>Background</a></li>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html#exercise-1-ranked"><i class="fa fa-check"></i>Exercise 1 - prepare the gene lists</a>
+<ul>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html#step-1---install-and-load-libraries-1"><i class="fa fa-check"></i>Step 1 - Install and Load libraries</a></li>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html#step-2---prepare-the-rank-file-upload-the-gmt-file-and-run-fgsea"><i class="fa fa-check"></i>Step 2 - Prepare the rank file , upload the gmt file and run fgsea</a></li>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html#step-3---examine-the-results"><i class="fa fa-check"></i>Step 3 - Examine the results</a></li>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html#step-4---explore-the-tabular-format-of-the-results"><i class="fa fa-check"></i>Step 4 - Explore the tabular format of the results</a></li>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html#step-5---visualize-the-top-results"><i class="fa fa-check"></i>Step 5 - Visualize the top results</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html"><i class="fa fa-check"></i>Module 8.4 Lab: BYOD - Differential Expression (Palbo-resistant vs Abema-resistant)</a>
+<ul>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html#install-and-load-libraries-1"><i class="fa fa-check"></i>Install and load libraries</a></li>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html#data-used-for-this-comparison-1"><i class="fa fa-check"></i>Data used for this comparison</a>
+<ul>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html#generate-a-dge-object-1"><i class="fa fa-check"></i>generate a DGE object</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html#filter-low-count-genes-and-tmm-normalize-1"><i class="fa fa-check"></i>Filter low-count genes and TMM-normalize</a></li>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html#design-0-group-and-named-contrast-1"><i class="fa fa-check"></i>Design (~0 + group) and named contrast</a></li>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html#dispersion-estimation-and-quasi-likelihood-glm-1"><i class="fa fa-check"></i>Dispersion estimation and quasi-likelihood GLM</a></li>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html#calculating-ranking-score-and-export-full-results-1"><i class="fa fa-check"></i>Calculating ranking score and export full results</a></li>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html#result-output-1"><i class="fa fa-check"></i>Result output</a></li>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html#your-turn"><i class="fa fa-check"></i>YOUR TURN</a></li>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html#additional-exercise"><i class="fa fa-check"></i>Additional exercise</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="module-9---variant-to-networks.html"><a href="module-9---variant-to-networks.html"><i class="fa fa-check"></i>Module 9 - Variant to Networks</a>
 <ul>
 <li class="chapter" data-level="" data-path="module-9---variant-to-networks.html"><a href="module-9---variant-to-networks.html#network-visualization-and-analysis-with-cytoscape"><i class="fa fa-check"></i>Network Visualization and Analysis with Cytoscape</a></li>
 <li class="chapter" data-level="" data-path="module-9---variant-to-networks.html"><a href="module-9---variant-to-networks.html#lecture-8"><i class="fa fa-check"></i>Lecture</a></li>
-<li class="chapter" data-level="" data-path="module-9---variant-to-networks.html"><a href="module-9---variant-to-networks.html#lab-8"><i class="fa fa-check"></i>Lab</a></li>
+<li class="chapter" data-level="" data-path="module-9---variant-to-networks.html"><a href="module-9---variant-to-networks.html#lab-7"><i class="fa fa-check"></i>Lab</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html"><i class="fa fa-check"></i>Module 9 Lab Primer: Cytoscape Primer</a>
 <ul>
-<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#goal-of-the-exercise"><i class="fa fa-check"></i>Goal of the exercise</a></li>
-<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#data"><i class="fa fa-check"></i>Data</a></li>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#goal-of-the-exercise-2"><i class="fa fa-check"></i>Goal of the exercise</a></li>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#data-2"><i class="fa fa-check"></i>Data</a></li>
 <li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#start-the-exercise"><i class="fa fa-check"></i>Start the exercise</a></li>
 <li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#exercise-1a---create-network-from-table"><i class="fa fa-check"></i>Exercise 1a - Create Network from table</a>
 <ul>
@@ -261,8 +360,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html"><i class="fa fa-check"></i>Module 9.2 Lab: g:profiler Visualization</a>
 <ul>
-<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#goal-of-the-exercise-1"><i class="fa fa-check"></i>Goal of the exercise</a></li>
-<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#data-1"><i class="fa fa-check"></i>Data</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#goal-of-the-exercise-3"><i class="fa fa-check"></i>Goal of the exercise</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#data-3"><i class="fa fa-check"></i>Data</a></li>
 <li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#enrichmentmap"><i class="fa fa-check"></i>EnrichmentMap</a></li>
 <li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#description-of-this-exercise"><i class="fa fa-check"></i>Description of this exercise</a></li>
 <li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#start-the-exercise-1"><i class="fa fa-check"></i>Start the exercise</a></li>
@@ -283,7 +382,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="module-10.html"><a href="module-10.html"><i class="fa fa-check"></i>Module 10</a>
 <ul>
 <li class="chapter" data-level="" data-path="module-10.html"><a href="module-10.html#lecture-9"><i class="fa fa-check"></i>Lecture</a></li>
-<li class="chapter" data-level="" data-path="module-10.html"><a href="module-10.html#lab-9"><i class="fa fa-check"></i>Lab</a></li>
+<li class="chapter" data-level="" data-path="module-10.html"><a href="module-10.html#lab-8"><i class="fa fa-check"></i>Lab</a></li>
 </ul></li>
 <li class="divider"></li>
 <h1 id="sponsors">Sponsors</h1>
@@ -316,13 +415,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1>Module 9 Lab Primer: Cytoscape Primer<a href="cytoscape_mod9.html#cytoscape_mod9" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p><strong>This work is licensed under a <a href="http://creativecommons.org/licenses/by-sa/3.0/deed.en_US">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>. This means that you are able to copy, share and modify the work, as long as the result is distributed under the same license.</strong></p>
 <p>By Gary Bader, Ruth Isserlin, Veronique Voisin</p>
-<div id="goal-of-the-exercise" class="section level2 hasAnchor">
-<h2>Goal of the exercise<a href="cytoscape_mod9.html#goal-of-the-exercise" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="goal-of-the-exercise-2" class="section level2 hasAnchor">
+<h2>Goal of the exercise<a href="cytoscape_mod9.html#goal-of-the-exercise-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><strong>Create a network and customize it.</strong></p>
 <p>The goal of this exercise is to learn how to create a network in Cytoscape and customize id. In this example, the proteins are the entities represented as nodes in the network and known physical interactions are the connections between the proteins that are represented as edges. We will overlay 2 additional pieces of information about these proteins, mutation information per protein as node color and mutation expression as node size.</p>
 </div>
-<div id="data" class="section level2 hasAnchor">
-<h2>Data<a href="cytoscape_mod9.html#data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="data-2" class="section level2 hasAnchor">
+<h2>Data<a href="cytoscape_mod9.html#data-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
 <li>The data used in this exercise is a set of protein - protein interactions and associated attributes.</li>
 </ul>
@@ -401,66 +500,59 @@ file</strong>
 </div>
 <div id="setting-up-cytoscape-variables--" class="section level3 hasAnchor">
 <h3>Setting up cytoscape variables -<a href="cytoscape_mod9.html#setting-up-cytoscape-variables--" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The values of the below variables depends on where you are running your R Code and where you are running your Cytoscape. There are a lot of different combinations but it is improtant to understand your set up.<br />
+<p>The values of the below variables depends on where you are running your R Code and where you are running your Cytoscape. There are a lot of different combinations but it is important to understand your set up.<br />
 Almost always you will be running cytoscape on your computer or laptop. Something that you can interact with directly. But often we might run our code on:</p>
 <ol style="list-style-type: decimal">
-<li>A Dcoker on your computer</li>
+<li>A Docker on your computer</li>
 <li>A docker on a remote machine</li>
 <li>AWS cloud</li>
 <li>another cloud service.</li>
 </ol>
-<p>When we send commands to cytoscape we need to specify where cytoscape is. We have defined a varialbe that we will use for every command we send to cytoscape telling it where the cytoscape host is:
+<p>When we send commands to cytoscape we need to specify where cytoscape is. We have defined a variable that we will use for every command we send to cytoscape telling it where the cytoscape host is:
 1. From RStudio on your computer to cytoscape on your computer - current_cytoscape_baseurl = “<a href="http://localhost:1234/v1" class="uri">http://localhost:1234/v1</a>”
 1. From docker implementation of Rstudio on your computer to cytoscape on your computer - current_cytoscape_baseurl = “<a href="http://host.docker.internal:1234/v1" class="uri">http://host.docker.internal:1234/v1</a>”<br />
 1. From AWS Rstudio to cytoscape on your computer -
 a. Set up ssh tunnel from your computer to AWS as follows -</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="cytoscape_mod9.html#cb20-1" tabindex="-1"></a>ssh <span class="sc">-</span>i <span class="sc">&lt;</span>studentname<span class="sc">&gt;</span>.pem <span class="sc">-</span>R <span class="dv">1234</span><span class="sc">:</span>localhost<span class="sc">:</span><span class="dv">1234</span> ubuntu<span class="sc">@</span>can.uhn<span class="sc">-</span>hpc.ca</span></code></pre></div>
+<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb289-1"><a href="cytoscape_mod9.html#cb289-1" tabindex="-1"></a>ssh <span class="sc">-</span>i <span class="sc">&lt;</span>studentname<span class="sc">&gt;</span>.pem <span class="sc">-</span>R <span class="dv">1234</span><span class="sc">:</span>localhost<span class="sc">:</span><span class="dv">1234</span> ubuntu<span class="sc">@</span>can.uhn<span class="sc">-</span>hpc.ca</span></code></pre></div>
 <pre><code>a. current_cytoscape_baseurl = &quot;http://localhost:1234/v1&quot;</code></pre>
 <p>When cytoscape loads or saves files, it can not save to the docker or the cloud. It only has access to the files on the computer that it is running. So the path to files saved or accessed by cytoscape need to be on the machine that is running cytoscape. Initialize the variable to a directory on your computer that you want to save all your results</p>
 <p>path_to_save_cytoscape = “/Users/risserlin/CBW_Workshop_results/Module9”</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="cytoscape_mod9.html#cb22-1" tabindex="-1"></a><span class="fu">library</span>(RCy3)</span>
-<span id="cb22-2"><a href="cytoscape_mod9.html#cb22-2" tabindex="-1"></a></span>
-<span id="cb22-3"><a href="cytoscape_mod9.html#cb22-3" tabindex="-1"></a>is_remote <span class="ot">=</span> <span class="cn">TRUE</span></span>
-<span id="cb22-4"><a href="cytoscape_mod9.html#cb22-4" tabindex="-1"></a>current_cytoscape_baseurl <span class="ot">=</span> <span class="st">&quot;http://host.docker.internal:1234/v1&quot;</span></span>
-<span id="cb22-5"><a href="cytoscape_mod9.html#cb22-5" tabindex="-1"></a></span>
-<span id="cb22-6"><a href="cytoscape_mod9.html#cb22-6" tabindex="-1"></a><span class="co">#make sure this directory is created ahead of time.  We can&#39;t create this directory from this instance of RStudio.  </span></span>
-<span id="cb22-7"><a href="cytoscape_mod9.html#cb22-7" tabindex="-1"></a>path_to_save_cytoscape <span class="ot">=</span> <span class="st">&quot;/Users/risserlin/CBW_Workshop_results/Module9&quot;</span></span>
-<span id="cb22-8"><a href="cytoscape_mod9.html#cb22-8" tabindex="-1"></a></span>
-<span id="cb22-9"><a href="cytoscape_mod9.html#cb22-9" tabindex="-1"></a><span class="co"># Confirm Cytoscape is running and reachable</span></span>
-<span id="cb22-10"><a href="cytoscape_mod9.html#cb22-10" tabindex="-1"></a><span class="fu">cytoscapePing</span>(<span class="at">base.url =</span> current_cytoscape_baseurl)</span></code></pre></div>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="cytoscape_mod9.html#cb23-1" tabindex="-1"></a><span class="fu">library</span>(RCy3)</span>
-<span id="cb23-2"><a href="cytoscape_mod9.html#cb23-2" tabindex="-1"></a></span>
-<span id="cb23-3"><a href="cytoscape_mod9.html#cb23-3" tabindex="-1"></a>current_cytoscape_baseurl <span class="ot">=</span> <span class="st">&quot;http://host.docker.internal:1234/v1&quot;</span></span>
-<span id="cb23-4"><a href="cytoscape_mod9.html#cb23-4" tabindex="-1"></a></span>
-<span id="cb23-5"><a href="cytoscape_mod9.html#cb23-5" tabindex="-1"></a><span class="co"># Confirm Cytoscape is running and reachable</span></span>
-<span id="cb23-6"><a href="cytoscape_mod9.html#cb23-6" tabindex="-1"></a><span class="fu">cytoscapePing</span>(<span class="at">base.url =</span> current_cytoscape_baseurl)</span>
-<span id="cb23-7"><a href="cytoscape_mod9.html#cb23-7" tabindex="-1"></a></span>
-<span id="cb23-8"><a href="cytoscape_mod9.html#cb23-8" tabindex="-1"></a><span class="co"># Read the network table into R</span></span>
-<span id="cb23-9"><a href="cytoscape_mod9.html#cb23-9" tabindex="-1"></a>network_df <span class="ot">&lt;-</span> <span class="fu">read.table</span>(</span>
-<span id="cb23-10"><a href="cytoscape_mod9.html#cb23-10" tabindex="-1"></a>  <span class="st">&quot;./Module9/cytoscape_primer/data/network_table.txt&quot;</span>,</span>
-<span id="cb23-11"><a href="cytoscape_mod9.html#cb23-11" tabindex="-1"></a>  <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>, <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span></span>
-<span id="cb23-12"><a href="cytoscape_mod9.html#cb23-12" tabindex="-1"></a>)</span>
-<span id="cb23-13"><a href="cytoscape_mod9.html#cb23-13" tabindex="-1"></a></span>
-<span id="cb23-14"><a href="cytoscape_mod9.html#cb23-14" tabindex="-1"></a><span class="co"># The table has columns: source, interaction, target</span></span>
-<span id="cb23-15"><a href="cytoscape_mod9.html#cb23-15" tabindex="-1"></a><span class="co"># createNetworkFromDataFrames() takes a separate edges data frame and</span></span>
-<span id="cb23-16"><a href="cytoscape_mod9.html#cb23-16" tabindex="-1"></a><span class="co"># an optional nodes data frame.  Here we build edges directly from the table.</span></span>
-<span id="cb23-17"><a href="cytoscape_mod9.html#cb23-17" tabindex="-1"></a>edges_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb23-18"><a href="cytoscape_mod9.html#cb23-18" tabindex="-1"></a>  <span class="at">source      =</span> network_df<span class="sc">$</span>source,</span>
-<span id="cb23-19"><a href="cytoscape_mod9.html#cb23-19" tabindex="-1"></a>  <span class="at">target      =</span> network_df<span class="sc">$</span>target,</span>
-<span id="cb23-20"><a href="cytoscape_mod9.html#cb23-20" tabindex="-1"></a>  <span class="at">interaction =</span> network_df<span class="sc">$</span>interaction,</span>
-<span id="cb23-21"><a href="cytoscape_mod9.html#cb23-21" tabindex="-1"></a>  <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span></span>
-<span id="cb23-22"><a href="cytoscape_mod9.html#cb23-22" tabindex="-1"></a>)</span>
-<span id="cb23-23"><a href="cytoscape_mod9.html#cb23-23" tabindex="-1"></a></span>
-<span id="cb23-24"><a href="cytoscape_mod9.html#cb23-24" tabindex="-1"></a><span class="co"># Create the network in Cytoscape</span></span>
-<span id="cb23-25"><a href="cytoscape_mod9.html#cb23-25" tabindex="-1"></a>network_suid <span class="ot">&lt;-</span> <span class="fu">createNetworkFromDataFrames</span>(</span>
-<span id="cb23-26"><a href="cytoscape_mod9.html#cb23-26" tabindex="-1"></a>  <span class="at">edges      =</span> edges_df,</span>
-<span id="cb23-27"><a href="cytoscape_mod9.html#cb23-27" tabindex="-1"></a>  <span class="at">title      =</span> <span class="st">&quot;Cytoscape Primer Network&quot;</span>,</span>
-<span id="cb23-28"><a href="cytoscape_mod9.html#cb23-28" tabindex="-1"></a>  <span class="at">collection =</span> <span class="st">&quot;Module 9&quot;</span>,</span>
-<span id="cb23-29"><a href="cytoscape_mod9.html#cb23-29" tabindex="-1"></a>  <span class="at">base.url =</span> current_cytoscape_baseurl</span>
-<span id="cb23-30"><a href="cytoscape_mod9.html#cb23-30" tabindex="-1"></a>)</span>
-<span id="cb23-31"><a href="cytoscape_mod9.html#cb23-31" tabindex="-1"></a></span>
-<span id="cb23-32"><a href="cytoscape_mod9.html#cb23-32" tabindex="-1"></a><span class="co"># Confirm the network was created</span></span>
-<span id="cb23-33"><a href="cytoscape_mod9.html#cb23-33" tabindex="-1"></a><span class="fu">message</span>(<span class="st">&quot;Network SUID: &quot;</span>, network_suid)</span></code></pre></div>
+<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb291-1"><a href="cytoscape_mod9.html#cb291-1" tabindex="-1"></a><span class="fu">library</span>(RCy3)</span>
+<span id="cb291-2"><a href="cytoscape_mod9.html#cb291-2" tabindex="-1"></a></span>
+<span id="cb291-3"><a href="cytoscape_mod9.html#cb291-3" tabindex="-1"></a>is_remote <span class="ot">=</span> <span class="cn">TRUE</span></span>
+<span id="cb291-4"><a href="cytoscape_mod9.html#cb291-4" tabindex="-1"></a>current_cytoscape_baseurl <span class="ot">=</span> <span class="st">&quot;http://host.docker.internal:1234/v1&quot;</span></span>
+<span id="cb291-5"><a href="cytoscape_mod9.html#cb291-5" tabindex="-1"></a></span>
+<span id="cb291-6"><a href="cytoscape_mod9.html#cb291-6" tabindex="-1"></a><span class="co">#make sure this directory is created ahead of time.  We can&#39;t create this directory from this instance of RStudio.  </span></span>
+<span id="cb291-7"><a href="cytoscape_mod9.html#cb291-7" tabindex="-1"></a>path_to_save_cytoscape <span class="ot">=</span> <span class="st">&quot;/Users/risserlin/CBW_Workshop_results/Module9&quot;</span></span>
+<span id="cb291-8"><a href="cytoscape_mod9.html#cb291-8" tabindex="-1"></a></span>
+<span id="cb291-9"><a href="cytoscape_mod9.html#cb291-9" tabindex="-1"></a><span class="co"># Confirm Cytoscape is running and reachable</span></span>
+<span id="cb291-10"><a href="cytoscape_mod9.html#cb291-10" tabindex="-1"></a><span class="fu">cytoscapePing</span>(<span class="at">base.url =</span> current_cytoscape_baseurl)</span></code></pre></div>
+<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb292-1"><a href="cytoscape_mod9.html#cb292-1" tabindex="-1"></a><span class="co"># Read the network table into R</span></span>
+<span id="cb292-2"><a href="cytoscape_mod9.html#cb292-2" tabindex="-1"></a>network_df <span class="ot">&lt;-</span> <span class="fu">read.table</span>(</span>
+<span id="cb292-3"><a href="cytoscape_mod9.html#cb292-3" tabindex="-1"></a>  <span class="st">&quot;./Module9/cytoscape_primer/data/network_table.txt&quot;</span>,</span>
+<span id="cb292-4"><a href="cytoscape_mod9.html#cb292-4" tabindex="-1"></a>  <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>, <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span></span>
+<span id="cb292-5"><a href="cytoscape_mod9.html#cb292-5" tabindex="-1"></a>)</span>
+<span id="cb292-6"><a href="cytoscape_mod9.html#cb292-6" tabindex="-1"></a></span>
+<span id="cb292-7"><a href="cytoscape_mod9.html#cb292-7" tabindex="-1"></a><span class="co"># The table has columns: source, interaction, target</span></span>
+<span id="cb292-8"><a href="cytoscape_mod9.html#cb292-8" tabindex="-1"></a><span class="co"># createNetworkFromDataFrames() takes a separate edges data frame and</span></span>
+<span id="cb292-9"><a href="cytoscape_mod9.html#cb292-9" tabindex="-1"></a><span class="co"># an optional nodes data frame.  Here we build edges directly from the table.</span></span>
+<span id="cb292-10"><a href="cytoscape_mod9.html#cb292-10" tabindex="-1"></a>edges_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb292-11"><a href="cytoscape_mod9.html#cb292-11" tabindex="-1"></a>  <span class="at">source      =</span> network_df<span class="sc">$</span>source,</span>
+<span id="cb292-12"><a href="cytoscape_mod9.html#cb292-12" tabindex="-1"></a>  <span class="at">target      =</span> network_df<span class="sc">$</span>target,</span>
+<span id="cb292-13"><a href="cytoscape_mod9.html#cb292-13" tabindex="-1"></a>  <span class="at">interaction =</span> network_df<span class="sc">$</span>interaction,</span>
+<span id="cb292-14"><a href="cytoscape_mod9.html#cb292-14" tabindex="-1"></a>  <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span></span>
+<span id="cb292-15"><a href="cytoscape_mod9.html#cb292-15" tabindex="-1"></a>)</span>
+<span id="cb292-16"><a href="cytoscape_mod9.html#cb292-16" tabindex="-1"></a></span>
+<span id="cb292-17"><a href="cytoscape_mod9.html#cb292-17" tabindex="-1"></a><span class="co"># Create the network in Cytoscape</span></span>
+<span id="cb292-18"><a href="cytoscape_mod9.html#cb292-18" tabindex="-1"></a>network_suid <span class="ot">&lt;-</span> <span class="fu">createNetworkFromDataFrames</span>(</span>
+<span id="cb292-19"><a href="cytoscape_mod9.html#cb292-19" tabindex="-1"></a>  <span class="at">edges      =</span> edges_df,</span>
+<span id="cb292-20"><a href="cytoscape_mod9.html#cb292-20" tabindex="-1"></a>  <span class="at">title      =</span> <span class="st">&quot;Cytoscape Primer Network&quot;</span>,</span>
+<span id="cb292-21"><a href="cytoscape_mod9.html#cb292-21" tabindex="-1"></a>  <span class="at">collection =</span> <span class="st">&quot;Module 9&quot;</span>,</span>
+<span id="cb292-22"><a href="cytoscape_mod9.html#cb292-22" tabindex="-1"></a>  <span class="at">base.url =</span> current_cytoscape_baseurl</span>
+<span id="cb292-23"><a href="cytoscape_mod9.html#cb292-23" tabindex="-1"></a>)</span>
+<span id="cb292-24"><a href="cytoscape_mod9.html#cb292-24" tabindex="-1"></a></span>
+<span id="cb292-25"><a href="cytoscape_mod9.html#cb292-25" tabindex="-1"></a><span class="co"># Confirm the network was created</span></span>
+<span id="cb292-26"><a href="cytoscape_mod9.html#cb292-26" tabindex="-1"></a><span class="fu">message</span>(<span class="st">&quot;Network SUID: &quot;</span>, network_suid)</span></code></pre></div>
 </div>
 </div>
 <div id="exercise-1b---load-node-attributes" class="section level2 hasAnchor">
@@ -489,14 +581,14 @@ The key is the column in the loaded attribute file used to match
 your attributes to your network.
 </li>
 <li>
-<strong>key colum for Network</strong> is the column in the Network
+<strong>key column for Network</strong> is the column in the Network
 that the key is matched to. (In this network there isn’t the ability to
 set this value because that is the only attribute associated with the
 nodes in our network but normally this drop box will be selectable)
 </li>
 <li>
 The key and matching column need to match perfectly (unless you have
-specifid that case does not matter).
+specified that case does not matter).
 </li>
 </ol>
 <p>
@@ -507,9 +599,9 @@ specifid that case does not matter).
 <br></p>
 <div class="rmd-tip">
 <p>
-Similiar to the <strong>Import Network from Table</strong>,
-everything about the import is customizable. Cytoscape does its best to
-guess the datatypes of each column but you are able to fine tune it.
+Similar to the <strong>Import Network from Table</strong>, everything
+about the import is customizable. Cytoscape does its best to guess the
+datatypes of each column but you are able to fine tune it.
 </p>
 <p>
 <img src="Module9/cytoscape_primer/images/cyto_import_attribute_table_options.png" width="75%" />
@@ -538,25 +630,25 @@ specify the header column
 file</strong>
 </p>
 </div>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="cytoscape_mod9.html#cb24-1" tabindex="-1"></a><span class="co"># Read the node attribute table into R</span></span>
-<span id="cb24-2"><a href="cytoscape_mod9.html#cb24-2" tabindex="-1"></a>node_attributes <span class="ot">&lt;-</span> <span class="fu">read.table</span>(</span>
-<span id="cb24-3"><a href="cytoscape_mod9.html#cb24-3" tabindex="-1"></a>  <span class="st">&quot;./Module9/cytoscape_primer/data/node_attribute.txt&quot;</span>,</span>
-<span id="cb24-4"><a href="cytoscape_mod9.html#cb24-4" tabindex="-1"></a>  <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>, <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span></span>
-<span id="cb24-5"><a href="cytoscape_mod9.html#cb24-5" tabindex="-1"></a>)</span>
-<span id="cb24-6"><a href="cytoscape_mod9.html#cb24-6" tabindex="-1"></a></span>
-<span id="cb24-7"><a href="cytoscape_mod9.html#cb24-7" tabindex="-1"></a><span class="co"># loadTableData() merges the data frame into the Cytoscape node table.</span></span>
-<span id="cb24-8"><a href="cytoscape_mod9.html#cb24-8" tabindex="-1"></a><span class="co"># The &#39;data.key.column&#39; is the column in node_attributes that matches</span></span>
-<span id="cb24-9"><a href="cytoscape_mod9.html#cb24-9" tabindex="-1"></a><span class="co"># the node name column in Cytoscape (default: &quot;name&quot;).</span></span>
-<span id="cb24-10"><a href="cytoscape_mod9.html#cb24-10" tabindex="-1"></a><span class="fu">loadTableData</span>(</span>
-<span id="cb24-11"><a href="cytoscape_mod9.html#cb24-11" tabindex="-1"></a>  <span class="at">data            =</span> node_attributes,</span>
-<span id="cb24-12"><a href="cytoscape_mod9.html#cb24-12" tabindex="-1"></a>  <span class="at">data.key.column =</span> <span class="fu">colnames</span>(node_attributes)[<span class="dv">1</span>],  <span class="co"># first column is the key</span></span>
-<span id="cb24-13"><a href="cytoscape_mod9.html#cb24-13" tabindex="-1"></a>  <span class="at">table           =</span> <span class="st">&quot;node&quot;</span>,</span>
-<span id="cb24-14"><a href="cytoscape_mod9.html#cb24-14" tabindex="-1"></a>  <span class="at">table.key.column =</span> <span class="st">&quot;name&quot;</span>,</span>
-<span id="cb24-15"><a href="cytoscape_mod9.html#cb24-15" tabindex="-1"></a>  <span class="at">network         =</span> network_suid,</span>
-<span id="cb24-16"><a href="cytoscape_mod9.html#cb24-16" tabindex="-1"></a>  <span class="at">base.url =</span> current_cytoscape_baseurl</span>
-<span id="cb24-17"><a href="cytoscape_mod9.html#cb24-17" tabindex="-1"></a>)</span>
-<span id="cb24-18"><a href="cytoscape_mod9.html#cb24-18" tabindex="-1"></a></span>
-<span id="cb24-19"><a href="cytoscape_mod9.html#cb24-19" tabindex="-1"></a><span class="fu">message</span>(<span class="st">&quot;Node attributes loaded successfully.&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb293-1"><a href="cytoscape_mod9.html#cb293-1" tabindex="-1"></a><span class="co"># Read the node attribute table into R</span></span>
+<span id="cb293-2"><a href="cytoscape_mod9.html#cb293-2" tabindex="-1"></a>node_attributes <span class="ot">&lt;-</span> <span class="fu">read.table</span>(</span>
+<span id="cb293-3"><a href="cytoscape_mod9.html#cb293-3" tabindex="-1"></a>  <span class="st">&quot;./Module9/cytoscape_primer/data/node_attribute.txt&quot;</span>,</span>
+<span id="cb293-4"><a href="cytoscape_mod9.html#cb293-4" tabindex="-1"></a>  <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>, <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span></span>
+<span id="cb293-5"><a href="cytoscape_mod9.html#cb293-5" tabindex="-1"></a>)</span>
+<span id="cb293-6"><a href="cytoscape_mod9.html#cb293-6" tabindex="-1"></a></span>
+<span id="cb293-7"><a href="cytoscape_mod9.html#cb293-7" tabindex="-1"></a><span class="co"># loadTableData() merges the data frame into the Cytoscape node table.</span></span>
+<span id="cb293-8"><a href="cytoscape_mod9.html#cb293-8" tabindex="-1"></a><span class="co"># The &#39;data.key.column&#39; is the column in node_attributes that matches</span></span>
+<span id="cb293-9"><a href="cytoscape_mod9.html#cb293-9" tabindex="-1"></a><span class="co"># the node name column in Cytoscape (default: &quot;name&quot;).</span></span>
+<span id="cb293-10"><a href="cytoscape_mod9.html#cb293-10" tabindex="-1"></a><span class="fu">loadTableData</span>(</span>
+<span id="cb293-11"><a href="cytoscape_mod9.html#cb293-11" tabindex="-1"></a>  <span class="at">data            =</span> node_attributes,</span>
+<span id="cb293-12"><a href="cytoscape_mod9.html#cb293-12" tabindex="-1"></a>  <span class="at">data.key.column =</span> <span class="fu">colnames</span>(node_attributes)[<span class="dv">1</span>],  <span class="co"># first column is the key</span></span>
+<span id="cb293-13"><a href="cytoscape_mod9.html#cb293-13" tabindex="-1"></a>  <span class="at">table           =</span> <span class="st">&quot;node&quot;</span>,</span>
+<span id="cb293-14"><a href="cytoscape_mod9.html#cb293-14" tabindex="-1"></a>  <span class="at">table.key.column =</span> <span class="st">&quot;name&quot;</span>,</span>
+<span id="cb293-15"><a href="cytoscape_mod9.html#cb293-15" tabindex="-1"></a>  <span class="at">network         =</span> network_suid,</span>
+<span id="cb293-16"><a href="cytoscape_mod9.html#cb293-16" tabindex="-1"></a>  <span class="at">base.url =</span> current_cytoscape_baseurl</span>
+<span id="cb293-17"><a href="cytoscape_mod9.html#cb293-17" tabindex="-1"></a>)</span>
+<span id="cb293-18"><a href="cytoscape_mod9.html#cb293-18" tabindex="-1"></a></span>
+<span id="cb293-19"><a href="cytoscape_mod9.html#cb293-19" tabindex="-1"></a><span class="fu">message</span>(<span class="st">&quot;Node attributes loaded successfully.&quot;</span>)</span></code></pre></div>
 </div>
 <div id="exercise-1c---map-node-attributes-to-visual-style" class="section level2 hasAnchor">
 <h2>Exercise 1c - Map node attributes to Visual Style<a href="cytoscape_mod9.html#exercise-1c---map-node-attributes-to-visual-style" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -591,7 +683,7 @@ Adjust the setting on the size mapping. Make the nodes bigger with
 higher values.
 </li>
 <li>
-Eventhough the network is small, play around with the layouts.
+Even though the network is small, play around with the layouts.
 </li>
 </ol>
 </div></li>
@@ -602,43 +694,43 @@ Eventhough the network is small, play around with the layouts.
 properties</strong>
 </p>
 </div>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="cytoscape_mod9.html#cb25-1" tabindex="-1"></a><span class="co"># ── Colour: map &#39;expression&#39; column to node fill colour ─────────────────────</span></span>
-<span id="cb25-2"><a href="cytoscape_mod9.html#cb25-2" tabindex="-1"></a></span>
-<span id="cb25-3"><a href="cytoscape_mod9.html#cb25-3" tabindex="-1"></a><span class="co"># Set a continuous colour mapping: low expression = blue, mid = white, high = red</span></span>
-<span id="cb25-4"><a href="cytoscape_mod9.html#cb25-4" tabindex="-1"></a><span class="co"># First get the range of the expression values from the node table</span></span>
-<span id="cb25-5"><a href="cytoscape_mod9.html#cb25-5" tabindex="-1"></a>node_table_current <span class="ot">&lt;-</span> <span class="fu">getTableColumns</span>(<span class="at">table =</span> <span class="st">&quot;node&quot;</span>, <span class="at">network =</span> network_suid,<span class="at">base.url =</span> current_cytoscape_baseurl)</span>
-<span id="cb25-6"><a href="cytoscape_mod9.html#cb25-6" tabindex="-1"></a>expr_min <span class="ot">&lt;-</span> <span class="fu">min</span>(node_table_current<span class="sc">$</span>expression, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb25-7"><a href="cytoscape_mod9.html#cb25-7" tabindex="-1"></a>expr_max <span class="ot">&lt;-</span> <span class="fu">max</span>(node_table_current<span class="sc">$</span>expression, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb25-8"><a href="cytoscape_mod9.html#cb25-8" tabindex="-1"></a>expr_mid <span class="ot">&lt;-</span> (expr_min <span class="sc">+</span> expr_max) <span class="sc">/</span> <span class="dv">2</span></span>
-<span id="cb25-9"><a href="cytoscape_mod9.html#cb25-9" tabindex="-1"></a></span>
-<span id="cb25-10"><a href="cytoscape_mod9.html#cb25-10" tabindex="-1"></a><span class="fu">setNodeColorMapping</span>(</span>
-<span id="cb25-11"><a href="cytoscape_mod9.html#cb25-11" tabindex="-1"></a>  <span class="at">table.column  =</span> <span class="st">&quot;expression&quot;</span>,</span>
-<span id="cb25-12"><a href="cytoscape_mod9.html#cb25-12" tabindex="-1"></a>  <span class="at">table.column.values =</span> <span class="fu">c</span>(expr_min, expr_mid, expr_max),</span>
-<span id="cb25-13"><a href="cytoscape_mod9.html#cb25-13" tabindex="-1"></a>  <span class="at">colors        =</span> <span class="fu">c</span>(<span class="st">&quot;#0000FF&quot;</span>, <span class="st">&quot;#FFFFFF&quot;</span>, <span class="st">&quot;#FF0000&quot;</span>),  <span class="co"># blue -&gt; white -&gt; red</span></span>
-<span id="cb25-14"><a href="cytoscape_mod9.html#cb25-14" tabindex="-1"></a>  <span class="at">mapping.type  =</span> <span class="st">&quot;continuous&quot;</span>,</span>
-<span id="cb25-15"><a href="cytoscape_mod9.html#cb25-15" tabindex="-1"></a>  <span class="at">network       =</span> network_suid,</span>
-<span id="cb25-16"><a href="cytoscape_mod9.html#cb25-16" tabindex="-1"></a>  <span class="at">base.url =</span> current_cytoscape_baseurl</span>
-<span id="cb25-17"><a href="cytoscape_mod9.html#cb25-17" tabindex="-1"></a>)</span>
-<span id="cb25-18"><a href="cytoscape_mod9.html#cb25-18" tabindex="-1"></a></span>
-<span id="cb25-19"><a href="cytoscape_mod9.html#cb25-19" tabindex="-1"></a><span class="co"># ── Size: map &#39;mutation&#39; column to node size ──────────────────────────────────</span></span>
-<span id="cb25-20"><a href="cytoscape_mod9.html#cb25-20" tabindex="-1"></a></span>
-<span id="cb25-21"><a href="cytoscape_mod9.html#cb25-21" tabindex="-1"></a>mut_min <span class="ot">&lt;-</span> <span class="fu">min</span>(node_table_current<span class="sc">$</span>mutation, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb25-22"><a href="cytoscape_mod9.html#cb25-22" tabindex="-1"></a>mut_max <span class="ot">&lt;-</span> <span class="fu">max</span>(node_table_current<span class="sc">$</span>mutation, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb25-23"><a href="cytoscape_mod9.html#cb25-23" tabindex="-1"></a></span>
-<span id="cb25-24"><a href="cytoscape_mod9.html#cb25-24" tabindex="-1"></a><span class="fu">setNodeSizeMapping</span>(</span>
-<span id="cb25-25"><a href="cytoscape_mod9.html#cb25-25" tabindex="-1"></a>  <span class="at">table.column        =</span> <span class="st">&quot;mutation&quot;</span>,</span>
-<span id="cb25-26"><a href="cytoscape_mod9.html#cb25-26" tabindex="-1"></a>  <span class="at">table.column.values =</span> <span class="fu">c</span>(mut_min, mut_max),</span>
-<span id="cb25-27"><a href="cytoscape_mod9.html#cb25-27" tabindex="-1"></a>  <span class="at">sizes               =</span> <span class="fu">c</span>(<span class="dv">30</span>, <span class="dv">100</span>),   <span class="co"># smallest to largest node size in pixels</span></span>
-<span id="cb25-28"><a href="cytoscape_mod9.html#cb25-28" tabindex="-1"></a>  <span class="at">mapping.type        =</span> <span class="st">&quot;continuous&quot;</span>,</span>
-<span id="cb25-29"><a href="cytoscape_mod9.html#cb25-29" tabindex="-1"></a>  <span class="at">network             =</span> network_suid,</span>
-<span id="cb25-30"><a href="cytoscape_mod9.html#cb25-30" tabindex="-1"></a>  <span class="at">base.url =</span> current_cytoscape_baseurl</span>
-<span id="cb25-31"><a href="cytoscape_mod9.html#cb25-31" tabindex="-1"></a>)</span>
-<span id="cb25-32"><a href="cytoscape_mod9.html#cb25-32" tabindex="-1"></a></span>
-<span id="cb25-33"><a href="cytoscape_mod9.html#cb25-33" tabindex="-1"></a><span class="co"># Lock node width and height so size mapping applies uniformly</span></span>
-<span id="cb25-34"><a href="cytoscape_mod9.html#cb25-34" tabindex="-1"></a><span class="fu">lockNodeDimensions</span>(<span class="cn">TRUE</span>, </span>
-<span id="cb25-35"><a href="cytoscape_mod9.html#cb25-35" tabindex="-1"></a>                   <span class="at">base.url =</span> current_cytoscape_baseurl)</span>
-<span id="cb25-36"><a href="cytoscape_mod9.html#cb25-36" tabindex="-1"></a></span>
-<span id="cb25-37"><a href="cytoscape_mod9.html#cb25-37" tabindex="-1"></a><span class="fu">message</span>(<span class="st">&quot;Visual style mappings applied.&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb294-1"><a href="cytoscape_mod9.html#cb294-1" tabindex="-1"></a><span class="co"># ── Colour: map &#39;expression&#39; column to node fill colour ─────────────────────</span></span>
+<span id="cb294-2"><a href="cytoscape_mod9.html#cb294-2" tabindex="-1"></a></span>
+<span id="cb294-3"><a href="cytoscape_mod9.html#cb294-3" tabindex="-1"></a><span class="co"># Set a continuous colour mapping: low expression = blue, mid = white, high = red</span></span>
+<span id="cb294-4"><a href="cytoscape_mod9.html#cb294-4" tabindex="-1"></a><span class="co"># First get the range of the expression values from the node table</span></span>
+<span id="cb294-5"><a href="cytoscape_mod9.html#cb294-5" tabindex="-1"></a>node_table_current <span class="ot">&lt;-</span> <span class="fu">getTableColumns</span>(<span class="at">table =</span> <span class="st">&quot;node&quot;</span>, <span class="at">network =</span> network_suid,<span class="at">base.url =</span> current_cytoscape_baseurl)</span>
+<span id="cb294-6"><a href="cytoscape_mod9.html#cb294-6" tabindex="-1"></a>expr_min <span class="ot">&lt;-</span> <span class="fu">min</span>(node_table_current<span class="sc">$</span>expression, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb294-7"><a href="cytoscape_mod9.html#cb294-7" tabindex="-1"></a>expr_max <span class="ot">&lt;-</span> <span class="fu">max</span>(node_table_current<span class="sc">$</span>expression, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb294-8"><a href="cytoscape_mod9.html#cb294-8" tabindex="-1"></a>expr_mid <span class="ot">&lt;-</span> (expr_min <span class="sc">+</span> expr_max) <span class="sc">/</span> <span class="dv">2</span></span>
+<span id="cb294-9"><a href="cytoscape_mod9.html#cb294-9" tabindex="-1"></a></span>
+<span id="cb294-10"><a href="cytoscape_mod9.html#cb294-10" tabindex="-1"></a><span class="fu">setNodeColorMapping</span>(</span>
+<span id="cb294-11"><a href="cytoscape_mod9.html#cb294-11" tabindex="-1"></a>  <span class="at">table.column  =</span> <span class="st">&quot;expression&quot;</span>,</span>
+<span id="cb294-12"><a href="cytoscape_mod9.html#cb294-12" tabindex="-1"></a>  <span class="at">table.column.values =</span> <span class="fu">c</span>(expr_min, expr_mid, expr_max),</span>
+<span id="cb294-13"><a href="cytoscape_mod9.html#cb294-13" tabindex="-1"></a>  <span class="at">colors        =</span> <span class="fu">c</span>(<span class="st">&quot;#0000FF&quot;</span>, <span class="st">&quot;#FFFFFF&quot;</span>, <span class="st">&quot;#FF0000&quot;</span>),  <span class="co"># blue -&gt; white -&gt; red</span></span>
+<span id="cb294-14"><a href="cytoscape_mod9.html#cb294-14" tabindex="-1"></a>  <span class="at">mapping.type  =</span> <span class="st">&quot;continuous&quot;</span>,</span>
+<span id="cb294-15"><a href="cytoscape_mod9.html#cb294-15" tabindex="-1"></a>  <span class="at">network       =</span> network_suid,</span>
+<span id="cb294-16"><a href="cytoscape_mod9.html#cb294-16" tabindex="-1"></a>  <span class="at">base.url =</span> current_cytoscape_baseurl</span>
+<span id="cb294-17"><a href="cytoscape_mod9.html#cb294-17" tabindex="-1"></a>)</span>
+<span id="cb294-18"><a href="cytoscape_mod9.html#cb294-18" tabindex="-1"></a></span>
+<span id="cb294-19"><a href="cytoscape_mod9.html#cb294-19" tabindex="-1"></a><span class="co"># ── Size: map &#39;mutation&#39; column to node size ──────────────────────────────────</span></span>
+<span id="cb294-20"><a href="cytoscape_mod9.html#cb294-20" tabindex="-1"></a></span>
+<span id="cb294-21"><a href="cytoscape_mod9.html#cb294-21" tabindex="-1"></a>mut_min <span class="ot">&lt;-</span> <span class="fu">min</span>(node_table_current<span class="sc">$</span>mutation, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb294-22"><a href="cytoscape_mod9.html#cb294-22" tabindex="-1"></a>mut_max <span class="ot">&lt;-</span> <span class="fu">max</span>(node_table_current<span class="sc">$</span>mutation, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb294-23"><a href="cytoscape_mod9.html#cb294-23" tabindex="-1"></a></span>
+<span id="cb294-24"><a href="cytoscape_mod9.html#cb294-24" tabindex="-1"></a><span class="fu">setNodeSizeMapping</span>(</span>
+<span id="cb294-25"><a href="cytoscape_mod9.html#cb294-25" tabindex="-1"></a>  <span class="at">table.column        =</span> <span class="st">&quot;mutation&quot;</span>,</span>
+<span id="cb294-26"><a href="cytoscape_mod9.html#cb294-26" tabindex="-1"></a>  <span class="at">table.column.values =</span> <span class="fu">c</span>(mut_min, mut_max),</span>
+<span id="cb294-27"><a href="cytoscape_mod9.html#cb294-27" tabindex="-1"></a>  <span class="at">sizes               =</span> <span class="fu">c</span>(<span class="dv">30</span>, <span class="dv">100</span>),   <span class="co"># smallest to largest node size in pixels</span></span>
+<span id="cb294-28"><a href="cytoscape_mod9.html#cb294-28" tabindex="-1"></a>  <span class="at">mapping.type        =</span> <span class="st">&quot;continuous&quot;</span>,</span>
+<span id="cb294-29"><a href="cytoscape_mod9.html#cb294-29" tabindex="-1"></a>  <span class="at">network             =</span> network_suid,</span>
+<span id="cb294-30"><a href="cytoscape_mod9.html#cb294-30" tabindex="-1"></a>  <span class="at">base.url =</span> current_cytoscape_baseurl</span>
+<span id="cb294-31"><a href="cytoscape_mod9.html#cb294-31" tabindex="-1"></a>)</span>
+<span id="cb294-32"><a href="cytoscape_mod9.html#cb294-32" tabindex="-1"></a></span>
+<span id="cb294-33"><a href="cytoscape_mod9.html#cb294-33" tabindex="-1"></a><span class="co"># Lock node width and height so size mapping applies uniformly</span></span>
+<span id="cb294-34"><a href="cytoscape_mod9.html#cb294-34" tabindex="-1"></a><span class="fu">lockNodeDimensions</span>(<span class="cn">TRUE</span>, </span>
+<span id="cb294-35"><a href="cytoscape_mod9.html#cb294-35" tabindex="-1"></a>                   <span class="at">base.url =</span> current_cytoscape_baseurl)</span>
+<span id="cb294-36"><a href="cytoscape_mod9.html#cb294-36" tabindex="-1"></a></span>
+<span id="cb294-37"><a href="cytoscape_mod9.html#cb294-37" tabindex="-1"></a><span class="fu">message</span>(<span class="st">&quot;Visual style mappings applied.&quot;</span>)</span></code></pre></div>
 </div>
 <div id="exercise-2---work-with-larger-networks" class="section level2 hasAnchor">
 <h2>Exercise 2 - Work with larger networks<a href="cytoscape_mod9.html#exercise-2---work-with-larger-networks" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -648,9 +740,9 @@ properties</strong>
 <li><p>You do not need to re-open cytoscape to open the starter panel. Locate the Cytoscape top menu bar and select <strong>View</strong>,–&gt; <strong>Show Starter panel</strong>.
 <img src="Module9/cytoscape_primer/images/launch_starter_panel.png" width="75%" /></p></li>
 <li><p>Double click on the <strong>Affinity Purification Network</strong> to open it.</p></li>
-<li><p>If you already have a session open then you will recieve a warning that the current session will be lost. Before proceeding make sure your current session is saved. (Click on cancel. Then, <strong>File</strong> –&gt; <strong>Save as</strong>)<br>
+<li><p>If you already have a session open then you will receive a warning that the current session will be lost. Before proceeding make sure your current session is saved. (Click on cancel. Then, <strong>File</strong> –&gt; <strong>Save as</strong>)<br>
 <img src="Module9/cytoscape_primer/images/session_overwrite_warning.png" width="75%" /></p></li>
-<li><p>Once the network has loaded you will see a network of protein interactions derived from an affinity purification experiment. Bait proteins are reprsented as pink hexagons and their corresponing prey proteins blue boxes.
+<li><p>Once the network has loaded you will see a network of protein interactions derived from an affinity purification experiment. Bait proteins are represented as pink hexagons and their corresponding prey proteins blue boxes.
 <img src="Module9/cytoscape_primer/images/affinity_purification_network.png" width="75%" /></p></li>
 <li><p>Using this larger network play around with the different layouts
 <br>
@@ -674,54 +766,54 @@ neighbours</strong>
 </p>
 </div>
 <p>Save current session before moving onto the next example - This is a little bit difficult because cytoscape is running on your computer but you are running this code from your instance which is in the cloud. the path to the file from within the instance is not the same as the one that cytoscape will see on your computer.</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="cytoscape_mod9.html#cb26-1" tabindex="-1"></a><span class="co"># ── Save the current session before switching networks ───────────────────────</span></span>
-<span id="cb26-2"><a href="cytoscape_mod9.html#cb26-2" tabindex="-1"></a><span class="fu">saveSession</span>(<span class="at">filename =</span> <span class="fu">file.path</span>(path_to_save_cytoscape, </span>
-<span id="cb26-3"><a href="cytoscape_mod9.html#cb26-3" tabindex="-1"></a>                                 <span class="st">&quot;my_session.cys&quot;</span>),</span>
-<span id="cb26-4"><a href="cytoscape_mod9.html#cb26-4" tabindex="-1"></a>            <span class="at">base.url =</span> current_cytoscape_baseurl)</span>
-<span id="cb26-5"><a href="cytoscape_mod9.html#cb26-5" tabindex="-1"></a></span>
-<span id="cb26-6"><a href="cytoscape_mod9.html#cb26-6" tabindex="-1"></a><span class="co"># ── Open the Affinity Purification sample network ────────────────────────────</span></span>
-<span id="cb26-7"><a href="cytoscape_mod9.html#cb26-7" tabindex="-1"></a><span class="co"># Cytoscape ships sample sessions in its installation directory.</span></span>
-<span id="cb26-8"><a href="cytoscape_mod9.html#cb26-8" tabindex="-1"></a><span class="co"># The easiest way via RCy3 is to open the session file directly if you know</span></span>
-<span id="cb26-9"><a href="cytoscape_mod9.html#cb26-9" tabindex="-1"></a><span class="co"># its path, or to use the openSession command:</span></span>
-<span id="cb26-10"><a href="cytoscape_mod9.html#cb26-10" tabindex="-1"></a><span class="fu">openSession</span>(</span>
-<span id="cb26-11"><a href="cytoscape_mod9.html#cb26-11" tabindex="-1"></a>  <span class="at">file.location =</span> <span class="fu">file.path</span>(</span>
-<span id="cb26-12"><a href="cytoscape_mod9.html#cb26-12" tabindex="-1"></a>    <span class="fu">Sys.getenv</span>(<span class="st">&quot;CYTOSCAPE_HOME&quot;</span>, <span class="st">&quot;/Applications/Cytoscape_v3.10.5&quot;</span>),</span>
-<span id="cb26-13"><a href="cytoscape_mod9.html#cb26-13" tabindex="-1"></a>    <span class="st">&quot;sampleData&quot;</span>, <span class="st">&quot;sessions&quot;</span>, <span class="st">&quot;Affinity Purification.cys&quot;</span></span>
-<span id="cb26-14"><a href="cytoscape_mod9.html#cb26-14" tabindex="-1"></a>  ), <span class="at">base.url =</span> current_cytoscape_baseurl</span>
-<span id="cb26-15"><a href="cytoscape_mod9.html#cb26-15" tabindex="-1"></a>)</span>
-<span id="cb26-16"><a href="cytoscape_mod9.html#cb26-16" tabindex="-1"></a></span>
-<span id="cb26-17"><a href="cytoscape_mod9.html#cb26-17" tabindex="-1"></a><span class="co"># Get the SUID of the newly loaded network</span></span>
-<span id="cb26-18"><a href="cytoscape_mod9.html#cb26-18" tabindex="-1"></a>ap_suid <span class="ot">&lt;-</span> <span class="fu">getNetworkSuid</span>(<span class="at">base.url =</span> current_cytoscape_baseurl)</span>
-<span id="cb26-19"><a href="cytoscape_mod9.html#cb26-19" tabindex="-1"></a></span>
-<span id="cb26-20"><a href="cytoscape_mod9.html#cb26-20" tabindex="-1"></a><span class="co"># ── Try different layouts ─────────────────────────────────────────────────────</span></span>
-<span id="cb26-21"><a href="cytoscape_mod9.html#cb26-21" tabindex="-1"></a><span class="co"># List available layout algorithms</span></span>
-<span id="cb26-22"><a href="cytoscape_mod9.html#cb26-22" tabindex="-1"></a><span class="fu">getLayoutNames</span>(<span class="at">base.url =</span> current_cytoscape_baseurl)</span>
-<span id="cb26-23"><a href="cytoscape_mod9.html#cb26-23" tabindex="-1"></a></span>
-<span id="cb26-24"><a href="cytoscape_mod9.html#cb26-24" tabindex="-1"></a><span class="co"># Apply a force-directed layout</span></span>
-<span id="cb26-25"><a href="cytoscape_mod9.html#cb26-25" tabindex="-1"></a><span class="fu">layoutNetwork</span>(<span class="st">&quot;force-directed&quot;</span>, <span class="at">network =</span> ap_suid,</span>
-<span id="cb26-26"><a href="cytoscape_mod9.html#cb26-26" tabindex="-1"></a>              <span class="at">base.url =</span> current_cytoscape_baseurl)</span>
-<span id="cb26-27"><a href="cytoscape_mod9.html#cb26-27" tabindex="-1"></a></span>
-<span id="cb26-28"><a href="cytoscape_mod9.html#cb26-28" tabindex="-1"></a><span class="co"># Apply a hierarchical layout</span></span>
-<span id="cb26-29"><a href="cytoscape_mod9.html#cb26-29" tabindex="-1"></a><span class="fu">layoutNetwork</span>(<span class="st">&quot;hierarchical&quot;</span>, <span class="at">network =</span> ap_suid,</span>
-<span id="cb26-30"><a href="cytoscape_mod9.html#cb26-30" tabindex="-1"></a>              <span class="at">base.url =</span> current_cytoscape_baseurl)</span>
-<span id="cb26-31"><a href="cytoscape_mod9.html#cb26-31" tabindex="-1"></a></span>
-<span id="cb26-32"><a href="cytoscape_mod9.html#cb26-32" tabindex="-1"></a><span class="co"># ── Search for the node &quot;VPR&quot; and select its first neighbours ────────────────</span></span>
-<span id="cb26-33"><a href="cytoscape_mod9.html#cb26-33" tabindex="-1"></a><span class="co"># Select VPR by name</span></span>
-<span id="cb26-34"><a href="cytoscape_mod9.html#cb26-34" tabindex="-1"></a><span class="fu">selectNodes</span>(<span class="at">nodes =</span> <span class="st">&quot;VPR&quot;</span>, <span class="at">by.col =</span> <span class="st">&quot;name&quot;</span>, <span class="at">network =</span> ap_suid,</span>
-<span id="cb26-35"><a href="cytoscape_mod9.html#cb26-35" tabindex="-1"></a>            <span class="at">base.url =</span> current_cytoscape_baseurl)</span>
-<span id="cb26-36"><a href="cytoscape_mod9.html#cb26-36" tabindex="-1"></a></span>
-<span id="cb26-37"><a href="cytoscape_mod9.html#cb26-37" tabindex="-1"></a><span class="co"># Expand selection to include all directly connected (first-neighbour) nodes</span></span>
-<span id="cb26-38"><a href="cytoscape_mod9.html#cb26-38" tabindex="-1"></a><span class="fu">selectFirstNeighbors</span>(<span class="at">network =</span> ap_suid,</span>
-<span id="cb26-39"><a href="cytoscape_mod9.html#cb26-39" tabindex="-1"></a>                     <span class="at">base.url =</span> current_cytoscape_baseurl)</span>
-<span id="cb26-40"><a href="cytoscape_mod9.html#cb26-40" tabindex="-1"></a></span>
-<span id="cb26-41"><a href="cytoscape_mod9.html#cb26-41" tabindex="-1"></a><span class="co"># Retrieve the names of all currently selected nodes</span></span>
-<span id="cb26-42"><a href="cytoscape_mod9.html#cb26-42" tabindex="-1"></a>selected <span class="ot">&lt;-</span> <span class="fu">getSelectedNodes</span>(<span class="at">network =</span> ap_suid,</span>
-<span id="cb26-43"><a href="cytoscape_mod9.html#cb26-43" tabindex="-1"></a>                             <span class="at">base.url =</span> current_cytoscape_baseurl)</span>
-<span id="cb26-44"><a href="cytoscape_mod9.html#cb26-44" tabindex="-1"></a><span class="fu">message</span>(<span class="st">&quot;Selected nodes: &quot;</span>, <span class="fu">paste</span>(selected, <span class="at">collapse =</span> <span class="st">&quot;, &quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb295-1"><a href="cytoscape_mod9.html#cb295-1" tabindex="-1"></a><span class="co"># ── Save the current session before switching networks ───────────────────────</span></span>
+<span id="cb295-2"><a href="cytoscape_mod9.html#cb295-2" tabindex="-1"></a><span class="fu">saveSession</span>(<span class="at">filename =</span> <span class="fu">file.path</span>(path_to_save_cytoscape, </span>
+<span id="cb295-3"><a href="cytoscape_mod9.html#cb295-3" tabindex="-1"></a>                                 <span class="st">&quot;my_session.cys&quot;</span>),</span>
+<span id="cb295-4"><a href="cytoscape_mod9.html#cb295-4" tabindex="-1"></a>            <span class="at">base.url =</span> current_cytoscape_baseurl)</span>
+<span id="cb295-5"><a href="cytoscape_mod9.html#cb295-5" tabindex="-1"></a></span>
+<span id="cb295-6"><a href="cytoscape_mod9.html#cb295-6" tabindex="-1"></a><span class="co"># ── Open the Affinity Purification sample network ────────────────────────────</span></span>
+<span id="cb295-7"><a href="cytoscape_mod9.html#cb295-7" tabindex="-1"></a><span class="co"># Cytoscape ships sample sessions in its installation directory.</span></span>
+<span id="cb295-8"><a href="cytoscape_mod9.html#cb295-8" tabindex="-1"></a><span class="co"># The easiest way via RCy3 is to open the session file directly if you know</span></span>
+<span id="cb295-9"><a href="cytoscape_mod9.html#cb295-9" tabindex="-1"></a><span class="co"># its path, or to use the openSession command:</span></span>
+<span id="cb295-10"><a href="cytoscape_mod9.html#cb295-10" tabindex="-1"></a><span class="fu">openSession</span>(</span>
+<span id="cb295-11"><a href="cytoscape_mod9.html#cb295-11" tabindex="-1"></a>  <span class="at">file.location =</span> <span class="fu">file.path</span>(</span>
+<span id="cb295-12"><a href="cytoscape_mod9.html#cb295-12" tabindex="-1"></a>    <span class="fu">Sys.getenv</span>(<span class="st">&quot;CYTOSCAPE_HOME&quot;</span>, <span class="st">&quot;/Applications/Cytoscape_v3.10.5&quot;</span>),</span>
+<span id="cb295-13"><a href="cytoscape_mod9.html#cb295-13" tabindex="-1"></a>    <span class="st">&quot;sampleData&quot;</span>, <span class="st">&quot;sessions&quot;</span>, <span class="st">&quot;Affinity Purification.cys&quot;</span></span>
+<span id="cb295-14"><a href="cytoscape_mod9.html#cb295-14" tabindex="-1"></a>  ), <span class="at">base.url =</span> current_cytoscape_baseurl</span>
+<span id="cb295-15"><a href="cytoscape_mod9.html#cb295-15" tabindex="-1"></a>)</span>
+<span id="cb295-16"><a href="cytoscape_mod9.html#cb295-16" tabindex="-1"></a></span>
+<span id="cb295-17"><a href="cytoscape_mod9.html#cb295-17" tabindex="-1"></a><span class="co"># Get the SUID of the newly loaded network</span></span>
+<span id="cb295-18"><a href="cytoscape_mod9.html#cb295-18" tabindex="-1"></a>ap_suid <span class="ot">&lt;-</span> <span class="fu">getNetworkSuid</span>(<span class="at">base.url =</span> current_cytoscape_baseurl)</span>
+<span id="cb295-19"><a href="cytoscape_mod9.html#cb295-19" tabindex="-1"></a></span>
+<span id="cb295-20"><a href="cytoscape_mod9.html#cb295-20" tabindex="-1"></a><span class="co"># ── Try different layouts ─────────────────────────────────────────────────────</span></span>
+<span id="cb295-21"><a href="cytoscape_mod9.html#cb295-21" tabindex="-1"></a><span class="co"># List available layout algorithms</span></span>
+<span id="cb295-22"><a href="cytoscape_mod9.html#cb295-22" tabindex="-1"></a><span class="fu">getLayoutNames</span>(<span class="at">base.url =</span> current_cytoscape_baseurl)</span>
+<span id="cb295-23"><a href="cytoscape_mod9.html#cb295-23" tabindex="-1"></a></span>
+<span id="cb295-24"><a href="cytoscape_mod9.html#cb295-24" tabindex="-1"></a><span class="co"># Apply a force-directed layout</span></span>
+<span id="cb295-25"><a href="cytoscape_mod9.html#cb295-25" tabindex="-1"></a><span class="fu">layoutNetwork</span>(<span class="st">&quot;force-directed&quot;</span>, <span class="at">network =</span> ap_suid,</span>
+<span id="cb295-26"><a href="cytoscape_mod9.html#cb295-26" tabindex="-1"></a>              <span class="at">base.url =</span> current_cytoscape_baseurl)</span>
+<span id="cb295-27"><a href="cytoscape_mod9.html#cb295-27" tabindex="-1"></a></span>
+<span id="cb295-28"><a href="cytoscape_mod9.html#cb295-28" tabindex="-1"></a><span class="co"># Apply a hierarchical layout</span></span>
+<span id="cb295-29"><a href="cytoscape_mod9.html#cb295-29" tabindex="-1"></a><span class="fu">layoutNetwork</span>(<span class="st">&quot;hierarchical&quot;</span>, <span class="at">network =</span> ap_suid,</span>
+<span id="cb295-30"><a href="cytoscape_mod9.html#cb295-30" tabindex="-1"></a>              <span class="at">base.url =</span> current_cytoscape_baseurl)</span>
+<span id="cb295-31"><a href="cytoscape_mod9.html#cb295-31" tabindex="-1"></a></span>
+<span id="cb295-32"><a href="cytoscape_mod9.html#cb295-32" tabindex="-1"></a><span class="co"># ── Search for the node &quot;VPR&quot; and select its first neighbours ────────────────</span></span>
+<span id="cb295-33"><a href="cytoscape_mod9.html#cb295-33" tabindex="-1"></a><span class="co"># Select VPR by name</span></span>
+<span id="cb295-34"><a href="cytoscape_mod9.html#cb295-34" tabindex="-1"></a><span class="fu">selectNodes</span>(<span class="at">nodes =</span> <span class="st">&quot;VPR&quot;</span>, <span class="at">by.col =</span> <span class="st">&quot;name&quot;</span>, <span class="at">network =</span> ap_suid,</span>
+<span id="cb295-35"><a href="cytoscape_mod9.html#cb295-35" tabindex="-1"></a>            <span class="at">base.url =</span> current_cytoscape_baseurl)</span>
+<span id="cb295-36"><a href="cytoscape_mod9.html#cb295-36" tabindex="-1"></a></span>
+<span id="cb295-37"><a href="cytoscape_mod9.html#cb295-37" tabindex="-1"></a><span class="co"># Expand selection to include all directly connected (first-neighbour) nodes</span></span>
+<span id="cb295-38"><a href="cytoscape_mod9.html#cb295-38" tabindex="-1"></a><span class="fu">selectFirstNeighbors</span>(<span class="at">network =</span> ap_suid,</span>
+<span id="cb295-39"><a href="cytoscape_mod9.html#cb295-39" tabindex="-1"></a>                     <span class="at">base.url =</span> current_cytoscape_baseurl)</span>
+<span id="cb295-40"><a href="cytoscape_mod9.html#cb295-40" tabindex="-1"></a></span>
+<span id="cb295-41"><a href="cytoscape_mod9.html#cb295-41" tabindex="-1"></a><span class="co"># Retrieve the names of all currently selected nodes</span></span>
+<span id="cb295-42"><a href="cytoscape_mod9.html#cb295-42" tabindex="-1"></a>selected <span class="ot">&lt;-</span> <span class="fu">getSelectedNodes</span>(<span class="at">network =</span> ap_suid,</span>
+<span id="cb295-43"><a href="cytoscape_mod9.html#cb295-43" tabindex="-1"></a>                             <span class="at">base.url =</span> current_cytoscape_baseurl)</span>
+<span id="cb295-44"><a href="cytoscape_mod9.html#cb295-44" tabindex="-1"></a><span class="fu">message</span>(<span class="st">&quot;Selected nodes: &quot;</span>, <span class="fu">paste</span>(selected, <span class="at">collapse =</span> <span class="st">&quot;, &quot;</span>))</span></code></pre></div>
 </div>
 <div id="exercise-3---perform-basic-enrichment-analysis-using-enrichmenttable" class="section level2 hasAnchor">
 <h2>Exercise 3 - Perform basic enrichment analysis using EnrichmentTable<a href="cytoscape_mod9.html#exercise-3---perform-basic-enrichment-analysis-using-enrichmenttable" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>In Module 2 we performed detailed enrichment analysis with g:profiler and GSEA. We supplied gene lists and ranked expression sets in order to perform the analysis. What if you want to run a quick enrichment analysis with a given network or a given subset of the network? The easiest way to do this is to use the cytoscape app EnrichmentTable. EnrichmentTable will query g:profiler directly with the given network or subnetwork. Not all of the parameters that are available in the web version can be tweaked from the enrichmentmap table app but it can be an easy way to quickly see enrichment results.</p>
+<p>In Module 8 we performed detailed enrichment analysis with g:profiler and GSEA. We supplied gene lists and ranked expression sets in order to perform the analysis. What if you want to run a quick enrichment analysis with a given network or a given subset of the network? The easiest way to do this is to use the cytoscape app EnrichmentTable. EnrichmentTable will query g:profiler directly with the given network or subnetwork. Not all of the parameters that are available in the web version can be tweaked from the enrichmentmap table app but it can be an easy way to quickly see enrichment results.</p>
 We will select the bait protein VPR and all its associated prey proteins to use for an enrichment analysis.
 <br>
 <br>
@@ -776,7 +868,7 @@ This will bring up a panel with the adjustable settings. There are only 5 adjust
 <li><strong>Gene ID column</strong> - the column in the current network that you want to use to search g:Profiler with. Ideally this should be a column specifying the Gene Name or other identifier.</li>
 <li><strong>Multiple testing correction</strong> - change to fdr.</li>
 <li><strong>Adjusted p-value threshold (min 0 max 1)</strong> - leave as 0.05. If you are getting too many results you can make this value smaller.</li>
-<li><strong>Include inferred GO annotations (IEA)</strong> - by default the search will exclude inferred from electonic annotation GO terms. If you want to include them, select this option. <br>
+<li><strong>Include inferred GO annotations (IEA)</strong> - by default the search will exclude inferred from electronic annotation GO terms. If you want to include them, select this option. <br>
 <img src="Module9/cytoscape_primer/images/enrichment_table_params.png" width="75%" /></li>
 </ol>
 <br>
@@ -796,7 +888,7 @@ testing with.
 <br></p>
 <ol start="6" type="1">
 <li>
-Filter the EnrichmentTable results to show only GO:BP, Reactome and Wikipathway, similiar to what we used in Module 2.
+Filter the EnrichmentTable results to show only GO:BP, Reactome and Wikipathway, similar to what we used in Module 2.
 </li>
 </ol>
 <ol style="list-style-type: lower-roman">
@@ -811,40 +903,40 @@ Filter the EnrichmentTable results to show only GO:BP, Reactome and Wikipathway,
 then run g:Profiler enrichment directly from R</strong>
 </p>
 </div>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="cytoscape_mod9.html#cb27-1" tabindex="-1"></a><span class="fu">library</span>(gprofiler2)</span>
-<span id="cb27-2"><a href="cytoscape_mod9.html#cb27-2" tabindex="-1"></a></span>
-<span id="cb27-3"><a href="cytoscape_mod9.html#cb27-3" tabindex="-1"></a><span class="co"># ── Select VPR and its first neighbours ──────────────────────────────────────</span></span>
-<span id="cb27-4"><a href="cytoscape_mod9.html#cb27-4" tabindex="-1"></a><span class="fu">selectNodes</span>(<span class="at">nodes =</span> <span class="st">&quot;VPR&quot;</span>, <span class="at">by.col =</span> <span class="st">&quot;name&quot;</span>, <span class="at">network =</span> ap_suid,</span>
-<span id="cb27-5"><a href="cytoscape_mod9.html#cb27-5" tabindex="-1"></a>            <span class="at">base.url =</span> current_cytoscape_baseurl)</span>
-<span id="cb27-6"><a href="cytoscape_mod9.html#cb27-6" tabindex="-1"></a><span class="fu">selectFirstNeighbors</span>(<span class="at">network =</span> ap_suid,</span>
-<span id="cb27-7"><a href="cytoscape_mod9.html#cb27-7" tabindex="-1"></a>                     <span class="at">base.url =</span> current_cytoscape_baseurl)</span>
-<span id="cb27-8"><a href="cytoscape_mod9.html#cb27-8" tabindex="-1"></a></span>
-<span id="cb27-9"><a href="cytoscape_mod9.html#cb27-9" tabindex="-1"></a><span class="co"># Get the names of all selected nodes (VPR + prey proteins)</span></span>
-<span id="cb27-10"><a href="cytoscape_mod9.html#cb27-10" tabindex="-1"></a>vpr_neighbourhood <span class="ot">&lt;-</span> <span class="fu">getSelectedNodes</span>(<span class="at">network =</span> ap_suid,</span>
-<span id="cb27-11"><a href="cytoscape_mod9.html#cb27-11" tabindex="-1"></a>                                      <span class="at">base.url =</span> current_cytoscape_baseurl)</span>
-<span id="cb27-12"><a href="cytoscape_mod9.html#cb27-12" tabindex="-1"></a><span class="fu">message</span>(<span class="st">&quot;Nodes in VPR neighbourhood: &quot;</span>, <span class="fu">length</span>(vpr_neighbourhood))</span>
-<span id="cb27-13"><a href="cytoscape_mod9.html#cb27-13" tabindex="-1"></a></span>
-<span id="cb27-14"><a href="cytoscape_mod9.html#cb27-14" tabindex="-1"></a><span class="co"># ── Run g:Profiler enrichment directly from R ─────────────────────────────────</span></span>
-<span id="cb27-15"><a href="cytoscape_mod9.html#cb27-15" tabindex="-1"></a><span class="co"># This replicates what EnrichmentTable does internally, with full control over</span></span>
-<span id="cb27-16"><a href="cytoscape_mod9.html#cb27-16" tabindex="-1"></a><span class="co"># all parameters including source filtering before multiple testing correction.</span></span>
-<span id="cb27-17"><a href="cytoscape_mod9.html#cb27-17" tabindex="-1"></a>gp_results <span class="ot">&lt;-</span> <span class="fu">gost</span>(</span>
-<span id="cb27-18"><a href="cytoscape_mod9.html#cb27-18" tabindex="-1"></a>  <span class="at">query             =</span> vpr_neighbourhood,</span>
-<span id="cb27-19"><a href="cytoscape_mod9.html#cb27-19" tabindex="-1"></a>  <span class="at">organism          =</span> <span class="st">&quot;hsapiens&quot;</span>,</span>
-<span id="cb27-20"><a href="cytoscape_mod9.html#cb27-20" tabindex="-1"></a>  <span class="at">correction_method =</span> <span class="st">&quot;fdr&quot;</span>,</span>
-<span id="cb27-21"><a href="cytoscape_mod9.html#cb27-21" tabindex="-1"></a>  <span class="at">user_threshold    =</span> <span class="fl">0.05</span>,</span>
-<span id="cb27-22"><a href="cytoscape_mod9.html#cb27-22" tabindex="-1"></a>  <span class="at">evcodes           =</span> <span class="cn">TRUE</span>,           <span class="co"># include evidence codes (like IEA filter)</span></span>
-<span id="cb27-23"><a href="cytoscape_mod9.html#cb27-23" tabindex="-1"></a>  <span class="at">sources           =</span> <span class="fu">c</span>(<span class="st">&quot;GO:BP&quot;</span>, <span class="st">&quot;REAC&quot;</span>, <span class="st">&quot;WP&quot;</span>)  <span class="co"># GO:BP, Reactome, WikiPathways</span></span>
-<span id="cb27-24"><a href="cytoscape_mod9.html#cb27-24" tabindex="-1"></a>)</span>
-<span id="cb27-25"><a href="cytoscape_mod9.html#cb27-25" tabindex="-1"></a></span>
-<span id="cb27-26"><a href="cytoscape_mod9.html#cb27-26" tabindex="-1"></a><span class="co"># View the top results</span></span>
-<span id="cb27-27"><a href="cytoscape_mod9.html#cb27-27" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(gp_results)) {</span>
-<span id="cb27-28"><a href="cytoscape_mod9.html#cb27-28" tabindex="-1"></a>  results_df <span class="ot">&lt;-</span> gp_results<span class="sc">$</span>result</span>
-<span id="cb27-29"><a href="cytoscape_mod9.html#cb27-29" tabindex="-1"></a>  results_df <span class="ot">&lt;-</span> results_df[<span class="fu">order</span>(results_df<span class="sc">$</span>p_value), ]</span>
-<span id="cb27-30"><a href="cytoscape_mod9.html#cb27-30" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">head</span>(results_df[, <span class="fu">c</span>(<span class="st">&quot;term_name&quot;</span>, <span class="st">&quot;source&quot;</span>, <span class="st">&quot;p_value&quot;</span>, <span class="st">&quot;term_size&quot;</span>,</span>
-<span id="cb27-31"><a href="cytoscape_mod9.html#cb27-31" tabindex="-1"></a>                             <span class="st">&quot;intersection_size&quot;</span>)], <span class="dv">20</span>))</span>
-<span id="cb27-32"><a href="cytoscape_mod9.html#cb27-32" tabindex="-1"></a>} <span class="cf">else</span> {</span>
-<span id="cb27-33"><a href="cytoscape_mod9.html#cb27-33" tabindex="-1"></a>  <span class="fu">message</span>(<span class="st">&quot;No significant enrichment results found.&quot;</span>)</span>
-<span id="cb27-34"><a href="cytoscape_mod9.html#cb27-34" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb296-1"><a href="cytoscape_mod9.html#cb296-1" tabindex="-1"></a><span class="fu">library</span>(gprofiler2)</span>
+<span id="cb296-2"><a href="cytoscape_mod9.html#cb296-2" tabindex="-1"></a></span>
+<span id="cb296-3"><a href="cytoscape_mod9.html#cb296-3" tabindex="-1"></a><span class="co"># ── Select VPR and its first neighbours ──────────────────────────────────────</span></span>
+<span id="cb296-4"><a href="cytoscape_mod9.html#cb296-4" tabindex="-1"></a><span class="fu">selectNodes</span>(<span class="at">nodes =</span> <span class="st">&quot;VPR&quot;</span>, <span class="at">by.col =</span> <span class="st">&quot;name&quot;</span>, <span class="at">network =</span> ap_suid,</span>
+<span id="cb296-5"><a href="cytoscape_mod9.html#cb296-5" tabindex="-1"></a>            <span class="at">base.url =</span> current_cytoscape_baseurl)</span>
+<span id="cb296-6"><a href="cytoscape_mod9.html#cb296-6" tabindex="-1"></a><span class="fu">selectFirstNeighbors</span>(<span class="at">network =</span> ap_suid,</span>
+<span id="cb296-7"><a href="cytoscape_mod9.html#cb296-7" tabindex="-1"></a>                     <span class="at">base.url =</span> current_cytoscape_baseurl)</span>
+<span id="cb296-8"><a href="cytoscape_mod9.html#cb296-8" tabindex="-1"></a></span>
+<span id="cb296-9"><a href="cytoscape_mod9.html#cb296-9" tabindex="-1"></a><span class="co"># Get the names of all selected nodes (VPR + prey proteins)</span></span>
+<span id="cb296-10"><a href="cytoscape_mod9.html#cb296-10" tabindex="-1"></a>vpr_neighbourhood <span class="ot">&lt;-</span> <span class="fu">getSelectedNodes</span>(<span class="at">network =</span> ap_suid,</span>
+<span id="cb296-11"><a href="cytoscape_mod9.html#cb296-11" tabindex="-1"></a>                                      <span class="at">base.url =</span> current_cytoscape_baseurl)</span>
+<span id="cb296-12"><a href="cytoscape_mod9.html#cb296-12" tabindex="-1"></a><span class="fu">message</span>(<span class="st">&quot;Nodes in VPR neighbourhood: &quot;</span>, <span class="fu">length</span>(vpr_neighbourhood))</span>
+<span id="cb296-13"><a href="cytoscape_mod9.html#cb296-13" tabindex="-1"></a></span>
+<span id="cb296-14"><a href="cytoscape_mod9.html#cb296-14" tabindex="-1"></a><span class="co"># ── Run g:Profiler enrichment directly from R ─────────────────────────────────</span></span>
+<span id="cb296-15"><a href="cytoscape_mod9.html#cb296-15" tabindex="-1"></a><span class="co"># This replicates what EnrichmentTable does internally, with full control over</span></span>
+<span id="cb296-16"><a href="cytoscape_mod9.html#cb296-16" tabindex="-1"></a><span class="co"># all parameters including source filtering before multiple testing correction.</span></span>
+<span id="cb296-17"><a href="cytoscape_mod9.html#cb296-17" tabindex="-1"></a>gp_results <span class="ot">&lt;-</span> <span class="fu">gost</span>(</span>
+<span id="cb296-18"><a href="cytoscape_mod9.html#cb296-18" tabindex="-1"></a>  <span class="at">query             =</span> vpr_neighbourhood,</span>
+<span id="cb296-19"><a href="cytoscape_mod9.html#cb296-19" tabindex="-1"></a>  <span class="at">organism          =</span> <span class="st">&quot;hsapiens&quot;</span>,</span>
+<span id="cb296-20"><a href="cytoscape_mod9.html#cb296-20" tabindex="-1"></a>  <span class="at">correction_method =</span> <span class="st">&quot;fdr&quot;</span>,</span>
+<span id="cb296-21"><a href="cytoscape_mod9.html#cb296-21" tabindex="-1"></a>  <span class="at">user_threshold    =</span> <span class="fl">0.05</span>,</span>
+<span id="cb296-22"><a href="cytoscape_mod9.html#cb296-22" tabindex="-1"></a>  <span class="at">evcodes           =</span> <span class="cn">TRUE</span>,           <span class="co"># include evidence codes (like IEA filter)</span></span>
+<span id="cb296-23"><a href="cytoscape_mod9.html#cb296-23" tabindex="-1"></a>  <span class="at">sources           =</span> <span class="fu">c</span>(<span class="st">&quot;GO:BP&quot;</span>, <span class="st">&quot;REAC&quot;</span>, <span class="st">&quot;WP&quot;</span>)  <span class="co"># GO:BP, Reactome, WikiPathways</span></span>
+<span id="cb296-24"><a href="cytoscape_mod9.html#cb296-24" tabindex="-1"></a>)</span>
+<span id="cb296-25"><a href="cytoscape_mod9.html#cb296-25" tabindex="-1"></a></span>
+<span id="cb296-26"><a href="cytoscape_mod9.html#cb296-26" tabindex="-1"></a><span class="co"># View the top results</span></span>
+<span id="cb296-27"><a href="cytoscape_mod9.html#cb296-27" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(gp_results)) {</span>
+<span id="cb296-28"><a href="cytoscape_mod9.html#cb296-28" tabindex="-1"></a>  results_df <span class="ot">&lt;-</span> gp_results<span class="sc">$</span>result</span>
+<span id="cb296-29"><a href="cytoscape_mod9.html#cb296-29" tabindex="-1"></a>  results_df <span class="ot">&lt;-</span> results_df[<span class="fu">order</span>(results_df<span class="sc">$</span>p_value), ]</span>
+<span id="cb296-30"><a href="cytoscape_mod9.html#cb296-30" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">head</span>(results_df[, <span class="fu">c</span>(<span class="st">&quot;term_name&quot;</span>, <span class="st">&quot;source&quot;</span>, <span class="st">&quot;p_value&quot;</span>, <span class="st">&quot;term_size&quot;</span>,</span>
+<span id="cb296-31"><a href="cytoscape_mod9.html#cb296-31" tabindex="-1"></a>                             <span class="st">&quot;intersection_size&quot;</span>)], <span class="dv">20</span>))</span>
+<span id="cb296-32"><a href="cytoscape_mod9.html#cb296-32" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb296-33"><a href="cytoscape_mod9.html#cb296-33" tabindex="-1"></a>  <span class="fu">message</span>(<span class="st">&quot;No significant enrichment results found.&quot;</span>)</span>
+<span id="cb296-34"><a href="cytoscape_mod9.html#cb296-34" tabindex="-1"></a>}</span></code></pre></div>
 </div>
 <div id="enrichmenttabl-features" class="section level2 hasAnchor">
 <h2>Exercise 3B - create Enrichment Map and Enhanced graphics nodes from EnrichmentTable<a href="cytoscape_mod9.html#enrichmenttabl-features" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -864,74 +956,74 @@ g:Profiler results using the EnrichmentMap Cytoscape app</strong>
 </p>
 </div>
 <p>Cytoscape has no access to the files that we create on the instance or remote server. We need to upload the file to Cytoscape so it can see it.</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="cytoscape_mod9.html#cb28-1" tabindex="-1"></a><span class="co">#if using docker we need to replace all the the paths to the host path</span></span>
-<span id="cb28-2"><a href="cytoscape_mod9.html#cb28-2" tabindex="-1"></a><span class="cf">if</span>(is_remote) {</span>
-<span id="cb28-3"><a href="cytoscape_mod9.html#cb28-3" tabindex="-1"></a>  upload_em_file <span class="ot">&lt;-</span> <span class="cf">function</span>(localPath) {</span>
-<span id="cb28-4"><a href="cytoscape_mod9.html#cb28-4" tabindex="-1"></a>      <span class="co"># EnrichmentMap&#39;s upload endpoint is on the root port, </span></span>
-<span id="cb28-5"><a href="cytoscape_mod9.html#cb28-5" tabindex="-1"></a>      <span class="co">#not under /v1</span></span>
-<span id="cb28-6"><a href="cytoscape_mod9.html#cb28-6" tabindex="-1"></a>     base_no_v1 <span class="ot">&lt;-</span> <span class="fu">sub</span>(<span class="st">&quot;/v1$&quot;</span>, <span class="st">&quot;&quot;</span>, current_cytoscape_baseurl)</span>
-<span id="cb28-7"><a href="cytoscape_mod9.html#cb28-7" tabindex="-1"></a>  </span>
-<span id="cb28-8"><a href="cytoscape_mod9.html#cb28-8" tabindex="-1"></a>    bname <span class="ot">&lt;-</span> <span class="fu">basename</span>(localPath)</span>
-<span id="cb28-9"><a href="cytoscape_mod9.html#cb28-9" tabindex="-1"></a>    r <span class="ot">&lt;-</span> httr<span class="sc">::</span><span class="fu">POST</span>(</span>
-<span id="cb28-10"><a href="cytoscape_mod9.html#cb28-10" tabindex="-1"></a>      <span class="at">url =</span> <span class="fu">paste</span>(base_no_v1,</span>
-<span id="cb28-11"><a href="cytoscape_mod9.html#cb28-11" tabindex="-1"></a>      <span class="st">&#39;/enrichmentmap/textfileupload?fileName=&#39;</span>, </span>
-<span id="cb28-12"><a href="cytoscape_mod9.html#cb28-12" tabindex="-1"></a>                  bname, <span class="at">sep=</span><span class="st">&quot;&quot;</span>),</span>
-<span id="cb28-13"><a href="cytoscape_mod9.html#cb28-13" tabindex="-1"></a>      <span class="at">config =</span> <span class="fu">list</span>(),</span>
-<span id="cb28-14"><a href="cytoscape_mod9.html#cb28-14" tabindex="-1"></a>      <span class="at">body =</span> <span class="fu">list</span>(<span class="at">file =</span> httr<span class="sc">::</span><span class="fu">upload_file</span>(localPath)),</span>
-<span id="cb28-15"><a href="cytoscape_mod9.html#cb28-15" tabindex="-1"></a>      <span class="at">encode =</span> <span class="st">&quot;multipart&quot;</span>,</span>
-<span id="cb28-16"><a href="cytoscape_mod9.html#cb28-16" tabindex="-1"></a>      <span class="at">handle =</span> <span class="cn">NULL</span></span>
-<span id="cb28-17"><a href="cytoscape_mod9.html#cb28-17" tabindex="-1"></a>    )</span>
-<span id="cb28-18"><a href="cytoscape_mod9.html#cb28-18" tabindex="-1"></a>    httr<span class="sc">::</span><span class="fu">content</span>(r,<span class="st">&quot;parsed&quot;</span>)<span class="sc">$</span>path</span>
-<span id="cb28-19"><a href="cytoscape_mod9.html#cb28-19" tabindex="-1"></a>  }</span>
-<span id="cb28-20"><a href="cytoscape_mod9.html#cb28-20" tabindex="-1"></a>  </span>
-<span id="cb28-21"><a href="cytoscape_mod9.html#cb28-21" tabindex="-1"></a>}</span></code></pre></div>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="cytoscape_mod9.html#cb29-1" tabindex="-1"></a><span class="fu">library</span>(RCy3)</span>
-<span id="cb29-2"><a href="cytoscape_mod9.html#cb29-2" tabindex="-1"></a></span>
-<span id="cb29-3"><a href="cytoscape_mod9.html#cb29-3" tabindex="-1"></a><span class="co"># ── Write g:Profiler results to a file that EnrichmentMap can read ────────────</span></span>
-<span id="cb29-4"><a href="cytoscape_mod9.html#cb29-4" tabindex="-1"></a><span class="co"># EnrichmentMap accepts g:Profiler results via its file-based input.</span></span>
-<span id="cb29-5"><a href="cytoscape_mod9.html#cb29-5" tabindex="-1"></a><span class="co"># gprofiler2::gost() can write a GMT-compatible file directly.</span></span>
-<span id="cb29-6"><a href="cytoscape_mod9.html#cb29-6" tabindex="-1"></a></span>
-<span id="cb29-7"><a href="cytoscape_mod9.html#cb29-7" tabindex="-1"></a>em_dir <span class="ot">&lt;-</span> <span class="st">&quot;./Module9/cytoscape_primer/em_output&quot;</span></span>
-<span id="cb29-8"><a href="cytoscape_mod9.html#cb29-8" tabindex="-1"></a><span class="fu">dir.create</span>(em_dir, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>, <span class="at">recursive =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb29-9"><a href="cytoscape_mod9.html#cb29-9" tabindex="-1"></a></span>
-<span id="cb29-10"><a href="cytoscape_mod9.html#cb29-10" tabindex="-1"></a>gp_gem_file <span class="ot">&lt;-</span> <span class="fu">file.path</span>(em_dir, <span class="st">&quot;vpr_gprofiler.gem.txt&quot;</span>)</span>
-<span id="cb29-11"><a href="cytoscape_mod9.html#cb29-11" tabindex="-1"></a></span>
-<span id="cb29-12"><a href="cytoscape_mod9.html#cb29-12" tabindex="-1"></a><span class="co"># Write the g:Profiler results in the Generic Enrichment Map (GEM) format</span></span>
-<span id="cb29-13"><a href="cytoscape_mod9.html#cb29-13" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(gp_results)) {</span>
-<span id="cb29-14"><a href="cytoscape_mod9.html#cb29-14" tabindex="-1"></a>  gem_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb29-15"><a href="cytoscape_mod9.html#cb29-15" tabindex="-1"></a>    <span class="at">Name        =</span> gp_results<span class="sc">$</span>result<span class="sc">$</span>term_name,</span>
-<span id="cb29-16"><a href="cytoscape_mod9.html#cb29-16" tabindex="-1"></a>    <span class="at">Description =</span> gp_results<span class="sc">$</span>result<span class="sc">$</span>term_id,</span>
-<span id="cb29-17"><a href="cytoscape_mod9.html#cb29-17" tabindex="-1"></a>    <span class="at">pvalue      =</span> gp_results<span class="sc">$</span>result<span class="sc">$</span>p_value,</span>
-<span id="cb29-18"><a href="cytoscape_mod9.html#cb29-18" tabindex="-1"></a>    <span class="at">qvalue      =</span> gp_results<span class="sc">$</span>result<span class="sc">$</span>p_value,  <span class="co"># gost returns fdr-corrected p_value</span></span>
-<span id="cb29-19"><a href="cytoscape_mod9.html#cb29-19" tabindex="-1"></a>    <span class="at">phenotype =</span> <span class="dv">1</span>,</span>
-<span id="cb29-20"><a href="cytoscape_mod9.html#cb29-20" tabindex="-1"></a>    <span class="at">genes       =</span> <span class="fu">sapply</span>(gp_results<span class="sc">$</span>result<span class="sc">$</span>intersection, paste, <span class="at">collapse =</span> <span class="st">&quot;,&quot;</span>),</span>
-<span id="cb29-21"><a href="cytoscape_mod9.html#cb29-21" tabindex="-1"></a>    <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span></span>
-<span id="cb29-22"><a href="cytoscape_mod9.html#cb29-22" tabindex="-1"></a>  )</span>
-<span id="cb29-23"><a href="cytoscape_mod9.html#cb29-23" tabindex="-1"></a>  <span class="fu">write.table</span>(gem_df, <span class="at">file =</span> gp_gem_file, <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>,</span>
-<span id="cb29-24"><a href="cytoscape_mod9.html#cb29-24" tabindex="-1"></a>              <span class="at">quote =</span> <span class="cn">FALSE</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>, <span class="at">col.names =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb29-25"><a href="cytoscape_mod9.html#cb29-25" tabindex="-1"></a>}</span>
-<span id="cb29-26"><a href="cytoscape_mod9.html#cb29-26" tabindex="-1"></a></span>
-<span id="cb29-27"><a href="cytoscape_mod9.html#cb29-27" tabindex="-1"></a><span class="co">#if cytoscape is remote then upload the file we just created</span></span>
-<span id="cb29-28"><a href="cytoscape_mod9.html#cb29-28" tabindex="-1"></a><span class="cf">if</span>(is_remote) {</span>
-<span id="cb29-29"><a href="cytoscape_mod9.html#cb29-29" tabindex="-1"></a>    gp_gem_file <span class="ot">&lt;-</span> <span class="fu">upload_em_file</span>(gp_gem_file)</span>
-<span id="cb29-30"><a href="cytoscape_mod9.html#cb29-30" tabindex="-1"></a>  }</span>
-<span id="cb29-31"><a href="cytoscape_mod9.html#cb29-31" tabindex="-1"></a></span>
-<span id="cb29-32"><a href="cytoscape_mod9.html#cb29-32" tabindex="-1"></a><span class="co"># ── Build the Enrichment Map via the RCy3 / EM command interface ──────────────</span></span>
-<span id="cb29-33"><a href="cytoscape_mod9.html#cb29-33" tabindex="-1"></a><span class="co"># Use commandsRun() to call the EnrichmentMap build command directly</span></span>
-<span id="cb29-34"><a href="cytoscape_mod9.html#cb29-34" tabindex="-1"></a>em_command <span class="ot">&lt;-</span> <span class="fu">paste</span>(</span>
-<span id="cb29-35"><a href="cytoscape_mod9.html#cb29-35" tabindex="-1"></a>  <span class="st">&quot;enrichmentmap build&quot;</span>,</span>
-<span id="cb29-36"><a href="cytoscape_mod9.html#cb29-36" tabindex="-1"></a>  <span class="fu">paste0</span>(<span class="st">&quot;analysisType=&quot;</span>, <span class="st">&quot;generic&quot;</span>),</span>
-<span id="cb29-37"><a href="cytoscape_mod9.html#cb29-37" tabindex="-1"></a>  <span class="fu">paste0</span>(<span class="st">&quot;enrichmentsDataset1=&quot;</span>, gp_gem_file),</span>
-<span id="cb29-38"><a href="cytoscape_mod9.html#cb29-38" tabindex="-1"></a>  <span class="fu">paste0</span>(<span class="st">&quot;pvalue=&quot;</span>,   <span class="st">&quot;1.0&quot;</span>),    <span class="co"># already filtered by gost; keep all</span></span>
-<span id="cb29-39"><a href="cytoscape_mod9.html#cb29-39" tabindex="-1"></a>  <span class="fu">paste0</span>(<span class="st">&quot;qvalue=&quot;</span>,   <span class="st">&quot;0.05&quot;</span>),</span>
-<span id="cb29-40"><a href="cytoscape_mod9.html#cb29-40" tabindex="-1"></a>  <span class="fu">paste0</span>(<span class="st">&quot;coefficients=&quot;</span>, <span class="st">&quot;COMBINED&quot;</span>),</span>
-<span id="cb29-41"><a href="cytoscape_mod9.html#cb29-41" tabindex="-1"></a>  <span class="fu">paste0</span>(<span class="st">&quot;similaritycutoff=&quot;</span>, <span class="st">&quot;0.375&quot;</span>),</span>
-<span id="cb29-42"><a href="cytoscape_mod9.html#cb29-42" tabindex="-1"></a>  <span class="at">sep =</span> <span class="st">&quot; &quot;</span></span>
-<span id="cb29-43"><a href="cytoscape_mod9.html#cb29-43" tabindex="-1"></a>)</span>
-<span id="cb29-44"><a href="cytoscape_mod9.html#cb29-44" tabindex="-1"></a></span>
-<span id="cb29-45"><a href="cytoscape_mod9.html#cb29-45" tabindex="-1"></a><span class="fu">commandsRun</span>(em_command,<span class="at">base.url =</span> current_cytoscape_baseurl)</span>
-<span id="cb29-46"><a href="cytoscape_mod9.html#cb29-46" tabindex="-1"></a></span>
-<span id="cb29-47"><a href="cytoscape_mod9.html#cb29-47" tabindex="-1"></a><span class="fu">message</span>(<span class="st">&quot;Enrichment Map created from VPR neighbourhood g:Profiler results.&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb297-1"><a href="cytoscape_mod9.html#cb297-1" tabindex="-1"></a><span class="co">#if using docker we need to replace all the the paths to the host path</span></span>
+<span id="cb297-2"><a href="cytoscape_mod9.html#cb297-2" tabindex="-1"></a><span class="cf">if</span>(is_remote) {</span>
+<span id="cb297-3"><a href="cytoscape_mod9.html#cb297-3" tabindex="-1"></a>  upload_em_file <span class="ot">&lt;-</span> <span class="cf">function</span>(localPath) {</span>
+<span id="cb297-4"><a href="cytoscape_mod9.html#cb297-4" tabindex="-1"></a>      <span class="co"># EnrichmentMap&#39;s upload endpoint is on the root port, </span></span>
+<span id="cb297-5"><a href="cytoscape_mod9.html#cb297-5" tabindex="-1"></a>      <span class="co">#not under /v1</span></span>
+<span id="cb297-6"><a href="cytoscape_mod9.html#cb297-6" tabindex="-1"></a>     base_no_v1 <span class="ot">&lt;-</span> <span class="fu">sub</span>(<span class="st">&quot;/v1$&quot;</span>, <span class="st">&quot;&quot;</span>, current_cytoscape_baseurl)</span>
+<span id="cb297-7"><a href="cytoscape_mod9.html#cb297-7" tabindex="-1"></a>  </span>
+<span id="cb297-8"><a href="cytoscape_mod9.html#cb297-8" tabindex="-1"></a>    bname <span class="ot">&lt;-</span> <span class="fu">basename</span>(localPath)</span>
+<span id="cb297-9"><a href="cytoscape_mod9.html#cb297-9" tabindex="-1"></a>    r <span class="ot">&lt;-</span> httr<span class="sc">::</span><span class="fu">POST</span>(</span>
+<span id="cb297-10"><a href="cytoscape_mod9.html#cb297-10" tabindex="-1"></a>      <span class="at">url =</span> <span class="fu">paste</span>(base_no_v1,</span>
+<span id="cb297-11"><a href="cytoscape_mod9.html#cb297-11" tabindex="-1"></a>      <span class="st">&#39;/enrichmentmap/textfileupload?fileName=&#39;</span>, </span>
+<span id="cb297-12"><a href="cytoscape_mod9.html#cb297-12" tabindex="-1"></a>                  bname, <span class="at">sep=</span><span class="st">&quot;&quot;</span>),</span>
+<span id="cb297-13"><a href="cytoscape_mod9.html#cb297-13" tabindex="-1"></a>      <span class="at">config =</span> <span class="fu">list</span>(),</span>
+<span id="cb297-14"><a href="cytoscape_mod9.html#cb297-14" tabindex="-1"></a>      <span class="at">body =</span> <span class="fu">list</span>(<span class="at">file =</span> httr<span class="sc">::</span><span class="fu">upload_file</span>(localPath)),</span>
+<span id="cb297-15"><a href="cytoscape_mod9.html#cb297-15" tabindex="-1"></a>      <span class="at">encode =</span> <span class="st">&quot;multipart&quot;</span>,</span>
+<span id="cb297-16"><a href="cytoscape_mod9.html#cb297-16" tabindex="-1"></a>      <span class="at">handle =</span> <span class="cn">NULL</span></span>
+<span id="cb297-17"><a href="cytoscape_mod9.html#cb297-17" tabindex="-1"></a>    )</span>
+<span id="cb297-18"><a href="cytoscape_mod9.html#cb297-18" tabindex="-1"></a>    httr<span class="sc">::</span><span class="fu">content</span>(r,<span class="st">&quot;parsed&quot;</span>)<span class="sc">$</span>path</span>
+<span id="cb297-19"><a href="cytoscape_mod9.html#cb297-19" tabindex="-1"></a>  }</span>
+<span id="cb297-20"><a href="cytoscape_mod9.html#cb297-20" tabindex="-1"></a>  </span>
+<span id="cb297-21"><a href="cytoscape_mod9.html#cb297-21" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb298"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb298-1"><a href="cytoscape_mod9.html#cb298-1" tabindex="-1"></a><span class="fu">library</span>(RCy3)</span>
+<span id="cb298-2"><a href="cytoscape_mod9.html#cb298-2" tabindex="-1"></a></span>
+<span id="cb298-3"><a href="cytoscape_mod9.html#cb298-3" tabindex="-1"></a><span class="co"># ── Write g:Profiler results to a file that EnrichmentMap can read ────────────</span></span>
+<span id="cb298-4"><a href="cytoscape_mod9.html#cb298-4" tabindex="-1"></a><span class="co"># EnrichmentMap accepts g:Profiler results via its file-based input.</span></span>
+<span id="cb298-5"><a href="cytoscape_mod9.html#cb298-5" tabindex="-1"></a><span class="co"># gprofiler2::gost() can write a GMT-compatible file directly.</span></span>
+<span id="cb298-6"><a href="cytoscape_mod9.html#cb298-6" tabindex="-1"></a></span>
+<span id="cb298-7"><a href="cytoscape_mod9.html#cb298-7" tabindex="-1"></a>em_dir <span class="ot">&lt;-</span> <span class="st">&quot;./Module9/cytoscape_primer/em_output&quot;</span></span>
+<span id="cb298-8"><a href="cytoscape_mod9.html#cb298-8" tabindex="-1"></a><span class="fu">dir.create</span>(em_dir, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>, <span class="at">recursive =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb298-9"><a href="cytoscape_mod9.html#cb298-9" tabindex="-1"></a></span>
+<span id="cb298-10"><a href="cytoscape_mod9.html#cb298-10" tabindex="-1"></a>gp_gem_file <span class="ot">&lt;-</span> <span class="fu">file.path</span>(em_dir, <span class="st">&quot;vpr_gprofiler.gem.txt&quot;</span>)</span>
+<span id="cb298-11"><a href="cytoscape_mod9.html#cb298-11" tabindex="-1"></a></span>
+<span id="cb298-12"><a href="cytoscape_mod9.html#cb298-12" tabindex="-1"></a><span class="co"># Write the g:Profiler results in the Generic Enrichment Map (GEM) format</span></span>
+<span id="cb298-13"><a href="cytoscape_mod9.html#cb298-13" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(gp_results)) {</span>
+<span id="cb298-14"><a href="cytoscape_mod9.html#cb298-14" tabindex="-1"></a>  gem_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb298-15"><a href="cytoscape_mod9.html#cb298-15" tabindex="-1"></a>    <span class="at">Name        =</span> gp_results<span class="sc">$</span>result<span class="sc">$</span>term_name,</span>
+<span id="cb298-16"><a href="cytoscape_mod9.html#cb298-16" tabindex="-1"></a>    <span class="at">Description =</span> gp_results<span class="sc">$</span>result<span class="sc">$</span>term_id,</span>
+<span id="cb298-17"><a href="cytoscape_mod9.html#cb298-17" tabindex="-1"></a>    <span class="at">pvalue      =</span> gp_results<span class="sc">$</span>result<span class="sc">$</span>p_value,</span>
+<span id="cb298-18"><a href="cytoscape_mod9.html#cb298-18" tabindex="-1"></a>    <span class="at">qvalue      =</span> gp_results<span class="sc">$</span>result<span class="sc">$</span>p_value,  <span class="co"># gost returns fdr-corrected p_value</span></span>
+<span id="cb298-19"><a href="cytoscape_mod9.html#cb298-19" tabindex="-1"></a>    <span class="at">phenotype =</span> <span class="dv">1</span>,</span>
+<span id="cb298-20"><a href="cytoscape_mod9.html#cb298-20" tabindex="-1"></a>    <span class="at">genes       =</span> <span class="fu">sapply</span>(gp_results<span class="sc">$</span>result<span class="sc">$</span>intersection, paste, <span class="at">collapse =</span> <span class="st">&quot;,&quot;</span>),</span>
+<span id="cb298-21"><a href="cytoscape_mod9.html#cb298-21" tabindex="-1"></a>    <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span></span>
+<span id="cb298-22"><a href="cytoscape_mod9.html#cb298-22" tabindex="-1"></a>  )</span>
+<span id="cb298-23"><a href="cytoscape_mod9.html#cb298-23" tabindex="-1"></a>  <span class="fu">write.table</span>(gem_df, <span class="at">file =</span> gp_gem_file, <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>,</span>
+<span id="cb298-24"><a href="cytoscape_mod9.html#cb298-24" tabindex="-1"></a>              <span class="at">quote =</span> <span class="cn">FALSE</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>, <span class="at">col.names =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb298-25"><a href="cytoscape_mod9.html#cb298-25" tabindex="-1"></a>}</span>
+<span id="cb298-26"><a href="cytoscape_mod9.html#cb298-26" tabindex="-1"></a></span>
+<span id="cb298-27"><a href="cytoscape_mod9.html#cb298-27" tabindex="-1"></a><span class="co">#if cytoscape is remote then upload the file we just created</span></span>
+<span id="cb298-28"><a href="cytoscape_mod9.html#cb298-28" tabindex="-1"></a><span class="cf">if</span>(is_remote) {</span>
+<span id="cb298-29"><a href="cytoscape_mod9.html#cb298-29" tabindex="-1"></a>    gp_gem_file <span class="ot">&lt;-</span> <span class="fu">upload_em_file</span>(gp_gem_file)</span>
+<span id="cb298-30"><a href="cytoscape_mod9.html#cb298-30" tabindex="-1"></a>  }</span>
+<span id="cb298-31"><a href="cytoscape_mod9.html#cb298-31" tabindex="-1"></a></span>
+<span id="cb298-32"><a href="cytoscape_mod9.html#cb298-32" tabindex="-1"></a><span class="co"># ── Build the Enrichment Map via the RCy3 / EM command interface ──────────────</span></span>
+<span id="cb298-33"><a href="cytoscape_mod9.html#cb298-33" tabindex="-1"></a><span class="co"># Use commandsRun() to call the EnrichmentMap build command directly</span></span>
+<span id="cb298-34"><a href="cytoscape_mod9.html#cb298-34" tabindex="-1"></a>em_command <span class="ot">&lt;-</span> <span class="fu">paste</span>(</span>
+<span id="cb298-35"><a href="cytoscape_mod9.html#cb298-35" tabindex="-1"></a>  <span class="st">&quot;enrichmentmap build&quot;</span>,</span>
+<span id="cb298-36"><a href="cytoscape_mod9.html#cb298-36" tabindex="-1"></a>  <span class="fu">paste0</span>(<span class="st">&quot;analysisType=&quot;</span>, <span class="st">&quot;generic&quot;</span>),</span>
+<span id="cb298-37"><a href="cytoscape_mod9.html#cb298-37" tabindex="-1"></a>  <span class="fu">paste0</span>(<span class="st">&quot;enrichmentsDataset1=&quot;</span>, gp_gem_file),</span>
+<span id="cb298-38"><a href="cytoscape_mod9.html#cb298-38" tabindex="-1"></a>  <span class="fu">paste0</span>(<span class="st">&quot;pvalue=&quot;</span>,   <span class="st">&quot;1.0&quot;</span>),    <span class="co"># already filtered by gost; keep all</span></span>
+<span id="cb298-39"><a href="cytoscape_mod9.html#cb298-39" tabindex="-1"></a>  <span class="fu">paste0</span>(<span class="st">&quot;qvalue=&quot;</span>,   <span class="st">&quot;0.05&quot;</span>),</span>
+<span id="cb298-40"><a href="cytoscape_mod9.html#cb298-40" tabindex="-1"></a>  <span class="fu">paste0</span>(<span class="st">&quot;coefficients=&quot;</span>, <span class="st">&quot;COMBINED&quot;</span>),</span>
+<span id="cb298-41"><a href="cytoscape_mod9.html#cb298-41" tabindex="-1"></a>  <span class="fu">paste0</span>(<span class="st">&quot;similaritycutoff=&quot;</span>, <span class="st">&quot;0.375&quot;</span>),</span>
+<span id="cb298-42"><a href="cytoscape_mod9.html#cb298-42" tabindex="-1"></a>  <span class="at">sep =</span> <span class="st">&quot; &quot;</span></span>
+<span id="cb298-43"><a href="cytoscape_mod9.html#cb298-43" tabindex="-1"></a>)</span>
+<span id="cb298-44"><a href="cytoscape_mod9.html#cb298-44" tabindex="-1"></a></span>
+<span id="cb298-45"><a href="cytoscape_mod9.html#cb298-45" tabindex="-1"></a><span class="fu">commandsRun</span>(em_command,<span class="at">base.url =</span> current_cytoscape_baseurl)</span>
+<span id="cb298-46"><a href="cytoscape_mod9.html#cb298-46" tabindex="-1"></a></span>
+<span id="cb298-47"><a href="cytoscape_mod9.html#cb298-47" tabindex="-1"></a><span class="fu">message</span>(<span class="st">&quot;Enrichment Map created from VPR neighbourhood g:Profiler results.&quot;</span>)</span></code></pre></div>
 </div>
 <div id="exercise-4---load-network-from-ndex" class="section level2 hasAnchor">
 <h2>Exercise 4 - Load network from NDex<a href="cytoscape_mod9.html#exercise-4---load-network-from-ndex" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -1022,56 +1114,63 @@ Change the default node colour to blue.
 network from NDEx, and apply bonus visual style changes</strong>
 </p>
 </div>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="cytoscape_mod9.html#cb30-1" tabindex="-1"></a><span class="fu">library</span>(RCy3)</span>
-<span id="cb30-2"><a href="cytoscape_mod9.html#cb30-2" tabindex="-1"></a><span class="fu">library</span>(ndexr)  <span class="co"># install with: BiocManager::install(&quot;ndexr&quot;)</span></span>
-<span id="cb30-3"><a href="cytoscape_mod9.html#cb30-3" tabindex="-1"></a></span>
-<span id="cb30-4"><a href="cytoscape_mod9.html#cb30-4" tabindex="-1"></a><span class="co"># ── Close current session ─────────────────────────────────────────────────────</span></span>
-<span id="cb30-5"><a href="cytoscape_mod9.html#cb30-5" tabindex="-1"></a><span class="fu">closeSession</span>(<span class="at">save.before.closing =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb30-6"><a href="cytoscape_mod9.html#cb30-6" tabindex="-1"></a>             <span class="at">base.url =</span> current_cytoscape_baseurl)</span>
-<span id="cb30-7"><a href="cytoscape_mod9.html#cb30-7" tabindex="-1"></a></span>
-<span id="cb30-8"><a href="cytoscape_mod9.html#cb30-8" tabindex="-1"></a><span class="co"># ── Import the MCF7_All_PPI&gt;=0.9 network from NDEx ───────────────────────────</span></span>
-<span id="cb30-9"><a href="cytoscape_mod9.html#cb30-9" tabindex="-1"></a><span class="co"># The NDEx UUID for this network (from the publication&#39;s NDEx record)</span></span>
-<span id="cb30-10"><a href="cytoscape_mod9.html#cb30-10" tabindex="-1"></a>mcf7_ndex_uuid <span class="ot">&lt;-</span> <span class="st">&quot;84e36f91-ecb7-11eb-b666-0ac135e8bacf&quot;</span></span>
-<span id="cb30-11"><a href="cytoscape_mod9.html#cb30-11" tabindex="-1"></a></span>
-<span id="cb30-12"><a href="cytoscape_mod9.html#cb30-12" tabindex="-1"></a><span class="co"># Import directly into Cytoscape via the CyNDEx2 app command</span></span>
-<span id="cb30-13"><a href="cytoscape_mod9.html#cb30-13" tabindex="-1"></a><span class="co"># (requires the CyNDEx2 Cytoscape app to be installed)</span></span>
-<span id="cb30-14"><a href="cytoscape_mod9.html#cb30-14" tabindex="-1"></a><span class="fu">importNetworkFromNDEx</span>(<span class="at">ndex.id =</span> mcf7_ndex_uuid,</span>
-<span id="cb30-15"><a href="cytoscape_mod9.html#cb30-15" tabindex="-1"></a>                      <span class="at">base.url =</span> current_cytoscape_baseurl)</span>
-<span id="cb30-16"><a href="cytoscape_mod9.html#cb30-16" tabindex="-1"></a></span>
-<span id="cb30-17"><a href="cytoscape_mod9.html#cb30-17" tabindex="-1"></a><span class="co"># Get the SUID of the imported network</span></span>
-<span id="cb30-18"><a href="cytoscape_mod9.html#cb30-18" tabindex="-1"></a>mcf7_suid <span class="ot">&lt;-</span> <span class="fu">getNetworkSuid</span>(<span class="at">base.url =</span> current_cytoscape_baseurl)</span>
-<span id="cb30-19"><a href="cytoscape_mod9.html#cb30-19" tabindex="-1"></a><span class="fu">message</span>(<span class="st">&quot;MCF7 network SUID: &quot;</span>, mcf7_suid)</span>
-<span id="cb30-20"><a href="cytoscape_mod9.html#cb30-20" tabindex="-1"></a></span>
-<span id="cb30-21"><a href="cytoscape_mod9.html#cb30-21" tabindex="-1"></a><span class="co"># Apply a layout to make the network readable</span></span>
-<span id="cb30-22"><a href="cytoscape_mod9.html#cb30-22" tabindex="-1"></a><span class="fu">layoutNetwork</span>(<span class="st">&quot;force-directed&quot;</span>, <span class="at">network =</span> mcf7_suid,</span>
-<span id="cb30-23"><a href="cytoscape_mod9.html#cb30-23" tabindex="-1"></a>              <span class="at">base.url =</span> current_cytoscape_baseurl)</span>
-<span id="cb30-24"><a href="cytoscape_mod9.html#cb30-24" tabindex="-1"></a></span>
-<span id="cb30-25"><a href="cytoscape_mod9.html#cb30-25" tabindex="-1"></a><span class="co"># ── BONUS: Change edge width to reflect number of patients ────────────────────</span></span>
-<span id="cb30-26"><a href="cytoscape_mod9.html#cb30-26" tabindex="-1"></a><span class="co"># First inspect the edge table to find the relevant column name</span></span>
-<span id="cb30-27"><a href="cytoscape_mod9.html#cb30-27" tabindex="-1"></a>edge_table <span class="ot">&lt;-</span> <span class="fu">getTableColumns</span>(<span class="at">table =</span> <span class="st">&quot;edge&quot;</span>, <span class="at">network =</span> mcf7_suid,</span>
-<span id="cb30-28"><a href="cytoscape_mod9.html#cb30-28" tabindex="-1"></a>                              <span class="at">base.url =</span> current_cytoscape_baseurl)</span>
-<span id="cb30-29"><a href="cytoscape_mod9.html#cb30-29" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">colnames</span>(edge_table))  <span class="co"># identify the patients column name</span></span>
-<span id="cb30-30"><a href="cytoscape_mod9.html#cb30-30" tabindex="-1"></a></span>
-<span id="cb30-31"><a href="cytoscape_mod9.html#cb30-31" tabindex="-1"></a><span class="co"># Assuming the column is called &quot;num_patients&quot; - adjust to match actual column</span></span>
-<span id="cb30-32"><a href="cytoscape_mod9.html#cb30-32" tabindex="-1"></a>patient_col <span class="ot">&lt;-</span> <span class="st">&quot;PPI.Score&quot;</span>   <span class="co"># &lt;-- update this to the actual column name</span></span>
-<span id="cb30-33"><a href="cytoscape_mod9.html#cb30-33" tabindex="-1"></a></span>
-<span id="cb30-34"><a href="cytoscape_mod9.html#cb30-34" tabindex="-1"></a>patient_min <span class="ot">&lt;-</span> <span class="fu">min</span>(edge_table[[patient_col]], <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb30-35"><a href="cytoscape_mod9.html#cb30-35" tabindex="-1"></a>patient_max <span class="ot">&lt;-</span> <span class="fu">max</span>(edge_table[[patient_col]], <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb30-36"><a href="cytoscape_mod9.html#cb30-36" tabindex="-1"></a></span>
-<span id="cb30-37"><a href="cytoscape_mod9.html#cb30-37" tabindex="-1"></a><span class="fu">setEdgeLineWidthMapping</span>(</span>
-<span id="cb30-38"><a href="cytoscape_mod9.html#cb30-38" tabindex="-1"></a>  <span class="at">table.column        =</span> patient_col,</span>
-<span id="cb30-39"><a href="cytoscape_mod9.html#cb30-39" tabindex="-1"></a>  <span class="at">table.column.values =</span> <span class="fu">c</span>(patient_min, patient_max),</span>
-<span id="cb30-40"><a href="cytoscape_mod9.html#cb30-40" tabindex="-1"></a>  <span class="at">widths              =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">10</span>),</span>
-<span id="cb30-41"><a href="cytoscape_mod9.html#cb30-41" tabindex="-1"></a>  <span class="at">mapping.type        =</span> <span class="st">&quot;continuous&quot;</span>,</span>
-<span id="cb30-42"><a href="cytoscape_mod9.html#cb30-42" tabindex="-1"></a>  <span class="at">network             =</span> mcf7_suid,</span>
-<span id="cb30-43"><a href="cytoscape_mod9.html#cb30-43" tabindex="-1"></a>  <span class="at">base.url =</span> current_cytoscape_baseurl</span>
-<span id="cb30-44"><a href="cytoscape_mod9.html#cb30-44" tabindex="-1"></a>)</span>
-<span id="cb30-45"><a href="cytoscape_mod9.html#cb30-45" tabindex="-1"></a></span>
-<span id="cb30-46"><a href="cytoscape_mod9.html#cb30-46" tabindex="-1"></a><span class="co"># ── BONUS: Change default node colour to blue ─────────────────────────────────</span></span>
-<span id="cb30-47"><a href="cytoscape_mod9.html#cb30-47" tabindex="-1"></a><span class="fu">setNodeColorDefault</span>(<span class="at">new.color =</span> <span class="st">&quot;#4A90D9&quot;</span>, </span>
-<span id="cb30-48"><a href="cytoscape_mod9.html#cb30-48" tabindex="-1"></a>                    <span class="at">base.url =</span> current_cytoscape_baseurl)</span>
-<span id="cb30-49"><a href="cytoscape_mod9.html#cb30-49" tabindex="-1"></a></span>
-<span id="cb30-50"><a href="cytoscape_mod9.html#cb30-50" tabindex="-1"></a><span class="fu">message</span>(<span class="st">&quot;Visual style updates applied to MCF7 network.&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb299"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb299-1"><a href="cytoscape_mod9.html#cb299-1" tabindex="-1"></a><span class="fu">library</span>(RCy3)</span>
+<span id="cb299-2"><a href="cytoscape_mod9.html#cb299-2" tabindex="-1"></a><span class="fu">library</span>(ndexr)  <span class="co"># install with: BiocManager::install(&quot;ndexr&quot;)</span></span>
+<span id="cb299-3"><a href="cytoscape_mod9.html#cb299-3" tabindex="-1"></a></span>
+<span id="cb299-4"><a href="cytoscape_mod9.html#cb299-4" tabindex="-1"></a><span class="co"># ── Close current session ─────────────────────────────────────────────────────</span></span>
+<span id="cb299-5"><a href="cytoscape_mod9.html#cb299-5" tabindex="-1"></a><span class="fu">closeSession</span>(<span class="at">save.before.closing =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb299-6"><a href="cytoscape_mod9.html#cb299-6" tabindex="-1"></a>             <span class="at">base.url =</span> current_cytoscape_baseurl)</span>
+<span id="cb299-7"><a href="cytoscape_mod9.html#cb299-7" tabindex="-1"></a></span>
+<span id="cb299-8"><a href="cytoscape_mod9.html#cb299-8" tabindex="-1"></a><span class="co"># ── Import the MCF7_All_PPI&gt;=0.9 network from NDEx ───────────────────────────</span></span>
+<span id="cb299-9"><a href="cytoscape_mod9.html#cb299-9" tabindex="-1"></a><span class="co"># The NDEx UUID for this network (from the publication&#39;s NDEx record)</span></span>
+<span id="cb299-10"><a href="cytoscape_mod9.html#cb299-10" tabindex="-1"></a>mcf7_ndex_uuid <span class="ot">&lt;-</span> <span class="st">&quot;84e36f91-ecb7-11eb-b666-0ac135e8bacf&quot;</span></span>
+<span id="cb299-11"><a href="cytoscape_mod9.html#cb299-11" tabindex="-1"></a></span>
+<span id="cb299-12"><a href="cytoscape_mod9.html#cb299-12" tabindex="-1"></a><span class="co"># Import directly into Cytoscape via the CyNDEx2 app command</span></span>
+<span id="cb299-13"><a href="cytoscape_mod9.html#cb299-13" tabindex="-1"></a><span class="co"># (requires the CyNDEx2 Cytoscape app to be installed)</span></span>
+<span id="cb299-14"><a href="cytoscape_mod9.html#cb299-14" tabindex="-1"></a><span class="fu">importNetworkFromNDEx</span>(<span class="at">ndex.id =</span> mcf7_ndex_uuid,</span>
+<span id="cb299-15"><a href="cytoscape_mod9.html#cb299-15" tabindex="-1"></a>                      <span class="at">base.url =</span> current_cytoscape_baseurl)</span>
+<span id="cb299-16"><a href="cytoscape_mod9.html#cb299-16" tabindex="-1"></a></span>
+<span id="cb299-17"><a href="cytoscape_mod9.html#cb299-17" tabindex="-1"></a><span class="co"># Get the SUID of the imported network</span></span>
+<span id="cb299-18"><a href="cytoscape_mod9.html#cb299-18" tabindex="-1"></a>mcf7_suid <span class="ot">&lt;-</span> <span class="fu">getNetworkSuid</span>(<span class="at">base.url =</span> current_cytoscape_baseurl)</span>
+<span id="cb299-19"><a href="cytoscape_mod9.html#cb299-19" tabindex="-1"></a><span class="fu">message</span>(<span class="st">&quot;MCF7 network SUID: &quot;</span>, mcf7_suid)</span>
+<span id="cb299-20"><a href="cytoscape_mod9.html#cb299-20" tabindex="-1"></a></span>
+<span id="cb299-21"><a href="cytoscape_mod9.html#cb299-21" tabindex="-1"></a><span class="co"># Apply a layout to make the network readable</span></span>
+<span id="cb299-22"><a href="cytoscape_mod9.html#cb299-22" tabindex="-1"></a><span class="fu">layoutNetwork</span>(<span class="st">&quot;force-directed&quot;</span>, <span class="at">network =</span> mcf7_suid,</span>
+<span id="cb299-23"><a href="cytoscape_mod9.html#cb299-23" tabindex="-1"></a>              <span class="at">base.url =</span> current_cytoscape_baseurl)</span>
+<span id="cb299-24"><a href="cytoscape_mod9.html#cb299-24" tabindex="-1"></a></span>
+<span id="cb299-25"><a href="cytoscape_mod9.html#cb299-25" tabindex="-1"></a><span class="co"># ── BONUS: Change edge width to reflect number of patients ────────────────────</span></span>
+<span id="cb299-26"><a href="cytoscape_mod9.html#cb299-26" tabindex="-1"></a><span class="co"># First inspect the edge table to find the relevant column name</span></span>
+<span id="cb299-27"><a href="cytoscape_mod9.html#cb299-27" tabindex="-1"></a>edge_table <span class="ot">&lt;-</span> <span class="fu">getTableColumns</span>(<span class="at">table =</span> <span class="st">&quot;edge&quot;</span>, </span>
+<span id="cb299-28"><a href="cytoscape_mod9.html#cb299-28" tabindex="-1"></a>                              <span class="at">network =</span> mcf7_suid,</span>
+<span id="cb299-29"><a href="cytoscape_mod9.html#cb299-29" tabindex="-1"></a>                              <span class="at">base.url =</span> current_cytoscape_baseurl)</span>
+<span id="cb299-30"><a href="cytoscape_mod9.html#cb299-30" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">colnames</span>(edge_table))  <span class="co"># identify the patients column name</span></span>
+<span id="cb299-31"><a href="cytoscape_mod9.html#cb299-31" tabindex="-1"></a></span>
+<span id="cb299-32"><a href="cytoscape_mod9.html#cb299-32" tabindex="-1"></a><span class="co">#get current style</span></span>
+<span id="cb299-33"><a href="cytoscape_mod9.html#cb299-33" tabindex="-1"></a>current_style <span class="ot">&lt;-</span> <span class="fu">getCurrentStyle</span>( </span>
+<span id="cb299-34"><a href="cytoscape_mod9.html#cb299-34" tabindex="-1"></a>  <span class="at">base.url =</span> current_cytoscape_baseurl)</span>
+<span id="cb299-35"><a href="cytoscape_mod9.html#cb299-35" tabindex="-1"></a></span>
+<span id="cb299-36"><a href="cytoscape_mod9.html#cb299-36" tabindex="-1"></a><span class="co"># Assuming the column is called &quot;Npat&quot; </span></span>
+<span id="cb299-37"><a href="cytoscape_mod9.html#cb299-37" tabindex="-1"></a>patient_col <span class="ot">&lt;-</span> <span class="st">&quot;Npat&quot;</span>   <span class="co"># &lt;-- update this to the actual column name</span></span>
+<span id="cb299-38"><a href="cytoscape_mod9.html#cb299-38" tabindex="-1"></a></span>
+<span id="cb299-39"><a href="cytoscape_mod9.html#cb299-39" tabindex="-1"></a>patient_min <span class="ot">&lt;-</span> <span class="fu">min</span>(edge_table[[patient_col]], <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb299-40"><a href="cytoscape_mod9.html#cb299-40" tabindex="-1"></a>patient_max <span class="ot">&lt;-</span> <span class="fu">max</span>(edge_table[[patient_col]], <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb299-41"><a href="cytoscape_mod9.html#cb299-41" tabindex="-1"></a></span>
+<span id="cb299-42"><a href="cytoscape_mod9.html#cb299-42" tabindex="-1"></a><span class="fu">setEdgeLineWidthMapping</span>(</span>
+<span id="cb299-43"><a href="cytoscape_mod9.html#cb299-43" tabindex="-1"></a>  <span class="at">table.column        =</span> patient_col,</span>
+<span id="cb299-44"><a href="cytoscape_mod9.html#cb299-44" tabindex="-1"></a>  <span class="at">table.column.values =</span> <span class="fu">c</span>(patient_min, patient_max),</span>
+<span id="cb299-45"><a href="cytoscape_mod9.html#cb299-45" tabindex="-1"></a>  <span class="at">widths              =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">15</span>),</span>
+<span id="cb299-46"><a href="cytoscape_mod9.html#cb299-46" tabindex="-1"></a>  <span class="at">mapping.type        =</span> <span class="st">&quot;continuous&quot;</span>,</span>
+<span id="cb299-47"><a href="cytoscape_mod9.html#cb299-47" tabindex="-1"></a>  <span class="at">network             =</span> mcf7_suid,</span>
+<span id="cb299-48"><a href="cytoscape_mod9.html#cb299-48" tabindex="-1"></a>  <span class="at">style.name =</span> current_style,  </span>
+<span id="cb299-49"><a href="cytoscape_mod9.html#cb299-49" tabindex="-1"></a>  <span class="at">base.url =</span> current_cytoscape_baseurl</span>
+<span id="cb299-50"><a href="cytoscape_mod9.html#cb299-50" tabindex="-1"></a>)</span>
+<span id="cb299-51"><a href="cytoscape_mod9.html#cb299-51" tabindex="-1"></a></span>
+<span id="cb299-52"><a href="cytoscape_mod9.html#cb299-52" tabindex="-1"></a><span class="co"># ── BONUS: Change default node colour to blue ─────────────────────────────────</span></span>
+<span id="cb299-53"><a href="cytoscape_mod9.html#cb299-53" tabindex="-1"></a><span class="fu">setNodeColorDefault</span>(<span class="at">new.color =</span> <span class="st">&quot;#4A90D9&quot;</span>, </span>
+<span id="cb299-54"><a href="cytoscape_mod9.html#cb299-54" tabindex="-1"></a>                    <span class="at">style.name =</span> current_style,</span>
+<span id="cb299-55"><a href="cytoscape_mod9.html#cb299-55" tabindex="-1"></a>                    <span class="at">base.url =</span> current_cytoscape_baseurl)</span>
+<span id="cb299-56"><a href="cytoscape_mod9.html#cb299-56" tabindex="-1"></a></span>
+<span id="cb299-57"><a href="cytoscape_mod9.html#cb299-57" tabindex="-1"></a><span class="fu">message</span>(<span class="st">&quot;Visual style updates applied to MCF7 network.&quot;</span>)</span></code></pre></div>
 
 </div>
 </div>
@@ -1135,6 +1234,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>

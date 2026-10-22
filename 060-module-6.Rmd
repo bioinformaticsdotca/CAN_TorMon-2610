@@ -1,4 +1,4 @@
-# Module 6
+# Module 6 Transcriptomics RNA-seq
 
 ## Lecture
 
@@ -7,10 +7,7 @@
 -->
 ```
 
-```{=html}
-<!--<iframe src="GOOGLE SLIDES LINK/preview" width="640" height="480" allow="autoplay"></iframe>  
--->
-```
+<iframe src="https://docs.google.com/presentation/d/1QvGRiCufntRCvnF_h-Uihu64VYgJPqep/preview" width="640" height="480" allow="autoplay"></iframe>
 
 ## Lab
 
@@ -95,7 +92,9 @@ export RNA_REF_FASTA=$RNA_REF_INDEX.fa      # genome sequence (FASTA)
 export RNA_REF_GTF=$RNA_REF_INDEX.gtf       # gene annotation (GTF)
 ```
 
-In the workshop environment all the tools needed were installed for you. Follow this page from the Griffith lab for complete instructions for RNAseq [Tool Installation](https://rnabio.org/module-00-setup/0000/10/01/Installation/) when you work on your own system.
+To view the environment variables you can try `env` and for checking this module variables `env | grep RNA`
+
+All the tools needed are installed for you in the workshop instance environment. Follow this page from the Griffith's lab for complete instructions for RNAseq [Tool Installation](https://rnabio.org/module-00-setup/0000/10/01/Installation/) 
 
 ### 2. Explore data in your workspace
 
@@ -111,6 +110,7 @@ The files are gzip-compressed (`.fastq.gz`) to save space. Most bioinformatics t
 Before any analysis, we run FastQC on each file. FastQC produces an HTML report with plots of per-base quality, GC content, sequence duplication, overrepresented sequences, and adapter content. These reports help us decide whether the reads need trimming, and they reveal problems with the library or the sequencing run.
 
 ``` bash
+mkdir -p $RNA_HOME
 cp -r ~/CourseData/Module6/data $RNA_HOME
 
 # check the data
@@ -132,7 +132,11 @@ What is r1 and r2 in the file names indicating?
 
 <summary>Show Answer</summary>
 
-*Hints:* - `samples.txt` describes the experimental design: which sample belongs to which condition and replicate. Biological replicates are needed to estimate variability when testing for differential expression later. - Each read takes four lines in a FASTQ file, so dividing the line count by 4 gives the number of reads. Because the files are compressed, decompress them while counting (`zcat file.fastq.gz | wc -l`). Running `wc -l` directly on a `.gz` file counts lines in the compressed binary data, which is meaningless. - The data is paired-end. Each DNA fragment was sequenced from both ends. Read 1 and read 2 of a pair come from the same fragment and appear in the same order in the two files. Tools must always receive both files of a pair together.
+*Hints*
+
+- `samples.txt` describes the experimental design: which sample belongs to which condition and replicate. Biological replicates are needed to estimate variability when testing for differential expression later.
+- Each read takes four lines in a FASTQ file, so dividing the line count by 4 gives the number of reads. Because the files are compressed, decompress them while counting (`zcat file.fastq.gz | wc -l`). Running `wc -l` directly on a `.gz` file counts lines in the compressed binary data, which is meaningless.
+- The data is paired-end. Each DNA fragment was sequenced from both ends. Read 1 and read 2 of a pair come from the same fragment and appear in the same order in the two files. Tools must always receive both files of a pair together.
 
 ``` bash
 cd $RNA_DATA_DIR
@@ -141,7 +145,10 @@ cd $RNA_DATA_DIR
 cat samples.txt
 
 # number of lines per file and divide by 4 for number of reads
-wc -l *fastq.gz
+zcat MCF7_rep1_r1.fastq.gz | wc -l
+zcat MCF7_rep2_r1.fastq.gz | wc -l
+zcat MCF7_rep3_r1.fastq.gz | wc -l
+
 ```
 
 </details>
@@ -154,7 +161,7 @@ Raw reads often contain sequencing adapter sequences. Adapters appear when the c
 
 For paired-end data, fastp processes R1 and R2 together so that the pairs stay synchronized. If one read of a pair is discarded, its mate is handled accordingly.
 
-With many samples, opening one FastQC or fastp report per file becomes tedious. MultiQC searches a directory for reports from supported tools, including FastQC and fastp, and combines them into a single interactive report. This makes it easy to compare samples side by side and spot outliers.
+With many samples, opening one FastQC or fastp report per file becomes tedious. MultiQC searches a directory for reports from supported tools, including FastQC and fastp, and combines them into a single interactive report. This makes it easy to compare samples side by side and spot outliers. After running this step for all samples try MultiQC that summarizes all QC output files.
 
 ``` bash
 mkdir -p $RNA_DATA_TRIM_DIR
@@ -166,12 +173,17 @@ fastp \
   -O $RNA_DATA_TRIM_DIR/AR1_MCF7_rep1_r2.fastq.gz \
   --detect_adapter_for_pe \
   -h qc/AR1_MCF7_rep1_fastp.html \
-  -j qc/AR1_MCF7_rep1_fastp.json   # MultiQC reads the JSON file
+  -j qc/AR1_MCF7_rep1_fastp.json
 
-multiqc qc -o qc/multiqc_report
 ```
 
-Summarize all samples QC with MultiQC
+:::: {.callout type="purple" style="subtle" title="Practice" icon="false"}
+
+Write the fastp trimming scripts for the other replicates
+
+::::
+
+Summarize all samples QC with MultiQC and view the output in your browser. 
 
 ``` bash
 # aggregate all reports found in qc/ into one summary report
@@ -182,24 +194,28 @@ multiqc qc -o qc/multiqc_report
 
 Searching every read against the raw genome sequence would be far too slow. Aligners therefore first build an index, a compressed data structure that allows sequences to be looked up very quickly. HISAT2 uses a hierarchical index based on the Burrows–Wheeler transform / FM-index. This only needs to be done once per reference genome.
 
+- `hisat2_extract_splice_sites.py` reads the GTF annotation and writes the coordinates of known exon–exon junctions. Because RNA-seq reads come from spliced mRNA, a single read can span an intron. Known junctions help HISAT2 align these split reads correctly. The file can be passed to `hisat2` with `--known-splicesite-infile`. It can also be passed to `hisat2-build` with `-p` parallel process - provide number of cores, `--ss`, together with `--exon` from `hisat2_extract_exons.py`, to build a splice-aware index.
 - `hisat2-build` creates the index from the FASTA file. It writes several files named `chr22.1.ht2`, `chr22.2.ht2`, and so on. The second argument (`chr22`) is the prefix that we later pass to `hisat2 -x`.
-- `hisat2_extract_splice_sites.py` reads the GTF annotation and writes the coordinates of known exon–exon junctions. Because RNA-seq reads come from spliced mRNA, a single read can span an intron. Known junctions help HISAT2 align these split reads correctly. The file can be passed to `hisat2` with `--known-splicesite-infile`. It can also be passed to `hisat2-build` with `--ss`, together with `--exon` from `hisat2_extract_exons.py`, to build a splice-aware index.
 - `samtools faidx` creates a `.fai` index of the FASTA file. This allows tools such as samtools and IGV to retrieve any region of the genome quickly.
 
 ``` bash
 mkdir $RNA_REFS_DIR
 cd $RNA_REFS_DIR
 
-cp ~/CourseData/Module6/refs/* $RNA_REFS_DIR
+# the required reference files .fa and .gtf
+cp ~/CourseData/Module6/refs/chr22.fa $RNA_REFS_DIR
+cp ~/CourseData/Module6/refs/chr22.gtf $RNA_REFS_DIR
+
+# extract known splice sites and exons from the annotation .gtf
+hisat2_extract_splice_sites.py chr22.gtf > chr22.splicesites.txt
+hisat2_extract_exons.py chr22.gtf > chr22.exons.txt
 
 # build the HISAT2 index (output files: chr22.*.ht2)
-hisat2-build chr22.fa chr22
-
-# extract known splice sites from the annotation
-hisat2_extract_splice_sites.py chr22.gtf > chr22.splicesites.txt
+hisat2-build -p 2 --ss $RNA_REF_INDEX.splicesites.txt --exon $RNA_REF_INDEX.exons.txt $RNA_REF_FASTA $RNA_REF_INDEX
 
 # FASTA index for fast random access to the sequence (creates chr22.fa.fai)
 samtools faidx chr22.fa
+
 ```
 
 ### 5. Alignment with HISAT2
@@ -210,6 +226,11 @@ HISAT2 is a splice-aware aligner. It maps each read pair to its location in the 
 - `-1` and `-2` give the paired read files (R1 and R2).
 - `-S` names the output SAM file.
 - `--summary-file` saves the alignment statistics: total reads, the percentage aligned uniquely, the percentage aligned to multiple locations, and the overall alignment rate.
+- `--rg-id` and `--rg SM:/LB:/PL:/PU:` add read group information to the SAM header and each read. HISAT2 doesn’t need them for alignment, but some other tools often require read groups, and they help keep track of samples if you merge BAM files later. Note that `--rg` only works alongside `--rg-id`.
+- `--rg-id` is a unique ID for this set of reads. The file’s base name works well.
+- `SM` sample name sample group name. Just be aware if you merge aligned reads those replicates will be combined to one sample.
+- `LB` library name.
+- `PL` the sequencing platform ILLUMINA
 
 The overall alignment rate is one of the most important QC metrics. Here the reference is only chromosome 22, so most reads will legitimately not align. Expect a low rate.
 
@@ -223,20 +244,47 @@ cd $RNA_ALIGN_DIR
 
 # align one paired-end sample to chr22
 hisat2 -x $RNA_REF_INDEX \
+  --dta --rna-strandness RF \
   -1 $RNA_DATA_DIR/AR1_MCF7_rep1_r1.fastq.gz \
   -2 $RNA_DATA_DIR/AR1_MCF7_rep1_r2.fastq.gz \
   -S AR1_MCF7_rep1.sam \
-  --summary-file AR1_MCF7_rep1_summary.txt
+  --summary-file AR1_MCF7_rep1_summary.txt \
+  --rg-id=AR1_MCF7_rep1 \
+  --rg SM:AR1_MCF7 \
+  --rg LB:AR1_MCF7_rep1 \
+  --rg PL:ILLUMINA
 
 # convert SAM to compressed BAM, sorted by genomic position
 samtools sort -o AR1_MCF7_rep1.bam AR1_MCF7_rep1.sam
+
 # index the BAM file (creates AR1_MCF7_rep1.bam.bai)
 samtools index AR1_MCF7_rep1.bam
+
 ```
+
+:::: {.callout type="purple" style="subtle" title="Practice" icon="false"}
+
+Write the scripts for the rest of samples
+
+::::
 
 - Explore the summary.txt output file
 
 - Try FastQC on the aligned reads. FastQC accepts BAM files as input (`fastqc AR1_MCF7_rep1.bam`). Compare the report with the one from the raw reads. `samtools flagstat AR1_MCF7_rep1.bam` also gives a quick summary of mapped and properly paired reads.
+
+Merge `.bam` files for each group of samples to make it easier for visualization. In this step, the unique `rg-id` that we set for alignment becomes important to distinguish samples.
+
+``` bash
+# merge AR1_MCF7 bam files
+java -Xmx2g -jar /usr/local/picard.jar MergeSamFiles -OUTPUT AR1_MCF7.bam -INPUT AR1_MCF7_rep1.bam -INPUT AR1_MCF7_rep2.bam -INPUT AR1_MCF7_rep3.bam
+
+# merge MCF7 bam files
+java -Xmx2g -jar /usr/local/picard.jar MergeSamFiles -OUTPUT MCF7.bam -INPUT MCF7_rep1.bam -INPUT MCF7_rep2.bam -INPUT MCF7_rep3.bam
+
+# how many bam files do you have?
+ls -l *bam | wc -l
+
+```
 
 - Download the BAM file together with its `.bai` index, and try visualizing them in IGV. Remember that this data covers only chromosome 22 of the genome, so load the human reference (hg38) in IGV and navigate to chr22. Look for reads piling up on exons and for split reads spanning introns, which IGV draws as thin connecting lines.
 
@@ -262,12 +310,14 @@ cd $RNA_EXP_DIR
 htseq-count --format bam --order pos --mode intersection-strict \
   --stranded reverse --minaqual 1 --type exon \
   --idattr gene_id --additional-attr gene_name \
-  $RNA_ALIGN_DIR/AR1_MCF7_rep1.bam $RNA_REF_GTF > AR1_MCF7_rep1_genes.tsv
+  $RNA_ALIGN_DIR/AR1_MCF7_rep1.bam $RNA_REF_GTF > AR1_MCF7_rep1_genes.chr22.tsv
 
 # inspect the result
-head AR1_MCF7_rep1_genes.tsv
-tail -n 5 AR1_MCF7_rep1_genes.tsv   # assignment summary
+head AR1_MCF7_rep1_genes.chr22.tsv
+tail -n 5 AR1_MCF7_rep1_genes.chr22.tsv   # summary
+
 ```
+
 
 ### 7. Differential Expression Analysis
 
@@ -287,15 +337,17 @@ At the end of the workshop, you can use the practice expression data with two mo
 Transfer the expression data to your workspace, and you can move to Rstudio for the rest of this module.
 
 ``` bash
-mkdir $RNA_EXP_DIR
 cd $RNA_EXP_DIR
 
+# copy the complete expression dataset and sample metadata
 cp ~/CourseData/Module6/expression/expression_data.txt ./
+cp ~/CourseData/Module6/expression/sample_metadata.txt ./
+
 ```
 
 #### Load packages and data
 
-Load the necessary packages, on your own environment you might need to install them for the first time.
+Load the necessary packages, they are installed and ready to use. On your own environment you might need to install them for the first time. 
 
 ``` r
 library(edgeR)
@@ -305,14 +357,16 @@ library(DT)
 ```
 
 ``` r
-
+# work in your workspace directory
 setwd("~/workspace/Module6/expression/")
+
 count_file <- "expression_data.txt"
 metadata_file <- "sample_metadata.txt"
 
 counts <- read.delim(count_file, row.names = 1, check.names = FALSE, stringsAsFactors = FALSE)
 metadata <- read.delim(metadata_file, stringsAsFactors = FALSE)
 
+metadata$group <- factor(metadata$group)
 count_mat <- as.matrix(counts)
 
 dim(count_mat)
@@ -422,6 +476,7 @@ We build one design matrix for the two groups and estimate dispersion using all 
 ``` r
 design <- model.matrix(~0 + group, data = metadata)
 colnames(design) <- levels(metadata$group)
+
 design
 ```
 
@@ -462,7 +517,7 @@ contrast_groups <- list(
 
 Helper functions for visualization
 
-So the same steps can be reused for any contrast (including the one you'll run yourself on the practice dataset at the end), we define one function that runs the test, tables, and plots for a given contrast, and one helper that picks which genes to label on the volcano plot.
+The same steps can be reused for any contrast (you can run a different one yourself on the practice dataset at the end), we define one function that runs the test, tables, and plots for a given contrast, and one helper that picks which genes to label on the volcano plot.
 
 Genes are ranked by a blend of significance (FDR) and effect size (\|log2FC\|), so the labeled genes are both strongly *and* significantly changed rather than just the single most extreme metric; up to 15 genes are labeled on each side (Up / Down).
 
@@ -554,6 +609,11 @@ Compare Abemaciclib resistant MCF7 cells to the parental MCF7 samples.
 
 ``` r
 res_ar1 <- run_contrast("AR1_vs_MCF7")
+
+# write results table
+write.table(res_ar1$qlf, "AR1_vs_MCF7.txt", sep = '\t')
+
+# View summary
 summary(decideTests(res_ar1$qlf))
 ```
 

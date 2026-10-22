@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Module 8 - Pathway Enrichment Analysis | Cancer Analysis 2026</title>
+  <meta name="description" content="Workshop website for the 2026 Cancer Analysis Canadian Bioinformatics Workshop" />
+  <meta name="generator" content="bookdown 0.46 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Module 8 - Pathway Enrichment Analysis | Cancer Analysis 2026" />
+  <meta property="og:type" content="book" />
+  <meta property="og:image" content="https://bioinformaticsdotca.github.io/CAN_TorMon-2610/img/bioinformatics_logo.png" />
+  <meta property="og:description" content="Workshop website for the 2026 Cancer Analysis Canadian Bioinformatics Workshop" />
+  <meta name="github-repo" content="bioinformaticsdotca/CAN_TorMon-2610" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Module 8 - Pathway Enrichment Analysis | Cancer Analysis 2026" />
+  
+  <meta name="twitter:description" content="Workshop website for the 2026 Cancer Analysis Canadian Bioinformatics Workshop" />
+  <meta name="twitter:image" content="https://bioinformaticsdotca.github.io/CAN_TorMon-2610/img/bioinformatics_logo.png" />
+
+<meta name="author" content="Faculty: Trevor Pugh, Linda Xiang, Yoshiaki Tanaka, Robert Eveleigh, Mathieu Lajoie, Vida Talebian, Aqsa Alam, Veronique Voisin, Ruth Isserlin, Nicholas Geoffrion" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="prev" href="module-7-from-gene-alteration-to-gene-effect.html"/>
+<link rel="next" href="de_mod8.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LearningResource",
+  "name": "Cancer Analysis",
+  "description": "The complete set of tutorials, slides, and practical exercises for the Cancer Analysis 2026 Canadian Bioinformatics Workshop, hosted on GitHub Pages.",
+  "url": "https://bioinformaticsdotca.github.io/CAN_TorMon-2610",
+  "learningResourceType": ["tutorial", "slides", "exercise"],
+  "inLanguage": "en",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "provider": {
+    "@type": "Organization",
+    "name": "Bioinformatics.ca",
+    "url": "https://bioinformatics.ca"
+  },
+  "keywords": "",
+  "isPartOf": {
+    "@type": "Course",
+    "@id": "https://bioinformatics.ca/CAN_TorMon-2610/"
+  }
+}
+</script>
+
+
+<style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<a href="https://bioinformaticsdotca.github.io/">
+ <img src="img/bioinformatics_logo.png" width="90%" alt="bioinformatics.ca logo" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;">
+ </a>
+<li><center><strong><a href="./"><br>Cancer Analysis<br><br></a></strong></center></li>
+<a href="./">
+ <img src="img/CBW_CAN-1.png" width="70%" alt="Cancer Analysis logo" style="display:block; margin-left:auto; margin-right:auto; ">
+ </a>
+<br>
+
+<li class="divider"></li>
+<li class="part"><span><b>I Introduction</b></span></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Workshop Info</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#pre-work"><i class="fa fa-check"></i>Pre-work</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#class-photo"><i class="fa fa-check"></i>Class Photo</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#schedule"><i class="fa fa-check"></i>Schedule</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="meet-your-faculty.html"><a href="meet-your-faculty.html"><i class="fa fa-check"></i>Meet Your Faculty</a>
+<ul>
+<li class="chapter" data-level="" data-path="meet-your-faculty.html"><a href="meet-your-faculty.html#tas"><i class="fa fa-check"></i>TA’s</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="data-and-compute-setup.html"><a href="data-and-compute-setup.html"><i class="fa fa-check"></i>Data and Compute Setup</a></li>
+<li class="part"><span><b>II Modules</b></span></li>
+<li class="chapter" data-level="" data-path="module-1-intro-to-cancer-genomics.html"><a href="module-1-intro-to-cancer-genomics.html"><i class="fa fa-check"></i>Module 1 Intro to Cancer Genomics</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-1-intro-to-cancer-genomics.html"><a href="module-1-intro-to-cancer-genomics.html#lecture"><i class="fa fa-check"></i>Lecture</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-2-understanding-and-visualizing-data.html"><a href="module-2-understanding-and-visualizing-data.html"><i class="fa fa-check"></i>Module 2 Understanding and Visualizing Data</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-2-understanding-and-visualizing-data.html"><a href="module-2-understanding-and-visualizing-data.html#lecture-1"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-2-understanding-and-visualizing-data.html"><a href="module-2-understanding-and-visualizing-data.html#lab"><i class="fa fa-check"></i>Lab</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-2-understanding-and-visualizing-data.html"><a href="module-2-understanding-and-visualizing-data.html#part-1---igv"><i class="fa fa-check"></i>Part 1 - IGV</a></li>
+<li class="chapter" data-level="" data-path="module-2-understanding-and-visualizing-data.html"><a href="module-2-understanding-and-visualizing-data.html#part-2---cbioportal"><i class="fa fa-check"></i>Part 2 - cBioPortal</a></li>
+<li class="chapter" data-level="" data-path="module-2-understanding-and-visualizing-data.html"><a href="module-2-understanding-and-visualizing-data.html#part-3---cosmic"><i class="fa fa-check"></i>Part 3 - COSMIC</a></li>
+<li class="chapter" data-level="" data-path="module-2-understanding-and-visualizing-data.html"><a href="module-2-understanding-and-visualizing-data.html#part-4---advanced-exercises"><i class="fa fa-check"></i>Part 4 - Advanced Exercises</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-3-genome-alignment.html"><a href="module-3-genome-alignment.html"><i class="fa fa-check"></i>Module 3 Genome Alignment</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-3-genome-alignment.html"><a href="module-3-genome-alignment.html#lecture-2"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-3-genome-alignment.html"><a href="module-3-genome-alignment.html#lab-1"><i class="fa fa-check"></i>Lab</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-4-somatic-alterations.html"><a href="module-4-somatic-alterations.html"><i class="fa fa-check"></i>Module 4 Somatic Alterations</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-4-somatic-alterations.html"><a href="module-4-somatic-alterations.html#lecture-3"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-4-somatic-alterations.html"><a href="module-4-somatic-alterations.html#lab-2"><i class="fa fa-check"></i>Lab</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-4-somatic-alterations.html"><a href="module-4-somatic-alterations.html#introduction-to-variant-discovery-and-annotations-in-cancer-data"><i class="fa fa-check"></i>Introduction to Variant Discovery and Annotations in Cancer Data</a></li>
+<li class="chapter" data-level="" data-path="module-4-somatic-alterations.html"><a href="module-4-somatic-alterations.html#getting-started"><i class="fa fa-check"></i>Getting started</a></li>
+<li class="chapter" data-level="" data-path="module-4-somatic-alterations.html"><a href="module-4-somatic-alterations.html#variant-discovery-in-cancer"><i class="fa fa-check"></i>Variant Discovery in Cancer</a></li>
+<li class="chapter" data-level="" data-path="module-4-somatic-alterations.html"><a href="module-4-somatic-alterations.html#functional-annotations"><i class="fa fa-check"></i>Functional Annotations</a></li>
+<li class="chapter" data-level="" data-path="module-4-somatic-alterations.html"><a href="module-4-somatic-alterations.html#beyond-vep-what-else-does-pcgr-add-to-this-info-field"><i class="fa fa-check"></i>Beyond VEP: what else does PCGR add to this INFO field</a></li>
+<li class="chapter" data-level="" data-path="module-4-somatic-alterations.html"><a href="module-4-somatic-alterations.html#exit-the-container-environment"><i class="fa fa-check"></i>Exit the container environment</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-5-copy-number-alterations.html"><a href="module-5-copy-number-alterations.html"><i class="fa fa-check"></i>Module 5 Copy Number Alterations</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-5-copy-number-alterations.html"><a href="module-5-copy-number-alterations.html#lecture-4"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-5-copy-number-alterations.html"><a href="module-5-copy-number-alterations.html#lab-3"><i class="fa fa-check"></i>Lab</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-5-copy-number-alterations.html"><a href="module-5-copy-number-alterations.html#dataset-1"><i class="fa fa-check"></i>Dataset</a></li>
+<li class="chapter" data-level="" data-path="module-5-copy-number-alterations.html"><a href="module-5-copy-number-alterations.html#run-cobalt-amber-purple"><i class="fa fa-check"></i>Run cobalt , amber , purple</a></li>
+<li class="chapter" data-level="" data-path="module-5-copy-number-alterations.html"><a href="module-5-copy-number-alterations.html#run-genpipe"><i class="fa fa-check"></i>Run Genpipe</a></li>
+<li class="chapter" data-level="" data-path="module-5-copy-number-alterations.html"><a href="module-5-copy-number-alterations.html#analyze-the-purple-results"><i class="fa fa-check"></i>Analyze the purple results</a></li>
+<li class="chapter" data-level="" data-path="module-5-copy-number-alterations.html"><a href="module-5-copy-number-alterations.html#some-examples-of-gain-loss-deletion-and-loh"><i class="fa fa-check"></i>Some examples of Gain, Loss, Deletion and LOH</a></li>
+<li class="chapter" data-level="" data-path="module-5-copy-number-alterations.html"><a href="module-5-copy-number-alterations.html#visualize-a-gene-or-a-chromosome"><i class="fa fa-check"></i>Visualize a gene or a chromosome</a></li>
+<li class="chapter" data-level="" data-path="module-5-copy-number-alterations.html"><a href="module-5-copy-number-alterations.html#exercises"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html"><i class="fa fa-check"></i>Module 6 Transcriptomics RNA-seq</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html#lecture-5"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html#lab-4"><i class="fa fa-check"></i>Lab</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html#introduction-to-the-dataset"><i class="fa fa-check"></i>0. Introduction to the dataset</a></li>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html#setting-the-environment-variables"><i class="fa fa-check"></i>1. Setting the environment variables</a></li>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html#explore-data-in-your-workspace"><i class="fa fa-check"></i>2. Explore data in your workspace</a></li>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html#trimming-and-qc"><i class="fa fa-check"></i>3. Trimming and QC</a></li>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html#prepare-the-reference-genome-for-alignment"><i class="fa fa-check"></i>4. Prepare the reference genome for alignment</a></li>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html#alignment-with-hisat2"><i class="fa fa-check"></i>5. Alignment with HISAT2</a></li>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html#gene-count-estimation"><i class="fa fa-check"></i>6. Gene count estimation</a></li>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html#differential-expression-analysis"><i class="fa fa-check"></i>7. Differential Expression Analysis</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html"><i class="fa fa-check"></i>Module 7 | From Gene Alteration to Gene Effect</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#lecture-6"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#lab-5"><i class="fa fa-check"></i>Lab</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#part-1.-introduction"><i class="fa fa-check"></i>Part 1. Introduction</a></li>
+<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#part-2-inspect-the-data"><i class="fa fa-check"></i>Part 2: Inspect the data</a></li>
+<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#look-at-the-first-few-variant-records"><i class="fa fa-check"></i>2.4. Look at the first few variant records</a></li>
+<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#part-3.-summarize-the-variant-calls-with-bcftools"><i class="fa fa-check"></i>Part 3. Summarize the variant calls with bcftools</a></li>
+<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#part-4.-annotate-variants-with-snpeff"><i class="fa fa-check"></i>Part 4. Annotate variants with SnpEff</a></li>
+<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#part-5.-interpret-the-snpeff-html-summary"><i class="fa fa-check"></i>Part 5. Interpret the SnpEff HTML summary</a></li>
+<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#part-6.-examine-individual-variant-annotations"><i class="fa fa-check"></i>Part 6. Examine individual variant annotations</a></li>
+<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#part-7.-from-gene-function-to-cancer-interpretation"><i class="fa fa-check"></i>Part 7. From gene function to cancer interpretation</a></li>
+<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#investigate-variant-evidence"><i class="fa fa-check"></i>7.2. Investigate variant evidence</a></li>
+<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#part-8.-compare-snpeff-and-ensembl-vep"><i class="fa fa-check"></i>Part 8. Compare SnpEff and Ensembl VEP</a></li>
+<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#part-9.-final-interpretation"><i class="fa fa-check"></i>Part 9. Final interpretation</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-8---pathway-enrichment-analysis.html"><a href="module-8---pathway-enrichment-analysis.html"><i class="fa fa-check"></i>Module 8 - Pathway Enrichment Analysis</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-8---pathway-enrichment-analysis.html"><a href="module-8---pathway-enrichment-analysis.html#lecture-7"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-8---pathway-enrichment-analysis.html"><a href="module-8---pathway-enrichment-analysis.html#presentation-of-the-dataset"><i class="fa fa-check"></i>Presentation of the dataset</a></li>
+<li class="chapter" data-level="" data-path="module-8---pathway-enrichment-analysis.html"><a href="module-8---pathway-enrichment-analysis.html#lab-6"><i class="fa fa-check"></i>Lab</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="de_mod8.html"><a href="de_mod8.html"><i class="fa fa-check"></i>Module 8.1 Lab: Differential Expression</a>
+<ul>
+<li class="chapter" data-level="" data-path="de_mod8.html"><a href="de_mod8.html#install-and-load-libraries"><i class="fa fa-check"></i>Install and load libraries</a></li>
+<li class="chapter" data-level="" data-path="de_mod8.html"><a href="de_mod8.html#data-used-for-this-comparison"><i class="fa fa-check"></i>Data used for this comparison</a>
+<ul>
+<li class="chapter" data-level="" data-path="de_mod8.html"><a href="de_mod8.html#generate-a-dge-object"><i class="fa fa-check"></i>generate a DGE object</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="de_mod8.html"><a href="de_mod8.html#filter-low-count-genes-and-tmm-normalize"><i class="fa fa-check"></i>Filter low-count genes and TMM-normalize</a></li>
+<li class="chapter" data-level="" data-path="de_mod8.html"><a href="de_mod8.html#design-0-group-and-named-contrast"><i class="fa fa-check"></i>Design (~0 + group) and named contrast</a></li>
+<li class="chapter" data-level="" data-path="de_mod8.html"><a href="de_mod8.html#dispersion-estimation-and-quasi-likelihood-glm"><i class="fa fa-check"></i>Dispersion estimation and quasi-likelihood GLM</a></li>
+<li class="chapter" data-level="" data-path="de_mod8.html"><a href="de_mod8.html#calculating-ranking-score-and-export-full-results"><i class="fa fa-check"></i>Calculating ranking score and export full results</a></li>
+<li class="chapter" data-level="" data-path="de_mod8.html"><a href="de_mod8.html#result-output"><i class="fa fa-check"></i>Result output</a></li>
+<li class="chapter" data-level="" data-path="de_mod8.html"><a href="de_mod8.html#version-of-packages-and-r"><i class="fa fa-check"></i>Version of packages and R</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html"><i class="fa fa-check"></i>Module 8.2 Lab: Defined gene list (g:Profiler)</a>
+<ul>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#introduction"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#goal-of-the-exercise-1"><i class="fa fa-check"></i>Goal of the exercise 1</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#data"><i class="fa fa-check"></i>Data</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#exercise-1-defined"><i class="fa fa-check"></i>Exercise 1 - prepare the gene lists</a>
+<ul>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#step-1---install-and-load-libraries"><i class="fa fa-check"></i>Step 1 - Install and Load libraries</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#step-2---prepare-the-define-gene-lists"><i class="fa fa-check"></i>Step 2 - Prepare the define gene lists</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#step-3---run-gprofiler"><i class="fa fa-check"></i>Step 3 - Run g:Profiler</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#clear-visualization-of-the-results"><i class="fa fa-check"></i>Clear visualization of the results</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#step-4---explore-top-table-of-results"><i class="fa fa-check"></i>Step 4 - Explore top table of results</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#step-5---filter-results-by-geneset-size"><i class="fa fa-check"></i>Step 5 - Filter results by geneset size</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#step-6---run-gprofiler-with-your-own-genesets-example-using-baderlab-genesets"><i class="fa fa-check"></i>Step 6 - Run g:profiler with your own genesets (example using BaderLab genesets)</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#exercise-2---visualization"><i class="fa fa-check"></i>Exercise 2 - visualization</a>
+<ul>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#step-2---dot-plot-with-segment"><i class="fa fa-check"></i>Step 2 - Dot plot with segment</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#step-4---hierarchical-cluster"><i class="fa fa-check"></i>Step 4 - Hierarchical Cluster</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html"><i class="fa fa-check"></i>Module 8.3 Lab: Ranked gene list (fGSEA)</a>
+<ul>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html#introduction-1"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html#goal-of-the-exercise"><i class="fa fa-check"></i>Goal of the exercise</a></li>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html#data-1"><i class="fa fa-check"></i>Data</a></li>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html#background"><i class="fa fa-check"></i>Background</a></li>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html#exercise-1-ranked"><i class="fa fa-check"></i>Exercise 1 - prepare the gene lists</a>
+<ul>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html#step-1---install-and-load-libraries-1"><i class="fa fa-check"></i>Step 1 - Install and Load libraries</a></li>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html#step-2---prepare-the-rank-file-upload-the-gmt-file-and-run-fgsea"><i class="fa fa-check"></i>Step 2 - Prepare the rank file , upload the gmt file and run fgsea</a></li>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html#step-3---examine-the-results"><i class="fa fa-check"></i>Step 3 - Examine the results</a></li>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html#step-4---explore-the-tabular-format-of-the-results"><i class="fa fa-check"></i>Step 4 - Explore the tabular format of the results</a></li>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html#step-5---visualize-the-top-results"><i class="fa fa-check"></i>Step 5 - Visualize the top results</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html"><i class="fa fa-check"></i>Module 8.4 Lab: BYOD - Differential Expression (Palbo-resistant vs Abema-resistant)</a>
+<ul>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html#install-and-load-libraries-1"><i class="fa fa-check"></i>Install and load libraries</a></li>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html#data-used-for-this-comparison-1"><i class="fa fa-check"></i>Data used for this comparison</a>
+<ul>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html#generate-a-dge-object-1"><i class="fa fa-check"></i>generate a DGE object</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html#filter-low-count-genes-and-tmm-normalize-1"><i class="fa fa-check"></i>Filter low-count genes and TMM-normalize</a></li>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html#design-0-group-and-named-contrast-1"><i class="fa fa-check"></i>Design (~0 + group) and named contrast</a></li>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html#dispersion-estimation-and-quasi-likelihood-glm-1"><i class="fa fa-check"></i>Dispersion estimation and quasi-likelihood GLM</a></li>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html#calculating-ranking-score-and-export-full-results-1"><i class="fa fa-check"></i>Calculating ranking score and export full results</a></li>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html#result-output-1"><i class="fa fa-check"></i>Result output</a></li>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html#your-turn"><i class="fa fa-check"></i>YOUR TURN</a></li>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html#additional-exercise"><i class="fa fa-check"></i>Additional exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-9---variant-to-networks.html"><a href="module-9---variant-to-networks.html"><i class="fa fa-check"></i>Module 9 - Variant to Networks</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-9---variant-to-networks.html"><a href="module-9---variant-to-networks.html#network-visualization-and-analysis-with-cytoscape"><i class="fa fa-check"></i>Network Visualization and Analysis with Cytoscape</a></li>
+<li class="chapter" data-level="" data-path="module-9---variant-to-networks.html"><a href="module-9---variant-to-networks.html#lecture-8"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-9---variant-to-networks.html"><a href="module-9---variant-to-networks.html#lab-7"><i class="fa fa-check"></i>Lab</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html"><i class="fa fa-check"></i>Module 9 Lab Primer: Cytoscape Primer</a>
+<ul>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#goal-of-the-exercise-2"><i class="fa fa-check"></i>Goal of the exercise</a></li>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#data-2"><i class="fa fa-check"></i>Data</a></li>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#start-the-exercise"><i class="fa fa-check"></i>Start the exercise</a></li>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#exercise-1a---create-network-from-table"><i class="fa fa-check"></i>Exercise 1a - Create Network from table</a>
+<ul>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#setting-up-cytoscape-variables--"><i class="fa fa-check"></i>Setting up cytoscape variables -</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#exercise-1b---load-node-attributes"><i class="fa fa-check"></i>Exercise 1b - Load node attributes</a></li>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#exercise-1c---map-node-attributes-to-visual-style"><i class="fa fa-check"></i>Exercise 1c - Map node attributes to Visual Style</a></li>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#exercise-2---work-with-larger-networks"><i class="fa fa-check"></i>Exercise 2 - Work with larger networks</a></li>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#exercise-3---perform-basic-enrichment-analysis-using-enrichmenttable"><i class="fa fa-check"></i>Exercise 3 - Perform basic enrichment analysis using EnrichmentTable</a></li>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#enrichmenttabl-features"><i class="fa fa-check"></i>Exercise 3B - create Enrichment Map and Enhanced graphics nodes from EnrichmentTable</a></li>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#exercise-4---load-network-from-ndex"><i class="fa fa-check"></i>Exercise 4 - Load network from NDex</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html"><i class="fa fa-check"></i>Module 9.2 Lab: g:profiler Visualization</a>
+<ul>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#goal-of-the-exercise-3"><i class="fa fa-check"></i>Goal of the exercise</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#data-3"><i class="fa fa-check"></i>Data</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#enrichmentmap"><i class="fa fa-check"></i>EnrichmentMap</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#description-of-this-exercise"><i class="fa fa-check"></i>Description of this exercise</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#start-the-exercise-1"><i class="fa fa-check"></i>Start the exercise</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#exercise-1a---compare-up-and-down-regulated-gprofiler-results"><i class="fa fa-check"></i>Exercise 1a - compare UP and DOWN regulated g:Profiler results</a>
+<ul>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#step-1"><i class="fa fa-check"></i>Step 1</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#step-2"><i class="fa fa-check"></i>Step 2</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#step-3-explore-the-results"><i class="fa fa-check"></i>Step 3: Explore the results:</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#explore-detailed-results"><i class="fa fa-check"></i>Explore Detailed results</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#exercise-1b---create-em-from-fgsea-results-using-baderlab-genesets"><i class="fa fa-check"></i>Exercise 1b - create EM from fgsea results using Baderlab genesets</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#exercise-1c-optional---investigate-individual-pathways-in-genemania-or-string"><i class="fa fa-check"></i>Exercise 1c (optional) - investigate individual pathways in GeneMANIA or String</a>
+<ul>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#genemania"><i class="fa fa-check"></i>GeneMANIA</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#string"><i class="fa fa-check"></i>String</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-10.html"><a href="module-10.html"><i class="fa fa-check"></i>Module 10</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-10.html"><a href="module-10.html#lecture-9"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-10.html"><a href="module-10.html#lab-8"><i class="fa fa-check"></i>Lab</a></li>
+</ul></li>
+<li class="divider"></li>
+<h1 id="sponsors">Sponsors</h1>
+<center>
+<a href="https://www.cihr-irsc.gc.ca"><img src="img/sponsors/cihr.png" width=90% style="padding-bottom: 20px" alt="Canadian Institutes of Health Research logo."></a>
+
+<a href="https://genomecanada.ca/"><img src="img/sponsors/genomecanada.png" height="55" style="display:inline-block;"  style="padding-bottom: 20px" alt="Genome Canada logo.">
+<a href="https://www.ontariogenomics.ca/"><img src="img/sponsors/ontariogenomics.png" height="55" style="display:inline-block;" style="padding-bottom: 20px;" alt="Ontario Genomics logo.">
+<br><br>
+<a href="https://oicr.on.ca/"><img src="img/sponsors/oicr.png" width=35% style="display:inline-block;" style="padding-bottom: 20px" alt="Ontario Institute for Cancer Research logo.">
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Cancer Analysis 2026</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="module-8---pathway-enrichment-analysis" class="section level1 hasAnchor">
+<h1>Module 8 - Pathway Enrichment Analysis<a href="module-8---pathway-enrichment-analysis.html#module-8---pathway-enrichment-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p><em><font color="#827e9c">Veronique Voisin</font></em></p>
+<p>This module will cover how to use differential expression output to generate pathway enrichment results.</p>
+<div id="lecture-7" class="section level2 hasAnchor">
+<h2>Lecture<a href="module-8---pathway-enrichment-analysis.html#lecture-7" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<iframe src="https://docs.google.com/presentation/d/1PL7aiYzVt-vHTR_-9LY2oQ2RKluDvf-Z/preview" width="640" height="480" allow="autoplay">
+</iframe>
+</div>
+<div id="presentation-of-the-dataset" class="section level2 hasAnchor">
+<h2>Presentation of the dataset<a href="module-8---pathway-enrichment-analysis.html#presentation-of-the-dataset" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li><p>This module is a continuation of the transcriptomics module 6 and we will use the same dataset. This dataset contains bulk RNA-seq data of a model of breast cancer. The gene counts were deposited to the Gene Expression Omnibus (GEO) database under accession <strong><em>GSE222367</em></strong> and are publicly available.</p></li>
+<li><p>RNA was extracted from MCF7, a breast cancer cell line under different conditions: parental cell line and cell line samples resistant to the drugs palbociclib or abemaciclib.</p></li>
+<li><p>Biological replicates were available for each condition.</p></li>
+<li><p>RNA-seq library was prepared and sequenced using an Illumina HiSeq 2500 sequencer.</p></li>
+<li><p>Sequence reads were mapped to the human reference genome (Gencode GRCh38) using TopHat as aligner.</p></li>
+<li><p>The BAM files with mapped reads for each sample were sorted and then used as input for HTSeq 0.11.0 in order to generate read count data at the gene level.</p></li>
+<li><p>We retrieved the gene counts and performed differential expression analysis using a negative binomial generalized linear model, followed by pathway enrichment analysis.</p></li>
+</ul>
+<div class="figure"><span style="display:block;" id="fig:fig-mychart"></span>
+<img src="Module8/image/GEOscreenshot.png" alt="GEO dataset" width="60%" />
+<p class="caption">
+Figure 1: GEO dataset
+</p>
+</div>
+</div>
+<div id="lab-6" class="section level2 hasAnchor">
+<h2>Lab<a href="module-8---pathway-enrichment-analysis.html#lab-6" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><a href="de_mod8.html#de_mod8">8.1 Lab practical Differential Expression</a></p>
+<p><a href="gprofiler_mod8.html#gprofiler_mod8">8.2 Lab practical Defined gene list (g:Profiler)</a></p>
+<p><a href="fgsea_mod8.html#fgsea_mod8">8.3 Lab practical Ranked gene list (fGSEA)</a></p>
+<p><a href="byod_mod8.html#byod_mod8">8.4 Lab practical BYOD - Differential Expression (Palbo-resistant vs Abema-resistant)</a></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="module-7-from-gene-alteration-to-gene-effect.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="de_mod8.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": false,
+    "twitter": false,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/bioinformaticsdotca/CAN_TorMon-2610/blob/main/080-module-8.Rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["_main.pdf", "_main.epub"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

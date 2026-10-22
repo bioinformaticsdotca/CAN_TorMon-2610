@@ -1,0 +1,1332 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Analyze the purple results | Cancer Analysis 2026</title>
+  <meta name="description" content="Workshop website for the 2026 Cancer Analysis Canadian Bioinformatics Workshop" />
+  <meta name="generator" content="bookdown 0.46 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Analyze the purple results | Cancer Analysis 2026" />
+  <meta property="og:type" content="book" />
+  <meta property="og:image" content="https://bioinformaticsdotca.github.io/CAN_TorMon-2610/img/bioinformatics_logo.png" />
+  <meta property="og:description" content="Workshop website for the 2026 Cancer Analysis Canadian Bioinformatics Workshop" />
+  <meta name="github-repo" content="bioinformaticsdotca/CAN_TorMon-2610" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Analyze the purple results | Cancer Analysis 2026" />
+  
+  <meta name="twitter:description" content="Workshop website for the 2026 Cancer Analysis Canadian Bioinformatics Workshop" />
+  <meta name="twitter:image" content="https://bioinformaticsdotca.github.io/CAN_TorMon-2610/img/bioinformatics_logo.png" />
+
+<meta name="author" content="Faculty: Trevor Pugh, Linda Xiang, Yoshiaki Tanaka, Robert Eveleigh, Mathieu Lajoie, Vida Talebian, Aqsa Alam, Veronique Voisin, Ruth Isserlin, Nicholas Geoffrion" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="prev" href="run-genpipe.html"/>
+<link rel="next" href="some-examples-of-gain-loss-deletion-and-loh.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LearningResource",
+  "name": "Cancer Analysis",
+  "description": "The complete set of tutorials, slides, and practical exercises for the Cancer Analysis 2026 Canadian Bioinformatics Workshop, hosted on GitHub Pages.",
+  "url": "https://bioinformaticsdotca.github.io/CAN_TorMon-2610",
+  "learningResourceType": ["tutorial", "slides", "exercise"],
+  "inLanguage": "en",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "provider": {
+    "@type": "Organization",
+    "name": "Bioinformatics.ca",
+    "url": "https://bioinformatics.ca"
+  },
+  "keywords": "",
+  "isPartOf": {
+    "@type": "Course",
+    "@id": "https://bioinformatics.ca/CAN_TorMon-2610/"
+  }
+}
+</script>
+
+
+<style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<a href="https://bioinformaticsdotca.github.io/">
+ <img src="img/bioinformatics_logo.png" width="90%" alt="bioinformatics.ca logo" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;">
+ </a>
+<li><center><strong><a href="./"><br>Cancer Analysis<br><br></a></strong></center></li>
+<a href="./">
+ <img src="img/CBW_CAN-1.png" width="70%" alt="Cancer Analysis logo" style="display:block; margin-left:auto; margin-right:auto; ">
+ </a>
+<br>
+
+<li class="divider"></li>
+<li class="part"><span><b>I Introduction</b></span></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Workshop Info</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#pre-work"><i class="fa fa-check"></i>Pre-work</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#class-photo"><i class="fa fa-check"></i>Class Photo</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#schedule"><i class="fa fa-check"></i>Schedule</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="meet-your-faculty.html"><a href="meet-your-faculty.html"><i class="fa fa-check"></i>Meet Your Faculty</a>
+<ul>
+<li class="chapter" data-level="" data-path="meet-your-faculty.html"><a href="meet-your-faculty.html#tas"><i class="fa fa-check"></i>TA’s</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="data-and-compute-setup.html"><a href="data-and-compute-setup.html"><i class="fa fa-check"></i>Data and Compute Setup</a></li>
+<li class="part"><span><b>II Modules</b></span></li>
+<li class="chapter" data-level="" data-path="module-1-intro-to-cancer-genomics.html"><a href="module-1-intro-to-cancer-genomics.html"><i class="fa fa-check"></i>Module 1 Intro to Cancer Genomics</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-1-intro-to-cancer-genomics.html"><a href="module-1-intro-to-cancer-genomics.html#lecture"><i class="fa fa-check"></i>Lecture</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-2-understanding-and-visualizing-data.html"><a href="module-2-understanding-and-visualizing-data.html"><i class="fa fa-check"></i>Module 2 Understanding and Visualizing Data</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-2-understanding-and-visualizing-data.html"><a href="module-2-understanding-and-visualizing-data.html#lecture-1"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-2-understanding-and-visualizing-data.html"><a href="module-2-understanding-and-visualizing-data.html#lab"><i class="fa fa-check"></i>Lab</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-2-understanding-and-visualizing-data.html"><a href="module-2-understanding-and-visualizing-data.html#part-1---igv"><i class="fa fa-check"></i>Part 1 - IGV</a></li>
+<li class="chapter" data-level="" data-path="module-2-understanding-and-visualizing-data.html"><a href="module-2-understanding-and-visualizing-data.html#part-2---cbioportal"><i class="fa fa-check"></i>Part 2 - cBioPortal</a></li>
+<li class="chapter" data-level="" data-path="module-2-understanding-and-visualizing-data.html"><a href="module-2-understanding-and-visualizing-data.html#part-3---cosmic"><i class="fa fa-check"></i>Part 3 - COSMIC</a></li>
+<li class="chapter" data-level="" data-path="module-2-understanding-and-visualizing-data.html"><a href="module-2-understanding-and-visualizing-data.html#part-4---advanced-exercises"><i class="fa fa-check"></i>Part 4 - Advanced Exercises</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-3-genome-alignment.html"><a href="module-3-genome-alignment.html"><i class="fa fa-check"></i>Module 3 Genome Alignment</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-3-genome-alignment.html"><a href="module-3-genome-alignment.html#lecture-2"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-3-genome-alignment.html"><a href="module-3-genome-alignment.html#lab-1"><i class="fa fa-check"></i>Lab</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-4-somatic-alterations.html"><a href="module-4-somatic-alterations.html"><i class="fa fa-check"></i>Module 4 Somatic Alterations</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-4-somatic-alterations.html"><a href="module-4-somatic-alterations.html#lecture-3"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-4-somatic-alterations.html"><a href="module-4-somatic-alterations.html#lab-2"><i class="fa fa-check"></i>Lab</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-4-somatic-alterations.html"><a href="module-4-somatic-alterations.html#introduction-to-variant-discovery-and-annotations-in-cancer-data"><i class="fa fa-check"></i>Introduction to Variant Discovery and Annotations in Cancer Data</a></li>
+<li class="chapter" data-level="" data-path="module-4-somatic-alterations.html"><a href="module-4-somatic-alterations.html#getting-started"><i class="fa fa-check"></i>Getting started</a></li>
+<li class="chapter" data-level="" data-path="module-4-somatic-alterations.html"><a href="module-4-somatic-alterations.html#variant-discovery-in-cancer"><i class="fa fa-check"></i>Variant Discovery in Cancer</a></li>
+<li class="chapter" data-level="" data-path="module-4-somatic-alterations.html"><a href="module-4-somatic-alterations.html#functional-annotations"><i class="fa fa-check"></i>Functional Annotations</a></li>
+<li class="chapter" data-level="" data-path="module-4-somatic-alterations.html"><a href="module-4-somatic-alterations.html#beyond-vep-what-else-does-pcgr-add-to-this-info-field"><i class="fa fa-check"></i>Beyond VEP: what else does PCGR add to this INFO field</a></li>
+<li class="chapter" data-level="" data-path="module-4-somatic-alterations.html"><a href="module-4-somatic-alterations.html#exit-the-container-environment"><i class="fa fa-check"></i>Exit the container environment</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-5.html"><a href="module-5.html"><i class="fa fa-check"></i>Module 5</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-5.html"><a href="module-5.html#lecture-4"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-5.html"><a href="module-5.html#lab-3"><i class="fa fa-check"></i>Lab</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="dataset-1.html"><a href="dataset-1.html"><i class="fa fa-check"></i>Dataset</a></li>
+<li class="chapter" data-level="" data-path="run-cobalt-amber-purple.html"><a href="run-cobalt-amber-purple.html"><i class="fa fa-check"></i>Run cobalt , amber , purple</a>
+<ul>
+<li class="chapter" data-level="" data-path="run-cobalt-amber-purple.html"><a href="run-cobalt-amber-purple.html#cobalt-read-depth-ratios"><i class="fa fa-check"></i>1. COBALT: read-depth ratios</a></li>
+<li class="chapter" data-level="" data-path="run-cobalt-amber-purple.html"><a href="run-cobalt-amber-purple.html#amber-b-allele-frequencies"><i class="fa fa-check"></i>2. AMBER: B-allele frequencies</a></li>
+<li class="chapter" data-level="" data-path="run-cobalt-amber-purple.html"><a href="run-cobalt-amber-purple.html#purple-purity-ploidy-and-copy-number"><i class="fa fa-check"></i>3. PURPLE: purity, ploidy and copy number</a></li>
+<li class="chapter" data-level="" data-path="run-cobalt-amber-purple.html"><a href="run-cobalt-amber-purple.html#first-look-at-the-results-estimated-vs.-true-purity"><i class="fa fa-check"></i>First look at the results: estimated vs. “true” purity</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="run-genpipe.html"><a href="run-genpipe.html"><i class="fa fa-check"></i>Run Genpipe</a>
+<ul>
+<li class="chapter" data-level="" data-path="run-genpipe.html"><a href="run-genpipe.html#load-the-environment"><i class="fa fa-check"></i>1. Load the environment</a></li>
+<li class="chapter" data-level="" data-path="run-genpipe.html"><a href="run-genpipe.html#input-files"><i class="fa fa-check"></i>2. Input files</a></li>
+<li class="chapter" data-level="" data-path="run-genpipe.html"><a href="run-genpipe.html#re-using-existing-bams-make-them-match-the-genpipes-reference"><i class="fa fa-check"></i>3. Re-using existing BAMs: make them match the GenPipes reference</a></li>
+<li class="chapter" data-level="" data-path="run-genpipe.html"><a href="run-genpipe.html#configuration-files"><i class="fa fa-check"></i>4. Configuration files</a></li>
+<li class="chapter" data-level="" data-path="run-genpipe.html"><a href="run-genpipe.html#generate-the-job-script"><i class="fa fa-check"></i>5. Generate the job script</a></li>
+<li class="chapter" data-level="" data-path="run-genpipe.html"><a href="run-genpipe.html#submit"><i class="fa fa-check"></i>6. Submit</a></li>
+<li class="chapter" data-level="" data-path="run-genpipe.html"><a href="run-genpipe.html#monitor-and-find-the-results"><i class="fa fa-check"></i>7. Monitor and find the results</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="analyze-the-purple-results.html"><a href="analyze-the-purple-results.html"><i class="fa fa-check"></i>Analyze the purple results</a>
+<ul>
+<li class="chapter" data-level="" data-path="analyze-the-purple-results.html"><a href="analyze-the-purple-results.html#key-concepts-read-this-first"><i class="fa fa-check"></i>Key concepts (read this first)</a></li>
+<li class="chapter" data-level="" data-path="analyze-the-purple-results.html"><a href="analyze-the-purple-results.html#setup"><i class="fa fa-check"></i>Setup</a></li>
+<li class="chapter" data-level="" data-path="analyze-the-purple-results.html"><a href="analyze-the-purple-results.html#a-tour-of-the-output-files-one-sample"><i class="fa fa-check"></i>A tour of the output files (one sample)</a>
+<ul>
+<li class="chapter" data-level="" data-path="analyze-the-purple-results.html"><a href="analyze-the-purple-results.html#how-the-files-fit-together"><i class="fa fa-check"></i>How the files fit together</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="analyze-the-purple-results.html"><a href="analyze-the-purple-results.html#amber-b-allele-frequency"><i class="fa fa-check"></i>AMBER: B-allele frequency</a></li>
+<li class="chapter" data-level="" data-path="analyze-the-purple-results.html"><a href="analyze-the-purple-results.html#cobalt-read-depth-ratio"><i class="fa fa-check"></i>COBALT: read-depth ratio</a></li>
+<li class="chapter" data-level="" data-path="analyze-the-purple-results.html"><a href="analyze-the-purple-results.html#purple-purity-ploidy-and-copy-number-1"><i class="fa fa-check"></i>PURPLE: purity, ploidy and copy number</a></li>
+<li class="chapter" data-level="" data-path="analyze-the-purple-results.html"><a href="analyze-the-purple-results.html#which-file-answers-which-question"><i class="fa fa-check"></i>Which file answers which question?</a>
+<ul>
+<li class="chapter" data-level="" data-path="analyze-the-purple-results.html"><a href="analyze-the-purple-results.html#load-the-files"><i class="fa fa-check"></i>Load the files</a></li>
+<li class="chapter" data-level="" data-path="analyze-the-purple-results.html"><a href="analyze-the-purple-results.html#all-four-plots-for-one-sample"><i class="fa fa-check"></i>All four plots for one sample</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="analyze-the-purple-results.html"><a href="analyze-the-purple-results.html#selection-of-purity"><i class="fa fa-check"></i>Selection of purity</a></li>
+<li class="chapter" data-level="" data-path="analyze-the-purple-results.html"><a href="analyze-the-purple-results.html#baf-vs-copy-number-does-the-fit-explain-the-data"><i class="fa fa-check"></i>BAF vs copy number: does the fit explain the data?</a>
+<ul>
+<li class="chapter" data-level="" data-path="analyze-the-purple-results.html"><a href="analyze-the-purple-results.html#low-purity"><i class="fa fa-check"></i>Low purity</a></li>
+<li class="chapter" data-level="" data-path="analyze-the-purple-results.html"><a href="analyze-the-purple-results.html#check-specific-chromosome"><i class="fa fa-check"></i>check specific chromosome</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="analyze-the-purple-results.html"><a href="analyze-the-purple-results.html#segment"><i class="fa fa-check"></i>Segment</a></li>
+<li class="chapter" data-level="" data-path="analyze-the-purple-results.html"><a href="analyze-the-purple-results.html#copy-number-distribution"><i class="fa fa-check"></i>Copy number distribution</a></li>
+<li class="chapter" data-level="" data-path="analyze-the-purple-results.html"><a href="analyze-the-purple-results.html#minorallelecopy"><i class="fa fa-check"></i>MinorAlleleCopy</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="some-examples-of-gain-loss-deletion-and-loh.html"><a href="some-examples-of-gain-loss-deletion-and-loh.html"><i class="fa fa-check"></i>Some examples of Gain, Loss, Deletion and LOH</a></li>
+<li class="chapter" data-level="" data-path="visualize-a-gene-or-a-chromosome.html"><a href="visualize-a-gene-or-a-chromosome.html"><i class="fa fa-check"></i>Visualize a gene or a chromosome</a>
+<ul>
+<li class="chapter" data-level="" data-path="visualize-a-gene-or-a-chromosome.html"><a href="visualize-a-gene-or-a-chromosome.html#one-gene-plot_gene"><i class="fa fa-check"></i>One gene: <code>plot_gene()</code></a></li>
+<li class="chapter" data-level="" data-path="visualize-a-gene-or-a-chromosome.html"><a href="visualize-a-gene-or-a-chromosome.html#one-chromosome-plot_chromosome"><i class="fa fa-check"></i>One chromosome: <code>plot_chromosome()</code></a></li>
+<li class="chapter" data-level="" data-path="visualize-a-gene-or-a-chromosome.html"><a href="visualize-a-gene-or-a-chromosome.html#effect-of-purity-on-the-signal"><i class="fa fa-check"></i>Effect of purity on the signal</a></li>
+<li class="chapter" data-level="" data-path="visualize-a-gene-or-a-chromosome.html"><a href="visualize-a-gene-or-a-chromosome.html#any-region-plot_cn_region"><i class="fa fa-check"></i>Any region: <code>plot_cn_region()</code></a></li>
+<li class="chapter" data-level="" data-path="visualize-a-gene-or-a-chromosome.html"><a href="visualize-a-gene-or-a-chromosome.html#saving-figures"><i class="fa fa-check"></i>Saving figures</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="exercises.html"><a href="exercises.html"><i class="fa fa-check"></i>Exercises</a></li>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html"><i class="fa fa-check"></i>Module 6 Transcriptomics RNA-seq</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html#lecture-5"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html#lab-4"><i class="fa fa-check"></i>Lab</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html#introduction-to-the-dataset"><i class="fa fa-check"></i>0. Introduction to the dataset</a></li>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html#setting-the-environment-variables"><i class="fa fa-check"></i>1. Setting the environment variables</a></li>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html#explore-data-in-your-workspace"><i class="fa fa-check"></i>2. Explore data in your workspace</a></li>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html#trimming-and-qc"><i class="fa fa-check"></i>3. Trimming and QC</a></li>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html#prepare-the-reference-genome-for-alignment"><i class="fa fa-check"></i>4. Prepare the reference genome for alignment</a></li>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html#alignment-with-hisat2"><i class="fa fa-check"></i>5. Alignment with HISAT2</a></li>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html#gene-count-estimation"><i class="fa fa-check"></i>6. Gene count estimation</a></li>
+<li class="chapter" data-level="" data-path="module-6-transcriptomics-rna-seq.html"><a href="module-6-transcriptomics-rna-seq.html#differential-expression-analysis"><i class="fa fa-check"></i>7. Differential Expression Analysis</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html"><i class="fa fa-check"></i>Module 7 | From Gene Alteration to Gene Effect</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#lecture-6"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#lab-5"><i class="fa fa-check"></i>Lab</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#part-1.-introduction"><i class="fa fa-check"></i>Part 1. Introduction</a></li>
+<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#part-2-inspect-the-data"><i class="fa fa-check"></i>Part 2: Inspect the data</a></li>
+<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#look-at-the-first-few-variant-records"><i class="fa fa-check"></i>2.4. Look at the first few variant records</a></li>
+<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#part-3.-summarize-the-variant-calls-with-bcftools"><i class="fa fa-check"></i>Part 3. Summarize the variant calls with bcftools</a></li>
+<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#part-4.-annotate-variants-with-snpeff"><i class="fa fa-check"></i>Part 4. Annotate variants with SnpEff</a></li>
+<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#part-5.-interpret-the-snpeff-html-summary"><i class="fa fa-check"></i>Part 5. Interpret the SnpEff HTML summary</a></li>
+<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#part-6.-examine-individual-variant-annotations"><i class="fa fa-check"></i>Part 6. Examine individual variant annotations</a></li>
+<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#part-7.-from-gene-function-to-cancer-interpretation"><i class="fa fa-check"></i>Part 7. From gene function to cancer interpretation</a></li>
+<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#investigate-variant-evidence"><i class="fa fa-check"></i>7.2. Investigate variant evidence</a></li>
+<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#part-8.-compare-snpeff-and-ensembl-vep"><i class="fa fa-check"></i>Part 8. Compare SnpEff and Ensembl VEP</a></li>
+<li class="chapter" data-level="" data-path="module-7-from-gene-alteration-to-gene-effect.html"><a href="module-7-from-gene-alteration-to-gene-effect.html#part-9.-final-interpretation"><i class="fa fa-check"></i>Part 9. Final interpretation</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-8---pathway-enrichment-analysis.html"><a href="module-8---pathway-enrichment-analysis.html"><i class="fa fa-check"></i>Module 8 - Pathway Enrichment Analysis</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-8---pathway-enrichment-analysis.html"><a href="module-8---pathway-enrichment-analysis.html#lecture-7"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-8---pathway-enrichment-analysis.html"><a href="module-8---pathway-enrichment-analysis.html#presentation-of-the-dataset"><i class="fa fa-check"></i>Presentation of the dataset</a></li>
+<li class="chapter" data-level="" data-path="module-8---pathway-enrichment-analysis.html"><a href="module-8---pathway-enrichment-analysis.html#lab-6"><i class="fa fa-check"></i>Lab</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="de_mod8.html"><a href="de_mod8.html"><i class="fa fa-check"></i>Module 8.1 Lab: Differential Expression</a>
+<ul>
+<li class="chapter" data-level="" data-path="de_mod8.html"><a href="de_mod8.html#install-and-load-libraries"><i class="fa fa-check"></i>Install and load libraries</a></li>
+<li class="chapter" data-level="" data-path="de_mod8.html"><a href="de_mod8.html#data-used-for-this-comparison"><i class="fa fa-check"></i>Data used for this comparison</a>
+<ul>
+<li class="chapter" data-level="" data-path="de_mod8.html"><a href="de_mod8.html#generate-a-dge-object"><i class="fa fa-check"></i>generate a DGE object</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="de_mod8.html"><a href="de_mod8.html#filter-low-count-genes-and-tmm-normalize"><i class="fa fa-check"></i>Filter low-count genes and TMM-normalize</a></li>
+<li class="chapter" data-level="" data-path="de_mod8.html"><a href="de_mod8.html#design-0-group-and-named-contrast"><i class="fa fa-check"></i>Design (~0 + group) and named contrast</a></li>
+<li class="chapter" data-level="" data-path="de_mod8.html"><a href="de_mod8.html#dispersion-estimation-and-quasi-likelihood-glm"><i class="fa fa-check"></i>Dispersion estimation and quasi-likelihood GLM</a></li>
+<li class="chapter" data-level="" data-path="de_mod8.html"><a href="de_mod8.html#calculating-ranking-score-and-export-full-results"><i class="fa fa-check"></i>Calculating ranking score and export full results</a></li>
+<li class="chapter" data-level="" data-path="de_mod8.html"><a href="de_mod8.html#result-output"><i class="fa fa-check"></i>Result output</a></li>
+<li class="chapter" data-level="" data-path="de_mod8.html"><a href="de_mod8.html#version-of-packages-and-r"><i class="fa fa-check"></i>Version of packages and R</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html"><i class="fa fa-check"></i>Module 8.2 Lab: Defined gene list (g:Profiler)</a>
+<ul>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#introduction"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#goal-of-the-exercise-1"><i class="fa fa-check"></i>Goal of the exercise 1</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#data"><i class="fa fa-check"></i>Data</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#exercise-1-defined"><i class="fa fa-check"></i>Exercise 1 - prepare the gene lists</a>
+<ul>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#step-1---install-and-load-libraries"><i class="fa fa-check"></i>Step 1 - Install and Load libraries</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#step-2---prepare-the-define-gene-lists"><i class="fa fa-check"></i>Step 2 - Prepare the define gene lists</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#step-3---run-gprofiler"><i class="fa fa-check"></i>Step 3 - Run g:Profiler</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#clear-visualization-of-the-results"><i class="fa fa-check"></i>Clear visualization of the results</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#step-4---explore-top-table-of-results"><i class="fa fa-check"></i>Step 4 - Explore top table of results</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#step-5---filter-results-by-geneset-size"><i class="fa fa-check"></i>Step 5 - Filter results by geneset size</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#step-6---run-gprofiler-with-your-own-genesets-example-using-baderlab-genesets"><i class="fa fa-check"></i>Step 6 - Run g:profiler with your own genesets (example using BaderLab genesets)</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#exercise-2---visualization"><i class="fa fa-check"></i>Exercise 2 - visualization</a>
+<ul>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#step-2---dot-plot-with-segment"><i class="fa fa-check"></i>Step 2 - Dot plot with segment</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod8.html"><a href="gprofiler_mod8.html#step-4---hierarchical-cluster"><i class="fa fa-check"></i>Step 4 - Hierarchical Cluster</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html"><i class="fa fa-check"></i>Module 8.3 Lab: Ranked gene list (fGSEA)</a>
+<ul>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html#introduction-1"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html#goal-of-the-exercise"><i class="fa fa-check"></i>Goal of the exercise</a></li>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html#data-1"><i class="fa fa-check"></i>Data</a></li>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html#background"><i class="fa fa-check"></i>Background</a></li>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html#exercise-1-ranked"><i class="fa fa-check"></i>Exercise 1 - prepare the gene lists</a>
+<ul>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html#step-1---install-and-load-libraries-1"><i class="fa fa-check"></i>Step 1 - Install and Load libraries</a></li>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html#step-2---prepare-the-rank-file-upload-the-gmt-file-and-run-fgsea"><i class="fa fa-check"></i>Step 2 - Prepare the rank file , upload the gmt file and run fgsea</a></li>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html#step-3---examine-the-results"><i class="fa fa-check"></i>Step 3 - Examine the results</a></li>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html#step-4---explore-the-tabular-format-of-the-results"><i class="fa fa-check"></i>Step 4 - Explore the tabular format of the results</a></li>
+<li class="chapter" data-level="" data-path="fgsea_mod8.html"><a href="fgsea_mod8.html#step-5---visualize-the-top-results"><i class="fa fa-check"></i>Step 5 - Visualize the top results</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html"><i class="fa fa-check"></i>Module 8.4 Lab: BYOD - Differential Expression (Palbo-resistant vs Abema-resistant)</a>
+<ul>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html#install-and-load-libraries-1"><i class="fa fa-check"></i>Install and load libraries</a></li>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html#data-used-for-this-comparison-1"><i class="fa fa-check"></i>Data used for this comparison</a>
+<ul>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html#generate-a-dge-object-1"><i class="fa fa-check"></i>generate a DGE object</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html#filter-low-count-genes-and-tmm-normalize-1"><i class="fa fa-check"></i>Filter low-count genes and TMM-normalize</a></li>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html#design-0-group-and-named-contrast-1"><i class="fa fa-check"></i>Design (~0 + group) and named contrast</a></li>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html#dispersion-estimation-and-quasi-likelihood-glm-1"><i class="fa fa-check"></i>Dispersion estimation and quasi-likelihood GLM</a></li>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html#calculating-ranking-score-and-export-full-results-1"><i class="fa fa-check"></i>Calculating ranking score and export full results</a></li>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html#result-output-1"><i class="fa fa-check"></i>Result output</a></li>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html#your-turn"><i class="fa fa-check"></i>YOUR TURN</a></li>
+<li class="chapter" data-level="" data-path="byod_mod8.html"><a href="byod_mod8.html#additional-exercise"><i class="fa fa-check"></i>Additional exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-9---variant-to-networks.html"><a href="module-9---variant-to-networks.html"><i class="fa fa-check"></i>Module 9 - Variant to Networks</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-9---variant-to-networks.html"><a href="module-9---variant-to-networks.html#network-visualization-and-analysis-with-cytoscape"><i class="fa fa-check"></i>Network Visualization and Analysis with Cytoscape</a></li>
+<li class="chapter" data-level="" data-path="module-9---variant-to-networks.html"><a href="module-9---variant-to-networks.html#lecture-8"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-9---variant-to-networks.html"><a href="module-9---variant-to-networks.html#lab-7"><i class="fa fa-check"></i>Lab</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html"><i class="fa fa-check"></i>Module 9 Lab Primer: Cytoscape Primer</a>
+<ul>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#goal-of-the-exercise-2"><i class="fa fa-check"></i>Goal of the exercise</a></li>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#data-2"><i class="fa fa-check"></i>Data</a></li>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#start-the-exercise"><i class="fa fa-check"></i>Start the exercise</a></li>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#exercise-1a---create-network-from-table"><i class="fa fa-check"></i>Exercise 1a - Create Network from table</a>
+<ul>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#setting-up-cytoscape-variables--"><i class="fa fa-check"></i>Setting up cytoscape variables -</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#exercise-1b---load-node-attributes"><i class="fa fa-check"></i>Exercise 1b - Load node attributes</a></li>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#exercise-1c---map-node-attributes-to-visual-style"><i class="fa fa-check"></i>Exercise 1c - Map node attributes to Visual Style</a></li>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#exercise-2---work-with-larger-networks"><i class="fa fa-check"></i>Exercise 2 - Work with larger networks</a></li>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#exercise-3---perform-basic-enrichment-analysis-using-enrichmenttable"><i class="fa fa-check"></i>Exercise 3 - Perform basic enrichment analysis using EnrichmentTable</a></li>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#enrichmenttabl-features"><i class="fa fa-check"></i>Exercise 3B - create Enrichment Map and Enhanced graphics nodes from EnrichmentTable</a></li>
+<li class="chapter" data-level="" data-path="cytoscape_mod9.html"><a href="cytoscape_mod9.html#exercise-4---load-network-from-ndex"><i class="fa fa-check"></i>Exercise 4 - Load network from NDex</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html"><i class="fa fa-check"></i>Module 9.2 Lab: g:profiler Visualization</a>
+<ul>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#goal-of-the-exercise-3"><i class="fa fa-check"></i>Goal of the exercise</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#data-3"><i class="fa fa-check"></i>Data</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#enrichmentmap"><i class="fa fa-check"></i>EnrichmentMap</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#description-of-this-exercise"><i class="fa fa-check"></i>Description of this exercise</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#start-the-exercise-1"><i class="fa fa-check"></i>Start the exercise</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#exercise-1a---compare-up-and-down-regulated-gprofiler-results"><i class="fa fa-check"></i>Exercise 1a - compare UP and DOWN regulated g:Profiler results</a>
+<ul>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#step-1"><i class="fa fa-check"></i>Step 1</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#step-2"><i class="fa fa-check"></i>Step 2</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#step-3-explore-the-results"><i class="fa fa-check"></i>Step 3: Explore the results:</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#explore-detailed-results"><i class="fa fa-check"></i>Explore Detailed results</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#exercise-1b---create-em-from-fgsea-results-using-baderlab-genesets"><i class="fa fa-check"></i>Exercise 1b - create EM from fgsea results using Baderlab genesets</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#exercise-1c-optional---investigate-individual-pathways-in-genemania-or-string"><i class="fa fa-check"></i>Exercise 1c (optional) - investigate individual pathways in GeneMANIA or String</a>
+<ul>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#genemania"><i class="fa fa-check"></i>GeneMANIA</a></li>
+<li class="chapter" data-level="" data-path="gprofiler_mod9.html"><a href="gprofiler_mod9.html#string"><i class="fa fa-check"></i>String</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-10.html"><a href="module-10.html"><i class="fa fa-check"></i>Module 10</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-10.html"><a href="module-10.html#lecture-9"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-10.html"><a href="module-10.html#lab-8"><i class="fa fa-check"></i>Lab</a></li>
+</ul></li>
+<li class="divider"></li>
+<h1 id="sponsors">Sponsors</h1>
+<center>
+<a href="https://www.cihr-irsc.gc.ca"><img src="img/sponsors/cihr.png" width=90% style="padding-bottom: 20px" alt="Canadian Institutes of Health Research logo."></a>
+
+<a href="https://genomecanada.ca/"><img src="img/sponsors/genomecanada.png" height="55" style="display:inline-block;"  style="padding-bottom: 20px" alt="Genome Canada logo.">
+<a href="https://www.ontariogenomics.ca/"><img src="img/sponsors/ontariogenomics.png" height="55" style="display:inline-block;" style="padding-bottom: 20px;" alt="Ontario Genomics logo.">
+<br><br>
+<a href="https://oicr.on.ca/"><img src="img/sponsors/oicr.png" width=35% style="display:inline-block;" style="padding-bottom: 20px" alt="Ontario Institute for Cancer Research logo.">
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Cancer Analysis 2026</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="analyze-the-purple-results" class="section level1 hasAnchor">
+<h1>Analyze the purple results<a href="analyze-the-purple-results.html#analyze-the-purple-results" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<ul>
+<li><p>Check the quality of each PURPLE run and compare the estimated purity with the truth.</p></li>
+<li><p>Understand how PURPLE chooses purity and ploidy.</p></li>
+<li><p>Read the raw signals (read depth and B-allele frequency) and the fitted copy number.</p></li>
+<li><p>Find genes that are gained, lost, deleted or show loss of heterozygosity (LOH).</p></li>
+<li><p>Plot any gene or chromosome with all the evidence in one figure.</p></li>
+</ul>
+<div id="key-concepts-read-this-first" class="section level2 hasAnchor">
+<h2>Key concepts (read this first)<a href="analyze-the-purple-results.html#key-concepts-read-this-first" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<table>
+<colgroup>
+<col width="34%" />
+<col width="65%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Term</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Copy number (CN)</strong></td>
+<td>How many copies of a DNA segment a cell has. Normal human cells have 2 (one from each parent).</td>
+</tr>
+<tr class="even">
+<td><strong>Purity</strong></td>
+<td>Fraction of cells in the sample that are tumor cells. The rest are normal cells with CN = 2.</td>
+</tr>
+<tr class="odd">
+<td><strong>Ploidy</strong></td>
+<td>Average copy number across the tumor genome. HCC1395 is about 2.8, i.e. near-triploid.</td>
+</tr>
+<tr class="even">
+<td><strong>Major / minor allele CN</strong></td>
+<td>The two parental copies are counted separately. A segment with CN 3 can be 2+1 (major 2, minor 1) or 3+0 (major 3, minor 0).</td>
+</tr>
+<tr class="odd">
+<td><strong>BAF (B-allele frequency)</strong></td>
+<td>At a heterozygous SNP (A/B), the fraction of reads that carry the B allele. It is 0.5 in a normal cell.</td>
+</tr>
+<tr class="even">
+<td><strong>LOH (loss of heterozygosity)</strong></td>
+<td>One parental allele is lost (minor CN = 0). The BAF then moves to 0 or 1. If the remaining allele is duplicated, CN stays 2: <strong>copy-neutral LOH (cnLOH)</strong>.</td>
+</tr>
+<tr class="odd">
+<td><strong>Depth ratio</strong></td>
+<td>Tumor read depth divided by normal read depth in a window. It goes up with gains and down with losses.</td>
+</tr>
+</tbody>
+</table>
+<p>PURPLE combines two independent signals:</p>
+<ul>
+<li><strong>COBALT</strong> measures the <strong>depth ratio</strong> in 1 kb windows → tells us the <em>total</em> copy number.</li>
+<li><strong>AMBER</strong> measures the <strong>BAF</strong> at germline heterozygous SNPs → tells us how the copies are split between the two alleles.</li>
+</ul>
+<p>Both signals are <strong>diluted by normal cells</strong>. With purity <em>p</em>, a segment with tumor copy number <em>CN</em> and minor-allele copy number <em>m</em> is expected to show:</p>
+<p><span class="math display">\[\text{depth ratio} =\frac{p \cdot CN + (1-p)\cdot 2}{p \cdot \text{ploidy} + (1-p)\cdot 2}\qquad\text{BAF} =\frac{p \cdot m + (1-p)\cdot 1}{p \cdot CN + (1-p)\cdot 2}\]</span></p>
+<p>PURPLE searches for the purity and ploidy that make these predictions match the observed data best, across the whole genome.</p>
+<p>Let’s see what these formulas mean in practice. The table shows the expected signal of four common events at different purities (tumor ploidy fixed at 2.8):</p>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="analyze-the-purple-results.html#cb73-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb73-2"><a href="analyze-the-purple-results.html#cb73-2" tabindex="-1"></a></span>
+<span id="cb73-3"><a href="analyze-the-purple-results.html#cb73-3" tabindex="-1"></a>expected_signal <span class="ot">&lt;-</span> <span class="cf">function</span>(purity, cn, minor, <span class="at">ploidy =</span> <span class="fl">2.8</span>) {</span>
+<span id="cb73-4"><a href="analyze-the-purple-results.html#cb73-4" tabindex="-1"></a>  <span class="fu">tibble</span>(</span>
+<span id="cb73-5"><a href="analyze-the-purple-results.html#cb73-5" tabindex="-1"></a>    <span class="at">depth_ratio =</span> (purity <span class="sc">*</span> cn <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">-</span> purity) <span class="sc">*</span> <span class="dv">2</span>) <span class="sc">/</span> (purity <span class="sc">*</span> ploidy <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">-</span> purity) <span class="sc">*</span> <span class="dv">2</span>),</span>
+<span id="cb73-6"><a href="analyze-the-purple-results.html#cb73-6" tabindex="-1"></a>    <span class="at">BAF         =</span> (purity <span class="sc">*</span> minor <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">-</span> purity) <span class="sc">*</span> <span class="dv">1</span>) <span class="sc">/</span> (purity <span class="sc">*</span> cn <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">-</span> purity) <span class="sc">*</span> <span class="dv">2</span>)</span>
+<span id="cb73-7"><a href="analyze-the-purple-results.html#cb73-7" tabindex="-1"></a>  )</span>
+<span id="cb73-8"><a href="analyze-the-purple-results.html#cb73-8" tabindex="-1"></a>}</span>
+<span id="cb73-9"><a href="analyze-the-purple-results.html#cb73-9" tabindex="-1"></a></span>
+<span id="cb73-10"><a href="analyze-the-purple-results.html#cb73-10" tabindex="-1"></a>events <span class="ot">&lt;-</span> <span class="fu">tribble</span>(</span>
+<span id="cb73-11"><a href="analyze-the-purple-results.html#cb73-11" tabindex="-1"></a>  <span class="sc">~</span>event,                  <span class="sc">~</span>cn, <span class="sc">~</span>minor,</span>
+<span id="cb73-12"><a href="analyze-the-purple-results.html#cb73-12" tabindex="-1"></a>  <span class="st">&quot;Normal (1+1)&quot;</span>,           <span class="dv">2</span>,   <span class="dv">1</span>,</span>
+<span id="cb73-13"><a href="analyze-the-purple-results.html#cb73-13" tabindex="-1"></a>  <span class="st">&quot;Deep deletion (0+0)&quot;</span>,    <span class="dv">0</span>,   <span class="dv">0</span>,</span>
+<span id="cb73-14"><a href="analyze-the-purple-results.html#cb73-14" tabindex="-1"></a>  <span class="st">&quot;Copy-neutral LOH (2+0)&quot;</span>, <span class="dv">2</span>,   <span class="dv">0</span>,</span>
+<span id="cb73-15"><a href="analyze-the-purple-results.html#cb73-15" tabindex="-1"></a>  <span class="st">&quot;Gain (3+1)&quot;</span>,             <span class="dv">4</span>,   <span class="dv">1</span></span>
+<span id="cb73-16"><a href="analyze-the-purple-results.html#cb73-16" tabindex="-1"></a>)</span>
+<span id="cb73-17"><a href="analyze-the-purple-results.html#cb73-17" tabindex="-1"></a></span>
+<span id="cb73-18"><a href="analyze-the-purple-results.html#cb73-18" tabindex="-1"></a><span class="fu">crossing</span>(events, <span class="at">purity =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="fl">0.5</span>, <span class="fl">0.2</span>, <span class="fl">0.05</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb73-19"><a href="analyze-the-purple-results.html#cb73-19" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">expected_signal</span>(purity, cn, minor)) <span class="sc">%&gt;%</span></span>
+<span id="cb73-20"><a href="analyze-the-purple-results.html#cb73-20" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(depth_ratio, BAF), <span class="sc">~</span> <span class="fu">round</span>(.x, <span class="dv">2</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb73-21"><a href="analyze-the-purple-results.html#cb73-21" tabindex="-1"></a>  <span class="fu">arrange</span>(event, <span class="fu">desc</span>(purity))</span></code></pre></div>
+<p><strong>What to notice</strong></p>
+<ul>
+<li>At purity 1, a deep deletion has depth ratio 0, and cnLOH has BAF 0 (or 1): very clear signals.</li>
+<li>At purity 0.05, every event gives a depth ratio close to the genome average and a BAF close to 0.5. The tumor signal is tiny compared with the noise, so low-purity samples are hard to fit.</li>
+<li>The BAF of a deleted region is undefined at purity 1 (no reads at all). In a mixed sample the remaining reads come only from normal cells, so the BAF goes back to 0.5.</li>
+</ul>
+</div>
+<div id="setup" class="section level2 hasAnchor">
+<h2>Setup<a href="analyze-the-purple-results.html#setup" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="analyze-the-purple-results.html#cb74-1" tabindex="-1"></a><span class="co"># Packages used in this lab</span></span>
+<span id="cb74-2"><a href="analyze-the-purple-results.html#cb74-2" tabindex="-1"></a><span class="fu">library</span>(tidyverse)   <span class="co"># data manipulation (dplyr, tidyr, readr) and plotting (ggplot2)</span></span>
+<span id="cb74-3"><a href="analyze-the-purple-results.html#cb74-3" tabindex="-1"></a><span class="fu">library</span>(patchwork)   <span class="co"># stack several ggplots into one figure (p1 / p2)</span></span>
+<span id="cb74-4"><a href="analyze-the-purple-results.html#cb74-4" tabindex="-1"></a><span class="fu">library</span>(stringr)     <span class="co"># string helpers</span></span>
+<span id="cb74-5"><a href="analyze-the-purple-results.html#cb74-5" tabindex="-1"></a><span class="fu">library</span>(data.table)</span>
+<span id="cb74-6"><a href="analyze-the-purple-results.html#cb74-6" tabindex="-1"></a><span class="co"># Helper functions written for this lab (see codes/purple_lab_functions.R):</span></span>
+<span id="cb74-7"><a href="analyze-the-purple-results.html#cb74-7" tabindex="-1"></a><span class="co">#   purity_info          named vector: sample -&gt; true purity</span></span>
+<span id="cb74-8"><a href="analyze-the-purple-results.html#cb74-8" tabindex="-1"></a><span class="co">#   sort_by_purity()     order file names by the true purity of the sample</span></span>
+<span id="cb74-9"><a href="analyze-the-purple-results.html#cb74-9" tabindex="-1"></a><span class="co">#   load_purple_sample() read all AMBER / COBALT / PURPLE files of one sample</span></span>
+<span id="cb74-10"><a href="analyze-the-purple-results.html#cb74-10" tabindex="-1"></a><span class="co">#   plot_gene()          multi-track figure of one gene</span></span>
+<span id="cb74-11"><a href="analyze-the-purple-results.html#cb74-11" tabindex="-1"></a><span class="co">#   plot_chromosome()    multi-track figure of one chromosome</span></span>
+<span id="cb74-12"><a href="analyze-the-purple-results.html#cb74-12" tabindex="-1"></a><span class="co">#   plot_cn_region()     multi-track figure of any chr:start-end</span></span>
+<span id="cb74-13"><a href="analyze-the-purple-results.html#cb74-13" tabindex="-1"></a><span class="co">#   classify_gene_cn()   label genes as gain / loss / deep deletion / LOH ...</span></span>
+<span id="cb74-14"><a href="analyze-the-purple-results.html#cb74-14" tabindex="-1"></a><span class="co">#   save_cn_plot()       save a figure as PDF + PNG</span></span>
+<span id="cb74-15"><a href="analyze-the-purple-results.html#cb74-15" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;codes/purple_lab_functions.R&quot;</span>)</span>
+<span id="cb74-16"><a href="analyze-the-purple-results.html#cb74-16" tabindex="-1"></a></span>
+<span id="cb74-17"><a href="analyze-the-purple-results.html#cb74-17" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;R.utils&quot;</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>)) {</span>
+<span id="cb74-18"><a href="analyze-the-purple-results.html#cb74-18" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;R.utils&quot;</span>)</span>
+<span id="cb74-19"><a href="analyze-the-purple-results.html#cb74-19" tabindex="-1"></a>}</span>
+<span id="cb74-20"><a href="analyze-the-purple-results.html#cb74-20" tabindex="-1"></a></span>
+<span id="cb74-21"><a href="analyze-the-purple-results.html#cb74-21" tabindex="-1"></a><span class="fu">library</span>(R.utils)</span>
+<span id="cb74-22"><a href="analyze-the-purple-results.html#cb74-22" tabindex="-1"></a></span>
+<span id="cb74-23"><a href="analyze-the-purple-results.html#cb74-23" tabindex="-1"></a>purple_dir <span class="ot">&lt;-</span> <span class="st">&quot;./Mathieu_purple/purple/&quot;</span> <span class="co"># purity_info</span></span></code></pre></div>
+</div>
+<div id="a-tour-of-the-output-files-one-sample" class="section level2 hasAnchor">
+<h2>A tour of the output files (one sample)<a href="analyze-the-purple-results.html#a-tour-of-the-output-files-one-sample" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Before analysing the results, let’s look at <strong>every file</strong> that AMBER, COBALT and PURPLE wrote for one sample, what each file is for, and what is inside. We use the 100% tumor <code>SPP_GT_1-0_1</code>; every other sample has the same files.</p>
+<div id="how-the-files-fit-together" class="section level3 hasAnchor">
+<h3>How the files fit together<a href="analyze-the-purple-results.html#how-the-files-fit-together" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<pre><code> tumor BAM + normal BAM
+        │
+        ├── AMBER  ──► amber.baf.tsv.gz   (BAF at every het SNP)
+        │                 └─► amber.baf.pcf      (BAF segments)
+        │
+        ├── COBALT ──► cobalt.ratio.tsv.gz (depth ratio in 1 kb windows)
+        │                 └─► cobalt.ratio.pcf   (depth segments)
+        │
+        └────────────► PURPLE
+                          ├─► purple.purity.range.tsv  (score of every purity/ploidy tried)
+                          │      └─► purple.purity.tsv (the best fit)
+                          ├─► purple.segment.tsv       (all segments, observed + fitted values)
+                          │      └─► purple.cnv.somatic.tsv (final copy-number segments)
+                          │             └─► purple.cnv.gene.tsv (copy number per gene)
+                          └─► purple.qc, plot/*.png</code></pre>
+<p>AMBER and COBALT turn the BAMs into two signals; PURPLE combines them, fits purity and ploidy, and turns the signals into copy numbers for segments and genes.</p>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="analyze-the-purple-results.html#cb76-1" tabindex="-1"></a>tour_sample <span class="ot">&lt;-</span> <span class="st">&quot;SPP_GT_1-0_1&quot;</span></span>
+<span id="cb76-2"><a href="analyze-the-purple-results.html#cb76-2" tabindex="-1"></a>tour_dirs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">AMBER  =</span> <span class="fu">file.path</span>(<span class="st">&quot;./Mathieu_purple/amber&quot;</span>,  tour_sample),</span>
+<span id="cb76-3"><a href="analyze-the-purple-results.html#cb76-3" tabindex="-1"></a>               <span class="at">COBALT =</span> <span class="fu">file.path</span>(<span class="st">&quot;./Mathieu_purple/cobalt&quot;</span>, tour_sample),</span>
+<span id="cb76-4"><a href="analyze-the-purple-results.html#cb76-4" tabindex="-1"></a>               <span class="at">PURPLE =</span> <span class="st">&quot;./Mathieu_purple/purple&quot;</span>)</span>
+<span id="cb76-5"><a href="analyze-the-purple-results.html#cb76-5" tabindex="-1"></a></span>
+<span id="cb76-6"><a href="analyze-the-purple-results.html#cb76-6" tabindex="-1"></a><span class="co"># List every file with its size. The purple/ folder holds all samples, so keep this sample only.</span></span>
+<span id="cb76-7"><a href="analyze-the-purple-results.html#cb76-7" tabindex="-1"></a>tour_files <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="fu">names</span>(tour_dirs), <span class="cf">function</span>(tool) {</span>
+<span id="cb76-8"><a href="analyze-the-purple-results.html#cb76-8" tabindex="-1"></a>  f <span class="ot">&lt;-</span> <span class="fu">list.files</span>(tour_dirs[[tool]], <span class="at">full.names =</span> <span class="cn">TRUE</span>, <span class="at">recursive =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb76-9"><a href="analyze-the-purple-results.html#cb76-9" tabindex="-1"></a>  <span class="cf">if</span> (tool <span class="sc">==</span> <span class="st">&quot;PURPLE&quot;</span>) f <span class="ot">&lt;-</span> f[<span class="fu">grepl</span>(tour_sample, <span class="fu">basename</span>(f)) <span class="sc">|</span> <span class="fu">basename</span>(f) <span class="sc">==</span> <span class="st">&quot;purple.version&quot;</span>]</span>
+<span id="cb76-10"><a href="analyze-the-purple-results.html#cb76-10" tabindex="-1"></a>  <span class="fu">tibble</span>(tool, <span class="at">file =</span> <span class="fu">str_remove</span>(f, <span class="fu">paste0</span>(tour_dirs[[tool]], <span class="st">&quot;/&quot;</span>)), <span class="at">size_MB =</span> <span class="fu">round</span>(<span class="fu">file.size</span>(f) <span class="sc">/</span> <span class="fl">1e6</span>, <span class="dv">2</span>))</span>
+<span id="cb76-11"><a href="analyze-the-purple-results.html#cb76-11" tabindex="-1"></a>}) <span class="sc">%&gt;%</span> <span class="fu">bind_rows</span>()</span>
+<span id="cb76-12"><a href="analyze-the-purple-results.html#cb76-12" tabindex="-1"></a></span>
+<span id="cb76-13"><a href="analyze-the-purple-results.html#cb76-13" tabindex="-1"></a><span class="fu">print</span>(tour_files, <span class="at">n =</span> <span class="cn">Inf</span>)</span></code></pre></div>
+<p>Two small helpers to look inside the files:</p>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="analyze-the-purple-results.html#cb77-1" tabindex="-1"></a><span class="co"># peek(): print the first lines of a file exactly as they are on disk (works for .gz too)</span></span>
+<span id="cb77-2"><a href="analyze-the-purple-results.html#cb77-2" tabindex="-1"></a>peek <span class="ot">&lt;-</span> <span class="cf">function</span>(path, <span class="at">n =</span> <span class="dv">4</span>, <span class="at">width =</span> <span class="dv">150</span>) {</span>
+<span id="cb77-3"><a href="analyze-the-purple-results.html#cb77-3" tabindex="-1"></a>  con <span class="ot">&lt;-</span> <span class="cf">if</span> (<span class="fu">grepl</span>(<span class="st">&quot;</span><span class="sc">\\</span><span class="st">.gz$&quot;</span>, path)) <span class="fu">gzfile</span>(path) <span class="cf">else</span> <span class="fu">file</span>(path)</span>
+<span id="cb77-4"><a href="analyze-the-purple-results.html#cb77-4" tabindex="-1"></a>  <span class="fu">on.exit</span>(<span class="fu">close</span>(con))</span>
+<span id="cb77-5"><a href="analyze-the-purple-results.html#cb77-5" tabindex="-1"></a>  lines <span class="ot">&lt;-</span> <span class="fu">readLines</span>(con, <span class="at">n =</span> n)</span>
+<span id="cb77-6"><a href="analyze-the-purple-results.html#cb77-6" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="fu">str_trunc</span>(lines, width), <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb77-7"><a href="analyze-the-purple-results.html#cb77-7" tabindex="-1"></a>}</span>
+<span id="cb77-8"><a href="analyze-the-purple-results.html#cb77-8" tabindex="-1"></a></span>
+<span id="cb77-9"><a href="analyze-the-purple-results.html#cb77-9" tabindex="-1"></a><span class="co"># columns(): list the columns of a table with their type and first values</span></span>
+<span id="cb77-10"><a href="analyze-the-purple-results.html#cb77-10" tabindex="-1"></a>columns <span class="ot">&lt;-</span> <span class="cf">function</span>(path, <span class="at">n =</span> <span class="dv">3</span>) {</span>
+<span id="cb77-11"><a href="analyze-the-purple-results.html#cb77-11" tabindex="-1"></a>  <span class="fu">read_tsv</span>(path, <span class="at">n_max =</span> n, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span> <span class="fu">glimpse</span>()</span>
+<span id="cb77-12"><a href="analyze-the-purple-results.html#cb77-12" tabindex="-1"></a>}</span>
+<span id="cb77-13"><a href="analyze-the-purple-results.html#cb77-13" tabindex="-1"></a></span>
+<span id="cb77-14"><a href="analyze-the-purple-results.html#cb77-14" tabindex="-1"></a>amber_dir  <span class="ot">&lt;-</span> tour_dirs[[<span class="st">&quot;AMBER&quot;</span>]]</span>
+<span id="cb77-15"><a href="analyze-the-purple-results.html#cb77-15" tabindex="-1"></a>cobalt_dir <span class="ot">&lt;-</span> tour_dirs[[<span class="st">&quot;COBALT&quot;</span>]]</span>
+<span id="cb77-16"><a href="analyze-the-purple-results.html#cb77-16" tabindex="-1"></a>purple_f   <span class="ot">&lt;-</span> <span class="cf">function</span>(suffix) <span class="fu">file.path</span>(purple_dir, <span class="fu">paste0</span>(tour_sample, suffix))</span></code></pre></div>
+</div>
+</div>
+<div id="amber-b-allele-frequency" class="section level2 hasAnchor">
+<h2>AMBER: B-allele frequency<a href="analyze-the-purple-results.html#amber-b-allele-frequency" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<table>
+<colgroup>
+<col width="25%" />
+<col width="44%" />
+<col width="30%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>File</th>
+<th>What it is</th>
+<th>When to use it</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>&lt;tumor&gt;.amber.baf.tsv.gz</code></td>
+<td><strong>Main output.</strong> One row per SNP that is heterozygous in the normal (~1.7 million rows)</td>
+<td>Plot BAF along the genome; check allelic imbalance / LOH in a region</td>
+</tr>
+<tr class="even">
+<td><code>&lt;tumor&gt;.amber.baf.pcf</code></td>
+<td>Segments of the tumor BAF (piecewise-constant fit)</td>
+<td>Input for PURPLE; quick view of where the BAF changes</td>
+</tr>
+<tr class="odd">
+<td><code>&lt;tumor&gt;.amber.qc</code></td>
+<td>QC summary: contamination, consanguinity, uniparental disomy</td>
+<td>First thing to check</td>
+</tr>
+<tr class="even">
+<td><code>&lt;tumor&gt;.amber.contamination.tsv</code> (+ <code>.vcf.gz</code>)</td>
+<td>SNPs that are <strong>homozygous</strong> in the normal; any other allele in the tumor suggests DNA from another person</td>
+<td>Investigate a contamination warning</td>
+</tr>
+<tr class="odd">
+<td><code>&lt;normal&gt;.amber.homozygousregion.tsv</code></td>
+<td>Long runs of homozygosity in the <strong>normal</strong></td>
+<td>Detect consanguinity or uniparental disomy in the patient</td>
+</tr>
+<tr class="even">
+<td><code>amber.version</code></td>
+<td>AMBER version and build date</td>
+<td>Reproducibility</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="analyze-the-purple-results.html#cb78-1" tabindex="-1"></a><span class="co"># **`amber.baf.tsv.gz`**</span></span>
+<span id="cb78-2"><a href="analyze-the-purple-results.html#cb78-2" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&#39;amber.baf.tsv.gz</span><span class="sc">\n</span><span class="st">&#39;</span>)</span>
+<span id="cb78-3"><a href="analyze-the-purple-results.html#cb78-3" tabindex="-1"></a><span class="fu">peek</span>(<span class="fu">file.path</span>(amber_dir, <span class="fu">paste0</span>(tour_sample, <span class="st">&quot;.amber.baf.tsv.gz&quot;</span>)))</span>
+<span id="cb78-4"><a href="analyze-the-purple-results.html#cb78-4" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&#39;</span><span class="sc">\n\n</span><span class="st">&#39;</span>)</span>
+<span id="cb78-5"><a href="analyze-the-purple-results.html#cb78-5" tabindex="-1"></a></span>
+<span id="cb78-6"><a href="analyze-the-purple-results.html#cb78-6" tabindex="-1"></a><span class="co"># **`amber.baf.pcf`**: the `mean` column is the average **tumorModifiedBAF** of the segment; `n.probes` is the number of SNPs in it.</span></span>
+<span id="cb78-7"><a href="analyze-the-purple-results.html#cb78-7" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&#39;amber.baf.pcf</span><span class="sc">\n</span><span class="st">&#39;</span>)</span>
+<span id="cb78-8"><a href="analyze-the-purple-results.html#cb78-8" tabindex="-1"></a><span class="fu">peek</span>(<span class="fu">file.path</span>(amber_dir, <span class="fu">paste0</span>(tour_sample, <span class="st">&quot;.amber.baf.pcf&quot;</span>)))</span>
+<span id="cb78-9"><a href="analyze-the-purple-results.html#cb78-9" tabindex="-1"></a><span class="co"># cat(&#39;\n\n&#39;)</span></span>
+<span id="cb78-10"><a href="analyze-the-purple-results.html#cb78-10" tabindex="-1"></a></span>
+<span id="cb78-11"><a href="analyze-the-purple-results.html#cb78-11" tabindex="-1"></a></span>
+<span id="cb78-12"><a href="analyze-the-purple-results.html#cb78-12" tabindex="-1"></a><span class="co"># # **`amber.qc`**: key-value pairs.</span></span>
+<span id="cb78-13"><a href="analyze-the-purple-results.html#cb78-13" tabindex="-1"></a><span class="co"># cat(&#39;amber.qc\n&#39;)</span></span>
+<span id="cb78-14"><a href="analyze-the-purple-results.html#cb78-14" tabindex="-1"></a><span class="co"># peek(file.path(amber_dir, paste0(tour_sample, &quot;.amber.qc&quot;)), n = 15)</span></span>
+<span id="cb78-15"><a href="analyze-the-purple-results.html#cb78-15" tabindex="-1"></a><span class="co"># cat(&#39;\n\n&#39;)</span></span>
+<span id="cb78-16"><a href="analyze-the-purple-results.html#cb78-16" tabindex="-1"></a></span>
+<span id="cb78-17"><a href="analyze-the-purple-results.html#cb78-17" tabindex="-1"></a><span class="co"># # **`amber.contamination.tsv`**: sites homozygous in the normal (`normalAltSupport` = 0). If many sites have alt reads in the tumor (`tumorAltSupport` \&gt; 0), the tumor may contain DNA from someone else.</span></span>
+<span id="cb78-18"><a href="analyze-the-purple-results.html#cb78-18" tabindex="-1"></a><span class="co"># cat(&#39;amber.contamination.tsv\n&#39;)</span></span>
+<span id="cb78-19"><a href="analyze-the-purple-results.html#cb78-19" tabindex="-1"></a><span class="co"># peek(file.path(amber_dir, paste0(tour_sample, &quot;.amber.contamination.tsv&quot;)))</span></span>
+<span id="cb78-20"><a href="analyze-the-purple-results.html#cb78-20" tabindex="-1"></a><span class="co"># cat(&#39;\n\n&#39;)</span></span>
+<span id="cb78-21"><a href="analyze-the-purple-results.html#cb78-21" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb78-22"><a href="analyze-the-purple-results.html#cb78-22" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb78-23"><a href="analyze-the-purple-results.html#cb78-23" tabindex="-1"></a><span class="co"># # **`&lt;normal&gt;.amber.homozygousregion.tsv`**: regions where the normal has (almost) only homozygous SNPs (`homCount` vs `hetCount`). Long regions on many chromosomes suggest consanguinity. Note that this file writes chromosomes without the `chr` prefix.</span></span>
+<span id="cb78-24"><a href="analyze-the-purple-results.html#cb78-24" tabindex="-1"></a><span class="co"># cat(&#39;amber.homozygousregion.tsv\n&#39;)</span></span>
+<span id="cb78-25"><a href="analyze-the-purple-results.html#cb78-25" tabindex="-1"></a><span class="co"># peek(file.path(amber_dir, &quot;SPP_GT_0-1_1.amber.homozygousregion.tsv&quot;))</span></span>
+<span id="cb78-26"><a href="analyze-the-purple-results.html#cb78-26" tabindex="-1"></a><span class="co"># cat(&#39;\n\n&#39;)</span></span></code></pre></div>
+<table>
+<colgroup>
+<col width="34%" />
+<col width="65%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Column</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>chromosome</code>, <code>position</code></td>
+<td>SNP location (1-based)</td>
+</tr>
+<tr class="even">
+<td><code>tumorBAF</code></td>
+<td>Fraction of tumor reads with the B allele: 0.5 balanced, 0 or 1 = LOH</td>
+</tr>
+<tr class="odd">
+<td><code>tumorModifiedBAF</code></td>
+<td>BAF folded to the upper half: 0.5 + |BAF − 0.5|. Easier to segment because the two bands become one.</td>
+</tr>
+<tr class="even">
+<td><code>tumorDepth</code></td>
+<td>Tumor reads covering the SNP</td>
+</tr>
+<tr class="odd">
+<td><code>normalBAF</code>, <code>normalModifiedBAF</code>, <code>normalDepth</code></td>
+<td>Same for the normal; normalBAF should be close to 0.5</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="cobalt-read-depth-ratio" class="section level2 hasAnchor">
+<h2>COBALT: read-depth ratio<a href="analyze-the-purple-results.html#cobalt-read-depth-ratio" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<table>
+<colgroup>
+<col width="25%" />
+<col width="43%" />
+<col width="31%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>File</th>
+<th>What it is</th>
+<th>When to use it</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>&lt;tumor&gt;.cobalt.ratio.tsv.gz</code></td>
+<td><strong>Main output.</strong> One row per 1 kb window (~3 million rows), tumor and normal depth and GC-corrected ratios</td>
+<td>Plot depth along the genome; look for gains / losses</td>
+</tr>
+<tr class="even">
+<td><code>&lt;tumor&gt;.cobalt.ratio.pcf</code></td>
+<td>Segments of the tumor ratio</td>
+<td>Input for PURPLE; quick view of copy-number steps</td>
+</tr>
+<tr class="odd">
+<td><code>&lt;normal&gt;.cobalt.ratio.pcf</code></td>
+<td>Segments of the normal ratio</td>
+<td>Spot germline copy-number changes</td>
+</tr>
+<tr class="even">
+<td><code>&lt;normal&gt;.cobalt.ratio.median.tsv</code></td>
+<td>Median normal ratio per chromosome</td>
+<td>Sex of the patient (chrX ~0.5 = one X) and whole-chromosome germline changes</td>
+</tr>
+<tr class="odd">
+<td><code>&lt;sample&gt;.cobalt.gc.median.tsv</code></td>
+<td>Mean/median depth, and median depth per GC bucket</td>
+<td>See how strongly depth depends on GC (the GC-correction curve)</td>
+</tr>
+<tr class="even">
+<td><code>cobalt.version</code></td>
+<td>COBALT version</td>
+<td>Reproducibility</td>
+</tr>
+</tbody>
+</table>
+<p><strong><code>cobalt.ratio.tsv.gz</code></strong></p>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="analyze-the-purple-results.html#cb79-1" tabindex="-1"></a><span class="co"># The first windows of chr1 are telomere sequence (N), so their values are -1</span></span>
+<span id="cb79-2"><a href="analyze-the-purple-results.html#cb79-2" tabindex="-1"></a><span class="co"># peek(file.path(cobalt_dir, paste0(tour_sample, &quot;.cobalt.ratio.tsv.gz&quot;)))</span></span>
+<span id="cb79-3"><a href="analyze-the-purple-results.html#cb79-3" tabindex="-1"></a><span class="fu">read_tsv</span>(<span class="fu">file.path</span>(cobalt_dir, <span class="fu">paste0</span>(tour_sample, <span class="st">&quot;.cobalt.ratio.tsv.gz&quot;</span>)),</span>
+<span id="cb79-4"><a href="analyze-the-purple-results.html#cb79-4" tabindex="-1"></a>         <span class="at">n_max =</span> <span class="dv">5000</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span> <span class="fu">head</span>(<span class="dv">5</span>)</span>
+<span id="cb79-5"><a href="analyze-the-purple-results.html#cb79-5" tabindex="-1"></a></span>
+<span id="cb79-6"><a href="analyze-the-purple-results.html#cb79-6" tabindex="-1"></a><span class="co"># A few usable windows further along chr1</span></span>
+<span id="cb79-7"><a href="analyze-the-purple-results.html#cb79-7" tabindex="-1"></a><span class="fu">read_tsv</span>(<span class="fu">file.path</span>(cobalt_dir, <span class="fu">paste0</span>(tour_sample, <span class="st">&quot;.cobalt.ratio.tsv.gz&quot;</span>)),</span>
+<span id="cb79-8"><a href="analyze-the-purple-results.html#cb79-8" tabindex="-1"></a>         <span class="at">n_max =</span> <span class="dv">5000</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb79-9"><a href="analyze-the-purple-results.html#cb79-9" tabindex="-1"></a>  <span class="fu">filter</span>(tumorGCRatio <span class="sc">&gt;=</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb79-10"><a href="analyze-the-purple-results.html#cb79-10" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">5</span>)</span></code></pre></div>
+<table>
+<colgroup>
+<col width="34%" />
+<col width="65%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Column</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>chromosome</code>, <code>position</code></td>
+<td>Start of the 1 kb window (1, 1001, 2001, …)</td>
+</tr>
+<tr class="even">
+<td><code>referenceReadDepth</code>, <code>tumorReadDepth</code></td>
+<td>Raw read depth in the window</td>
+</tr>
+<tr class="odd">
+<td><code>referenceGCRatio</code>, <code>tumorGCRatio</code></td>
+<td>Depth divided by the median depth of windows with the same GC content: GC-corrected, genome average about 1. <strong>This is the tumor depth ratio we plot.</strong></td>
+</tr>
+<tr class="even">
+<td><code>referenceGCDiploidRatio</code></td>
+<td>Normal ratio, further normalised so a normal diploid region is 1 (accounts for the sex chromosomes)</td>
+</tr>
+<tr class="odd">
+<td><code>referenceGCContent</code>, <code>tumorGCContent</code></td>
+<td>GC content of the reads in the window</td>
+</tr>
+<tr class="even">
+<td>value <strong>-1</strong></td>
+<td>Window not used (N bases, low mappability, extreme GC)</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="analyze-the-purple-results.html#cb80-1" tabindex="-1"></a><span class="co"># **`cobalt.ratio.pcf`**: same layout as the AMBER pcf. Here `mean` is a **log2** ratio: use `2^mean` to get back to the ratio scale.</span></span>
+<span id="cb80-2"><a href="analyze-the-purple-results.html#cb80-2" tabindex="-1"></a><span class="fu">peek</span>(<span class="fu">file.path</span>(cobalt_dir, <span class="fu">paste0</span>(tour_sample, <span class="st">&quot;.cobalt.ratio.pcf&quot;</span>)))</span>
+<span id="cb80-3"><a href="analyze-the-purple-results.html#cb80-3" tabindex="-1"></a></span>
+<span id="cb80-4"><a href="analyze-the-purple-results.html#cb80-4" tabindex="-1"></a></span>
+<span id="cb80-5"><a href="analyze-the-purple-results.html#cb80-5" tabindex="-1"></a><span class="co"># **`&lt;normal&gt;.cobalt.ratio.median.tsv`**: one line per chromosome. Look at chrX (\~0.5: only one X) and chr16 (\~0.57: part of chr16 is lost in the normal itself).</span></span>
+<span id="cb80-6"><a href="analyze-the-purple-results.html#cb80-6" tabindex="-1"></a><span class="fu">read_tsv</span>(<span class="fu">file.path</span>(cobalt_dir, <span class="st">&quot;SPP_GT_0-1_1.cobalt.ratio.median.tsv&quot;</span>), <span class="at">show_col_types =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb80-7"><a href="analyze-the-purple-results.html#cb80-7" tabindex="-1"></a>  <span class="fu">filter</span>(chromosome <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;chr1&quot;</span>, <span class="st">&quot;chr6&quot;</span>, <span class="st">&quot;chr16&quot;</span>, <span class="st">&quot;chr19&quot;</span>, <span class="st">&quot;chrX&quot;</span>, <span class="st">&quot;chrY&quot;</span>))</span></code></pre></div>
+<p><strong><code>cobalt.gc.median.tsv</code></strong>: two blocks. The first gives the sample’s mean and median depth; the second the median depth for each GC percentage.<br />
+<strong>It is important to account for GC bias, as sequencing read counts can vary substantially across regions with different GC content.</strong> Depth is not constant across GC content: in the normal it drops from about 116 (25% GC) to about 90 (60% GC), and both samples lose depth below ~25% GC. If this bias were not removed, GC-rich and GC-poor regions would look like losses or gains. COBALT divides each window’s depth by the median of its GC bucket (this curve), so the <code>tumorGCRatio</code> / <code>referenceGCRatio</code> values are free of GC bias.</p>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="analyze-the-purple-results.html#cb81-1" tabindex="-1"></a><span class="co"># The file has 3 header lines (#sampleMean/sampleMedian, their values, #gcBucket/median);</span></span>
+<span id="cb81-2"><a href="analyze-the-purple-results.html#cb81-2" tabindex="-1"></a><span class="co"># skip all 3 and force numeric columns, otherwise the &quot;#gcBucket&quot; line is read as data</span></span>
+<span id="cb81-3"><a href="analyze-the-purple-results.html#cb81-3" tabindex="-1"></a><span class="co"># and both columns become text (ggplot then draws no line).</span></span>
+<span id="cb81-4"><a href="analyze-the-purple-results.html#cb81-4" tabindex="-1"></a>read_gc_median <span class="ot">&lt;-</span> <span class="cf">function</span>(path) {</span>
+<span id="cb81-5"><a href="analyze-the-purple-results.html#cb81-5" tabindex="-1"></a>  <span class="fu">read_tsv</span>(path, <span class="at">skip =</span> <span class="dv">3</span>, <span class="at">col_names =</span> <span class="fu">c</span>(<span class="st">&quot;gcBucket&quot;</span>, <span class="st">&quot;median&quot;</span>), <span class="at">col_types =</span> <span class="st">&quot;dd&quot;</span>)</span>
+<span id="cb81-6"><a href="analyze-the-purple-results.html#cb81-6" tabindex="-1"></a>}</span>
+<span id="cb81-7"><a href="analyze-the-purple-results.html#cb81-7" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(</span>
+<span id="cb81-8"><a href="analyze-the-purple-results.html#cb81-8" tabindex="-1"></a>  <span class="at">tumor  =</span> <span class="fu">read_gc_median</span>(<span class="fu">file.path</span>(cobalt_dir, <span class="fu">paste0</span>(tour_sample, <span class="st">&quot;.cobalt.gc.median.tsv&quot;</span>))),</span>
+<span id="cb81-9"><a href="analyze-the-purple-results.html#cb81-9" tabindex="-1"></a>  <span class="at">normal =</span> <span class="fu">read_gc_median</span>(<span class="fu">file.path</span>(cobalt_dir, <span class="st">&quot;SPP_GT_0-1_1.cobalt.gc.median.tsv&quot;</span>)),</span>
+<span id="cb81-10"><a href="analyze-the-purple-results.html#cb81-10" tabindex="-1"></a>  <span class="at">.id =</span> <span class="st">&quot;sample&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb81-11"><a href="analyze-the-purple-results.html#cb81-11" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(gcBucket, median, <span class="at">colour =</span> sample)) <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb81-12"><a href="analyze-the-purple-results.html#cb81-12" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;GC content of the 1 kb window (%)&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Median read depth&quot;</span>) <span class="sc">+</span> <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="Module5/img/cobalt_gc_median.png" alt="" width="70%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="purple-purity-ploidy-and-copy-number-1" class="section level2 hasAnchor">
+<h2>PURPLE: purity, ploidy and copy number<a href="analyze-the-purple-results.html#purple-purity-ploidy-and-copy-number-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<table>
+<colgroup>
+<col width="25%" />
+<col width="44%" />
+<col width="30%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>File</th>
+<th>What it is</th>
+<th>When to use it</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>&lt;tumor&gt;.purple.purity.tsv</code></td>
+<td><strong>The best fit</strong>: purity, ploidy, sex, status, plus the uncertainty range</td>
+<td>Report purity/ploidy</td>
+</tr>
+<tr class="even">
+<td><code>&lt;tumor&gt;.purple.purity.range.tsv</code></td>
+<td>Score of every purity/ploidy combination tested (~16,000 rows)</td>
+<td>Check whether other solutions are almost as good</td>
+</tr>
+<tr class="odd">
+<td><code>&lt;tumor&gt;.purple.cnv.somatic.tsv</code></td>
+<td><strong>Final copy-number segments</strong> (~300 rows)</td>
+<td>Copy number of any region; genome plots; input for downstream tools</td>
+</tr>
+<tr class="even">
+<td><code>&lt;tumor&gt;.purple.cnv.gene.tsv</code></td>
+<td><strong>Copy number per gene</strong> (~37,000 genes)</td>
+<td>Is my gene deleted / gained / LOH?</td>
+</tr>
+<tr class="odd">
+<td><code>&lt;tumor&gt;.purple.segment.tsv</code></td>
+<td>All segments before merging (~9,500 rows), with observed and fitted values and the <strong>germline status</strong></td>
+<td>Debug a call: compare observed vs fitted ratio and BAF</td>
+</tr>
+<tr class="even">
+<td><code>&lt;tumor&gt;.purple.qc</code></td>
+<td>QC summary</td>
+<td>First thing to check</td>
+</tr>
+<tr class="odd">
+<td><code>&lt;tumor&gt;.purple.somatic.clonality.tsv</code></td>
+<td>Clonality peaks of somatic SNVs</td>
+<td><strong>Empty here</strong>: no somatic VCF (<code>-somatic_vcf</code>) was given</td>
+</tr>
+<tr class="even">
+<td><code>plot/*.png</code></td>
+<td>PURPLE’s own figures (purity.range, segment, copynumber, map)</td>
+<td>Quick visual QC</td>
+</tr>
+<tr class="odd">
+<td><code>plot/&lt;tumor&gt;.somatic_data.tsv</code></td>
+<td>Data behind the somatic-variant plots</td>
+<td><strong>Empty here</strong>, same reason</td>
+</tr>
+<tr class="even">
+<td><code>purple.version</code></td>
+<td>PURPLE version</td>
+<td>Reproducibility</td>
+</tr>
+</tbody>
+</table>
+<p>Files that PURPLE can also write but that are <strong>missing</strong> in this run: <code>purple.driver.catalog.somatic.tsv</code> (needs <code>-driver_gene_panel</code>), the germline files (<code>purple.germline.*</code>, need a matched normal via <code>-reference</code>), and <code>purple.somatic.vcf.gz</code> (needs <code>-somatic_vcf</code>).</p>
+<p><strong><code>purple.purity.tsv</code></strong>: one line, the chosen fit (columns explained in the QC section).</p>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="analyze-the-purple-results.html#cb82-1" tabindex="-1"></a><span class="fu">columns</span>(<span class="fu">purple_f</span>(<span class="st">&quot;.purple.purity.tsv&quot;</span>), <span class="at">n =</span> <span class="dv">1</span>)</span></code></pre></div>
+<p><strong><code>purple.purity.range.tsv</code></strong>: every fit that was tried, best first.</p>
+<table>
+<colgroup>
+<col width="34%" />
+<col width="65%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Column</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>purity</code>, <code>ploidy</code></td>
+<td>The combination tested</td>
+</tr>
+<tr class="even">
+<td><code>score</code></td>
+<td>How badly it explains the data; <strong>lower is better</strong></td>
+</tr>
+<tr class="odd">
+<td><code>normFactor</code></td>
+<td>Scaling between observed ratio and copy number for this fit</td>
+</tr>
+<tr class="even">
+<td><code>diploidProportion</code></td>
+<td>Fraction of the genome that would be diploid</td>
+</tr>
+<tr class="odd">
+<td><code>somaticPenalty</code></td>
+<td>Penalty from somatic variants (0 without a somatic VCF)</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="analyze-the-purple-results.html#cb83-1" tabindex="-1"></a><span class="fu">read_tsv</span>(<span class="fu">purple_f</span>(<span class="st">&quot;.purple.purity.range.tsv&quot;</span>), <span class="at">show_col_types =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span> <span class="fu">head</span>(<span class="dv">8</span>)</span></code></pre></div>
+<p><strong><code>purple.cnv.somatic.tsv</code></strong>: the final segments (columns explained in the <em>PURPLE segments</em> section below). The <code>method</code> column says how the copy number was obtained:</p>
+<table>
+<colgroup>
+<col width="37%" />
+<col width="62%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><code>method</code></th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>BAF_WEIGHTED</code></td>
+<td>From depth and BAF of the segment itself (most reliable)</td>
+</tr>
+<tr class="even">
+<td><code>LONG_ARM</code></td>
+<td>Too little data; copied from the rest of the chromosome arm</td>
+</tr>
+<tr class="odd">
+<td><code>STRUCTURAL_VARIANT</code>, <code>GERMLINE_*</code></td>
+<td>Other inference methods (not used in this run)</td>
+</tr>
+<tr class="even">
+<td><code>UNKNOWN</code></td>
+<td>Could not be inferred</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="analyze-the-purple-results.html#cb84-1" tabindex="-1"></a>cnv_tour <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="fu">purple_f</span>(<span class="st">&quot;.purple.cnv.somatic.tsv&quot;</span>), <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb84-2"><a href="analyze-the-purple-results.html#cb84-2" tabindex="-1"></a><span class="fu">head</span>(cnv_tour)</span>
+<span id="cb84-3"><a href="analyze-the-purple-results.html#cb84-3" tabindex="-1"></a><span class="fu">count</span>(cnv_tour, method)</span></code></pre></div>
+<p><strong><code>purple.cnv.gene.tsv</code></strong>: one row per gene (columns explained in the <em>Gain, Loss, Deletion and LOH</em> section below).</p>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="analyze-the-purple-results.html#cb85-1" tabindex="-1"></a><span class="fu">read_tsv</span>(<span class="fu">purple_f</span>(<span class="st">&quot;.purple.cnv.gene.tsv&quot;</span>), <span class="at">show_col_types =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb85-2"><a href="analyze-the-purple-results.html#cb85-2" tabindex="-1"></a>  <span class="fu">filter</span>(gene <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;CDKN2A&quot;</span>, <span class="st">&quot;MYC&quot;</span>, <span class="st">&quot;TP53&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb85-3"><a href="analyze-the-purple-results.html#cb85-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(chromosome, start, end, gene, minCopyNumber, maxCopyNumber,</span>
+<span id="cb85-4"><a href="analyze-the-purple-results.html#cb85-4" tabindex="-1"></a>                minMinorAlleleCopyNumber, somaticRegions, chromosomeBand)</span></code></pre></div>
+<p><strong><code>purple.segment.tsv</code></strong>: the most detailed table, useful to understand <em>why</em> PURPLE made a call. Important columns:</p>
+<table>
+<colgroup>
+<col width="34%" />
+<col width="65%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Column</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>germlineStatus</code></td>
+<td>State of the <strong>normal</strong> in this segment: <code>DIPLOID</code> (normal), <code>HET_DELETION</code>, <code>HOM_DELETION</code>, <code>AMPLIFICATION</code>, <code>NOISE</code>, <code>CENTROMETIC</code> (sic), <code>EXCLUDED</code>, <code>UNKNOWN</code></td>
+</tr>
+<tr class="even">
+<td><code>observedTumorRatio</code>, <code>observedNormalRatio</code></td>
+<td>Measured depth ratios of the segment</td>
+</tr>
+<tr class="odd">
+<td><code>observedBAF</code>, <code>bafCount</code></td>
+<td>Measured (folded) BAF and the number of SNPs</td>
+</tr>
+<tr class="even">
+<td><code>tumorCopyNumber</code>, <code>minorAlleleCopyNumber</code>, <code>majorAlleleCopyNumber</code></td>
+<td>Copy numbers implied by the chosen purity/ploidy</td>
+</tr>
+<tr class="odd">
+<td><code>fittedTumorCopyNumber</code>, <code>fittedBAF</code></td>
+<td>Nearest whole-number solution and its expected BAF</td>
+</tr>
+<tr class="even">
+<td><code>minorAlleleCopyNumberDeviation</code>, <code>majorAlleleCopyNumberDeviation</code></td>
+<td>Distance from a whole number: large values = poor fit or subclonal</td>
+</tr>
+<tr class="odd">
+<td><code>support</code></td>
+<td>What defines the segment start: <code>NONE</code> (depth/BAF change), <code>CENTROMERE</code>, <code>TELOMERE</code>, or an SV type if SVs were given</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="analyze-the-purple-results.html#cb86-1" tabindex="-1"></a>segment_tour <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="fu">purple_f</span>(<span class="st">&quot;.purple.segment.tsv&quot;</span>), <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb86-2"><a href="analyze-the-purple-results.html#cb86-2" tabindex="-1"></a><span class="fu">count</span>(segment_tour, germlineStatus, <span class="at">sort =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p>Most segments are <code>DIPLOID</code> in the normal. The <code>HET_DELETION</code> segments are places where the <strong>normal</strong> has only one copy: mostly large parts of chr6 (~58 Mb) and chr16 (~53 Mb) in this cell line. PURPLE treats these as germline events, so they are not reported as tumor losses.</p>
+<p><strong><code>purple.qc</code></strong></p>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="analyze-the-purple-results.html#cb87-1" tabindex="-1"></a><span class="fu">peek</span>(<span class="fu">purple_f</span>(<span class="st">&quot;.purple.qc&quot;</span>), <span class="at">n =</span> <span class="dv">20</span>)</span></code></pre></div>
+</div>
+<div id="which-file-answers-which-question" class="section level2 hasAnchor">
+<h2>Which file answers which question?<a href="analyze-the-purple-results.html#which-file-answers-which-question" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<table>
+<colgroup>
+<col width="27%" />
+<col width="39%" />
+<col width="32%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Question</th>
+<th>File</th>
+<th>Column(s)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>What is the purity and ploidy of my tumor?</td>
+<td><code>purple.purity.tsv</code></td>
+<td><code>purity</code>, <code>ploidy</code></td>
+</tr>
+<tr class="even">
+<td>How sure is PURPLE about it?</td>
+<td><code>purple.purity.range.tsv</code>, <code>plot/*purity.range.png</code></td>
+<td><code>score</code></td>
+</tr>
+<tr class="odd">
+<td>Did the run pass QC?</td>
+<td><code>purple.qc</code>, <code>amber.qc</code></td>
+<td><code>QCStatus</code></td>
+</tr>
+<tr class="even">
+<td>What is the copy number of gene X?</td>
+<td><code>purple.cnv.gene.tsv</code></td>
+<td><code>minCopyNumber</code>, <code>maxCopyNumber</code>, <code>minMinorAlleleCopyNumber</code></td>
+</tr>
+<tr class="odd">
+<td>What is the copy number of region chr:start-end?</td>
+<td><code>purple.cnv.somatic.tsv</code></td>
+<td><code>copyNumber</code>, <code>major/minorAlleleCopyNumber</code></td>
+</tr>
+<tr class="even">
+<td>Is a region LOH?</td>
+<td><code>purple.cnv.somatic.tsv</code> (minor CN = 0), confirmed in <code>amber.baf.tsv.gz</code></td>
+<td><code>minorAlleleCopyNumber</code>, <code>tumorBAF</code></td>
+</tr>
+<tr class="odd">
+<td>Is a change germline or somatic?</td>
+<td><code>purple.segment.tsv</code>, normal ratio in <code>cobalt.ratio.tsv.gz</code></td>
+<td><code>germlineStatus</code>, <code>referenceGCDiploidRatio</code></td>
+</tr>
+<tr class="even">
+<td>What does the raw evidence look like?</td>
+<td><code>cobalt.ratio.tsv.gz</code>, <code>amber.baf.tsv.gz</code></td>
+<td><code>tumorGCRatio</code>, <code>tumorBAF</code> (or use <code>plot_gene()</code> below)</td>
+</tr>
+</tbody>
+</table>
+<div id="load-the-files" class="section level3 hasAnchor">
+<h3>Load the files<a href="analyze-the-purple-results.html#load-the-files" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="analyze-the-purple-results.html#cb88-1" tabindex="-1"></a><span class="co"># purity range</span></span>
+<span id="cb88-2"><a href="analyze-the-purple-results.html#cb88-2" tabindex="-1"></a>purple.purity_ranges <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="st">&quot;./Mathieu_purple/purple/plot/&quot;</span>,</span>
+<span id="cb88-3"><a href="analyze-the-purple-results.html#cb88-3" tabindex="-1"></a>                                   <span class="at">pattern =</span> <span class="st">&quot;purity.range.png&quot;</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb88-4"><a href="analyze-the-purple-results.html#cb88-4" tabindex="-1"></a>purple.purity_ranges <span class="ot">&lt;-</span> <span class="fu">normalizePath</span>(<span class="fu">sort_by_purity</span>(purple.purity_ranges))</span>
+<span id="cb88-5"><a href="analyze-the-purple-results.html#cb88-5" tabindex="-1"></a></span>
+<span id="cb88-6"><a href="analyze-the-purple-results.html#cb88-6" tabindex="-1"></a></span>
+<span id="cb88-7"><a href="analyze-the-purple-results.html#cb88-7" tabindex="-1"></a><span class="co"># segment</span></span>
+<span id="cb88-8"><a href="analyze-the-purple-results.html#cb88-8" tabindex="-1"></a>segfiles <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="st">&quot;./Mathieu_purple/purple/plot/&quot;</span>,</span>
+<span id="cb88-9"><a href="analyze-the-purple-results.html#cb88-9" tabindex="-1"></a>                       <span class="at">pattern =</span> <span class="st">&quot;segment.png&quot;</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb88-10"><a href="analyze-the-purple-results.html#cb88-10" tabindex="-1"></a>segfiles <span class="ot">&lt;-</span> <span class="fu">normalizePath</span>(<span class="fu">sort_by_purity</span>(segfiles))</span>
+<span id="cb88-11"><a href="analyze-the-purple-results.html#cb88-11" tabindex="-1"></a></span>
+<span id="cb88-12"><a href="analyze-the-purple-results.html#cb88-12" tabindex="-1"></a><span class="co"># CN files</span></span>
+<span id="cb88-13"><a href="analyze-the-purple-results.html#cb88-13" tabindex="-1"></a>copyNumberFiles <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="st">&quot;./Mathieu_purple/purple/plot/&quot;</span>,</span>
+<span id="cb88-14"><a href="analyze-the-purple-results.html#cb88-14" tabindex="-1"></a>                              <span class="at">pattern =</span> <span class="st">&quot;copynumber.png&quot;</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb88-15"><a href="analyze-the-purple-results.html#cb88-15" tabindex="-1"></a>copyNumberFiles <span class="ot">&lt;-</span> <span class="fu">normalizePath</span>(<span class="fu">sort_by_purity</span>(copyNumberFiles))</span>
+<span id="cb88-16"><a href="analyze-the-purple-results.html#cb88-16" tabindex="-1"></a></span>
+<span id="cb88-17"><a href="analyze-the-purple-results.html#cb88-17" tabindex="-1"></a><span class="co"># MAC</span></span>
+<span id="cb88-18"><a href="analyze-the-purple-results.html#cb88-18" tabindex="-1"></a>MAP <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="st">&quot;./Mathieu_purple/purple/plot/&quot;</span>,</span>
+<span id="cb88-19"><a href="analyze-the-purple-results.html#cb88-19" tabindex="-1"></a>                  <span class="at">pattern =</span> <span class="st">&quot;map.png&quot;</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb88-20"><a href="analyze-the-purple-results.html#cb88-20" tabindex="-1"></a>MAP <span class="ot">&lt;-</span> <span class="fu">normalizePath</span>(<span class="fu">sort_by_purity</span>(MAP))</span>
+<span id="cb88-21"><a href="analyze-the-purple-results.html#cb88-21" tabindex="-1"></a></span>
+<span id="cb88-22"><a href="analyze-the-purple-results.html#cb88-22" tabindex="-1"></a></span>
+<span id="cb88-23"><a href="analyze-the-purple-results.html#cb88-23" tabindex="-1"></a><span class="co"># arrange plots</span></span>
+<span id="cb88-24"><a href="analyze-the-purple-results.html#cb88-24" tabindex="-1"></a><span class="fu">library</span>(png)    <span class="co"># readPNG(): read a PNG file into a matrix of pixels</span></span>
+<span id="cb88-25"><a href="analyze-the-purple-results.html#cb88-25" tabindex="-1"></a><span class="fu">library</span>(grid)   <span class="co"># rasterGrob(): turn the pixels into a drawable object</span></span>
+<span id="cb88-26"><a href="analyze-the-purple-results.html#cb88-26" tabindex="-1"></a><span class="co"># combine_pngs(): put several PNG files into one figure, each panel titled</span></span>
+<span id="cb88-27"><a href="analyze-the-purple-results.html#cb88-27" tabindex="-1"></a><span class="co"># with its sample ID and true purity. Panels are filled row by row.</span></span>
+<span id="cb88-28"><a href="analyze-the-purple-results.html#cb88-28" tabindex="-1"></a><span class="co">#   labels: panel titles; default = sample ID + true purity, &quot;&quot; = no title</span></span>
+<span id="cb88-29"><a href="analyze-the-purple-results.html#cb88-29" tabindex="-1"></a>combine_pngs <span class="ot">&lt;-</span> <span class="cf">function</span>(files, <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">labels =</span> <span class="cn">NULL</span>, <span class="at">purity =</span> purity_info) {</span>
+<span id="cb88-30"><a href="analyze-the-purple-results.html#cb88-30" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">is.null</span>(labels)) {</span>
+<span id="cb88-31"><a href="analyze-the-purple-results.html#cb88-31" tabindex="-1"></a>    ids    <span class="ot">&lt;-</span> <span class="fu">str_extract</span>(<span class="fu">basename</span>(files), <span class="st">&quot;SPP_GT_[0-9]+-[0-9]+_[0-9]+&quot;</span>)</span>
+<span id="cb88-32"><a href="analyze-the-purple-results.html#cb88-32" tabindex="-1"></a>    labels <span class="ot">&lt;-</span> <span class="fu">sprintf</span>(<span class="st">&quot;%s  (true tDNA fraction %g%%)&quot;</span>, ids, <span class="dv">100</span> <span class="sc">*</span> purity[ids])</span>
+<span id="cb88-33"><a href="analyze-the-purple-results.html#cb88-33" tabindex="-1"></a>  }</span>
+<span id="cb88-34"><a href="analyze-the-purple-results.html#cb88-34" tabindex="-1"></a>  panels <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="fu">seq_along</span>(files), <span class="cf">function</span>(i) {</span>
+<span id="cb88-35"><a href="analyze-the-purple-results.html#cb88-35" tabindex="-1"></a>    p <span class="ot">&lt;-</span> <span class="fu">wrap_elements</span>(<span class="at">full =</span> <span class="fu">rasterGrob</span>(<span class="fu">readPNG</span>(files[i]), <span class="at">interpolate =</span> <span class="cn">TRUE</span>))   <span class="co"># image as a patchwork panel</span></span>
+<span id="cb88-36"><a href="analyze-the-purple-results.html#cb88-36" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">nzchar</span>(labels[i])) {</span>
+<span id="cb88-37"><a href="analyze-the-purple-results.html#cb88-37" tabindex="-1"></a>      p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title =</span> labels[i]) <span class="sc">+</span></span>
+<span id="cb88-38"><a href="analyze-the-purple-results.html#cb88-38" tabindex="-1"></a>        <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">&quot;bold&quot;</span>, <span class="at">size =</span> <span class="dv">14</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>))</span>
+<span id="cb88-39"><a href="analyze-the-purple-results.html#cb88-39" tabindex="-1"></a>    }</span>
+<span id="cb88-40"><a href="analyze-the-purple-results.html#cb88-40" tabindex="-1"></a>    p</span>
+<span id="cb88-41"><a href="analyze-the-purple-results.html#cb88-41" tabindex="-1"></a>  })</span>
+<span id="cb88-42"><a href="analyze-the-purple-results.html#cb88-42" tabindex="-1"></a>  <span class="fu">wrap_plots</span>(panels, <span class="at">ncol =</span> ncol)</span>
+<span id="cb88-43"><a href="analyze-the-purple-results.html#cb88-43" tabindex="-1"></a>}</span></code></pre></div>
+</div>
+<div id="all-four-plots-for-one-sample" class="section level3 hasAnchor">
+<h3>All four plots for one sample<a href="analyze-the-purple-results.html#all-four-plots-for-one-sample" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Change <code>idx</code> to look at another sample (1 = 5% tDNA fraction … 6 = 100% tDNA fraction).</p>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="analyze-the-purple-results.html#cb89-1" tabindex="-1"></a>idx <span class="ot">&lt;-</span> <span class="dv">6</span></span>
+<span id="cb89-2"><a href="analyze-the-purple-results.html#cb89-2" tabindex="-1"></a>one_sample <span class="ot">&lt;-</span> <span class="fu">c</span>(purple.purity_ranges[idx], segfiles[idx], copyNumberFiles[idx], MAP[idx])</span>
+<span id="cb89-3"><a href="analyze-the-purple-results.html#cb89-3" tabindex="-1"></a>sid <span class="ot">&lt;-</span> <span class="fu">str_extract</span>(<span class="fu">basename</span>(one_sample[<span class="dv">1</span>]), <span class="st">&quot;SPP_GT_[0-9]+-[0-9]+_[0-9]+&quot;</span>)</span>
+<span id="cb89-4"><a href="analyze-the-purple-results.html#cb89-4" tabindex="-1"></a></span>
+<span id="cb89-5"><a href="analyze-the-purple-results.html#cb89-5" tabindex="-1"></a><span class="co"># 2 x 2 figure; each PNG already has its own title, so only the sample is labelled (on top)</span></span>
+<span id="cb89-6"><a href="analyze-the-purple-results.html#cb89-6" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">combine_pngs</span>(one_sample, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">labels =</span> <span class="fu">rep</span>(<span class="st">&quot;&quot;</span>, <span class="dv">4</span>)) <span class="sc">+</span></span>
+<span id="cb89-7"><a href="analyze-the-purple-results.html#cb89-7" tabindex="-1"></a>  <span class="fu">plot_annotation</span>(<span class="at">title =</span> <span class="fu">sprintf</span>(<span class="st">&quot;%s  (true tDNA fraction %g%%)&quot;</span>, sid, <span class="dv">100</span> <span class="sc">*</span> purity_info[[sid]])) <span class="sc">&amp;</span></span>
+<span id="cb89-8"><a href="analyze-the-purple-results.html#cb89-8" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">&quot;bold&quot;</span>, <span class="at">size =</span> <span class="dv">18</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>))</span></code></pre></div>
+<p><img src="Module5/img/purple_plots_SPP_GT_1-0_1.png" alt="" width="100%" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="selection-of-purity" class="section level2 hasAnchor">
+<h2>Selection of purity<a href="analyze-the-purple-results.html#selection-of-purity" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>PURPLE tries a grid of purity (y axis) × ploidy (x axis) combinations and gives each one a score: how badly the predicted depth ratio and BAF fit the data (<strong>lower is better</strong>). In the <code>purity.range.png</code> plots:</p>
+<ul>
+<li>colours show the score relative to the best fit; <strong>blue</strong> = within 10% of the best, red = poor;</li>
+<li>the dashed lines and labels mark the chosen purity and ploidy;</li>
+<li>several separate blue spots mean several solutions explain the data almost as well (e.g. ploidy 1.4 vs 2.8 at the same purity). This is a common source of errors, because doubling all copy numbers often fits the data equally well.</li>
+</ul>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="analyze-the-purple-results.html#cb90-1" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">combine_pngs</span>(purple.purity_ranges)</span></code></pre></div>
+<p><img src="Module5/img/purple_purity_range_all.png" alt="" width="100%" style="display: block; margin: auto;" /></p>
+<p><strong>What to notice.</strong></p>
+<ul>
+<li><strong>100%</strong>: one sharp blue spot at purity 99%, ploidy 2.82 (plus a small one at ploidy ~1.4, the “half” solution).</li>
+<li><strong>75%</strong>: still one clear solution, at the right purity.</li>
+<li><strong>50%</strong>: two blue spots: the chosen fit (43%, ploidy 2.86) and an alternative at about 73% purity with ploidy ~4.8. PURPLE picked the right one, but the data alone almost allow the other.</li>
+<li><strong>20% and below</strong>: the blue region is a horizontal band at ~15% purity that stretches over many ploidies: PURPLE cannot tell the ploidy, and it reports about the same purity for all three samples.</li>
+</ul>
+</div>
+<div id="baf-vs-copy-number-does-the-fit-explain-the-data" class="section level2 hasAnchor">
+<h2>BAF vs copy number: does the fit explain the data?<a href="analyze-the-purple-results.html#baf-vs-copy-number-does-the-fit-explain-the-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>This plot checks a purity/ploidy fit directly against the data.</p>
+<p><strong>Observed (coloured density).</strong> Each PURPLE segment (from <code>purple.segment.tsv</code>) has:</p>
+<ul>
+<li>an <strong>observed BAF</strong> (<code>observedBAF</code>, folded to 0.5-1), and</li>
+<li>an <strong>observed depth ratio</strong> (<code>observedTumorRatio</code>), which we turn into a tumor copy number with</li>
+</ul>
+<p><span class="math display">\[CN = \frac{\text{ratio}\cdot\big(p\cdot\text{ploidy} + (1-p)\cdot 2\big) - (1-p)\cdot 2}{p}\]</span></p>
+<p>Segments with many het SNPs count more (the density is weighted by <code>bafCount</code>). Only autosomal segments that are diploid in the normal are used.</p>
+<p><strong>Expected (black dots).</strong> For the same purity <em>p</em>, every allele state “major+minor” (e.g. <code>2+1</code>) predicts where its segments should fall:</p>
+<p><span class="math display">\[\text{BAF} = \frac{p\cdot\text{major} + (1-p)}{p\cdot(\text{major}+\text{minor}) + 2(1-p)}, \qquad CN = \text{major}+\text{minor}\]</span></p>
+<p><strong>A good fit puts the dense clouds on the black dots.</strong> The functions behind the plot (in <code>codes/purple_lab_functions.R</code>):</p>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="analyze-the-purple-results.html#cb91-1" tabindex="-1"></a><span class="fu">expected_CN</span>(ratio, p, <span class="at">CN_R =</span> ploidy)     <span class="co"># depth ratio -&gt; tumor copy number</span></span>
+<span id="cb91-2"><a href="analyze-the-purple-results.html#cb91-2" tabindex="-1"></a><span class="fu">calc_baf</span>(purity, <span class="at">nA =</span> minor, <span class="at">nB =</span> major) <span class="co"># expected BAF of an allele state</span></span>
+<span id="cb91-3"><a href="analyze-the-purple-results.html#cb91-3" tabindex="-1"></a><span class="fu">plot_baf_cn</span>(sample_id, <span class="at">purity =</span> <span class="cn">NULL</span>, <span class="at">ploidy =</span> <span class="cn">NULL</span>, <span class="at">min_baf_count =</span> <span class="dv">10</span>, <span class="at">max_cn =</span> <span class="dv">8</span>)</span></code></pre></div>
+<p>By default <code>plot_baf_cn()</code> uses PURPLE’s fitted purity and ploidy. With these values, <code>expected_CN()</code> gives back PURPLE’s own <code>tumorCopyNumber</code>.</p>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="analyze-the-purple-results.html#cb92-1" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">plot_baf_cn</span>(<span class="st">&quot;SPP_GT_1-0_1&quot;</span>)</span></code></pre></div>
+<p><img src="Module5/img/baf_cn_SPP_GT_1-0_1.png" alt="" width="80%" style="display: block; margin: auto;" /></p>
+<p><strong>100% purity.</strong> The clouds sit on whole-number states: a big cloud on <code>2+0</code> (copy-neutral LOH), and others on <code>1+0</code>, <code>3+0</code>, <code>4+0</code>, <code>2+1</code>, <code>4+1</code>, <code>2+2</code>. Balanced states (<code>1+1</code>, <code>2+2</code>) appear slightly right of 0.5: folding a noisy BAF to 0.5-1 always pushes it up a little.</p>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="analyze-the-purple-results.html#cb93-1" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">plot_baf_cn</span>(<span class="st">&quot;SPP_GT_1-1_1&quot;</span>)</span>
+<span id="cb93-2"><a href="analyze-the-purple-results.html#cb93-2" tabindex="-1"></a></span>
+<span id="cb93-3"><a href="analyze-the-purple-results.html#cb93-3" tabindex="-1"></a><span class="co"># Test another solution</span></span>
+<span id="cb93-4"><a href="analyze-the-purple-results.html#cb93-4" tabindex="-1"></a><span class="co"># The purity-range plot of SPP_GT_1-1_1 had a second blue spot at about 73% purity and ploidy 4.8. Give these values to plot_baf_cn()</span></span>
+<span id="cb93-5"><a href="analyze-the-purple-results.html#cb93-5" tabindex="-1"></a><span class="co"># plot_baf_cn(&quot;SPP_GT_1-1_1&quot;, purity = 0.73, ploidy =4.8 ) # 4.8  2</span></span></code></pre></div>
+<p><img src="Module5/img/baf_cn_SPP_GT_1-1_1.png" alt="" width="80%" style="display: block; margin: auto;" /></p>
+<p><strong>50% purity.</strong> All states move towards BAF 0.5 because of the normal cells (<code>2+0</code> is now at BAF ~0.71 instead of 1), but the clouds still sit on the predicted dots. The fit is good.</p>
+<p><strong>Another solution:</strong> The clouds still sit on predicted dots, only every state has one more copy: <code>2+0</code> becomes <code>3+1</code>, <code>2+1</code> becomes <code>3+2</code>, <code>1+0</code> becomes <code>2+1</code>. Both solutions explain the same BAF and depth data, which is why PURPLE found two blue spots. PURPLE prefers the solution with fewer copy-number changes and lower ploidy (here the correct one).</p>
+<div id="low-purity" class="section level3 hasAnchor">
+<h3>Low purity<a href="analyze-the-purple-results.html#low-purity" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="analyze-the-purple-results.html#cb94-1" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">plot_baf_cn</span>(<span class="st">&quot;SPP_GT_1-9_1&quot;</span>)</span></code></pre></div>
+<p><img src="Module5/img/baf_cn_SPP_GT_1-9_1.png" alt="" width="80%" style="display: block; margin: auto;" /></p>
+<p>At 10% purity all expected states are squeezed close to BAF 0.5, and the observed segments form one blurred cloud: many purity/ploidy combinations fit equally badly or well, so the fit cannot be trusted.</p>
+<p><strong>Try it:</strong> run <code>plot_baf_cn()</code> on <code>SPP_GT_3-1_1</code> with PURPLE’s fit, then with <code>purity = 0.5</code>. How do the dots move relative to the clouds?</p>
+</div>
+<div id="check-specific-chromosome" class="section level3 hasAnchor">
+<h3>check specific chromosome<a href="analyze-the-purple-results.html#check-specific-chromosome" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="analyze-the-purple-results.html#cb95-1" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">plot_chromosome</span>(<span class="st">&quot;SPP_GT_1-0_1&quot;</span>, <span class="st">&quot;chr1&quot;</span>)</span></code></pre></div>
+<p><img src="Module5/img/chromosome_SPP_GT_1-0_1_chr1.png" alt="" width="100%" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="segment" class="section level2 hasAnchor">
+<h2>Segment<a href="analyze-the-purple-results.html#segment" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Each point in <code>segment.png</code> is one copy-number segment, placed at its <strong>major</strong> (x) and <strong>minor</strong> (y) allele copy number.</p>
+<ul>
+<li>Point size = number of BAF points supporting the segment (bigger = more evidence).</li>
+<li>Colour = how far the segment is from a whole number of copies (blue = close, red = far).</li>
+</ul>
+<p>In a good fit, most large points sit on integer values (1+1, 2+0, 2+1, …). Points spread between integers suggest the purity/ploidy is wrong or the sample is subclonal.</p>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="analyze-the-purple-results.html#cb96-1" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">combine_pngs</span>(segfiles)   <span class="co"># one figure, panels titled with sample ID and true purity</span></span></code></pre></div>
+<p><img src="Module5/img/purple_segment_all.png" alt="" width="100%" style="display: block; margin: auto;" /></p>
+<p><strong>What to notice.</strong> At 50-100% purity the large points cluster on whole-number states (1+1, 2+0, 2+1, 2+2, …). At 5-10% purity the points line up along straight lines instead of clusters: with so little tumor signal, PURPLE can place a segment almost anywhere along these lines, so the major/minor split is not determined.</p>
+</div>
+<div id="copy-number-distribution" class="section level2 hasAnchor">
+<h2>Copy number distribution<a href="analyze-the-purple-results.html#copy-number-distribution" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><code>copynumber.png</code> is a histogram of the fitted copy number, weighted by the number of BAF points. Colours split each bar by minor-allele copy number (MACN0 = LOH, MACN1, MACN2). For a good fit the peaks sit on whole numbers. For HCC1395 the largest peak is CN 2 with MACN0, i.e. copy-neutral LOH covers a big part of the genome.</p>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="analyze-the-purple-results.html#cb97-1" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">combine_pngs</span>(copyNumberFiles)   <span class="co"># one figure, panels titled with sample ID and true</span></span></code></pre></div>
+<p><img src="Module5/img/purple_copynumber_all.png" alt="" width="100%" style="display: block; margin: auto;" /></p>
+<p><strong>What to notice.</strong> From 50% to 100% purity the histograms look alike: a sharp peak at CN 2 that is almost all MACN0 (copy-neutral LOH), plus peaks at 3 and 4. At 5% and 10% there is almost no MACN0 at all and the copy numbers form a broad, continuous hump between 1.5 and 3.5: the LOH and the integer copy-number states are no longer resolved.</p>
+</div>
+<div id="minorallelecopy" class="section level2 hasAnchor">
+<h2>MinorAlleleCopy<a href="analyze-the-purple-results.html#minorallelecopy" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><code>map.png</code> (minor-allele ploidy) is the same idea for the <strong>minor</strong> allele: a histogram of minor-allele copy number, coloured by total copy number. The bar at 0 is the amount of LOH in the genome.</p>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="analyze-the-purple-results.html#cb98-1" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">combine_pngs</span>(MAP)   <span class="co"># one figure, panels titled with sample ID and true purity</span></span></code></pre></div>
+<p><img src="Module5/img/purple_map_all.png" alt="" width="100%" style="display: block; margin: auto;" /></p>
+<p><strong>What to notice.</strong> At 50-100% purity the tallest bar is at minor CN 0: a large part of the genome is LOH. At 20% the LOH is still partly found (bars near 0-0.2). At 5% and 10% the distribution is centred on 1: PURPLE no longer sees the LOH, because the BAF shift it causes is too small (see the expected-signal table in the introduction).</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="run-genpipe.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="some-examples-of-gain-loss-deletion-and-loh.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": false,
+    "twitter": false,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/bioinformaticsdotca/CAN_TorMon-2610/blob/main/050-module-5.Rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["_main.pdf", "_main.epub"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
