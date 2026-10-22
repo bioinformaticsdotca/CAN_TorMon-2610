@@ -236,7 +236,7 @@ Here, the reference allele is `G`, while the alternate allele is `A`. The total 
 4. Does the presence of an alternate allele (an allele different from the reference sequence) mean that the variant is somatic (i.e, acquired in the tumour rather than inherited)?
 ::::
 
-### 2.4. Look at the first few variant records
+#### 2.4. Look at the first few variant records
 
 Display the first five variant records from Patient 1:
 
@@ -612,7 +612,7 @@ You can also use NCBI's variation viewer to look at collated information for the
 5. What is the difference between a plausible hypothesis and a demonstrated functional effect?
 ::::
 
-### 7.2. Investigate variant evidence
+#### 7.2. Investigate variant evidence
 
 Look at the following resources:
 
@@ -700,17 +700,255 @@ Your interpretation should distinguish between a predicted molecular consequence
 You are not expected to prove that your selected variant is a cancer driver. You are expected to make a reasoned interpretation of the available evidence and explain its limitations.
 
 :::: {.callout type="blue"}
-**Final questions**
+**Questions**
 
 1. Why is a gene's function not enough to determine the effect of an individual variant?
 2. What additional evidence would help establish whether a variant contributes to cancer?
 3. What would you need to know before deciding whether a variant could inform treatment?
 ::::
 
+
+### Part 10. Manually confirming variants in IGV
+
+
+Variant callers are powerful tools, but their output is not infallible. Incorrect variant calls or representations can lead to misleading annotations and potentially affect clinical interpretation.
+
+Before reporting variants clinically, calls should be **reviewed manually in IGV**, particularly in germline testing but also in somatic analysis.
+
+Since BAM files are not provided for this exercise, we will use IGV screenshots to investigate three real case studies. For each, identify the error, manually determine the correct variant representation (via good ol' pen and paper), and establish the corrected consequence.
+
+:::: {.callout type="yellow"}
+**Note:** To report variants clinically, we are required to run them through our clincially validated pipeline, i.e. the version of VEP (or other tool) we have installed in our production pipeline. To do so, we take our manually "calculated" variant, edit the VCF file, and rerun the annotation tool to properly correct the annotation.
+::::
+
+#### 10.1: To Stop or Not To Stop
+
+You are a bioinformatician in a clinical lab. You open your clinical report and see the following oncogenic variant reported by your variant caller, Mutect2, which is also associated with a [level 1 (the most actionable level!) FDA therapy, Olaparib](https://www.oncokb.org/gene/BRCA2/somatic/p.E1940*/HGSOC):
+
+![](Module7/brca2.png)
+
+Before rushing to give the **good news** to the clinican (that the patient has an actionable _BRCA2_ mutation), you manually confirm the variant in IGV, because you are a smart bioinformatician and good at your job.
+
+You check the MAF file (human-readable version of a VCF; think of it like a VCF re-organized) and see the following:
+
+```
+BRCA2, GRCh38, chr13 32340173 32340173, Nonsense_Mutation, SNP G G T, p.E1940*, stop_gained, Gag/Tag
+```
+
+All seems well.
+
+You open IGV and see the following:
+
+![](Module7/IGV_screenshot_2.png)
+
+:::: {.callout type="blue"}
+**Questions**
+
+1. What do you make of this finding?
+2. Can you locate the nonsense mutation given in the report? 
+3. Do these extra SNVs impact our finding? If so, how?
+::::
+
+To find out if the extra SNVs impact our nonsense mutation, we need to convert the DNA sequence to amino acids. We can do so using the codon conversion table:
+
+![](Module7/codon_table.png)
+
+Normally, you need to know which reading frame you are in. However, we are already told that the `GAG` became a `TAG`, so use that as your frame of reference for the codons.
+
+Take out a pen and paper, roll up your sleeves, and begin problem solving the impact of the two extra SNVs on your nonsense mutation.
+
+:::: {.callout type="blue"}
+**Questions**
+
+1. First, ignore all of the SNVs. Convert the reference sequence to amino acids.
+2. Next, change one letter of the DNA sequence (G>T) as described by your variant. What happened to the sequence of amino acids?
+3. Finally, add in the two extra SNVs. What happened to the sequence of amino acids?
+4. What is the TRUE variant? (NOTE: Remember p. notation! Look [here](https://hgvs-nomenclature.org/stable/recommendations/protein/delins/) for the notation for a delins. Try your best before looking at the answer!)
+
+  <details>
+  <summary>Reveal answer</summary>
+
+  `p.E1940_K1941delinsYE`
+
+  </details>
+
+
+5. Look up your new variant in OncoKB by changing the protein change field in [this link](https://www.oncokb.org/gene/BRCA2/somatic/p.E1940*/HGSOC). Is this variant actionable? 
+::::
+
+Finally, what will you tell the clinician?
+
+
+  <details>
+  <summary>Reveal answer</summary>
+
+  There is **no actionable mutation** in _BRCA2_. You **cannot recommend Olaparib.**
+
+  </details>
+
+#### 10.2: Germline Confusion
+
+You are a bioinformatician in a clinical lab. You open your clinical report and see the following oncogenic variants reported by your variant caller, Mutect2:
+
+![](Module7/germline_confusion_01.png)
+
+Cool, two mutations in _HLA-B_! You see:
+
+- One mutation at amino acid number 202 (K/Lys became A/Ala) which introduced a STOP codon 5 amino acids down.
+- One mutation at amino acid number 201 (D/Asp became K/Lys) which introduced a STOP codon 14 amino acids down.
+
+But you are a good scientist, so you open IGV to manually verify your two frameshift variants, and you see the following:
+
+![](Module7/IGV_screenshot_1.png)
+Huh? Those clearly look like SNVs! Worse; one looks germline! What's going on? It looks like Mutect2 has gotten confused with all of the germline variants, and was unable to call our real SNV.
+
+Let's start by generating these annotations ourselves using SnpEff (note: these ones will have slightly different protein change annotations, as I edited the VCF to make fake data and couldn't replicate the real finding 1-to-1):
+
+```
+$ $ cp ../CourseData/Module7/germline_confusion.vcf.gz .
+$ java -jar /usr/local/snpEff/snpEff.jar -v GRCh38.p14 germline_confusion.vcf.gz > germline_confusion_annotated.vcf
+```
+Look at the annotations:
+
+```
+$ bcftools view -H germline_confusion_annotated.vcf
+```
+
+:::: {.callout type="blue"}
+**Questions**
+
+1. What is the protein change of variant 1 (look at the first annotation)? Variant 2?
+2. How could they be the same if they are two different variants?
+3. Look at the IGV screenshot. Which one is the **REAL** somatic variant?
+::::
+
+But we work for a clinical lab, so we need to reannotate this variant by editing the VCF, and then re-running SnpEff to get the corrected notation.
+
+First, we need to figure out what our edits should be. Here is some context to the IGV screenshot:
+
+![](Module7/IGV_screenshot_3.png)
+
+:::: {.callout type="blue"}
+**Questions**
+
+1. The codon associated with Asp/D is `GTC`. Does this match our codon table? Why or why not? 
+2. What are the codons for Asp/D?
+3. Can you figure out why our codon was annotated to be Asp/D? (Try really hard before looking at the answer! This is a good way to exercise second-year university cell biology concepts).
+
+  <details>
+  <summary>Reveal answer</summary>
+
+  The transcription occurs on the **reverse complement!** So, `GTC` becomes `GAC`, which is Asp/D. 
+
+  </details>
+  
+4. What is the **REAL** variant?
+
+  <details>
+  <summary>Reveal answer</summary>
+
+  `GAC` becomes `AAC`, i.e. D becomes N. The real variant is p.D201N. 
+
+  </details>
+::::
+
+So we've figured out the real variant, but the clinician won't believe us (and the regulating body, CAP, will get angry with us) unless we use our clinically-validated pipeline.
+
+Let's edit our VCF:
+
+```
+$ cp germline_confusion.vcf.gz germline_confusion_modified.vcf.gz
+```
+
+There is no real variant at position `31356181`, so delete this entry.
+
+The variant at position `31356185` is not an insertion of TT; it is a C>T. 
+
+Change that entry in the VCF to say:
+
+```
+BEFORE: 
+chr6    31356185        .       T       TTT     .       PASS
+
+AFTER:
+chr6    31356185        .       C       T     .       PASS
+
+```
+
+:::: {.callout type="yellow"}
+**Note:** `nano` cannot edit gzipped files. If you want to use `nano`, unzip the file with `gunzip my_file.vcf.gz`, edit with `nano`, and rezip with `gzip my_file.vcf`. If you don't want to unzip and rezip, use `vim`.
+
+To use `vim` to edit, press or type:
+
+- `dd` (to delete lines)
+- `i` (to insert i.e. start typing)
+- `Esc` (to escape editing)
+- `:wq` to finish editing
+::::
+
+and rerun SnpEff:
+
+```
+$ java -jar /usr/local/snpEff/snpEff.jar -v GRCh38.p14 germline_confusion_modified.vcf.gz > germline_confusion_modified_annotated.vcf
+```
+
+View your annotation with:
+
+```
+$ bcftools view -H germline_confusion_modified_annotated.vcf
+```
+
+:::: {.callout type="blue"}
+**Questions**
+
+1. What is the protein change? Was your answer the same?
+2. What have you learned about the importance of reviewing variants? What are the risks if you skip review?
+3. How might you automate this process, if at all, in a very high-throughput research lab where you do not have time to manually review variants? 
+::::
+
+
+#### 10.3: To Merge or Not To Merge? That is the question.
+
+Having been trained to investigate variants, you have become a hypervigilent bioinformatician. You open your next clinical report and see the following:
+
+![](Module7/merge_or_not_01.png)
+
+Suspicious! They may be the same variant, or very close. You run to IGV:
+
+![](Module7/merge_or_not_02.png)
+
+
+:::: {.callout type="blue"}
+**Questions**
+
+1. What do you make of this finding?
+2. Is it a delins?
+3. Should you merge it?
+::::
+
+You fight with the amino acid sequence, but are struggling to tell whether it might have impact or not. 
+
+Luckily, HGVS has guidelines for merging variants. You read the guidelines:
+
+[HGVS guidelines for merging variants](https://hgvs-nomenclature.org/stable/recommendations/DNA/delins/#:~:text=two%20variants%20separated%20by%20one%20or%20more%20nucleotides%20should%20be%20described%20individually%20and%20not%20as%20a%20%22delins%22)
+
+:::: {.callout type="blue"}
+**Questions**
+
+1. Should you merge them?
+
+  <details>
+  <summary>Reveal answer</summary>
+
+  **No.** Two variants separated by one or more nucleotides and not affecting the same amino acid should be described individually and not as a "delins"
+
+  </details>
+::::
+
+After these three experiences, you've emerged stronger as a bioinformatician: cautious, but not hypervigilent!
+
 :::: {.callout type="purple"}
 **Key takeaway**
 
-A variant annotation is a starting point for interpretation, not the final answer.
-
-We began with a difference in DNA sequence, used genome annotations to predict its molecular consequence, investigated the affected gene and available evidence, and then formed our hypothesis.
+A variant annotation is a starting point for interpretation, not the final answer. Always do your research, consult the literature, and manually verify your variants, if you are able to!
 ::::
