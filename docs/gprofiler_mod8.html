@@ -176,7 +176,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Workshop Info</a>
 <ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#pre-work"><i class="fa fa-check"></i>Pre-work</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#class-photo"><i class="fa fa-check"></i>Class Photo</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#class-photo"><i class="fa fa-check"></i>Class Photo</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#toronto"><i class="fa fa-check"></i>Toronto:</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#montreal"><i class="fa fa-check"></i>Montreal:</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#schedule"><i class="fa fa-check"></i>Schedule</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="meet-your-faculty.html"><a href="meet-your-faculty.html"><i class="fa fa-check"></i>Meet Your Faculty</a>
@@ -1888,9 +1892,9 @@ Note: it took about 2 minutes to run this chunck of code.</p>
 <span id="cb234-2"><a href="gprofiler_mod8.html#cb234-2" tabindex="-1"></a></span>
 <span id="cb234-3"><a href="gprofiler_mod8.html#cb234-3" tabindex="-1"></a>custom_gmt_max500 <span class="ot">&lt;-</span> <span class="fu">upload_GMT_file</span>(</span>
 <span id="cb234-4"><a href="gprofiler_mod8.html#cb234-4" tabindex="-1"></a>                        <span class="at">gmtfile=</span>dest_gmt_file_500)</span></code></pre></div>
-<pre><code>## Your custom annotations ID is gp__ix3o_KIkk_cik.
+<pre><code>## Your custom annotations ID is gp__DWK9_SK49_ODw.
 ## You can use this ID as an &#39;organism&#39; name in all the related enrichment tests against this custom source.</code></pre>
-<pre><code>## Just use: gost(my_genes, organism = &#39;gp__ix3o_KIkk_cik&#39;)</code></pre>
+<pre><code>## Just use: gost(my_genes, organism = &#39;gp__DWK9_SK49_ODw&#39;)</code></pre>
 <div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb237-1"><a href="gprofiler_mod8.html#cb237-1" tabindex="-1"></a>UPgenes <span class="ot">&lt;-</span> res<span class="sc">$</span>gene[res<span class="sc">$</span>logFC<span class="sc">&gt;</span><span class="dv">0</span> <span class="sc">&amp;</span>  res<span class="sc">$</span>FDR <span class="sc">&lt;=</span> <span class="fl">0.001</span>]</span>
 <span id="cb237-2"><a href="gprofiler_mod8.html#cb237-2" tabindex="-1"></a>DOWNgenes <span class="ot">&lt;-</span> res<span class="sc">$</span>gene[res<span class="sc">$</span>logFC<span class="sc">&lt;</span><span class="dv">0</span> <span class="sc">&amp;</span>  res<span class="sc">$</span>FDR <span class="sc">&lt;=</span> <span class="fl">0.001</span>]</span>
 <span id="cb237-3"><a href="gprofiler_mod8.html#cb237-3" tabindex="-1"></a></span>

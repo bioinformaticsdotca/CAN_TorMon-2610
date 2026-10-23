@@ -26,7 +26,13 @@ Welcome to the 2026 Cancer Analysis Canadian Bioinformatics Workshop webpage!
 
 ## Class Photo
 
-Coming soon! 
+### Toronto:
+
+![Toronto Class Photo](./img/can-2610-tor.jpg)
+
+### Montreal:
+
+![Montreal Class photo](./img/can-2610-mtl.jpg)
 
 ## Schedule
 
