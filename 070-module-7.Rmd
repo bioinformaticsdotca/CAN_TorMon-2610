@@ -3,7 +3,8 @@
 
 ## Lecture
 
-<!-- PUT MY LINK HERE!!!!!!!!!!!! -->
+<iframe width="640" height="360" src="https://www.youtube.com/embed/hDTkH2TcIN4?si=ay6ZhgiD1w9tYQJv" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
 <iframe src="https://docs.google.com/presentation/d/18y1L6ftJpHAlFfFvX12euB0fZ650i-EY/preview" width="640" height="480" allow="autoplay"></iframe>  
 
 ## Lab

@@ -1,11 +1,12 @@
-# (PART) Modules {-}
+
 
 # Module 1 Intro to Cancer Genomics
 
 ## Lecture
 
-<!--<iframe width="640" height="360" src="YOUTUBE EMBED LINK" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
--->
+<iframe width="640" height="360" src="https://www.youtube.com/embed/ATUU2vDCP1w?si=eUrtGx9jFwYFXLuE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+
 
 <iframe src="https://docs.google.com/presentation/d/18sEuZvOvIQDaK0MG-TYCOzCRIPapRK8b/preview" width="640" height="480" allow="autoplay"></iframe>  
 -->

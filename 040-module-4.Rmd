@@ -2,6 +2,8 @@
 
 ## Lecture 
 
+<iframe width="640" height="360" src="https://www.youtube.com/embed/FLolQOo7l-w?si=sMlv4KY_M7J8tKSp" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
 <iframe src="https://docs.google.com/presentation/d/16YgnBYJJh-RcssrLtr_F15ZTZy0U5Ta6OcNttKKofSo/preview" width="640" height="480" allow="autoplay"></iframe>
 
 ## Lab
